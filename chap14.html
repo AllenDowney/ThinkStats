@@ -1,0 +1,1456 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Analytic methods &#8212; Think Stats, 3rd edition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap14';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Survival analysis" href="chap13.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Stats, 3rd edition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Think Stats, 3rd edition
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">Linear least squares</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analytic methods</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkStats/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap14.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analytic methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions">Normal distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distributions">Sampling distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-normal-distributions">Representing normal distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">Central limit theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-clt">Testing the CLT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-clt">Applying the CLT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-test">Correlation test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-test">Chi-squared test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="analytic-methods">
+<h1>Analytic methods<a class="headerlink" href="#analytic-methods" title="Link to this heading">#</a></h1>
+<p>This book has focused on computational methods like simulation and
+resampling, but some of the problems we solved have analytic solutions
+that can be much faster.</p>
+<p>I present some of these methods in this chapter, and explain how they
+work. At the end of the chapter, I make suggestions for integrating
+computational and analytic methods for exploratory data analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+
+
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">thinkstats2</span>
+<span class="kn">import</span> <span class="nn">thinkplot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="normal-distributions">
+<h2>Normal distributions<a class="headerlink" href="#normal-distributions" title="Link to this heading">#</a></h2>
+<p>As a motivating example, let’s review the problem from
+Section <a class="reference internal" href="#gorilla"><span class="xref myst">[gorilla]</span></a>{reference-type=“ref”
+reference=“gorilla”}:</p>
+<blockquote>
+<div><p>Suppose you are a scientist studying gorillas in a wildlife preserve.
+Having weighed 9 gorillas, you find sample mean <span class="math notranslate nohighlight">\(\bar{x}=90\)</span> kg and
+sample standard deviation, <span class="math notranslate nohighlight">\(S=7.5\)</span> kg. If you use <span class="math notranslate nohighlight">\(\bar{x}\)</span> to estimate
+the population mean, what is the standard error of the estimate?</p>
+</div></blockquote>
+<p>To answer that question, we need the sampling distribution of <span class="math notranslate nohighlight">\(\bar{x}\)</span>.
+In Section <a class="reference internal" href="#gorilla"><span class="xref myst">[gorilla]</span></a>{reference-type=“ref”
+reference=“gorilla”} we approximated this distribution by simulating the
+experiment (weighing 9 gorillas), computing <span class="math notranslate nohighlight">\(\bar{x}\)</span> for each simulated
+experiment, and accumulating the distribution of estimates.</p>
+<p>The result is an approximation of the sampling distribution. Then we use
+the sampling distribution to compute standard errors and confidence
+intervals:</p>
+<ol class="arabic simple">
+<li><p>The standard deviation of the sampling distribution is the standard
+error of the estimate; in the example, it is about 2.5 kg.</p></li>
+<li><p>The interval between the 5th and 95th percentile of the sampling
+distribution is a 90% confidence interval. If we run the experiment
+many times, we expect the estimate to fall in this interval 90% of
+the time. In the example, the 90% CI is <span class="math notranslate nohighlight">\((86, 94)\)</span> kg.</p></li>
+</ol>
+<p>Now we’ll do the same calculation analytically. We take advantage of the
+fact that the weights of adult female gorillas are roughly normally
+distributed. Normal distributions have two properties that make them
+amenable for analysis: they are “closed” under linear transformation and
+addition. To explain what that means, I need some notation.</p>
+<p>If the distribution of a quantity, <span class="math notranslate nohighlight">\(X\)</span>, is normal with parameters <span class="math notranslate nohighlight">\(\mu\)</span>
+and <span class="math notranslate nohighlight">\(\sigma\)</span>, you can write $<span class="math notranslate nohighlight">\(X \sim Normal~(\mu, \sigma^{2})\)</span><span class="math notranslate nohighlight">\( where
+the symbol \)</span>\sim<span class="math notranslate nohighlight">\( means &quot;is distributed&quot; and the script letter \)</span>Normal$
+stands for “normal.”</p>
+<p>A linear transformation of <span class="math notranslate nohighlight">\(X\)</span> is something like <span class="math notranslate nohighlight">\(X' = a X + b\)</span>, where
+<span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are real numbers. A family of distributions is closed under
+linear transformation if <span class="math notranslate nohighlight">\(X'\)</span> is in the same family as <span class="math notranslate nohighlight">\(X\)</span>. The normal
+distribution has this property; if <span class="math notranslate nohighlight">\(X \sim Normal~(\mu,
+\sigma^2)\)</span>, $<span class="math notranslate nohighlight">\(X' \sim Normal~(a \mu + b, a^{2} \sigma^2) \tag*{(1)}\)</span><span class="math notranslate nohighlight">\(
+Normal distributions are also closed under addition. If \)</span>Z = X + Y<span class="math notranslate nohighlight">\( and
+\)</span>X \sim Normal~(\mu_{X}, \sigma_{X}^{2})<span class="math notranslate nohighlight">\( and
+\)</span>Y \sim Normal~(\mu_{Y}, \sigma_{Y}^{2})<span class="math notranslate nohighlight">\( then
+\)</span><span class="math notranslate nohighlight">\(Z \sim Normal~(\mu_X + \mu_Y, \sigma_X^2 + \sigma_Y^2)  \tag*{(2)}\)</span><span class="math notranslate nohighlight">\(
+In the special case \)</span>Z = X + X<span class="math notranslate nohighlight">\(, we have
+\)</span><span class="math notranslate nohighlight">\(Z \sim Normal~(2 \mu_X, 2 \sigma_X^2)\)</span><span class="math notranslate nohighlight">\( and in general if we draw \)</span>n<span class="math notranslate nohighlight">\(
+values of \)</span>X<span class="math notranslate nohighlight">\( and add them up, we have
+\)</span><span class="math notranslate nohighlight">\(Z \sim Normal~(n \mu_X, n \sigma_X^2)  \tag*{(3)}\)</span>$</p>
+</section>
+<section id="sampling-distributions">
+<h2>Sampling distributions<a class="headerlink" href="#sampling-distributions" title="Link to this heading">#</a></h2>
+<p>Now we have everything we need to compute the sampling distribution of
+<span class="math notranslate nohighlight">\(\bar{x}\)</span>. Remember that we compute <span class="math notranslate nohighlight">\(\bar{x}\)</span> by weighing <span class="math notranslate nohighlight">\(n\)</span> gorillas,
+adding up the total weight, and dividing by <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>Assume that the distribution of gorilla weights, <span class="math notranslate nohighlight">\(X\)</span>, is approximately
+normal: $<span class="math notranslate nohighlight">\(X \sim Normal~(\mu, \sigma^2)\)</span><span class="math notranslate nohighlight">\( If we weigh \)</span>n<span class="math notranslate nohighlight">\( gorillas, the
+total weight, \)</span>Y<span class="math notranslate nohighlight">\(, is distributed \)</span><span class="math notranslate nohighlight">\(Y \sim Normal~(n \mu, n \sigma^2)\)</span><span class="math notranslate nohighlight">\(
+using Equation 3. And if we divide by \)</span>n<span class="math notranslate nohighlight">\(, the sample mean, \)</span>Z<span class="math notranslate nohighlight">\(, is
+distributed \)</span><span class="math notranslate nohighlight">\(Z \sim Normal~(\mu, \sigma^2/n)\)</span><span class="math notranslate nohighlight">\( using Equation 1 with
+\)</span>a = 1/n$.</p>
+<p>The distribution of <span class="math notranslate nohighlight">\(Z\)</span> is the sampling distribution of <span class="math notranslate nohighlight">\(\bar{x}\)</span>. The
+mean of <span class="math notranslate nohighlight">\(Z\)</span> is <span class="math notranslate nohighlight">\(\mu\)</span>, which shows that <span class="math notranslate nohighlight">\(\bar{x}\)</span> is an unbiased estimate
+of <span class="math notranslate nohighlight">\(\mu\)</span>. The variance of the sampling distribution is <span class="math notranslate nohighlight">\(\sigma^2 / n\)</span>.</p>
+<p>So the standard deviation of the sampling distribution, which is the
+standard error of the estimate, is <span class="math notranslate nohighlight">\(\sigma / \sqrt{n}\)</span>. In the example,
+<span class="math notranslate nohighlight">\(\sigma\)</span> is 7.5 kg and <span class="math notranslate nohighlight">\(n\)</span> is 9, so the standard error is 2.5 kg. That
+result is consistent with what we estimated by simulation, but much
+faster to compute!</p>
+<p>We can also use the sampling distribution to compute confidence
+intervals. A 90% confidence interval for <span class="math notranslate nohighlight">\(\bar{x}\)</span> is the interval between
+the 5th and 95th percentiles of <span class="math notranslate nohighlight">\(Z\)</span>. Since <span class="math notranslate nohighlight">\(Z\)</span> is normally distributed,
+we can compute percentiles by evaluating the inverse CDF.</p>
+<p>There is no closed form for the CDF of the normal distribution or its
+inverse, but there are fast numerical methods and they are implemented
+in SciPy, as we saw in
+Section <a class="reference internal" href="#normal"><span class="xref myst">[normal]</span></a>{reference-type=“ref” reference=“normal”}.
+<code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides a wrapper function that makes the SciPy function
+a little easier to use:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="k">def</span> <span class="nf">EvalNormalCdfInverse</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Given a probability, <code class="docutils literal notranslate"><span class="pre">p</span></code>, it returns the corresponding percentile from a
+normal distribution with parameters <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code>. For the 90%
+confidence interval of <span class="math notranslate nohighlight">\(\bar{x}\)</span>, we compute the 5th and 95th percentiles
+like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EvalNormalCdfInverse</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85.88786593262132
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EvalNormalCdfInverse</span><span class="p">(</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>94.11213406737868
+</pre></div>
+</div>
+</div>
+</div>
+<p>So if we run the experiment many times, we expect the estimate, <span class="math notranslate nohighlight">\(\bar{x}\)</span>,
+to fall in the range <span class="math notranslate nohighlight">\((85.9, 94.1)\)</span> about 90% of the time. Again, this
+is consistent with the result we got by simulation.</p>
+</section>
+<section id="representing-normal-distributions">
+<h2>Representing normal distributions<a class="headerlink" href="#representing-normal-distributions" title="Link to this heading">#</a></h2>
+<p>To make these calculations easier, I have defined a class called
+<code class="docutils literal notranslate"><span class="pre">Normal</span></code> that represents a normal distribution and encodes the equations
+in the previous sections. Here’s what it looks like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/normal.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg2.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/hypothesis.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded nsfg2.py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Normal</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma2</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigma2</span> <span class="o">=</span> <span class="n">sigma2</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;N(</span><span class="si">%g</span><span class="s1">, </span><span class="si">%g</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">Sum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Normal</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Normal</span><span class="p">(</span><span class="n">factor</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="n">factor</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__divide__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">divisor</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">divisor</span> <span class="o">*</span> <span class="bp">self</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So we can instantiate a Normal that represents the distribution of
+gorilla weights:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">normal</span> <span class="kn">import</span> <span class="n">Normal</span>
+
+<span class="n">dist</span> <span class="o">=</span> <span class="n">Normal</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mf">7.5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Normal(90, 56.25)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Normal</span></code> provides <code class="docutils literal notranslate"><span class="pre">Sum</span></code>, which takes a sample size, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and returns the
+distribution of the sum of <code class="docutils literal notranslate"><span class="pre">n</span></code> values, using Equation 3:</p>
+<p>So we can compute the sampling distribution of the mean with sample size
+9:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist_xbar</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="o">/</span> <span class="mi">9</span>
+<span class="n">dist_xbar</span><span class="o">.</span><span class="n">sigma</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5
+</pre></div>
+</div>
+</div>
+</div>
+<p>The standard deviation of the sampling distribution is 2.5 kg, as we saw
+in the previous section. Finally, Normal provides <code class="docutils literal notranslate"><span class="pre">Percentile</span></code>, which we
+can use to compute a confidence interval:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist_xbar</span><span class="o">.</span><span class="n">Percentile</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">dist_xbar</span><span class="o">.</span><span class="n">Percentile</span><span class="p">(</span><span class="mi">95</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(85.88786593262132, 94.11213406737868)
+</pre></div>
+</div>
+</div>
+</div>
+<p>And that’s the same answer we got before. We’ll use the Normal class
+again later, but before we go on, we need one more bit of analysis.</p>
+</section>
+<section id="central-limit-theorem">
+<h2>Central limit theorem<a class="headerlink" href="#central-limit-theorem" title="Link to this heading">#</a></h2>
+<p>As we saw in the previous sections, if we add values drawn from normal
+distributions, the distribution of the sum is normal. Most other
+distributions don’t have this property; if we add values drawn from
+other distributions, the sum does not generally have an analytic
+distribution.</p>
+<p>But if we add up <code class="docutils literal notranslate"><span class="pre">n</span></code> values from almost any distribution, the
+distribution of the sum converges to normal as <code class="docutils literal notranslate"><span class="pre">n</span></code> increases.</p>
+<p>More specifically, if the distribution of the values has mean and
+standard deviation <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, the distribution of the sum is
+approximately <span class="math notranslate nohighlight">\(Normal(n \mu, n \sigma^2)\)</span>.</p>
+<p>This result is the Central Limit Theorem (CLT). It is one of the most
+useful tools for statistical analysis, but it comes with caveats:</p>
+<ul class="simple">
+<li><p>The values have to be drawn independently. If they are correlated,
+the CLT doesn’t apply (although this is seldom a problem in
+practice).</p></li>
+<li><p>The values have to come from the same distribution (although this
+requirement can be relaxed).</p></li>
+<li><p>The values have to be drawn from a distribution with finite mean and
+variance. So most Pareto distributions are out.</p></li>
+<li><p>The rate of convergence depends on the skewness of the distribution.
+Sums from an exponential distribution converge for small <code class="docutils literal notranslate"><span class="pre">n</span></code>. Sums
+from a lognormal distribution require larger sizes.</p></li>
+</ul>
+<p>The Central Limit Theorem explains the prevalence of normal
+distributions in the natural world. Many characteristics of living
+things are affected by genetic and environmental factors whose effect is
+additive. The characteristics we measure are the sum of a large number
+of small effects, so their distribution tends to be normal.</p>
+</section>
+<section id="testing-the-clt">
+<h2>Testing the CLT<a class="headerlink" href="#testing-the-clt" title="Link to this heading">#</a></h2>
+<p>To see how the Central Limit Theorem works, and when it doesn’t, let’s
+try some experiments. First, we’ll try an exponential distribution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MakeExpoSamples</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates samples from an exponential distribution.</span>
+
+<span class="sd">    beta: parameter</span>
+<span class="sd">    iters: number of samples to generate for each size</span>
+
+<span class="sd">    returns: list of samples</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+        <span class="n">samples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">sample</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">samples</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">MakeExpoSamples</span></code> generates samples of sums of exponential values (I use
+“exponential values” as shorthand for “values from an exponential
+distribution”). <code class="docutils literal notranslate"><span class="pre">beta</span></code> is the parameter of the distribution; <code class="docutils literal notranslate"><span class="pre">iters</span></code> is
+the number of sums to generate.</p>
+<p>To explain this function, I’ll start from the inside and work my way
+out. Each time we call <code class="docutils literal notranslate"><span class="pre">np.random.exponential</span></code>, we get a sequence of <code class="docutils literal notranslate"><span class="pre">n</span></code>
+exponential values and compute its sum. <code class="docutils literal notranslate"><span class="pre">sample</span></code> is a list of these
+sums, with length <code class="docutils literal notranslate"><span class="pre">iters</span></code>.</p>
+<p>It is easy to get <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">iters</span></code> confused: <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of terms
+in each sum; <code class="docutils literal notranslate"><span class="pre">iters</span></code> is the number of sums we compute in order to
+characterize the distribution of sums.</p>
+<p>The return value is a list of <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">sample)</span></code> pairs. For each pair, we
+make a normal probability plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">NormalPlotSamples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes normal probability plots for samples.</span>
+
+<span class="sd">    samples: list of samples</span>
+<span class="sd">    label: string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">samples</span><span class="p">:</span>
+        <span class="n">thinkplot</span><span class="o">.</span><span class="n">SubPlot</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+        <span class="n">thinkstats2</span><span class="o">.</span><span class="n">NormalProbabilityPlot</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+
+        <span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;n=</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n</span><span class="p">,</span>
+            <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">xticks</span><span class="o">=</span><span class="p">[],</span>
+            <span class="n">yticks</span><span class="o">=</span><span class="p">[],</span>
+            <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;random normal variate&quot;</span><span class="p">,</span>
+            <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">plot</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">NormalPlotSamples</span></code> takes the list of pairs from <code class="docutils literal notranslate"><span class="pre">MakeExpoSamples</span></code> and
+generates a row of normal probability plots.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">MakeExpoSamples</span><span class="p">()</span>
+<span class="n">NormalPlotSamples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;sum of expo values&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a7f9503514934079df053082ed1491f90d3578c8000f990b4e5cd56d475ce9fe.png" src="_images/a7f9503514934079df053082ed1491f90d3578c8000f990b4e5cd56d475ce9fe.png" />
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#normal1"><span class="xref myst">[normal1]</span></a>{reference-type=“ref” reference=“normal1”}
+(top row) shows the results. With <code class="docutils literal notranslate"><span class="pre">n=1</span></code>, the distribution of the sum is
+still exponential, so the normal probability plot is not a straight
+line. But with <code class="docutils literal notranslate"><span class="pre">n=10</span></code> the distribution of the sum is approximately
+normal, and with <code class="docutils literal notranslate"><span class="pre">n=100</span></code> it is all but indistinguishable from normal.</p>
+<p>Figure <a class="reference internal" href="#normal1"><span class="xref myst">[normal1]</span></a>{reference-type=“ref” reference=“normal1”}
+(bottom row) shows similar results for a lognormal distribution.
+Lognormal distributions are generally more skewed than exponential
+distributions, so the distribution of sums takes longer to converge.
+With <code class="docutils literal notranslate"><span class="pre">n=10</span></code> the normal probability plot is nowhere near straight, but
+with <code class="docutils literal notranslate"><span class="pre">n=100</span></code> it is approximately normal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MakeLognormalSamples</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates samples from a lognormal distribution.</span>
+
+<span class="sd">    mu: parmeter</span>
+<span class="sd">    sigma: parameter</span>
+<span class="sd">    iters: number of samples to generate for each size</span>
+
+<span class="sd">    returns: list of samples</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+        <span class="n">samples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">sample</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">samples</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">MakeLognormalSamples</span><span class="p">()</span>
+<span class="n">NormalPlotSamples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;sum of lognormal values&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/07f34135359813e8f73519fa338f0e8136875a313d132ffce5035da15f3b3fcf.png" src="_images/07f34135359813e8f73519fa338f0e8136875a313d132ffce5035da15f3b3fcf.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MakeParetoSamples</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates samples from a Pareto distribution.</span>
+
+<span class="sd">    alpha: parameter</span>
+<span class="sd">    iters: number of samples to generate for each size</span>
+
+<span class="sd">    returns: list of samples</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">pareto</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+        <span class="n">samples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">sample</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">samples</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">MakeParetoSamples</span><span class="p">()</span>
+<span class="n">NormalPlotSamples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;sum of Pareto values&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/162a81bd13a09fcd0da0fe8a708f3651aa59164605d4f95d6d7d8a01a8c4a72f.png" src="_images/162a81bd13a09fcd0da0fe8a708f3651aa59164605d4f95d6d7d8a01a8c4a72f.png" />
+</div>
+</div>
+<p>Pareto distributions are even more skewed than lognormal. Depending on
+the parameters, many Pareto distributions do not have finite mean and
+variance. As a result, the Central Limit Theorem does not apply.
+Figure <a class="reference internal" href="#normal2"><span class="xref myst">[normal2]</span></a>{reference-type=“ref” reference=“normal2”}
+(top row) shows distributions of sums of Pareto values. Even with
+<code class="docutils literal notranslate"><span class="pre">n=100</span></code> the normal probability plot is far from straight.</p>
+<p>I also mentioned that CLT does not apply if the values are correlated.
+To test that, I generate correlated values from an exponential
+distribution. The algorithm for generating correlated values is (1)
+generate correlated normal values, (2) use the normal CDF to transform
+the values to uniform, and (3) use the inverse exponential CDF to
+transform the uniform values to exponential.</p>
+<p><code class="docutils literal notranslate"><span class="pre">GenerateCorrelated</span></code> returns an iterator of <code class="docutils literal notranslate"><span class="pre">n</span></code> normal values with
+serial correlation <code class="docutils literal notranslate"><span class="pre">rho</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">GenerateCorrelated</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a sequence of correlated values from a standard normal dist.</span>
+
+<span class="sd">    rho: coefficient of correlation</span>
+<span class="sd">    n: length of sequence</span>
+
+<span class="sd">    returns: iterator</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">x</span>
+
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">rho</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">rho</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first value is a standard normal value. Each subsequent value
+depends on its predecessor: if the previous value is <code class="docutils literal notranslate"><span class="pre">x</span></code>, the mean of
+the next value is <code class="docutils literal notranslate"><span class="pre">x*rho</span></code>, with variance <code class="docutils literal notranslate"><span class="pre">1-rho**2</span></code>. Note that
+<code class="docutils literal notranslate"><span class="pre">random.gauss</span></code> takes the standard deviation as the second argument, not
+variance.</p>
+<p><code class="docutils literal notranslate"><span class="pre">GenerateExpoCorrelated</span></code> takes the resulting sequence and transforms it
+to exponential:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">expon</span>
+
+<span class="k">def</span> <span class="nf">GenerateExpoCorrelated</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a sequence of correlated values from an exponential dist.</span>
+
+<span class="sd">    rho: coefficient of correlation</span>
+<span class="sd">    n: length of sequence</span>
+
+<span class="sd">    returns: NumPy array</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">normal</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">GenerateCorrelated</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">uniform</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">normal</span><span class="p">)</span>
+    <span class="n">expo</span> <span class="o">=</span> <span class="n">expon</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">uniform</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">expo</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MakeCorrelatedSamples</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates samples from a correlated exponential distribution.</span>
+
+<span class="sd">    rho: correlation</span>
+<span class="sd">    iters: number of samples to generate for each size</span>
+
+<span class="sd">    returns: list of samples</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">GenerateExpoCorrelated</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+        <span class="n">samples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">sample</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">samples</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">MakeCorrelatedSamples</span><span class="p">()</span>
+<span class="n">NormalPlotSamples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;sum of correlated exponential values&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9745449f66cb3ef32760248ce91cd4908fc117055aebd53fd65928f51b5e86ee.png" src="_images/9745449f66cb3ef32760248ce91cd4908fc117055aebd53fd65928f51b5e86ee.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">normal</span></code> is a list of correlated normal values. <code class="docutils literal notranslate"><span class="pre">uniform</span></code> is a sequence
+of uniform values between 0 and 1. <code class="docutils literal notranslate"><span class="pre">expo</span></code> is a correlated sequence of
+exponential values. <code class="docutils literal notranslate"><span class="pre">ppf</span></code> stands for “percent point function,” which is
+another name for the inverse CDF.</p>
+<p>Figure <a class="reference internal" href="#normal2"><span class="xref myst">[normal2]</span></a>{reference-type=“ref” reference=“normal2”}
+(bottom row) shows distributions of sums of correlated exponential
+values with <code class="docutils literal notranslate"><span class="pre">rho=0.9</span></code>. The correlation slows the rate of convergence;
+nevertheless, with <code class="docutils literal notranslate"><span class="pre">n=100</span></code> the normal probability plot is nearly
+straight. So even though CLT does not strictly apply when the values are
+correlated, moderate correlations are seldom a problem in practice.</p>
+<p>These experiments are meant to show how the Central Limit Theorem works,
+and what happens when it doesn’t. Now let’s see how we can use it.</p>
+</section>
+<section id="applying-the-clt">
+<h2>Applying the CLT<a class="headerlink" href="#applying-the-clt" title="Link to this heading">#</a></h2>
+<p>To see why the Central Limit Theorem is useful, let’s get back to the
+example in Section <a class="reference internal" href="#testdiff"><span class="xref myst">[testdiff]</span></a>{reference-type=“ref”
+reference=“testdiff”}: testing the apparent difference in mean pregnancy
+length for first babies and others. As we’ve seen, the apparent
+difference is about 0.078 weeks:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/first.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">first</span>
+
+<span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">MakeFrames</span><span class="p">()</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">delta</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.07803726677754952
+</pre></div>
+</div>
+</div>
+</div>
+<p>Remember the logic of hypothesis testing: we compute a p-value, which is
+the probability of the observed difference under the null hypothesis; if
+it is small, we conclude that the observed difference is unlikely to be
+due to chance.</p>
+<p>In this example, the null hypothesis is that the distribution of
+pregnancy lengths is the same for first babies and others. So we can
+compute the sampling distribution of the mean like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SamplingDistMean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the sampling distribution of the mean.</span>
+
+<span class="sd">    data: sequence of values representing the population</span>
+<span class="sd">    n: sample size</span>
+
+<span class="sd">    returns: Normal object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mean</span><span class="p">,</span> <span class="n">var</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">data</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">Normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dist</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist1</span> <span class="o">=</span> <span class="n">SamplingDistMean</span><span class="p">(</span><span class="n">live</span><span class="o">.</span><span class="n">prglngth</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">firsts</span><span class="p">))</span>
+<span class="n">dist2</span> <span class="o">=</span> <span class="n">SamplingDistMean</span><span class="p">(</span><span class="n">live</span><span class="o">.</span><span class="n">prglngth</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">others</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Both sampling distributions are based on the same population, which is
+the pool of all live births. <code class="docutils literal notranslate"><span class="pre">SamplingDistMean</span></code> takes this sequence of
+values and the sample size, and returns a Normal object representing the
+sampling distribution:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">var</span></code> are the mean and variance of <code class="docutils literal notranslate"><span class="pre">data</span></code>. We approximate the
+distribution of the data with a normal distribution, <code class="docutils literal notranslate"><span class="pre">dist</span></code>.</p>
+<p>In this example, the data are not normally distributed, so this
+approximation is not very good. But then we compute <code class="docutils literal notranslate"><span class="pre">dist.Sum(n)</span> <span class="pre">/</span> <span class="pre">n</span></code>,
+which is the sampling distribution of the mean of <code class="docutils literal notranslate"><span class="pre">n</span></code> values. Even if
+the data are not normally distributed, the sampling distribution of the
+mean is, by the Central Limit Theorem.</p>
+<p>Next, we compute the sampling distribution of the difference in the
+means. The <code class="docutils literal notranslate"><span class="pre">Normal</span></code> class knows how to perform subtraction using
+Equation 2:</p>
+<p>So we can compute the sampling distribution of the difference like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist</span> <span class="o">=</span> <span class="n">dist1</span> <span class="o">-</span> <span class="n">dist2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Normal(0, 0.00319708)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The mean is 0, which makes sense because we expect two samples from the
+same distribution to have the same mean, on average. The variance of the
+sampling distribution is 0.0032.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Normal</span></code> provides <code class="docutils literal notranslate"><span class="pre">Prob</span></code>, which evaluates the normal CDF. We can use
+<code class="docutils literal notranslate"><span class="pre">Prob</span></code> to compute the probability of a difference as large as <code class="docutils literal notranslate"><span class="pre">delta</span></code>
+under the null hypothesis:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">-</span> <span class="n">dist</span><span class="o">.</span><span class="n">Prob</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.08377070425543787
+</pre></div>
+</div>
+</div>
+</div>
+<p>Which means that the p-value for a one-sided test is 0.084. For a
+two-sided test we would also compute</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist</span><span class="o">.</span><span class="n">Prob</span><span class="p">(</span><span class="o">-</span><span class="n">delta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.08377070425543781
+</pre></div>
+</div>
+</div>
+</div>
+<p>Which is the same because the normal distribution is symmetric. The sum
+of the tails is 0.168, which is consistent with the estimate in
+Section <a class="reference internal" href="#testdiff"><span class="xref myst">[testdiff]</span></a>{reference-type=“ref”
+reference=“testdiff”}, which was 0.17.</p>
+</section>
+<section id="correlation-test">
+<h2>Correlation test<a class="headerlink" href="#correlation-test" title="Link to this heading">#</a></h2>
+<p>In Section <a class="reference internal" href="#corrtest"><span class="xref myst">[corrtest]</span></a>{reference-type=“ref”
+reference=“corrtest”} we used a permutation test for the correlation
+between birth weight and mother’s age, and found that it is
+statistically significant, with p-value less than 0.001.</p>
+<p>Now we can do the same thing analytically. The method is based on this
+mathematical result: given two variables that are normally distributed
+and uncorrelated, if we generate a sample with size <span class="math notranslate nohighlight">\(n\)</span>, compute
+Pearson’s correlation, <span class="math notranslate nohighlight">\(r\)</span>, and then compute the transformed correlation
+$<span class="math notranslate nohighlight">\(t = r \sqrt{\frac{n-2}{1-r^2}}\)</span><span class="math notranslate nohighlight">\( the distribution of \)</span>t<span class="math notranslate nohighlight">\( is Student's
+t-distribution with parameter \)</span>n-2$. The t-distribution is an analytic
+distribution; the CDF can be computed efficiently using gamma functions.</p>
+<p>We can use this result to compute the sampling distribution of
+correlation under the null hypothesis; that is, if we generate
+uncorrelated sequences of normal values, what is the distribution of
+their correlation? <code class="docutils literal notranslate"><span class="pre">StudentCdf</span></code> takes the sample size, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and returns
+the sampling distribution of correlation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span> <span class="k">as</span> <span class="n">studentt</span>
+
+<span class="k">def</span> <span class="nf">StudentCdf</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the CDF correlations from uncorrelated variables.</span>
+
+<span class="sd">    n: sample size</span>
+
+<span class="sd">    returns: Cdf</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+    <span class="n">ps</span> <span class="o">=</span> <span class="n">studentt</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">rs</span> <span class="o">=</span> <span class="n">ts</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">ts</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">ps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ts</span></code> is a NumPy array of values for <span class="math notranslate nohighlight">\(t\)</span>, the transformed correlation.
+<code class="docutils literal notranslate"><span class="pre">ps</span></code> contains the corresponding probabilities, computed using the CDF of
+the Student’s t-distribution implemented in SciPy. The parameter of the
+t-distribution, <code class="docutils literal notranslate"><span class="pre">df</span></code>, stands for “degrees of freedom.” I won’t explain
+that term, but you can read about it at
+<a class="reference external" href="http://en.wikipedia.org/wiki/Degrees_of_freedom_(statistics)">http://en.wikipedia.org/wiki/Degrees_of_freedom_(statistics)</a>.</p>
+<p>To get from <code class="docutils literal notranslate"><span class="pre">ts</span></code> to the correlation coefficients, <code class="docutils literal notranslate"><span class="pre">rs</span></code>, we apply the
+inverse transform, $<span class="math notranslate nohighlight">\(r = t / \sqrt{n - 2 + t^2}\)</span><span class="math notranslate nohighlight">\( The result is the
+sampling distribution of \)</span>r$ under the null hypothesis.
+Figure <a class="reference internal" href="#normal4"><span class="xref myst">[normal4]</span></a>{reference-type=“ref” reference=“normal4”}
+shows this distribution along with the distribution we generated in
+Section <a class="reference internal" href="#corrtest"><span class="xref myst">[corrtest]</span></a>{reference-type=“ref”
+reference=“corrtest”} by resampling. They are nearly identical. Although
+the actual distributions are not normal, Pearson’s coefficient of
+correlation is based on sample means and variances. By the Central Limit
+Theorem, these moment-based statistics are normally distributed even if
+the data are not.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hypothesis</span>
+
+
+<span class="k">class</span> <span class="nc">CorrelationPermute</span><span class="p">(</span><span class="n">hypothesis</span><span class="o">.</span><span class="n">CorrelationPermute</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests correlations by permutation.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the test statistic.</span>
+
+<span class="sd">        data: tuple of xs and ys</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ResampleCorrelations</span><span class="p">(</span><span class="n">live</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests the correlation between birth weight and mother&#39;s age.</span>
+
+<span class="sd">    live: DataFrame for live births</span>
+
+<span class="sd">    returns: sample size, observed correlation, CDF of resampled correlations</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">live2</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;agepreg&quot;</span><span class="p">,</span> <span class="s2">&quot;totalwgt_lb&quot;</span><span class="p">])</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">live2</span><span class="o">.</span><span class="n">agepreg</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">live2</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">ht</span> <span class="o">=</span> <span class="n">CorrelationPermute</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">p_value</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">PValue</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">live2</span><span class="p">),</span> <span class="n">ht</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">test_cdf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">cdf</span> <span class="o">=</span> <span class="n">ResampleCorrelations</span><span class="p">(</span><span class="n">live</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">StudentCdf</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">xs</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">ps</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Student t&quot;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sample&quot;</span><span class="p">)</span>
+
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;correlation&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b6fa05ed39b0279c9fe7d41fbe8ad76b44858d043c9a7f8a4d771512883aa31d.png" src="_images/b6fa05ed39b0279c9fe7d41fbe8ad76b44858d043c9a7f8a4d771512883aa31d.png" />
+</div>
+</div>
+<p>From Figure <a class="reference internal" href="#normal4"><span class="xref myst">[normal4]</span></a>{reference-type=“ref”
+reference=“normal4”}, we can see that the observed correlation, 0.07, is
+unlikely to occur if the variables are actually uncorrelated. Using the
+analytic distribution, we can compute just how unlikely:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">p_value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">studentt</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">p_value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.861466619208386e-11
+</pre></div>
+</div>
+</div>
+</div>
+<p>We compute the value of <code class="docutils literal notranslate"><span class="pre">t</span></code> that corresponds to <code class="docutils literal notranslate"><span class="pre">r=0.07</span></code>, and then
+evaluate the t-distribution at <code class="docutils literal notranslate"><span class="pre">t</span></code>. The result is <code class="docutils literal notranslate"><span class="pre">2.9e-11</span></code>. This
+example demonstrates an advantage of the analytic method: we can compute
+very small p-values. But in practice it usually doesn’t matter.</p>
+</section>
+<section id="chi-squared-test">
+<h2>Chi-squared test<a class="headerlink" href="#chi-squared-test" title="Link to this heading">#</a></h2>
+<p>In Section <a class="reference internal" href="#casino2"><span class="xref myst">[casino2]</span></a>{reference-type=“ref”
+reference=“casino2”} we used the chi-squared statistic to test whether a
+die is crooked. The chi-squared statistic measures the total normalized
+deviation from the expected values in a table:</p>
+<div class="math notranslate nohighlight">
+\[\chi^2 = \sum_i \frac{{(O_i - E_i)}^2}{E_i}\]</div>
+<p>One reason the
+chi-squared statistic is widely used is that its sampling distribution
+under the null hypothesis is analytic; by a remarkable coincidence<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>,
+it is called the chi-squared distribution. Like the t-distribution, the
+chi-squared CDF can be computed efficiently using gamma functions.</p>
+<p>SciPy provides an implementation of the chi-squared distribution, which
+we use to compute the sampling distribution of the chi-squared
+statistic:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span> <span class="k">as</span> <span class="n">chi2_dist</span>
+
+<span class="k">def</span> <span class="nf">ChiSquaredCdf</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Discrete approximation of the chi-squared CDF with df=n-1.</span>
+
+<span class="sd">    n: sample size</span>
+
+<span class="sd">    returns: Cdf</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+    <span class="n">ps</span> <span class="o">=</span> <span class="n">chi2_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#normal5"><span class="xref myst">[normal5]</span></a>{reference-type=“ref” reference=“normal5”}
+shows the analytic result along with the distribution we got by
+resampling. They are very similar, especially in the tail, which is the
+part we usually care most about.</p>
+<p>We can use this distribution to compute the p-value of the observed test
+statistic, <code class="docutils literal notranslate"><span class="pre">chi2</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">hypothesis</span><span class="o">.</span><span class="n">DiceChiTest</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">p_value</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">PValue</span><span class="p">(</span><span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">chi2</span><span class="p">,</span> <span class="n">cdf</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">dt</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">test_cdf</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ChiSquaredCdf</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">xs</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">ps</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;chi squared&quot;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sample&quot;</span><span class="p">)</span>
+
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;chi-squared statistic&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8f27cf96a26349c4913db14d1c3af8ee8b47cd01d3edbe30a3c5a179b66003ba.png" src="_images/8f27cf96a26349c4913db14d1c3af8ee8b47cd01d3edbe30a3c5a179b66003ba.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">chi2_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">p_value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.04069938850404997
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is 0.041, which is consistent with the result from
+Section <a class="reference internal" href="#casino2"><span class="xref myst">[casino2]</span></a>{reference-type=“ref”
+reference=“casino2”}.</p>
+<p>The parameter of the chi-squared distribution is “degrees of freedom”
+again. In this case the correct parameter is <code class="docutils literal notranslate"><span class="pre">n-1</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the
+size of the table, 6. Choosing this parameter can be tricky; to be
+honest, I am never confident that I have it right until I generate
+something like Figure <a class="reference internal" href="#normal5"><span class="xref myst">[normal5]</span></a>{reference-type=“ref”
+reference=“normal5”} to compare the analytic results to the resampling
+results.</p>
+</section>
+<section id="discussion">
+<h2>Discussion<a class="headerlink" href="#discussion" title="Link to this heading">#</a></h2>
+<p>This book focuses on computational methods like resampling and
+permutation. These methods have several advantages over analysis:</p>
+<ul class="simple">
+<li><p>They are easier to explain and understand. For example, one of the
+most difficult topics in an introductory statistics class is
+hypothesis testing. Many students don’t really understand what
+p-values are. I think the approach I presented in
+Chapter <a class="reference internal" href="#testing"><span class="xref myst">[testing]</span></a>{reference-type=“ref”
+reference=“testing”}—simulating the null hypothesis and computing
+test statistics—makes the fundamental idea clearer.</p></li>
+<li><p>They are robust and versatile. Analytic methods are often based on
+assumptions that might not hold in practice. Computational methods
+require fewer assumptions, and can be adapted and extended more
+easily.</p></li>
+<li><p>They are debuggable. Analytic methods are often like a black box:
+you plug in numbers and they spit out results. But it’s easy to make
+subtle errors, hard to be confident that the results are right, and
+hard to find the problem if they are not. Computational methods lend
+themselves to incremental development and testing, which fosters
+confidence in the results.</p></li>
+</ul>
+<p>But there is one drawback: computational methods can be slow. Taking
+into account these pros and cons, I recommend the following process:</p>
+<ol class="arabic simple">
+<li><p>Use computational methods during exploration. If you find a
+satisfactory answer and the run time is acceptable, you can stop.</p></li>
+<li><p>If run time is not acceptable, look for opportunities to optimize.
+Using analytic methods is one of several methods of optimization.</p></li>
+<li><p>If replacing a computational method with an analytic method is
+appropriate, use the computational method as a basis of comparison,
+providing mutual validation between the computational and analytic
+results.</p></li>
+</ol>
+<p>For the vast majority of problems I have worked on, I didn’t have to go
+past Step 1.</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong>    In Section 5.4, we saw that the distribution of adult weights is approximately lognormal. One possible explanation is that the weight a person gains each year is proportional to their current weight. In that case, adult weight is the product of a large number of multiplicative factors:</p>
+<p>w = w0 f1 f2 … fn</p>
+<p>where w is adult weight, w0 is birth weight, and fi is the weight gain factor for year i.</p>
+<p>The log of a product is the sum of the logs of the factors:</p>
+<p>logw = logw0 + logf1 + logf2 + … + logfn</p>
+<p>So by the Central Limit Theorem, the distribution of logw is approximately normal for large n, which implies that the distribution of w is lognormal.</p>
+<p>To model this phenomenon, choose a distribution for f that seems reasonable, then generate a sample of adult weights by choosing a random value from the distribution of birth weights, choosing a sequence of factors from the distribution of f, and computing the product. What value of n is needed to converge to a lognormal distribution?</p>
+<p><strong>Exercise:</strong> In Section 14.6 we used the Central Limit Theorem to find the sampling distribution of the difference in means, δ, under the null hypothesis that both samples are drawn from the same population.</p>
+<p>We can also use this distribution to find the standard error of the estimate and confidence intervals, but that would only be approximately correct. To be more precise, we should compute the sampling distribution of δ under the alternate hypothesis that the samples are drawn from different populations.</p>
+<p>Compute this distribution and use it to calculate the standard error and a 90% confidence interval for the difference in means.</p>
+<p><strong>Exercise:</strong> <a class="reference external" href="http://ieeexplore.ieee.org/document/7044435/">In a 2014 paper</a>, Stein et al. investigate the effects of an intervention intended to mitigate gender-stereotypical task allocation within student engineering teams.</p>
+<p>Before and after the intervention, students responded to a survey that asked them to rate their contribution to each aspect of class projects on a 7-point scale.</p>
+<p>Before the intervention, male students reported higher scores for the programming aspect of the project than female students; on average men reported a score of 3.57 with standard error 0.28. Women reported 1.91, on average, with standard error 0.32.</p>
+<p>Compute the sampling distribution of the gender gap (the difference in means), and test whether it is statistically significant. Because you are given standard errors for the estimated means, you don’t need to know the sample size to figure out the sampling distributions.</p>
+<p>After the intervention, the gender gap was smaller: the average score for men was 3.44 (SE 0.16); the average score for women was 3.18 (SE 0.16). Again, compute the sampling distribution of the gender gap and test it.</p>
+<p>Finally, estimate the change in gender gap; what is the sampling distribution of this change, and is it statistically significant?</p>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Not really.</p>
+</aside>
+</aside>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap13.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Survival analysis</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions">Normal distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distributions">Sampling distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-normal-distributions">Representing normal distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">Central limit theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-clt">Testing the CLT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-clt">Applying the CLT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-test">Correlation test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-test">Chi-squared test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

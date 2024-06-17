@@ -1,0 +1,1895 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Time series analysis &#8212; Think Stats, 3rd edition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap12';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Survival analysis" href="chap13.html" />
+    <link rel="prev" title="Regression" href="chap11.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Stats, 3rd edition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Think Stats, 3rd edition
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">Linear least squares</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">Regression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic methods</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkStats/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap12.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Time series analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-cleaning">Importing and cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-averages">Moving averages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">Missing values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-correlation">Serial correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation">Autocorrelation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="time-series-analysis">
+<h1>Time series analysis<a class="headerlink" href="#time-series-analysis" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+
+
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">thinkstats2</span>
+<span class="kn">import</span> <span class="nn">thinkplot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A <strong>time series</strong> is a sequence of measurements from a system that
+varies in time. One famous example is the “hockey stick graph” that
+shows global average temperature over time (see
+<a class="reference external" href="https://en.wikipedia.org/wiki/Hockey_stick_graph">https://en.wikipedia.org/wiki/Hockey_stick_graph</a>).</p>
+<p>The example I work with in this chapter comes from Zachary M. Jones, a
+researcher in political science who studies the black market for
+cannabis in the U.S. (<a class="reference external" href="http://zmjones.com/marijuana">http://zmjones.com/marijuana</a>). He collected data
+from a web site called “Price of Weed” that crowdsources market
+information by asking participants to report the price, quantity,
+quality, and location of cannabis transactions
+(<a class="reference external" href="http://www.priceofweed.com/">http://www.priceofweed.com/</a>). The goal of his project is to
+investigate the effect of policy decisions, like legalization, on
+markets. I find this project appealing because it is an example that
+uses data to address important political questions, like drug policy.</p>
+<p>I hope you will find this chapter interesting, but I’ll take this
+opportunity to reiterate the importance of maintaining a professional
+attitude to data analysis. Whether and which drugs should be illegal are
+important and difficult public policy questions; our decisions should be
+informed by accurate data reported honestly.</p>
+<section id="importing-and-cleaning">
+<h2>Importing and cleaning<a class="headerlink" href="#importing-and-cleaning" title="Link to this heading">#</a></h2>
+<p>The data I downloaded from Mr. Jones’s site is in the repository for
+this book. The following code reads it into a pandas DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/mj-clean.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded mj-clean.csv
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transactions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;mj-clean.csv&quot;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">transactions</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>city</th>
+      <th>state</th>
+      <th>price</th>
+      <th>amount</th>
+      <th>quality</th>
+      <th>date</th>
+      <th>ppg</th>
+      <th>state.name</th>
+      <th>lat</th>
+      <th>lon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Annandale</td>
+      <td>VA</td>
+      <td>100</td>
+      <td>7.075</td>
+      <td>high</td>
+      <td>2010-09-02</td>
+      <td>14.13</td>
+      <td>Virginia</td>
+      <td>38.830345</td>
+      <td>-77.213870</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Auburn</td>
+      <td>AL</td>
+      <td>60</td>
+      <td>28.300</td>
+      <td>high</td>
+      <td>2010-09-02</td>
+      <td>2.12</td>
+      <td>Alabama</td>
+      <td>32.578185</td>
+      <td>-85.472820</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Austin</td>
+      <td>TX</td>
+      <td>60</td>
+      <td>28.300</td>
+      <td>medium</td>
+      <td>2010-09-02</td>
+      <td>2.12</td>
+      <td>Texas</td>
+      <td>30.326374</td>
+      <td>-97.771258</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Belleville</td>
+      <td>IL</td>
+      <td>400</td>
+      <td>28.300</td>
+      <td>high</td>
+      <td>2010-09-02</td>
+      <td>14.13</td>
+      <td>Illinois</td>
+      <td>38.532311</td>
+      <td>-89.983521</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Boone</td>
+      <td>NC</td>
+      <td>55</td>
+      <td>3.540</td>
+      <td>high</td>
+      <td>2010-09-02</td>
+      <td>15.54</td>
+      <td>North Carolina</td>
+      <td>36.217052</td>
+      <td>-81.687983</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">parse_dates</span></code> tells <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> to interpret values in column 5 as dates
+and convert them to NumPy <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> objects.</p>
+<p>The DataFrame has a row for each reported transaction and the following
+columns:</p>
+<ul class="simple">
+<li><p>city: string city name.</p></li>
+<li><p>state: two-letter state abbreviation.</p></li>
+<li><p>price: price paid in dollars.</p></li>
+<li><p>amount: quantity purchased in grams.</p></li>
+<li><p>quality: high, medium, or low quality, as reported by the purchaser.</p></li>
+<li><p>date: date of report, presumed to be shortly after date of purchase.</p></li>
+<li><p>ppg: price per gram, in dollars.</p></li>
+<li><p><a class="reference external" href="http://state.name">state.name</a>: string state name.</p></li>
+<li><p>lat: approximate latitude of the transaction, based on city name.</p></li>
+<li><p>lon: approximate longitude of the transaction.</p></li>
+</ul>
+<p>Each transaction is an event in time, so we could treat this dataset as
+a time series. But the events are not equally spaced in time; the number
+of transactions reported each day varies from 0 to several hundred. Many
+methods used to analyze time series require the measurements to be
+equally spaced, or at least things are simpler if they are.</p>
+<p>In order to demonstrate these methods, I divide the dataset into groups
+by reported quality, and then transform each group into an equally
+spaced series by computing the mean daily price per gram.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">GroupByQualityAndDay</span><span class="p">(</span><span class="n">transactions</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Divides transactions by quality and computes mean daily price.</span>
+
+<span class="sd">    transaction: DataFrame of transactions</span>
+
+<span class="sd">    returns: map from quality to time series of ppg</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">groups</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;quality&quot;</span><span class="p">)</span>
+    <span class="n">dailies</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+        <span class="n">dailies</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">GroupByDay</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dailies</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">groupby</span></code> is a DataFrame method that returns a GroupBy object, <code class="docutils literal notranslate"><span class="pre">groups</span></code>;
+used in a for loop, it iterates the names of the groups and the
+DataFrames that represent them. Since the values of <code class="docutils literal notranslate"><span class="pre">quality</span></code> are <code class="docutils literal notranslate"><span class="pre">low</span></code>,
+<code class="docutils literal notranslate"><span class="pre">medium</span></code>, and <code class="docutils literal notranslate"><span class="pre">high</span></code>, we get three groups with those names.</p>
+<p>The loop iterates through the groups and calls <code class="docutils literal notranslate"><span class="pre">GroupByDay</span></code>, which
+computes the daily average price and returns a new DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">GroupByDay</span><span class="p">(</span><span class="n">transactions</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Groups transactions by day and compute the daily mean ppg.</span>
+
+<span class="sd">    transactions: DataFrame of transactions</span>
+
+<span class="sd">    returns: DataFrame of daily prices</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">grouped</span> <span class="o">=</span> <span class="n">transactions</span><span class="p">[[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;ppg&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)</span>
+    <span class="n">daily</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+
+    <span class="n">daily</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">daily</span><span class="o">.</span><span class="n">index</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">daily</span><span class="o">.</span><span class="n">date</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">one_year</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">52</span><span class="p">,</span> <span class="s2">&quot;W&quot;</span><span class="p">)</span>
+    <span class="n">daily</span><span class="p">[</span><span class="s2">&quot;years&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">date</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="n">one_year</span>
+
+    <span class="k">return</span> <span class="n">daily</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The parameter, <code class="docutils literal notranslate"><span class="pre">transactions</span></code>, is a DataFrame that contains columns
+<code class="docutils literal notranslate"><span class="pre">date</span></code> and <code class="docutils literal notranslate"><span class="pre">ppg</span></code>. We select these two columns, then group by <code class="docutils literal notranslate"><span class="pre">date</span></code>.</p>
+<p>The result, <code class="docutils literal notranslate"><span class="pre">grouped</span></code>, is a map from each date to a DataFrame that
+contains prices reported on that date. <code class="docutils literal notranslate"><span class="pre">aggregate</span></code> is a GroupBy method
+that iterates through the groups and applies a function to each column
+of the group; in this case there is only one column, <code class="docutils literal notranslate"><span class="pre">ppg</span></code>. So the
+result of <code class="docutils literal notranslate"><span class="pre">aggregate</span></code> is a DataFrame with one row for each date and one
+column, <code class="docutils literal notranslate"><span class="pre">ppg</span></code>.</p>
+<p>Dates in these DataFrames are stored as NumPy <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> objects,
+which are represented as 64-bit integers in nanoseconds. For some of the
+analyses coming up, it will be convenient to work with time in more
+human-friendly units, like years. So <code class="docutils literal notranslate"><span class="pre">GroupByDay</span></code> adds a column named
+<code class="docutils literal notranslate"><span class="pre">date</span></code> by copying the <code class="docutils literal notranslate"><span class="pre">index</span></code>, then adds <code class="docutils literal notranslate"><span class="pre">years</span></code>, which contains the
+number of years since the first transaction as a floating-point number.</p>
+<p>The resulting DataFrame has columns <code class="docutils literal notranslate"><span class="pre">ppg</span></code>, <code class="docutils literal notranslate"><span class="pre">date</span></code>, and <code class="docutils literal notranslate"><span class="pre">years</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dailies</span> <span class="o">=</span> <span class="n">GroupByQualityAndDay</span><span class="p">(</span><span class="n">transactions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_173743/579312898.py:9: FutureWarning: The provided callable &lt;function mean at 0x7fe92c248ee0&gt; is currently using DataFrameGroupBy.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;mean&quot; instead.
+  daily = grouped.aggregate(func)
+/tmp/ipykernel_173743/579312898.py:12: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  start = daily.date[0]
+/tmp/ipykernel_173743/579312898.py:9: FutureWarning: The provided callable &lt;function mean at 0x7fe92c248ee0&gt; is currently using DataFrameGroupBy.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;mean&quot; instead.
+  daily = grouped.aggregate(func)
+/tmp/ipykernel_173743/579312898.py:12: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  start = daily.date[0]
+/tmp/ipykernel_173743/579312898.py:9: FutureWarning: The provided callable &lt;function mean at 0x7fe92c248ee0&gt; is currently using DataFrameGroupBy.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;mean&quot; instead.
+  daily = grouped.aggregate(func)
+/tmp/ipykernel_173743/579312898.py:12: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  start = daily.date[0]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting">
+<h2>Plotting<a class="headerlink" href="#plotting" title="Link to this heading">#</a></h2>
+<p>The result from <code class="docutils literal notranslate"><span class="pre">GroupByQualityAndDay</span></code> is a map from each quality to a
+DataFrame of daily prices. Here’s the code I use to plot the three time
+series:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">daily</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dailies</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">SubPlot</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;price per gram ($)&#39;</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">daily</span><span class="o">.</span><span class="n">ppg</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span> 
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xticks</span><span class="o">=</span><span class="p">[])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/96548a412e8a63d661a808f4f39d8dfde3799576d7e4712174677d2ff75a69ae.png" src="_images/96548a412e8a63d661a808f4f39d8dfde3799576d7e4712174677d2ff75a69ae.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">PrePlot</span></code> with <code class="docutils literal notranslate"><span class="pre">rows=3</span></code> means that we are planning to make three
+subplots laid out in three rows. The loop iterates through the
+DataFrames and creates a scatter plot for each. It is common to plot
+time series with line segments between the points, but in this case
+there are many data points and prices are highly variable, so adding
+lines would not help.</p>
+<p>Since the labels on the x-axis are dates, I use <code class="docutils literal notranslate"><span class="pre">plt.xticks</span></code> to
+rotate the “ticks” 30 degrees, making them more readable.</p>
+<p>Figure <a class="reference internal" href="#timeseries1"><span class="xref myst">[timeseries1]</span></a>{reference-type=“ref”
+reference=“timeseries1”} shows the result. One apparent feature in these
+plots is a gap around November 2013. It’s possible that data collection
+was not active during this time, or the data might not be available. We
+will consider ways to deal with this missing data later.</p>
+<p>Visually, it looks like the price of high quality cannabis is declining
+during this period, and the price of medium quality is increasing. The
+price of low quality might also be increasing, but it is harder to tell,
+since it seems to be more volatile. Keep in mind that quality data is
+reported by volunteers, so trends over time might reflect changes in how
+participants apply these labels.</p>
+</section>
+<section id="linear-regression">
+<h2>Linear regression<a class="headerlink" href="#linear-regression" title="Link to this heading">#</a></h2>
+<p>Although there are methods specific to time series analysis, for many
+problems a simple way to get started is by applying general-purpose
+tools like linear regression. The following function takes a DataFrame
+of daily prices and computes a least squares fit, returning the model
+and results objects from StatsModels:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="k">def</span> <span class="nf">RunLinearModel</span><span class="p">(</span><span class="n">daily</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;ppg ~ years&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">daily</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">results</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we can iterate through the qualities and fit a model to each:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">regression</span> <span class="kn">import</span> <span class="n">SummarizeResults</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">daily</span> <span class="ow">in</span> <span class="n">dailies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="n">RunLinearModel</span><span class="p">(</span><span class="n">daily</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">SummarizeResults</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high
+Intercept   13.4   (0)
+years   -0.706   (3.69e-160)
+R^2 0.4441
+Std(ys) 1.096
+Std(res) 0.8174
+low
+Intercept   5.36   (3.15e-130)
+years   0.566   (2.76e-09)
+R^2 0.0296
+Std(ys) 3.381
+Std(res) 3.332
+medium
+Intercept   8.88   (0)
+years   0.282   (1.82e-15)
+R^2 0.0499
+Std(ys) 1.304
+Std(res) 1.272
+</pre></div>
+</div>
+</div>
+</div>
+<p>The estimated slopes indicate that the price of high quality cannabis
+dropped by about 71 cents per year during the observed interval; for
+medium quality it increased by 28 cents per year, and for low quality it
+increased by 57 cents per year. These estimates are all statistically
+significant with very small p-values.</p>
+<p>The <span class="math notranslate nohighlight">\(R^2\)</span> value for high quality cannabis is 0.44, which means that time
+as an explanatory variable accounts for 44% of the observed variability
+in price. For the other qualities, the change in price is smaller, and
+variability in prices is higher, so the values of <span class="math notranslate nohighlight">\(R^2\)</span> are smaller (but
+still statistically significant).</p>
+<p>The following code plots the observed prices and the fitted values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotFittedValues</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">endog</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;model&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we saw in
+Section <a class="reference internal" href="#implementation"><span class="xref myst">[implementation]</span></a>{reference-type=“ref”
+reference=“implementation”}, <code class="docutils literal notranslate"><span class="pre">model</span></code> contains <code class="docutils literal notranslate"><span class="pre">exog</span></code> and <code class="docutils literal notranslate"><span class="pre">endog</span></code>, NumPy
+arrays with the exogenous (explanatory) and endogenous (dependent)
+variables.</p>
+<p><code class="docutils literal notranslate"><span class="pre">PlotFittedValues</span></code> makes a scatter plot of the data points and a line
+plot of the fitted values.
+Figure <a class="reference internal" href="#timeseries2"><span class="xref myst">[timeseries2]</span></a>{reference-type=“ref”
+reference=“timeseries2”} shows the results for high quality cannabis.
+The model seems like a good linear fit for the data; nevertheless,
+linear regression is not the most appropriate choice for this data:</p>
+<ul class="simple">
+<li><p>First, there is no reason to expect the long-term trend to be a line
+or any other simple function. In general, prices are determined by
+supply and demand, both of which vary over time in unpredictable
+ways.</p></li>
+<li><p>Second, the linear regression model gives equal weight to all data,
+recent and past. For purposes of prediction, we should probably give
+more weight to recent data.</p></li>
+<li><p>Finally, one of the assumptions of linear regression is that the
+residuals are uncorrelated noise. With time series data, this
+assumption is often false because successive values are correlated.</p></li>
+</ul>
+<p>The next section presents an alternative that is more appropriate for
+time series data.</p>
+</section>
+<section id="moving-averages">
+<h2>Moving averages<a class="headerlink" href="#moving-averages" title="Link to this heading">#</a></h2>
+<p>Most time series analysis is based on the modeling assumption that the
+observed series is the sum of three components:</p>
+<ul class="simple">
+<li><p>Trend: A smooth function that captures persistent changes.</p></li>
+<li><p>Seasonality: Periodic variation, possibly including daily, weekly,
+monthly, or yearly cycles.</p></li>
+<li><p>Noise: Random variation around the long-term trend.</p></li>
+</ul>
+<p>Regression is one way to extract the trend from a series, as we saw in
+the previous section. But if the trend is not a simple function, a good
+alternative is a <strong>moving average</strong>. A moving average divides the series
+into overlapping regions, called <strong>windows</strong>, and computes the average
+of the values in each window.</p>
+<p>One of the simplest moving averages is the <strong>rolling mean</strong>, which
+computes the mean of the values in each window. For example, if the
+window size is 3, the rolling mean computes the mean of values 0 through
+2, 1 through 3, 2 through 4, etc.</p>
+<p>Pandas provides <code class="docutils literal notranslate"><span class="pre">rolling_mean</span></code>, which takes a Series and a window size
+and returns a new Series.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="n">series</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    NaN
+1    NaN
+2    1.0
+3    2.0
+4    3.0
+5    4.0
+6    5.0
+7    6.0
+8    7.0
+9    8.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first two values are <code class="docutils literal notranslate"><span class="pre">nan</span></code>; the next value is the mean of the first
+three elements, 0, 1, and 2. The next value is the mean of 1, 2, and 3.
+And so on.</p>
+<p>Before we can apply <code class="docutils literal notranslate"><span class="pre">rolling_mean</span></code> to the cannabis data, we have to deal
+with missing values. There are a few days in the observed interval with
+no reported transactions for one or more quality categories, and a
+period in 2013 when data collection was not active.</p>
+<p>In the DataFrames we have used so far, these dates are absent; the index
+skips days with no data. For the analysis that follows, we need to
+represent this missing data explicitly. We can do that by “reindexing”
+the DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">reindexed</span> <span class="o">=</span> <span class="n">daily</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first line computes a date range that includes every day from the
+beginning to the end of the observed interval. The second line creates a
+new DataFrame with all of the data from <code class="docutils literal notranslate"><span class="pre">daily</span></code>, but including rows for
+all dates, filled with <code class="docutils literal notranslate"><span class="pre">nan</span></code>.</p>
+<p>Now we can plot the rolling mean like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotRollingMean</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots rolling mean.</span>
+
+<span class="sd">    daily: DataFrame of daily prices</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+    <span class="n">reindexed</span> <span class="o">=</span> <span class="n">daily</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">reindexed</span><span class="o">.</span><span class="n">ppg</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">roll_mean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">reindexed</span><span class="o">.</span><span class="n">ppg</span><span class="p">)</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">roll_mean</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;rolling mean&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#ff7f00&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;price per gram ($)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PlotRollingMean</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/84547077a0a71fcb892b43956435910eb07910aa2e142137c8cebfe2eff7fdc7.png" src="_images/84547077a0a71fcb892b43956435910eb07910aa2e142137c8cebfe2eff7fdc7.png" />
+</div>
+</div>
+<p>The window size is 30, so each value in <code class="docutils literal notranslate"><span class="pre">roll_mean</span></code> is the mean of 30
+values from <code class="docutils literal notranslate"><span class="pre">reindexed.ppg</span></code>.</p>
+<p>Figure <a class="reference internal" href="#timeseries10"><span class="xref myst">[timeseries10]</span></a>{reference-type=“ref”
+reference=“timeseries10”} (left) shows the result. The rolling mean
+seems to do a good job of smoothing out the noise and extracting the
+trend. The first 29 values are <code class="docutils literal notranslate"><span class="pre">nan</span></code>, and wherever there’s a missing
+value, it’s followed by another 29 <code class="docutils literal notranslate"><span class="pre">nan</span></code>s. There are ways to fill in
+these gaps, but they are a minor nuisance.</p>
+<p>An alternative is the <strong>exponentially-weighted moving average</strong> (EWMA),
+which has two advantages. First, as the name suggests, it computes a
+weighted average where the most recent value has the highest weight and
+the weights for previous values drop off exponentially. Second, the
+pandas implementation of EWMA handles missing values better.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotEWMA</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots rolling mean.</span>
+
+<span class="sd">    daily: DataFrame of daily prices</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+    <span class="n">reindexed</span> <span class="o">=</span> <span class="n">daily</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">reindexed</span><span class="o">.</span><span class="n">ppg</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">roll_mean</span> <span class="o">=</span> <span class="n">reindexed</span><span class="o">.</span><span class="n">ppg</span><span class="o">.</span><span class="n">ewm</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">roll_mean</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;EWMA&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#ff7f00&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;price per gram ($)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PlotEWMA</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0419b85751ff70c6695aa484e59c1b3a76cc3d8628fcbf2606833c406beb0cf5.png" src="_images/0419b85751ff70c6695aa484e59c1b3a76cc3d8628fcbf2606833c406beb0cf5.png" />
+</div>
+</div>
+<p>The <strong>span</strong> parameter corresponds roughly to the window size of a
+moving average; it controls how fast the weights drop off, so it
+determines the number of points that make a non-negligible contribution
+to each average.</p>
+<p>Figure <a class="reference internal" href="#timeseries10"><span class="xref myst">[timeseries10]</span></a>{reference-type=“ref”
+reference=“timeseries10”} (right) shows the EWMA for the same data. It
+is similar to the rolling mean, where they are both defined, but it has
+no missing values, which makes it easier to work with. The values are
+noisy at the beginning of the time series, because they are based on
+fewer data points.</p>
+</section>
+<section id="missing-values">
+<h2>Missing values<a class="headerlink" href="#missing-values" title="Link to this heading">#</a></h2>
+<p>Now that we have characterized the trend of the time series, the next
+step is to investigate seasonality, which is periodic behavior. Time
+series data based on human behavior often exhibits daily, weekly,
+monthly, or yearly cycles. In the next section I present methods to test
+for seasonality, but they don’t work well with missing data, so we have
+to solve that problem first.</p>
+<p>A simple and common way to fill missing data is to use a moving average.
+The Series method <code class="docutils literal notranslate"><span class="pre">fillna</span></code> does just what we want:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">FillMissing</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">span</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fills missing values with an exponentially weighted moving average.</span>
+
+<span class="sd">    Resulting DataFrame has new columns &#39;ewma&#39; and &#39;resid&#39;.</span>
+
+<span class="sd">    daily: DataFrame of daily prices</span>
+<span class="sd">    span: window size (sort of) passed to ewma</span>
+
+<span class="sd">    returns: new DataFrame of daily prices</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+    <span class="n">reindexed</span> <span class="o">=</span> <span class="n">daily</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+
+    <span class="n">ewma</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">reindexed</span><span class="o">.</span><span class="n">ppg</span><span class="p">)</span><span class="o">.</span><span class="n">ewm</span><span class="p">(</span><span class="n">span</span><span class="o">=</span><span class="n">span</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="n">resid</span> <span class="o">=</span> <span class="p">(</span><span class="n">reindexed</span><span class="o">.</span><span class="n">ppg</span> <span class="o">-</span> <span class="n">ewma</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">fake_data</span> <span class="o">=</span> <span class="n">ewma</span> <span class="o">+</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Resample</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">reindexed</span><span class="p">))</span>
+    <span class="n">reindexed</span><span class="p">[</span><span class="s1">&#39;ppg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reindexed</span><span class="o">.</span><span class="n">ppg</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">fake_data</span><span class="p">)</span>
+
+    <span class="n">reindexed</span><span class="p">[</span><span class="s2">&quot;ewma&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ewma</span>
+    <span class="n">reindexed</span><span class="p">[</span><span class="s2">&quot;resid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reindexed</span><span class="o">.</span><span class="n">ppg</span> <span class="o">-</span> <span class="n">ewma</span>
+    <span class="k">return</span> <span class="n">reindexed</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotFilled</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots the EWMA and filled data.</span>
+
+<span class="sd">    daily: DataFrame of daily prices</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filled</span> <span class="o">=</span> <span class="n">FillMissing</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">span</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">filled</span><span class="o">.</span><span class="n">ppg</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">filled</span><span class="o">.</span><span class="n">ewma</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;EWMA&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#ff7f00&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Price per gram ($)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PlotFilled</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/eb4861aae31cf12e70d6c62b5a960fdac82f55b35ddeef9517d77d5af7d8a8aa.png" src="_images/eb4861aae31cf12e70d6c62b5a960fdac82f55b35ddeef9517d77d5af7d8a8aa.png" />
+</div>
+</div>
+<p>Wherever <code class="docutils literal notranslate"><span class="pre">reindexed.ppg</span></code> is <code class="docutils literal notranslate"><span class="pre">nan</span></code>, <code class="docutils literal notranslate"><span class="pre">fillna</span></code> replaces it with the
+corresponding value from <code class="docutils literal notranslate"><span class="pre">ewma</span></code>.</p>
+<p>A drawback of this method is that it understates the noise in the
+series. We can solve that problem by adding in resampled residuals:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid</span> <span class="o">=</span> <span class="p">(</span><span class="n">reindexed</span><span class="o">.</span><span class="n">ppg</span> <span class="o">-</span> <span class="n">ewma</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">fake_data</span> <span class="o">=</span> <span class="n">ewma</span> <span class="o">+</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Resample</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">reindexed</span><span class="p">))</span>
+<span class="n">reindexed</span><span class="p">[</span><span class="s1">&#39;ppg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reindexed</span><span class="o">.</span><span class="n">ppg</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">ewma</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">resid</span></code> contains the residual values, not including days when <code class="docutils literal notranslate"><span class="pre">ppg</span></code> is
+<code class="docutils literal notranslate"><span class="pre">nan</span></code>. <code class="docutils literal notranslate"><span class="pre">fake_data</span></code> contains the sum of the moving average and a random
+sample of residuals. Finally, <code class="docutils literal notranslate"><span class="pre">fillna</span></code> replaces <code class="docutils literal notranslate"><span class="pre">nan</span></code> with values from
+<code class="docutils literal notranslate"><span class="pre">fake_data</span></code>.</p>
+<p>Figure <a class="reference internal" href="#timeseries8"><span class="xref myst">[timeseries8]</span></a>{reference-type=“ref”
+reference=“timeseries8”} shows the result. The filled data is visually
+similar to the actual values. Since the resampled residuals are random,
+the results are different every time; later we’ll see how to
+characterize the error created by missing values.</p>
+</section>
+<section id="serial-correlation">
+<h2>Serial correlation<a class="headerlink" href="#serial-correlation" title="Link to this heading">#</a></h2>
+<p>As prices vary from day to day, you might expect to see patterns. If the
+price is high on Monday, you might expect it to be high for a few more
+days; and if it’s low, you might expect it to stay low. A pattern like
+this is called <strong>serial correlation</strong>, because each value is correlated
+with the next one in the series.</p>
+<p>To compute serial correlation, we can shift the time series by an
+interval called a <strong>lag</strong>, and then compute the correlation of the
+shifted series with the original:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SerialCorr</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="n">lag</span><span class="p">:]</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">lag</span><span class="p">)[</span><span class="n">lag</span><span class="p">:]</span>
+    <span class="n">corr</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">corr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After the shift, the first <code class="docutils literal notranslate"><span class="pre">lag</span></code> values are <code class="docutils literal notranslate"><span class="pre">nan</span></code>, so I use a slice to
+remove them before computing <code class="docutils literal notranslate"><span class="pre">Corr</span></code>.</p>
+<p>If we apply <code class="docutils literal notranslate"><span class="pre">SerialCorr</span></code> to the raw price data with lag 1, we find
+serial correlation 0.48 for the high quality category, 0.16 for medium
+and 0.10 for low. In any time series with a long-term trend, we expect
+to see strong serial correlations; for example, if prices are falling,
+we expect to see values above the mean in the first half of the series
+and values below the mean in the second half.</p>
+<p>It is more interesting to see if the correlation persists if you
+subtract away the trend. For example, we can compute the residual of the
+EWMA and then compute its serial correlation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filled_dailies</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">daily</span> <span class="ow">in</span> <span class="n">dailies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">filled_dailies</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">FillMissing</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">span</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">filled</span> <span class="ow">in</span> <span class="n">filled_dailies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">corr</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">SerialCorr</span><span class="p">(</span><span class="n">filled</span><span class="o">.</span><span class="n">ppg</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">corr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high 0.4849493118401932
+low 0.12124572717048827
+medium 0.17349477457545587
+</pre></div>
+</div>
+</div>
+</div>
+<p>With lag=1, the serial correlations for the de-trended data are -0.022
+for high quality, -0.015 for medium, and 0.036 for low. These values are
+small, indicating that there is little or no one-day serial correlation
+in this series.</p>
+<p>To check for weekly, monthly, and yearly seasonality, I ran the analysis
+again with different lags. Here are the results:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">filled</span> <span class="ow">in</span> <span class="n">filled_dailies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">corr</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">SerialCorr</span><span class="p">(</span><span class="n">filled</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">corr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high -0.014990113091734883
+low 0.0605318442718437
+medium -0.013939508007357701
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the next section we’ll test whether these correlations are
+statistically significant (they are not), but at this point we can
+tentatively conclude that there are no substantial seasonal patterns in
+these series, at least not with these lags.</p>
+</section>
+<section id="autocorrelation">
+<h2>Autocorrelation<a class="headerlink" href="#autocorrelation" title="Link to this heading">#</a></h2>
+<p>If you think a series might have some serial correlation, but you don’t
+know which lags to test, you can test them all! The <strong>autocorrelation
+function</strong> is a function that maps from lag to the serial correlation
+with the given lag. “Autocorrelation” is another name for serial
+correlation, used more often when the lag is not 1.</p>
+<p>StatsModels, which we used for linear regression in
+Section <a class="reference internal" href="#statsmodels"><span class="xref myst">[statsmodels]</span></a>{reference-type=“ref”
+reference=“statsmodels”}, also provides functions for time series
+analysis, including <code class="docutils literal notranslate"><span class="pre">acf</span></code>, which computes the autocorrelation function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="k">as</span> <span class="nn">smtsa</span>
+
+<span class="n">filled</span> <span class="o">=</span> <span class="n">filled_dailies</span><span class="p">[</span><span class="s2">&quot;high&quot;</span><span class="p">]</span>
+<span class="n">acf</span> <span class="o">=</span> <span class="n">smtsa</span><span class="o">.</span><span class="n">acf</span><span class="p">(</span><span class="n">filled</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">365</span><span class="p">,</span> <span class="n">adjusted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fft</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">acf</span></code> computes serial correlations with lags from 0 through <code class="docutils literal notranslate"><span class="pre">nlags</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">unbiased</span></code> flag tells <code class="docutils literal notranslate"><span class="pre">acf</span></code> to correct the estimates for the sample
+size. The result is an array of correlations. If we select daily prices
+for high quality, and extract correlations for lags 1, 7, 30, and 365,
+we can confirm that <code class="docutils literal notranslate"><span class="pre">acf</span></code> and <code class="docutils literal notranslate"><span class="pre">SerialCorr</span></code> yield approximately the same
+results:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%0.2g</span><span class="s2">, </span><span class="si">%.2g</span><span class="s2">, </span><span class="si">%0.2g</span><span class="s2">, </span><span class="si">%0.2g</span><span class="s2">, </span><span class="si">%0.2g</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">acf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">acf</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">acf</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">acf</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">acf</span><span class="p">[</span><span class="mi">365</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1, -0.015, 0.008, 0.0059, 0.066
+</pre></div>
+</div>
+</div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">lag=0</span></code>, <code class="docutils literal notranslate"><span class="pre">acf</span></code> computes the correlation of the series with itself,
+which is always 1.</p>
+<p>Figure <a class="reference internal" href="#timeseries9"><span class="xref myst">[timeseries9]</span></a>{reference-type=“ref”
+reference=“timeseries9”} (left) shows autocorrelation functions for the
+three quality categories, with <code class="docutils literal notranslate"><span class="pre">nlags=40</span></code>. The gray region shows the
+normal variability we would expect if there is no actual
+autocorrelation; anything that falls outside this range is statistically
+significant, with a p-value less than 5%. Since the false positive rate
+is 5%, and we are computing 120 correlations (40 lags for each of 3
+times series), we expect to see about 6 points outside this region. In
+fact, there are 7. We conclude that there are no autocorrelations in
+these series that could not be explained by chance.</p>
+<p>I computed the gray regions by resampling the residuals. You can see my
+code in <code class="docutils literal notranslate"><span class="pre">timeseries.py</span></code>; the function is called
+<code class="docutils literal notranslate"><span class="pre">SimulateAutocorrelation</span></code>.</p>
+<p>To see what the autocorrelation function looks like when there is a
+seasonal component, I generated simulated data by adding a weekly cycle.
+Assuming that demand for cannabis is higher on weekends, we might expect
+the price to be higher. To simulate this effect, I select dates that
+fall on Friday or Saturday and add a random amount to the price, chosen
+from a uniform distribution from $0 to $2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">AddWeeklySeasonality</span><span class="p">(</span><span class="n">daily</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds a weekly pattern.</span>
+
+<span class="sd">    daily: DataFrame of daily prices</span>
+
+<span class="sd">    returns: new DataFrame of daily prices</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fri_or_sat</span> <span class="o">=</span> <span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dayofweek</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dayofweek</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">fake</span> <span class="o">=</span> <span class="n">daily</span><span class="o">.</span><span class="n">ppg</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">fake</span><span class="p">[</span><span class="n">fri_or_sat</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">fri_or_sat</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">fake</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">frisat</span></code> is a boolean Series, <code class="docutils literal notranslate"><span class="pre">True</span></code> if the day of the week is Friday or
+Saturday. <code class="docutils literal notranslate"><span class="pre">fake</span></code> is a new DataFrame, initially a copy of <code class="docutils literal notranslate"><span class="pre">daily</span></code>, which
+we modify by adding random values to <code class="docutils literal notranslate"><span class="pre">ppg</span></code>. <code class="docutils literal notranslate"><span class="pre">frisat.sum()</span></code> is the total
+number of Fridays and Saturdays, which is the number of random values we
+have to generate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SimulateAutocorrelation</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1001</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">40</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resample residuals, compute autocorrelation, and plot percentiles.</span>
+
+<span class="sd">    daily: DataFrame</span>
+<span class="sd">    iters: number of simulations to run</span>
+<span class="sd">    nlags: maximum lags to compute autocorrelation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># run simulations</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+        <span class="n">filled</span> <span class="o">=</span> <span class="n">FillMissing</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">span</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+        <span class="n">resid</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Resample</span><span class="p">(</span><span class="n">filled</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+        <span class="n">acf</span> <span class="o">=</span> <span class="n">smtsa</span><span class="o">.</span><span class="n">acf</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="n">nlags</span><span class="p">,</span> <span class="n">adjusted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fft</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">acf</span><span class="p">))</span>
+
+    <span class="n">high</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">PercentileRows</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">[</span><span class="mf">97.5</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">low</span> <span class="o">=</span> <span class="o">-</span><span class="n">high</span>
+    <span class="n">lags</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nlags</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">FillBetween</span><span class="p">(</span><span class="n">lags</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotAutoCorrelation</span><span class="p">(</span><span class="n">dailies</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">add_weekly</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots autocorrelation functions.</span>
+
+<span class="sd">    dailies: map from category name to DataFrame of daily prices</span>
+<span class="sd">    nlags: number of lags to compute</span>
+<span class="sd">    add_weekly: boolean, whether to add a simulated weekly pattern</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">daily</span> <span class="o">=</span> <span class="n">dailies</span><span class="p">[</span><span class="s2">&quot;high&quot;</span><span class="p">]</span>
+    <span class="n">SimulateAutocorrelation</span><span class="p">(</span><span class="n">daily</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">daily</span> <span class="ow">in</span> <span class="n">dailies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+        <span class="k">if</span> <span class="n">add_weekly</span><span class="p">:</span>
+            <span class="n">daily</span><span class="o">.</span><span class="n">ppg</span> <span class="o">=</span> <span class="n">AddWeeklySeasonality</span><span class="p">(</span><span class="n">daily</span><span class="p">)</span>
+
+        <span class="n">filled</span> <span class="o">=</span> <span class="n">FillMissing</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">span</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+
+        <span class="n">acf</span> <span class="o">=</span> <span class="n">smtsa</span><span class="o">.</span><span class="n">acf</span><span class="p">(</span><span class="n">filled</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="n">nlags</span><span class="p">,</span> <span class="n">adjusted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fft</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">lags</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">acf</span><span class="p">))</span>
+        <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">lags</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">acf</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axis</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
+
+<span class="n">PlotAutoCorrelation</span><span class="p">(</span><span class="n">dailies</span><span class="p">,</span> <span class="n">add_weekly</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">,</span> 
+                 <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;correlation&quot;</span><span class="p">,</span> 
+                 <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;lag (day)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/37a6702a3815b2234ec614d6c2a8783ba81f5ea81c66ae16f8cdf100af9acfd7.png" src="_images/37a6702a3815b2234ec614d6c2a8783ba81f5ea81c66ae16f8cdf100af9acfd7.png" />
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#timeseries9"><span class="xref myst">[timeseries9]</span></a>{reference-type=“ref”
+reference=“timeseries9”} (right) shows autocorrelation functions for
+prices with this simulated seasonality. As expected, the correlations
+are highest when the lag is a multiple of 7. For high and medium
+quality, the new correlations are statistically significant. For low
+quality they are not, because residuals in this category are large; the
+effect would have to be bigger to be visible through the noise.</p>
+</section>
+<section id="prediction">
+<h2>Prediction<a class="headerlink" href="#prediction" title="Link to this heading">#</a></h2>
+<p>Time series analysis can be used to investigate, and sometimes explain,
+the behavior of systems that vary in time. It can also make predictions.</p>
+<p>The linear regressions we used in
+Section <a class="reference internal" href="#timeregress"><span class="xref myst">[timeregress]</span></a>{reference-type=“ref”
+reference=“timeregress”} can be used for prediction. The
+RegressionResults class provides <code class="docutils literal notranslate"><span class="pre">predict</span></code>, which takes a DataFrame
+containing the explanatory variables and returns a sequence of
+predictions. Here’s the code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">GenerateSimplePrediction</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">years</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a simple prediction.</span>
+
+<span class="sd">    results: results object</span>
+<span class="sd">    years: sequence of times (in years) to make predictions for</span>
+
+<span class="sd">    returns: sequence of predicted values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">)</span>
+    <span class="n">inter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Intercept</span><span class="o">=</span><span class="n">inter</span><span class="p">,</span> <span class="n">years</span><span class="o">=</span><span class="n">years</span><span class="p">,</span> <span class="n">years2</span><span class="o">=</span><span class="n">years</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">predict_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">predict</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">predict_df</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">predict</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotSimplePrediction</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">years</span><span class="p">):</span>
+    <span class="n">predict</span> <span class="o">=</span> <span class="n">GenerateSimplePrediction</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">years</span><span class="p">)</span>
+
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">years</span><span class="p">,</span> <span class="n">daily</span><span class="o">.</span><span class="n">ppg</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">predict</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#ff7f00&quot;</span><span class="p">)</span>
+    <span class="n">xlim</span> <span class="o">=</span> <span class="n">years</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">years</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span>
+        <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Years&quot;</span><span class="p">,</span>
+        <span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">,</span>
+        <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Price per gram ($)&quot;</span><span class="p">,</span>
+        <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;high&quot;</span>
+<span class="n">daily</span> <span class="o">=</span> <span class="n">dailies</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="n">RunLinearModel</span><span class="p">(</span><span class="n">daily</span><span class="p">)</span>
+<span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="n">PlotSimplePrediction</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">years</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2843a5b2d57fea9c1f86cca9e78688d32e965e9a1c50ce028a309059aa85a4d4.png" src="_images/2843a5b2d57fea9c1f86cca9e78688d32e965e9a1c50ce028a309059aa85a4d4.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">results</span></code> is a RegressionResults object; <code class="docutils literal notranslate"><span class="pre">years</span></code> is the sequence of time
+values we want predictions for. The function constructs a DataFrame,
+passes it to <code class="docutils literal notranslate"><span class="pre">predict</span></code>, and returns the result.</p>
+<p>If all we want is a single, best-guess prediction, we’re done. But for
+most purposes it is important to quantify error. In other words, we want
+to know how accurate the prediction is likely to be.</p>
+<p>There are three sources of error we should take into account:</p>
+<ul class="simple">
+<li><p>Sampling error: The prediction is based on estimated parameters,
+which depend on random variation in the sample. If we run the
+experiment again, we expect the estimates to vary.</p></li>
+<li><p>Random variation: Even if the estimated parameters are perfect, the
+observed data varies randomly around the long-term trend, and we
+expect this variation to continue in the future.</p></li>
+<li><p>Modeling error: We have already seen evidence that the long-term
+trend is not linear, so predictions based on a linear model will
+eventually fail.</p></li>
+</ul>
+<p>Another source of error to consider is unexpected future events.
+Agricultural prices are affected by weather, and all prices are affected
+by politics and law. As I write this, cannabis is legal in two states
+and legal for medical purposes in 20 more. If more states legalize it,
+the price is likely to go down. But if the federal government cracks
+down, the price might go up.</p>
+<p>Modeling errors and unexpected future events are hard to quantify.
+Sampling error and random variation are easier to deal with, so we’ll do
+that first.</p>
+<p>To quantify sampling error, I use resampling, as we did in
+Section <a class="reference internal" href="#regest"><span class="xref myst">[regest]</span></a>{reference-type=“ref” reference=“regest”}.
+As always, the goal is to use the actual observations to simulate what
+would happen if we ran the experiment again. The simulations are based
+on the assumption that the estimated parameters are correct, but the
+random residuals could have been different. Here is a function that runs
+the simulations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SimulateResults</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">RunLinearModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run simulations based on resampling residuals.</span>
+
+<span class="sd">    daily: DataFrame of daily prices</span>
+<span class="sd">    iters: number of simulations</span>
+<span class="sd">    func: function that fits a model to the data</span>
+
+<span class="sd">    returns: list of result objects</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">daily</span><span class="p">)</span>
+    <span class="n">fake</span> <span class="o">=</span> <span class="n">daily</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">result_seq</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+        <span class="n">fake</span><span class="o">.</span><span class="n">ppg</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">fittedvalues</span> <span class="o">+</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Resample</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">fake_results</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">fake</span><span class="p">)</span>
+        <span class="n">result_seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fake_results</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result_seq</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">daily</span></code> is a DataFrame containing the observed prices; <code class="docutils literal notranslate"><span class="pre">iters</span></code> is the
+number of simulations to run.</p>
+<p><code class="docutils literal notranslate"><span class="pre">SimulateResults</span></code> uses <code class="docutils literal notranslate"><span class="pre">RunLinearModel</span></code>, from
+Section <a class="reference internal" href="#timeregress"><span class="xref myst">[timeregress]</span></a>{reference-type=“ref”
+reference=“timeregress”}, to estimate the slope and intercept of the
+observed values.</p>
+<p>Each time through the loop, it generates a “fake” dataset by resampling
+the residuals and adding them to the fitted values. Then it runs a
+linear model on the fake data and stores the RegressionResults object.</p>
+<p>The next step is to use the simulated results to generate predictions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">GeneratePredictions</span><span class="p">(</span><span class="n">result_seq</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">add_resid</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates an array of predicted values from a list of model results.</span>
+
+<span class="sd">    When add_resid is False, predictions represent sampling error only.</span>
+
+<span class="sd">    When add_resid is True, they also include residual error (which is</span>
+<span class="sd">    more relevant to prediction).</span>
+
+<span class="sd">    result_seq: list of model results</span>
+<span class="sd">    years: sequence of times (in years) to make predictions for</span>
+<span class="sd">    add_resid: boolean, whether to add in resampled residuals</span>
+
+<span class="sd">    returns: sequence of predictions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Intercept</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">years</span><span class="o">=</span><span class="n">years</span><span class="p">,</span> <span class="n">years2</span><span class="o">=</span><span class="n">years</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">predict_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+    <span class="n">predict_seq</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">fake_results</span> <span class="ow">in</span> <span class="n">result_seq</span><span class="p">:</span>
+        <span class="n">predict</span> <span class="o">=</span> <span class="n">fake_results</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">predict_df</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">add_resid</span><span class="p">:</span>
+            <span class="n">predict</span> <span class="o">+=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Resample</span><span class="p">(</span><span class="n">fake_results</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="n">predict_seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">predict</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">predict_seq</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">GeneratePredictions</span></code> takes the sequence of results from the previous
+step, as well as <code class="docutils literal notranslate"><span class="pre">years</span></code>, which is a sequence of floats that specifies
+the interval to generate predictions for, and <code class="docutils literal notranslate"><span class="pre">add_resid</span></code>, which
+indicates whether it should add resampled residuals to the straight-line
+prediction. <code class="docutils literal notranslate"><span class="pre">GeneratePredictions</span></code> iterates through the sequence of
+RegressionResults and generates a sequence of predictions.</p>
+<p>Finally, here’s the code that plots a 90% confidence interval for the
+predictions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotPredictions</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">RunLinearModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots predictions.</span>
+
+<span class="sd">    daily: DataFrame of daily prices</span>
+<span class="sd">    years: sequence of times (in years) to make predictions for</span>
+<span class="sd">    iters: number of simulations</span>
+<span class="sd">    percent: what percentile range to show</span>
+<span class="sd">    func: function that fits a model to the data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result_seq</span> <span class="o">=</span> <span class="n">SimulateResults</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="n">iters</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="n">percent</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">percents</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">p</span>
+
+    <span class="n">predict_seq</span> <span class="o">=</span> <span class="n">GeneratePredictions</span><span class="p">(</span><span class="n">result_seq</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">add_resid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">PercentileRows</span><span class="p">(</span><span class="n">predict_seq</span><span class="p">,</span> <span class="n">percents</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">FillBetween</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+
+    <span class="n">predict_seq</span> <span class="o">=</span> <span class="n">GeneratePredictions</span><span class="p">(</span><span class="n">result_seq</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">add_resid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">PercentileRows</span><span class="p">(</span><span class="n">predict_seq</span><span class="p">,</span> <span class="n">percents</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">FillBetween</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">PlotPredictions</span></code> calls <code class="docutils literal notranslate"><span class="pre">GeneratePredictions</span></code> twice: once with
+<code class="docutils literal notranslate"><span class="pre">add_resid=True</span></code> and again with <code class="docutils literal notranslate"><span class="pre">add_resid=False</span></code>. It uses
+<code class="docutils literal notranslate"><span class="pre">PercentileRows</span></code> to select the 5th and 95th percentiles for each year,
+then plots a gray region between these bounds.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">years</span><span class="p">,</span> <span class="n">daily</span><span class="o">.</span><span class="n">ppg</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="n">PlotPredictions</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">years</span><span class="p">)</span>
+<span class="n">xlim</span> <span class="o">=</span> <span class="n">years</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">years</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Years&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Price per gram ($)&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f1785cda7f4a7a07ea20dd5bd1bcfea753d79c78180df54f02062ea0c093a71e.png" src="_images/f1785cda7f4a7a07ea20dd5bd1bcfea753d79c78180df54f02062ea0c093a71e.png" />
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#timeseries4"><span class="xref myst">[timeseries4]</span></a>{reference-type=“ref”
+reference=“timeseries4”} shows the result. The dark gray region
+represents a 90% confidence interval for the sampling error; that is,
+uncertainty about the estimated slope and intercept due to sampling.</p>
+<p>The lighter region shows a 90% confidence interval for prediction error,
+which is the sum of sampling error and random variation.</p>
+<p>These regions quantify sampling error and random variation, but not
+modeling error. In general modeling error is hard to quantify, but in
+this case we can address at least one source of error, unpredictable
+external events.</p>
+<p>The regression model is based on the assumption that the system is
+<strong>stationary</strong>; that is, that the parameters of the model don’t change
+over time. Specifically, it assumes that the slope and intercept are
+constant, as well as the distribution of residuals.</p>
+<p>But looking at the moving averages in
+Figure <a class="reference internal" href="#timeseries10"><span class="xref myst">[timeseries10]</span></a>{reference-type=“ref”
+reference=“timeseries10”}, it seems like the slope changes at least once
+during the observed interval, and the variance of the residuals seems
+bigger in the first half than the second.</p>
+<p>As a result, the parameters we get depend on the interval we observe. To
+see how much effect this has on the predictions, we can extend
+<code class="docutils literal notranslate"><span class="pre">SimulateResults</span></code> to use intervals of observation with different start
+and end dates. My implementation is in <code class="docutils literal notranslate"><span class="pre">timeseries.py</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SimulateIntervals</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">RunLinearModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run simulations based on different subsets of the data.</span>
+
+<span class="sd">    daily: DataFrame of daily prices</span>
+<span class="sd">    iters: number of simulations</span>
+<span class="sd">    func: function that fits a model to the data</span>
+
+<span class="sd">    returns: list of result objects</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result_seq</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">starts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">daily</span><span class="p">),</span> <span class="n">iters</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="n">starts</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]:</span>
+        <span class="n">subset</span> <span class="o">=</span> <span class="n">daily</span><span class="p">[</span><span class="n">start</span><span class="p">:]</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
+        <span class="n">fake</span> <span class="o">=</span> <span class="n">subset</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+            <span class="n">fake</span><span class="o">.</span><span class="n">ppg</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">fittedvalues</span> <span class="o">+</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Resample</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">fake_results</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">fake</span><span class="p">)</span>
+            <span class="n">result_seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fake_results</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result_seq</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotIntervals</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">RunLinearModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots predictions based on different intervals.</span>
+
+<span class="sd">    daily: DataFrame of daily prices</span>
+<span class="sd">    years: sequence of times (in years) to make predictions for</span>
+<span class="sd">    iters: number of simulations</span>
+<span class="sd">    percent: what percentile range to show</span>
+<span class="sd">    func: function that fits a model to the data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result_seq</span> <span class="o">=</span> <span class="n">SimulateIntervals</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="n">iters</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="n">percent</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">percents</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">p</span>
+
+    <span class="n">predict_seq</span> <span class="o">=</span> <span class="n">GeneratePredictions</span><span class="p">(</span><span class="n">result_seq</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">add_resid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">PercentileRows</span><span class="p">(</span><span class="n">predict_seq</span><span class="p">,</span> <span class="n">percents</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">FillBetween</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;high&quot;</span>
+<span class="n">daily</span> <span class="o">=</span> <span class="n">dailies</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">years</span><span class="p">,</span> <span class="n">daily</span><span class="o">.</span><span class="n">ppg</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="n">PlotIntervals</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">years</span><span class="p">)</span>
+<span class="n">PlotPredictions</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">years</span><span class="p">)</span>
+<span class="n">xlim</span> <span class="o">=</span> <span class="n">years</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">years</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Years&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Price per gram ($)&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/335e4d9b3c91afa47a6a5a8794fa7993d000bd7ba2ce004b22be7705800dff34.png" src="_images/335e4d9b3c91afa47a6a5a8794fa7993d000bd7ba2ce004b22be7705800dff34.png" />
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#timeseries5"><span class="xref myst">[timeseries5]</span></a>{reference-type=“ref”
+reference=“timeseries5”} shows the result for the medium quality
+category. The lightest gray area shows a confidence interval that
+includes uncertainty due to sampling error, random variation, and
+variation in the interval of observation.</p>
+<p>The model based on the entire interval has positive slope, indicating
+that prices were increasing. But the most recent interval shows signs of
+decreasing prices, so models based on the most recent data have negative
+slope. As a result, the widest predictive interval includes the
+possibility of decreasing prices over the next year.</p>
+</section>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
+<p>Time series analysis is a big topic; this chapter has only scratched the
+surface. An important tool for working with time series data is
+autoregression, which I did not cover here, mostly because it turns out
+not to be useful for the example data I worked with.</p>
+<p>But once you have learned the material in this chapter, you are well
+prepared to learn about autoregression. One resource I recommend is
+Philipp Janert’s book, <em>Data Analysis with Open Source Tools</em>, O’Reilly
+Media, 2011. His chapter on time series analysis picks up where this one
+leaves off.</p>
+</section>
+<section id="glossary">
+<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>time series</strong>: A dataset where each value is associated with a
+timestamp, often a series of measurements and the times they were
+collected.</p></li>
+<li><p><strong>window</strong>: A sequence of consecutive values in a time series, often
+used to compute a moving average.</p></li>
+<li><p><strong>moving average</strong>: One of several statistics intended to estimate
+the underlying trend in a time series by computing averages (of some
+kind) for a series of overlapping windows.</p></li>
+<li><p><strong>rolling mean</strong>: A moving average based on the mean value in each
+window.</p></li>
+<li><p><strong>exponentially-weighted moving average (EWMA)</strong>: A moving average
+based on a weighted mean that gives the highest weight to the most
+recent values, and exponentially decreasing weights to earlier
+values.</p></li>
+<li><p><strong>span</strong>: A parameter of EWMA that determines how quickly the
+weights decrease.</p></li>
+<li><p><strong>serial correlation</strong>: Correlation between a time series and a
+shifted or lagged version of itself.</p></li>
+<li><p><strong>lag</strong>: The size of the shift in a serial correlation or
+autocorrelation.</p></li>
+<li><p><strong>autocorrelation</strong>: A more general term for a serial correlation
+with any amount of lag.</p></li>
+<li><p><strong>autocorrelation function</strong>: A function that maps from lag to
+serial correlation.</p></li>
+<li><p><strong>stationary</strong>: A model is stationary if the parameters and the
+distribution of residuals does not change over time.</p></li>
+</ul>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong>   The linear model I used in this chapter has the obvious drawback that it is linear, and there is no reason to expect prices to change linearly over time. We can add flexibility to the model by adding a quadratic term, as we did in Section 11.3.</p>
+<p>Use a quadratic model to fit the time series of daily prices, and use the model to generate predictions. You will have to write a version of <code class="docutils literal notranslate"><span class="pre">RunLinearModel</span></code> that runs that quadratic model, but after that you should be able to reuse code from the chapter to generate predictions.</p>
+<p><strong>Exercise:</strong> Write a definition for a class named <code class="docutils literal notranslate"><span class="pre">SerialCorrelationTest</span></code> that extends <code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code> from Section 9.2. It should take a series and a lag as data, compute the serial correlation of the series with the given lag, and then compute the p-value of the observed correlation.</p>
+<p>Use this class to test whether the serial correlation in raw price data is statistically significant. Also test the residuals of the linear model and (if you did the previous exercise), the quadratic model.</p>
+<p><strong>Bonus Example:</strong> There are several ways to extend the EWMA model to generate predictions. One of the simplest is something like this:</p>
+<ol class="arabic simple">
+<li><p>Compute the EWMA of the time series and use the last point as an intercept, <code class="docutils literal notranslate"><span class="pre">inter</span></code>.</p></li>
+<li><p>Compute the EWMA of differences between successive elements in the time series and use the last point as a slope, <code class="docutils literal notranslate"><span class="pre">slope</span></code>.</p></li>
+<li><p>To predict values at future times, compute <code class="docutils literal notranslate"><span class="pre">inter</span> <span class="pre">+</span> <span class="pre">slope</span> <span class="pre">*</span> <span class="pre">dt</span></code>, where <code class="docutils literal notranslate"><span class="pre">dt</span></code> is the difference between the time of the prediction and the time of the last observation.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;high&quot;</span>
+<span class="n">daily</span> <span class="o">=</span> <span class="n">dailies</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+<span class="n">filled</span> <span class="o">=</span> <span class="n">FillMissing</span><span class="p">(</span><span class="n">daily</span><span class="p">)</span>
+<span class="n">diffs</span> <span class="o">=</span> <span class="n">filled</span><span class="o">.</span><span class="n">ppg</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Daily change in price per gram ($)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/32b54967eb386f15da98bfcd0fb2ac9c439209e34670a00be9911cd132a6ae26.png" src="_images/32b54967eb386f15da98bfcd0fb2ac9c439209e34670a00be9911cd132a6ae26.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filled</span><span class="p">[</span><span class="s2">&quot;slope&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">diffs</span><span class="o">.</span><span class="n">ewm</span><span class="p">(</span><span class="n">span</span><span class="o">=</span><span class="mi">365</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">filled</span><span class="o">.</span><span class="n">slope</span><span class="p">[</span><span class="o">-</span><span class="mi">365</span><span class="p">:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;EWMA of diff ($)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9a007068e0fee1b526010ce39d2b92885fd39ccdf444b810d92a7ec0beb7d89a.png" src="_images/9a007068e0fee1b526010ce39d2b92885fd39ccdf444b810d92a7ec0beb7d89a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># extract the last inter and the mean of the last 30 slopes</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">filled</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">inter</span> <span class="o">=</span> <span class="n">filled</span><span class="o">.</span><span class="n">ewma</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">slope</span> <span class="o">=</span> <span class="n">filled</span><span class="o">.</span><span class="n">slope</span><span class="p">[</span><span class="o">-</span><span class="mi">30</span><span class="p">:]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="n">start</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_173743/2806971204.py:3: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  inter = filled.ewma[-1]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Timestamp(&#39;2014-05-13 00:00:00&#39;), 10.929518765455489, -0.0025438557241791366)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reindex the DataFrame, adding a year to the end</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">filled</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">filled</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">365</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">))</span>
+<span class="n">predicted</span> <span class="o">=</span> <span class="n">filled</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate predicted values and add them to the end</span>
+<span class="n">predicted</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predicted</span><span class="o">.</span><span class="n">index</span>
+<span class="n">one_day</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
+<span class="n">predicted</span><span class="p">[</span><span class="s2">&quot;days&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">predicted</span><span class="o">.</span><span class="n">date</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="n">one_day</span>
+<span class="n">predict</span> <span class="o">=</span> <span class="n">inter</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">predicted</span><span class="o">.</span><span class="n">days</span>
+<span class="n">predicted</span><span class="p">[</span><span class="s2">&quot;ewma&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predicted</span><span class="o">.</span><span class="n">ewma</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">predict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the actual values and predictions</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">ppg</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">predicted</span><span class="o">.</span><span class="n">ewma</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#ff7f00&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6df8b16f3ac799b52f87bd0b2afff2f38d0e05e6f1652dda7031bcf06829d1b9.png" src="_images/6df8b16f3ac799b52f87bd0b2afff2f38d0e05e6f1652dda7031bcf06829d1b9.png" />
+</div>
+</div>
+<p>As an exercise, run this analysis again for the other quality categories.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap11.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Regression</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap13.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Survival analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-cleaning">Importing and cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-averages">Moving averages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">Missing values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-correlation">Serial correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation">Autocorrelation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

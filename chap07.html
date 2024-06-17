@@ -1,0 +1,1106 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Relationships between variables &#8212; Think Stats, 3rd edition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap07';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Estimation" href="chap08.html" />
+    <link rel="prev" title="Probability density functions" href="chap06.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Stats, 3rd edition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Think Stats, 3rd edition
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">Linear least squares</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic methods</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkStats/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap07.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Relationships between variables</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">Scatter plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characterizing-relationships">Characterizing relationships</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation">Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance">Covariance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pearsons-correlation">Pearson’s correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-relationships">Nonlinear relationships</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spearmans-rank-correlation">Spearman’s rank correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-and-causation">Correlation and causation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="relationships-between-variables">
+<h1>Relationships between variables<a class="headerlink" href="#relationships-between-variables" title="Link to this heading">#</a></h1>
+<p>So far we have only looked at one variable at a time. In this chapter we
+look at relationships between variables. Two variables are related if
+knowing one gives you information about the other. For example, height
+and weight are related; people who are taller tend to be heavier. Of
+course, it is not a perfect relationship: there are short heavy people
+and tall light ones. But if you are trying to guess someone’s weight,
+you will be more accurate if you know their height than if you don’t.</p>
+<p>The code for this chapter is in <code class="docutils literal notranslate"><span class="pre">scatter.py</span></code>. For information about
+downloading and working with this code, see
+Section <a class="reference internal" href="#code"><span class="xref myst">[code]</span></a>{reference-type=“ref” reference=“code”}.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="kn">import</span> <span class="nn">thinkstats2</span>
+<span class="kn">import</span> <span class="nn">thinkplot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="scatter-plots">
+<h2>Scatter plots<a class="headerlink" href="#scatter-plots" title="Link to this heading">#</a></h2>
+<p>The simplest way to check for a relationship between two variables is a
+<strong>scatter plot</strong>, but making a good scatter plot is not always easy. As
+an example, I’ll plot weight versus height for the respondents in the
+BRFSS (see Section <a class="reference internal" href="#lognormal"><span class="xref myst">[lognormal]</span></a>{reference-type=“ref”
+reference=“lognormal”}).</p>
+<p>Here’s the code that reads the data file and extracts height and weight:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/brfss.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/CDBRFS08.ASC.gz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">brfss</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">ReadBrfss</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">SampleRows</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+<span class="n">heights</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">htm3</span><span class="p">,</span> <span class="n">sample</span><span class="o">.</span><span class="n">wtkg2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">SampleRows</span></code> chooses a random subset of the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SampleRows</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">)</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">sample</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code> is the DataFrame, <code class="docutils literal notranslate"><span class="pre">nrows</span></code> is the number of rows to choose, and
+<code class="docutils literal notranslate"><span class="pre">replace</span></code> is a boolean indicating whether sampling should be done with
+replacement; in other words, whether the same row could be chosen more
+than once.</p>
+<p><code class="docutils literal notranslate"><span class="pre">thinkplot</span></code> provides <code class="docutils literal notranslate"><span class="pre">Scatter</span></code>, which makes scatter plots:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Height (cm)&#39;</span><span class="p">,</span>
+               <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Weight (kg)&#39;</span><span class="p">,</span>
+               <span class="n">axis</span><span class="o">=</span><span class="p">[</span><span class="mi">140</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">200</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6907e6c10fa4ad86186b64c006436fd025a43cb4536debbf01a9732500bf0108.png" src="_images/6907e6c10fa4ad86186b64c006436fd025a43cb4536debbf01a9732500bf0108.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result, in Figure <a class="reference internal" href="#scatter1"><span class="xref myst">[scatter1]</span></a>{reference-type=“ref”
+reference=“scatter1”} (left), shows the shape of the relationship. As we
+expected, taller people tend to be heavier.</p>
+<p>But this is not the best representation of the data, because the data
+are packed into columns. The problem is that the heights are rounded to
+the nearest inch, converted to centimeters, and then rounded again. Some
+information is lost in translation.</p>
+<p>We can’t get that information back, but we can minimize the effect on
+the scatter plot by <strong>jittering</strong> the data, which means adding random
+noise to reverse the effect of rounding off. Since these measurements
+were rounded to the nearest inch, they might be off by up to 0.5 inches
+or 1.3 cm. Similarly, the weights might be off by 0.5 kg.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">heights</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Jitter</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">)</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Jitter</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s the implementation of <code class="docutils literal notranslate"><span class="pre">Jitter</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Jitter</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">jitter</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">jitter</span><span class="p">,</span> <span class="o">+</span><span class="n">jitter</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The values can be any sequence; the result is a NumPy array.</p>
+<p>Figure <a class="reference internal" href="#scatter1"><span class="xref myst">[scatter1]</span></a>{reference-type=“ref”
+reference=“scatter1”} (right) shows the result. Jittering reduces the
+visual effect of rounding and makes the shape of the relationship
+clearer. But in general you should only jitter data for purposes of
+visualization and avoid using jittered data for analysis.</p>
+<p>Even with jittering, this is not the best way to represent the data.
+There are many overlapping points, which hides data in the dense parts
+of the figure and gives disproportionate emphasis to outliers. This
+effect is called <strong>saturation</strong>.</p>
+<p><img alt="Scatter plot with jittering and transparency (left), hexbin plot(right)." src="figs/scatter2.pdf" />{height=“3.0in”}</p>
+<p>We can solve this problem with the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> parameter, which makes the
+points partly transparent:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3ac3e8bc44d21c08f1eeff577ad9807b7c40cd2b46ecbc5a28d152799cd3f635.png" src="_images/3ac3e8bc44d21c08f1eeff577ad9807b7c40cd2b46ecbc5a28d152799cd3f635.png" />
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#scatter2"><span class="xref myst">[scatter2]</span></a>{reference-type=“ref”
+reference=“scatter2”} (left) shows the result. Overlapping data points
+look darker, so darkness is proportional to density. In this version of
+the plot we can see two details that were not apparent before: vertical
+clusters at several heights and a horizontal line near 90 kg or 200
+pounds. Since this data is based on self-reports in pounds, the most
+likely explanation is that some respondents reported rounded values.</p>
+<p>Using transparency works well for moderate-sized datasets, but this
+figure only shows the first 5000 records in the BRFSS, out of a total of
+414 509.</p>
+<p>To handle larger datasets, another option is a hexbin plot, which
+divides the graph into hexagonal bins and colors each bin according to
+how many data points fall in it. <code class="docutils literal notranslate"><span class="pre">thinkplot</span></code> provides <code class="docutils literal notranslate"><span class="pre">HexBin</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">HexBin</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/85077c0ff2b6f724cd7631ed86d7070bdbbb779c3350997f347774bc16daf15a.png" src="_images/85077c0ff2b6f724cd7631ed86d7070bdbbb779c3350997f347774bc16daf15a.png" />
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#scatter2"><span class="xref myst">[scatter2]</span></a>{reference-type=“ref”
+reference=“scatter2”} (right) shows the result. An advantage of a hexbin
+is that it shows the shape of the relationship well, and it is efficient
+for large datasets, both in time and in the size of the file it
+generates. A drawback is that it makes the outliers invisible.</p>
+<p>The point of this example is that it is not easy to make a scatter plot
+that shows relationships clearly without introducing misleading
+artifacts.</p>
+</section>
+<section id="characterizing-relationships">
+<h2>Characterizing relationships<a class="headerlink" href="#characterizing-relationships" title="Link to this heading">#</a></h2>
+<p>Scatter plots provide a general impression of the relationship between
+variables, but there are other visualizations that provide more insight
+into the nature of the relationship. One option is to bin one variable
+and plot percentiles of the other.</p>
+<p>NumPy and pandas provide functions for binning data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;htm3&#39;</span><span class="p">,</span> <span class="s1">&#39;wtkg2&#39;</span><span class="p">])</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">135</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">htm3</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+<span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">dropna</span></code> drops rows with <code class="docutils literal notranslate"><span class="pre">nan</span></code> in any of the listed columns. <code class="docutils literal notranslate"><span class="pre">arange</span></code>
+makes a NumPy array of bins from 135 to, but not including, 210, in
+increments of 5.</p>
+<p><code class="docutils literal notranslate"><span class="pre">digitize</span></code> computes the index of the bin that contains each value in
+<code class="docutils literal notranslate"><span class="pre">df.htm3</span></code>. The result is a NumPy array of integer indices. Values that
+fall below the lowest bin are mapped to index 0. Values above the
+highest bin are mapped to <code class="docutils literal notranslate"><span class="pre">len(bins)</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">groupby</span></code> is a DataFrame method that returns a GroupBy object; used in a
+<code class="docutils literal notranslate"><span class="pre">for</span></code> loop, <code class="docutils literal notranslate"><span class="pre">groups</span></code> iterates the names of the groups and the DataFrames
+that represent them. So, for example, we can print the number of rows in
+each group like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 305
+1 228
+2 477
+3 2162
+4 18759
+5 45761
+6 70610
+7 72138
+8 61725
+9 49938
+10 43555
+11 20077
+12 7784
+13 1777
+14 405
+15 131
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now for each group we can compute the mean height and the CDF of weight:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">heights</span> <span class="o">=</span> <span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">htm3</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">]</span>
+<span class="n">cdfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">wtkg2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we can plot percentiles of weight versus height:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">percent</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">75</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">25</span><span class="p">]:</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">cdf</span><span class="o">.</span><span class="n">Percentile</span><span class="p">(</span><span class="n">percent</span><span class="p">)</span> <span class="k">for</span> <span class="n">cdf</span> <span class="ow">in</span> <span class="n">cdfs</span><span class="p">]</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">th&#39;</span> <span class="o">%</span> <span class="n">percent</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b94d30cd97fbcea24e631a767997ad0ac1606d48f383ef0ce8758064d4f05ae7.png" src="_images/b94d30cd97fbcea24e631a767997ad0ac1606d48f383ef0ce8758064d4f05ae7.png" />
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#scatter3"><span class="xref myst">[scatter3]</span></a>{reference-type=“ref”
+reference=“scatter3”} shows the result. Between 140 and 200 cm the
+relationship between these variables is roughly linear. This range
+includes more than 99% of the data, so we don’t have to worry too much
+about the extremes.</p>
+</section>
+<section id="correlation">
+<h2>Correlation<a class="headerlink" href="#correlation" title="Link to this heading">#</a></h2>
+<p>A <strong>correlation</strong> is a statistic intended to quantify the strength of
+the relationship between two variables.</p>
+<p>A challenge in measuring correlation is that the variables we want to
+compare are often not expressed in the same units. And even if they are
+in the same units, they come from different distributions.</p>
+<p>There are two common solutions to these problems:</p>
+<ol class="arabic simple">
+<li><p>Transform each value to a <strong>standard score</strong>, which is the number of
+standard deviations from the mean. This transform leads to the
+“Pearson product-moment correlation coefficient.”</p></li>
+<li><p>Transform each value to its <strong>rank</strong>, which is its index in the
+sorted list of values. This transform leads to the “Spearman rank
+correlation coefficient.”</p></li>
+</ol>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is a series of <span class="math notranslate nohighlight">\(n\)</span> values, <span class="math notranslate nohighlight">\(x_i\)</span>, we can convert to standard
+scores by subtracting the mean and dividing by the standard deviation:
+<span class="math notranslate nohighlight">\(z_i = (x_i - \mu) / \sigma\)</span>.</p>
+<p>The numerator is a deviation: the distance from the mean. Dividing by
+<span class="math notranslate nohighlight">\(\sigma\)</span> <strong>standardizes</strong> the deviation, so the values of <span class="math notranslate nohighlight">\(Z\)</span> are
+dimensionless (no units) and their distribution has mean 0 and variance
+1.</p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is normally distributed, so is <span class="math notranslate nohighlight">\(Z\)</span>. But if <span class="math notranslate nohighlight">\(X\)</span> is skewed or has
+outliers, so does <span class="math notranslate nohighlight">\(Z\)</span>; in those cases, it is more robust to use
+percentile ranks. If we compute a new variable, <span class="math notranslate nohighlight">\(R\)</span>, so that <span class="math notranslate nohighlight">\(r_i\)</span> is
+the rank of <span class="math notranslate nohighlight">\(x_i\)</span>, the distribution of <span class="math notranslate nohighlight">\(R\)</span> is uniform from 1 to <span class="math notranslate nohighlight">\(n\)</span>,
+regardless of the distribution of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+</section>
+<section id="covariance">
+<h2>Covariance<a class="headerlink" href="#covariance" title="Link to this heading">#</a></h2>
+<p><strong>Covariance</strong> is a measure of the tendency of two variables to vary
+together. If we have two series, <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, their deviations from the
+mean are $<span class="math notranslate nohighlight">\(dx_i = x_i - \xbar\)</span><span class="math notranslate nohighlight">\( \)</span><span class="math notranslate nohighlight">\(dy_i = y_i - \ybar\)</span><span class="math notranslate nohighlight">\( where \)</span>\xbar<span class="math notranslate nohighlight">\( is
+the sample mean of \)</span>X<span class="math notranslate nohighlight">\( and \)</span>\ybar<span class="math notranslate nohighlight">\( is the sample mean of \)</span>Y<span class="math notranslate nohighlight">\(. If \)</span>X<span class="math notranslate nohighlight">\( and
+\)</span>Y$ vary together, their deviations tend to have the same sign.</p>
+<p>If we multiply them together, the product is positive when the
+deviations have the same sign and negative when they have the opposite
+sign. So adding up the products gives a measure of the tendency to vary
+together.</p>
+<p>Covariance is the mean of these products:
+$<span class="math notranslate nohighlight">\(Cov(X,Y) = \frac{1}{n} \sum dx_i~dy_i\)</span><span class="math notranslate nohighlight">\( where \)</span>n$ is the length of the
+two series (they have to be the same length).</p>
+<p>If you have studied linear algebra, you might recognize that <code class="docutils literal notranslate"><span class="pre">Cov</span></code> is
+the dot product of the deviations, divided by their length. So the
+covariance is maximized if the two vectors are identical, 0 if they are
+orthogonal, and negative if they point in opposite directions.
+<code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> uses <code class="docutils literal notranslate"><span class="pre">np.dot</span></code> to implement <code class="docutils literal notranslate"><span class="pre">Cov</span></code> efficiently:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Cov</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">meanx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">meany</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">meanx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">meanx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">meany</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">meany</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+
+    <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">xs</span><span class="o">-</span><span class="n">meanx</span><span class="p">,</span> <span class="n">ys</span><span class="o">-</span><span class="n">meany</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cov</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>By default <code class="docutils literal notranslate"><span class="pre">Cov</span></code> computes deviations from the sample means, or you can
+provide known means. If <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> are Python sequences, <code class="docutils literal notranslate"><span class="pre">np.asarray</span></code>
+converts them to NumPy arrays. If they are already NumPy arrays,
+<code class="docutils literal notranslate"><span class="pre">np.asarray</span></code> does nothing.</p>
+<p>This implementation of covariance is meant to be simple for purposes of
+explanation. NumPy and pandas also provide implementations of
+covariance, but both of them apply a correction for small sample sizes
+that we have not covered yet, and <code class="docutils literal notranslate"><span class="pre">np.cov</span></code> returns a covariance matrix,
+which is more than we need for now.</p>
+</section>
+<section id="pearsons-correlation">
+<h2>Pearson’s correlation<a class="headerlink" href="#pearsons-correlation" title="Link to this heading">#</a></h2>
+<p>Covariance is useful in some computations, but it is seldom reported as
+a summary statistic because it is hard to interpret. Among other
+problems, its units are the product of the units of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>. For
+example, the covariance of weight and height in the BRFSS dataset is 113
+kilogram-centimeters, whatever that means.</p>
+<p>One solution to this problem is to divide the deviations by the standard
+deviation, which yields standard scores, and compute the product of
+standard scores:
+$<span class="math notranslate nohighlight">\(p_i = \frac{(x_i - \xbar)}{S_X} \frac{(y_i - \ybar)}{S_Y}\)</span><span class="math notranslate nohighlight">\( Where
+\)</span>S_X<span class="math notranslate nohighlight">\( and \)</span>S_Y<span class="math notranslate nohighlight">\( are the standard deviations of \)</span>X<span class="math notranslate nohighlight">\( and \)</span>Y<span class="math notranslate nohighlight">\(. The mean of
+these products is \)</span><span class="math notranslate nohighlight">\(\rho = \frac{1}{n} \sum p_i\)</span><span class="math notranslate nohighlight">\( Or we can rewrite
+\)</span>\rho<span class="math notranslate nohighlight">\( by factoring out \)</span>S_X<span class="math notranslate nohighlight">\( and \)</span>S_Y<span class="math notranslate nohighlight">\(:
+\)</span><span class="math notranslate nohighlight">\(\rho = \frac{Cov(X,Y)}{S_X S_Y}\)</span><span class="math notranslate nohighlight">\( This value is called **Pearson's
+correlation** after Karl Pearson, an influential early statistician. It
+is easy to compute and easy to interpret. Because standard scores are
+dimensionless, so is \)</span>\rho$.</p>
+<p>Here is the implementation in <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">MeanVar</span>
+
+<span class="k">def</span> <span class="nf">Corr</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">):</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+
+    <span class="n">meanx</span><span class="p">,</span> <span class="n">varx</span> <span class="o">=</span> <span class="n">MeanVar</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">meany</span><span class="p">,</span> <span class="n">vary</span> <span class="o">=</span> <span class="n">MeanVar</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+
+    <span class="n">corr</span> <span class="o">=</span> <span class="n">Cov</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">meanx</span><span class="p">,</span> <span class="n">meany</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">varx</span> <span class="o">*</span> <span class="n">vary</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">corr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">MeanVar</span></code> computes mean and variance slightly more efficiently than
+separate calls to <code class="docutils literal notranslate"><span class="pre">np.mean</span></code> and <code class="docutils literal notranslate"><span class="pre">np.var</span></code>.</p>
+<p>Pearson’s correlation is always between -1 and +1 (including both). If
+<span class="math notranslate nohighlight">\(\rho\)</span> is positive, we say that the correlation is positive, which means
+that when one variable is high, the other tends to be high. If <span class="math notranslate nohighlight">\(\rho\)</span> is
+negative, the correlation is negative, so when one variable is high, the
+other is low.</p>
+<p>The magnitude of <span class="math notranslate nohighlight">\(\rho\)</span> indicates the strength of the correlation. If
+<span class="math notranslate nohighlight">\(\rho\)</span> is 1 or -1, the variables are perfectly correlated, which means
+that if you know one, you can make a perfect prediction about the other.</p>
+<p>Most correlation in the real world is not perfect, but it is still
+useful. The correlation of height and weight is 0.51, which is a strong
+correlation compared to similar human-related variables.</p>
+</section>
+<section id="nonlinear-relationships">
+<h2>Nonlinear relationships<a class="headerlink" href="#nonlinear-relationships" title="Link to this heading">#</a></h2>
+<p>If Pearson’s correlation is near 0, it is tempting to conclude that
+there is no relationship between the variables, but that conclusion is
+not valid. Pearson’s correlation only measures <em>linear</em> relationships.
+If there’s a nonlinear relationship, <span class="math notranslate nohighlight">\(\rho\)</span> understates its strength.</p>
+<p><img alt="Examples of datasets with a range ofcorrelations." src="figs/Correlation_examples.png" />{height=“2.5in”}</p>
+<p>Figure <a class="reference internal" href="#corr_examples"><span class="xref myst">[corr_examples]</span></a>{reference-type=“ref”
+reference=“corr_examples”} is from
+<a class="reference external" href="http://wikipedia.org/wiki/Correlation_and_dependence">http://wikipedia.org/wiki/Correlation_and_dependence</a>. It shows scatter
+plots and correlation coefficients for several carefully constructed
+datasets.</p>
+<p>The top row shows linear relationships with a range of correlations; you
+can use this row to get a sense of what different values of <span class="math notranslate nohighlight">\(\rho\)</span> look
+like. The second row shows perfect correlations with a range of slopes,
+which demonstrates that correlation is unrelated to slope (we’ll talk
+about estimating slope soon). The third row shows variables that are
+clearly related, but because the relationship is nonlinear, the
+correlation coefficient is 0.</p>
+<p>The moral of this story is that you should always look at a scatter plot
+of your data before blindly computing a correlation coefficient.</p>
+</section>
+<section id="spearmans-rank-correlation">
+<h2>Spearman’s rank correlation<a class="headerlink" href="#spearmans-rank-correlation" title="Link to this heading">#</a></h2>
+<p>Pearson’s correlation works well if the relationship between variables
+is linear and if the variables are roughly normal. But it is not robust
+in the presence of outliers. Spearman’s rank correlation is an
+alternative that mitigates the effect of outliers and skewed
+distributions. To compute Spearman’s correlation, we have to compute the
+<strong>rank</strong> of each value, which is its index in the sorted sample. For
+example, in the sample <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">5,</span> <span class="pre">7]</span></code> the rank of the value 5 is 3,
+because it appears third in the sorted list. Then we compute Pearson’s
+correlation for the ranks.</p>
+<p><code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides a function that computes Spearman’s rank
+correlation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SpearmanCorr</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">):</span>
+    <span class="n">xranks</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span>
+    <span class="n">yranks</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">Corr</span><span class="p">(</span><span class="n">xranks</span><span class="p">,</span> <span class="n">yranks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>I convert the arguments to pandas Series objects so I can use <code class="docutils literal notranslate"><span class="pre">rank</span></code>,
+which computes the rank for each value and returns a Series. Then I use
+<code class="docutils literal notranslate"><span class="pre">Corr</span></code> to compute the correlation of the ranks.</p>
+<p>I could also use <code class="docutils literal notranslate"><span class="pre">Series.corr</span></code> directly and specify Spearman’s method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SpearmanCorr</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">):</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">xs</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The Spearman rank correlation for the BRFSS data is 0.54, a little
+higher than the Pearson correlation, 0.51. There are several possible
+reasons for the difference, including:</p>
+<ul class="simple">
+<li><p>If the relationship is nonlinear, Pearson’s correlation tends to
+underestimate the strength of the relationship, and</p></li>
+<li><p>Pearson’s correlation can be affected (in either direction) if one
+of the distributions is skewed or contains outliers. Spearman’s rank
+correlation is more robust.</p></li>
+</ul>
+<p>In the BRFSS example, we know that the distribution of weights is
+roughly lognormal; under a log transform it approximates a normal
+distribution, so it has no skew. So another way to eliminate the effect
+of skewness is to compute Pearson’s correlation with log-weight and
+height:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">htm3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">wtkg2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.531728260598344
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is 0.53, close to the rank correlation, 0.54. So that
+suggests that skewness in the distribution of weight explains most of
+the difference between Pearson’s and Spearman’s correlation.</p>
+</section>
+<section id="correlation-and-causation">
+<h2>Correlation and causation<a class="headerlink" href="#correlation-and-causation" title="Link to this heading">#</a></h2>
+<p>If variables A and B are correlated, there are three possible
+explanations: A causes B, or B causes A, or some other set of factors
+causes both A and B. These explanations are called “causal
+relationships”.</p>
+<p>Correlation alone does not distinguish between these explanations, so it
+does not tell you which ones are true. This rule is often summarized
+with the phrase “Correlation does not imply causation,” which is so
+pithy it has its own Wikipedia page:
+<a class="reference external" href="http://wikipedia.org/wiki/Correlation_does_not_imply_causation">http://wikipedia.org/wiki/Correlation_does_not_imply_causation</a>.</p>
+<p>So what can you do to provide evidence of causation?</p>
+<ol class="arabic simple">
+<li><p>Use time. If A comes before B, then A can cause B but not the other
+way around (at least according to our common understanding of
+causation). The order of events can help us infer the direction of
+causation, but it does not preclude the possibility that something
+else causes both A and B.</p></li>
+<li><p>Use randomness. If you divide a large sample into two groups at
+random and compute the means of almost any variable, you expect the
+difference to be small. If the groups are nearly identical in all
+variables but one, you can eliminate spurious relationships.</p></li>
+</ol>
+<p>This works even if you don’t know what the relevant variables are,
+but it works even better if you do, because you can check that the
+groups are identical.</p>
+<p>These ideas are the motivation for the <strong>randomized controlled trial</strong>,
+in which subjects are assigned randomly to two (or more) groups: a
+<strong>treatment group</strong> that receives some kind of intervention, like a new
+medicine, and a <strong>control group</strong> that receives no intervention, or
+another treatment whose effects are known.</p>
+<p>A randomized controlled trial is the most reliable way to demonstrate a
+causal relationship, and the foundation of science-based medicine (see
+<a class="reference external" href="http://wikipedia.org/wiki/Randomized_controlled_trial">http://wikipedia.org/wiki/Randomized_controlled_trial</a>).</p>
+<p>Unfortunately, controlled trials are only possible in the laboratory
+sciences, medicine, and a few other disciplines. In the social sciences,
+controlled experiments are rare, usually because they are impossible or
+unethical.</p>
+<p>An alternative is to look for a <strong>natural experiment</strong>, where different
+“treatments” are applied to groups that are otherwise similar. One
+danger of natural experiments is that the groups might differ in ways
+that are not apparent. You can read more about this topic at
+<a class="reference external" href="http://wikipedia.org/wiki/Natural_experiment">http://wikipedia.org/wiki/Natural_experiment</a>.</p>
+<p>In some cases it is possible to infer causal relationships using
+<strong>regression analysis</strong>, which is the topic of
+Chapter <a class="reference internal" href="#regression"><span class="xref myst">[regression]</span></a>{reference-type=“ref”
+reference=“regression”}.</p>
+</section>
+<section id="glossary">
+<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>scatter plot</strong>: A visualization of the relationship between two
+variables, showing one point for each row of data.</p></li>
+<li><p><strong>jitter</strong>: Random noise added to data for purposes of
+visualization.</p></li>
+<li><p><strong>saturation</strong>: Loss of information when multiple points are plotted
+on top of each other.</p></li>
+<li><p><strong>correlation</strong>: A statistic that measures the strength of the
+relationship between two variables.</p></li>
+<li><p><strong>standardize</strong>: To transform a set of values so that their mean is
+0 and their variance is 1.</p></li>
+<li><p><strong>standard score</strong>: A value that has been standardized so that it is
+expressed in standard deviations from the mean.</p></li>
+<li><p><strong>covariance</strong>: A measure of the tendency of two variables to vary
+together.</p></li>
+<li><p><strong>rank</strong>: The index where an element appears in a sorted list.</p></li>
+<li><p><strong>randomized controlled trial</strong>: An experimental design in which
+subjects are divided into groups at random, and different groups are
+given different treatments.</p></li>
+<li><p><strong>treatment group</strong>: A group in a controlled trial that receives
+some kind of intervention.</p></li>
+<li><p><strong>control group</strong>: A group in a controlled trial that receives no
+treatment, or a treatment whose effect is known.</p></li>
+<li><p><strong>natural experiment</strong>: An experimental design that takes advantage
+of a natural division of subjects into groups in ways that are at
+least approximately random.</p></li>
+</ul>
+<p><strong>Exercise:</strong>  So far we have been working with a subset of only 5000 respondents.  When we include the entire dataset, making an effective scatter plot can be tricky.  As an exercise, experiment with <code class="docutils literal notranslate"><span class="pre">Scatter</span></code> and <code class="docutils literal notranslate"><span class="pre">HexBin</span></code> to make a plot that represents the entire dataset well.</p>
+<p><strong>Exercise:</strong> Yet another option is to divide the dataset into groups and then plot the CDF for each group.  As an exercise, divide the dataset into a smaller number of groups and plot the CDF for each group.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cleaned</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;htm3&#39;</span><span class="p">,</span> <span class="s1">&#39;wtkg2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p>Using data from the NSFG, make a scatter plot of birth weight versus mother’s age. Plot percentiles of birth weight versus mother’s age. Compute Pearson’s and Spearman’s correlations. How would you characterize the relationship between these variables?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/first.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">first</span>
+
+<span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">MakeFrames</span><span class="p">()</span>
+<span class="n">live</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;agepreg&#39;</span><span class="p">,</span> <span class="s1">&#39;totalwgt_lb&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap06.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Probability density functions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap08.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Estimation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">Scatter plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characterizing-relationships">Characterizing relationships</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation">Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance">Covariance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pearsons-correlation">Pearson’s correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-relationships">Nonlinear relationships</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spearmans-rank-correlation">Spearman’s rank correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-and-causation">Correlation and causation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

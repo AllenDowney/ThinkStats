@@ -1,0 +1,1193 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Distributions &#8212; Think Stats, 3rd edition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap02';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Probability mass functions" href="chap03.html" />
+    <link rel="prev" title="Exploratory data analysis" href="chap01.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Stats, 3rd edition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Think Stats, 3rd edition
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">Linear least squares</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic methods</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkStats/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap02.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Distributions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms">Histograms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-histograms">Representing histograms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-histograms">Plotting histograms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nsfg-variables">NSFG variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outliers">Outliers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-babies">First babies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summarizing-distributions">Summarizing distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-size">Effect size</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-results">Reporting results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="distributions">
+<h1>Distributions<a class="headerlink" href="#distributions" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+
+
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py&quot;</span><span class="p">)</span>
+
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="histograms">
+<h2>Histograms<a class="headerlink" href="#histograms" title="Link to this heading">#</a></h2>
+<p>One of the best ways to describe a variable is to report the values that
+appear in the dataset and how many times each value appears. This
+description is called the <strong>distribution</strong> of the variable.</p>
+<p>The most common representation of a distribution is a <strong>histogram</strong>,
+which is a graph that shows the <strong>frequency</strong> of each value. In this
+context, “frequency” means the number of times the value appears.</p>
+<p>In Python, an efficient way to compute frequencies is with a dictionary.
+Given a sequence of values, <code class="docutils literal notranslate"><span class="pre">t</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+    <span class="n">hist</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">hist</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is a dictionary that maps from values to frequencies.
+Alternatively, you could use the <code class="docutils literal notranslate"><span class="pre">Counter</span></code> class defined in the
+<code class="docutils literal notranslate"><span class="pre">collections</span></code> module:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is a <code class="docutils literal notranslate"><span class="pre">Counter</span></code> object, which is a subclass of dictionary.</p>
+<p>Another option is to use the pandas method <code class="docutils literal notranslate"><span class="pre">value_counts</span></code>, which we saw
+in the previous chapter. But for this book I created a class, Hist, that
+represents histograms and provides the methods that operate on them.</p>
+</section>
+<section id="representing-histograms">
+<h2>Representing histograms<a class="headerlink" href="#representing-histograms" title="Link to this heading">#</a></h2>
+<p>The Hist constructor can take a sequence, dictionary, pandas Series, or
+another Hist. You can instantiate a Hist object like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">Hist</span>
+
+<span class="n">hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">hist</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hist({1: 1, 2: 2, 3: 1, 5: 1})
+</pre></div>
+</div>
+</div>
+</div>
+<p>Hist objects provide <code class="docutils literal notranslate"><span class="pre">Freq</span></code>, which takes a value and returns its
+frequency:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="o">.</span><span class="n">Freq</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>The bracket operator does the same thing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you look up a value that has never appeared, the frequency is 0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="o">.</span><span class="n">Freq</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Values</span></code> returns an unsorted list of the values in the Hist:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="o">.</span><span class="n">Values</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([1, 2, 3, 5])
+</pre></div>
+</div>
+</div>
+</div>
+<p>To loop through the values in order, you can use the built-in function
+<code class="docutils literal notranslate"><span class="pre">sorted</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">hist</span><span class="o">.</span><span class="n">Values</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">hist</span><span class="o">.</span><span class="n">Freq</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 1
+2 2
+3 1
+5 1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or you can use <code class="docutils literal notranslate"><span class="pre">Items</span></code> to iterate through value-frequency pairs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">hist</span><span class="o">.</span><span class="n">Items</span><span class="p">():</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 1
+2 2
+3 1
+5 1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting-histograms">
+<h2>Plotting histograms<a class="headerlink" href="#plotting-histograms" title="Link to this heading">#</a></h2>
+<p><img alt="Histogram of the pound part of birthweight." src="figs/first_wgt_lb_hist.pdf" />{height=“2.5in”}</p>
+<p>For this book I wrote a module called <code class="docutils literal notranslate"><span class="pre">thinkplot.py</span></code> that provides
+functions for plotting Hists and other objects defined in
+<code class="docutils literal notranslate"><span class="pre">thinkstats2.py</span></code>. It is based on <code class="docutils literal notranslate"><span class="pre">pyplot</span></code>, which is part of the
+<code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> package. See Section <a class="reference internal" href="#code"><span class="xref myst">[code]</span></a>{reference-type=“ref”
+reference=“code”} for information about installing <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>
+<p>To plot <code class="docutils literal notranslate"><span class="pre">hist</span></code> with <code class="docutils literal notranslate"><span class="pre">thinkplot</span></code>, try this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">thinkplot</span>
+
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7f9ba05415fdff8405b8b0bd52d1badcebb9f83a77d819766f27ddfc7161a61c.png" src="_images/7f9ba05415fdff8405b8b0bd52d1badcebb9f83a77d819766f27ddfc7161a61c.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can read the documentation for <code class="docutils literal notranslate"><span class="pre">thinkplot</span></code> at
+<a class="reference external" href="http://greenteapress.com/thinkstats2/thinkplot.html">http://greenteapress.com/thinkstats2/thinkplot.html</a>.</p>
+</section>
+<section id="nsfg-variables">
+<h2>NSFG variables<a class="headerlink" href="#nsfg-variables" title="Link to this heading">#</a></h2>
+<p>Now let’s get back to the data from the NSFG. The code in this chapter
+is in <code class="docutils literal notranslate"><span class="pre">first.py</span></code>. For information about downloading and working with
+this code, see Section <a class="reference internal" href="#code"><span class="xref myst">[code]</span></a>{reference-type=“ref”
+reference=“code”}.</p>
+<p>When you start working with a new dataset, I suggest you explore the
+variables you are planning to use one at a time, and a good way to start
+is by looking at histograms.</p>
+<p>In Section <a class="reference internal" href="#cleaning"><span class="xref myst">[cleaning]</span></a>{reference-type=“ref”
+reference=“cleaning”} we transformed <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> from centiyears to years,
+and combined <code class="docutils literal notranslate"><span class="pre">birthwgt_lb</span></code> and <code class="docutils literal notranslate"><span class="pre">birthwgt_oz</span></code> into a single quantity,
+<code class="docutils literal notranslate"><span class="pre">totalwgt_lb</span></code>. In this section I use these variables to demonstrate some
+features of histograms.</p>
+<p><img alt="Histogram of mother's age at end ofpregnancy." src="figs/first_agepreg_hist.pdf" />{height=“2.5in”}</p>
+<p>I’ll start by reading the data and selecting records for live births:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">ReadFemPreg</span>
+
+<span class="n">preg</span> <span class="o">=</span> <span class="n">ReadFemPreg</span><span class="p">()</span>
+<span class="n">live</span> <span class="o">=</span> <span class="n">preg</span><span class="p">[</span><span class="n">preg</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The expression in brackets is a boolean Series that selects rows from
+the DataFrame and returns a new DataFrame. Next I generate and plot the
+histogram of <code class="docutils literal notranslate"><span class="pre">birthwgt_lb</span></code> for live births.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">live</span><span class="o">.</span><span class="n">birthwgt_lb</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;birthwgt_lb&#39;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;pounds&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ba1ca699e8b8087cb78ab94858323c0af15c9db13ef4cdf6124bdbaa22894976.png" src="_images/ba1ca699e8b8087cb78ab94858323c0af15c9db13ef4cdf6124bdbaa22894976.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>When the argument passed to Hist is a pandas Series, any <code class="docutils literal notranslate"><span class="pre">nan</span></code> values
+are dropped. <code class="docutils literal notranslate"><span class="pre">label</span></code> is a string that appears in the legend when the
+Hist is plotted.</p>
+<p><img alt="Histogram of pregnancy length inweeks." src="figs/first_prglngth_hist.pdf" />{height=“2.5in”}</p>
+<p>Figure <a class="reference internal" href="#first_wgt_lb_hist"><span class="xref myst">[first_wgt_lb_hist]</span></a>{reference-type=“ref”
+reference=“first_wgt_lb_hist”} shows the result. The most common value,
+called the <strong>mode</strong>, is 7 pounds. The distribution is approximately
+bell-shaped, which is the shape of the <strong>normal</strong> distribution, also
+called a <strong>Gaussian</strong> distribution. But unlike a true normal
+distribution, this distribution is asymmetric; it has a <strong>tail</strong> that
+extends farther to the left than to the right.</p>
+<p>Figure <a class="reference internal" href="#first_wgt_oz_hist"><span class="xref myst">[first_wgt_oz_hist]</span></a>{reference-type=“ref”
+reference=“first_wgt_oz_hist”} shows the histogram of <code class="docutils literal notranslate"><span class="pre">birthwgt_oz</span></code>,
+which is the ounces part of birth weight. In theory we expect this
+distribution to be <strong>uniform</strong>; that is, all values should have the same
+frequency. In fact, 0 is more common than the other values, and 1 and 15
+are less common, probably because respondents round off birth weights
+that are close to an integer value.</p>
+<p>Figure <a class="reference internal" href="#first_agepreg_hist"><span class="xref myst">[first_agepreg_hist]</span></a>{reference-type=“ref”
+reference=“first_agepreg_hist”} shows the histogram of <code class="docutils literal notranslate"><span class="pre">agepreg</span></code>, the
+mother’s age at the end of pregnancy. The mode is 21 years. The
+distribution is very roughly bell-shaped, but in this case the tail
+extends farther to the right than left; most mothers are in their 20s,
+fewer in their 30s.</p>
+<p>Figure <a class="reference internal" href="#first_prglngth_hist"><span class="xref myst">[first_prglngth_hist]</span></a>{reference-type=“ref”
+reference=“first_prglngth_hist”} shows the histogram of <code class="docutils literal notranslate"><span class="pre">prglngth</span></code>, the
+length of the pregnancy in weeks. By far the most common value is 39
+weeks. The left tail is longer than the right; early babies are common,
+but pregnancies seldom go past 43 weeks, and doctors often intervene if
+they do.</p>
+</section>
+<section id="outliers">
+<h2>Outliers<a class="headerlink" href="#outliers" title="Link to this heading">#</a></h2>
+<p>Looking at histograms, it is easy to identify the most common values and
+the shape of the distribution, but rare values are not always visible.</p>
+<p>Before going on, it is a good idea to check for <strong>outliers</strong>, which are
+extreme values that might be errors in measurement and recording, or
+might be accurate reports of rare events.</p>
+<p>Hist provides methods <code class="docutils literal notranslate"><span class="pre">Largest</span></code> and <code class="docutils literal notranslate"><span class="pre">Smallest</span></code>, which take an integer
+<code class="docutils literal notranslate"><span class="pre">n</span></code> and return the <code class="docutils literal notranslate"><span class="pre">n</span></code> largest or smallest values from the histogram:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">weeks</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">hist</span><span class="o">.</span><span class="n">Smallest</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">weeks</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0 8
+1.0 40
+2.0 53
+3.0 98
+4.0 229
+5.0 697
+6.0 2223
+7.0 3049
+8.0 1889
+9.0 623
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the list of pregnancy lengths for live births, the 10 lowest values
+are <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">4,</span> <span class="pre">9,</span> <span class="pre">13,</span> <span class="pre">17,</span> <span class="pre">18,</span> <span class="pre">19,</span> <span class="pre">20,</span> <span class="pre">21,</span> <span class="pre">22]</span></code>. Values below 10 weeks are
+certainly errors; the most likely explanation is that the outcome was
+not coded correctly. Values higher than 30 weeks are probably
+legitimate. Between 10 and 30 weeks, it is hard to be sure; some values
+are probably errors, but some represent premature babies.</p>
+<p>On the other end of the range, the highest values are:</p>
+<p>Most doctors recommend induced labor if a pregnancy exceeds 42 weeks, so
+some of the longer values are surprising. In particular, 50 weeks seems
+medically unlikely.</p>
+<p>The best way to handle outliers depends on “domain knowledge”; that is,
+information about where the data come from and what they mean. And it
+depends on what analysis you are planning to perform.</p>
+<p>In this example, the motivating question is whether first babies tend to
+be early (or late). When people ask this question, they are usually
+interested in full-term pregnancies, so for this analysis I will focus
+on pregnancies longer than 27 weeks.</p>
+</section>
+<section id="first-babies">
+<h2>First babies<a class="headerlink" href="#first-babies" title="Link to this heading">#</a></h2>
+<p>Now we can compare the distribution of pregnancy lengths for first
+babies and others. I divided the DataFrame of live births using
+<code class="docutils literal notranslate"><span class="pre">birthord</span></code>, and computed their histograms:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">firsts</span> <span class="o">=</span> <span class="n">live</span><span class="p">[</span><span class="n">live</span><span class="o">.</span><span class="n">birthord</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">others</span> <span class="o">=</span> <span class="n">live</span><span class="p">[</span><span class="n">live</span><span class="o">.</span><span class="n">birthord</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">first_hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="n">other_hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;other&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then I plotted their histograms on the same axis:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">width</span> <span class="o">=</span> <span class="mf">0.45</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">first_hist</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">other_hist</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;weeks&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span>
+               <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">27</span><span class="p">,</span> <span class="mi">46</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2ed7d22ec1c26c341a75905a9691d44c3319afeaeb2718d79746172d02fdfdc7.png" src="_images/2ed7d22ec1c26c341a75905a9691d44c3319afeaeb2718d79746172d02fdfdc7.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">thinkplot.PrePlot</span></code> takes the number of histograms we are planning to
+plot; it uses this information to choose an appropriate collection of
+colors.</p>
+<p><img alt="Histogram of pregnancylengths." src="figs/first_nsfg_hist.pdf" />{height=“2.5in”}</p>
+<p><code class="docutils literal notranslate"><span class="pre">thinkplot.Hist</span></code> normally uses <code class="docutils literal notranslate"><span class="pre">align='center'</span></code> so that each bar is
+centered over its value. For this figure, I use <code class="docutils literal notranslate"><span class="pre">align='right'</span></code> and
+<code class="docutils literal notranslate"><span class="pre">align='left'</span></code> to place corresponding bars on either side of the value.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">width=0.45</span></code>, the total width of the two bars is 0.9, leaving some
+space between each pair.</p>
+<p>Finally, I adjust the axis to show only data between 27 and 46 weeks.
+Figure <a class="reference internal" href="#first_nsfg_hist"><span class="xref myst">[first_nsfg_hist]</span></a>{reference-type=“ref”
+reference=“first_nsfg_hist”} shows the result.</p>
+<p>Histograms are useful because they make the most frequent values
+immediately apparent. But they are not the best choice for comparing two
+distributions. In this example, there are fewer “first babies” than
+“others,” so some of the apparent differences in the histograms are due
+to sample sizes. In the next chapter we address this problem using
+probability mass functions.</p>
+</section>
+<section id="summarizing-distributions">
+<h2>Summarizing distributions<a class="headerlink" href="#summarizing-distributions" title="Link to this heading">#</a></h2>
+<p>A histogram is a complete description of the distribution of a sample;
+that is, given a histogram, we could reconstruct the values in the
+sample (although not their order).</p>
+<p>If the details of the distribution are important, it might be necessary
+to present a histogram. But often we want to summarize the distribution
+with a few descriptive statistics.</p>
+<p>Some of the characteristics we might want to report are:</p>
+<ul class="simple">
+<li><p>central tendency: Do the values tend to cluster around a particular
+point?</p></li>
+<li><p>modes: Is there more than one cluster?</p></li>
+<li><p>spread: How much variability is there in the values?</p></li>
+<li><p>tails: How quickly do the probabilities drop off as we move away
+from the modes?</p></li>
+<li><p>outliers: Are there extreme values far from the modes?</p></li>
+</ul>
+<p>Statistics designed to answer these questions are called <strong>summary
+statistics</strong>. By far the most common summary statistic is the <strong>mean</strong>,
+which is meant to describe the central tendency of the distribution.</p>
+<p>If you have a sample of <code class="docutils literal notranslate"><span class="pre">n</span></code> values, <span class="math notranslate nohighlight">\(x_i\)</span>, the mean, <span class="math notranslate nohighlight">\(\xbar\)</span>, is the sum
+of the values divided by the number of values; in other words
+$<span class="math notranslate nohighlight">\(\xbar = \frac{1}{n} \sum_i x_i\)</span>$ The words “mean” and “average” are
+sometimes used interchangeably, but I make this distinction:</p>
+<ul class="simple">
+<li><p>The “mean” of a sample is the summary statistic computed with the
+previous formula.</p></li>
+<li><p>An “average” is one of several summary statistics you might choose
+to describe a central tendency.</p></li>
+</ul>
+<p>Sometimes the mean is a good description of a set of values. For
+example, apples are all pretty much the same size (at least the ones
+sold in supermarkets). So if I buy 6 apples and the total weight is 3
+pounds, it would be a reasonable summary to say they are about a half
+pound each.</p>
+<p>But pumpkins are more diverse. Suppose I grow several varieties in my
+garden, and one day I harvest three decorative pumpkins that are 1 pound
+each, two pie pumpkins that are 3 pounds each, and one Atlantic
+Giant pumpkin that weighs 591 pounds. The mean of this sample is 100
+pounds, but if I told you “The average pumpkin in my garden is 100
+pounds,” that would be misleading. In this example, there is no
+meaningful average because there is no typical pumpkin.</p>
+</section>
+<section id="variance">
+<h2>Variance<a class="headerlink" href="#variance" title="Link to this heading">#</a></h2>
+<p>If there is no single number that summarizes pumpkin weights, we can do
+a little better with two numbers: mean and <strong>variance</strong>.</p>
+<p>Variance is a summary statistic intended to describe the variability or
+spread of a distribution. The variance of a set of values is
+$<span class="math notranslate nohighlight">\(S^2 = \frac{1}{n} \sum_i (x_i - \xbar)^2\)</span><span class="math notranslate nohighlight">\( The term \)</span>x_i - \xbar<span class="math notranslate nohighlight">\( is
+called the &quot;deviation from the mean,&quot; so variance is the mean squared
+deviation. The square root of variance, \)</span>S$, is the <strong>standard
+deviation</strong>.</p>
+<p>If you have prior experience, you might have seen a formula for variance
+with <span class="math notranslate nohighlight">\(n-1\)</span> in the denominator, rather than <code class="docutils literal notranslate"><span class="pre">n</span></code>. This statistic is used
+to estimate the variance in a population using a sample. We will come
+back to this in
+Chapter <a class="reference internal" href="#estimation"><span class="xref myst">[estimation]</span></a>{reference-type=“ref”
+reference=“estimation”}.</p>
+<p>Pandas data structures provides methods to compute mean, variance and
+standard deviation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mean</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38.56055968517709
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+<span class="n">var</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.302662067826817
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">std</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">std</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.702343810070587
+</pre></div>
+</div>
+</div>
+</div>
+<p>For all live births, the mean pregnancy length is 38.6 weeks, the
+standard deviation is 2.7 weeks, which means we should expect deviations
+of 2-3 weeks to be common.</p>
+<p>Variance of pregnancy length is 7.3, which is hard to interpret,
+especially since the units are weeks<span class="math notranslate nohighlight">\(^2\)</span>, or “square weeks.” Variance is
+useful in some calculations, but it is not a good summary statistic.</p>
+</section>
+<section id="effect-size">
+<h2>Effect size<a class="headerlink" href="#effect-size" title="Link to this heading">#</a></h2>
+<p>An <strong>effect size</strong> is a summary statistic intended to describe (wait for
+it) the size of an effect. For example, to describe the difference
+between two groups, one obvious choice is the difference in the means.</p>
+<p>Mean pregnancy length for first babies is 38.601; for other babies it is
+38.523. The difference is 0.078 weeks, which works out to 13 hours. As a
+fraction of the typical pregnancy length, this difference is about 0.2%.</p>
+<p>If we assume this estimate is accurate, such a difference would have no
+practical consequences. In fact, without observing a large number of
+pregnancies, it is unlikely that anyone would notice this difference at
+all.</p>
+<p>Another way to convey the size of the effect is to compare the
+difference between groups to the variability within groups. Cohen’s <span class="math notranslate nohighlight">\(d\)</span>
+is a statistic intended to do that; it is defined
+$<span class="math notranslate nohighlight">\(d = \frac{\bar{x_1} - \bar{x_2}}{s}\)</span><span class="math notranslate nohighlight">\( where \)</span>\bar{x_1}<span class="math notranslate nohighlight">\( and
+\)</span>\bar{x_2}<span class="math notranslate nohighlight">\( are the means of the groups and \)</span>s<span class="math notranslate nohighlight">\( is the &quot;pooled standard
+deviation&quot;. Here's the Python code that computes Cohen's \)</span>d$:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">CohenEffectSize</span><span class="p">(</span><span class="n">group1</span><span class="p">,</span> <span class="n">group2</span><span class="p">):</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">group1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">group2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="n">var1</span> <span class="o">=</span> <span class="n">group1</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+    <span class="n">var2</span> <span class="o">=</span> <span class="n">group2</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+    <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">group1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">group2</span><span class="p">)</span>
+
+    <span class="n">pooled_var</span> <span class="o">=</span> <span class="p">(</span><span class="n">n1</span> <span class="o">*</span> <span class="n">var1</span> <span class="o">+</span> <span class="n">n2</span> <span class="o">*</span> <span class="n">var2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pooled_var</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, the difference in means is 0.029 standard deviations,
+which is small. To put that in perspective, the difference in height
+between men and women is about 1.7 standard deviations (see
+<a class="reference external" href="https://en.wikipedia.org/wiki/Effect_size">https://en.wikipedia.org/wiki/Effect_size</a>).</p>
+</section>
+<section id="reporting-results">
+<h2>Reporting results<a class="headerlink" href="#reporting-results" title="Link to this heading">#</a></h2>
+<p>We have seen several ways to describe the difference in pregnancy length
+(if there is one) between first babies and others. How should we report
+these results?</p>
+<p>The answer depends on who is asking the question. A scientist might be
+interested in any (real) effect, no matter how small. A doctor might
+only care about effects that are <strong>clinically significant</strong>; that is,
+differences that affect treatment decisions. A pregnant woman might be
+interested in results that are relevant to her, like the probability of
+delivering early or late.</p>
+<p>How you report results also depends on your goals. If you are trying to
+demonstrate the importance of an effect, you might choose summary
+statistics that emphasize differences. If you are trying to reassure a
+patient, you might choose statistics that put the differences in
+context.</p>
+<p>Of course your decisions should also be guided by professional ethics.
+It’s ok to be persuasive; you <em>should</em> design statistical reports and
+visualizations that tell a story clearly. But you should also do your
+best to make your reports honest, and to acknowledge uncertainty and
+limitations.</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<section id="exercise">
+<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<p>Based on the results in this chapter, suppose you were asked to
+summarize what you learned about whether first babies arrive late.</p>
+<p>Which summary statistics would you use if you wanted to get a story on
+the evening news? Which ones would you use if you wanted to reassure an
+anxious patient?</p>
+<p>Finally, imagine that you are Cecil Adams, author of <em>The Straight Dope</em>
+(<a class="reference external" href="http://straightdope.com">http://straightdope.com</a>), and your job is to answer the question, “Do
+first babies arrive late?” Write a paragraph that uses the results in
+this chapter to answer the question clearly, precisely, and honestly.</p>
+</section>
+<section id="id1">
+<h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>In the repository you downloaded, you should find a file named
+<code class="docutils literal notranslate"><span class="pre">chap02ex.ipynb</span></code>; open it. Some cells are already filled in, and you
+should execute them. Other cells give you instructions for exercises.
+Follow the instructions and fill in the answers.</p>
+<p>A solution to this exercise is in <code class="docutils literal notranslate"><span class="pre">chap02soln.ipynb</span></code></p>
+<p>In the repository you downloaded, you should find a file named
+<code class="docutils literal notranslate"><span class="pre">chap02ex.py</span></code>; you can use this file as a starting place for the
+following exercises. My solution is in <code class="docutils literal notranslate"><span class="pre">chap02soln.py</span></code>.</p>
+</section>
+<section id="id2">
+<h3>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>The mode of a distribution is the most frequent value; see
+<a class="reference external" href="http://wikipedia.org/wiki/Mode_(statistics)">http://wikipedia.org/wiki/Mode_(statistics)</a>. Write a function called
+<code class="docutils literal notranslate"><span class="pre">Mode</span></code> that takes a Hist and returns the most frequent value.</p>
+<p>As a more challenging exercise, write a function called <code class="docutils literal notranslate"><span class="pre">AllModes</span></code> that
+returns a list of value-frequency pairs in descending order of
+frequency.</p>
+</section>
+<section id="id3">
+<h3>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>Using the variable <code class="docutils literal notranslate"><span class="pre">totalwgt_lb</span></code>, investigate whether first babies are
+lighter or heavier than others. Compute Cohen’s <span class="math notranslate nohighlight">\(d\)</span> to quantify the
+difference between the groups. How does it compare to the difference in
+pregnancy length?</p>
+</section>
+</section>
+<section id="glossary">
+<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>distribution</strong>: The values that appear in a sample and the
+frequency of each.</p></li>
+<li><p><strong>histogram</strong>: A mapping from values to frequencies, or a graph that
+shows this mapping.</p></li>
+<li><p><strong>frequency</strong>: The number of times a value appears in a sample.</p></li>
+<li><p><strong>mode</strong>: The most frequent value in a sample, or one of the most
+frequent values.</p></li>
+<li><p><strong>normal distribution</strong>: An idealization of a bell-shaped
+distribution; also known as a Gaussian distribution.</p></li>
+<li><p><strong>uniform distribution</strong>: A distribution in which all values have
+the same frequency.</p></li>
+<li><p><strong>tail</strong>: The part of a distribution at the high and low extremes.</p></li>
+<li><p><strong>central tendency</strong>: A characteristic of a sample or population;
+intuitively, it is an average or typical value.</p></li>
+<li><p><strong>outlier</strong>: A value far from the central tendency.</p></li>
+<li><p><strong>spread</strong>: A measure of how spread out the values in a distribution
+are.</p></li>
+<li><p><strong>summary statistic</strong>: A statistic that quantifies some aspect of a
+distribution, like central tendency or spread.</p></li>
+<li><p><strong>variance</strong>: A summary statistic often used to quantify spread.</p></li>
+<li><p><strong>standard deviation</strong>: The square root of variance, also used as a
+measure of spread.</p></li>
+<li><p><strong>effect size</strong>: A summary statistic intended to quantify the size
+of an effect like a difference between groups.</p></li>
+<li><p><strong>clinically significant</strong>: A result, like a difference between
+groups, that is relevant in practice.</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>Exercises<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>Using the variable <code class="docutils literal notranslate"><span class="pre">totalwgt_lb</span></code>, investigate whether first babies are lighter or heavier than others.</p>
+<p>Compute Cohen’s effect size to quantify the difference between the groups.  How does it compare to the difference in pregnancy length?</p>
+<p>For the next few exercises, we’ll load the respondent file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dct&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dat.gz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">ReadFemResp</span>
+
+<span class="n">resp</span> <span class="o">=</span> <span class="n">ReadFemResp</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Make a histogram of <tt>totincr</tt> the total income for the respondent’s family.  To interpret the codes see the <a class="reference internal" href="#ftp://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/NSFG/Cycle6Codebook-Pregnancy.pdf"><span class="xref myst">codebook</span></a>.</p>
+<p>Make a histogram of <tt>age_r</tt>, the respondent’s age at the time of interview.</p>
+<p>Make a histogram of <tt>numfmhh</tt>, the number of people in the respondent’s household.</p>
+<p>Make a histogram of <tt>parity</tt>, the number of children borne by the respondent.  How would you describe this distribution?</p>
+<p>Use Hist.Largest to find the largest values of <tt>parity</tt>.</p>
+<p>Let’s investigate whether people with higher income have higher parity.  Keep in mind that in this study, we are observing different people at different times during their lives, so this data is not the best choice for answering this question.  But for now let’s take it at face value.</p>
+<p>Use <tt>totincr</tt> to select the respondents with the highest income (level 14).  Plot the histogram of <tt>parity</tt> for just the high income respondents.</p>
+<p>Find the largest parities for high income respondents.</p>
+<p>Compare the mean <tt>parity</tt> for high income respondents and others.</p>
+<p>Compute the Cohen effect size for this difference.  How does it compare with the difference in pregnancy length for first babies and others?</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap01.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Exploratory data analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap03.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Probability mass functions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms">Histograms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-histograms">Representing histograms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-histograms">Plotting histograms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nsfg-variables">NSFG variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outliers">Outliers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-babies">First babies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summarizing-distributions">Summarizing distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-size">Effect size</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-results">Reporting results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

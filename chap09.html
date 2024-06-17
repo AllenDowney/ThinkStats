@@ -1,0 +1,1298 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Hypothesis testing &#8212; Think Stats, 3rd edition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap09';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Linear least squares" href="chap10.html" />
+    <link rel="prev" title="Estimation" href="chap08.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Stats, 3rd edition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Think Stats, 3rd edition
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hypothesis testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">Linear least squares</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic methods</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkStats/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap09.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Hypothesis testing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-hypothesis-testing">Classical hypothesis testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesistest">HypothesisTest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-difference-in-means">Testing a difference in means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-test-statistics">Other test statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-correlation">Testing a correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-proportions">Testing proportions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-tests">Chi-squared tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-babies-again">First babies again</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">Errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power">Power</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replication">Replication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="hypothesis-testing">
+<h1>Hypothesis testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+
+
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">thinkstats2</span>
+<span class="kn">import</span> <span class="nn">thinkplot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="classical-hypothesis-testing">
+<h2>Classical hypothesis testing<a class="headerlink" href="#classical-hypothesis-testing" title="Link to this heading">#</a></h2>
+<p>Exploring the data from the NSFG, we saw several “apparent effects,”
+including differences between first babies and others. So far we have
+taken these effects at face value; in this chapter, we put them to the
+test.</p>
+<p>The fundamental question we want to address is whether the effects we
+see in a sample are likely to appear in the larger population. For
+example, in the NSFG sample we see a difference in mean pregnancy length
+for first babies and others. We would like to know if that effect
+reflects a real difference for women in the U.S., or if it might appear
+in the sample by chance.</p>
+<p>There are several ways we could formulate this question, including
+Fisher null hypothesis testing, Neyman-Pearson decision theory, and
+Bayesian inference<a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. What I present here is a subset of all three
+that makes up most of what people use in practice, which I will call
+<strong>classical hypothesis testing</strong>.</p>
+<p>The goal of classical hypothesis testing is to answer the question,
+“Given a sample and an apparent effect, what is the probability of
+seeing such an effect by chance?” Here’s how we answer that question:</p>
+<ul class="simple">
+<li><p>The first step is to quantify the size of the apparent effect by
+choosing a <strong>test statistic</strong>. In the NSFG example, the apparent
+effect is a difference in pregnancy length between first babies and
+others, so a natural choice for the test statistic is the difference
+in means between the two groups.</p></li>
+<li><p>The second step is to define a <strong>null hypothesis</strong>, which is a model
+of the system based on the assumption that the apparent effect is
+not real. In the NSFG example the null hypothesis is that there is
+no difference between first babies and others; that is, that
+pregnancy lengths for both groups have the same distribution.</p></li>
+<li><p>The third step is to compute a <strong>p-value</strong>, which is the probability
+of seeing the apparent effect if the null hypothesis is true. In the
+NSFG example, we would compute the actual difference in means, then
+compute the probability of seeing a difference as big, or bigger,
+under the null hypothesis.</p></li>
+<li><p>The last step is to interpret the result. If the p-value is low, the
+effect is said to be <strong>statistically significant</strong>, which means that
+it is unlikely to have occurred by chance. In that case we infer
+that the effect is more likely to appear in the larger population.</p></li>
+</ul>
+<p>The logic of this process is similar to a proof by contradiction. To
+prove a mathematical statement, A, you assume temporarily that A is
+false. If that assumption leads to a contradiction, you conclude that A
+must actually be true.</p>
+<p>Similarly, to test a hypothesis like, “This effect is real,” we assume,
+temporarily, that it is not. That’s the null hypothesis. Based on that
+assumption, we compute the probability of the apparent effect. That’s
+the p-value. If the p-value is low, we conclude that the null hypothesis
+is unlikely to be true.</p>
+</section>
+<section id="hypothesistest">
+<h2>HypothesisTest<a class="headerlink" href="#hypothesistest" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides <code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code>, a class that represents the
+structure of a classical hypothesis test. Here is the definition:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HypothesisTest</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MakeModel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actual</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">TestStatistic</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">PValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_stats</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RunModel</span><span class="p">())</span> 
+                           <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+
+        <span class="n">count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_stats</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actual</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">count</span> <span class="o">/</span> <span class="n">iters</span>
+
+    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">UnimplementedMethodException</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">MakeModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">UnimplementedMethodException</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code> is an abstract parent class that provides complete
+definitions for some methods and place-keepers for others. Child classes
+based on <code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code> inherit <code class="docutils literal notranslate"><span class="pre">__init__</span></code> and <code class="docutils literal notranslate"><span class="pre">PValue</span></code> and provide
+<code class="docutils literal notranslate"><span class="pre">TestStatistic</span></code>, <code class="docutils literal notranslate"><span class="pre">RunModel</span></code>, and optionally <code class="docutils literal notranslate"><span class="pre">MakeModel</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">__init__</span></code> takes the data in whatever form is appropriate. It calls
+<code class="docutils literal notranslate"><span class="pre">MakeModel</span></code>, which builds a representation of the null hypothesis, then
+passes the data to <code class="docutils literal notranslate"><span class="pre">TestStatistic</span></code>, which computes the size of the
+effect in the sample.</p>
+<p><code class="docutils literal notranslate"><span class="pre">PValue</span></code> computes the probability of the apparent effect under the null
+hypothesis. It takes as a parameter <code class="docutils literal notranslate"><span class="pre">iters</span></code>, which is the number of
+simulations to run. The first line generates simulated data, computes
+test statistics, and stores them in <code class="docutils literal notranslate"><span class="pre">test_stats</span></code>. The result is the
+fraction of elements in <code class="docutils literal notranslate"><span class="pre">test_stats</span></code> that exceed or equal the observed
+test statistic, <code class="docutils literal notranslate"><span class="pre">self.actual</span></code>.</p>
+<p>As a simple example<a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, suppose we toss a coin 250 times and see 140
+heads and 110 tails. Based on this result, we might suspect that the
+coin is biased; that is, more likely to land heads. To test this
+hypothesis, we compute the probability of seeing such a difference if
+the coin is actually fair:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CoinTest</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">HypothesisTest</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">heads</span><span class="p">,</span> <span class="n">tails</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">test_stat</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">heads</span> <span class="o">-</span> <span class="n">tails</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">test_stat</span>
+
+    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">heads</span><span class="p">,</span> <span class="n">tails</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">heads</span> <span class="o">+</span> <span class="n">tails</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;HT&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="n">hist</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">hist</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">],</span> <span class="n">hist</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The parameter, <code class="docutils literal notranslate"><span class="pre">data</span></code>, is a pair of integers: the number of heads and
+tails. The test statistic is the absolute difference between them, so
+<code class="docutils literal notranslate"><span class="pre">self.actual</span></code> is 30.</p>
+<p><code class="docutils literal notranslate"><span class="pre">RunModel</span></code> simulates coin tosses assuming that the coin is actually
+fair. It generates a sample of 250 tosses, uses Hist to count the number
+of heads and tails, and returns a pair of integers.</p>
+<p>Now all we have to do is instantiate <code class="docutils literal notranslate"><span class="pre">CoinTest</span></code> and call <code class="docutils literal notranslate"><span class="pre">PValue</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span> <span class="o">=</span> <span class="n">CoinTest</span><span class="p">((</span><span class="mi">140</span><span class="p">,</span> <span class="mi">110</span><span class="p">))</span>
+<span class="n">p_value</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">PValue</span><span class="p">()</span>
+<span class="n">p_value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.061
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is about 0.07, which means that if the coin is fair, we
+expect to see a difference as big as 30 about 7% of the time.</p>
+<p>How should we interpret this result? By convention, 5% is the threshold
+of statistical significance. If the p-value is less than 5%, the effect
+is considered significant; otherwise it is not.</p>
+<p>But the choice of 5% is arbitrary, and (as we will see later) the
+p-value depends on the choice of the test statistics and the model of
+the null hypothesis. So p-values should not be considered precise
+measurements.</p>
+<p>I recommend interpreting p-values according to their order of magnitude:
+if the p-value is less than 1%, the effect is unlikely to be due to
+chance; if it is greater than 10%, the effect can plausibly be explained
+by chance. P-values between 1% and 10% should be considered borderline.
+So in this example I conclude that the data do not provide strong
+evidence that the coin is biased or not.</p>
+</section>
+<section id="testing-a-difference-in-means">
+<h2>Testing a difference in means<a class="headerlink" href="#testing-a-difference-in-means" title="Link to this heading">#</a></h2>
+<p>One of the most common effects to test is a difference in mean between
+two groups. In the NSFG data, we saw that the mean pregnancy length for
+first babies is slightly longer, and the mean birth weight is slightly
+smaller. Now we will see if those effects are statistically significant.</p>
+<p>For these examples, the null hypothesis is that the distributions for
+the two groups are the same. One way to model the null hypothesis is by
+<strong>permutation</strong>; that is, we can take values for first babies and others
+and shuffle them, treating the two groups as one big group:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DiffMeansPermute</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">HypothesisTest</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">test_stat</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">group1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">group2</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">test_stat</span>
+
+    <span class="k">def</span> <span class="nf">MakeModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">group1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">group2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">group1</span><span class="p">,</span> <span class="n">group2</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">data</span></code> is a pair of sequences, one for each group. The test statistic is
+the absolute difference in the means.</p>
+<p><code class="docutils literal notranslate"><span class="pre">MakeModel</span></code> records the sizes of the groups, <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">m</span></code>, and combines
+the groups into one NumPy array, <code class="docutils literal notranslate"><span class="pre">self.pool</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">RunModel</span></code> simulates the null hypothesis by shuffling the pooled values
+and splitting them into two groups with sizes <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">m</span></code>. As always,
+the return value from <code class="docutils literal notranslate"><span class="pre">RunModel</span></code> has the same format as the observed
+data.</p>
+<p>To test the difference in pregnancy length, we run:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/first.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">first</span>
+
+<span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">MakeFrames</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span>
+<span class="n">ht</span> <span class="o">=</span> <span class="n">DiffMeansPermute</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">pvalue</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">PValue</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">MakeFrames</span></code> reads the NSFG data and returns DataFrames representing all
+live births, first babies, and others. We extract pregnancy lengths as
+NumPy arrays, pass them as data to <code class="docutils literal notranslate"><span class="pre">DiffMeansPermute</span></code>, and compute the
+p-value. The result is about 0.17, which means that we expect to see a
+difference as big as the observed effect about 17% of the time. So this
+effect is not statistically significant.</p>
+<p><code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code> provides <code class="docutils literal notranslate"><span class="pre">PlotCdf</span></code>, which plots the distribution of the
+test statistic and a gray line indicating the observed effect size:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ht</span><span class="o">.</span><span class="n">PlotCdf</span><span class="p">()</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;test statistic&#39;</span><span class="p">,</span>
+               <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5124b1d4db586829afb3fa2d02544ae0e8f4e1d4b19f5bdba6c1b914b651ff8c.png" src="_images/5124b1d4db586829afb3fa2d02544ae0e8f4e1d4b19f5bdba6c1b914b651ff8c.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#hypothesis1"><span class="xref myst">[hypothesis1]</span></a>{reference-type=“ref”
+reference=“hypothesis1”} shows the result. The CDF intersects the
+observed difference at 0.83, which is the complement of the p-value,
+0.17.</p>
+<p>If we run the same analysis with birth weight, the computed p-value is
+0; after 1000 attempts, the simulation never yields an effect as big as
+the observed difference, 0.12 lbs. So we would report <span class="math notranslate nohighlight">\(p &lt; 0.001\)</span>, and
+conclude that the difference in birth weight is statistically
+significant.</p>
+</section>
+<section id="other-test-statistics">
+<h2>Other test statistics<a class="headerlink" href="#other-test-statistics" title="Link to this heading">#</a></h2>
+<p>Choosing the best test statistic depends on what question you are trying
+to address. For example, if the relevant question is whether pregnancy
+lengths are different for first babies, then it makes sense to test the
+absolute difference in means, as we did in the previous section.</p>
+<p>If we had some reason to think that first babies are likely to be late,
+then we would not take the absolute value of the difference; instead we
+would use this test statistic:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DiffMeansOneSided</span><span class="p">(</span><span class="n">DiffMeansPermute</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">test_stat</span> <span class="o">=</span> <span class="n">group1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">group2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">test_stat</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">DiffMeansOneSided</span></code> inherits <code class="docutils literal notranslate"><span class="pre">MakeModel</span></code> and <code class="docutils literal notranslate"><span class="pre">RunModel</span></code> from
+<code class="docutils literal notranslate"><span class="pre">DiffMeansPermute</span></code>; the only difference is that <code class="docutils literal notranslate"><span class="pre">TestStatistic</span></code> does not
+take the absolute value of the difference. This kind of test is called
+<strong>one-sided</strong> because it only counts one side of the distribution of
+differences. The previous test, using both sides, is <strong>two-sided</strong>.</p>
+<p>For this version of the test, the p-value is 0.09. In general the
+p-value for a one-sided test is about half the p-value for a two-sided
+test, depending on the shape of the distribution.</p>
+<p>The one-sided hypothesis, that first babies are born late, is more
+specific than the two-sided hypothesis, so the p-value is smaller. But
+even for the stronger hypothesis, the difference is not statistically
+significant.</p>
+<p>We can use the same framework to test for a difference in standard
+deviation. In
+Section <a class="reference internal" href="#visualization"><span class="xref myst">[visualization]</span></a>{reference-type=“ref”
+reference=“visualization”}, we saw some evidence that first babies are
+more likely to be early or late, and less likely to be on time. So we
+might hypothesize that the standard deviation is higher. Here’s how we
+can test that:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DiffStdPermute</span><span class="p">(</span><span class="n">DiffMeansPermute</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">test_stat</span> <span class="o">=</span> <span class="n">group1</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">-</span> <span class="n">group2</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">test_stat</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is a one-sided test because the hypothesis is that the standard
+deviation for first babies is higher, not just different. The p-value is
+0.09, which is not statistically significant.</p>
+</section>
+<section id="testing-a-correlation">
+<h2>Testing a correlation<a class="headerlink" href="#testing-a-correlation" title="Link to this heading">#</a></h2>
+<p>This framework can also test correlations. For example, in the NSFG data
+set, the correlation between birth weight and mother’s age is about
+0.07. It seems like older mothers have heavier babies. But could this
+effect be due to chance?</p>
+<p>For the test statistic, I use Pearson’s correlation, but Spearman’s
+would work as well. If we had reason to expect positive correlation, we
+would do a one-sided test. But since we have no such reason, I’ll do a
+two-sided test using the absolute value of correlation.</p>
+<p>The null hypothesis is that there is no correlation between mother’s age
+and birth weight. By shuffling the observed values, we can simulate a
+world where the distributions of age and birth weight are the same, but
+where the variables are unrelated:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CorrelationPermute</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">HypothesisTest</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">test_stat</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">test_stat</span>
+
+    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">data</span></code> is a pair of sequences. <code class="docutils literal notranslate"><span class="pre">TestStatistic</span></code> computes the absolute
+value of Pearson’s correlation. <code class="docutils literal notranslate"><span class="pre">RunModel</span></code> shuffles the <code class="docutils literal notranslate"><span class="pre">xs</span></code> and returns
+simulated data.</p>
+<p>Here’s the code that reads the data and runs the test:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">MakeFrames</span><span class="p">()</span>
+<span class="n">live</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;agepreg&#39;</span><span class="p">,</span> <span class="s1">&#39;totalwgt_lb&#39;</span><span class="p">])</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">agepreg</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">live</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">values</span>
+<span class="n">ht</span> <span class="o">=</span> <span class="n">CorrelationPermute</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">p_value</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">PValue</span><span class="p">()</span>
+<span class="n">p_value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>I use <code class="docutils literal notranslate"><span class="pre">dropna</span></code> with the <code class="docutils literal notranslate"><span class="pre">subset</span></code> argument to drop rows that are missing
+either of the variables we need.</p>
+<p>The actual correlation is 0.07. The computed p-value is 0; after 1000
+iterations the largest simulated correlation is 0.04. So although the
+observed correlation is small, it is statistically significant.</p>
+<p>This example is a reminder that “statistically significant” does not
+always mean that an effect is important, or significant in practice. It
+only means that it is unlikely to have occurred by chance.</p>
+</section>
+<section id="testing-proportions">
+<h2>Testing proportions<a class="headerlink" href="#testing-proportions" title="Link to this heading">#</a></h2>
+<p>Suppose you run a casino and you suspect that a customer is using a
+crooked die; that is, one that has been modified to make one of the
+faces more likely than the others. You apprehend the alleged cheater and
+confiscate the die, but now you have to prove that it is crooked. You
+roll the die 60 times and get the following results:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">center</span>
+  <span class="n">Value</span>        <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>    <span class="mi">4</span>   <span class="mi">5</span>   <span class="mi">6</span>
+  <span class="o">-----------</span> <span class="o">---</span> <span class="o">---</span> <span class="o">----</span> <span class="o">---</span> <span class="o">---</span> <span class="o">----</span>
+  <span class="n">Frequency</span>    <span class="mi">8</span>   <span class="mi">9</span>   <span class="mi">19</span>   <span class="mi">5</span>   <span class="mi">8</span>   <span class="mi">11</span>
+</pre></div>
+</div>
+<p>On average you expect each value to appear 10 times. In this dataset,
+the value 3 appears more often than expected, and the value 4 appears
+less often. But are these differences statistically significant?</p>
+<p>To test this hypothesis, we can compute the expected frequency for each
+value, the difference between the expected and observed frequencies, and
+the total absolute difference. In this example, we expect each side to
+come up 10 times out of 60; the deviations from this expectation are -2,
+-1, 9, -5, -2, and 1; so the total absolute difference is 20. How often
+would we see such a difference by chance?</p>
+<p>Here’s a version of <code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code> that answers that question:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DiceTest</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">HypothesisTest</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">6</span>
+        <span class="n">test_stat</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">test_stat</span>
+
+    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+        <span class="n">rolls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">hist</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">rolls</span><span class="p">)</span>
+        <span class="n">freqs</span> <span class="o">=</span> <span class="n">hist</span><span class="o">.</span><span class="n">Freqs</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">freqs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data are represented as a list of frequencies: the observed values
+are <code class="docutils literal notranslate"><span class="pre">[8,</span> <span class="pre">9,</span> <span class="pre">19,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">11]</span></code>; the expected frequencies are all 10. The
+test statistic is the sum of the absolute differences.</p>
+<p>The null hypothesis is that the die is fair, so we simulate that by
+drawing random samples from <code class="docutils literal notranslate"><span class="pre">values</span></code>. <code class="docutils literal notranslate"><span class="pre">RunModel</span></code> uses <code class="docutils literal notranslate"><span class="pre">Hist</span></code> to compute
+and return the list of frequencies.</p>
+<p>The p-value for this data is 0.13, which means that if the die is fair
+we expect to see the observed total deviation, or more, about 13% of the
+time. So the apparent effect is not statistically significant.</p>
+</section>
+<section id="chi-squared-tests">
+<h2>Chi-squared tests<a class="headerlink" href="#chi-squared-tests" title="Link to this heading">#</a></h2>
+<p>In the previous section we used total deviation as the test statistic.
+But for testing proportions it is more common to use the chi-squared
+statistic: $<span class="math notranslate nohighlight">\(\chi^2 = \sum_i \frac{(O_i - E_i)^2}{E_i}\)</span><span class="math notranslate nohighlight">\( Where \)</span>O_i<span class="math notranslate nohighlight">\(
+are the observed frequencies and \)</span>E_i$ are the expected frequencies.
+Here’s the Python code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DiceChiTest</span><span class="p">(</span><span class="n">DiceTest</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">6</span>
+        <span class="n">test_stat</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">expected</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">test_stat</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Squaring the deviations (rather than taking absolute values) gives more
+weight to large deviations. Dividing through by <code class="docutils literal notranslate"><span class="pre">expected</span></code> standardizes
+the deviations, although in this case it has no effect because the
+expected frequencies are all equal.</p>
+<p>The p-value using the chi-squared statistic is 0.04, substantially
+smaller than what we got using total deviation, 0.13. If we take the 5%
+threshold seriously, we would consider this effect statistically
+significant. But considering the two tests togther, I would say that the
+results are borderline. I would not rule out the possibility that the
+die is crooked, but I would not convict the accused cheater.</p>
+<p>This example demonstrates an important point: the p-value depends on the
+choice of test statistic and the model of the null hypothesis, and
+sometimes these choices determine whether an effect is statistically
+significant or not.</p>
+</section>
+<section id="first-babies-again">
+<h2>First babies again<a class="headerlink" href="#first-babies-again" title="Link to this heading">#</a></h2>
+<p>Earlier in this chapter we looked at pregnancy lengths for first babies
+and others, and concluded that the apparent differences in mean and
+standard deviation are not statistically significant. But in
+Section <a class="reference internal" href="#visualization"><span class="xref myst">[visualization]</span></a>{reference-type=“ref”
+reference=“visualization”}, we saw several apparent differences in the
+distribution of pregnancy length, especially in the range from 35 to 43
+weeks. To see whether those differences are statistically significant,
+we can use a test based on a chi-squared statistic.</p>
+<p>The code combines elements from previous examples:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PregLengthTest</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">HypothesisTest</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">MakeModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">firsts</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">firsts</span><span class="p">,</span> <span class="n">others</span><span class="p">))</span>
+
+        <span class="n">pmf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Pmf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">44</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expected_probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pmf</span><span class="o">.</span><span class="n">Probs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">stat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ChiSquared</span><span class="p">(</span><span class="n">firsts</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ChiSquared</span><span class="p">(</span><span class="n">others</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">stat</span>
+
+    <span class="k">def</span> <span class="nf">ChiSquared</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lengths</span><span class="p">):</span>
+        <span class="n">hist</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hist</span><span class="o">.</span><span class="n">Freqs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expected_probs</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
+        <span class="n">stat</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">expected</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">stat</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data are represented as two lists of pregnancy lengths. The null
+hypothesis is that both samples are drawn from the same distribution.
+<code class="docutils literal notranslate"><span class="pre">MakeModel</span></code> models that distribution by pooling the two samples using
+<code class="docutils literal notranslate"><span class="pre">hstack</span></code>. Then <code class="docutils literal notranslate"><span class="pre">RunModel</span></code> generates simulated data by shuffling the
+pooled sample and splitting it into two parts.</p>
+<p><code class="docutils literal notranslate"><span class="pre">MakeModel</span></code> also defines <code class="docutils literal notranslate"><span class="pre">values</span></code>, which is the range of weeks we’ll
+use, and <code class="docutils literal notranslate"><span class="pre">expected_probs</span></code>, which is the probability of each value in the
+pooled distribution.</p>
+<p>Here’s the code that computes the test statistic:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span>
+<span class="n">ht</span> <span class="o">=</span> <span class="n">PregLengthTest</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">p_value</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">PValue</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value =&#39;</span><span class="p">,</span> <span class="n">p_value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;actual =&#39;</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">actual</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ts max =&#39;</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">MaxTestStat</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value = 0.0
+actual = 101.50141482893264
+ts max = 26.34915336197512
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">TestStatistic</span></code> computes the chi-squared statistic for first babies and
+others, and adds them.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ChiSquared</span></code> takes a sequence of pregnancy lengths, computes its
+histogram, and computes <code class="docutils literal notranslate"><span class="pre">observed</span></code>, which is a list of frequencies
+corresponding to <code class="docutils literal notranslate"><span class="pre">self.values</span></code>. To compute the list of expected
+frequencies, it multiplies the pre-computed probabilities,
+<code class="docutils literal notranslate"><span class="pre">expected_probs</span></code>, by the sample size. It returns the chi-squared
+statistic, <code class="docutils literal notranslate"><span class="pre">stat</span></code>.</p>
+<p>For the NSFG data the total chi-squared statistic is 102, which doesn’t
+mean much by itself. But after 1000 iterations, the largest test
+statistic generated under the null hypothesis is 32. We conclude that
+the observed chi-squared statistic is unlikely under the null
+hypothesis, so the apparent effect is statistically significant.</p>
+<p>This example demonstrates a limitation of chi-squared tests: they
+indicate that there is a difference between the two groups, but they
+don’t say anything specific about what the difference is.</p>
+</section>
+<section id="errors">
+<h2>Errors<a class="headerlink" href="#errors" title="Link to this heading">#</a></h2>
+<p>In classical hypothesis testing, an effect is considered statistically
+significant if the p-value is below some threshold, commonly 5%. This
+procedure raises two questions:</p>
+<ul class="simple">
+<li><p>If the effect is actually due to chance, what is the probability
+that we will wrongly consider it significant? This probability is
+the <strong>false positive rate</strong>.</p></li>
+<li><p>If the effect is real, what is the chance that the hypothesis test
+will fail? This probability is the <strong>false negative rate</strong>.</p></li>
+</ul>
+<p>The false positive rate is relatively easy to compute: if the threshold
+is 5%, the false positive rate is 5%. Here’s why:</p>
+<ul class="simple">
+<li><p>If there is no real effect, the null hypothesis is true, so we can
+compute the distribution of the test statistic by simulating the
+null hypothesis. Call this distribution <span class="math notranslate nohighlight">\(\CDF_T\)</span>.</p></li>
+<li><p>Each time we run an experiment, we get a test statistic, <span class="math notranslate nohighlight">\(t\)</span>, which
+is drawn from <span class="math notranslate nohighlight">\(CDF_T\)</span>. Then we compute a p-value, which is the
+probability that a random value from <span class="math notranslate nohighlight">\(CDF_T\)</span> exceeds <code class="docutils literal notranslate"><span class="pre">t</span></code>, so that’s
+<span class="math notranslate nohighlight">\(1 - CDF_T(t)\)</span>.</p></li>
+<li><p>The p-value is less than 5% if <span class="math notranslate nohighlight">\(CDF_T(t)\)</span> is greater than 95%; that
+is, if <span class="math notranslate nohighlight">\(t\)</span> exceeds the 95th percentile. And how often does a value
+chosen from <span class="math notranslate nohighlight">\(CDF_T\)</span> exceed the 95th percentile? 5% of the time.</p></li>
+</ul>
+<p>So if you perform one hypothesis test with a 5% threshold, you expect a
+false positive 1 time in 20.</p>
+</section>
+<section id="power">
+<h2>Power<a class="headerlink" href="#power" title="Link to this heading">#</a></h2>
+<p>The false negative rate is harder to compute because it depends on the
+actual effect size, and normally we don’t know that. One option is to
+compute a rate conditioned on a hypothetical effect size.</p>
+<p>For example, if we assume that the observed difference between groups is
+accurate, we can use the observed samples as a model of the population
+and run hypothesis tests with simulated data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">FalseNegRate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_runs</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_runs</span><span class="p">):</span>
+        <span class="n">sample1</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Resample</span><span class="p">(</span><span class="n">group1</span><span class="p">)</span>
+        <span class="n">sample2</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Resample</span><span class="p">(</span><span class="n">group2</span><span class="p">)</span>
+
+        <span class="n">ht</span> <span class="o">=</span> <span class="n">DiffMeansPermute</span><span class="p">((</span><span class="n">sample1</span><span class="p">,</span> <span class="n">sample2</span><span class="p">))</span>
+        <span class="n">pvalue</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">PValue</span><span class="p">(</span><span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pvalue</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">count</span> <span class="o">/</span> <span class="n">num_runs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">FalseNegRate</span></code> takes data in the form of two sequences, one for each
+group. Each time through the loop, it simulates an experiment by drawing
+a random sample from each group and running a hypothesis test. Then it
+checks the result and counts the number of false negatives.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Resample</span></code> takes a sequence and draws a sample with the same length,
+with replacement:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Resample</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s the code that tests pregnancy lengths:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">MakeFrames</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span>
+<span class="n">neg_rate</span> <span class="o">=</span> <span class="n">FalseNegRate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">neg_rate</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is about 70%, which means that if the actual difference in
+mean pregnancy length is 0.078 weeks, we expect an experiment with this
+sample size to yield a negative test 70% of the time.</p>
+<p>This result is often presented the other way around: if the actual
+difference is 0.078 weeks, we should expect a positive test only 30% of
+the time. This “correct positive rate” is called the <strong>power</strong> of the
+test, or sometimes “sensitivity”. It reflects the ability of the test to
+detect an effect of a given size.</p>
+<p>In this example, the test had only a 30% chance of yielding a positive
+result (again, assuming that the difference is 0.078 weeks). As a rule
+of thumb, a power of 80% is considered acceptable, so we would say that
+this test was “underpowered.”</p>
+<p>In general a negative hypothesis test does not imply that there is no
+difference between the groups; instead it suggests that if there is a
+difference, it is too small to detect with this sample size.</p>
+</section>
+<section id="replication">
+<h2>Replication<a class="headerlink" href="#replication" title="Link to this heading">#</a></h2>
+<p>The hypothesis testing process I demonstrated in this chapter is not,
+strictly speaking, good practice.</p>
+<p>First, I performed multiple tests. If you run one hypothesis test, the
+chance of a false positive is about 1 in 20, which might be acceptable.
+But if you run 20 tests, you should expect at least one false positive,
+most of the time.</p>
+<p>Second, I used the same dataset for exploration and testing. If you
+explore a large dataset, find a surprising effect, and then test whether
+it is significant, you have a good chance of generating a false
+positive.</p>
+<p>To compensate for multiple tests, you can adjust the p-value threshold
+(see <a class="reference external" href="https://en.wikipedia.org/wiki/Holm-Bonferroni_method">https://en.wikipedia.org/wiki/Holm-Bonferroni_method</a>). Or you can
+address both problems by partitioning the data, using one set for
+exploration and the other for testing.</p>
+<p>In some fields these practices are required or at least encouraged. But
+it is also common to address these problems implicitly by replicating
+published results. Typically the first paper to report a new result is
+considered exploratory. Subsequent papers that replicate the result with
+new data are considered confirmatory.</p>
+<p>As it happens, we have an opportunity to replicate the results in this
+chapter. The first edition of this book is based on Cycle 6 of the NSFG,
+which was released in 2002. In October 2011, the CDC released additional
+data based on interviews conducted from 2006–2010. <code class="docutils literal notranslate"><span class="pre">nsfg2.py</span></code> contains
+code to read and clean this data. In the new dataset:</p>
+<ul class="simple">
+<li><p>The difference in mean pregnancy length is 0.16 weeks and
+statistically significant with <span class="math notranslate nohighlight">\(p &lt; 0.001\)</span> (compared to 0.078 weeks
+in the original dataset).</p></li>
+<li><p>The difference in birth weight is 0.17 pounds with <span class="math notranslate nohighlight">\(p &lt; 0.001\)</span>
+(compared to 0.12 lbs in the original dataset).</p></li>
+<li><p>The correlation between birth weight and mother’s age is 0.08 with
+<span class="math notranslate nohighlight">\(p &lt; 0.001\)</span> (compared to 0.07).</p></li>
+<li><p>The chi-squared test is statistically significant with <span class="math notranslate nohighlight">\(p &lt; 0.001\)</span>
+(as it was in the original).</p></li>
+</ul>
+<p>In summary, all of the effects that were statistically significant in
+the original dataset were replicated in the new dataset, and the
+difference in pregnancy length, which was not significant in the
+original, is bigger in the new dataset and significant.</p>
+</section>
+<section id="glossary">
+<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>hypothesis testing</strong>: The process of determining whether an
+apparent effect is statistically significant.</p></li>
+<li><p><strong>test statistic</strong>: A statistic used to quantify an effect size.</p></li>
+<li><p><strong>null hypothesis</strong>: A model of a system based on the assumption
+that an apparent effect is due to chance.</p></li>
+<li><p><strong>p-value</strong>: The probability that an effect could occur by chance.</p></li>
+<li><p><strong>statistically significant</strong>: An effect is statistically
+significant if it is unlikely to occur by chance.</p></li>
+<li><p><strong>permutation test</strong>: A way to compute p-values by generating
+permutations of an observed dataset.</p></li>
+<li><p><strong>resampling test</strong>: A way to compute p-values by generating
+samples, with replacement, from an observed dataset.</p></li>
+<li><p><strong>two-sided test</strong>: A test that asks, “What is the chance of an
+effect as big as the observed effect, positive or negative?”</p></li>
+<li><p><strong>one-sided test</strong>: A test that asks, “What is the chance of an
+effect as big as the observed effect, and with the same sign?”</p></li>
+<li><p><strong>chi-squared test</strong>: A test that uses the chi-squared statistic as
+the test statistic.</p></li>
+<li><p><strong>false positive</strong>: The conclusion that an effect is real when it is
+not.</p></li>
+<li><p><strong>false negative</strong>: The conclusion that an effect is due to chance
+when it is not.</p></li>
+<li><p><strong>power</strong>: The probability of a positive test if the null hypothesis
+is false.</p></li>
+</ul>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong> As sample size increases, the power of a hypothesis test increases, which means it is more likely to be positive if the effect is real. Conversely, as sample size decreases, the test is less likely to be positive even if the effect is real.</p>
+<p>To investigate this behavior, run the tests in this chapter with different subsets of the NSFG data. You can use <code class="docutils literal notranslate"><span class="pre">thinkstats2.SampleRows</span></code> to select a random subset of the rows in a DataFrame.</p>
+<p>What happens to the p-values of these tests as sample size decreases? What is the smallest sample size that yields a positive test?</p>
+<p><strong>Exercise:</strong> In Section 9.3, we simulated the null hypothesis by permutation; that is, we treated the observed values as if they represented the entire population, and randomly assigned the members of the population to the two groups.</p>
+<p>An alternative is to use the sample to estimate the distribution for the population, then draw a random sample from that distribution. This process is called resampling. There are several ways to implement resampling, but one of the simplest is to draw a sample with replacement from the observed values, as in Section 9.10.</p>
+<p>Write a class named <code class="docutils literal notranslate"><span class="pre">DiffMeansResample</span></code> that inherits from <code class="docutils literal notranslate"><span class="pre">DiffMeansPermute</span></code> and overrides <code class="docutils literal notranslate"><span class="pre">RunModel</span></code> to implement resampling, rather than permutation.</p>
+<p>Use this model to test the differences in pregnancy length and birth weight. How much does the model affect the results?</p>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>For more about Bayesian inference, see the sequel to this book,
+<em>Think Bayes</em>.</p>
+</aside>
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Adapted from MacKay, <em>Information Theory, Inference, and Learning
+Algorithms</em>, 2003.</p>
+</aside>
+</aside>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap08.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Estimation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap10.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Linear least squares</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-hypothesis-testing">Classical hypothesis testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesistest">HypothesisTest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-difference-in-means">Testing a difference in means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-test-statistics">Other test statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-correlation">Testing a correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-proportions">Testing proportions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-tests">Chi-squared tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-babies-again">First babies again</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">Errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power">Power</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replication">Replication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

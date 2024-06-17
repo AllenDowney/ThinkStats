@@ -1,0 +1,1435 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Linear least squares &#8212; Think Stats, 3rd edition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap10';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Regression" href="chap11.html" />
+    <link rel="prev" title="Hypothesis testing" href="chap09.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Stats, 3rd edition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Think Stats, 3rd edition
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis testing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear least squares</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic methods</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkStats/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap10.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linear least squares</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear least squares</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-fit">Least squares fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals">Residuals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation">Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goodness-of-fit">Goodness of fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-linear-model">Testing a linear model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-resampling">Weighted resampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="linear-least-squares">
+<h1>Linear least squares<a class="headerlink" href="#linear-least-squares" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+
+
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">thinkstats2</span>
+<span class="kn">import</span> <span class="nn">thinkplot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="least-squares-fit">
+<h2>Least squares fit<a class="headerlink" href="#least-squares-fit" title="Link to this heading">#</a></h2>
+<p>Correlation coefficients measure the strength and sign of a
+relationship, but not the slope. There are several ways to estimate the
+slope; the most common is a <strong>linear least squares fit</strong>. A “linear fit”
+is a line intended to model the relationship between variables. A “least
+squares” fit is one that minimizes the mean squared error (MSE) between
+the line and the data.</p>
+<p>Suppose we have a sequence of points, <code class="docutils literal notranslate"><span class="pre">ys</span></code>, that we want to express as a
+function of another sequence <code class="docutils literal notranslate"><span class="pre">xs</span></code>. If there is a linear relationship
+between <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> with intercept <code class="docutils literal notranslate"><span class="pre">inter</span></code> and slope <code class="docutils literal notranslate"><span class="pre">slope</span></code>, we
+expect each <code class="docutils literal notranslate"><span class="pre">y[i]</span></code> to be <code class="docutils literal notranslate"><span class="pre">inter</span> <span class="pre">+</span> <span class="pre">slope</span> <span class="pre">*</span> <span class="pre">x[i]</span></code>.</p>
+<p>But unless the correlation is perfect, this prediction is only
+approximate. The vertical deviation from the line, or <strong>residual</strong>, is</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">ys</span> <span class="o">-</span> <span class="p">(</span><span class="n">inter</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">xs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">res</span> <span class="o">=</span> <span class="n">ys</span> <span class="o">-</span> <span class="p">(</span><span class="n">inter</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">xs</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;ys&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>The residuals might be due to random factors like measurement error, or
+non-random factors that are unknown. For example, if we are trying to
+predict weight as a function of height, unknown factors might include
+diet, exercise, and body type.</p>
+<p>If we get the parameters <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code> wrong, the residuals get
+bigger, so it makes intuitive sense that the parameters we want are the
+ones that minimize the residuals.</p>
+<p>We might try to minimize the absolute value of the residuals, or their
+squares, or their cubes; but the most common choice is to minimize the
+sum of squared residuals, <code class="docutils literal notranslate"><span class="pre">sum(res**2)</span></code>.</p>
+<p>Why? There are three good reasons and one less important one:</p>
+<ul class="simple">
+<li><p>Squaring has the feature of treating positive and negative residuals
+the same, which is usually what we want.</p></li>
+<li><p>Squaring gives more weight to large residuals, but not so much
+weight that the largest residual always dominates.</p></li>
+<li><p>If the residuals are uncorrelated and normally distributed with mean
+0 and constant (but unknown) variance, then the least squares fit is
+also the maximum likelihood estimator of <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code>. See
+<a class="reference external" href="https://en.wikipedia.org/wiki/Linear_regression">https://en.wikipedia.org/wiki/Linear_regression</a>.</p></li>
+<li><p>The values of <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code> that minimize the squared
+residuals can be computed efficiently.</p></li>
+</ul>
+<p>The last reason made sense when computational efficiency was more
+important than choosing the method most appropriate to the problem at
+hand. That’s no longer the case, so it is worth considering whether
+squared residuals are the right thing to minimize.</p>
+<p>For example, if you are using <code class="docutils literal notranslate"><span class="pre">xs</span></code> to predict values of <code class="docutils literal notranslate"><span class="pre">ys</span></code>, guessing
+too high might be better (or worse) than guessing too low. In that case
+you might want to compute some cost function for each residual, and
+minimize total cost, <code class="docutils literal notranslate"><span class="pre">sum(cost(res))</span></code>. However, computing a least
+squares fit is quick, easy and often good enough.</p>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides simple functions that demonstrate linear least
+squares:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">Mean</span><span class="p">,</span> <span class="n">MeanVar</span><span class="p">,</span> <span class="n">Var</span><span class="p">,</span> <span class="n">Std</span><span class="p">,</span> <span class="n">Cov</span>
+
+<span class="k">def</span> <span class="nf">LeastSquares</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">):</span>
+    <span class="n">meanx</span><span class="p">,</span> <span class="n">varx</span> <span class="o">=</span> <span class="n">MeanVar</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">meany</span> <span class="o">=</span> <span class="n">Mean</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+
+    <span class="n">slope</span> <span class="o">=</span> <span class="n">Cov</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">meanx</span><span class="p">,</span> <span class="n">meany</span><span class="p">)</span> <span class="o">/</span> <span class="n">varx</span>
+    <span class="n">inter</span> <span class="o">=</span> <span class="n">meany</span> <span class="o">-</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">meanx</span>
+
+    <span class="k">return</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">LeastSquares</span></code> takes sequences <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> and returns the estimated
+parameters <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code>. For details on how it works, see
+<a class="reference external" href="http://wikipedia.org/wiki/Numerical_methods_for_linear_least_squares">http://wikipedia.org/wiki/Numerical_methods_for_linear_least_squares</a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> also provides <code class="docutils literal notranslate"><span class="pre">FitLine</span></code>, which takes <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code>
+and returns the fitted line for a sequence of <code class="docutils literal notranslate"><span class="pre">xs</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">FitLine</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">):</span>
+    <span class="n">fit_xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">fit_ys</span> <span class="o">=</span> <span class="n">inter</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">fit_xs</span>
+    <span class="k">return</span> <span class="n">fit_xs</span><span class="p">,</span> <span class="n">fit_ys</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use these functions to compute the least squares fit for birth
+weight as a function of mother’s age.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/first.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">first</span>
+
+<span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">MakeFrames</span><span class="p">()</span>
+<span class="n">live</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;agepreg&#39;</span><span class="p">,</span> <span class="s1">&#39;totalwgt_lb&#39;</span><span class="p">])</span>
+<span class="n">ages</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">agepreg</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">totalwgt_lb</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inter</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">LeastSquares</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+<span class="n">inter</span><span class="p">,</span> <span class="n">slope</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6.830396973311053, 0.017453851471802746)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_xs</span><span class="p">,</span> <span class="n">fit_ys</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">FitLine</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The estimated intercept and slope are 6.8 lbs and 0.017 lbs per year.
+These values are hard to interpret in this form: the intercept is the
+expected weight of a baby whose mother is 0 years old, which doesn’t
+make sense in context, and the slope is too small to grasp easily.</p>
+<p>Instead of presenting the intercept at <span class="math notranslate nohighlight">\(x=0\)</span>, it is often helpful to
+present the intercept at the mean of <span class="math notranslate nohighlight">\(x\)</span>. In this case the mean age is
+about 25 years and the mean baby weight for a 25 year old mother is 7.3
+pounds. The slope is 0.27 ounces per year, or 0.17 pounds per decade.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">fit_xs</span><span class="p">,</span> <span class="n">fit_ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">fit_xs</span><span class="p">,</span> <span class="n">fit_ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mother&#39;s age (years)&quot;</span><span class="p">,</span>
+                 <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Birth weight (lbs)&#39;</span><span class="p">,</span>
+                 <span class="n">axis</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+                 <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3e2bfac2ee8abae00d0e9d228e631ab6c2b5e3f1e3de852919c4cf93535bd8a7.png" src="_images/3e2bfac2ee8abae00d0e9d228e631ab6c2b5e3f1e3de852919c4cf93535bd8a7.png" />
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#linear1"><span class="xref myst">[linear1]</span></a>{reference-type=“ref” reference=“linear1”}
+shows a scatter plot of birth weight and age along with the fitted line.
+It’s a good idea to look at a figure like this to assess whether the
+relationship is linear and whether the fitted line seems like a good
+model of the relationship.</p>
+</section>
+<section id="residuals">
+<h2>Residuals<a class="headerlink" href="#residuals" title="Link to this heading">#</a></h2>
+<p>Another useful test is to plot the residuals. <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides a
+function that computes residuals:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Residuals</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">):</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">ys</span> <span class="o">-</span> <span class="p">(</span><span class="n">inter</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">xs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Residuals</span></code> takes sequences <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> and estimated parameters
+<code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code>. It returns the differences between the actual
+values and the fitted line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">[</span><span class="s1">&#39;residual&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Residuals</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">live</span><span class="o">.</span><span class="n">agepreg</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+<span class="n">groups</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+
+<span class="n">age_means</span> <span class="o">=</span> <span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">agepreg</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">age_means</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[15.212333333333335,
+ 17.740359281437126,
+ 20.506304824561404,
+ 23.455752212389378,
+ 26.435156146179406,
+ 29.411177432542924,
+ 32.30232530120482,
+ 35.240273631840786,
+ 38.10876470588235,
+ 40.91205882352941]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">residual</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotPercentiles</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">cdfs</span><span class="p">):</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">percent</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">75</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">25</span><span class="p">]:</span>
+        <span class="n">weight_percentiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">cdf</span><span class="o">.</span><span class="n">Percentile</span><span class="p">(</span><span class="n">percent</span><span class="p">)</span> <span class="k">for</span> <span class="n">cdf</span> <span class="ow">in</span> <span class="n">cdfs</span><span class="p">]</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">th&#39;</span> <span class="o">%</span> <span class="n">percent</span>
+        <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">weight_percentiles</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PlotPercentiles</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">cdfs</span><span class="p">)</span>
+
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mother&#39;s age (years)&quot;</span><span class="p">,</span>
+                 <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Residual (lbs)&#39;</span><span class="p">,</span>
+                 <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a49b23fa9a7e7bf00d12b8b4c370040b966a6ab00cafe1e4cdb7ffef51331d4a.png" src="_images/a49b23fa9a7e7bf00d12b8b4c370040b966a6ab00cafe1e4cdb7ffef51331d4a.png" />
+</div>
+</div>
+<p>To visualize the residuals, I group respondents by age and compute
+percentiles in each group, as we saw in
+Section <a class="reference internal" href="#characterizing"><span class="xref myst">[characterizing]</span></a>{reference-type=“ref”
+reference=“characterizing”}.
+Figure <a class="reference internal" href="#linear2"><span class="xref myst">[linear2]</span></a>{reference-type=“ref” reference=“linear2”}
+shows the 25th, 50th and 75th percentiles of the residuals for each age
+group. The median is near zero, as expected, and the interquartile range
+is about 2 pounds. So if we know the mother’s age, we can guess the
+baby’s weight within a pound, about 50% of the time.</p>
+<p>Ideally these lines should be flat, indicating that the residuals are
+random, and parallel, indicating that the variance of the residuals is
+the same for all age groups. In fact, the lines are close to parallel,
+so that’s good; but they have some curvature, indicating that the
+relationship is nonlinear. Nevertheless, the linear fit is a simple
+model that is probably good enough for some purposes.</p>
+</section>
+<section id="estimation">
+<h2>Estimation<a class="headerlink" href="#estimation" title="Link to this heading">#</a></h2>
+<p>The parameters <code class="docutils literal notranslate"><span class="pre">slope</span></code> and <code class="docutils literal notranslate"><span class="pre">inter</span></code> are estimates based on a sample; like
+other estimates, they are vulnerable to sampling bias, measurement
+error, and sampling error. As discussed in
+Chapter <a class="reference internal" href="#estimation"><span class="xref myst">[estimation]</span></a>{reference-type=“ref”
+reference=“estimation”}, sampling bias is caused by non-representative
+sampling, measurement error is caused by errors in collecting and
+recording data, and sampling error is the result of measuring a sample
+rather than the entire population.</p>
+<p>To assess sampling error, we ask, “If we run this experiment again, how
+much variability do we expect in the estimates?” We can answer this
+question by running simulated experiments and computing sampling
+distributions of the estimates.</p>
+<p>I simulate the experiments by resampling the data; that is, I treat the
+observed pregnancies as if they were the entire population and draw
+samples, with replacement, from the observed sample.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SampleRows</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Choose a sample of rows from a DataFrame.</span>
+
+<span class="sd">    df: DataFrame</span>
+<span class="sd">    nrows: number of rows</span>
+<span class="sd">    replace: whether to sample with replacement</span>
+
+<span class="sd">    returns: DataDf</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">)</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">sample</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ResampleRows</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resamples rows from a DataFrame.</span>
+
+<span class="sd">    df: DataFrame</span>
+
+<span class="sd">    returns: DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">SampleRows</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SamplingDistributions</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">ResampleRows</span><span class="p">(</span><span class="n">live</span><span class="p">)</span>
+        <span class="n">ages</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">agepreg</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">totalwgt_lb</span>
+        <span class="n">estimates</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">LeastSquares</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+
+    <span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span> <span class="o">=</span> <span class="n">SamplingDistributions</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1001</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">SamplingDistributions</span></code> takes a DataFrame with one row per live birth,
+and <code class="docutils literal notranslate"><span class="pre">iters</span></code>, the number of experiments to simulate. It uses
+<code class="docutils literal notranslate"><span class="pre">ResampleRows</span></code> to resample the observed pregnancies. We’ve already seen
+<code class="docutils literal notranslate"><span class="pre">SampleRows</span></code>, which chooses random rows from a DataFrame. <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code>
+also provides <code class="docutils literal notranslate"><span class="pre">ResampleRows</span></code>, which returns a sample the same size as
+the original:</p>
+<p>After resampling, we use the simulated sample to estimate parameters.
+The result is two sequences: the estimated intercepts and estimated
+slopes.</p>
+<p>I summarize the sampling distributions by printing the standard error
+and confidence interval:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Summarize</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">actual</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+    <span class="n">stderr</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Std</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">actual</span><span class="p">)</span>
+    <span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+    <span class="n">ci</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">ConfidenceInterval</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mean, SE, CI&#39;</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">ci</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Summarize</span></code> takes a sequence of estimates and the actual value. It
+prints the mean of the estimates, the standard error and a 90%
+confidence interval.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Summarize</span><span class="p">(</span><span class="n">inters</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean, SE, CI 6.83346967384324 0.06772233597164748 (6.724508263178181, 6.946444466395725)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Summarize</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean, SE, CI 0.01732961674795306 0.00267138995054031 (0.012838271847846819, 0.0217432188488668)
+</pre></div>
+</div>
+</div>
+</div>
+<p>For the intercept, the mean estimate is 6.83, with standard error 0.07
+and 90% confidence interval (6.71, 6.94). The estimated slope, in more
+compact form, is 0.0174, SE 0.0028, CI (0.0126, 0.0220). There is almost
+a factor of two between the low and high ends of this CI, so it should
+be considered a rough estimate.</p>
+<p>To visualize the sampling error of the estimate, we could plot all of
+the fitted lines, or for a less cluttered representation, plot a 90%
+confidence interval for each age. Here’s the code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">slope</span><span class="p">,</span> <span class="n">inter</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">slopes</span><span class="p">,</span> <span class="n">inters</span><span class="p">):</span>
+    <span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span> <span class="o">=</span> <span class="n">FitLine</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+    
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mother&#39;s age (years)&quot;</span><span class="p">,</span>
+                 <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Residual (lbs)&#39;</span><span class="p">,</span>
+                 <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ce4892cc591491e4b5e6e8f30f5d22bfd0cd19940af2ecdf24961dcf542f5a16.png" src="_images/ce4892cc591491e4b5e6e8f30f5d22bfd0cd19940af2ecdf24961dcf542f5a16.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotConfidenceIntervals</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span><span class="p">,</span>
+                            <span class="n">percent</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+    <span class="n">fys_seq</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span><span class="p">):</span>
+        <span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">FitLine</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+        <span class="n">fys_seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fys</span><span class="p">)</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="n">percent</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">percents</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">p</span>
+    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">PercentileRows</span><span class="p">(</span><span class="n">fys_seq</span><span class="p">,</span> <span class="n">percents</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">FillBetween</span><span class="p">(</span><span class="n">fxs</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">xs</span></code> is the sequence of mother’s age. <code class="docutils literal notranslate"><span class="pre">inters</span></code> and <code class="docutils literal notranslate"><span class="pre">slopes</span></code> are the
+estimated parameters generated by <code class="docutils literal notranslate"><span class="pre">SamplingDistributions</span></code>. <code class="docutils literal notranslate"><span class="pre">percent</span></code>
+indicates which confidence interval to plot.</p>
+<p><code class="docutils literal notranslate"><span class="pre">PlotConfidenceIntervals</span></code> generates a fitted line for each pair of
+<code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code> and stores the results in a sequence, <code class="docutils literal notranslate"><span class="pre">fys_seq</span></code>.
+Then it uses <code class="docutils literal notranslate"><span class="pre">PercentileRows</span></code> to select the upper and lower percentiles
+of <code class="docutils literal notranslate"><span class="pre">y</span></code> for each value of <code class="docutils literal notranslate"><span class="pre">x</span></code>. For a 90% confidence interval, it selects
+the 5th and 95th percentiles. <code class="docutils literal notranslate"><span class="pre">FillBetween</span></code> draws a polygon that fills
+the space between two lines.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PlotConfidenceIntervals</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> 
+                        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;90% CI&#39;</span><span class="p">)</span>
+<span class="n">PlotConfidenceIntervals</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+                        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;50% CI&#39;</span><span class="p">)</span>
+
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mother&#39;s age (years)&quot;</span><span class="p">,</span>
+                 <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Residual (lbs)&#39;</span><span class="p">,</span>
+                 <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/67d3d0d4e61d407ceaff6c15239fe832749557e4d788f559eda19a730b4d90fe.png" src="_images/67d3d0d4e61d407ceaff6c15239fe832749557e4d788f559eda19a730b4d90fe.png" />
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#linear3"><span class="xref myst">[linear3]</span></a>{reference-type=“ref” reference=“linear3”}
+shows the 50% and 90% confidence intervals for curves fitted to birth
+weight as a function of mother’s age. The vertical width of the region
+represents the effect of sampling error; the effect is smaller for
+values near the mean and larger for the extremes.</p>
+</section>
+<section id="goodness-of-fit">
+<h2>Goodness of fit<a class="headerlink" href="#goodness-of-fit" title="Link to this heading">#</a></h2>
+<p>There are several ways to measure the quality of a linear model, or
+<strong>goodness of fit</strong>. One of the simplest is the standard deviation of
+the residuals.</p>
+<p>If you use a linear model to make predictions, <code class="docutils literal notranslate"><span class="pre">Std(res)</span></code> is the root
+mean squared error (RMSE) of your predictions. For example, if you use
+mother’s age to guess birth weight, the RMSE of your guess would be 1.40
+lbs.</p>
+<p>If you guess birth weight without knowing the mother’s age, the RMSE of
+your guess is <code class="docutils literal notranslate"><span class="pre">Std(ys)</span></code>, which is 1.41 lbs. So in this example, knowing
+a mother’s age does not improve the predictions substantially.</p>
+<p>Another way to measure goodness of fit is the <strong>coefficient of
+determination</strong>, usually denoted <span class="math notranslate nohighlight">\(R^2\)</span> and called “R-squared”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CoefDetermination</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">Var</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">/</span> <span class="n">Var</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inter</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">LeastSquares</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">Residuals</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">CoefDetermination</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+<span class="n">r2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.004738115474710258
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rho&#39;</span><span class="p">,</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r2</span><span class="p">))</span>    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rho 0.06883397035410904
+R 0.06883397035410828
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Std(ys)&#39;</span><span class="p">,</span> <span class="n">Std</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Std(res)&#39;</span><span class="p">,</span> <span class="n">Std</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Std(ys) 1.40821553384062
+Std(res) 1.4048754287857834
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Var(res)</span></code> is the MSE of your guesses using the model, <code class="docutils literal notranslate"><span class="pre">Var(ys)</span></code> is the
+MSE without it. So their ratio is the fraction of MSE that remains if
+you use the model, and <span class="math notranslate nohighlight">\(R^2\)</span> is the fraction of MSE the model
+eliminates.</p>
+<p>For birth weight and mother’s age, <span class="math notranslate nohighlight">\(R^2\)</span> is 0.0047, which means that
+mother’s age predicts about half of 1% of variance in birth weight.</p>
+<p>There is a simple relationship between the coefficient of determination
+and Pearson’s coefficient of correlation: <span class="math notranslate nohighlight">\(R^2 = \rho^2\)</span>. For example,
+if <span class="math notranslate nohighlight">\(\rho\)</span> is 0.8 or -0.8, <span class="math notranslate nohighlight">\(R^2 = 0.64\)</span>.</p>
+<p>Although <span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(R^2\)</span> are often used to quantify the strength of a
+relationship, they are not easy to interpret in terms of predictive
+power. In my opinion, <code class="docutils literal notranslate"><span class="pre">Std(res)</span></code> is the best representation of the
+quality of prediction, especially if it is presented in relation to
+<code class="docutils literal notranslate"><span class="pre">Std(ys)</span></code>.</p>
+<p>For example, when people talk about the validity of the SAT (a
+standardized test used for college admission in the U.S.) they often
+talk about correlations between SAT scores and other measures of
+intelligence.</p>
+<p>According to one study, there is a Pearson correlation of <span class="math notranslate nohighlight">\(\rho=0.72\)</span>
+between total SAT scores and IQ scores, which sounds like a strong
+correlation. But <span class="math notranslate nohighlight">\(R^2 = \rho^2 = 0.52\)</span>, so SAT scores account for only
+52% of variance in IQ.</p>
+<p>IQ scores are normalized with <code class="docutils literal notranslate"><span class="pre">Std(ys)</span> <span class="pre">=</span> <span class="pre">15</span></code>, so</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var_ys</span> <span class="o">=</span> <span class="mi">15</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mf">0.72</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">rho</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">var_res</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">r2</span><span class="p">)</span> <span class="o">*</span> <span class="n">var_ys</span>
+<span class="n">std_res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_res</span><span class="p">)</span>
+<span class="n">std_res</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.409610943738484
+</pre></div>
+</div>
+</div>
+</div>
+<p>So using SAT score to predict IQ reduces RMSE from 15 points to 10.4
+points. A correlation of 0.72 yields a reduction in RMSE of only 31%.</p>
+<p>If you see a correlation that looks impressive, remember that <span class="math notranslate nohighlight">\(R^2\)</span> is a
+better indicator of reduction in MSE, and reduction in RMSE is a better
+indicator of predictive power.</p>
+</section>
+<section id="testing-a-linear-model">
+<h2>Testing a linear model<a class="headerlink" href="#testing-a-linear-model" title="Link to this heading">#</a></h2>
+<p>The effect of mother’s age on birth weight is small, and has little
+predictive power. So is it possible that the apparent relationship is
+due to chance? There are several ways we might test the results of a
+linear fit.</p>
+<p>One option is to test whether the apparent reduction in MSE is due to
+chance. In that case, the test statistic is <span class="math notranslate nohighlight">\(R^2\)</span> and the null
+hypothesis is that there is no relationship between the variables. We
+can simulate the null hypothesis by permutation, as in
+Section <a class="reference internal" href="#corrtest"><span class="xref myst">[corrtest]</span></a>{reference-type=“ref”
+reference=“corrtest”}, when we tested the correlation between mother’s
+age and birth weight. In fact, because <span class="math notranslate nohighlight">\(R^2 = \rho^2\)</span>, a one-sided test
+of <span class="math notranslate nohighlight">\(R^2\)</span> is equivalent to a two-sided test of <span class="math notranslate nohighlight">\(\rho\)</span>. We’ve already done
+that test, and found <span class="math notranslate nohighlight">\(p &lt; 0.001\)</span>, so we conclude that the apparent
+relationship between mother’s age and birth weight is statistically
+significant.</p>
+<p>Another approach is to test whether the apparent slope is due to chance.
+The null hypothesis is that the slope is actually zero; in that case we
+can model the birth weights as random variations around their mean.
+Here’s a HypothesisTest for this model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SlopeTest</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">HypothesisTest</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">ages</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">LeastSquares</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">slope</span>
+
+    <span class="k">def</span> <span class="nf">MakeModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ybar</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">res</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ybar</span>
+
+    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ages</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ybar</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ages</span><span class="p">,</span> <span class="n">weights</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data are represented as sequences of ages and weights. The test
+statistic is the slope estimated by <code class="docutils literal notranslate"><span class="pre">LeastSquares</span></code>. The model of the
+null hypothesis is represented by the mean weight of all babies and the
+deviations from the mean. To generate simulated data, we permute the
+deviations and add them to the mean.</p>
+<p>Here’s the code that runs the hypothesis test:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">MakeFrames</span><span class="p">()</span>
+<span class="n">live</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;agepreg&#39;</span><span class="p">,</span> <span class="s1">&#39;totalwgt_lb&#39;</span><span class="p">])</span>
+<span class="n">ht</span> <span class="o">=</span> <span class="n">SlopeTest</span><span class="p">((</span><span class="n">live</span><span class="o">.</span><span class="n">agepreg</span><span class="p">,</span> <span class="n">live</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="p">))</span>
+<span class="n">p_value</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">PValue</span><span class="p">()</span>
+<span class="n">p_value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ht</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">MaxTestStat</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.017453851471802746, 0.008602477027343606)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The p-value is less than <span class="math notranslate nohighlight">\(0.001\)</span>, so although the estimated slope is
+small, it is unlikely to be due to chance.</p>
+<p>Estimating the p-value by simulating the null hypothesis is strictly
+correct, but there is a simpler alternative. Remember that we already
+computed the sampling distribution of the slope, in
+Section <a class="reference internal" href="#regest"><span class="xref myst">[regest]</span></a>{reference-type=“ref” reference=“regest”}.
+To do that, we assumed that the observed slope was correct and simulated
+experiments by resampling.</p>
+<p>Figure <a class="reference internal" href="#linear4"><span class="xref myst">[linear4]</span></a>{reference-type=“ref” reference=“linear4”}
+shows the sampling distribution of the slope, from
+Section <a class="reference internal" href="#regest"><span class="xref myst">[regest]</span></a>{reference-type=“ref” reference=“regest”},
+and the distribution of slopes generated under the null hypothesis. The
+sampling distribution is centered about the estimated slope, 0.017
+lbs/year, and the slopes under the null hypothesis are centered around
+0; but other than that, the distributions are identical. The
+distributions are also symmetric, for reasons we will see in
+Section <a class="reference internal" href="#CLT"><span class="xref myst">[CLT]</span></a>{reference-type=“ref” reference=“CLT”}.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sampling_cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
+
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.8&#39;</span><span class="p">)</span>
+<span class="n">ht</span><span class="o">.</span><span class="n">PlotCdf</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;null hypothesis&#39;</span><span class="p">)</span>
+
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">sampling_cdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sampling distribution&#39;</span><span class="p">)</span>
+
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;slope (lbs / year)&#39;</span><span class="p">,</span>
+                   <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">,</span>
+                   <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">],</span>
+                   <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/64a548657ce12ad6b37a3d30ea788da48bb36dea0f62f8c1699b9fca7f7f7996.png" src="_images/64a548657ce12ad6b37a3d30ea788da48bb36dea0f62f8c1699b9fca7f7f7996.png" />
+</div>
+</div>
+<p>So we could estimate the p-value two ways:</p>
+<ul class="simple">
+<li><p>Compute the probability that the slope under the null hypothesis
+exceeds the observed slope.</p></li>
+<li><p>Compute the probability that the slope in the sampling distribution
+falls below 0. (If the estimated slope were negative, we would
+compute the probability that the slope in the sampling distribution
+exceeds 0.)</p></li>
+</ul>
+<p>The second option is easier because we normally want to compute the
+sampling distribution of the parameters anyway. And it is a good
+approximation unless the sample size is small <em>and</em> the distribution of
+residuals is skewed. Even then, it is usually good enough, because
+p-values don’t have to be precise.</p>
+<p>Here’s the code that estimates the p-value of the slope using the
+sampling distribution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span> <span class="o">=</span> <span class="n">SamplingDistributions</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1001</span><span class="p">)</span>
+<span class="n">slope_cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
+<span class="n">p_value</span> <span class="o">=</span> <span class="n">slope_cdf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">p_value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, we find <span class="math notranslate nohighlight">\(p &lt; 0.001\)</span>.</p>
+</section>
+<section id="weighted-resampling">
+<h2>Weighted resampling<a class="headerlink" href="#weighted-resampling" title="Link to this heading">#</a></h2>
+<p>So far we have treated the NSFG data as if it were a representative
+sample, but as I mentioned in
+Section <a class="reference internal" href="#nsfg"><span class="xref myst">[nsfg]</span></a>{reference-type=“ref” reference=“nsfg”}, it is
+not. The survey deliberately oversamples several groups in order to
+improve the chance of getting statistically significant results; that
+is, in order to improve the power of tests involving these groups.</p>
+<p>This survey design is useful for many purposes, but it means that we
+cannot use the sample to estimate values for the general population
+without accounting for the sampling process.</p>
+<p>For each respondent, the NSFG data includes a variable called
+<code class="docutils literal notranslate"><span class="pre">finalwgt</span></code>, which is the number of people in the general population the
+respondent represents. This value is called a <strong>sampling weight</strong>, or
+just “weight.”</p>
+<p>As an example, if you survey 100,000 people in a country of 300 million,
+each respondent represents 3,000 people. If you oversample one group by
+a factor of 2, each person in the oversampled group would have a lower
+weight, about 1500.</p>
+<p>To correct for oversampling, we can use resampling; that is, we can draw
+samples from the survey using probabilities proportional to sampling
+weights. Then, for any quantity we want to estimate, we can generate
+sampling distributions, standard errors, and confidence intervals. As an
+example, I will estimate mean birth weight with and without sampling
+weights.</p>
+<p>In Section <a class="reference internal" href="#regest"><span class="xref myst">[regest]</span></a>{reference-type=“ref”
+reference=“regest”}, we saw <code class="docutils literal notranslate"><span class="pre">ResampleRows</span></code>, which chooses rows from a
+DataFrame, giving each row the same probability. Now we need to do the
+same thing using probabilities proportional to sampling weights.
+<code class="docutils literal notranslate"><span class="pre">ResampleRowsWeighted</span></code> takes a DataFrame, resamples rows according to
+the weights in <code class="docutils literal notranslate"><span class="pre">finalwgt</span></code>, and returns a DataFrame containing the
+resampled rows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ResampleRowsWeighted</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;finalwgt&#39;</span><span class="p">):</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
+    <span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">sample</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">weights</span></code> is a Series; converting it to a dictionary makes a map from
+the indices to the weights. In <code class="docutils literal notranslate"><span class="pre">cdf</span></code> the values are indices and the
+probabilities are proportional to the weights.</p>
+<p><code class="docutils literal notranslate"><span class="pre">indices</span></code> is a sequence of row indices; <code class="docutils literal notranslate"><span class="pre">sample</span></code> is a DataFrame that
+contains the selected rows. Since we sample with replacement, the same
+row might appear more than once.</p>
+<p>Now we can compare the effect of resampling with and without weights.
+Without weights, we generate the sampling distribution like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iters</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">estimates</span> <span class="o">=</span> <span class="p">[</span><span class="n">ResampleRowsWeighted</span><span class="p">(</span><span class="n">live</span><span class="p">)</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+             <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+<span class="n">Summarize</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean, SE, CI 7.348876203252929 0.01403009016964961 (7.320812126576676, 7.372144003098031)
+</pre></div>
+</div>
+</div>
+</div>
+<p>With weights, it looks like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimates</span> <span class="o">=</span> <span class="p">[</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">ResampleRows</span><span class="p">(</span><span class="n">live</span><span class="p">)</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+             <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+<span class="n">Summarize</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean, SE, CI 7.265405371763665 0.013719971782041939 (7.243389024120381, 7.285226266873202)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following table summarizes the results:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">------------</span> <span class="o">--------------</span> <span class="o">----------</span> <span class="o">--------------</span>
+                <span class="n">mean</span> <span class="n">birth</span>    <span class="n">standard</span>      <span class="mi">90</span><span class="o">%</span> <span class="n">CI</span>
+               <span class="n">weight</span> <span class="p">(</span><span class="n">lbs</span><span class="p">)</span>    <span class="n">error</span>    
+ <span class="n">Unweighted</span>        <span class="mf">7.27</span>        <span class="mf">0.014</span>     <span class="p">(</span><span class="mf">7.24</span><span class="p">,</span> <span class="mf">7.29</span><span class="p">)</span>
+ <span class="n">Weighted</span>          <span class="mf">7.35</span>        <span class="mf">0.014</span>     <span class="p">(</span><span class="mf">7.32</span><span class="p">,</span> <span class="mf">7.37</span><span class="p">)</span>
+ <span class="o">------------</span> <span class="o">--------------</span> <span class="o">----------</span> <span class="o">--------------</span>
+</pre></div>
+</div>
+<p>In this example, the effect of weighting is small but non-negligible.
+The difference in estimated means, with and without weighting, is about
+0.08 pounds, or 1.3 ounces. This difference is substantially larger than
+the standard error of the estimate, 0.014 pounds, which implies that the
+difference is not due to chance.</p>
+</section>
+<section id="glossary">
+<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>linear fit</strong>: a line intended to model the relationship between
+variables.</p></li>
+<li><p><strong>least squares fit</strong>: A model of a dataset that minimizes the sum
+of squares of the residuals.</p></li>
+<li><p><strong>residual</strong>: The deviation of an actual value from a model.</p></li>
+<li><p><strong>goodness of fit</strong>: A measure of how well a model fits data.</p></li>
+<li><p><strong>coefficient of determination</strong>: A statistic intended to quantify
+goodness of fit.</p></li>
+<li><p><strong>sampling weight</strong>: A value associated with an observation in a
+sample that indicates what part of the population it represents.</p></li>
+</ul>
+</section>
+</section>
+<section id="exercises">
+<h1>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h1>
+<p><strong>Exercise:</strong> Use <code class="docutils literal notranslate"><span class="pre">ResampleRows</span></code> and generate a list of estimates for the mean birth weight.  Use <code class="docutils literal notranslate"><span class="pre">Summarize</span></code> to compute the SE and CI for these estimates.</p>
+<p>The difference is non-negligible, which suggests that there are differences in birth weight between the strata in the survey.</p>
+<p><strong>Exercise:</strong> Using the data from the BRFSS, compute the linear least squares fit for log(weight) versus height. How would you best present the estimated parameters for a model like this where one of the variables is log-transformed? If you were trying to guess someone’s weight, how much would it help to know their height?</p>
+<p>Like the NSFG, the BRFSS oversamples some groups and provides a sampling weight for each respondent. In the BRFSS data, the variable name for these weights is totalwt. Use resampling, with and without weights, to estimate the mean height of respondents in the BRFSS, the standard error of the mean, and a 90% confidence interval. How much does correct weighting affect the estimates?</p>
+<p>Read the BRFSS data and extract heights and log weights.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/brfss.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/CDBRFS08.ASC.gz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">brfss</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">ReadBrfss</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;htm3&#39;</span><span class="p">,</span> <span class="s1">&#39;wtkg2&#39;</span><span class="p">])</span>
+<span class="n">heights</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">htm3</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">wtkg2</span>
+<span class="n">log_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Estimate intercept and slope.</p>
+<p>Make a scatter plot of the data and show the fitted line.</p>
+<p>Make the same plot but apply the inverse transform to show weights on a linear (not log) scale.</p>
+<p>Plot percentiles of the residuals.</p>
+<p>Compute correlation.</p>
+<p>Compute coefficient of determination.</p>
+<p>Confirm that <span class="math notranslate nohighlight">\(R^2 = \rho^2\)</span>.</p>
+<p>Compute Std(ys), which is the RMSE of predictions that don’t use height.</p>
+<p>Compute Std(res), the RMSE of predictions that do use height.</p>
+<p>How much does height information reduce RMSE?</p>
+<p>Use resampling to compute sampling distributions for inter and slope.</p>
+<p>Plot the sampling distribution of slope.</p>
+<p>Compute the p-value of the slope.</p>
+<p>Compute the 90% confidence interval of slope.</p>
+<p>Compute the mean of the sampling distribution.</p>
+<p>Compute the standard deviation of the sampling distribution, which is the standard error.</p>
+<p>Resample rows without weights, compute mean height, and summarize results.</p>
+<p>Resample rows with weights.  Note that the weight column in this dataset is called <code class="docutils literal notranslate"><span class="pre">finalwt</span></code>.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap09.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Hypothesis testing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap11.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear least squares</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-fit">Least squares fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals">Residuals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation">Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goodness-of-fit">Goodness of fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-linear-model">Testing a linear model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-resampling">Weighted resampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

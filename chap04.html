@@ -1,0 +1,1103 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cumulative distribution functions &#8212; Think Stats, 3rd edition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap04';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Modeling distributions" href="chap05.html" />
+    <link rel="prev" title="Probability mass functions" href="chap03.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Stats, 3rd edition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Think Stats, 3rd edition
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">Linear least squares</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic methods</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkStats/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap04.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Cumulative distribution functions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-limits-of-pmfs">The limits of PMFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentiles">Percentiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdfs">CDFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-cdfs">Representing CDFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-cdfs">Comparing CDFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentile-based-statistics">Percentile-based statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers">Random numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-percentile-ranks">Comparing percentile ranks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="cumulative-distribution-functions">
+<h1>Cumulative distribution functions<a class="headerlink" href="#cumulative-distribution-functions" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+
+
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/first.py&quot;</span><span class="p">)</span>
+
+
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">thinkstats2</span>
+<span class="kn">import</span> <span class="nn">thinkplot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-limits-of-pmfs">
+<h2>The limits of PMFs<a class="headerlink" href="#the-limits-of-pmfs" title="Link to this heading">#</a></h2>
+<p>PMFs work well if the number of values is small. But as the number of
+values increases, the probability associated with each value gets
+smaller and the effect of random noise increases.</p>
+<p>For example, we might be interested in the distribution of birth
+weights. In the NSFG data, the variable <code class="docutils literal notranslate"><span class="pre">totalwgt_lb</span></code> records weight at
+birth in pounds.
+Figure <a class="reference internal" href="#nsfg_birthwgt_pmf"><span class="xref myst">[nsfg_birthwgt_pmf]</span></a>{reference-type=“ref”
+reference=“nsfg_birthwgt_pmf”} shows the PMF of these values for first
+babies and others.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">first</span>
+
+<span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">MakeFrames</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_wgt</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">totalwgt_lb</span>
+<span class="n">first_wgt_dropna</span> <span class="o">=</span> <span class="n">first_wgt</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Firsts&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">first_wgt</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">first_wgt_dropna</span><span class="p">))</span>
+ 
+<span class="n">other_wgt</span> <span class="o">=</span> <span class="n">others</span><span class="o">.</span><span class="n">totalwgt_lb</span>
+<span class="n">other_wgt_dropna</span> <span class="o">=</span> <span class="n">other_wgt</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Others&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">other_wgt</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">other_wgt_dropna</span><span class="p">))</span>
+
+<span class="n">first_pmf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Pmf</span><span class="p">(</span><span class="n">first_wgt_dropna</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="n">other_pmf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Pmf</span><span class="p">(</span><span class="n">other_wgt_dropna</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;other&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Firsts 4413 4363
+Others 4735 4675
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">width</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="o">/</span> <span class="mi">16</span>
+
+<span class="c1"># plot PMFs of birth weights for first babies and others</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">first_pmf</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">other_pmf</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weight (pounds)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;PMF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d84f4e33912781fc8e9aced390933e0498f6b7af3e5bd2c99c91b02077a1f216.png" src="_images/d84f4e33912781fc8e9aced390933e0498f6b7af3e5bd2c99c91b02077a1f216.png" />
+</div>
+</div>
+<p>Overall, these distributions resemble the bell shape of a normal
+distribution, with many values near the mean and a few values much
+higher and lower.</p>
+<p>But parts of this figure are hard to interpret. There are many spikes
+and valleys, and some apparent differences between the distributions. It
+is hard to tell which of these features are meaningful. Also, it is hard
+to see overall patterns; for example, which distribution do you think
+has the higher mean?</p>
+<p>These problems can be mitigated by binning the data; that is, dividing
+the range of values into non-overlapping intervals and counting the
+number of values in each bin. Binning can be useful, but it is tricky to
+get the size of the bins right. If they are big enough to smooth out
+noise, they might also smooth out useful information.</p>
+<p>An alternative that avoids these problems is the cumulative distribution
+function (CDF), which is the subject of this chapter. But before I can
+explain CDFs, I have to explain percentiles.</p>
+</section>
+<section id="percentiles">
+<h2>Percentiles<a class="headerlink" href="#percentiles" title="Link to this heading">#</a></h2>
+<p>If you have taken a standardized test, you probably got your results in
+the form of a raw score and a <strong>percentile rank</strong>. In this context, the
+percentile rank is the fraction of people who scored lower than you (or
+the same). So if you are “in the 90th percentile,” you did as well as or
+better than 90% of the people who took the exam.</p>
+<p>Here’s how you could compute the percentile rank of a value,
+<code class="docutils literal notranslate"><span class="pre">your_score</span></code>, relative to the values in the sequence <code class="docutils literal notranslate"><span class="pre">scores</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PercentileRank</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">your_score</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="n">your_score</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">percentile_rank</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="n">count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">percentile_rank</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As an example, if the scores in the sequence were 55, 66, 77, 88 and 99,
+and you got the 88, then your percentile rank would be <code class="docutils literal notranslate"><span class="pre">100</span> <span class="pre">*</span> <span class="pre">4</span> <span class="pre">/</span> <span class="pre">5</span></code>
+which is 80.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PercentileRank</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">88</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are given a value, it is easy to find its percentile rank; going
+the other way is slightly harder. If you are given a percentile rank and
+you want to find the corresponding value, one option is to sort the
+values and search for the one you want:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Percentile</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">percentile_rank</span><span class="p">):</span>
+    <span class="n">scores</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">PercentileRank</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">percentile_rank</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">score</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result of this calculation is a <strong>percentile</strong>. For example, the
+50th percentile is the value with percentile rank 50. In the
+distribution of exam scores, the 50th percentile is 77.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Percentile</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77
+</pre></div>
+</div>
+</div>
+</div>
+<p>This implementation of <code class="docutils literal notranslate"><span class="pre">Percentile</span></code> is not efficient. A better approach
+is to use the percentile rank to compute the index of the corresponding
+percentile:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Percentile2</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">percentile_rank</span><span class="p">):</span>
+    <span class="n">scores</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">percentile_rank</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">100</span>
+    <span class="k">return</span> <span class="n">scores</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Percentile2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77
+</pre></div>
+</div>
+</div>
+</div>
+<p>The difference between “percentile” and “percentile rank” can be
+confusing, and people do not always use the terms precisely. To
+summarize, <code class="docutils literal notranslate"><span class="pre">PercentileRank</span></code> takes a value and computes its percentile
+rank in a set of values; <code class="docutils literal notranslate"><span class="pre">Percentile</span></code> takes a percentile rank and
+computes the corresponding value.</p>
+</section>
+<section id="cdfs">
+<h2>CDFs<a class="headerlink" href="#cdfs" title="Link to this heading">#</a></h2>
+<p>Now that we understand percentiles and percentile ranks, we are ready to
+tackle the <strong>cumulative distribution function</strong> (CDF). The CDF is the
+function that maps from a value to its percentile rank.</p>
+<p>The CDF is a function of <span class="math notranslate nohighlight">\(x\)</span>, where <span class="math notranslate nohighlight">\(x\)</span> is any value that might appear
+in the distribution. To evaluate <span class="math notranslate nohighlight">\(CDF(x)\)</span> for a particular value of
+<span class="math notranslate nohighlight">\(x\)</span>, we compute the fraction of values in the distribution less than or
+equal to <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Here’s what that looks like as a function that takes a sequence,
+<code class="docutils literal notranslate"><span class="pre">sample</span></code>, and a value, <code class="docutils literal notranslate"><span class="pre">x</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">EvalCdf</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">prob</span> <span class="o">=</span> <span class="n">count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">prob</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This function is almost identical to <code class="docutils literal notranslate"><span class="pre">PercentileRank</span></code>, except that the
+result is a probability in the range 0–1 rather than a percentile rank
+in the range 0–100.</p>
+<p>As an example, suppose we collect a sample with the values
+<code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5]</span></code>. Here are some values from its CDF: $<span class="math notranslate nohighlight">\(CDF(0) = 0\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(CDF(1) = 0.2\)</span><span class="math notranslate nohighlight">\( \)</span><span class="math notranslate nohighlight">\(CDF(2) = 0.6\)</span><span class="math notranslate nohighlight">\( \)</span><span class="math notranslate nohighlight">\(CDF(3) = 0.8\)</span><span class="math notranslate nohighlight">\( \)</span><span class="math notranslate nohighlight">\(CDF(4) = 0.8\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(CDF(5) = 1\)</span><span class="math notranslate nohighlight">\( We can evaluate the CDF for any value of \)</span>x<span class="math notranslate nohighlight">\(, not just
+values that appear in the sample. If \)</span>x<span class="math notranslate nohighlight">\( is less than the smallest value
+in the sample, \)</span>CDF(x)<span class="math notranslate nohighlight">\( is 0. If \)</span>x<span class="math notranslate nohighlight">\( is greater than the largest value,
+\)</span>CDF(x)$ is 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+
+<span class="n">EvalCdf</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">EvalCdf</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">EvalCdf</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">EvalCdf</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">EvalCdf</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">EvalCdf</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 0.2, 0.6, 0.8, 0.8, 1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#example_cdf"><span class="xref myst">[example_cdf]</span></a>{reference-type=“ref”
+reference=“example_cdf”} is a graphical representation of this CDF. The
+CDF of a sample is a step function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/791603394edc9f7b38cc9603621d2e7ad99fce2904786cfc0c635f97d458b20e.png" src="_images/791603394edc9f7b38cc9603621d2e7ad99fce2904786cfc0c635f97d458b20e.png" />
+</div>
+</div>
+</section>
+<section id="representing-cdfs">
+<h2>Representing CDFs<a class="headerlink" href="#representing-cdfs" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides a class named Cdf that represents CDFs. The
+fundamental methods Cdf provides are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Prob(x)</span></code>: Given a value <code class="docutils literal notranslate"><span class="pre">x</span></code>, computes the probability
+<span class="math notranslate nohighlight">\(p = CDF(x)\)</span>. The bracket operator is equivalent to <code class="docutils literal notranslate"><span class="pre">Prob</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Value(p)</span></code>: Given a probability <code class="docutils literal notranslate"><span class="pre">p</span></code>, computes the corresponding
+value, <code class="docutils literal notranslate"><span class="pre">x</span></code>; that is, the <strong>inverse CDF</strong> of <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p></li>
+</ul>
+<p>The Cdf constructor can take as an argument a list of values, a pandas
+Series, a Hist, Pmf, or another Cdf. The following code makes a Cdf for
+the distribution of pregnancy lengths in the NSFG:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">live</span><span class="o">.</span><span class="n">prglngth</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;prglngth&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">thinkplot</span></code> provides a function named <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> that plots Cdfs as lines:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;weeks&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/99e041f589aac93f8be4cb05e04d904d5d6758727f7d4ce4e87bf2831b5cffb6.png" src="_images/99e041f589aac93f8be4cb05e04d904d5d6758727f7d4ce4e87bf2831b5cffb6.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#cumulative_prglngth_cdf"><span class="xref myst">[cumulative_prglngth_cdf]</span></a>{reference-type=“ref”
+reference=“cumulative_prglngth_cdf”} shows the result. One way to read a
+CDF is to look up percentiles. For example, it looks like about 10% of
+pregnancies are shorter than 36 weeks, and about 90% are shorter than 41
+weeks. The CDF also provides a visual representation of the shape of the
+distribution. Common values appear as steep or vertical sections of the
+CDF; in this example, the mode at 39 weeks is apparent. There are few
+values below 30 weeks, so the CDF in this range is flat.</p>
+<p>It takes some time to get used to CDFs, but once you do, I think you
+will find that they show more information, more clearly, than PMFs.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Cdf</span></code> provides <code class="docutils literal notranslate"><span class="pre">Prob</span></code>, which evaluates the CDF; that is, it computes the fraction of values less than or equal to the given value.  For example, 94% of pregnancy lengths are less than or equal to 41.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span><span class="o">.</span><span class="n">Prob</span><span class="p">(</span><span class="mi">41</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9406427634455619
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Value</span></code> evaluates the inverse CDF; given a fraction, it computes the corresponding value.  For example, the median is the value that corresponds to 0.5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="comparing-cdfs">
+<h2>Comparing CDFs<a class="headerlink" href="#comparing-cdfs" title="Link to this heading">#</a></h2>
+<p>CDFs are especially useful for comparing distributions. For example,
+here is the code that plots the CDF of birth weight for first babies and
+others.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">firsts</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="n">other_cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">others</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;other&#39;</span><span class="p">)</span>
+
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Cdfs</span><span class="p">([</span><span class="n">first_cdf</span><span class="p">,</span> <span class="n">other_cdf</span><span class="p">])</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;weight (pounds)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7c4834b2e7b0269ca655a4c1a7260c9b13a0207341d1283fa2981c6dfd6d4544.png" src="_images/7c4834b2e7b0269ca655a4c1a7260c9b13a0207341d1283fa2981c6dfd6d4544.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Compared to
+Figure <a class="reference internal" href="#nsfg_birthwgt_pmf"><span class="xref myst">[nsfg_birthwgt_pmf]</span></a>{reference-type=“ref”
+reference=“nsfg_birthwgt_pmf”}, this figure makes the shape of the
+distributions, and the differences between them, much clearer. We can
+see that first babies are slightly lighter throughout the distribution,
+with a larger discrepancy above the mean.</p>
+</section>
+<section id="percentile-based-statistics">
+<h2>Percentile-based statistics<a class="headerlink" href="#percentile-based-statistics" title="Link to this heading">#</a></h2>
+<p>Once you have computed a CDF, it is easy to compute percentiles and
+percentile ranks. The Cdf class provides these two methods:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PercentileRank(x)</span></code>: Given a value <code class="docutils literal notranslate"><span class="pre">x</span></code>, computes its percentile
+rank, <span class="math notranslate nohighlight">\(100 \cdot CDF(x)\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Percentile(p)</span></code>: Given a percentile rank <code class="docutils literal notranslate"><span class="pre">p</span></code>, computes the
+corresponding value, <code class="docutils literal notranslate"><span class="pre">x</span></code>. Equivalent to <code class="docutils literal notranslate"><span class="pre">Value(p/100)</span></code>.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">Percentile</span></code> can be used to compute percentile-based summary statistics.
+For example, the 50th percentile is the value that divides the
+distribution in half, also known as the <strong>median</strong>. Like the mean, the
+median is a measure of the central tendency of a distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">totalwgt_lb</span>
+<span class="n">live_cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;live&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">median</span> <span class="o">=</span> <span class="n">live_cdf</span><span class="o">.</span><span class="n">Percentile</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">median</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.375
+</pre></div>
+</div>
+</div>
+</div>
+<p>Actually, there are several definitions of “median,” each with different
+properties. But <code class="docutils literal notranslate"><span class="pre">Percentile(50)</span></code> is simple and efficient to compute.</p>
+<p>Another percentile-based statistic is the <strong>interquartile range</strong> (IQR),
+which is a measure of the spread of a distribution. The IQR is the
+difference between the 75th and 25th percentiles.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iqr</span> <span class="o">=</span> <span class="p">(</span><span class="n">live_cdf</span><span class="o">.</span><span class="n">Percentile</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span> <span class="n">live_cdf</span><span class="o">.</span><span class="n">Percentile</span><span class="p">(</span><span class="mi">75</span><span class="p">))</span>
+<span class="n">iqr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6.5, 8.125)
+</pre></div>
+</div>
+</div>
+</div>
+<p>More generally, percentiles are often used to summarize the shape of a
+distribution. For example, the distribution of income is often reported
+in “quintiles”; that is, it is split at the 20th, 40th, 60th and 80th
+percentiles. Other distributions are divided into ten “deciles”.
+Statistics like these that represent equally-spaced points in a CDF are
+called <strong>quantiles</strong>. For more, see
+<a class="reference external" href="https://en.wikipedia.org/wiki/Quantile">https://en.wikipedia.org/wiki/Quantile</a>.</p>
+</section>
+<section id="random-numbers">
+<h2>Random numbers<a class="headerlink" href="#random-numbers" title="Link to this heading">#</a></h2>
+<p>Suppose we choose a random sample from the population of live births and
+look up the percentile rank of their birth weights. Now suppose we
+compute the CDF of the percentile ranks. What do you think the
+distribution will look like?</p>
+<p>Here’s how we can compute it. First, we make the Cdf of birth weights:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">totalwgt_lb</span>
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;totalwgt_lb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we generate a sample and compute the percentile rank of each value
+in the sample.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ranks</span> <span class="o">=</span> <span class="p">[</span><span class="n">cdf</span><span class="o">.</span><span class="n">PercentileRank</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sample</span></code> is a random sample of 100 birth weights, chosen with
+<strong>replacement</strong>; that is, the same value could be chosen more than once.
+<code class="docutils literal notranslate"><span class="pre">ranks</span></code> is a list of percentile ranks.</p>
+<p>Finally we make and plot the Cdf of the percentile ranks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rank_cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">rank_cdf</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;percentile rank&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/91fafc249e6ce96cf1271243e4724ba77edcfa49b853891c63b6c609e9be64cd.png" src="_images/91fafc249e6ce96cf1271243e4724ba77edcfa49b853891c63b6c609e9be64cd.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This figure shows the result. The CDF is
+approximately a straight line, which means that the distribution is
+uniform.</p>
+<p>That outcome might be non-obvious, but it is a consequence of the way
+the CDF is defined. What this figure shows is that 10% of the sample is
+below the 10th percentile, 20% is below the 20th percentile, and so on,
+exactly as we should expect.</p>
+<p>So, regardless of the shape of the CDF, the distribution of percentile
+ranks is uniform. This property is useful, because it is the basis of a
+simple and efficient algorithm for generating random numbers with a
+given CDF. Here’s how:</p>
+<ul class="simple">
+<li><p>Choose a percentile rank uniformly from the range 0–100.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">Cdf.Percentile</span></code> to find the value in the distribution that
+corresponds to the percentile rank you chose.</p></li>
+</ul>
+<p>Cdf provides an implementation of this algorithm, called <code class="docutils literal notranslate"><span class="pre">Random</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Percentile</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cdf also provides <code class="docutils literal notranslate"><span class="pre">Sample</span></code>, which takes an integer, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and returns a
+list of <code class="docutils literal notranslate"><span class="pre">n</span></code> values chosen at random from the Cdf.</p>
+</section>
+<section id="comparing-percentile-ranks">
+<h2>Comparing percentile ranks<a class="headerlink" href="#comparing-percentile-ranks" title="Link to this heading">#</a></h2>
+<p>Percentile ranks are useful for comparing measurements across different
+groups. For example, people who compete in foot races are usually
+grouped by age and gender. To compare people in different age groups,
+you can convert race times to percentile ranks.</p>
+<p>A few years ago I ran the James Joyce Ramble 10K in Dedham MA; I
+finished in 42:44, which was 97th in a field of 1633. I beat or tied
+1537 runners out of 1633, so my percentile rank in the field is 94%.</p>
+<p>More generally, given position and field size, we can compute percentile
+rank:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PositionToPercentile</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">field_size</span><span class="p">):</span>
+    <span class="n">beat</span> <span class="o">=</span> <span class="n">field_size</span> <span class="o">-</span> <span class="n">position</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">percentile</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="n">beat</span> <span class="o">/</span> <span class="n">field_size</span>
+    <span class="k">return</span> <span class="n">percentile</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In my age group, denoted M4049 for “male between 40 and 49 years of
+age”, I came in 26th out of 256. So my percentile rank in my age group
+was 90%.</p>
+<p>If I am still running in 10 years (and I hope I am), I will be in the
+M5059 division. Assuming that my percentile rank in my division is the
+same, how much slower should I expect to be?</p>
+<p>I can answer that question by converting my percentile rank in M4049 to
+a position in M5059. Here’s the code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PercentileToPosition</span><span class="p">(</span><span class="n">percentile</span><span class="p">,</span> <span class="n">field_size</span><span class="p">):</span>
+    <span class="n">beat</span> <span class="o">=</span> <span class="n">percentile</span> <span class="o">*</span> <span class="n">field_size</span> <span class="o">/</span> <span class="mf">100.0</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="n">field_size</span> <span class="o">-</span> <span class="n">beat</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">position</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There were 171 people in M5059, so I would have to come in between 17th
+and 18th place to have the same percentile rank. The finishing time of
+the 17th runner in M5059 was 46:05, so that’s the time I will have to
+beat to maintain my percentile rank.</p>
+</section>
+<section id="glossary">
+<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>percentile rank</strong>: The percentage of values in a distribution that
+are less than or equal to a given value.</p></li>
+<li><p><strong>percentile</strong>: The value associated with a given percentile rank.</p></li>
+<li><p><strong>cumulative distribution function (CDF)</strong>: A function that maps
+from values to their cumulative probabilities. <span class="math notranslate nohighlight">\(CDF(x)\)</span> is the
+fraction of the sample less than or equal to <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p><strong>inverse CDF</strong>: A function that maps from a cumulative probability,
+<span class="math notranslate nohighlight">\(p\)</span>, to the corresponding value.</p></li>
+<li><p><strong>median</strong>: The 50th percentile, often used as a measure of central
+tendency.</p></li>
+<li><p><strong>interquartile range</strong>: The difference between the 75th and 25th
+percentiles, used as a measure of spread.</p></li>
+<li><p><strong>quantile</strong>: A sequence of values that correspond to equally spaced
+percentile ranks; for example, the quartiles of a distribution are
+the 25th, 50th and 75th percentiles.</p></li>
+<li><p><strong>replacement</strong>: A property of a sampling process. “With
+replacement” means that the same value can be chosen more than once;
+“without replacement” means that once a value is chosen, it is
+removed from the population.</p></li>
+</ul>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong> How much did you weigh at birth? If you don’t know, call your mother or someone else who knows. Using the NSFG data (all live births), compute the distribution of birth weights and use it to find your percentile rank. If you were a first baby, find your percentile rank in the distribution for first babies. Otherwise use the distribution for others. If you are in the 90th percentile or higher, call your mother back and apologize.</p>
+<p><strong>Exercise:</strong> The numbers generated by <code class="docutils literal notranslate"><span class="pre">numpy.random.random</span></code> are supposed to be uniform between 0 and 1; that is, every value in the range should have the same probability.</p>
+<p>Generate 1000 numbers from <code class="docutils literal notranslate"><span class="pre">numpy.random.random</span></code> and plot their PMF.  What goes wrong?</p>
+<p>Now plot the CDF. Is the distribution uniform?</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap03.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Probability mass functions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap05.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Modeling distributions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-limits-of-pmfs">The limits of PMFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentiles">Percentiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdfs">CDFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-cdfs">Representing CDFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-cdfs">Comparing CDFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentile-based-statistics">Percentile-based statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers">Random numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-percentile-ranks">Comparing percentile ranks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
