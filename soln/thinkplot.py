@@ -440,6 +440,7 @@ def pmf(pmf, **options):
     options = _Underride(options, label=pmf.label)
     plot(pxs, pys, **options)
 
+plot_pmf = pmf
 
 def pmfs(pmfs, **options):
     """Plots a sequence of PMFs.
@@ -452,7 +453,7 @@ def pmfs(pmfs, **options):
       options: keyword args passed to plt.plot
     """
     for pmf in pmfs:
-        pmf(pmf, **options)
+        plot_pmf(pmf, **options)
 
 
 def diff(t):
@@ -511,7 +512,7 @@ def cdf(cdf, complement=False, transform=None, **options):
     options = _Underride(options, label=cdf.label)
     plot(xs, ps, **options)
     return scale
-
+plot_cdf = cdf
 
 def cdfs(cdfs, complement=False, transform=None, **options):
     """Plots a sequence of CDFs.
@@ -522,7 +523,7 @@ def cdfs(cdfs, complement=False, transform=None, **options):
     options: keyword args passed to plt.plot
     """
     for cdf in cdfs:
-        cdf(cdf, complement, transform, **options)
+        plot_cdf(cdf, complement, transform, **options)
 
 
 def contour(obj, pcolor=False, contour=True, imshow=False, **options):
