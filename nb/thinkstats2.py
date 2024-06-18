@@ -1,17 +1,17 @@
-"""This file contains code for use with "Think Stats" and
-"Think Bayes", both by Allen B. Downey, available from greenteapress.com
+"""This file contains code for use with "Think Stats"
+by Allen B. Downey, available from greenteapress.com
 
-Copyright 2014 Allen B. Downey
+Copyright 2024 Allen B. Downey
 License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 
 
 This file contains class definitions for:
 
+_DictWrapper: private parent class for Hist and Pmf.
+
 Hist: represents a histogram (map from values to integer frequencies).
 
 Pmf: represents a probability mass function (map from values to probs).
-
-_DictWrapper: private parent class for Hist and Pmf.
 
 Cdf: represents a discrete cumulative distribution function
 
