@@ -576,8 +576,8 @@ class Pmf(_DictWrapper):
 
         returns: float standard deviation
         """
-        S2 = self.var(mu)
-        return math.sqrt(S2)
+        s2 = self.var(mu)
+        return math.sqrt(s2)
 
     def mode(self):
         """Returns the value with the highest probability.
@@ -2392,8 +2392,8 @@ def std(xs, mu=None, ddof=0):
 
     returns: float
     """
-    S2 = var(xs, mu, ddof)
-    return math.sqrt(S2)
+    s2 = var(xs, mu, ddof)
+    return math.sqrt(s2)
 
 
 def mean_var(xs, ddof=0):
