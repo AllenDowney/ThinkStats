@@ -576,8 +576,8 @@ class Pmf(_DictWrapper):
 
         returns: float standard deviation
         """
-        var = self.var(mu)
-        return math.sqrt(var)
+        S2 = self.var(mu)
+        return math.sqrt(S2)
 
     def mode(self):
         """Returns the value with the highest probability.
@@ -1147,6 +1147,21 @@ class Cdf:
         """
         ps = np.asarray(ps)
         return self.values(ps / 100)
+    
+    def confidence_interval(self, percentage=90):
+        """Computes the central confidence interval.
+
+        If percentage=90, computes the 90% CI.
+
+        Args:
+            percentage: float between 0 and 100
+
+        Returns:
+            sequence of two floats, low and high
+        """
+        prob = (1 - percentage / 100) / 2
+        interval = self.value(prob), self.value(1 - prob)
+        return interval
 
     def percentile_rank(self, x):
         """Returns the percentile rank of the value x.
@@ -1177,7 +1192,7 @@ class Cdf:
         returns: NumPy array
         """
         ps = np.random.random(n)
-        return self.ValueArray(ps)
+        return self.values(ps)
 
     def mean(self):
         """Computes the mean of a CDF.
@@ -2377,8 +2392,8 @@ def std(xs, mu=None, ddof=0):
 
     returns: float
     """
-    var = var(xs, mu, ddof)
-    return math.sqrt(var)
+    S2 = var(xs, mu, ddof)
+    return math.sqrt(S2)
 
 
 def mean_var(xs, ddof=0):
@@ -2497,8 +2512,7 @@ def corr(xs, ys):
     ys = np.asarray(ys)
     meanx, varx = mean_var(xs)
     meany, vary = mean_var(ys)
-    corr = cov(xs, ys, meanx, meany) / math.sqrt(varx * vary)
-    return corr
+    return cov(xs, ys, meanx, meany) / math.sqrt(varx * vary)
 
 
 def serial_corr(series, lag=1):
@@ -2511,8 +2525,7 @@ def serial_corr(series, lag=1):
     """
     xs = series[lag:]
     ys = series.shift(lag)[lag:]
-    corr = corr(xs, ys)
-    return corr
+    return corr(xs, ys)
 
 
 def spearman_corr(xs, ys):
@@ -2887,7 +2900,7 @@ class HypothesisTest(object):
             thinkplot.plot([x, x], [0, 1], color="0.8")
 
         vert_line(self.actual)
-        thinkplot.Cdf(self.test_cdf, label=label)
+        thinkplot.cdf(self.test_cdf, label=label)
 
     def test_statistic(self, data):
         """Computes the test statistic.
@@ -3723,7 +3736,7 @@ def test_correlation(live):
     n, r, cdf = resample_correlations(live)
     model = student_cdf(n)
     thinkplot.plot(model.xs, model.ps, color="gray", alpha=0.3, label="Student t")
-    thinkplot.Cdf(cdf, label="sample")
+    thinkplot.cdf(cdf, label="sample")
     thinkplot.save(root="normal4", xlabel="correlation", ylabel="CDF")
     t = r * math.sqrt((n - 2) / (1 - r**2))
     p_value = 1 - scipy.stats.t.cdf(t, df=n - 2)
@@ -3986,7 +3999,7 @@ def plot_survival(complete):
     print(cdf[13])
     print(sf[13])
     thinkplot.plot(sf)
-    thinkplot.Cdf(cdf, alpha=0.2)
+    thinkplot.cdf(cdf, alpha=0.2)
     thinkplot.config()
     thinkplot.sub_plot(2)
     hf = sf.make_hazard_function(label="hazard")

@@ -199,7 +199,7 @@ def plot(obj, ys=None, style="", **options):
     options = _Underride(options, linewidth=3, alpha=0.7, label=label)
     xs = obj
     if ys is None:
-        if hasattr(obj, "Render"):
+        if hasattr(obj, "render"):
             xs, ys = obj.render()
         if isinstance(obj, pd.Series):
             ys = obj.values
