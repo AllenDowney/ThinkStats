@@ -381,6 +381,32 @@ document.write(`
 <h1>Linear least squares<a class="headerlink" href="#linear-least-squares" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> nb_black
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 1;
+                var nbb_unformatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_formatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
 
 
@@ -398,18 +424,50 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 2;
+                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n        local, _ = urlretrieve(url, filename)\n        print('Downloaded ' + local)\n\n\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py')";
+                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
 <span class="kn">import</span> <span class="nn">random</span>
-
 <span class="kn">import</span> <span class="nn">thinkstats2</span>
 <span class="kn">import</span> <span class="nn">thinkplot</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "import numpy as np\nimport random\nimport thinkstats2\nimport thinkplot";
+                var nbb_formatted_code = "import numpy as np\nimport random\nimport thinkstats2\nimport thinkplot";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <section id="least-squares-fit">
 <h2>Least squares fit<a class="headerlink" href="#least-squares-fit" title="Link to this heading">#</a></h2>
@@ -425,23 +483,6 @@ between <code class="docutils literal notranslate"><span class="pre">xs</span></
 expect each <code class="docutils literal notranslate"><span class="pre">y[i]</span></code> to be <code class="docutils literal notranslate"><span class="pre">inter</span> <span class="pre">+</span> <span class="pre">slope</span> <span class="pre">*</span> <span class="pre">x[i]</span></code>.</p>
 <p>But unless the correlation is perfect, this prediction is only
 approximate. The vertical deviation from the line, or <strong>residual</strong>, is</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">ys</span> <span class="o">-</span> <span class="p">(</span><span class="n">inter</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">xs</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">res</span> <span class="o">=</span> <span class="n">ys</span> <span class="o">-</span> <span class="p">(</span><span class="n">inter</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">xs</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;ys&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
 <p>The residuals might be due to random factors like measurement error, or
 non-random factors that are unknown. For example, if we are trying to
 predict weight as a function of height, unknown factors might include
@@ -481,19 +522,35 @@ squares fit is quick, easy and often good enough.</p>
 squares:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">Mean</span><span class="p">,</span> <span class="n">MeanVar</span><span class="p">,</span> <span class="n">Var</span><span class="p">,</span> <span class="n">Std</span><span class="p">,</span> <span class="n">Cov</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">mean</span><span class="p">,</span> <span class="n">mean_var</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">cov</span>
 
-<span class="k">def</span> <span class="nf">LeastSquares</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">):</span>
-    <span class="n">meanx</span><span class="p">,</span> <span class="n">varx</span> <span class="o">=</span> <span class="n">MeanVar</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-    <span class="n">meany</span> <span class="o">=</span> <span class="n">Mean</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
 
-    <span class="n">slope</span> <span class="o">=</span> <span class="n">Cov</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">meanx</span><span class="p">,</span> <span class="n">meany</span><span class="p">)</span> <span class="o">/</span> <span class="n">varx</span>
+<span class="k">def</span> <span class="nf">least_squares</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">):</span>
+    <span class="n">meanx</span><span class="p">,</span> <span class="n">varx</span> <span class="o">=</span> <span class="n">mean_var</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">meany</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+    <span class="n">slope</span> <span class="o">=</span> <span class="n">cov</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">meanx</span><span class="p">,</span> <span class="n">meany</span><span class="p">)</span> <span class="o">/</span> <span class="n">varx</span>
     <span class="n">inter</span> <span class="o">=</span> <span class="n">meany</span> <span class="o">-</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">meanx</span>
-
     <span class="k">return</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "from thinkstats2 import mean, mean_var, var, std, cov\n\ndef least_squares(xs, ys):\n    meanx, varx = mean_var(xs)\n    meany = mean(ys)\n    slope = cov(xs, ys, meanx, meany) / varx\n    inter = meany - slope * meanx\n    return inter, slope";
+                var nbb_formatted_code = "from thinkstats2 import mean, mean_var, var, std, cov\n\n\ndef least_squares(xs, ys):\n    meanx, varx = mean_var(xs)\n    meany = mean(ys)\n    slope = cov(xs, ys, meanx, meany) / varx\n    inter = meany - slope * meanx\n    return inter, slope";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">LeastSquares</span></code> takes sequences <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> and returns the estimated
 parameters <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code>. For details on how it works, see
@@ -502,20 +559,36 @@ parameters <code class="docutils literal notranslate"><span class="pre">inter</s
 and returns the fitted line for a sequence of <code class="docutils literal notranslate"><span class="pre">xs</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">FitLine</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit_line</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">):</span>
     <span class="n">fit_xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
     <span class="n">fit_ys</span> <span class="o">=</span> <span class="n">inter</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">fit_xs</span>
     <span class="k">return</span> <span class="n">fit_xs</span><span class="p">,</span> <span class="n">fit_ys</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "def fit_line(xs, inter, slope):\n    fit_xs = np.sort(xs)\n    fit_ys = inter + slope * fit_xs\n    return fit_xs, fit_ys";
+                var nbb_formatted_code = "def fit_line(xs, inter, slope):\n    fit_xs = np.sort(xs)\n    fit_ys = inter + slope * fit_xs\n    return fit_xs, fit_ys";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>We can use these functions to compute the least squares fit for birth
 weight as a function of mother’s age.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/first.py&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span>
     <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz&quot;</span>
@@ -523,22 +596,56 @@ weight as a function of mother’s age.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "download('https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py')\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz'\n    )";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz\"\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">first</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nsfg</span>
 
-<span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">MakeFrames</span><span class="p">()</span>
-<span class="n">live</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;agepreg&#39;</span><span class="p">,</span> <span class="s1">&#39;totalwgt_lb&#39;</span><span class="p">])</span>
+<span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">make_frames</span><span class="p">()</span>
+<span class="n">live</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;agepreg&quot;</span><span class="p">,</span> <span class="s2">&quot;totalwgt_lb&quot;</span><span class="p">])</span>
 <span class="n">ages</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">agepreg</span>
 <span class="n">weights</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">totalwgt_lb</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "import nsfg\nlive, firsts, others = nsfg.make_frames()\nlive = live.dropna(subset=['agepreg', 'totalwgt_lb'])\nages = live.agepreg\nweights = live.totalwgt_lb";
+                var nbb_formatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()\nlive = live.dropna(subset=[\"agepreg\", \"totalwgt_lb\"])\nages = live.agepreg\nweights = live.totalwgt_lb";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inter</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">LeastSquares</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inter</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">least_squares</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
 <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span>
 </pre></div>
 </div>
@@ -547,14 +654,46 @@ weight as a function of mother’s age.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6.830396973311053, 0.017453851471802746)
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "inter, slope = thinkstats2.least_squares(ages, weights)\ninter, slope";
+                var nbb_formatted_code = "inter, slope = thinkstats2.least_squares(ages, weights)\ninter, slope";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_xs</span><span class="p">,</span> <span class="n">fit_ys</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">FitLine</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_xs</span><span class="p">,</span> <span class="n">fit_ys</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">fit_line</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "fit_xs, fit_ys = thinkstats2.fit_line(ages, inter, slope)";
+                var nbb_formatted_code = "fit_xs, fit_ys = thinkstats2.fit_line(ages, inter, slope)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The estimated intercept and slope are 6.8 lbs and 0.017 lbs per year.
 These values are hard to interpret in this form: the intercept is the
@@ -566,19 +705,36 @@ about 25 years and the mean baby weight for a 25 year old mother is 7.3
 pounds. The slope is 0.27 ounces per year, or 0.17 pounds per decade.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">fit_xs</span><span class="p">,</span> <span class="n">fit_ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">fit_xs</span><span class="p">,</span> <span class="n">fit_ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mother&#39;s age (years)&quot;</span><span class="p">,</span>
-                 <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Birth weight (lbs)&#39;</span><span class="p">,</span>
-                 <span class="n">axis</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
-                 <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fit_xs</span><span class="p">,</span> <span class="n">fit_ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fit_xs</span><span class="p">,</span> <span class="n">fit_ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mother&#39;s age (years)&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Birth weight (lbs)&quot;</span><span class="p">,</span>
+    <span class="n">axis</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/3e2bfac2ee8abae00d0e9d228e631ab6c2b5e3f1e3de852919c4cf93535bd8a7.png" src="_images/3e2bfac2ee8abae00d0e9d228e631ab6c2b5e3f1e3de852919c4cf93535bd8a7.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "thinkplot.scatter(ages, weights, color='blue', alpha=0.1, s=10)\nthinkplot.plot(fit_xs, fit_ys, color='white', linewidth=3)\nthinkplot.plot(fit_xs, fit_ys, color='red', linewidth=2)\nthinkplot.config(xlabel=\"Mother's age (years)\", ylabel='Birth weight (lbs)',\n    axis=[10, 45, 0, 15], legend=False)";
+                var nbb_formatted_code = "thinkplot.scatter(ages, weights, color=\"blue\", alpha=0.1, s=10)\nthinkplot.plot(fit_xs, fit_ys, color=\"white\", linewidth=3)\nthinkplot.plot(fit_xs, fit_ys, color=\"red\", linewidth=2)\nthinkplot.config(\n    xlabel=\"Mother's age (years)\",\n    ylabel=\"Birth weight (lbs)\",\n    axis=[10, 45, 0, 15],\n    legend=False,\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Figure <a class="reference internal" href="#linear1"><span class="xref myst">[linear1]</span></a>{reference-type=“ref” reference=“linear1”}
 shows a scatter plot of birth weight and age along with the fitted line.
@@ -592,7 +748,7 @@ model of the relationship.</p>
 function that computes residuals:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Residuals</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">residuals</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">):</span>
     <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
     <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">ys</span> <span class="o">-</span> <span class="p">(</span><span class="n">inter</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">xs</span><span class="p">)</span>
@@ -600,23 +756,56 @@ function that computes residuals:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 12;
+                var nbb_unformatted_code = "def residuals(xs, ys, inter, slope):\n    xs = np.asarray(xs)\n    ys = np.asarray(ys)\n    res = ys - (inter + slope * xs)\n    return res";
+                var nbb_formatted_code = "def residuals(xs, ys, inter, slope):\n    xs = np.asarray(xs)\n    ys = np.asarray(ys)\n    res = ys - (inter + slope * xs)\n    return res";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Residuals</span></code> takes sequences <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> and estimated parameters
 <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code>. It returns the differences between the actual
 values and the fitted line.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">[</span><span class="s1">&#39;residual&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Residuals</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">[</span><span class="s2">&quot;residual&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">residuals</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "live['residual'] = residuals(ages, weights, inter, slope)";
+                var nbb_formatted_code = "live[\"residual\"] = residuals(ages, weights, inter, slope)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">live</span><span class="o">.</span><span class="n">agepreg</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
 <span class="n">groups</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
-
 <span class="n">age_means</span> <span class="o">=</span> <span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">agepreg</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">age_means</span>
 </pre></div>
@@ -635,7 +824,22 @@ values and the fitted line.</p>
  40.91205882352941]
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "bins = np.arange(10, 48, 3)\nindices = np.digitize(live.agepreg, bins)\ngroups = live.groupby(indices)\nage_means = [group.agepreg.mean() for _, group in groups][1:-1]\nage_means";
+                var nbb_formatted_code = "bins = np.arange(10, 48, 3)\nindices = np.digitize(live.agepreg, bins)\ngroups = live.groupby(indices)\nage_means = [group.agepreg.mean() for _, group in groups][1:-1]\nage_means";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -643,32 +847,78 @@ values and the fitted line.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "cdfs = [thinkstats2.Cdf(group.residual) for _, group in groups][1:-1]";
+                var nbb_formatted_code = "cdfs = [thinkstats2.Cdf(group.residual) for _, group in groups][1:-1]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotPercentiles</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">cdfs</span><span class="p">):</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_percentiles</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">cdfs</span><span class="p">):</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">percent</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">75</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">25</span><span class="p">]:</span>
-        <span class="n">weight_percentiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">cdf</span><span class="o">.</span><span class="n">Percentile</span><span class="p">(</span><span class="n">percent</span><span class="p">)</span> <span class="k">for</span> <span class="n">cdf</span> <span class="ow">in</span> <span class="n">cdfs</span><span class="p">]</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">th&#39;</span> <span class="o">%</span> <span class="n">percent</span>
-        <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">weight_percentiles</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">weight_percentiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">cdf</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">percent</span><span class="p">)</span> <span class="k">for</span> <span class="n">cdf</span> <span class="ow">in</span> <span class="n">cdfs</span><span class="p">]</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">th&quot;</span> <span class="o">%</span> <span class="n">percent</span>
+        <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">weight_percentiles</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "def plot_percentiles(age_means, cdfs):\n    thinkplot.pre_plot(3)\n    for percent in [75, 50, 25]:\n        weight_percentiles = [cdf.percentile(percent) for cdf in cdfs]\n        label = '%dth' % percent\n        thinkplot.plot(age_means, weight_percentiles, label=label)";
+                var nbb_formatted_code = "def plot_percentiles(age_means, cdfs):\n    thinkplot.pre_plot(3)\n    for percent in [75, 50, 25]:\n        weight_percentiles = [cdf.percentile(percent) for cdf in cdfs]\n        label = \"%dth\" % percent\n        thinkplot.plot(age_means, weight_percentiles, label=label)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PlotPercentiles</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">cdfs</span><span class="p">)</span>
-
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mother&#39;s age (years)&quot;</span><span class="p">,</span>
-                 <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Residual (lbs)&#39;</span><span class="p">,</span>
-                 <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_percentiles</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">cdfs</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mother&#39;s age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Residual (lbs)&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/a49b23fa9a7e7bf00d12b8b4c370040b966a6ab00cafe1e4cdb7ffef51331d4a.png" src="_images/a49b23fa9a7e7bf00d12b8b4c370040b966a6ab00cafe1e4cdb7ffef51331d4a.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "plot_percentiles(age_means, cdfs)\nthinkplot.config(xlabel=\"Mother's age (years)\", ylabel='Residual (lbs)',\n    xlim=[10, 45])";
+                var nbb_formatted_code = "plot_percentiles(age_means, cdfs)\nthinkplot.config(xlabel=\"Mother's age (years)\", ylabel=\"Residual (lbs)\", xlim=[10, 45])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>To visualize the residuals, I group respondents by age and compute
 percentiles in each group, as we saw in
@@ -705,7 +955,7 @@ observed pregnancies as if they were the entire population and draw
 samples, with replacement, from the observed sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SampleRows</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_rows</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Choose a sample of rows from a DataFrame.</span>
 
 <span class="sd">    df: DataFrame</span>
@@ -720,44 +970,111 @@ samples, with replacement, from the observed sample.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 18;
+                var nbb_unformatted_code = "def sample_rows(df, nrows, replace=False):\n    \"\"\"Choose a sample of rows from a DataFrame.\n\n    df: DataFrame\n    nrows: number of rows\n    replace: whether to sample with replacement\n\n    returns: DataDf\n    \"\"\"\n    indices = np.random.choice(df.index, nrows, replace=replace)\n    sample = df.loc[indices]\n    return sample";
+                var nbb_formatted_code = "def sample_rows(df, nrows, replace=False):\n    \"\"\"Choose a sample of rows from a DataFrame.\n\n    df: DataFrame\n    nrows: number of rows\n    replace: whether to sample with replacement\n\n    returns: DataDf\n    \"\"\"\n    indices = np.random.choice(df.index, nrows, replace=replace)\n    sample = df.loc[indices]\n    return sample";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ResampleRows</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resample_rows</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Resamples rows from a DataFrame.</span>
 
 <span class="sd">    df: DataFrame</span>
 
 <span class="sd">    returns: DataFrame</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">SampleRows</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sample_rows</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 19;
+                var nbb_unformatted_code = "def resample_rows(df):\n    \"\"\"Resamples rows from a DataFrame.\n\n    df: DataFrame\n\n    returns: DataFrame\n    \"\"\"\n    return sample_rows(df, len(df), replace=True)";
+                var nbb_formatted_code = "def resample_rows(df):\n    \"\"\"Resamples rows from a DataFrame.\n\n    df: DataFrame\n\n    returns: DataFrame\n    \"\"\"\n    return sample_rows(df, len(df), replace=True)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SamplingDistributions</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sampling_distributions</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">):</span>
     <span class="n">t</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
-        <span class="n">sample</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">ResampleRows</span><span class="p">(</span><span class="n">live</span><span class="p">)</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">resample_rows</span><span class="p">(</span><span class="n">live</span><span class="p">)</span>
         <span class="n">ages</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">agepreg</span>
         <span class="n">weights</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">totalwgt_lb</span>
-        <span class="n">estimates</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">LeastSquares</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+        <span class="n">estimates</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">least_squares</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
         <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
-
     <span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 20;
+                var nbb_unformatted_code = "def sampling_distributions(live, iters=101):\n    t = []\n    for _ in range(iters):\n        sample = thinkstats2.resample_rows(live)\n        ages = sample.agepreg\n        weights = sample.totalwgt_lb\n        estimates = thinkstats2.least_squares(ages, weights)\n        t.append(estimates)\n    inters, slopes = zip(*t)\n    return inters, slopes";
+                var nbb_formatted_code = "def sampling_distributions(live, iters=101):\n    t = []\n    for _ in range(iters):\n        sample = thinkstats2.resample_rows(live)\n        ages = sample.agepreg\n        weights = sample.totalwgt_lb\n        estimates = thinkstats2.least_squares(ages, weights)\n        t.append(estimates)\n    inters, slopes = zip(*t)\n    return inters, slopes";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span> <span class="o">=</span> <span class="n">SamplingDistributions</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1001</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span> <span class="o">=</span> <span class="n">sampling_distributions</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1001</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 21;
+                var nbb_unformatted_code = "inters, slopes = sampling_distributions(live, iters=1001)";
+                var nbb_formatted_code = "inters, slopes = sampling_distributions(live, iters=1001)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">SamplingDistributions</span></code> takes a DataFrame with one row per live birth,
 and <code class="docutils literal notranslate"><span class="pre">iters</span></code>, the number of experiments to simulate. It uses
@@ -772,42 +1089,89 @@ slopes.</p>
 and confidence interval:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Summarize</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">actual</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="n">mean</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
-    <span class="n">stderr</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Std</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">actual</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">actual</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+    <span class="n">stderr</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">actual</span><span class="p">)</span>
     <span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
-    <span class="n">ci</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">ConfidenceInterval</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mean, SE, CI&#39;</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">ci</span><span class="p">)</span>
+    <span class="n">ci</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">confidence_interval</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean, SE, CI&quot;</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">ci</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 26;
+                var nbb_unformatted_code = "def summarize(estimates, actual=None):\n    mean = thinkstats2.mean(estimates)\n    stderr = thinkstats2.std(estimates, mu=actual)\n    cdf = thinkstats2.Cdf(estimates)\n    ci = cdf.confidence_interval(90)\n    print(\"mean, SE, CI\", mean, stderr, ci)";
+                var nbb_formatted_code = "def summarize(estimates, actual=None):\n    mean = thinkstats2.mean(estimates)\n    stderr = thinkstats2.std(estimates, mu=actual)\n    cdf = thinkstats2.Cdf(estimates)\n    ci = cdf.confidence_interval(90)\n    print(\"mean, SE, CI\", mean, stderr, ci)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Summarize</span></code> takes a sequence of estimates and the actual value. It
 prints the mean of the estimates, the standard error and a 90%
 confidence interval.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Summarize</span><span class="p">(</span><span class="n">inters</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summarize</span><span class="p">(</span><span class="n">inters</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean, SE, CI 6.83346967384324 0.06772233597164748 (6.724508263178181, 6.946444466395725)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean, SE, CI 6.831089099582062 0.07446687543718343 (6.715284968830525, 6.956255856853705)
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 27;
+                var nbb_unformatted_code = "summarize(inters)";
+                var nbb_formatted_code = "summarize(inters)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Summarize</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summarize</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean, SE, CI 0.01732961674795306 0.00267138995054031 (0.012838271847846819, 0.0217432188488668)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean, SE, CI 0.017421108657218083 0.0029333380968900504 (0.012476972826294532, 0.022076488605690284)
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 28;
+                var nbb_unformatted_code = "summarize(slopes)";
+                var nbb_formatted_code = "summarize(slopes)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>For the intercept, the mean estimate is 6.83, with standard error 0.07
 and 90% confidence interval (6.71, 6.94). The estimated slope, in more
@@ -820,35 +1184,62 @@ confidence interval for each age. Here’s the code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">slope</span><span class="p">,</span> <span class="n">inter</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">slopes</span><span class="p">,</span> <span class="n">inters</span><span class="p">):</span>
-    <span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span> <span class="o">=</span> <span class="n">FitLine</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-    
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mother&#39;s age (years)&quot;</span><span class="p">,</span>
-                 <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Residual (lbs)&#39;</span><span class="p">,</span>
-                 <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">])</span>
+    <span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span> <span class="o">=</span> <span class="n">fit_line</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mother&#39;s age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Residual (lbs)&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ce4892cc591491e4b5e6e8f30f5d22bfd0cd19940af2ecdf24961dcf542f5a16.png" src="_images/ce4892cc591491e4b5e6e8f30f5d22bfd0cd19940af2ecdf24961dcf542f5a16.png" />
-</div>
+<img alt="_images/8ca9f55f3e52bb99d241676a95cf8a89dbab2d2b05b626dd5d5ec97a8649be6e.png" src="_images/8ca9f55f3e52bb99d241676a95cf8a89dbab2d2b05b626dd5d5ec97a8649be6e.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 29;
+                var nbb_unformatted_code = "for slope, inter in zip(slopes, inters):\n    fxs, fys = fit_line(age_means, inter, slope)\n    thinkplot.plot(fxs, fys, color='gray', alpha=0.01)\nthinkplot.config(xlabel=\"Mother's age (years)\", ylabel='Residual (lbs)',\n    xlim=[10, 45])";
+                var nbb_formatted_code = "for slope, inter in zip(slopes, inters):\n    fxs, fys = fit_line(age_means, inter, slope)\n    thinkplot.plot(fxs, fys, color=\"gray\", alpha=0.01)\nthinkplot.config(xlabel=\"Mother's age (years)\", ylabel=\"Residual (lbs)\", xlim=[10, 45])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotConfidenceIntervals</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span><span class="p">,</span>
-                            <span class="n">percent</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_confidence_intervals</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
     <span class="n">fys_seq</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span><span class="p">):</span>
-        <span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">FitLine</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+        <span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">fit_line</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
         <span class="n">fys_seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fys</span><span class="p">)</span>
-
     <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="n">percent</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="n">percents</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">p</span>
-    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">PercentileRows</span><span class="p">(</span><span class="n">fys_seq</span><span class="p">,</span> <span class="n">percents</span><span class="p">)</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">FillBetween</span><span class="p">(</span><span class="n">fxs</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">percentile_rows</span><span class="p">(</span><span class="n">fys_seq</span><span class="p">,</span> <span class="n">percents</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">fxs</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 30;
+                var nbb_unformatted_code = "def plot_confidence_intervals(xs, inters, slopes, percent=90, **options):\n    fys_seq = []\n    for inter, slope in zip(inters, slopes):\n        fxs, fys = thinkstats2.fit_line(xs, inter, slope)\n        fys_seq.append(fys)\n    p = (100 - percent) / 2\n    percents = p, 100 - p\n    low, high = thinkstats2.percentile_rows(fys_seq, percents)\n    thinkplot.fill_between(fxs, low, high, **options)";
+                var nbb_formatted_code = "def plot_confidence_intervals(xs, inters, slopes, percent=90, **options):\n    fys_seq = []\n    for inter, slope in zip(inters, slopes):\n        fxs, fys = thinkstats2.fit_line(xs, inter, slope)\n        fys_seq.append(fys)\n    p = (100 - percent) / 2\n    percents = p, 100 - p\n    low, high = thinkstats2.percentile_rows(fys_seq, percents)\n    thinkplot.fill_between(fxs, low, high, **options)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">xs</span></code> is the sequence of mother’s age. <code class="docutils literal notranslate"><span class="pre">inters</span></code> and <code class="docutils literal notranslate"><span class="pre">slopes</span></code> are the
 estimated parameters generated by <code class="docutils literal notranslate"><span class="pre">SamplingDistributions</span></code>. <code class="docutils literal notranslate"><span class="pre">percent</span></code>
@@ -861,20 +1252,34 @@ the 5th and 95th percentiles. <code class="docutils literal notranslate"><span c
 the space between two lines.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PlotConfidenceIntervals</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> 
-                        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;90% CI&#39;</span><span class="p">)</span>
-<span class="n">PlotConfidenceIntervals</span><span class="p">(</span><span class="n">age_means</span><span class="p">,</span> <span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-                        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;50% CI&#39;</span><span class="p">)</span>
-
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mother&#39;s age (years)&quot;</span><span class="p">,</span>
-                 <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Residual (lbs)&#39;</span><span class="p">,</span>
-                 <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_confidence_intervals</span><span class="p">(</span>
+    <span class="n">age_means</span><span class="p">,</span> <span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;90% CI&quot;</span>
+<span class="p">)</span>
+<span class="n">plot_confidence_intervals</span><span class="p">(</span>
+    <span class="n">age_means</span><span class="p">,</span> <span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;50% CI&quot;</span>
+<span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mother&#39;s age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Residual (lbs)&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/67d3d0d4e61d407ceaff6c15239fe832749557e4d788f559eda19a730b4d90fe.png" src="_images/67d3d0d4e61d407ceaff6c15239fe832749557e4d788f559eda19a730b4d90fe.png" />
-</div>
+<img alt="_images/70f9b8af0ea49d331ab91d2c8b25b0a4f3473f427ab4fc3ae5d243a0b79ca104.png" src="_images/70f9b8af0ea49d331ab91d2c8b25b0a4f3473f427ab4fc3ae5d243a0b79ca104.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 31;
+                var nbb_unformatted_code = "plot_confidence_intervals(age_means, inters, slopes, percent=90, color=\n    'gray', alpha=0.3, label='90% CI')\nplot_confidence_intervals(age_means, inters, slopes, percent=50, color=\n    'gray', alpha=0.5, label='50% CI')\nthinkplot.config(xlabel=\"Mother's age (years)\", ylabel='Residual (lbs)',\n    xlim=[10, 45])";
+                var nbb_formatted_code = "plot_confidence_intervals(\n    age_means, inters, slopes, percent=90, color=\"gray\", alpha=0.3, label=\"90% CI\"\n)\nplot_confidence_intervals(\n    age_means, inters, slopes, percent=50, color=\"gray\", alpha=0.5, label=\"50% CI\"\n)\nthinkplot.config(xlabel=\"Mother's age (years)\", ylabel=\"Residual (lbs)\", xlim=[10, 45])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Figure <a class="reference internal" href="#linear3"><span class="xref myst">[linear3]</span></a>{reference-type=“ref” reference=“linear3”}
 shows the 50% and 90% confidence intervals for curves fitted to birth
@@ -898,17 +1303,34 @@ a mother’s age does not improve the predictions substantially.</p>
 determination</strong>, usually denoted <span class="math notranslate nohighlight">\(R^2\)</span> and called “R-squared”:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CoefDetermination</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">Var</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">/</span> <span class="n">Var</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">coef_determination</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">var</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">/</span> <span class="n">var</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 32;
+                var nbb_unformatted_code = "def coef_determination(ys, res):\n    return 1 - var(res) / var(ys)";
+                var nbb_formatted_code = "def coef_determination(ys, res):\n    return 1 - var(res) / var(ys)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inter</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">LeastSquares</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">Residuals</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
-<span class="n">r2</span> <span class="o">=</span> <span class="n">CoefDetermination</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inter</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">least_squares</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">residuals</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">coef_determination</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
 <span class="n">r2</span>
 </pre></div>
 </div>
@@ -917,12 +1339,27 @@ determination</strong>, usually denoted <span class="math notranslate nohighligh
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.004738115474710258
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 33;
+                var nbb_unformatted_code = "inter, slope = least_squares(ages, weights)\nres = residuals(ages, weights, inter, slope)\nr2 = coef_determination(weights, res)\nr2";
+                var nbb_formatted_code = "inter, slope = least_squares(ages, weights)\nres = residuals(ages, weights, inter, slope)\nr2 = coef_determination(weights, res)\nr2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rho&#39;</span><span class="p">,</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r2</span><span class="p">))</span>    
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rho&quot;</span><span class="p">,</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -931,12 +1368,27 @@ determination</strong>, usually denoted <span class="math notranslate nohighligh
 R 0.06883397035410828
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 34;
+                var nbb_unformatted_code = "print('rho', thinkstats2.corr(ages, weights))\nprint('R', np.sqrt(r2))";
+                var nbb_formatted_code = "print(\"rho\", thinkstats2.corr(ages, weights))\nprint(\"R\", np.sqrt(r2))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Std(ys)&#39;</span><span class="p">,</span> <span class="n">Std</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Std(res)&#39;</span><span class="p">,</span> <span class="n">Std</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Std(ys)&quot;</span><span class="p">,</span> <span class="n">std</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Std(res)&quot;</span><span class="p">,</span> <span class="n">std</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -945,7 +1397,22 @@ R 0.06883397035410828
 Std(res) 1.4048754287857834
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 35;
+                var nbb_unformatted_code = "print('Std(ys)', std(weights))\nprint('Std(res)', std(res))";
+                var nbb_formatted_code = "print(\"Std(ys)\", std(weights))\nprint(\"Std(res)\", std(res))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Var(res)</span></code> is the MSE of your guesses using the model, <code class="docutils literal notranslate"><span class="pre">Var(ys)</span></code> is the
 MSE without it. So their ratio is the fraction of MSE that remains if
@@ -985,7 +1452,22 @@ correlation. But <span class="math notranslate nohighlight">\(R^2 = \rho^2 = 0.5
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.409610943738484
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 36;
+                var nbb_unformatted_code = "var_ys = 15 ** 2\nrho = 0.72\nr2 = rho ** 2\nvar_res = (1 - r2) * var_ys\nstd_res = np.sqrt(var_res)\nstd_res";
+                var nbb_formatted_code = "var_ys = 15**2\nrho = 0.72\nr2 = rho**2\nvar_res = (1 - r2) * var_ys\nstd_res = np.sqrt(var_res)\nstd_res";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>So using SAT score to predict IQ reduces RMSE from 15 points to 10.4
 points. A correlation of 0.72 yields a reduction in RMSE of only 31%.</p>
@@ -1018,23 +1500,40 @@ Here’s a HypothesisTest for this model:</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SlopeTest</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">HypothesisTest</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">ages</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">data</span>
-        <span class="n">_</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">LeastSquares</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">least_squares</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">slope</span>
 
-    <span class="k">def</span> <span class="nf">MakeModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">make_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ybar</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">res</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ybar</span>
 
-    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">ages</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
         <span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ybar</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ages</span><span class="p">,</span> <span class="n">weights</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 37;
+                var nbb_unformatted_code = "class SlopeTest(thinkstats2.HypothesisTest):\n\n    def test_statistic(self, data):\n        ages, weights = data\n        _, slope = thinkstats2.least_squares(ages, weights)\n        return slope\n\n    def make_model(self):\n        _, weights = self.data\n        self.ybar = weights.mean()\n        self.res = weights - self.ybar\n\n    def run_model(self):\n        ages, _ = self.data\n        weights = self.ybar + np.random.permutation(self.res)\n        return ages, weights";
+                var nbb_formatted_code = "class SlopeTest(thinkstats2.HypothesisTest):\n\n    def test_statistic(self, data):\n        ages, weights = data\n        _, slope = thinkstats2.least_squares(ages, weights)\n        return slope\n\n    def make_model(self):\n        _, weights = self.data\n        self.ybar = weights.mean()\n        self.res = weights - self.ybar\n\n    def run_model(self):\n        ages, _ = self.data\n        weights = self.ybar + np.random.permutation(self.res)\n        return ages, weights";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The data are represented as sequences of ages and weights. The test
 statistic is the slope estimated by <code class="docutils literal notranslate"><span class="pre">LeastSquares</span></code>. The model of the
@@ -1044,10 +1543,9 @@ deviations and add them to the mean.</p>
 <p>Here’s the code that runs the hypothesis test:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">MakeFrames</span><span class="p">()</span>
-<span class="n">live</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;agepreg&#39;</span><span class="p">,</span> <span class="s1">&#39;totalwgt_lb&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;agepreg&quot;</span><span class="p">,</span> <span class="s2">&quot;totalwgt_lb&quot;</span><span class="p">])</span>
 <span class="n">ht</span> <span class="o">=</span> <span class="n">SlopeTest</span><span class="p">((</span><span class="n">live</span><span class="o">.</span><span class="n">agepreg</span><span class="p">,</span> <span class="n">live</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="p">))</span>
-<span class="n">p_value</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">PValue</span><span class="p">()</span>
+<span class="n">p_value</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">p_value</span><span class="p">()</span>
 <span class="n">p_value</span>
 </pre></div>
 </div>
@@ -1056,19 +1554,49 @@ deviations and add them to the mean.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 38;
+                var nbb_unformatted_code = "live = live.dropna(subset=['agepreg', 'totalwgt_lb'])\nht = SlopeTest((live.agepreg, live.totalwgt_lb))\np_value = ht.p_value()\np_value";
+                var nbb_formatted_code = "live = live.dropna(subset=[\"agepreg\", \"totalwgt_lb\"])\nht = SlopeTest((live.agepreg, live.totalwgt_lb))\np_value = ht.p_value()\np_value";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ht</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">MaxTestStat</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ht</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">max_test_stat</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.017453851471802746, 0.008602477027343606)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.017453851471802746, 0.009086187016833011)
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 39;
+                var nbb_unformatted_code = "ht.actual, ht.max_test_stat()";
+                var nbb_formatted_code = "ht.actual, ht.max_test_stat()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The p-value is less than <span class="math notranslate nohighlight">\(0.001\)</span>, so although the estimated slope is
 small, it is unlikely to be due to chance.</p>
@@ -1090,23 +1618,38 @@ Section <a class="reference internal" href="#CLT"><span class="xref myst">[CLT]
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sampling_cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
-
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.8&#39;</span><span class="p">)</span>
-<span class="n">ht</span><span class="o">.</span><span class="n">PlotCdf</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;null hypothesis&#39;</span><span class="p">)</span>
-
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">sampling_cdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sampling distribution&#39;</span><span class="p">)</span>
-
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;slope (lbs / year)&#39;</span><span class="p">,</span>
-                   <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">,</span>
-                   <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">],</span>
-                   <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.8&quot;</span><span class="p">)</span>
+<span class="n">ht</span><span class="o">.</span><span class="n">plot_cdf</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;null hypothesis&quot;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">sampling_cdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sampling distribution&quot;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;slope (lbs / year)&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">,</span>
+    <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">],</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/64a548657ce12ad6b37a3d30ea788da48bb36dea0f62f8c1699b9fca7f7f7996.png" src="_images/64a548657ce12ad6b37a3d30ea788da48bb36dea0f62f8c1699b9fca7f7f7996.png" />
-</div>
+<img alt="_images/f302612084606e6ad42e234bfca7afd953e5527d067a71024ae3d9372949e728.png" src="_images/f302612084606e6ad42e234bfca7afd953e5527d067a71024ae3d9372949e728.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 40;
+                var nbb_unformatted_code = "sampling_cdf = thinkstats2.Cdf(slopes)\nthinkplot.pre_plot(2)\nthinkplot.plot([0, 0], [0, 1], color='0.8')\nht.plot_cdf(label='null hypothesis')\nthinkplot.cdf(sampling_cdf, label='sampling distribution')\nthinkplot.config(xlabel='slope (lbs / year)', ylabel='CDF', xlim=[-0.03, \n    0.03], legend=True, loc='upper left')";
+                var nbb_formatted_code = "sampling_cdf = thinkstats2.Cdf(slopes)\nthinkplot.pre_plot(2)\nthinkplot.plot([0, 0], [0, 1], color=\"0.8\")\nht.plot_cdf(label=\"null hypothesis\")\nthinkplot.cdf(sampling_cdf, label=\"sampling distribution\")\nthinkplot.config(\n    xlabel=\"slope (lbs / year)\",\n    ylabel=\"CDF\",\n    xlim=[-0.03, 0.03],\n    legend=True,\n    loc=\"upper left\",\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>So we could estimate the p-value two ways:</p>
 <ul class="simple">
@@ -1126,7 +1669,7 @@ p-values don’t have to be precise.</p>
 sampling distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span> <span class="o">=</span> <span class="n">SamplingDistributions</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1001</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span> <span class="o">=</span> <span class="n">sampling_distributions</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1001</span><span class="p">)</span>
 <span class="n">slope_cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
 <span class="n">p_value</span> <span class="o">=</span> <span class="n">slope_cdf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">p_value</span>
@@ -1137,7 +1680,22 @@ sampling distribution:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 41;
+                var nbb_unformatted_code = "inters, slopes = sampling_distributions(live, iters=1001)\nslope_cdf = thinkstats2.Cdf(slopes)\np_value = slope_cdf[0]\np_value";
+                var nbb_formatted_code = "inters, slopes = sampling_distributions(live, iters=1001)\nslope_cdf = thinkstats2.Cdf(slopes)\np_value = slope_cdf[0]\np_value";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Again, we find <span class="math notranslate nohighlight">\(p &lt; 0.001\)</span>.</p>
 </section>
@@ -1175,15 +1733,32 @@ the weights in <code class="docutils literal notranslate"><span class="pre">fina
 resampled rows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ResampleRowsWeighted</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;finalwgt&#39;</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resample_rows_weighted</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s2">&quot;finalwgt&quot;</span><span class="p">):</span>
     <span class="n">weights</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
     <span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span>
-    <span class="n">indices</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span>
     <span class="n">sample</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">sample</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 42;
+                var nbb_unformatted_code = "def resample_rows_weighted(df, column='finalwgt'):\n    weights = df[column]\n    cdf = thinkstats2.Cdf(dict(weights))\n    indices = cdf.sample(len(weights))\n    sample = df.loc[indices]\n    return sample";
+                var nbb_formatted_code = "def resample_rows_weighted(df, column=\"finalwgt\"):\n    weights = df[column]\n    cdf = thinkstats2.Cdf(dict(weights))\n    indices = cdf.sample(len(weights))\n    sample = df.loc[indices]\n    return sample";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">weights</span></code> is a Series; converting it to a dictionary makes a map from
 the indices to the weights. In <code class="docutils literal notranslate"><span class="pre">cdf</span></code> the values are indices and the
@@ -1196,29 +1771,68 @@ Without weights, we generate the sampling distribution like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iters</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">estimates</span> <span class="o">=</span> <span class="p">[</span><span class="n">ResampleRowsWeighted</span><span class="p">(</span><span class="n">live</span><span class="p">)</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-             <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
-<span class="n">Summarize</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+<span class="n">estimates</span> <span class="o">=</span> <span class="p">[</span><span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">live</span><span class="p">)</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+<span class="n">summarize</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean, SE, CI 7.348876203252929 0.01403009016964961 (7.320812126576676, 7.372144003098031)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">43</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">iters</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">estimates</span> <span class="o">=</span> <span class="p">[</span><span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">live</span><span class="p">)</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">summarize</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+
+<span class="nn">Cell In[43], line 2,</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">iters</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">estimates</span> <span class="o">=</span> <span class="p">[</span><span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">live</span><span class="p">)</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">summarize</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+
+<span class="nn">Cell In[42], line 4,</span> in <span class="ni">resample_rows_weighted</span><span class="nt">(df, column)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">sample</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">return</span> <span class="n">sample</span>
+
+<span class="nn">File ~/ThinkStats/soln/thinkstats2.py:1195,</span> in <span class="ni">Cdf.sample</span><span class="nt">(self, n)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1189</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Generates a random sample from this distribution.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1190</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1191</span><span class="sd"> n: int length of the sample</span>
+<span class="g g-Whitespace">   </span><span class="mi">1192</span><span class="sd"> returns: NumPy array</span>
+<span class="g g-Whitespace">   </span><span class="mi">1193</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1194</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1195</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ValueArray</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: &#39;Cdf&#39; object has no attribute &#39;ValueArray&#39;
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 43;
+                var nbb_unformatted_code = "iters = 100\nestimates = [resample_rows_weighted(live).totalwgt_lb.mean() for _ in range\n    (iters)]\nsummarize(estimates)";
+                var nbb_formatted_code = "iters = 100\nestimates = [resample_rows_weighted(live).totalwgt_lb.mean() for _ in range(iters)]\nsummarize(estimates)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>With weights, it looks like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimates</span> <span class="o">=</span> <span class="p">[</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">ResampleRows</span><span class="p">(</span><span class="n">live</span><span class="p">)</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-             <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
-<span class="n">Summarize</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean, SE, CI 7.265405371763665 0.013719971782041939 (7.243389024120381, 7.285226266873202)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimates</span> <span class="o">=</span> <span class="p">[</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">resample_rows</span><span class="p">(</span><span class="n">live</span><span class="p">)</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span>
+    <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+<span class="n">summarize</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1257,6 +1871,35 @@ sample that indicates what part of the population it represents.</p></li>
 <section id="exercises">
 <h1>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h1>
 <p><strong>Exercise:</strong> Use <code class="docutils literal notranslate"><span class="pre">ResampleRows</span></code> and generate a list of estimates for the mean birth weight.  Use <code class="docutils literal notranslate"><span class="pre">Summarize</span></code> to compute the SE and CI for these estimates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iters</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">estimates</span> <span class="o">=</span> <span class="p">[</span><span class="n">resample_rows</span><span class="p">(</span><span class="n">live</span><span class="p">)</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+<span class="n">summarize</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean, SE, CI 7.265908476709449 0.014787501759906655 (7.241017094489932, 7.289624363797301)
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 44;
+                var nbb_unformatted_code = "iters = 1000\nestimates = [resample_rows(live).totalwgt_lb.mean() for _ in range(iters)]\nsummarize(estimates)";
+                var nbb_formatted_code = "iters = 1000\nestimates = [resample_rows(live).totalwgt_lb.mean() for _ in range(iters)]\nsummarize(estimates)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>The difference is non-negligible, which suggests that there are differences in birth weight between the strata in the survey.</p>
 <p><strong>Exercise:</strong> Using the data from the BRFSS, compute the linear least squares fit for log(weight) versus height. How would you best present the estimated parameters for a model like this where one of the variables is log-transformed? If you were trying to guess someone’s weight, how much would it help to know their height?</p>
 <p>Like the NSFG, the BRFSS oversamples some groups and provides a sampling weight for each respondent. In the BRFSS data, the variable name for these weights is totalwt. Use resampling, with and without weights, to estimate the mean height of respondents in the BRFSS, the standard error of the mean, and a 90% confidence interval. How much does correct weighting affect the estimates?</p>
@@ -1268,37 +1911,586 @@ sample that indicates what part of the population it represents.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 45;
+                var nbb_unformatted_code = "download('https://github.com/AllenDowney/ThinkStats2/raw/master/code/brfss.py')\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/CDBRFS08.ASC.gz'\n    )";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/brfss.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/CDBRFS08.ASC.gz\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">brfss</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">ReadBrfss</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;htm3&#39;</span><span class="p">,</span> <span class="s1">&#39;wtkg2&#39;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">read_brfss</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;htm3&quot;</span><span class="p">,</span> <span class="s2">&quot;wtkg2&quot;</span><span class="p">])</span>
 <span class="n">heights</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">htm3</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">wtkg2</span>
 <span class="n">log_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 46;
+                var nbb_unformatted_code = "import brfss\ndf = brfss.read_brfss(nrows=None)\ndf = df.dropna(subset=['htm3', 'wtkg2'])\nheights, weights = df.htm3, df.wtkg2\nlog_weights = np.log10(weights)";
+                var nbb_formatted_code = "import brfss\n\ndf = brfss.read_brfss(nrows=None)\ndf = df.dropna(subset=[\"htm3\", \"wtkg2\"])\nheights, weights = df.htm3, df.wtkg2\nlog_weights = np.log10(weights)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Estimate intercept and slope.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inter</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">least_squares</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">log_weights</span><span class="p">)</span>
+<span class="n">inter</span><span class="p">,</span> <span class="n">slope</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.9930804163932864, 0.005281454169417784)
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 47;
+                var nbb_unformatted_code = "inter, slope = thinkstats2.least_squares(heights, log_weights)\ninter, slope";
+                var nbb_formatted_code = "inter, slope = thinkstats2.least_squares(heights, log_weights)\ninter, slope";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Make a scatter plot of the data and show the fitted line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">log_weights</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">fit_line</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Height (cm)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;log10 weight (kg)&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f7c6b2340a784040b33b3148c41a60b29eca2e5a899ae3210b1be461d9756051.png" src="_images/f7c6b2340a784040b33b3148c41a60b29eca2e5a899ae3210b1be461d9756051.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 48;
+                var nbb_unformatted_code = "thinkplot.scatter(heights, log_weights, alpha=0.01, s=5)\nfxs, fys = thinkstats2.fit_line(heights, inter, slope)\nthinkplot.plot(fxs, fys, color='red')\nthinkplot.config(xlabel='Height (cm)', ylabel='log10 weight (kg)', legend=False\n    )";
+                var nbb_formatted_code = "thinkplot.scatter(heights, log_weights, alpha=0.01, s=5)\nfxs, fys = thinkstats2.fit_line(heights, inter, slope)\nthinkplot.plot(fxs, fys, color=\"red\")\nthinkplot.config(xlabel=\"Height (cm)\", ylabel=\"log10 weight (kg)\", legend=False)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Make the same plot but apply the inverse transform to show weights on a linear (not log) scale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">fit_line</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fxs</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="n">fys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Height (cm)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Weight (kg)&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6a2f113ff22e0e4f0700d3366776911eac7163d3576affa786e223b55c8c76b6.png" src="_images/6a2f113ff22e0e4f0700d3366776911eac7163d3576affa786e223b55c8c76b6.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 49;
+                var nbb_unformatted_code = "thinkplot.scatter(heights, weights, alpha=0.01, s=5)\nfxs, fys = thinkstats2.fit_line(heights, inter, slope)\nthinkplot.plot(fxs, 10 ** fys, color='red')\nthinkplot.config(xlabel='Height (cm)', ylabel='Weight (kg)', legend=False)";
+                var nbb_formatted_code = "thinkplot.scatter(heights, weights, alpha=0.01, s=5)\nfxs, fys = thinkstats2.fit_line(heights, inter, slope)\nthinkplot.plot(fxs, 10**fys, color=\"red\")\nthinkplot.config(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\", legend=False)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Plot percentiles of the residuals.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">residuals</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">log_weights</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;residual&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">130</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">htm3</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+<span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+<span class="n">means</span> <span class="o">=</span> <span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">htm3</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">cdfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">residual</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">percent</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">75</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">25</span><span class="p">]:</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">cdf</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">percent</span><span class="p">)</span> <span class="k">for</span> <span class="n">cdf</span> <span class="ow">in</span> <span class="n">cdfs</span><span class="p">]</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">th&quot;</span> <span class="o">%</span> <span class="n">percent</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;height (cm)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;residual weight (kg)&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ab30ad58bccb255d6fa0336fea4ded99385ed22ed097e6143e81363681ec5d77.png" src="_images/ab30ad58bccb255d6fa0336fea4ded99385ed22ed097e6143e81363681ec5d77.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 50;
+                var nbb_unformatted_code = "res = thinkstats2.residuals(heights, log_weights, inter, slope)\ndf['residual'] = res\nbins = np.arange(130, 210, 5)\nindices = np.digitize(df.htm3, bins)\ngroups = df.groupby(indices)\nmeans = [group.htm3.mean() for i, group in groups][1:-1]\ncdfs = [thinkstats2.Cdf(group.residual) for i, group in groups][1:-1]\nthinkplot.pre_plot(3)\nfor percent in [75, 50, 25]:\n    ys = [cdf.percentile(percent) for cdf in cdfs]\n    label = '%dth' % percent\n    thinkplot.plot(means, ys, label=label)\nthinkplot.config(xlabel='height (cm)', ylabel='residual weight (kg)',\n    legend=False)";
+                var nbb_formatted_code = "res = thinkstats2.residuals(heights, log_weights, inter, slope)\ndf[\"residual\"] = res\nbins = np.arange(130, 210, 5)\nindices = np.digitize(df.htm3, bins)\ngroups = df.groupby(indices)\nmeans = [group.htm3.mean() for i, group in groups][1:-1]\ncdfs = [thinkstats2.Cdf(group.residual) for i, group in groups][1:-1]\nthinkplot.pre_plot(3)\nfor percent in [75, 50, 25]:\n    ys = [cdf.percentile(percent) for cdf in cdfs]\n    label = \"%dth\" % percent\n    thinkplot.plot(means, ys, label=label)\nthinkplot.config(xlabel=\"height (cm)\", ylabel=\"residual weight (kg)\", legend=False)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Compute correlation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">log_weights</span><span class="p">)</span>
+<span class="n">rho</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5317282605983439
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 51;
+                var nbb_unformatted_code = "rho = thinkstats2.corr(heights, log_weights)\nrho";
+                var nbb_formatted_code = "rho = thinkstats2.corr(heights, log_weights)\nrho";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Compute coefficient of determination.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r2</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">coef_determination</span><span class="p">(</span><span class="n">log_weights</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+<span class="n">r2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.28273494311893743
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 52;
+                var nbb_unformatted_code = "r2 = thinkstats2.coef_determination(log_weights, res)\nr2";
+                var nbb_formatted_code = "r2 = thinkstats2.coef_determination(log_weights, res)\nr2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Confirm that <span class="math notranslate nohighlight">\(R^2 = \rho^2\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">rho</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 53;
+                var nbb_unformatted_code = "np.isclose(rho ** 2, r2)";
+                var nbb_formatted_code = "np.isclose(rho**2, r2)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Compute Std(ys), which is the RMSE of predictions that don’t use height.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">std_ys</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">log_weights</span><span class="p">)</span>
+<span class="n">std_ys</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.10320725030004871
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 54;
+                var nbb_unformatted_code = "std_ys = thinkstats2.std(log_weights)\nstd_ys";
+                var nbb_formatted_code = "std_ys = thinkstats2.std(log_weights)\nstd_ys";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Compute Std(res), the RMSE of predictions that do use height.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">std_res</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">std_res</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.08740777080416084
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 55;
+                var nbb_unformatted_code = "std_res = thinkstats2.std(res)\nstd_res";
+                var nbb_formatted_code = "std_res = thinkstats2.std(res)\nstd_res";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>How much does height information reduce RMSE?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">-</span> <span class="n">std_res</span> <span class="o">/</span> <span class="n">std_ys</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.15308497658793263
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 56;
+                var nbb_unformatted_code = "1 - std_res / std_ys";
+                var nbb_formatted_code = "1 - std_res / std_ys";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Use resampling to compute sampling distributions for inter and slope.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">resample_rows</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">estimates</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">least_squares</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">htm3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">wtkg2</span><span class="p">))</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+<span class="n">inters</span><span class="p">,</span> <span class="n">slopes</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 57;
+                var nbb_unformatted_code = "t = []\nfor _ in range(100):\n    sample = thinkstats2.resample_rows(df)\n    estimates = thinkstats2.least_squares(sample.htm3, np.log10(sample.wtkg2))\n    t.append(estimates)\ninters, slopes = zip(*t)";
+                var nbb_formatted_code = "t = []\nfor _ in range(100):\n    sample = thinkstats2.resample_rows(df)\n    estimates = thinkstats2.least_squares(sample.htm3, np.log10(sample.wtkg2))\n    t.append(estimates)\ninters, slopes = zip(*t)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Plot the sampling distribution of slope.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;xscale&#39;: &#39;linear&#39;, &#39;yscale&#39;: &#39;linear&#39;}
+</pre></div>
+</div>
+<img alt="_images/09a7bf4d3fec9e7050b606adef28ed167711307d4e277a5ba0d06abf21a979ec.png" src="_images/09a7bf4d3fec9e7050b606adef28ed167711307d4e277a5ba0d06abf21a979ec.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 58;
+                var nbb_unformatted_code = "cdf = thinkstats2.Cdf(slopes)\nthinkplot.cdf(cdf)";
+                var nbb_formatted_code = "cdf = thinkstats2.Cdf(slopes)\nthinkplot.cdf(cdf)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Compute the p-value of the slope.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pvalue</span> <span class="o">=</span> <span class="n">cdf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">pvalue</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 59;
+                var nbb_unformatted_code = "pvalue = cdf[0]\npvalue";
+                var nbb_formatted_code = "pvalue = cdf[0]\npvalue";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Compute the 90% confidence interval of slope.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ci</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">cdf</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="mi">95</span><span class="p">)</span>
+<span class="n">ci</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0052567070784008295, 0.005308332287011223)
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 60;
+                var nbb_unformatted_code = "ci = cdf.percentile(5), cdf.percentile(95)\nci";
+                var nbb_formatted_code = "ci = cdf.percentile(5), cdf.percentile(95)\nci";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Compute the mean of the sampling distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
+<span class="n">mean</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.005282548138191337
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 61;
+                var nbb_unformatted_code = "mean = thinkstats2.mean(slopes)\nmean";
+                var nbb_formatted_code = "mean = thinkstats2.mean(slopes)\nmean";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Compute the standard deviation of the sampling distribution, which is the standard error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stderr</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
+<span class="n">stderr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5919573022644615e-05
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 62;
+                var nbb_unformatted_code = "stderr = thinkstats2.std(slopes)\nstderr";
+                var nbb_formatted_code = "stderr = thinkstats2.std(slopes)\nstderr";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Resample rows without weights, compute mean height, and summarize results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimates_unweighted</span> <span class="o">=</span> <span class="p">[</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">resample_rows</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">htm3</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">summarize</span><span class="p">(</span><span class="n">estimates_unweighted</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean, SE, CI 168.95665921400996 0.0175014714076389 (168.9234953212474, 168.98475868550295)
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 63;
+                var nbb_unformatted_code = "estimates_unweighted = [thinkstats2.resample_rows(df).htm3.mean() for _ in\n    range(100)]\nsummarize(estimates_unweighted)";
+                var nbb_formatted_code = "estimates_unweighted = [thinkstats2.resample_rows(df).htm3.mean() for _ in range(100)]\nsummarize(estimates_unweighted)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Resample rows with weights.  Note that the weight column in this dataset is called <code class="docutils literal notranslate"><span class="pre">finalwt</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimates_weighted</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;finalwt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">htm3</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">summarize</span><span class="p">(</span><span class="n">estimates_weighted</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean, SE, CI 170.4968666504982 0.019053493870144152 (170.4663670446048, 170.52590745568827)
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 65;
+                var nbb_unformatted_code = "estimates_weighted = [\n    resample_rows_weighted(df, \"finalwt\").htm3.mean() for _ in range(100)\n]\nsummarize(estimates_weighted)";
+                var nbb_formatted_code = "estimates_weighted = [\n    resample_rows_weighted(df, \"finalwt\").htm3.mean() for _ in range(100)\n]\nsummarize(estimates_weighted)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">

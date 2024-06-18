@@ -380,6 +380,32 @@ document.write(`
 <h1>Survival analysis<a class="headerlink" href="#survival-analysis" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> nb_black
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 1;
+                var nbb_unformatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_formatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
 
 
@@ -397,6 +423,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 2;
+                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n        local, _ = urlretrieve(url, filename)\n        print('Downloaded ' + local)\n\n\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py')";
+                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -405,6 +448,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "import thinkstats2\nimport thinkplot";
+                var nbb_formatted_code = "import thinkstats2\nimport thinkplot";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -413,6 +473,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 4;
+                var nbb_unformatted_code = "import numpy as np\nimport pandas as pd";
+                var nbb_formatted_code = "import numpy as np\nimport pandas as pd";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><strong>Survival analysis</strong> is a way to describe how long things last. It is
 often used to study human lifetimes, but it also applies to “survival”
@@ -442,24 +519,51 @@ pregnancies. We can read this data and compute the CDF:</p>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/survival.py&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "download('https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py')\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz'\n    )";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz\"\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nsfg</span>
 
-<span class="n">preg</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">ReadFemPreg</span><span class="p">()</span>
-<span class="n">complete</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;outcome in [1, 3, 4]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">prglngth</span>
-<span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;cdf&#39;</span><span class="p">)</span>
+<span class="n">preg</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">read_fem_preg</span><span class="p">()</span>
+<span class="n">complete</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;outcome in [1, 3, 4]&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">prglngth</span>
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;cdf&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "import nsfg\npreg = nsfg.read_fem_preg()\ncomplete = preg.query('outcome in [1, 3, 4]').prglngth\ncdf = thinkstats2.Cdf(complete, label='cdf')";
+                var nbb_formatted_code = "import nsfg\n\npreg = nsfg.read_fem_preg()\ncomplete = preg.query(\"outcome in [1, 3, 4]\").prglngth\ncdf = thinkstats2.Cdf(complete, label=\"cdf\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The outcome codes <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">4</span></code> indicate live birth, stillbirth, and
 miscarriage. For this analysis I am excluding induced abortions, ectopic
@@ -477,10 +581,10 @@ of lifetimes, and <code class="docutils literal notranslate"><span class="pre">s
 <p>We can instantiate a <code class="docutils literal notranslate"><span class="pre">SurvivalFunction</span></code> by passing the CDF of lifetimes:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">survival</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">SurvivalFunction</span>
 
 
-<span class="k">def</span> <span class="nf">MakeSurvivalFromCdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">make_survival_from_cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes a survival function based on a CDF.</span>
 
 <span class="sd">    cdf: Cdf</span>
@@ -489,17 +593,51 @@ of lifetimes, and <code class="docutils literal notranslate"><span class="pre">s
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">xs</span>
     <span class="n">ss</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">cdf</span><span class="o">.</span><span class="n">ps</span>
-    <span class="k">return</span> <span class="n">survival</span><span class="o">.</span><span class="n">SurvivalFunction</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">ss</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">SurvivalFunction</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">ss</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "from thinkstats2 import SurvivalFunction\n\n\ndef make_survival_from_cdf(cdf, label=''):\n    \"\"\"Makes a survival function based on a CDF.\n\n    cdf: Cdf\n\n    returns: SurvivalFunction\n    \"\"\"\n    ts = cdf.xs\n    ss = 1 - cdf.ps\n    return SurvivalFunction(ts, ss, label)";
+                var nbb_formatted_code = "from thinkstats2 import SurvivalFunction\n\n\ndef make_survival_from_cdf(cdf, label=\"\"):\n    \"\"\"Makes a survival function based on a CDF.\n\n    cdf: Cdf\n\n    returns: SurvivalFunction\n    \"\"\"\n    ts = cdf.xs\n    ss = 1 - cdf.ps\n    return SurvivalFunction(ts, ss, label)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sf</span> <span class="o">=</span> <span class="n">MakeSurvivalFromCdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;survival&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sf</span> <span class="o">=</span> <span class="n">make_survival_from_cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;survival&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "sf = make_survival_from_cdf(cdf, label='survival')";
+                var nbb_formatted_code = "sf = make_survival_from_cdf(cdf, label=\"survival\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">SurvivalFunction</span></code> also provides <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> and <code class="docutils literal notranslate"><span class="pre">Prob</span></code>, which
 evaluates the survival curve:</p>
@@ -515,7 +653,22 @@ the first trimester:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8602198587898829
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "sf[13]";
+                var nbb_formatted_code = "sf[13]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -527,7 +680,22 @@ the first trimester:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1397801412101171
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "cdf[13]";
+                var nbb_formatted_code = "cdf[13]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>About 86% of pregnancies proceed past the first trimester; about 14% do
 not.</p>
@@ -535,15 +703,130 @@ not.</p>
 functions in <code class="docutils literal notranslate"><span class="pre">thinkplot</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/03de4034c69dd58ccfcdd2cdf5cb9798a65b65be02e510f848a0c45531762d83.png" src="_images/03de4034c69dd58ccfcdd2cdf5cb9798a65b65be02e510f848a0c45531762d83.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">thinkplot</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/ThinkStats/soln/thinkplot.py:208,</span> in <span class="ni">plot</span><span class="nt">(obj, ys, style, **options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">206</span>         <span class="n">xs</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">index</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span> <span class="k">if</span> <span class="n">ys</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">208</span>     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">209</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">210</span>     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/matplotlib/pyplot.py:3708,</span> in <span class="ni">plot</span><span class="nt">(scalex, scaley, data, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3700</span> <span class="nd">@_copy_docstring_and_deprecators</span><span class="p">(</span><span class="n">Axes</span><span class="o">.</span><span class="n">plot</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3701</span> <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">3702</span>     <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">ArrayLike</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3706</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">3707</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Line2D</span><span class="p">]:</span>
+<span class="ne">-&gt; </span><span class="mi">3708</span>     <span class="k">return</span> <span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">3709</span>         <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">3710</span>         <span class="n">scalex</span><span class="o">=</span><span class="n">scalex</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">3711</span>         <span class="n">scaley</span><span class="o">=</span><span class="n">scaley</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">3712</span>         <span class="o">**</span><span class="p">({</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">}</span> <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}),</span>
+<span class="g g-Whitespace">   </span><span class="mi">3713</span>         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">3714</span>     <span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/matplotlib/axes/_axes.py:1779,</span> in <span class="ni">Axes.plot</span><span class="nt">(self, scalex, scaley, data, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1536</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1537</span><span class="sd"> Plot y versus x as lines and/or markers.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1538</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1776</span><span class="sd"> (``&#39;green&#39;``) or hex strings (``&#39;#008000&#39;``).</span>
+<span class="g g-Whitespace">   </span><span class="mi">1777</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1778</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">cbook</span><span class="o">.</span><span class="n">normalize_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">mlines</span><span class="o">.</span><span class="n">Line2D</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1779</span> <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1780</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1781</span>     <span class="bp">self</span><span class="o">.</span><span class="n">add_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/matplotlib/axes/_base.py:296,</span> in <span class="ni">_process_plot_var_args.__call__</span><span class="nt">(self, axes, data, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">294</span>     <span class="n">this</span> <span class="o">+=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">295</span>     <span class="n">args</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="ne">--&gt; </span><span class="mi">296</span> <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plot_args</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span>     <span class="n">axes</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">ambiguous_fmt_datakey</span><span class="o">=</span><span class="n">ambiguous_fmt_datakey</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/matplotlib/axes/_base.py:478,</span> in <span class="ni">_process_plot_var_args._plot_args</span><span class="nt">(self, axes, tup, kwargs, return_kwargs, ambiguous_fmt_datakey)</span>
+<span class="g g-Whitespace">    </span><span class="mi">476</span>     <span class="n">y</span> <span class="o">=</span> <span class="n">_check_1d</span><span class="p">(</span><span class="n">xy</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">477</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">478</span>     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">index_of</span><span class="p">(</span><span class="n">xy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span> <span class="k">if</span> <span class="n">axes</span><span class="o">.</span><span class="n">xaxis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="n">axes</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">update_units</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/matplotlib/cbook.py:1719,</span> in <span class="ni">index_of</span><span class="nt">(y)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1717</span>     <span class="k">pass</span>
+<span class="g g-Whitespace">   </span><span class="mi">1718</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1719</span>     <span class="n">y</span> <span class="o">=</span> <span class="n">_check_1d</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1720</span> <span class="k">except</span> <span class="p">(</span><span class="n">VisibleDeprecationWarning</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1721</span>     <span class="c1"># NumPy 1.19 will warn on ragged input, and we can&#39;t actually use it.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1722</span>     <span class="k">pass</span>
+
+<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/matplotlib/cbook.py:1411,</span> in <span class="ni">_check_1d</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1405</span> <span class="c1"># plot requires `shape` and `ndim`.  If passed an</span>
+<span class="g g-Whitespace">   </span><span class="mi">1406</span> <span class="c1"># object that doesn&#39;t provide them, then force to numpy array.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1407</span> <span class="c1"># Note this will strip unit information.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1408</span> <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;shape&#39;</span><span class="p">)</span> <span class="ow">or</span>
+<span class="g g-Whitespace">   </span><span class="mi">1409</span>         <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;ndim&#39;</span><span class="p">)</span> <span class="ow">or</span>
+<span class="g g-Whitespace">   </span><span class="mi">1410</span>         <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1411</span>     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1412</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1413</span>     <span class="k">return</span> <span class="n">x</span>
+
+<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/numpy/core/shape_base.py:65,</span> in <span class="ni">atleast_1d</span><span class="nt">(*arys)</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span> <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span> <span class="k">for</span> <span class="n">ary</span> <span class="ow">in</span> <span class="n">arys</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">65</span>     <span class="n">ary</span> <span class="o">=</span> <span class="n">asanyarray</span><span class="p">(</span><span class="n">ary</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span>     <span class="k">if</span> <span class="n">ary</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>         <span class="n">result</span> <span class="o">=</span> <span class="n">ary</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nn">File ~/ThinkStats/soln/thinkstats2.py:3804,</span> in <span class="ni">SurvivalFunction.__getitem__</span><span class="nt">(self, t)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3803</span> <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">3804</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="nn">File ~/ThinkStats/soln/thinkstats2.py:3811,</span> in <span class="ni">SurvivalFunction.prob</span><span class="nt">(self, t)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3806</span> <span class="k">def</span> <span class="nf">prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3807</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Returns S(t), the probability that corresponds to value t.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3808</span><span class="sd">     t: time</span>
+<span class="g g-Whitespace">   </span><span class="mi">3809</span><span class="sd">     returns: float probability</span>
+<span class="g g-Whitespace">   </span><span class="mi">3810</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">3811</span>     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/numpy/lib/function_base.py:1599,</span> in <span class="ni">interp</span><span class="nt">(x, xp, fp, left, right, period)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1596</span>     <span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">xp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span><span class="o">-</span><span class="n">period</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">xp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">period</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1597</span>     <span class="n">fp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">fp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:],</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]))</span>
+<span class="ne">-&gt; </span><span class="mi">1599</span> <span class="k">return</span> <span class="n">interp_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
 </div>
+<img alt="_images/169be4011b29a303724f83e418f7dc2df054cf23a9104843b87f6fdb32819f59.png" src="_images/169be4011b29a303724f83e418f7dc2df054cf23a9104843b87f6fdb32819f59.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "thinkplot.plot(sf)\nthinkplot.cdf(cdf, alpha=0.2)\nthinkplot.config(loc='center left')";
+                var nbb_formatted_code = "thinkplot.plot(sf)\nthinkplot.cdf(cdf, alpha=0.2)\nthinkplot.config(loc=\"center left\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Figure <a class="reference internal" href="#survival1"><span class="xref myst">[survival1]</span></a>{reference-type=“ref”
 reference=“survival1”} (top) shows the result. The curve is nearly flat
@@ -569,13 +852,8 @@ HazardFunction when plotted.</p>
 this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">MakeHazardFunction</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;hazard&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">make_hazard_function</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;hazard&#39;</span><span class="p">)</span>
 <span class="n">hf</span><span class="p">[</span><span class="mi">39</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6767068273092369
 </pre></div>
 </div>
 </div>
@@ -639,10 +917,10 @@ at an earlier age.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
-<span class="kn">from</span> <span class="nn">survival</span> <span class="kn">import</span> <span class="n">HazardFunction</span>
+<span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">HazardFunction</span>
 
 
-<span class="k">def</span> <span class="nf">EstimateHazardFunction</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">estimate_hazard_function</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimates the hazard function by Kaplan-Meier.</span>
 
 <span class="sd">    http://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator</span>
@@ -653,29 +931,23 @@ at an earlier age.</p>
 <span class="sd">    verbose: whether to display intermediate results</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">complete</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;complete contains NaNs&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;complete contains NaNs&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">ongoing</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ongoing contains NaNs&quot;</span><span class="p">)</span>
-
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;ongoing contains NaNs&#39;</span><span class="p">)</span>
     <span class="n">hist_complete</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">complete</span><span class="p">)</span>
     <span class="n">hist_ongoing</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">ongoing</span><span class="p">)</span>
-
     <span class="n">ts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">hist_complete</span> <span class="o">|</span> <span class="n">hist_ongoing</span><span class="p">)</span>
     <span class="n">ts</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-
     <span class="n">at_risk</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">complete</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">ongoing</span><span class="p">)</span>
-
     <span class="n">lams</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ts</span><span class="p">:</span>
         <span class="n">ended</span> <span class="o">=</span> <span class="n">hist_complete</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
         <span class="n">censored</span> <span class="o">=</span> <span class="n">hist_ongoing</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
-
         <span class="n">lams</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">ended</span> <span class="o">/</span> <span class="n">at_risk</span>
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">at_risk</span><span class="p">,</span> <span class="n">ended</span><span class="p">,</span> <span class="n">censored</span><span class="p">,</span> <span class="n">lams</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
         <span class="n">at_risk</span> <span class="o">-=</span> <span class="n">ended</span> <span class="o">+</span> <span class="n">censored</span>
-
-    <span class="k">return</span> <span class="n">survival</span><span class="o">.</span><span class="n">HazardFunction</span><span class="p">(</span><span class="n">lams</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HazardFunction</span><span class="p">(</span><span class="n">lams</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -729,8 +1001,7 @@ January 1900.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nsfg</span>
-
-<span class="n">resp</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">ReadFemResp</span><span class="p">()</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">read_fem_resp</span><span class="p">()</span>
 <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;cmmarrhx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmmarrhx</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="mi">9997</span><span class="p">,</span> <span class="mi">9998</span><span class="p">,</span> <span class="mi">9999</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -751,8 +1022,8 @@ have been married, and <code class="docutils literal notranslate"><span class="p
 women who have not:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">evrmarry</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">agemarry</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-<span class="n">ongoing</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">evrmarry</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">age</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">evrmarry</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">agemarry</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">ongoing</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">evrmarry</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">age</span>
 </pre></div>
 </div>
 </div>
@@ -760,14 +1031,11 @@ women who have not:</p>
 <p>Finally we compute the hazard function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span> <span class="o">=</span> <span class="n">EstimateHazardFunction</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">hf</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Hazard&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span> <span class="o">=</span> <span class="n">estimate_hazard_function</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hf</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Age (years)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Hazard&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/6632460f7283cc8ab827a2f28f9abb5b33ffe1652cd0692515d5555db380ea46.png" src="_images/6632460f7283cc8ab827a2f28f9abb5b33ffe1652cd0692515d5555db380ea46.png" />
 </div>
 </div>
 <p>Figure <a class="reference internal" href="#survival2"><span class="xref myst">[survival2]</span></a>{reference-type=“ref”
@@ -795,14 +1063,11 @@ the complement of <code class="docutils literal notranslate"><span class="pre">s
 SurvivalFunction object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">MakeSurvival</span><span class="p">()</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob unmarried&quot;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_survival</span><span class="p">()</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Age (years)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Prob unmarried&#39;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/153554752479475670815d093e4ee0ce5bbcb64bef7c0de599a5bf08acb263c6.png" src="_images/153554752479475670815d093e4ee0ce5bbcb64bef7c0de599a5bf08acb263c6.png" />
 </div>
 </div>
 <p>Figure <a class="reference internal" href="#survival2"><span class="xref myst">[survival2]</span></a>{reference-type=“ref”
@@ -836,20 +1101,17 @@ they can be expected to report this information accurately.</p>
 <p>We can quantify sampling error by resampling. Here’s the code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">EstimateMarriageSurvival</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate_marriage_survival</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimates the survival curve.</span>
 
 <span class="sd">    resp: DataFrame of respondents</span>
 
 <span class="sd">    returns: pair of HazardFunction, SurvivalFunction</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># NOTE: Filling missing values would be better than dropping them.</span>
     <span class="n">complete</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">evrmarry</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">agemarry</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
     <span class="n">ongoing</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">evrmarry</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">age</span>
-
-    <span class="n">hf</span> <span class="o">=</span> <span class="n">EstimateHazardFunction</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">)</span>
-    <span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">MakeSurvival</span><span class="p">()</span>
-
+    <span class="n">hf</span> <span class="o">=</span> <span class="n">estimate_hazard_function</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">)</span>
+    <span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_survival</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">hf</span><span class="p">,</span> <span class="n">sf</span>
 </pre></div>
 </div>
@@ -857,26 +1119,23 @@ they can be expected to report this information accurately.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ResampleSurvival</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resample_survival</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Resamples respondents and estimates the survival function.</span>
 
 <span class="sd">    resp: DataFrame of respondents</span>
 <span class="sd">    iters: number of resamples</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">EstimateMarriageSurvival</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
-
+    <span class="n">_</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">estimate_marriage_survival</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
     <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">agemarry</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">resp</span><span class="o">.</span><span class="n">agemarry</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mf">12.0</span><span class="p">)</span>
-
     <span class="n">ss_seq</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
-        <span class="n">sample</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">ResampleRowsWeighted</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
-        <span class="n">_</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">EstimateMarriageSurvival</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-        <span class="n">ss_seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sf</span><span class="o">.</span><span class="n">Probs</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
-
-    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">PercentileRows</span><span class="p">(</span><span class="n">ss_seq</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">95</span><span class="p">])</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">FillBetween</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;90% CI&quot;</span><span class="p">)</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">estimate_marriage_survival</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+        <span class="n">ss_seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sf</span><span class="o">.</span><span class="n">probs</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
+    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">percentile_rows</span><span class="p">(</span><span class="n">ss_seq</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">95</span><span class="p">])</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;90% CI&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -898,19 +1157,11 @@ takes this sequence and computes the 5th and 95th percentiles, returning
 a 90% confidence interval for the survival curve.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ResampleSurvival</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span>
-    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span>
-    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob unmarried&quot;</span><span class="p">,</span>
-    <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">46</span><span class="p">],</span>
-    <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-    <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resample_survival</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Age (years)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Prob unmarried&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> 
+    <span class="mi">46</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/ca4fc8be1012997b6a69bc50ee9385cbb752e999323e5f02bba986853464c1ff.png" src="_images/ca4fc8be1012997b6a69bc50ee9385cbb752e999323e5f02bba986853464c1ff.png" />
 </div>
 </div>
 <p>Figure <a class="reference internal" href="#survival3"><span class="xref myst">[survival3]</span></a>{reference-type=“ref”
@@ -944,23 +1195,23 @@ datasets include 30,769 respondents.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
-    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/1995FemRespData.dat.gz&quot;</span>
-<span class="p">)</span>
+    <span class="s1">&#39;https://github.com/AllenDowney/ThinkStats2/raw/master/code/1995FemRespData.dat.gz&#39;</span>
+    <span class="p">)</span>
 <span class="n">download</span><span class="p">(</span>
-    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2006_2010_FemRespSetup.dct&quot;</span>
-<span class="p">)</span>
+    <span class="s1">&#39;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2006_2010_FemRespSetup.dct&#39;</span>
+    <span class="p">)</span>
 <span class="n">download</span><span class="p">(</span>
-    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2006_2010_FemResp.dat.gz&quot;</span>
-<span class="p">)</span>
+    <span class="s1">&#39;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2006_2010_FemResp.dat.gz&#39;</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp5</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">ReadFemResp1995</span><span class="p">()</span>
-<span class="n">resp6</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">ReadFemResp2002</span><span class="p">()</span>
-<span class="n">resp7</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">ReadFemResp2010</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp5</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">read_fem_resp1995</span><span class="p">()</span>
+<span class="n">resp6</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">read_fem_resp2002</span><span class="p">()</span>
+<span class="n">resp7</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">read_fem_resp2010</span><span class="p">()</span>
 <span class="n">resps</span> <span class="o">=</span> <span class="p">[</span><span class="n">resp5</span><span class="p">,</span> <span class="n">resp6</span><span class="p">,</span> <span class="n">resp7</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -971,7 +1222,7 @@ birth for each respondent:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">month0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;1899-12-15&#39;</span><span class="p">)</span>
-<span class="n">dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">month0</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="n">cm</span><span class="p">)</span> <span class="k">for</span> <span class="n">cm</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmbirth</span><span class="p">]</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="p">[(</span><span class="n">month0</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="n">cm</span><span class="p">))</span> <span class="k">for</span> <span class="n">cm</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmbirth</span><span class="p">]</span>
 <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;decade&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1900</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span>
 </pre></div>
 </div>
@@ -979,37 +1230,37 @@ birth for each respondent:</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">AddLabelsByDecade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_labels_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Draws fake points in order to add labels to the legend.</span>
 
 <span class="sd">    groups: GroupBy object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">))</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">0s&quot;</span> <span class="o">%</span> <span class="n">name</span>
-        <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">([</span><span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">0s&#39;</span> <span class="o">%</span> <span class="n">name</span>
+        <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">EstimateMarriageSurvivalByDecade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate_marriage_survival_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Groups respondents by decade and plots survival curves.</span>
 
 <span class="sd">    groups: GroupBy object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">))</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
-        <span class="n">_</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">EstimateMarriageSurvival</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
-        <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">estimate_marriage_survival</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+        <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotResampledByDecade</span><span class="p">(</span><span class="n">resps</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">predict_flag</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">omit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_resampled_by_decade</span><span class="p">(</span><span class="n">resps</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">predict_flag</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">omit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots survival curves for resampled data.</span>
 
 <span class="sd">    resps: list of DataFrames</span>
@@ -1017,23 +1268,19 @@ birth for each respondent:</p>
 <span class="sd">    predict_flag: whether to also plot predictions</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
-        <span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">ResampleRowsWeighted</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span> <span class="k">for</span> <span class="n">resp</span> <span class="ow">in</span> <span class="n">resps</span><span class="p">]</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span> <span class="k">for</span> <span class="n">resp</span> <span class="ow">in</span> <span class="n">resps</span><span class="p">]</span>
         <span class="n">sample</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">groups</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;decade&quot;</span><span class="p">)</span>
-
+        <span class="n">groups</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;decade&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">omit</span><span class="p">:</span>
-            <span class="n">groups</span> <span class="o">=</span> <span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">omit</span><span class="p">]</span>
-
-        <span class="c1"># TODO: refactor this to collect resampled estimates and</span>
-        <span class="c1"># plot shaded areas</span>
+            <span class="n">groups</span> <span class="o">=</span> <span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span>
+                <span class="n">omit</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">AddLabelsByDecade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
-
+            <span class="n">add_labels_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">predict_flag</span><span class="p">:</span>
-            <span class="n">PlotPredictionsByDecade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-            <span class="n">EstimateMarriageSurvivalByDecade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">plot_predictions_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">estimate_marriage_survival_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">EstimateMarriageSurvivalByDecade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+            <span class="n">estimate_marriage_survival_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1049,15 +1296,11 @@ due to sampling error, I resample the data, group respondents by decade,
 and plot survival curves:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PlotResampledByDecade</span><span class="p">(</span><span class="n">resps</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span>
-    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob unmarried&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_resampled_by_decade</span><span class="p">(</span><span class="n">resps</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Age (years)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Prob unmarried&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">13</span><span class="p">,</span> 
+    <span class="mi">45</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/ab047067022d90e00d06197453605d58d1d6853866bc4391270898960f218256.png" src="_images/ab047067022d90e00d06197453605d58d1d6853866bc4391270898960f218256.png" />
 </div>
 </div>
 <p>Data from the three NSFG cycles use different sampling weights, so I
@@ -1077,18 +1320,12 @@ age 25, they were marrying faster. By age 32 they had overtaken the
 50s cohort, and at age 44 they are substantially more likely to have
 married.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Women</span> <span class="n">born</span> <span class="ow">in</span> <span class="n">the</span> <span class="mi">60</span><span class="n">s</span> <span class="n">turned</span> <span class="mi">25</span> <span class="n">between</span> <span class="mi">1985</span> <span class="ow">and</span> <span class="mf">1995.</span> <span class="n">Remembering</span>
-<span class="n">that</span> <span class="n">the</span> <span class="o">*</span><span class="n">Newsweek</span><span class="o">*</span> <span class="n">article</span> <span class="n">I</span> <span class="n">mentioned</span> <span class="n">was</span> <span class="n">published</span> <span class="ow">in</span> <span class="mi">1986</span><span class="p">,</span> <span class="n">it</span> <span class="ow">is</span>
-<span class="n">tempting</span> <span class="n">to</span> <span class="n">imagine</span> <span class="n">that</span> <span class="n">the</span> <span class="n">article</span> <span class="n">triggered</span> <span class="n">a</span> <span class="n">marriage</span> <span class="n">boom</span><span class="o">.</span> <span class="n">That</span>
-<span class="n">explanation</span> <span class="n">would</span> <span class="n">be</span> <span class="n">too</span> <span class="n">pat</span><span class="p">,</span> <span class="n">but</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">possible</span> <span class="n">that</span> <span class="n">the</span> <span class="n">article</span>
-<span class="ow">and</span> <span class="n">the</span> <span class="n">reaction</span> <span class="n">to</span> <span class="n">it</span> <span class="n">were</span> <span class="n">indicative</span> <span class="n">of</span> <span class="n">a</span> <span class="n">mood</span> <span class="n">that</span> <span class="n">affected</span> <span class="n">the</span>
-<span class="n">behavior</span> <span class="n">of</span> <span class="n">this</span> <span class="n">cohort</span><span class="o">.</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>Women born in the 60s turned 25 between 1985 and 1995. Remembering
+that the <em>Newsweek</em> article I mentioned was published in 1986, it is
+tempting to imagine that the article triggered a marriage boom. That
+explanation would be too pat, but it is possible that the article
+and the reaction to it were indicative of a mood that affected the
+behavior of this cohort.</p>
 <ul class="simple">
 <li><p>The pattern of the 70s cohort is similar. They are less likely than
 their predecessors to be married before age 25, but at age 35 they
@@ -1116,37 +1353,32 @@ and appends them onto <code class="docutils literal notranslate"><span class="pr
 the predecessor:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PlotPredictionsByDecade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_predictions_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Groups respondents by decade and plots survival curves.</span>
 
 <span class="sd">    groups: GroupBy object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">hfs</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
-        <span class="n">hf</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">EstimateMarriageSurvival</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+        <span class="n">hf</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">estimate_marriage_survival</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
         <span class="n">hfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hf</span><span class="p">)</span>
-
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hfs</span><span class="p">))</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hfs</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hf</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hfs</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">hf</span><span class="o">.</span><span class="n">Extend</span><span class="p">(</span><span class="n">hfs</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
-        <span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">MakeSurvival</span><span class="p">()</span>
-        <span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+            <span class="n">hf</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">hfs</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_survival</span><span class="p">()</span>
+        <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PlotResampledByDecade</span><span class="p">(</span><span class="n">resps</span><span class="p">,</span> <span class="n">predict_flag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span>
-    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob unmarried&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_resampled_by_decade</span><span class="p">(</span><span class="n">resps</span><span class="p">,</span> <span class="n">predict_flag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Age (years)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Prob unmarried&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">13</span><span class="p">,</span> 
+    <span class="mi">45</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/0665f59097d47d6e4f92aceba901a1bcf3f5b7877dbcac65e7c25a1269780a2a.png" src="_images/0665f59097d47d6e4f92aceba901a1bcf3f5b7877dbcac65e7c25a1269780a2a.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">groups</span></code> is a GroupBy object with respondents grouped by decade of
@@ -1196,37 +1428,25 @@ exceeds <code class="docutils literal notranslate"><span class="pre">t</span></c
 length.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">ReadFemPreg</span><span class="p">()</span>
-
-<span class="n">complete</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;outcome in [1, 3, 4]&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">prglngth</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of complete pregnancies&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">complete</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">read_fem_preg</span><span class="p">()</span>
+<span class="n">complete</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;outcome in [1, 3, 4]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">prglngth</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of complete pregnancies&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">complete</span><span class="p">))</span>
 <span class="n">ongoing</span> <span class="o">=</span> <span class="n">preg</span><span class="p">[</span><span class="n">preg</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">prglngth</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of ongoing pregnancies&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ongoing</span><span class="p">))</span>
-
-<span class="n">hf</span> <span class="o">=</span> <span class="n">EstimateHazardFunction</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">)</span>
-<span class="n">sf1</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">MakeSurvival</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of complete pregnancies 11189
-Number of ongoing pregnancies 352
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of ongoing pregnancies&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ongoing</span><span class="p">))</span>
+<span class="n">hf</span> <span class="o">=</span> <span class="n">estimate_hazard_function</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">)</span>
+<span class="n">sf1</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_survival</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rem_life1</span> <span class="o">=</span> <span class="n">sf1</span><span class="o">.</span><span class="n">RemainingLifetime</span><span class="p">()</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">rem_life1</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Remaining pregnancy length&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Weeks&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Mean remaining weeks&quot;</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rem_life1</span> <span class="o">=</span> <span class="n">sf1</span><span class="o">.</span><span class="n">remaining_lifetime</span><span class="p">()</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rem_life1</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Remaining pregnancy length&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weeks&#39;</span><span class="p">,</span> <span class="n">ylabel</span>
+    <span class="o">=</span><span class="s1">&#39;Mean remaining weeks&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/2fe8fbca40474e3967a82c7f45c2b552b58944f9256c750c7c719c76d15664a2.png" src="_images/2fe8fbca40474e3967a82c7f45c2b552b58944f9256c750c7c719c76d15664a2.png" />
 </div>
 </div>
 <p>Figure <a class="reference internal" href="#survival6"><span class="xref myst">[survival6]</span></a>{reference-type=“ref”
@@ -1271,29 +1491,20 @@ it is hard to define a meaningful expected remaining lifetime.</p>
 <p>Here’s the code that computes and plots these functions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span><span class="p">,</span> <span class="n">sf2</span> <span class="o">=</span> <span class="n">EstimateMarriageSurvival</span><span class="p">(</span><span class="n">resp6</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span><span class="p">,</span> <span class="n">sf2</span> <span class="o">=</span> <span class="n">estimate_marriage_survival</span><span class="p">(</span><span class="n">resp6</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">pmf</span><span class="p">:</span> <span class="n">pmf</span><span class="o">.</span><span class="n">Percentile</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">rem_life2</span> <span class="o">=</span> <span class="n">sf2</span><span class="o">.</span><span class="n">RemainingLifetime</span><span class="p">(</span><span class="n">filler</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">)</span>
-
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">rem_life2</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Years until first marriage&quot;</span><span class="p">,</span>
-    <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
-    <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">31</span><span class="p">],</span>
-    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span>
-    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Median remaining years&quot;</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">pmf</span><span class="p">:</span> <span class="n">pmf</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">rem_life2</span> <span class="o">=</span> <span class="n">sf2</span><span class="o">.</span><span class="n">remaining_lifetime</span><span class="p">(</span><span class="n">filler</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rem_life2</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Years until first marriage&#39;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">11</span><span class="p">,</span>
+    <span class="mi">31</span><span class="p">],</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Age (years)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Median remaining years&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/5d8eba616b780c9f8adf984e0703484f4d998b62bb6fa2971c890becb709f824.png" src="_images/5d8eba616b780c9f8adf984e0703484f4d998b62bb6fa2971c890becb709f824.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">sf1</span></code> is the survival curve for pregnancy length; in this case we can
@@ -1329,30 +1540,91 @@ than new in expectation.”</p></li>
 <p>Consider dividing the respondents into groups by decade of birth, and possibly by age at first marriage.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CleanData</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">clean_data</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Cleans respondent data.</span>
 
 <span class="sd">    resp: DataFrame</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cmdivorcx&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmdivorcx</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="mi">9998</span><span class="p">,</span> <span class="mi">9999</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
-    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;notdivorced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmdivorcx</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;duration&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">cmdivorcx</span> <span class="o">-</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmmarrhx</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span>
-    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;durationsofar&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">cmintvw</span> <span class="o">-</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmmarrhx</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span>
-
-    <span class="n">month0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;1899-12-15&quot;</span><span class="p">)</span>
-    <span class="n">dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">month0</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="n">cm</span><span class="p">)</span> <span class="k">for</span> <span class="n">cm</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmbirth</span><span class="p">]</span>
-    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;decade&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1900</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;cmdivorcx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmdivorcx</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="mi">9998</span><span class="p">,</span> <span class="mi">9999</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;notdivorced&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmdivorcx</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">cmdivorcx</span> <span class="o">-</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmmarrhx</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;durationsofar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">cmintvw</span> <span class="o">-</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmmarrhx</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span>
+    <span class="n">month0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;1899-12-15&#39;</span><span class="p">)</span>
+    <span class="n">dates</span> <span class="o">=</span> <span class="p">[(</span><span class="n">month0</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="n">cm</span><span class="p">))</span> <span class="k">for</span> <span class="n">cm</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmbirth</span><span class="p">]</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;decade&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1900</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CleanData</span><span class="p">(</span><span class="n">resp6</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clean_data</span><span class="p">(</span><span class="n">resp6</span><span class="p">)</span>
 <span class="n">married6</span> <span class="o">=</span> <span class="n">resp6</span><span class="p">[</span><span class="n">resp6</span><span class="o">.</span><span class="n">evrmarry</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
-
-<span class="n">CleanData</span><span class="p">(</span><span class="n">resp7</span><span class="p">)</span>
+<span class="n">clean_data</span><span class="p">(</span><span class="n">resp7</span><span class="p">)</span>
 <span class="n">married7</span> <span class="o">=</span> <span class="n">resp7</span><span class="p">[</span><span class="n">resp7</span><span class="o">.</span><span class="n">evrmarry</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">add_labels_by_decade</span>
+
+
+<span class="k">def</span> <span class="nf">resample_divorce_curve_by_decade</span><span class="p">(</span><span class="n">resps</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots divorce curves for each birth cohort.</span>
+
+<span class="sd">    resps: list of respondent DataFrames</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">41</span><span class="p">):</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span> <span class="k">for</span> <span class="n">resp</span> <span class="ow">in</span> <span class="n">resps</span><span class="p">]</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;decade&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">add_labels_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+        <span class="n">estimate_survival_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Years&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Fraction undivorced&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span>
+        <span class="mi">28</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate_survival_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Groups respondents by decade and plots survival curves.</span>
+
+<span class="sd">    groups: GroupBy object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">estimate_survival</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+        <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate_survival</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimates the survival curve.</span>
+
+<span class="sd">    resp: DataFrame of respondents</span>
+
+<span class="sd">    returns: pair of HazardFunction, SurvivalFunction</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">complete</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">notdivorced</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">ongoing</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">notdivorced</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">durationsofar</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">hf</span> <span class="o">=</span> <span class="n">estimate_hazard_function</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">)</span>
+    <span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_survival</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">hf</span><span class="p">,</span> <span class="n">sf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resample_divorce_curve_by_decade</span><span class="p">([</span><span class="n">married6</span><span class="p">,</span> <span class="n">married7</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>

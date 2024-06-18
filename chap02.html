@@ -387,6 +387,32 @@ document.write(`
 <h1>Distributions<a class="headerlink" href="#distributions" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> nb_black
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 1;
+                var nbb_unformatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_formatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
 
 
@@ -404,11 +430,27 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 2;
+                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n        local, _ = urlretrieve(url, filename)\n        print('Downloaded ' + local)\n\n\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py')";
+                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py&quot;</span><span class="p">)</span>
-
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span>
     <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz&quot;</span>
@@ -416,6 +458,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "download('https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py')\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz'\n    )";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz\"\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <section id="histograms">
 <h2>Histograms<a class="headerlink" href="#histograms" title="Link to this heading">#</a></h2>
@@ -433,6 +492,23 @@ Given a sequence of values, <code class="docutils literal notranslate"><span cla
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 4;
+                var nbb_unformatted_code = "t = [1, 2, 2, 3, 5]";
+                var nbb_formatted_code = "t = [1, 2, 2, 3, 5]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -442,6 +518,23 @@ Given a sequence of values, <code class="docutils literal notranslate"><span cla
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "hist = {}\nfor x in t:\n    hist[x] = hist.get(x, 0) + 1";
+                var nbb_formatted_code = "hist = {}\nfor x in t:\n    hist[x] = hist.get(x, 0) + 1";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The result is a dictionary that maps from values to frequencies.
 Alternatively, you could use the <code class="docutils literal notranslate"><span class="pre">Counter</span></code> class defined in the
@@ -454,6 +547,23 @@ Alternatively, you could use the <code class="docutils literal notranslate"><spa
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "from collections import Counter\ncounter = Counter(t)";
+                var nbb_formatted_code = "from collections import Counter\n\ncounter = Counter(t)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The result is a <code class="docutils literal notranslate"><span class="pre">Counter</span></code> object, which is a subclass of dictionary.</p>
 <p>Another option is to use the pandas method <code class="docutils literal notranslate"><span class="pre">value_counts</span></code>, which we saw
@@ -477,13 +587,28 @@ another Hist. You can instantiate a Hist object like this:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hist({1: 1, 2: 2, 3: 1, 5: 1})
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "from thinkstats2 import Hist\nhist = Hist([1, 2, 2, 3, 5])\nhist";
+                var nbb_formatted_code = "from thinkstats2 import Hist\n\nhist = Hist([1, 2, 2, 3, 5])\nhist";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Hist objects provide <code class="docutils literal notranslate"><span class="pre">Freq</span></code>, which takes a value and returns its
 frequency:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="o">.</span><span class="n">Freq</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="o">.</span><span class="n">freq</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -491,7 +616,22 @@ frequency:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "hist.freq(2)";
+                var nbb_formatted_code = "hist.freq(2)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The bracket operator does the same thing:</p>
 <div class="cell docutils container">
@@ -504,12 +644,27 @@ frequency:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "hist[2]";
+                var nbb_formatted_code = "hist[2]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>If you look up a value that has never appeared, the frequency is 0.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="o">.</span><span class="n">Freq</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="o">.</span><span class="n">freq</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -517,12 +672,27 @@ frequency:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "hist.freq(4)";
+                var nbb_formatted_code = "hist.freq(4)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Values</span></code> returns an unsorted list of the values in the Hist:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="o">.</span><span class="n">Values</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -530,14 +700,29 @@ frequency:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([1, 2, 3, 5])
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "hist.values()";
+                var nbb_formatted_code = "hist.values()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>To loop through the values in order, you can use the built-in function
 <code class="docutils literal notranslate"><span class="pre">sorted</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">hist</span><span class="o">.</span><span class="n">Values</span><span class="p">()):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">hist</span><span class="o">.</span><span class="n">Freq</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">hist</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">hist</span><span class="o">.</span><span class="n">freq</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -548,13 +733,28 @@ frequency:</p>
 5 1
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 12;
+                var nbb_unformatted_code = "for val in sorted(hist.values()):\n    print(val, hist.freq(val))";
+                var nbb_formatted_code = "for val in sorted(hist.values()):\n    print(val, hist.freq(val))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Or you can use <code class="docutils literal notranslate"><span class="pre">Items</span></code> to iterate through value-frequency pairs:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">hist</span><span class="o">.</span><span class="n">Items</span><span class="p">():</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">hist</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -565,7 +765,22 @@ frequency:</p>
 5 1
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "for val, freq in hist.items():\n    print(val, freq)";
+                var nbb_formatted_code = "for val, freq in hist.items():\n    print(val, freq)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 </section>
 <section id="plotting-histograms">
@@ -581,8 +796,8 @@ reference=“code”} for information about installing <code class="docutils lit
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">thinkplot</span>
 
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;frequency&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -591,18 +806,30 @@ reference=“code”} for information about installing <code class="docutils lit
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "import thinkplot\nthinkplot.hist(hist)\nthinkplot.show(xlabel='value', ylabel='frequency')";
+                var nbb_formatted_code = "import thinkplot\n\nthinkplot.hist(hist)\nthinkplot.show(xlabel=\"value\", ylabel=\"frequency\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>You can read the documentation for <code class="docutils literal notranslate"><span class="pre">thinkplot</span></code> at
 <a class="reference external" href="http://greenteapress.com/thinkstats2/thinkplot.html">http://greenteapress.com/thinkstats2/thinkplot.html</a>.</p>
 </section>
 <section id="nsfg-variables">
 <h2>NSFG variables<a class="headerlink" href="#nsfg-variables" title="Link to this heading">#</a></h2>
-<p>Now let’s get back to the data from the NSFG. The code in this chapter
-is in <code class="docutils literal notranslate"><span class="pre">first.py</span></code>. For information about downloading and working with
-this code, see Section <a class="reference internal" href="#code"><span class="xref myst">[code]</span></a>{reference-type=“ref”
-reference=“code”}.</p>
-<p>When you start working with a new dataset, I suggest you explore the
+<p>Now let’s get back to the data from the NSFG.
+When you start working with a new dataset, I suggest you explore the
 variables you are planning to use one at a time, and a good way to start
 is by looking at histograms.</p>
 <p>In Section <a class="reference internal" href="#cleaning"><span class="xref myst">[cleaning]</span></a>{reference-type=“ref”
@@ -610,26 +837,42 @@ reference=“cleaning”} we transformed <code class="docutils literal notransla
 and combined <code class="docutils literal notranslate"><span class="pre">birthwgt_lb</span></code> and <code class="docutils literal notranslate"><span class="pre">birthwgt_oz</span></code> into a single quantity,
 <code class="docutils literal notranslate"><span class="pre">totalwgt_lb</span></code>. In this section I use these variables to demonstrate some
 features of histograms.</p>
-<p><img alt="Histogram of mother's age at end ofpregnancy." src="figs/first_agepreg_hist.pdf" />{height=“2.5in”}</p>
 <p>I’ll start by reading the data and selecting records for live births:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">ReadFemPreg</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">read_fem_preg</span>
 
-<span class="n">preg</span> <span class="o">=</span> <span class="n">ReadFemPreg</span><span class="p">()</span>
+<span class="n">preg</span> <span class="o">=</span> <span class="n">read_fem_preg</span><span class="p">()</span>
 <span class="n">live</span> <span class="o">=</span> <span class="n">preg</span><span class="p">[</span><span class="n">preg</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "from nsfg import read_fem_preg\n\npreg = read_fem_preg()\nlive = preg[preg.outcome == 1]";
+                var nbb_formatted_code = "from nsfg import read_fem_preg\n\npreg = read_fem_preg()\nlive = preg[preg.outcome == 1]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The expression in brackets is a boolean Series that selects rows from
 the DataFrame and returns a new DataFrame. Next I generate and plot the
 histogram of <code class="docutils literal notranslate"><span class="pre">birthwgt_lb</span></code> for live births.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">live</span><span class="o">.</span><span class="n">birthwgt_lb</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;birthwgt_lb&#39;</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;pounds&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">live</span><span class="o">.</span><span class="n">birthwgt_lb</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;birthwgt_lb&quot;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;pounds&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;frequency&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -638,7 +881,22 @@ histogram of <code class="docutils literal notranslate"><span class="pre">birthw
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "hist = Hist(live.birthwgt_lb, label='birthwgt_lb')\nthinkplot.hist(hist)\nthinkplot.show(xlabel='pounds', ylabel='frequency')";
+                var nbb_formatted_code = "hist = Hist(live.birthwgt_lb, label=\"birthwgt_lb\")\nthinkplot.hist(hist)\nthinkplot.show(xlabel=\"pounds\", ylabel=\"frequency\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>When the argument passed to Hist is a pandas Series, any <code class="docutils literal notranslate"><span class="pre">nan</span></code> values
 are dropped. <code class="docutils literal notranslate"><span class="pre">label</span></code> is a string that appears in the legend when the
@@ -682,7 +940,7 @@ might be accurate reports of rare events.</p>
 <code class="docutils literal notranslate"><span class="pre">n</span></code> and return the <code class="docutils literal notranslate"><span class="pre">n</span></code> largest or smallest values from the histogram:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">weeks</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">hist</span><span class="o">.</span><span class="n">Smallest</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">weeks</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">hist</span><span class="o">.</span><span class="n">smallest</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">weeks</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -700,7 +958,22 @@ might be accurate reports of rare events.</p>
 9.0 623
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "for weeks, freq in hist.smallest(10):\n    print(weeks, freq)";
+                var nbb_formatted_code = "for weeks, freq in hist.smallest(10):\n    print(weeks, freq)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>In the list of pregnancy lengths for live births, the 10 lowest values
 are <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">4,</span> <span class="pre">9,</span> <span class="pre">13,</span> <span class="pre">17,</span> <span class="pre">18,</span> <span class="pre">19,</span> <span class="pre">20,</span> <span class="pre">21,</span> <span class="pre">22]</span></code>. Values below 10 weeks are
@@ -729,22 +1002,37 @@ babies and others. I divided the DataFrame of live births using
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">firsts</span> <span class="o">=</span> <span class="n">live</span><span class="p">[</span><span class="n">live</span><span class="o">.</span><span class="n">birthord</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
 <span class="n">others</span> <span class="o">=</span> <span class="n">live</span><span class="p">[</span><span class="n">live</span><span class="o">.</span><span class="n">birthord</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">]</span>
-
-<span class="n">first_hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
-<span class="n">other_hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;other&#39;</span><span class="p">)</span>
+<span class="n">first_hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
+<span class="n">other_hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;other&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 18;
+                var nbb_unformatted_code = "firsts = live[live.birthord == 1]\nothers = live[live.birthord != 1]\nfirst_hist = Hist(firsts.prglngth, label='first')\nother_hist = Hist(others.prglngth, label='other')";
+                var nbb_formatted_code = "firsts = live[live.birthord == 1]\nothers = live[live.birthord != 1]\nfirst_hist = Hist(firsts.prglngth, label=\"first\")\nother_hist = Hist(others.prglngth, label=\"other\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Then I plotted their histograms on the same axis:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">width</span> <span class="o">=</span> <span class="mf">0.45</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">PrePlot</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">first_hist</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">other_hist</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;weeks&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span>
-               <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">27</span><span class="p">,</span> <span class="mi">46</span><span class="p">])</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">first_hist</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">other_hist</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;weeks&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">27</span><span class="p">,</span> <span class="mi">46</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -753,7 +1041,22 @@ babies and others. I divided the DataFrame of live births using
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 19;
+                var nbb_unformatted_code = "width = 0.45\nthinkplot.pre_plot(2)\nthinkplot.hist(first_hist, align='right', width=width)\nthinkplot.hist(other_hist, align='left', width=width)\nthinkplot.show(xlabel='weeks', ylabel='frequency', xlim=[27, 46])";
+                var nbb_formatted_code = "width = 0.45\nthinkplot.pre_plot(2)\nthinkplot.hist(first_hist, align=\"right\", width=width)\nthinkplot.hist(other_hist, align=\"left\", width=width)\nthinkplot.show(xlabel=\"weeks\", ylabel=\"frequency\", xlim=[27, 46])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">thinkplot.PrePlot</span></code> takes the number of histograms we are planning to
 plot; it uses this information to choose an appropriate collection of
@@ -847,7 +1150,22 @@ standard deviation:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38.56055968517709
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 20;
+                var nbb_unformatted_code = "mean = live.prglngth.mean()\nmean";
+                var nbb_formatted_code = "mean = live.prglngth.mean()\nmean";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -860,7 +1178,22 @@ standard deviation:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.302662067826817
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 21;
+                var nbb_unformatted_code = "var = live.prglngth.var()\nvar";
+                var nbb_formatted_code = "var = live.prglngth.var()\nvar";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -873,7 +1206,22 @@ standard deviation:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.702343810070587
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 22;
+                var nbb_unformatted_code = "std = live.prglngth.std()\nstd";
+                var nbb_formatted_code = "std = live.prglngth.std()\nstd";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>For all live births, the mean pregnancy length is 38.6 weeks, the
 standard deviation is 2.7 weeks, which means we should expect deviations
@@ -904,19 +1252,35 @@ deviation&quot;. Here's the Python code that computes Cohen's \)</span>d$:</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="k">def</span> <span class="nf">CohenEffectSize</span><span class="p">(</span><span class="n">group1</span><span class="p">,</span> <span class="n">group2</span><span class="p">):</span>
-    <span class="n">diff</span> <span class="o">=</span> <span class="n">group1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">group2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
+<span class="k">def</span> <span class="nf">cohen_effect_size</span><span class="p">(</span><span class="n">group1</span><span class="p">,</span> <span class="n">group2</span><span class="p">):</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">group1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">group2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     <span class="n">var1</span> <span class="o">=</span> <span class="n">group1</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
     <span class="n">var2</span> <span class="o">=</span> <span class="n">group2</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
     <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">group1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">group2</span><span class="p">)</span>
-
     <span class="n">pooled_var</span> <span class="o">=</span> <span class="p">(</span><span class="n">n1</span> <span class="o">*</span> <span class="n">var1</span> <span class="o">+</span> <span class="n">n2</span> <span class="o">*</span> <span class="n">var2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span><span class="p">)</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pooled_var</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">d</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 23;
+                var nbb_unformatted_code = "import numpy as np\n\n\ndef cohen_effect_size(group1, group2):\n    diff = group1.mean() - group2.mean()\n    var1 = group1.var()\n    var2 = group2.var()\n    n1, n2 = len(group1), len(group2)\n    pooled_var = (n1 * var1 + n2 * var2) / (n1 + n2)\n    d = diff / np.sqrt(pooled_var)\n    return d";
+                var nbb_formatted_code = "import numpy as np\n\n\ndef cohen_effect_size(group1, group2):\n    diff = group1.mean() - group2.mean()\n    var1 = group1.var()\n    var2 = group2.var()\n    n1, n2 = len(group1), len(group2)\n    pooled_var = (n1 * var1 + n2 * var2) / (n1 + n2)\n    d = diff / np.sqrt(pooled_var)\n    return d";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>In this example, the difference in means is 0.029 standard deviations,
 which is small. To put that in perspective, the difference in height
@@ -1022,34 +1386,378 @@ groups, that is relevant in practice.</p></li>
 <h2>Exercises<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>Using the variable <code class="docutils literal notranslate"><span class="pre">totalwgt_lb</span></code>, investigate whether first babies are lighter or heavier than others.</p>
 <p>Compute Cohen’s effect size to quantify the difference between the groups.  How does it compare to the difference in pregnancy length?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">firsts</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">others</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7.201094430437772, 7.325855614973262)
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 24;
+                var nbb_unformatted_code = "firsts.totalwgt_lb.mean(), others.totalwgt_lb.mean()";
+                var nbb_formatted_code = "firsts.totalwgt_lb.mean(), others.totalwgt_lb.mean()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohen_effect_size</span><span class="p">(</span><span class="n">firsts</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="p">,</span> <span class="n">others</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.08867292707260174
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 25;
+                var nbb_unformatted_code = "cohen_effect_size(firsts.totalwgt_lb, others.totalwgt_lb)";
+                var nbb_formatted_code = "cohen_effect_size(firsts.totalwgt_lb, others.totalwgt_lb)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>For the next few exercises, we’ll load the respondent file:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dct&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dat.gz&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dat.gz&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 26;
+                var nbb_unformatted_code = "download(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dct'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dat.gz'\n    )";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dct\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dat.gz\"\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">ReadFemResp</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">read_fem_resp</span>
 
-<span class="n">resp</span> <span class="o">=</span> <span class="n">ReadFemResp</span><span class="p">()</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">read_fem_resp</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 27;
+                var nbb_unformatted_code = "from nsfg import read_fem_resp\nresp = read_fem_resp()";
+                var nbb_formatted_code = "from nsfg import read_fem_resp\n\nresp = read_fem_resp()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Make a histogram of <tt>totincr</tt> the total income for the respondent’s family.  To interpret the codes see the <a class="reference internal" href="#ftp://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/NSFG/Cycle6Codebook-Pregnancy.pdf"><span class="xref myst">codebook</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">totincr</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;totincr&quot;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;income (category)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/998b198fb5663c2918c75d5fe62b34435593abff041b31242205eea3db9659b8.png" src="_images/998b198fb5663c2918c75d5fe62b34435593abff041b31242205eea3db9659b8.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 29;
+                var nbb_unformatted_code = "hist = Hist(resp.totincr)\nthinkplot.hist(hist, label=\"totincr\")\nthinkplot.config(xlabel=\"income (category)\", ylabel=\"Count\")";
+                var nbb_formatted_code = "hist = Hist(resp.totincr)\nthinkplot.hist(hist, label=\"totincr\")\nthinkplot.config(xlabel=\"income (category)\", ylabel=\"Count\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Make a histogram of <tt>age_r</tt>, the respondent’s age at the time of interview.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">ager</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ager&quot;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/01660b9296db2e151a037c9e2c5f764ab21a5bb0679be5df525b38eebce57459.png" src="_images/01660b9296db2e151a037c9e2c5f764ab21a5bb0679be5df525b38eebce57459.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 31;
+                var nbb_unformatted_code = "hist = Hist(resp.ager)\nthinkplot.hist(hist, label=\"ager\")\nthinkplot.config(xlabel=\"age (years)\", ylabel=\"Count\")";
+                var nbb_formatted_code = "hist = Hist(resp.ager)\nthinkplot.hist(hist, label=\"ager\")\nthinkplot.config(xlabel=\"age (years)\", ylabel=\"Count\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Make a histogram of <tt>numfmhh</tt>, the number of people in the respondent’s household.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">numfmhh</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;numfmhh&quot;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;number of people&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4a3d9ee737fdca74e8685caa9230851fea0c4122d59323de38d68b40a00df075.png" src="_images/4a3d9ee737fdca74e8685caa9230851fea0c4122d59323de38d68b40a00df075.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 32;
+                var nbb_unformatted_code = "hist = Hist(resp.numfmhh)\nthinkplot.hist(hist, label='numfmhh')\nthinkplot.config(xlabel='number of people', ylabel='Count')";
+                var nbb_formatted_code = "hist = Hist(resp.numfmhh)\nthinkplot.hist(hist, label=\"numfmhh\")\nthinkplot.config(xlabel=\"number of people\", ylabel=\"Count\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Make a histogram of <tt>parity</tt>, the number of children borne by the respondent.  How would you describe this distribution?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">parity</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;parity&quot;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;parity&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/55b250ea6d8fcd66c040c201b6231366b747a9ed2f1dcd6dd90c7135a213d8c6.png" src="_images/55b250ea6d8fcd66c040c201b6231366b747a9ed2f1dcd6dd90c7135a213d8c6.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 33;
+                var nbb_unformatted_code = "hist = Hist(resp.parity)\nthinkplot.hist(hist, label='parity')\nthinkplot.config(xlabel='parity', ylabel='Count')";
+                var nbb_formatted_code = "hist = Hist(resp.parity)\nthinkplot.hist(hist, label=\"parity\")\nthinkplot.config(xlabel=\"parity\", ylabel=\"Count\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Use Hist.Largest to find the largest values of <tt>parity</tt>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="o">.</span><span class="n">largest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(22, 1),
+ (16, 1),
+ (10, 3),
+ (9, 2),
+ (8, 8),
+ (7, 15),
+ (6, 29),
+ (5, 95),
+ (4, 309),
+ (3, 828)]
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 34;
+                var nbb_unformatted_code = "hist.largest(10)";
+                var nbb_formatted_code = "hist.largest(10)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Let’s investigate whether people with higher income have higher parity.  Keep in mind that in this study, we are observing different people at different times during their lives, so this data is not the best choice for answering this question.  But for now let’s take it at face value.</p>
 <p>Use <tt>totincr</tt> to select the respondents with the highest income (level 14).  Plot the histogram of <tt>parity</tt> for just the high income respondents.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rich</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">totincr</span> <span class="o">==</span> <span class="mi">14</span><span class="p">]</span>
+<span class="n">hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">rich</span><span class="o">.</span><span class="n">parity</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;parity&quot;</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;parity&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fe7e55123d78788a18b7a54427e1284442eabed37d8f29f45daf863ebf0a031a.png" src="_images/fe7e55123d78788a18b7a54427e1284442eabed37d8f29f45daf863ebf0a031a.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 35;
+                var nbb_unformatted_code = "rich = resp[resp.totincr == 14]\nhist = Hist(rich.parity)\nthinkplot.hist(hist, label='parity')\nthinkplot.config(xlabel='parity', ylabel='Count')";
+                var nbb_formatted_code = "rich = resp[resp.totincr == 14]\nhist = Hist(rich.parity)\nthinkplot.hist(hist, label=\"parity\")\nthinkplot.config(xlabel=\"parity\", ylabel=\"Count\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Find the largest parities for high income respondents.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="o">.</span><span class="n">largest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(8, 1), (7, 1), (5, 5), (4, 19), (3, 123), (2, 267), (1, 229), (0, 515)]
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 36;
+                var nbb_unformatted_code = "hist.largest(10)";
+                var nbb_formatted_code = "hist.largest(10)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Compare the mean <tt>parity</tt> for high income respondents and others.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">not_rich</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">totincr</span> <span class="o">&lt;</span> <span class="mi">14</span><span class="p">]</span>
+<span class="n">rich</span><span class="o">.</span><span class="n">parity</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">not_rich</span><span class="o">.</span><span class="n">parity</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.0758620689655172, 1.2495758136665125)
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 37;
+                var nbb_unformatted_code = "not_rich = resp[resp.totincr < 14]\nrich.parity.mean(), not_rich.parity.mean()";
+                var nbb_formatted_code = "not_rich = resp[resp.totincr < 14]\nrich.parity.mean(), not_rich.parity.mean()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Compute the Cohen effect size for this difference.  How does it compare with the difference in pregnancy length for first babies and others?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohen_effect_size</span><span class="p">(</span><span class="n">rich</span><span class="o">.</span><span class="n">parity</span><span class="p">,</span> <span class="n">not_rich</span><span class="o">.</span><span class="n">parity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.12511855314660367
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 38;
+                var nbb_unformatted_code = "cohen_effect_size(rich.parity, not_rich.parity)";
+                var nbb_formatted_code = "cohen_effect_size(rich.parity, not_rich.parity)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 </section>
 </section>
 

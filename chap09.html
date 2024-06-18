@@ -381,6 +381,32 @@ document.write(`
 <h1>Hypothesis testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> nb_black
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 1;
+                var nbb_unformatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_formatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
 
 
@@ -398,18 +424,50 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 2;
+                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n        local, _ = urlretrieve(url, filename)\n        print('Downloaded ' + local)\n\n\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py')";
+                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
 <span class="kn">import</span> <span class="nn">random</span>
-
 <span class="kn">import</span> <span class="nn">thinkstats2</span>
 <span class="kn">import</span> <span class="nn">thinkplot</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "import numpy as np\nimport random\nimport thinkstats2\nimport thinkplot";
+                var nbb_formatted_code = "import numpy as np\nimport random\nimport thinkstats2\nimport thinkplot";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <section id="classical-hypothesis-testing">
 <h2>Classical hypothesis testing<a class="headerlink" href="#classical-hypothesis-testing" title="Link to this heading">#</a></h2>
@@ -472,27 +530,42 @@ structure of a classical hypothesis test. Here is the definition:</p>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">MakeModel</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">actual</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">TestStatistic</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make_model</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actual</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_statistic</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">PValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">test_stats</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RunModel</span><span class="p">())</span> 
-                           <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
-
+    <span class="k">def</span> <span class="nf">p_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_stats</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">test_statistic</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">run_model</span><span class="p">())</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
         <span class="n">count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_stats</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actual</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">count</span> <span class="o">/</span> <span class="n">iters</span>
 
-    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">UnimplementedMethodException</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">MakeModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">make_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
 
-    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">UnimplementedMethodException</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 4;
+                var nbb_unformatted_code = "class HypothesisTest(object):\n\n    def __init__(self, data):\n        self.data = data\n        self.make_model()\n        self.actual = self.test_statistic(data)\n\n    def p_value(self, iters=1000):\n        self.test_stats = [self.test_statistic(self.run_model()) for _ in\n            range(iters)]\n        count = sum(1 for x in self.test_stats if x >= self.actual)\n        return count / iters\n\n    def test_statistic(self, data):\n        raise UnimplementedMethodException()\n\n    def make_model(self):\n        pass\n\n    def run_model(self):\n        raise UnimplementedMethodException()";
+                var nbb_formatted_code = "class HypothesisTest(object):\n\n    def __init__(self, data):\n        self.data = data\n        self.make_model()\n        self.actual = self.test_statistic(data)\n\n    def p_value(self, iters=1000):\n        self.test_stats = [self.test_statistic(self.run_model()) for _ in range(iters)]\n        count = sum(1 for x in self.test_stats if x >= self.actual)\n        return count / iters\n\n    def test_statistic(self, data):\n        raise UnimplementedMethodException()\n\n    def make_model(self):\n        pass\n\n    def run_model(self):\n        raise UnimplementedMethodException()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code> is an abstract parent class that provides complete
 definitions for some methods and place-keepers for others. Child classes
@@ -517,21 +590,38 @@ the coin is actually fair:</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CoinTest</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">HypothesisTest</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">heads</span><span class="p">,</span> <span class="n">tails</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">test_stat</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">heads</span> <span class="o">-</span> <span class="n">tails</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">test_stat</span>
 
-    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">heads</span><span class="p">,</span> <span class="n">tails</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">heads</span> <span class="o">+</span> <span class="n">tails</span>
-        <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;HT&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s2">&quot;HT&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
         <span class="n">hist</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">hist</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">],</span> <span class="n">hist</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">hist</span><span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">],</span> <span class="n">hist</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">data</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "class CoinTest(thinkstats2.HypothesisTest):\n\n    def test_statistic(self, data):\n        heads, tails = data\n        test_stat = abs(heads - tails)\n        return test_stat\n\n    def run_model(self):\n        heads, tails = self.data\n        n = heads + tails\n        sample = [random.choice('HT') for _ in range(n)]\n        hist = thinkstats2.Hist(sample)\n        data = hist['H'], hist['T']\n        return data";
+                var nbb_formatted_code = "class CoinTest(thinkstats2.HypothesisTest):\n\n    def test_statistic(self, data):\n        heads, tails = data\n        test_stat = abs(heads - tails)\n        return test_stat\n\n    def run_model(self):\n        heads, tails = self.data\n        n = heads + tails\n        sample = [random.choice(\"HT\") for _ in range(n)]\n        hist = thinkstats2.Hist(sample)\n        data = hist[\"H\"], hist[\"T\"]\n        return data";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The parameter, <code class="docutils literal notranslate"><span class="pre">data</span></code>, is a pair of integers: the number of heads and
 tails. The test statistic is the absolute difference between them, so
@@ -543,16 +633,31 @@ of heads and tails, and returns a pair of integers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span> <span class="o">=</span> <span class="n">CoinTest</span><span class="p">((</span><span class="mi">140</span><span class="p">,</span> <span class="mi">110</span><span class="p">))</span>
-<span class="n">p_value</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">PValue</span><span class="p">()</span>
+<span class="n">p_value</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">p_value</span><span class="p">()</span>
 <span class="n">p_value</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.061
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.057
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "ct = CoinTest((140, 110))\np_value = ct.p_value()\np_value";
+                var nbb_formatted_code = "ct = CoinTest((140, 110))\np_value = ct.p_value()\np_value";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The result is about 0.07, which means that if the coin is fair, we
 expect to see a difference as big as 30 about 7% of the time.</p>
@@ -584,23 +689,40 @@ and shuffle them, treating the two groups as one big group:</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DiffMeansPermute</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">HypothesisTest</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">test_stat</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">group1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">group2</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">test_stat</span>
 
-    <span class="k">def</span> <span class="nf">MakeModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">make_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">group1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">group2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">group1</span><span class="p">,</span> <span class="n">group2</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">:]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="p">:]</span>
         <span class="k">return</span> <span class="n">data</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "class DiffMeansPermute(thinkstats2.HypothesisTest):\n\n    def test_statistic(self, data):\n        group1, group2 = data\n        test_stat = abs(group1.mean() - group2.mean())\n        return test_stat\n\n    def make_model(self):\n        group1, group2 = self.data\n        self.n, self.m = len(group1), len(group2)\n        self.pool = np.hstack((group1, group2))\n\n    def run_model(self):\n        np.random.shuffle(self.pool)\n        data = self.pool[:self.n], self.pool[self.n:]\n        return data";
+                var nbb_formatted_code = "class DiffMeansPermute(thinkstats2.HypothesisTest):\n\n    def test_statistic(self, data):\n        group1, group2 = data\n        test_stat = abs(group1.mean() - group2.mean())\n        return test_stat\n\n    def make_model(self):\n        group1, group2 = self.data\n        self.n, self.m = len(group1), len(group2)\n        self.pool = np.hstack((group1, group2))\n\n    def run_model(self):\n        np.random.shuffle(self.pool)\n        data = self.pool[: self.n], self.pool[self.n :]\n        return data";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">data</span></code> is a pair of sequences, one for each group. The test statistic is
 the absolute difference in the means.</p>
@@ -614,7 +736,6 @@ data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/first.py&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span>
     <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz&quot;</span>
@@ -622,18 +743,52 @@ data.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "download('https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py')\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz'\n    )";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz\"\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">first</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nsfg</span>
 
-<span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">MakeFrames</span><span class="p">()</span>
+<span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">make_frames</span><span class="p">()</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span>
 <span class="n">ht</span> <span class="o">=</span> <span class="n">DiffMeansPermute</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">pvalue</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">PValue</span><span class="p">()</span>
+<span class="n">pvalue</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">p_value</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "import nsfg\nlive, firsts, others = nsfg.make_frames()\ndata = firsts.prglngth.values, others.prglngth.values\nht = DiffMeansPermute(data)\npvalue = ht.p_value()";
+                var nbb_formatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()\ndata = firsts.prglngth.values, others.prglngth.values\nht = DiffMeansPermute(data)\npvalue = ht.p_value()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">MakeFrames</span></code> reads the NSFG data and returns DataFrames representing all
 live births, first babies, and others. We extract pregnancy lengths as
@@ -645,18 +800,32 @@ effect is not statistically significant.</p>
 test statistic and a gray line indicating the observed effect size:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ht</span><span class="o">.</span><span class="n">PlotCdf</span><span class="p">()</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;test statistic&#39;</span><span class="p">,</span>
-               <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ht</span><span class="o">.</span><span class="n">plot_cdf</span><span class="p">()</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;test statistic&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5124b1d4db586829afb3fa2d02544ae0e8f4e1d4b19f5bdba6c1b914b651ff8c.png" src="_images/5124b1d4db586829afb3fa2d02544ae0e8f4e1d4b19f5bdba6c1b914b651ff8c.png" />
+<img alt="_images/e2eb9439f4a8ba01cc5b717fc642e3485b0f4b39567fa7168bc4f45f93580b97.png" src="_images/e2eb9439f4a8ba01cc5b717fc642e3485b0f4b39567fa7168bc4f45f93580b97.png" />
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "ht.plot_cdf()\nthinkplot.show(xlabel=\"test statistic\", ylabel=\"CDF\")";
+                var nbb_formatted_code = "ht.plot_cdf()\nthinkplot.show(xlabel=\"test statistic\", ylabel=\"CDF\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Figure <a class="reference internal" href="#hypothesis1"><span class="xref myst">[hypothesis1]</span></a>{reference-type=“ref”
 reference=“hypothesis1”} shows the result. The CDF intersects the
@@ -681,13 +850,30 @@ would use this test statistic:</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DiffMeansOneSided</span><span class="p">(</span><span class="n">DiffMeansPermute</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">test_stat</span> <span class="o">=</span> <span class="n">group1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">group2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">test_stat</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 12;
+                var nbb_unformatted_code = "class DiffMeansOneSided(DiffMeansPermute):\n\n    def test_statistic(self, data):\n        group1, group2 = data\n        test_stat = group1.mean() - group2.mean()\n        return test_stat";
+                var nbb_formatted_code = "class DiffMeansOneSided(DiffMeansPermute):\n\n    def test_statistic(self, data):\n        group1, group2 = data\n        test_stat = group1.mean() - group2.mean()\n        return test_stat";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">DiffMeansOneSided</span></code> inherits <code class="docutils literal notranslate"><span class="pre">MakeModel</span></code> and <code class="docutils literal notranslate"><span class="pre">RunModel</span></code> from
 <code class="docutils literal notranslate"><span class="pre">DiffMeansPermute</span></code>; the only difference is that <code class="docutils literal notranslate"><span class="pre">TestStatistic</span></code> does not
@@ -712,13 +898,30 @@ can test that:</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DiffStdPermute</span><span class="p">(</span><span class="n">DiffMeansPermute</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">test_stat</span> <span class="o">=</span> <span class="n">group1</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">-</span> <span class="n">group2</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">test_stat</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "class DiffStdPermute(DiffMeansPermute):\n\n    def test_statistic(self, data):\n        group1, group2 = data\n        test_stat = group1.std() - group2.std()\n        return test_stat";
+                var nbb_formatted_code = "class DiffStdPermute(DiffMeansPermute):\n\n    def test_statistic(self, data):\n        group1, group2 = data\n        test_stat = group1.std() - group2.std()\n        return test_stat";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>This is a one-sided test because the hypothesis is that the standard
 deviation for first babies is higher, not just different. The p-value is
@@ -742,18 +945,35 @@ where the variables are unrelated:</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CorrelationPermute</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">HypothesisTest</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">data</span>
-        <span class="n">test_stat</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">))</span>
+        <span class="n">test_stat</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">test_stat</span>
 
-    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
         <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "class CorrelationPermute(thinkstats2.HypothesisTest):\n\n    def test_statistic(self, data):\n        xs, ys = data\n        test_stat = abs(thinkstats2.corr(xs, ys))\n        return test_stat\n\n    def run_model(self):\n        xs, ys = self.data\n        xs = np.random.permutation(xs)\n        return xs, ys";
+                var nbb_formatted_code = "class CorrelationPermute(thinkstats2.HypothesisTest):\n\n    def test_statistic(self, data):\n        xs, ys = data\n        test_stat = abs(thinkstats2.corr(xs, ys))\n        return test_stat\n\n    def run_model(self):\n        xs, ys = self.data\n        xs = np.random.permutation(xs)\n        return xs, ys";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">data</span></code> is a pair of sequences. <code class="docutils literal notranslate"><span class="pre">TestStatistic</span></code> computes the absolute
 value of Pearson’s correlation. <code class="docutils literal notranslate"><span class="pre">RunModel</span></code> shuffles the <code class="docutils literal notranslate"><span class="pre">xs</span></code> and returns
@@ -761,11 +981,10 @@ simulated data.</p>
 <p>Here’s the code that reads the data and runs the test:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">MakeFrames</span><span class="p">()</span>
-<span class="n">live</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;agepreg&#39;</span><span class="p">,</span> <span class="s1">&#39;totalwgt_lb&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;agepreg&quot;</span><span class="p">,</span> <span class="s2">&quot;totalwgt_lb&quot;</span><span class="p">])</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">agepreg</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">live</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">values</span>
 <span class="n">ht</span> <span class="o">=</span> <span class="n">CorrelationPermute</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">p_value</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">PValue</span><span class="p">()</span>
+<span class="n">p_value</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">p_value</span><span class="p">()</span>
 <span class="n">p_value</span>
 </pre></div>
 </div>
@@ -774,7 +993,22 @@ simulated data.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "live = live.dropna(subset=['agepreg', 'totalwgt_lb'])\ndata = live.agepreg.values, live.totalwgt_lb.values\nht = CorrelationPermute(data)\np_value = ht.p_value()\np_value";
+                var nbb_formatted_code = "live = live.dropna(subset=[\"agepreg\", \"totalwgt_lb\"])\ndata = live.agepreg.values, live.totalwgt_lb.values\nht = CorrelationPermute(data)\np_value = ht.p_value()\np_value";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>I use <code class="docutils literal notranslate"><span class="pre">dropna</span></code> with the <code class="docutils literal notranslate"><span class="pre">subset</span></code> argument to drop rows that are missing
 either of the variables we need.</p>
@@ -812,23 +1046,40 @@ would we see such a difference by chance?</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DiceTest</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">HypothesisTest</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">observed</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
         <span class="n">expected</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">6</span>
         <span class="n">test_stat</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">test_stat</span>
 
-    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
         <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
         <span class="n">rolls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">hist</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">rolls</span><span class="p">)</span>
-        <span class="n">freqs</span> <span class="o">=</span> <span class="n">hist</span><span class="o">.</span><span class="n">Freqs</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+        <span class="n">freqs</span> <span class="o">=</span> <span class="n">hist</span><span class="o">.</span><span class="n">freqs</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">freqs</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "class DiceTest(thinkstats2.HypothesisTest):\n\n    def test_statistic(self, data):\n        observed = data\n        n = sum(observed)\n        expected = np.ones(6) * n / 6\n        test_stat = sum(abs(observed - expected))\n        return test_stat\n\n    def run_model(self):\n        n = sum(self.data)\n        values = [1, 2, 3, 4, 5, 6]\n        rolls = np.random.choice(values, n, replace=True)\n        hist = thinkstats2.Hist(rolls)\n        freqs = hist.freqs(values)\n        return freqs";
+                var nbb_formatted_code = "class DiceTest(thinkstats2.HypothesisTest):\n\n    def test_statistic(self, data):\n        observed = data\n        n = sum(observed)\n        expected = np.ones(6) * n / 6\n        test_stat = sum(abs(observed - expected))\n        return test_stat\n\n    def run_model(self):\n        n = sum(self.data)\n        values = [1, 2, 3, 4, 5, 6]\n        rolls = np.random.choice(values, n, replace=True)\n        hist = thinkstats2.Hist(rolls)\n        freqs = hist.freqs(values)\n        return freqs";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The data are represented as a list of frequencies: the observed values
 are <code class="docutils literal notranslate"><span class="pre">[8,</span> <span class="pre">9,</span> <span class="pre">19,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">11]</span></code>; the expected frequencies are all 10. The
@@ -851,15 +1102,32 @@ Here’s the Python code:</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DiceChiTest</span><span class="p">(</span><span class="n">DiceTest</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">observed</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
         <span class="n">expected</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">6</span>
-        <span class="n">test_stat</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">expected</span><span class="p">)</span>
+        <span class="n">test_stat</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">expected</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">test_stat</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "class DiceChiTest(DiceTest):\n\n    def test_statistic(self, data):\n        observed = data\n        n = sum(observed)\n        expected = np.ones(6) * n / 6\n        test_stat = sum((observed - expected) ** 2 / expected)\n        return test_stat";
+                var nbb_formatted_code = "class DiceChiTest(DiceTest):\n\n    def test_statistic(self, data):\n        observed = data\n        n = sum(observed)\n        expected = np.ones(6) * n / 6\n        test_stat = sum((observed - expected) ** 2 / expected)\n        return test_stat";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Squaring the deviations (rather than taking absolute values) gives more
 weight to large deviations. Dividing through by <code class="docutils literal notranslate"><span class="pre">expected</span></code> standardizes
@@ -891,34 +1159,50 @@ we can use a test based on a chi-squared statistic.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PregLengthTest</span><span class="p">(</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">HypothesisTest</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">MakeModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">make_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">firsts</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">firsts</span><span class="p">,</span> <span class="n">others</span><span class="p">))</span>
-
         <span class="n">pmf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Pmf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">44</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">expected_probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pmf</span><span class="o">.</span><span class="n">Probs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expected_probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pmf</span><span class="o">.</span><span class="n">probs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">RunModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">:]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="p">:]</span>
         <span class="k">return</span> <span class="n">data</span>
 
-    <span class="k">def</span> <span class="nf">TestStatistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">data</span>
-        <span class="n">stat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ChiSquared</span><span class="p">(</span><span class="n">firsts</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ChiSquared</span><span class="p">(</span><span class="n">others</span><span class="p">)</span>
+        <span class="n">stat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chi_squared</span><span class="p">(</span><span class="n">firsts</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">chi_squared</span><span class="p">(</span><span class="n">others</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">stat</span>
 
-    <span class="k">def</span> <span class="nf">ChiSquared</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lengths</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">chi_squared</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lengths</span><span class="p">):</span>
         <span class="n">hist</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Hist</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
-        <span class="n">observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hist</span><span class="o">.</span><span class="n">Freqs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hist</span><span class="o">.</span><span class="n">freqs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
         <span class="n">expected</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expected_probs</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
-        <span class="n">stat</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">expected</span><span class="p">)</span>
+        <span class="n">stat</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">expected</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">stat</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 18;
+                var nbb_unformatted_code = "class PregLengthTest(thinkstats2.HypothesisTest):\n\n    def make_model(self):\n        firsts, others = self.data\n        self.n = len(firsts)\n        self.pool = np.hstack((firsts, others))\n        pmf = thinkstats2.Pmf(self.pool)\n        self.values = range(35, 44)\n        self.expected_probs = np.array(pmf.probs(self.values))\n\n    def run_model(self):\n        np.random.shuffle(self.pool)\n        data = self.pool[:self.n], self.pool[self.n:]\n        return data\n\n    def test_statistic(self, data):\n        firsts, others = data\n        stat = self.chi_squared(firsts) + self.chi_squared(others)\n        return stat\n\n    def chi_squared(self, lengths):\n        hist = thinkstats2.Hist(lengths)\n        observed = np.array(hist.freqs(self.values))\n        expected = self.expected_probs * len(lengths)\n        stat = sum((observed - expected) ** 2 / expected)\n        return stat";
+                var nbb_formatted_code = "class PregLengthTest(thinkstats2.HypothesisTest):\n\n    def make_model(self):\n        firsts, others = self.data\n        self.n = len(firsts)\n        self.pool = np.hstack((firsts, others))\n        pmf = thinkstats2.Pmf(self.pool)\n        self.values = range(35, 44)\n        self.expected_probs = np.array(pmf.probs(self.values))\n\n    def run_model(self):\n        np.random.shuffle(self.pool)\n        data = self.pool[: self.n], self.pool[self.n :]\n        return data\n\n    def test_statistic(self, data):\n        firsts, others = data\n        stat = self.chi_squared(firsts) + self.chi_squared(others)\n        return stat\n\n    def chi_squared(self, lengths):\n        hist = thinkstats2.Hist(lengths)\n        observed = np.array(hist.freqs(self.values))\n        expected = self.expected_probs * len(lengths)\n        stat = sum((observed - expected) ** 2 / expected)\n        return stat";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The data are represented as two lists of pregnancy lengths. The null
 hypothesis is that both samples are drawn from the same distribution.
@@ -933,20 +1217,35 @@ pooled distribution.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span>
 <span class="n">ht</span> <span class="o">=</span> <span class="n">PregLengthTest</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">p_value</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">PValue</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value =&#39;</span><span class="p">,</span> <span class="n">p_value</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;actual =&#39;</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">actual</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ts max =&#39;</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">MaxTestStat</span><span class="p">())</span>
+<span class="n">p_value</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">p_value</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p-value =&quot;</span><span class="p">,</span> <span class="n">p_value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;actual =&quot;</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">actual</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ts max =&quot;</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">max_test_stat</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value = 0.0
 actual = 101.50141482893264
-ts max = 26.34915336197512
+ts max = 26.4946075438446
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 19;
+                var nbb_unformatted_code = "data = firsts.prglngth.values, others.prglngth.values\nht = PregLengthTest(data)\np_value = ht.p_value()\nprint('p-value =', p_value)\nprint('actual =', ht.actual)\nprint('ts max =', ht.max_test_stat())";
+                var nbb_formatted_code = "data = firsts.prglngth.values, others.prglngth.values\nht = PregLengthTest(data)\np_value = ht.p_value()\nprint(\"p-value =\", p_value)\nprint(\"actual =\", ht.actual)\nprint(\"ts max =\", ht.max_test_stat())";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">TestStatistic</span></code> computes the chi-squared statistic for first babies and
 others, and adds them.</p>
@@ -1004,23 +1303,37 @@ accurate, we can use the observed samples as a model of the population
 and run hypothesis tests with simulated data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">FalseNegRate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_runs</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">false_neg_rate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_runs</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="n">data</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_runs</span><span class="p">):</span>
-        <span class="n">sample1</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Resample</span><span class="p">(</span><span class="n">group1</span><span class="p">)</span>
-        <span class="n">sample2</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Resample</span><span class="p">(</span><span class="n">group2</span><span class="p">)</span>
-
+        <span class="n">sample1</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">group1</span><span class="p">)</span>
+        <span class="n">sample2</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">group2</span><span class="p">)</span>
         <span class="n">ht</span> <span class="o">=</span> <span class="n">DiffMeansPermute</span><span class="p">((</span><span class="n">sample1</span><span class="p">,</span> <span class="n">sample2</span><span class="p">))</span>
-        <span class="n">pvalue</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">PValue</span><span class="p">(</span><span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">)</span>
+        <span class="n">pvalue</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">p_value</span><span class="p">(</span><span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">pvalue</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">:</span>
             <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
-
     <span class="k">return</span> <span class="n">count</span> <span class="o">/</span> <span class="n">num_runs</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 20;
+                var nbb_unformatted_code = "def false_neg_rate(data, num_runs=100):\n    group1, group2 = data\n    count = 0\n    for i in range(num_runs):\n        sample1 = thinkstats2.resample(group1)\n        sample2 = thinkstats2.resample(group2)\n        ht = DiffMeansPermute((sample1, sample2))\n        pvalue = ht.p_value(iters=101)\n        if pvalue > 0.05:\n            count += 1\n    return count / num_runs";
+                var nbb_formatted_code = "def false_neg_rate(data, num_runs=100):\n    group1, group2 = data\n    count = 0\n    for i in range(num_runs):\n        sample1 = thinkstats2.resample(group1)\n        sample2 = thinkstats2.resample(group2)\n        ht = DiffMeansPermute((sample1, sample2))\n        pvalue = ht.p_value(iters=101)\n        if pvalue > 0.05:\n            count += 1\n    return count / num_runs";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">FalseNegRate</span></code> takes data in the form of two sequences, one for each
 group. Each time through the loop, it simulates an experiment by drawing
@@ -1030,18 +1343,35 @@ checks the result and counts the number of false negatives.</p>
 with replacement:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Resample</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resample</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 21;
+                var nbb_unformatted_code = "def resample(xs):\n    return np.random.choice(xs, len(xs), replace=True)";
+                var nbb_formatted_code = "def resample(xs):\n    return np.random.choice(xs, len(xs), replace=True)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Here’s the code that tests pregnancy lengths:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">MakeFrames</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">make_frames</span><span class="p">()</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span>
-<span class="n">neg_rate</span> <span class="o">=</span> <span class="n">FalseNegRate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">neg_rate</span> <span class="o">=</span> <span class="n">false_neg_rate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="n">neg_rate</span>
 </pre></div>
 </div>
@@ -1050,7 +1380,22 @@ with replacement:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 22;
+                var nbb_unformatted_code = "live, firsts, others = nsfg.make_frames()\ndata = firsts.prglngth.values, others.prglngth.values\nneg_rate = false_neg_rate(data)\nneg_rate";
+                var nbb_formatted_code = "live, firsts, others = nsfg.make_frames()\ndata = firsts.prglngth.values, others.prglngth.values\nneg_rate = false_neg_rate(data)\nneg_rate";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The result is about 70%, which means that if the actual difference in
 mean pregnancy length is 0.078 weeks, we expect an experiment with this
@@ -1092,7 +1437,7 @@ new data are considered confirmatory.</p>
 <p>As it happens, we have an opportunity to replicate the results in this
 chapter. The first edition of this book is based on Cycle 6 of the NSFG,
 which was released in 2002. In October 2011, the CDC released additional
-data based on interviews conducted from 2006–2010. <code class="docutils literal notranslate"><span class="pre">nsfg2.py</span></code> contains
+data based on interviews conducted from 2006–2010. <code class="docutils literal notranslate"><span class="pre">nsfg.py</span></code> contains
 code to read and clean this data. In the new dataset:</p>
 <ul class="simple">
 <li><p>The difference in mean pregnancy length is 0.16 weeks and
@@ -1144,10 +1489,205 @@ is false.</p></li>
 <p><strong>Exercise:</strong> As sample size increases, the power of a hypothesis test increases, which means it is more likely to be positive if the effect is real. Conversely, as sample size decreases, the test is less likely to be positive even if the effect is real.</p>
 <p>To investigate this behavior, run the tests in this chapter with different subsets of the NSFG data. You can use <code class="docutils literal notranslate"><span class="pre">thinkstats2.SampleRows</span></code> to select a random subset of the rows in a DataFrame.</p>
 <p>What happens to the p-values of these tests as sample size decreases? What is the smallest sample size that yields a positive test?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_tests</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Runs the tests from Chapter 9 with a subset of the data.</span>
+
+<span class="sd">    live: DataFrame</span>
+<span class="sd">    iters: how many iterations to run</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">live</span><span class="p">)</span>
+    <span class="n">firsts</span> <span class="o">=</span> <span class="n">live</span><span class="p">[</span><span class="n">live</span><span class="o">.</span><span class="n">birthord</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">others</span> <span class="o">=</span> <span class="n">live</span><span class="p">[</span><span class="n">live</span><span class="o">.</span><span class="n">birthord</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">ht</span> <span class="o">=</span> <span class="n">DiffMeansPermute</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">p_value</span><span class="p">(</span><span class="n">iters</span><span class="o">=</span><span class="n">iters</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">others</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">ht</span> <span class="o">=</span> <span class="n">DiffMeansPermute</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">p_value</span><span class="p">(</span><span class="n">iters</span><span class="o">=</span><span class="n">iters</span><span class="p">)</span>
+    <span class="n">live2</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;agepreg&quot;</span><span class="p">,</span> <span class="s2">&quot;totalwgt_lb&quot;</span><span class="p">])</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">live2</span><span class="o">.</span><span class="n">agepreg</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">live2</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">ht</span> <span class="o">=</span> <span class="n">CorrelationPermute</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">p3</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">p_value</span><span class="p">(</span><span class="n">iters</span><span class="o">=</span><span class="n">iters</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">ht</span> <span class="o">=</span> <span class="n">PregLengthTest</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">p4</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">p_value</span><span class="p">(</span><span class="n">iters</span><span class="o">=</span><span class="n">iters</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\t</span><span class="si">%0.2f</span><span class="se">\t</span><span class="si">%0.2f</span><span class="se">\t</span><span class="si">%0.2f</span><span class="se">\t</span><span class="si">%0.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 23;
+                var nbb_unformatted_code = "def run_tests(live, iters=1000):\n    \"\"\"Runs the tests from Chapter 9 with a subset of the data.\n\n    live: DataFrame\n    iters: how many iterations to run\n    \"\"\"\n    n = len(live)\n    firsts = live[live.birthord == 1]\n    others = live[live.birthord != 1]\n    data = firsts.prglngth.values, others.prglngth.values\n    ht = DiffMeansPermute(data)\n    p1 = ht.p_value(iters=iters)\n    data = firsts.totalwgt_lb.dropna().values, others.totalwgt_lb.dropna(\n        ).values\n    ht = DiffMeansPermute(data)\n    p2 = ht.p_value(iters=iters)\n    live2 = live.dropna(subset=['agepreg', 'totalwgt_lb'])\n    data = live2.agepreg.values, live2.totalwgt_lb.values\n    ht = CorrelationPermute(data)\n    p3 = ht.p_value(iters=iters)\n    data = firsts.prglngth.values, others.prglngth.values\n    ht = PregLengthTest(data)\n    p4 = ht.p_value(iters=iters)\n    print('%d\\t%0.2f\\t%0.2f\\t%0.2f\\t%0.2f' % (n, p1, p2, p3, p4))";
+                var nbb_formatted_code = "def run_tests(live, iters=1000):\n    \"\"\"Runs the tests from Chapter 9 with a subset of the data.\n\n    live: DataFrame\n    iters: how many iterations to run\n    \"\"\"\n    n = len(live)\n    firsts = live[live.birthord == 1]\n    others = live[live.birthord != 1]\n    data = firsts.prglngth.values, others.prglngth.values\n    ht = DiffMeansPermute(data)\n    p1 = ht.p_value(iters=iters)\n    data = firsts.totalwgt_lb.dropna().values, others.totalwgt_lb.dropna().values\n    ht = DiffMeansPermute(data)\n    p2 = ht.p_value(iters=iters)\n    live2 = live.dropna(subset=[\"agepreg\", \"totalwgt_lb\"])\n    data = live2.agepreg.values, live2.totalwgt_lb.values\n    ht = CorrelationPermute(data)\n    p3 = ht.p_value(iters=iters)\n    data = firsts.prglngth.values, others.prglngth.values\n    ht = PregLengthTest(data)\n    p4 = ht.p_value(iters=iters)\n    print(\"%d\\t%0.2f\\t%0.2f\\t%0.2f\\t%0.2f\" % (n, p1, p2, p3, p4))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">live</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">sample_rows</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">run_tests</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">//=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9148	0.17	0.00	0.00	0.00
+4574	0.26	0.00	0.00	0.00
+2287	0.87	0.00	0.00	0.00
+1143	0.68	0.11	0.04	0.00
+571	0.24	0.57	0.50	0.17
+285	0.66	0.15	0.47	0.44
+142	0.37	0.07	0.01	0.81
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 24;
+                var nbb_unformatted_code = "n = len(live)\nfor _ in range(7):\n    sample = thinkstats2.sample_rows(live, n)\n    run_tests(sample)\n    n //= 2";
+                var nbb_formatted_code = "n = len(live)\nfor _ in range(7):\n    sample = thinkstats2.sample_rows(live, n)\n    run_tests(sample)\n    n //= 2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p><strong>Exercise:</strong> In Section 9.3, we simulated the null hypothesis by permutation; that is, we treated the observed values as if they represented the entire population, and randomly assigned the members of the population to the two groups.</p>
 <p>An alternative is to use the sample to estimate the distribution for the population, then draw a random sample from that distribution. This process is called resampling. There are several ways to implement resampling, but one of the simplest is to draw a sample with replacement from the observed values, as in Section 9.10.</p>
 <p>Write a class named <code class="docutils literal notranslate"><span class="pre">DiffMeansResample</span></code> that inherits from <code class="docutils literal notranslate"><span class="pre">DiffMeansPermute</span></code> and overrides <code class="docutils literal notranslate"><span class="pre">RunModel</span></code> to implement resampling, rather than permutation.</p>
 <p>Use this model to test the differences in pregnancy length and birth weight. How much does the model affect the results?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DiffMeansResample</span><span class="p">(</span><span class="n">DiffMeansPermute</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests a difference in means using resampling.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">run_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the model of the null hypothesis.</span>
+
+<span class="sd">        returns: simulated data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">group2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 25;
+                var nbb_unformatted_code = "class DiffMeansResample(DiffMeansPermute):\n    \"\"\"Tests a difference in means using resampling.\"\"\"\n\n    def run_model(self):\n        \"\"\"Run the model of the null hypothesis.\n\n        returns: simulated data\n        \"\"\"\n        group1 = np.random.choice(self.pool, self.n, replace=True)\n        group2 = np.random.choice(self.pool, self.m, replace=True)\n        return group1, group2";
+                var nbb_formatted_code = "class DiffMeansResample(DiffMeansPermute):\n    \"\"\"Tests a difference in means using resampling.\"\"\"\n\n    def run_model(self):\n        \"\"\"Run the model of the null hypothesis.\n\n        returns: simulated data\n        \"\"\"\n        group1 = np.random.choice(self.pool, self.n, replace=True)\n        group2 = np.random.choice(self.pool, self.m, replace=True)\n        return group1, group2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_resample_test</span><span class="p">(</span><span class="n">firsts</span><span class="p">,</span> <span class="n">others</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests differences in means by resampling.</span>
+
+<span class="sd">    firsts: DataFrame</span>
+<span class="sd">    others: DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">ht</span> <span class="o">=</span> <span class="n">DiffMeansResample</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">p_value</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">p_value</span><span class="p">(</span><span class="n">iters</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">diff means resample preglength&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p-value =&quot;</span><span class="p">,</span> <span class="n">p_value</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;actual =&quot;</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">actual</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ts max =&quot;</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">max_test_stat</span><span class="p">())</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">others</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">ht</span> <span class="o">=</span> <span class="n">DiffMeansPermute</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">p_value</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">p_value</span><span class="p">(</span><span class="n">iters</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">diff means resample birthweight&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p-value =&quot;</span><span class="p">,</span> <span class="n">p_value</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;actual =&quot;</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">actual</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ts max =&quot;</span><span class="p">,</span> <span class="n">ht</span><span class="o">.</span><span class="n">max_test_stat</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 26;
+                var nbb_unformatted_code = "def run_resample_test(firsts, others):\n    \"\"\"Tests differences in means by resampling.\n\n    firsts: DataFrame\n    others: DataFrame\n    \"\"\"\n    data = firsts.prglngth.values, others.prglngth.values\n    ht = DiffMeansResample(data)\n    p_value = ht.p_value(iters=10000)\n    print('\\ndiff means resample preglength')\n    print('p-value =', p_value)\n    print('actual =', ht.actual)\n    print('ts max =', ht.max_test_stat())\n    data = firsts.totalwgt_lb.dropna().values, others.totalwgt_lb.dropna(\n        ).values\n    ht = DiffMeansPermute(data)\n    p_value = ht.p_value(iters=10000)\n    print('\\ndiff means resample birthweight')\n    print('p-value =', p_value)\n    print('actual =', ht.actual)\n    print('ts max =', ht.max_test_stat())";
+                var nbb_formatted_code = "def run_resample_test(firsts, others):\n    \"\"\"Tests differences in means by resampling.\n\n    firsts: DataFrame\n    others: DataFrame\n    \"\"\"\n    data = firsts.prglngth.values, others.prglngth.values\n    ht = DiffMeansResample(data)\n    p_value = ht.p_value(iters=10000)\n    print(\"\\ndiff means resample preglength\")\n    print(\"p-value =\", p_value)\n    print(\"actual =\", ht.actual)\n    print(\"ts max =\", ht.max_test_stat())\n    data = firsts.totalwgt_lb.dropna().values, others.totalwgt_lb.dropna().values\n    ht = DiffMeansPermute(data)\n    p_value = ht.p_value(iters=10000)\n    print(\"\\ndiff means resample birthweight\")\n    print(\"p-value =\", p_value)\n    print(\"actual =\", ht.actual)\n    print(\"ts max =\", ht.max_test_stat())";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_resample_test</span><span class="p">(</span><span class="n">firsts</span><span class="p">,</span> <span class="n">others</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>diff means resample preglength
+p-value = 0.1645
+actual = 0.07803726677754952
+ts max = 0.22159913914705953
+
+diff means resample birthweight
+p-value = 0.0001
+actual = 0.12476118453549034
+ts max = 0.1247893565360636
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 27;
+                var nbb_unformatted_code = "run_resample_test(firsts, others)";
+                var nbb_formatted_code = "run_resample_test(firsts, others)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="id3" role="doc-footnote">

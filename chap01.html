@@ -375,6 +375,32 @@ document.write(`
 <h1>Exploratory data analysis<a class="headerlink" href="#exploratory-data-analysis" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> nb_black
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 1;
+                var nbb_unformatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_formatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
 
 
@@ -392,11 +418,27 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 2;
+                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n        local, _ = urlretrieve(url, filename)\n        print('Downloaded ' + local)\n\n\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py')";
+                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py&quot;</span><span class="p">)</span>
-
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span>
     <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz&quot;</span>
@@ -404,6 +446,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "download('https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py')\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz'\n    )";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz\"\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The thesis of this book is that data combined with practical methods can
 answer questions and guide decisions under uncertainty.</p>
@@ -547,17 +606,34 @@ including functions that read the Stata dictionary and the NSFG data
 file. Here’s how they are used in <code class="docutils literal notranslate"><span class="pre">nsfg.py</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">ReadStataDct</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">read_stata_dct</span>
 
-<span class="k">def</span> <span class="nf">ReadFemPreg</span><span class="p">(</span><span class="n">dct_file</span><span class="o">=</span><span class="s1">&#39;2002FemPreg.dct&#39;</span><span class="p">,</span>
-                <span class="n">dat_file</span><span class="o">=</span><span class="s1">&#39;2002FemPreg.dat.gz&#39;</span><span class="p">):</span>
-    <span class="n">dct</span> <span class="o">=</span> <span class="n">ReadStataDct</span><span class="p">(</span><span class="n">dct_file</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">dct</span><span class="o">.</span><span class="n">ReadFixedWidth</span><span class="p">(</span><span class="n">dat_file</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s1">&#39;gzip&#39;</span><span class="p">)</span>
-    <span class="n">CleanFemPreg</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">read_fem_preg</span><span class="p">(</span><span class="n">dct_file</span><span class="o">=</span><span class="s2">&quot;2002FemPreg.dct&quot;</span><span class="p">,</span> <span class="n">dat_file</span><span class="o">=</span><span class="s2">&quot;2002FemPreg.dat.gz&quot;</span><span class="p">):</span>
+    <span class="n">dct</span> <span class="o">=</span> <span class="n">read_stata_dct</span><span class="p">(</span><span class="n">dct_file</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">dct</span><span class="o">.</span><span class="n">read_fixed_width</span><span class="p">(</span><span class="n">dat_file</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;gzip&quot;</span><span class="p">)</span>
+    <span class="n">clean_fem_preg</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 4;
+                var nbb_unformatted_code = "from thinkstats2 import read_stata_dct\n\n\ndef read_fem_preg(dct_file='2002FemPreg.dct', dat_file='2002FemPreg.dat.gz'):\n    dct = read_stata_dct(dct_file)\n    df = dct.read_fixed_width(dat_file, compression='gzip')\n    clean_fem_preg(df)\n    return df";
+                var nbb_formatted_code = "from thinkstats2 import read_stata_dct\n\n\ndef read_fem_preg(dct_file=\"2002FemPreg.dct\", dat_file=\"2002FemPreg.dat.gz\"):\n    dct = read_stata_dct(dct_file)\n    df = dct.read_fixed_width(dat_file, compression=\"gzip\")\n    clean_fem_preg(df)\n    return df";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">ReadStataDct</span></code> takes the name of the dictionary file and returns <code class="docutils literal notranslate"><span class="pre">dct</span></code>,
 a <code class="docutils literal notranslate"><span class="pre">FixedWidthVariables</span></code> object that contains the information from the
@@ -580,49 +656,13 @@ columns/variables.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nsfg</span>
-<span class="n">preg</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">ReadFemPreg</span><span class="p">()</span>
+
+<span class="n">preg</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">read_fem_preg</span><span class="p">()</span>
 <span class="n">preg</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/downey/ThinkStats/soln/nsfg.py:68: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
-The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
-
-For example, when doing &#39;df[col].method(value, inplace=True)&#39;, try using &#39;df.method({col: value}, inplace=True)&#39; or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
-
-
-  df.birthwgt_lb.replace(na_vals, np.nan, inplace=True)
-/home/downey/ThinkStats/soln/nsfg.py:69: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
-The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
-
-For example, when doing &#39;df[col].method(value, inplace=True)&#39;, try using &#39;df.method({col: value}, inplace=True)&#39; or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
-
-
-  df.birthwgt_oz.replace(na_vals, np.nan, inplace=True)
-/home/downey/ThinkStats/soln/nsfg.py:70: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
-The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
-
-For example, when doing &#39;df[col].method(value, inplace=True)&#39;, try using &#39;df.method({col: value}, inplace=True)&#39; or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
-
-
-  df.hpagelb.replace(na_vals, np.nan, inplace=True)
-/home/downey/ThinkStats/soln/nsfg.py:72: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
-The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
-
-For example, when doing &#39;df[col].method(value, inplace=True)&#39;, try using &#39;df.method({col: value}, inplace=True)&#39; or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
-
-
-  df.babysex.replace([7, 9], np.nan, inplace=True)
-/home/downey/ThinkStats/soln/nsfg.py:73: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
-The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
-
-For example, when doing &#39;df[col].method(value, inplace=True)&#39;, try using &#39;df.method({col: value}, inplace=True)&#39; or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
-
-
-  df.nbrnaliv.replace([9], np.nan, inplace=True)
-</pre></div>
-</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -932,7 +972,22 @@ For example, when doing &#39;df[col].method(value, inplace=True)&#39;, try using
   </tbody>
 </table>
 <p>13593 rows × 244 columns</p>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "import nsfg\npreg = nsfg.read_fem_preg()\npreg";
+                var nbb_formatted_code = "import nsfg\n\npreg = nsfg.read_fem_preg()\npreg";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The DataFrame is too big to display, so the output is truncated. The
 last line reports the number of rows and columns.</p>
@@ -953,7 +1008,22 @@ strings:</p>
       dtype=&#39;object&#39;, length=244)
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "preg.columns";
+                var nbb_formatted_code = "preg.columns";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The result is an Index, which is another pandas data structure. We’ll
 learn more about Index later, but for now we’ll treat it like a list:</p>
@@ -967,13 +1037,28 @@ learn more about Index later, but for now we’ll treat it like a list:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;pregordr&#39;
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "preg.columns[1]";
+                var nbb_formatted_code = "preg.columns[1]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>To access a column from a DataFrame, you can use the column name as a
 key:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pregordr</span> <span class="o">=</span> <span class="n">preg</span><span class="p">[</span><span class="s1">&#39;pregordr&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pregordr</span> <span class="o">=</span> <span class="n">preg</span><span class="p">[</span><span class="s2">&quot;pregordr&quot;</span><span class="p">]</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">pregordr</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -982,7 +1067,22 @@ key:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pandas.core.series.Series
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "pregordr = preg['pregordr']\ntype(pregordr)";
+                var nbb_formatted_code = "pregordr = preg[\"pregordr\"]\ntype(pregordr)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The result is a Series, yet another pandas data structure. A Series is
 like a Python list with some additional features. When you print a
@@ -1008,7 +1108,22 @@ Series, you get the indices and the corresponding values:</p>
 Name: pregordr, Length: 13593, dtype: int64
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "pregordr";
+                var nbb_formatted_code = "pregordr";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>In this example the indices are integers from 0 to 13592, but in general
 they can be any sortable type. The elements are also integers, but they
@@ -1028,7 +1143,22 @@ slices:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "pregordr[0]";
+                var nbb_formatted_code = "pregordr[0]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1043,7 +1173,22 @@ slices:</p>
 Name: pregordr, dtype: int64
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "pregordr[2:5]";
+                var nbb_formatted_code = "pregordr[2:5]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The result of the index operator is an <code class="docutils literal notranslate"><span class="pre">int64</span></code>; the result of the slice
 is another Series.</p>
@@ -1054,6 +1199,23 @@ is another Series.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 12;
+                var nbb_unformatted_code = "pregordr = preg.pregordr";
+                var nbb_formatted_code = "pregordr = preg.pregordr";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>This notation only works if the column name is a valid Python
 identifier, so it has to begin with a letter, can’t contain spaces, etc.</p>
@@ -1103,17 +1265,32 @@ calculations. These operations are called <strong>data cleaning</strong>.</p>
 I am planning to use.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CleanFemPreg</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">clean_fem_preg</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="n">df</span><span class="o">.</span><span class="n">agepreg</span> <span class="o">/=</span> <span class="mf">100.0</span>
-
     <span class="n">na_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">97</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;birthwgt_lb&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">birthwgt_lb</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">na_vals</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;birthwgt_oz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">birthwgt_oz</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">na_vals</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
-
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;totalwgt_lb&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">birthwgt_lb</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">birthwgt_oz</span> <span class="o">/</span> <span class="mf">16.0</span>    
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;birthwgt_lb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">birthwgt_lb</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">na_vals</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;birthwgt_oz&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">birthwgt_oz</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">na_vals</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;totalwgt_lb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">birthwgt_lb</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">birthwgt_oz</span> <span class="o">/</span> <span class="mf">16.0</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "def clean_fem_preg(df):\n    df.agepreg /= 100.0\n    na_vals = [97, 98, 99]\n    df['birthwgt_lb'] = df.birthwgt_lb.replace(na_vals, np.nan)\n    df['birthwgt_oz'] = df.birthwgt_oz.replace(na_vals, np.nan)\n    df['totalwgt_lb'] = df.birthwgt_lb + df.birthwgt_oz / 16.0";
+                var nbb_formatted_code = "def clean_fem_preg(df):\n    df.agepreg /= 100.0\n    na_vals = [97, 98, 99]\n    df[\"birthwgt_lb\"] = df.birthwgt_lb.replace(na_vals, np.nan)\n    df[\"birthwgt_oz\"] = df.birthwgt_oz.replace(na_vals, np.nan)\n    df[\"totalwgt_lb\"] = df.birthwgt_lb + df.birthwgt_oz / 16.0";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">agepreg</span></code> contains the mother’s age at the end of the pregnancy. In the
 data file, <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> is encoded as an integer number of centiyears. So
@@ -1140,7 +1317,22 @@ return <code class="docutils literal notranslate"><span class="pre">nan</span></
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nan
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "import numpy as np\nnp.nan / 100.0";
+                var nbb_formatted_code = "import numpy as np\n\nnp.nan / 100.0";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>So computations with <code class="docutils literal notranslate"><span class="pre">nan</span></code> tend to do the right thing, and most pandas
 functions handle <code class="docutils literal notranslate"><span class="pre">nan</span></code> appropriately. But dealing with missing data will
@@ -1151,11 +1343,27 @@ combines pounds and ounces into a single quantity, in pounds.</p>
 use dictionary syntax, like this</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># CORRECT</span>
-<span class="n">preg</span><span class="p">[</span><span class="s1">&#39;totalwgt_lb&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">birthwgt_lb</span> <span class="o">+</span> <span class="n">preg</span><span class="o">.</span><span class="n">birthwgt_oz</span> <span class="o">/</span> <span class="mf">16.0</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span><span class="p">[</span><span class="s2">&quot;totalwgt_lb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">birthwgt_lb</span> <span class="o">+</span> <span class="n">preg</span><span class="o">.</span><span class="n">birthwgt_oz</span> <span class="o">/</span> <span class="mf">16.0</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "preg['totalwgt_lb'] = preg.birthwgt_lb + preg.birthwgt_oz / 16.0";
+                var nbb_formatted_code = "preg[\"totalwgt_lb\"] = preg.birthwgt_lb + preg.birthwgt_oz / 16.0";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Not dot notation, like this:</p>
 <p>The version with dot notation adds an attribute to the DataFrame object,
@@ -1193,7 +1401,22 @@ published data:</p>
 Name: count, dtype: int64
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "preg.outcome.value_counts().sort_index()";
+                var nbb_formatted_code = "preg.outcome.value_counts().sort_index()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The result of <code class="docutils literal notranslate"><span class="pre">value_counts</span></code> is a Series; <code class="docutils literal notranslate"><span class="pre">sort_index()</span></code> sorts the
 Series by index, so the values appear in order.</p>
@@ -1228,7 +1451,22 @@ in <code class="docutils literal notranslate"><span class="pre">outcome</span></
 Name: count, dtype: int64
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "preg.birthwgt_lb.value_counts().sort_index()";
+                var nbb_formatted_code = "preg.birthwgt_lb.value_counts().sort_index()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The counts for 6, 7, and 8 pounds check out, and if you add up the
 counts for 0-5 and 9-95, they check out, too. But if you look more
@@ -1237,10 +1475,27 @@ baby!</p>
 <p>To deal with this error, I added a line to <code class="docutils literal notranslate"><span class="pre">CleanFemPreg</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">preg</span><span class="o">.</span><span class="n">birthwgt_lb</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;birthwgt_lb&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">preg</span><span class="o">.</span><span class="n">birthwgt_lb</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">,</span> <span class="s2">&quot;birthwgt_lb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 18;
+                var nbb_unformatted_code = "preg.loc[preg.birthwgt_lb > 20, 'birthwgt_lb'] = np.nan";
+                var nbb_formatted_code = "preg.loc[preg.birthwgt_lb > 20, \"birthwgt_lb\"] = np.nan";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>This statement replaces invalid values with <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>. The attribute
 <code class="docutils literal notranslate"><span class="pre">loc</span></code> provides several ways to select rows and columns from a DataFrame.
@@ -1261,7 +1516,7 @@ do some processing to collect the pregnancy data for each respondent.
 Here’s a function that does that:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MakePregMap</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_preg_map</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">caseid</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">caseid</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
         <span class="n">d</span><span class="p">[</span><span class="n">caseid</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
@@ -1269,6 +1524,23 @@ Here’s a function that does that:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 19;
+                var nbb_unformatted_code = "def make_preg_map(df):\n    d = defaultdict(list)\n    for index, caseid in df.caseid.iteritems():\n        d[caseid].append(index)\n    return d";
+                var nbb_formatted_code = "def make_preg_map(df):\n    d = defaultdict(list)\n    for index, caseid in df.caseid.iteritems():\n        d[caseid].append(index)\n    return d";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">df</span></code> is the DataFrame with pregnancy data. The <code class="docutils literal notranslate"><span class="pre">iteritems</span></code> method
 enumerates the index (row number) and <code class="docutils literal notranslate"><span class="pre">caseid</span></code> for each pregnancy.</p>
@@ -1281,9 +1553,9 @@ her pregnancies:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">caseid</span> <span class="o">=</span> <span class="mi">10229</span>
-<span class="n">preg_map</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">MakePregMap</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">preg_map</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">make_preg_map</span><span class="p">(</span><span class="n">preg</span><span class="p">)</span>
 <span class="n">indices</span> <span class="o">=</span> <span class="n">preg_map</span><span class="p">[</span><span class="n">caseid</span><span class="p">]</span>
-<span class="n">df</span><span class="o">.</span><span class="n">outcome</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">preg</span><span class="o">.</span><span class="n">outcome</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 </pre></div>
 </div>
 </div>
@@ -1291,7 +1563,22 @@ her pregnancies:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([4, 4, 4, 4, 4, 4, 1])
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 20;
+                var nbb_unformatted_code = "caseid = 10229\npreg_map = nsfg.make_preg_map(preg)\nindices = preg_map[caseid]\npreg.outcome[indices].values";
+                var nbb_formatted_code = "caseid = 10229\npreg_map = nsfg.make_preg_map(preg)\nindices = preg_map[caseid]\npreg.outcome[indices].values";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">indices</span></code> is the list of indices for pregnancies corresponding to
 respondent <code class="docutils literal notranslate"><span class="pre">10229</span></code>.</p>
@@ -1316,6 +1603,44 @@ represented by the data, and to afford them respect and gratitude.</p>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p>Select the <code class="docutils literal notranslate"><span class="pre">birthord</span></code> column, print the value counts, and compare to results published in the <a class="reference external" href="https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/NSFG/Cycle6Codebook-Pregnancy.pdf">codebook</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span><span class="o">.</span><span class="n">birthord</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>birthord
+1.0     4413
+2.0     2874
+3.0     1234
+4.0      421
+5.0      126
+6.0       50
+7.0       20
+8.0        7
+9.0        2
+10.0       1
+Name: count, dtype: int64
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 21;
+                var nbb_unformatted_code = "preg.birthord.value_counts().sort_index()";
+                var nbb_formatted_code = "preg.birthord.value_counts().sort_index()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>We can also use <code class="docutils literal notranslate"><span class="pre">isnull</span></code> to count the number of nans.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1327,9 +1652,102 @@ represented by the data, and to afford them respect and gratitude.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4445
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 22;
+                var nbb_unformatted_code = "preg.birthord.isnull().sum()";
+                var nbb_formatted_code = "preg.birthord.isnull().sum()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Select the <code class="docutils literal notranslate"><span class="pre">prglngth</span></code> column, print the value counts, and compare to results published in the <a class="reference external" href="https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/NSFG/Cycle6Codebook-Pregnancy.pdf">codebook</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>prglngth
+0       15
+1        9
+2       78
+3      151
+4      412
+5      181
+6      543
+7      175
+8      409
+9      594
+10     137
+11     202
+12     170
+13     446
+14      29
+15      39
+16      44
+17     253
+18      17
+19      34
+20      18
+21      37
+22     147
+23      12
+24      31
+25      15
+26     117
+27       8
+28      38
+29      23
+30     198
+31      29
+32     122
+33      50
+34      60
+35     357
+36     329
+37     457
+38     609
+39    4744
+40    1120
+41     591
+42     328
+43     148
+44      46
+45      10
+46       1
+47       1
+48       7
+50       2
+Name: count, dtype: int64
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 23;
+                var nbb_unformatted_code = "preg.prglngth.value_counts().sort_index()";
+                var nbb_formatted_code = "preg.prglngth.value_counts().sort_index()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>To compute the mean of a column, you can invoke the <code class="docutils literal notranslate"><span class="pre">mean</span></code> method on a Series.  For example, here is the mean birthweight in pounds:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1341,30 +1759,103 @@ represented by the data, and to afford them respect and gratitude.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.265628457623368
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 24;
+                var nbb_unformatted_code = "preg.totalwgt_lb.mean()";
+                var nbb_formatted_code = "preg.totalwgt_lb.mean()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Create a new column named <tt>totalwgt_kg</tt> that contains birth weight in kilograms.  Compute its mean.  Remember that when you create a new column, you have to use dictionary syntax, not dot notation.</p>
-<p><code class="docutils literal notranslate"><span class="pre">nsfg.py</span></code> also provides <code class="docutils literal notranslate"><span class="pre">ReadFemResp</span></code>, which reads the female respondents file and returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dct&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dat.gz&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span><span class="p">[</span><span class="s2">&quot;totalwgt_kg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">totalwgt_lb</span> <span class="o">/</span> <span class="mf">2.2</span>
+<span class="n">preg</span><span class="o">.</span><span class="n">totalwgt_kg</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 2002FemResp.dct
-Downloaded 2002FemResp.dat.gz
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.302558389828803
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 25;
+                var nbb_unformatted_code = "preg['totalwgt_kg'] = preg.totalwgt_lb / 2.2\npreg.totalwgt_kg.mean()";
+                var nbb_formatted_code = "preg[\"totalwgt_kg\"] = preg.totalwgt_lb / 2.2\npreg.totalwgt_kg.mean()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">nsfg.py</span></code> also provides <code class="docutils literal notranslate"><span class="pre">ReadFemResp</span></code>, which reads the female respondents file and returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dct&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dat.gz&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 26;
+                var nbb_unformatted_code = "download(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dct'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dat.gz'\n    )";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dct\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dat.gz\"\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">ReadFemResp</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">read_fem_resp</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 27;
+                var nbb_unformatted_code = "resp = nsfg.read_fem_resp()";
+                var nbb_formatted_code = "resp = nsfg.read_fem_resp()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> provides a method <code class="docutils literal notranslate"><span class="pre">head</span></code> that displays the first five rows:</p>
 <div class="cell docutils container">
@@ -1539,13 +2030,86 @@ Downloaded 2002FemResp.dat.gz
   </tbody>
 </table>
 <p>5 rows × 3087 columns</p>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 28;
+                var nbb_unformatted_code = "resp.head()";
+                var nbb_formatted_code = "resp.head()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Select the <code class="docutils literal notranslate"><span class="pre">age_r</span></code> column from <code class="docutils literal notranslate"><span class="pre">resp</span></code> and print the value counts.  How old are the youngest and oldest respondents?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span><span class="o">.</span><span class="n">age_r</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>age_r
+15    217
+16    223
+17    234
+18    235
+19    241
+20    258
+21    267
+22    287
+23    282
+24    269
+25    267
+26    260
+27    255
+28    252
+29    262
+30    292
+31    278
+32    273
+33    257
+34    255
+35    262
+36    266
+37    271
+38    256
+39    215
+40    256
+41    250
+42    215
+43    253
+44    235
+Name: count, dtype: int64
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 29;
+                var nbb_unformatted_code = "resp.age_r.value_counts().sort_index()";
+                var nbb_formatted_code = "resp.age_r.value_counts().sort_index()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>We can use the <code class="docutils literal notranslate"><span class="pre">caseid</span></code> to match up rows from <code class="docutils literal notranslate"><span class="pre">resp</span></code> and <code class="docutils literal notranslate"><span class="pre">preg</span></code>.  For example, we can select the row from <code class="docutils literal notranslate"><span class="pre">resp</span></code> for <code class="docutils literal notranslate"><span class="pre">caseid</span></code> 2298 like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">caseid</span><span class="o">==</span><span class="mi">2298</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">caseid</span> <span class="o">==</span> <span class="mi">2298</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1619,12 +2183,27 @@ Downloaded 2002FemResp.dat.gz
   </tbody>
 </table>
 <p>1 rows × 3087 columns</p>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 30;
+                var nbb_unformatted_code = "resp[resp.caseid == 2298]";
+                var nbb_formatted_code = "resp[resp.caseid == 2298]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>And we can get the corresponding rows from <code class="docutils literal notranslate"><span class="pre">preg</span></code> like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span><span class="p">[</span><span class="n">preg</span><span class="o">.</span><span class="n">caseid</span><span class="o">==</span><span class="mi">2298</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span><span class="p">[</span><span class="n">preg</span><span class="o">.</span><span class="n">caseid</span> <span class="o">==</span> <span class="mi">2298</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1770,11 +2349,144 @@ Downloaded 2002FemResp.dat.gz
   </tbody>
 </table>
 <p>4 rows × 245 columns</p>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 31;
+                var nbb_unformatted_code = "preg[preg.caseid == 2298]";
+                var nbb_formatted_code = "preg[preg.caseid == 2298]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>How old is the respondent with <code class="docutils literal notranslate"><span class="pre">caseid</span></code> 1?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">caseid</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">age_r</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1069    44
+Name: age_r, dtype: int64
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 32;
+                var nbb_unformatted_code = "resp[resp.caseid == 1].age_r";
+                var nbb_formatted_code = "resp[resp.caseid == 1].age_r";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>What are the pregnancy lengths for the respondent with <code class="docutils literal notranslate"><span class="pre">caseid</span></code> 2298?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span><span class="p">[</span><span class="n">preg</span><span class="o">.</span><span class="n">caseid</span> <span class="o">==</span> <span class="mi">2298</span><span class="p">]</span><span class="o">.</span><span class="n">prglngth</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2610    40
+2611    36
+2612    30
+2613    40
+Name: prglngth, dtype: int64
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 33;
+                var nbb_unformatted_code = "preg[preg.caseid == 2298].prglngth";
+                var nbb_formatted_code = "preg[preg.caseid == 2298].prglngth";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>What was the birthweight of the first baby born to the respondent with <code class="docutils literal notranslate"><span class="pre">caseid</span></code> 5013?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span><span class="p">[</span><span class="n">preg</span><span class="o">.</span><span class="n">caseid</span> <span class="o">==</span> <span class="mi">5013</span><span class="p">]</span><span class="o">.</span><span class="n">birthwgt_lb</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5516    7.0
+5517    NaN
+5518    8.0
+5519    8.0
+Name: birthwgt_lb, dtype: float64
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 34;
+                var nbb_unformatted_code = "preg[preg.caseid == 5013].birthwgt_lb";
+                var nbb_formatted_code = "preg[preg.caseid == 5013].birthwgt_lb";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span><span class="p">[(</span><span class="n">preg</span><span class="o">.</span><span class="n">caseid</span> <span class="o">==</span> <span class="mi">5013</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">preg</span><span class="o">.</span><span class="n">pregordr</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">birthwgt_lb</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5516    7.0
+Name: birthwgt_lb, dtype: float64
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 35;
+                var nbb_unformatted_code = "preg[(preg.caseid == 5013) & (preg.pregordr == 1)].birthwgt_lb";
+                var nbb_formatted_code = "preg[(preg.caseid == 5013) & (preg.pregordr == 1)].birthwgt_lb";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Examples and Exercises from Think Stats, 2nd Edition</p>
 <p><a class="reference external" href="http://thinkstats2.com">http://thinkstats2.com</a></p>
 <p>Copyright 2016 Allen B. Downey</p>
