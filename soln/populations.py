@@ -5,32 +5,26 @@ Copyright 2010 Allen B. Downey
 License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
-from __future__ import print_function
-
-import csv
-import logging
-import sys
 import numpy as np
-import pandas
-
+import pandas as pd
 import thinkplot
 import thinkstats2
 
 
-def ReadData(filename="PEP_2012_PEPANNRES_with_ann.csv"):
+def read_data(filename="PEP_2012_PEPANNRES_with_ann.csv"):
     """Reads filename and returns populations in thousands
 
     filename: string
 
     returns: pandas Series of populations in thousands
     """
-    df = pandas.read_csv(filename, header=None, skiprows=2, encoding="iso-8859-1")
+    df = pd.read_csv(filename, header=None, skiprows=2, encoding="iso-8859-1")
     populations = df[7]
     populations.replace(0, np.nan, inplace=True)
     return populations.dropna()
 
 
-def MakeFigures():
+def make_figures():
     """Plots the CDF of populations in several forms.
 
     On a log-log scale the tail of the CCDF looks like a straight line,
@@ -45,41 +39,30 @@ def MakeFigures():
     Many phenomena that have been described with Pareto models can be described
     as well, or better, with lognormal models.
     """
-    pops = ReadData()
+    pops = read_data()
     print("Number of cities/towns", len(pops))
-
     log_pops = np.log10(pops)
-    cdf = thinkstats2.Cdf(pops, label="data")
     cdf_log = thinkstats2.Cdf(log_pops, label="data")
-
-    # pareto plot
-    xs, ys = thinkstats2.RenderParetoCdf(xmin=5000, alpha=1.4, low=0, high=1e7)
-    thinkplot.Plot(np.log10(xs), 1 - ys, label="model", color="0.8")
-
-    thinkplot.Cdf(cdf_log, complement=True)
-    thinkplot.Config(xlabel="log10 population", ylabel="CCDF", yscale="log")
-    thinkplot.Save(root="populations_pareto")
-
-    # lognormal plot
-    thinkplot.PrePlot(cols=2)
-
+    xs, ys = thinkstats2.render_pareto_cdf(xmin=5000, alpha=1.4, low=0, high=10000000.0)
+    thinkplot.plot(np.log10(xs), 1 - ys, label="model", color="0.8")
+    thinkplot.cdf(cdf_log, complement=True)
+    thinkplot.config(xlabel="log10 population", ylabel="CCDF", yscale="log")
+    thinkplot.save(root="populations_pareto")
+    thinkplot.pre_plot(cols=2)
     mu, sigma = log_pops.mean(), log_pops.std()
-    xs, ps = thinkstats2.RenderNormalCdf(mu, sigma, low=0, high=8)
-    thinkplot.Plot(xs, ps, label="model", color="0.8")
-
-    thinkplot.Cdf(cdf_log)
-    thinkplot.Config(xlabel="log10 population", ylabel="CDF")
-
-    thinkplot.SubPlot(2)
-    thinkstats2.NormalProbabilityPlot(log_pops, label="data")
-    thinkplot.Config(xlabel="z", ylabel="log10 population", xlim=[-5, 5])
-
-    thinkplot.Save(root="populations_normal")
+    xs, ps = thinkstats2.render_normal_cdf(mu, sigma, low=0, high=8)
+    thinkplot.plot(xs, ps, label="model", color="0.8")
+    thinkplot.cdf(cdf_log)
+    thinkplot.config(xlabel="log10 population", ylabel="CDF")
+    thinkplot.sub_plot(2)
+    thinkstats2.normal_probability_plot(log_pops, label="data")
+    thinkplot.config(xlabel="z", ylabel="log10 population", xlim=[-5, 5])
+    thinkplot.save(root="populations_normal")
 
 
 def main():
-    thinkstats2.RandomSeed(17)
-    MakeFigures()
+    thinkstats2.random_seed(17)
+    make_figures()
 
 
 if __name__ == "__main__":

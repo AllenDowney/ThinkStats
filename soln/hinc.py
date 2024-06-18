@@ -6,15 +6,13 @@ License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
 from __future__ import print_function, division
-
 import numpy as np
 import pandas
-
 import thinkplot
 import thinkstats2
 
 
-def Clean(s):
+def clean(s):
     """Converts dollar amounts to integers."""
     try:
         return int(s.lstrip("$").replace(",", ""))
@@ -26,7 +24,7 @@ def Clean(s):
         return None
 
 
-def ReadData(filename="hinc06.csv"):
+def read_data(filename="hinc06.csv"):
     """Reads filename and returns populations in thousands
 
     filename: string
@@ -35,32 +33,24 @@ def ReadData(filename="hinc06.csv"):
     """
     data = pandas.read_csv(filename, header=None, skiprows=9)
     cols = data[[0, 1]]
-
     res = []
     for _, row in cols.iterrows():
         label, freq = row.values
         freq = int(freq.replace(",", ""))
-
         t = label.split()
-        low, high = Clean(t[0]), Clean(t[-1])
-
+        low, high = clean(t[0]), clean(t[-1])
         res.append((high, freq))
-
     df = pandas.DataFrame(res)
-    # correct the first range
     df.loc[0, 0] -= 1
-    # compute the cumulative sum of the freqs
     df[2] = df[1].cumsum()
-    # normalize the cumulative freqs
     total = df[2][41]
     df[3] = df[2] / total
-    # add column names
     df.columns = ["income", "freq", "cumsum", "ps"]
     return df
 
 
 def main():
-    df = ReadData()
+    df = read_data()
     print(df)
 
 
