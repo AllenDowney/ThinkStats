@@ -12,9 +12,7 @@ import pandas as pd
 import thinkstats2
 
 
-def ReadFemResp(dct_file='2002FemResp.dct',
-                dat_file='2002FemResp.dat.gz',
-                **options):
+def ReadFemResp(dct_file="2002FemResp.dct", dat_file="2002FemResp.dat.gz", **options):
     """Reads the NSFG respondent data.
 
     dct_file: string file name
@@ -22,8 +20,8 @@ def ReadFemResp(dct_file='2002FemResp.dct',
 
     returns: DataFrame
     """
-    dct = thinkstats2.ReadStataDct(dct_file, encoding='iso-8859-1')
-    df = dct.ReadFixedWidth(dat_file, compression='gzip', **options)
+    dct = thinkstats2.ReadStataDct(dct_file, encoding="iso-8859-1")
+    df = dct.ReadFixedWidth(dat_file, compression="gzip", **options)
     return df
 
 
@@ -32,20 +30,19 @@ def ReadFemResp1995():
 
     returns: DataFrame
     """
-    dat_file = '1995FemRespData.dat.gz'
-    names = ['cmintvw', 'timesmar', 'cmmarrhx', 'cmbirth', 'finalwgt']
-    colspecs = [(12360-1, 12363),
-                (4637-1, 4638),
-                (11759-1, 11762),
-                (14-1, 16),
-                (12350-1, 12359)]
-    df = pd.read_fwf(dat_file, 
-                         compression='gzip', 
-                         colspecs=colspecs, 
-                         names=names)
+    dat_file = "1995FemRespData.dat.gz"
+    names = ["cmintvw", "timesmar", "cmmarrhx", "cmbirth", "finalwgt"]
+    colspecs = [
+        (12360 - 1, 12363),
+        (4637 - 1, 4638),
+        (11759 - 1, 11762),
+        (14 - 1, 16),
+        (12350 - 1, 12359),
+    ]
+    df = pd.read_fwf(dat_file, compression="gzip", colspecs=colspecs, names=names)
 
-    df['timesmar'] = df.timesmar.replace([98, 99], np.nan)
-    df['evrmarry'] = (df.timesmar > 0)
+    df["timesmar"] = df.timesmar.replace([98, 99], np.nan)
+    df["evrmarry"] = df.timesmar > 0
 
     CleanFemResp(df)
     return df
@@ -56,10 +53,18 @@ def ReadFemResp2002():
 
     returns: DataFrame
     """
-    usecols = ['caseid', 'cmmarrhx', 'cmdivorcx', 'cmbirth', 'cmintvw', 
-               'evrmarry', 'parity', 'finalwgt']
+    usecols = [
+        "caseid",
+        "cmmarrhx",
+        "cmdivorcx",
+        "cmbirth",
+        "cmintvw",
+        "evrmarry",
+        "parity",
+        "finalwgt",
+    ]
     df = ReadFemResp(usecols=usecols)
-    df['evrmarry'] = (df.evrmarry == 1)
+    df["evrmarry"] = df.evrmarry == 1
     CleanFemResp(df)
     return df
 
@@ -69,13 +74,21 @@ def ReadFemResp2010():
 
     returns: DataFrame
     """
-    usecols = ['caseid', 'cmmarrhx', 'cmdivorcx', 'cmbirth', 'cmintvw',
-               'evrmarry', 'parity', 'wgtq1q16']
-    df = ReadFemResp('2006_2010_FemRespSetup.dct',
-                       '2006_2010_FemResp.dat.gz',
-                        usecols=usecols)
-    df['evrmarry'] = (df.evrmarry == 1)
-    df['finalwgt'] = df.wgtq1q16
+    usecols = [
+        "caseid",
+        "cmmarrhx",
+        "cmdivorcx",
+        "cmbirth",
+        "cmintvw",
+        "evrmarry",
+        "parity",
+        "wgtq1q16",
+    ]
+    df = ReadFemResp(
+        "2006_2010_FemRespSetup.dct", "2006_2010_FemResp.dat.gz", usecols=usecols
+    )
+    df["evrmarry"] = df.evrmarry == 1
+    df["finalwgt"] = df.wgtq1q16
     CleanFemResp(df)
     return df
 
@@ -85,13 +98,21 @@ def ReadFemResp2013():
 
     returns: DataFrame
     """
-    usecols = ['caseid', 'cmmarrhx', 'cmdivorcx', 'cmbirth', 'cmintvw',
-               'evrmarry', 'parity', 'wgt2011_2013']
-    df = ReadFemResp('2011_2013_FemRespSetup.dct',
-                        '2011_2013_FemRespData.dat.gz',
-                        usecols=usecols)
-    df['evrmarry'] = (df.evrmarry == 1)
-    df['finalwgt'] = df.wgt2011_2013
+    usecols = [
+        "caseid",
+        "cmmarrhx",
+        "cmdivorcx",
+        "cmbirth",
+        "cmintvw",
+        "evrmarry",
+        "parity",
+        "wgt2011_2013",
+    ]
+    df = ReadFemResp(
+        "2011_2013_FemRespSetup.dct", "2011_2013_FemRespData.dat.gz", usecols=usecols
+    )
+    df["evrmarry"] = df.evrmarry == 1
+    df["finalwgt"] = df.wgt2011_2013
     CleanFemResp(df)
     return df
 
@@ -103,20 +124,18 @@ def CleanFemResp(resp):
 
     Adds columns: agemarry, age, decade, fives
     """
-    resp['cmmarrhx'] = resp.cmmarrhx.replace([9997, 9998, 9999], np.nan)
-    resp['agemarry'] = (resp.cmmarrhx - resp.cmbirth) / 12.0
-    resp['age'] = (resp.cmintvw - resp.cmbirth) / 12.0
+    resp["cmmarrhx"] = resp.cmmarrhx.replace([9997, 9998, 9999], np.nan)
+    resp["agemarry"] = (resp.cmmarrhx - resp.cmbirth) / 12.0
+    resp["age"] = (resp.cmintvw - resp.cmbirth) / 12.0
 
-    month0 = pd.to_datetime('1899-12-15')
-    dates = [month0 + pd.DateOffset(months=cm) 
-             for cm in resp.cmbirth]
-    resp['year'] = (pd.DatetimeIndex(dates).year - 1900)
-    resp['decade'] = resp.year // 10
-    resp['fives'] = resp.year // 5
+    month0 = pd.to_datetime("1899-12-15")
+    dates = [month0 + pd.DateOffset(months=cm) for cm in resp.cmbirth]
+    resp["year"] = pd.DatetimeIndex(dates).year - 1900
+    resp["decade"] = resp.year // 10
+    resp["fives"] = resp.year // 5
 
 
-def ReadFemPreg(dct_file='2002FemPreg.dct',
-                dat_file='2002FemPreg.dat.gz'):
+def ReadFemPreg(dct_file="2002FemPreg.dct", dat_file="2002FemPreg.dat.gz"):
     """Reads the NSFG pregnancy data.
 
     dct_file: string file name
@@ -125,7 +144,7 @@ def ReadFemPreg(dct_file='2002FemPreg.dct',
     returns: DataFrame
     """
     dct = thinkstats2.ReadStataDct(dct_file)
-    df = dct.ReadFixedWidth(dat_file, compression='gzip')
+    df = dct.ReadFixedWidth(dat_file, compression="gzip")
     CleanFemPreg(df)
     return df
 
@@ -140,22 +159,22 @@ def CleanFemPreg(df):
 
     # birthwgt_lb contains at least one bogus value (51 lbs)
     # replace with NaN
-    df.loc[df.birthwgt_lb > 20, 'birthwgt_lb'] = np.nan
-    
+    df.loc[df.birthwgt_lb > 20, "birthwgt_lb"] = np.nan
+
     # replace 'not ascertained', 'refused', 'don't know' with NaN
     na_vals = [97, 98, 99]
-    df['birthwgt_lb'] = df.birthwgt_lb.replace(na_vals, np.nan)
-    df['birthwgt_oz'] = df.birthwgt_oz.replace(na_vals, np.nan)
-    df['hpagelb'] = df.hpagelb.replace(na_vals, np.nan)
+    df["birthwgt_lb"] = df.birthwgt_lb.replace(na_vals, np.nan)
+    df["birthwgt_oz"] = df.birthwgt_oz.replace(na_vals, np.nan)
+    df["hpagelb"] = df.hpagelb.replace(na_vals, np.nan)
 
-    df['babysex'] = df.babysex.replace([7, 9], np.nan)
-    df['nbrnaliv'] = df.nbrnaliv.replace([9], np.nan)
+    df["babysex"] = df.babysex.replace([7, 9], np.nan)
+    df["nbrnaliv"] = df.nbrnaliv.replace([9], np.nan)
 
     # birthweight is stored in two columns, lbs and oz.
     # convert to a single column in lb
     # NOTE: creating a new column requires dictionary syntax,
     # not attribute assignment (like df.totalwgt_lb)
-    df['totalwgt_lb'] = df.birthwgt_lb + df.birthwgt_oz / 16.0    
+    df["totalwgt_lb"] = df.birthwgt_lb + df.birthwgt_oz / 16.0
 
     # due to a bug in ReadStataDct, the last variable gets clipped;
     # so for now set it to NaN
@@ -170,7 +189,7 @@ def ValidatePregnum(resp, preg):
     """
     # make the map from caseid to list of pregnancy indices
     preg_map = MakePregMap(preg)
-    
+
     # iterate through the respondent pregnum series
     for index, pregnum in resp.pregnum.items():
         caseid = resp.caseid[index]
@@ -223,9 +242,9 @@ def Summarize(live, firsts, others):
     var = live.prglngth.var()
     std = live.prglngth.std()
 
-    print('Live mean', mean)
-    print('Live variance', var)
-    print('Live std', std)
+    print("Live mean", mean)
+    print("Live variance", var)
+    print("Live std", std)
 
     mean1 = firsts.prglngth.mean()
     mean2 = others.prglngth.mean()
@@ -233,21 +252,21 @@ def Summarize(live, firsts, others):
     var1 = firsts.prglngth.var()
     var2 = others.prglngth.var()
 
-    print('Mean')
-    print('First babies', mean1)
-    print('Others', mean2)
+    print("Mean")
+    print("First babies", mean1)
+    print("Others", mean2)
 
-    print('Variance')
-    print('First babies', var1)
-    print('Others', var2)
+    print("Variance")
+    print("First babies", var1)
+    print("Others", var2)
 
-    print('Difference in weeks', mean1 - mean2)
-    print('Difference in hours', (mean1 - mean2) * 7 * 24)
+    print("Difference in weeks", mean1 - mean2)
+    print("Difference in hours", (mean1 - mean2) * 7 * 24)
 
-    print('Difference relative to 39 weeks', (mean1 - mean2) / 39 * 100)
+    print("Difference relative to 39 weeks", (mean1 - mean2) / 39 * 100)
 
     d = thinkstats2.CohenEffectSize(firsts.prglngth, others.prglngth)
-    print('Cohen d', d)
+    print("Cohen d", d)
 
 
 def main():
@@ -258,8 +277,8 @@ def main():
     # read and validate the respondent file
     resp = ReadFemResp()
 
-    assert(len(resp) == 7643)
-    assert(resp.pregnum.value_counts()[1] == 1267)
+    assert len(resp) == 7643
+    assert resp.pregnum.value_counts()[1] == 1267
 
     # read and validate the pregnancy file
     preg = ReadFemPreg()
@@ -284,13 +303,12 @@ def main():
 
     # validate that the pregnum column in `resp` matches the number
     # of entries in `preg`
-    assert(ValidatePregnum(resp, preg))
-    print('All tests passed.')
+    assert ValidatePregnum(resp, preg)
+    print("All tests passed.")
 
     live, firsts, others = MakeFrames()
     Summarize(live, firsts, others)
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

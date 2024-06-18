@@ -38,7 +38,6 @@ from scipy.special import gamma
 import statsmodels.formula.api as smf
 
 
-
 def RandomSeed(x):
     """Initialize the random and np.random generators.
 
@@ -1455,7 +1454,7 @@ class Suite(Pmf):
             self.LogUpdate(data)
 
     def Likelihood(self, data, hypo):
-        """Computes the likelihood of the data under the 
+        """Computes the likelihood of the data under the
 
         hypo: some representation of the hypothesis
         data: some representation of the data
@@ -1463,7 +1462,7 @@ class Suite(Pmf):
         raise UnimplementedMethodException()
 
     def LogLikelihood(self, data, hypo):
-        """Computes the log likelihood of the data under the 
+        """Computes the log likelihood of the data under the
 
         hypo: some representation of the hypothesis
         data: some representation of the data
@@ -2822,9 +2821,7 @@ class FixedWidthVariables(object):
 
         returns: DataFrame
         """
-        df = pd.read_fwf(
-            filename, colspecs=self.colspecs, names=self.names, **options
-        )
+        df = pd.read_fwf(filename, colspecs=self.colspecs, names=self.names, **options)
         return df
 
 
@@ -2968,6 +2965,7 @@ def Smooth(xs, sigma=2, **options):
 
 ## HypothesisTests
 
+
 class HypothesisTest(object):
     """Represents a hypothesis test."""
 
@@ -3017,11 +3015,11 @@ class HypothesisTest(object):
         raise UnimplementedMethodException()
 
     def MakeModel(self):
-        """Build a model of the null """
+        """Build a model of the null"""
         pass
 
     def RunModel(self):
-        """Run the model of the null 
+        """Run the model of the null
 
         returns: simulated data
         """
@@ -3034,22 +3032,22 @@ class CoinTest(HypothesisTest):
     def TestStatistic(self, data):
         """Computes the test statistic.
 
-        data: data in whatever form is relevant        
+        data: data in whatever form is relevant
         """
         heads, tails = data
         test_stat = abs(heads - tails)
         return test_stat
 
     def RunModel(self):
-        """Run the model of the null 
+        """Run the model of the null
 
         returns: simulated data
         """
         heads, tails = self.data
         n = heads + tails
-        sample = [random.choice('HT') for _ in range(n)]
+        sample = [random.choice("HT") for _ in range(n)]
         hist = Hist(sample)
-        data = hist['H'], hist['T']
+        data = hist["H"], hist["T"]
         return data
 
 
@@ -3059,26 +3057,25 @@ class DiffMeansPermute(HypothesisTest):
     def TestStatistic(self, data):
         """Computes the test statistic.
 
-        data: data in whatever form is relevant        
+        data: data in whatever form is relevant
         """
         group1, group2 = data
         test_stat = abs(group1.mean() - group2.mean())
         return test_stat
 
     def MakeModel(self):
-        """Build a model of the null 
-        """
+        """Build a model of the null"""
         group1, group2 = self.data
         self.n, self.m = len(group1), len(group2)
         self.pool = np.hstack((group1, group2))
 
     def RunModel(self):
-        """Run the model of the null 
+        """Run the model of the null
 
         returns: simulated data
         """
         np.random.shuffle(self.pool)
-        data = self.pool[:self.n], self.pool[self.n:]
+        data = self.pool[: self.n], self.pool[self.n :]
         return data
 
 
@@ -3088,7 +3085,7 @@ class DiffMeansOneSided(DiffMeansPermute):
     def TestStatistic(self, data):
         """Computes the test statistic.
 
-        data: data in whatever form is relevant        
+        data: data in whatever form is relevant
         """
         group1, group2 = data
         test_stat = group1.mean() - group2.mean()
@@ -3101,7 +3098,7 @@ class DiffStdPermute(DiffMeansPermute):
     def TestStatistic(self, data):
         """Computes the test statistic.
 
-        data: data in whatever form is relevant        
+        data: data in whatever form is relevant
         """
         group1, group2 = data
         test_stat = group1.std() - group2.std()
@@ -3121,7 +3118,7 @@ class CorrelationPermute(HypothesisTest):
         return test_stat
 
     def RunModel(self):
-        """Run the model of the null 
+        """Run the model of the null
 
         returns: simulated data
         """
@@ -3145,12 +3142,12 @@ class DiceTest(HypothesisTest):
         return test_stat
 
     def RunModel(self):
-        """Run the model of the null 
+        """Run the model of the null
 
         returns: simulated data
         """
         n = sum(self.data)
-        values = [1,2,3,4,5,6]
+        values = [1, 2, 3, 4, 5, 6]
         rolls = np.random.choice(values, n, replace=True)
         hist = Hist(rolls)
         freqs = hist.Freqs(values)
@@ -3168,7 +3165,7 @@ class DiceChiTest(DiceTest):
         observed = data
         n = sum(observed)
         expected = np.ones(6) * n / 6
-        test_stat = sum((observed - expected)**2 / expected)
+        test_stat = sum((observed - expected) ** 2 / expected)
         return test_stat
 
 
@@ -3186,7 +3183,7 @@ class PregLengthTest(HypothesisTest):
 
     def ChiSquared(self, lengths):
         """Computes the chi-squared statistic.
-        
+
         lengths: sequence of lengths
 
         returns: float
@@ -3194,12 +3191,11 @@ class PregLengthTest(HypothesisTest):
         hist = Hist(lengths)
         observed = np.array(hist.Freqs(self.values))
         expected = self.expected_probs * len(lengths)
-        stat = sum((observed - expected)**2 / expected)
+        stat = sum((observed - expected) ** 2 / expected)
         return stat
 
     def MakeModel(self):
-        """Build a model of the null 
-        """
+        """Build a model of the null"""
         firsts, others = self.data
         self.n = len(firsts)
         self.pool = np.hstack((firsts, others))
@@ -3209,23 +3205,22 @@ class PregLengthTest(HypothesisTest):
         self.expected_probs = np.array(pmf.Probs(self.values))
 
     def RunModel(self):
-        """Run the model of the null 
+        """Run the model of the null
 
         returns: simulated data
         """
         np.random.shuffle(self.pool)
-        data = self.pool[:self.n], self.pool[self.n:]
+        data = self.pool[: self.n], self.pool[self.n :]
         return data
 
 
 def RunDiceTest():
-    """Tests whether a die is fair.
-    """
+    """Tests whether a die is fair."""
     data = [8, 9, 19, 5, 8, 11]
     dt = DiceTest(data)
-    print('dice test', dt.PValue(iters=10000))
+    print("dice test", dt.PValue(iters=10000))
     dt = DiceChiTest(data)
-    print('dice chi test', dt.PValue(iters=10000))
+    print("dice chi test", dt.PValue(iters=10000))
 
 
 def FalseNegRate(data, num_runs=1000):
@@ -3256,12 +3251,13 @@ def PrintTest(p_value, ht):
     p_value: float
     ht: HypothesisTest
     """
-    print('p-value =', p_value)
-    print('actual =', ht.actual)
-    print('ts max =', ht.MaxTestStat())
+    print("p-value =", p_value)
+    print("actual =", ht.actual)
+    print("ts max =", ht.MaxTestStat())
 
 
 ## Regression
+
 
 def QuickLeastSquares(xs, ys):
     """Estimates linear least squares fit and returns MSE.
@@ -3294,8 +3290,8 @@ def ReadVariables():
 
     returns: DataFrame that maps variables names to descriptions
     """
-    vars1 = ReadStataDct('2002FemPreg.dct').variables
-    vars2 = ReadStataDct('2002FemResp.dct').variables
+    vars1 = ReadStataDct("2002FemPreg.dct").variables
+    vars2 = ReadStataDct("2002FemResp.dct").variables
 
     all_vars = vars1.append(vars2)
     all_vars.index = all_vars.name
@@ -3310,7 +3306,7 @@ def JoinFemResp(df):
     resp = nsfg.ReadFemResp()
     resp.index = resp.caseid
 
-    join = df.join(resp, on='caseid', rsuffix='_r')
+    join = df.join(resp, on="caseid", rsuffix="_r")
 
     # convert from colon-separated time strings to datetimes
     join.screentime = pd.to_datetime(join.screentime)
@@ -3340,11 +3336,11 @@ def GoMining(df):
             if df[name].var() < 1e-7:
                 continue
 
-            formula = 'totalwgt_lb ~ agepreg + ' + name
-            formula = formula.encode('ascii')
+            formula = "totalwgt_lb ~ agepreg + " + name
+            formula = formula.encode("ascii")
 
             model = smf.ols(formula, data=df)
-            if model.nobs < len(df)/2:
+            if model.nobs < len(df) / 2:
                 continue
 
             results = model.fit()
@@ -3368,7 +3364,7 @@ def MiningReport(variables, n=30):
 
     variables.sort(reverse=True)
     for mse, name in variables[:n]:
-        key = re.sub('_r$', '', name)
+        key = re.sub("_r$", "", name)
         try:
             desc = all_vars.loc[key].desc
             if isinstance(desc, pd.Series):
@@ -3383,14 +3379,16 @@ def PredictBirthWeight(live):
 
     live: DataFrame of live births
     """
-    live = live[live.prglngth>30]
+    live = live[live.prglngth > 30]
     join = JoinFemResp(live)
 
     t = GoMining(join)
     MiningReport(t)
 
-    formula = ('totalwgt_lb ~ agepreg + C(race) + babysex==1 + '
-               'nbrnaliv>1 + paydu==1 + totincr')
+    formula = (
+        "totalwgt_lb ~ agepreg + C(race) + babysex==1 + "
+        "nbrnaliv>1 + paydu==1 + totincr"
+    )
     results = smf.ols(formula, data=join).fit()
     SummarizeResults(results)
 
@@ -3402,15 +3400,15 @@ def SummarizeResults(results):
     """
     for name, param in results.params.items():
         pvalue = results.pvalues[name]
-        print('%s   %0.3g   (%.3g)' % (name, param, pvalue))
+        print("%s   %0.3g   (%.3g)" % (name, param, pvalue))
 
     try:
-        print('R^2 %.4g' % results.rsquared)
+        print("R^2 %.4g" % results.rsquared)
         ys = results.model.endog
-        print('Std(ys) %.4g' % ys.std())
-        print('Std(res) %.4g' % results.resid.std())
+        print("Std(ys) %.4g" % ys.std())
+        print("Std(res) %.4g" % results.resid.std())
     except AttributeError:
-        print('R^2 %.4g' % results.prsquared)
+        print("R^2 %.4g" % results.prsquared)
 
 
 def RunSimpleRegression(live):
@@ -3419,7 +3417,7 @@ def RunSimpleRegression(live):
     live: DataFrame of live births
     """
     # run the regression with thinkstats2 functions
-    live_dropna = live.dropna(subset=['agepreg', 'totalwgt_lb'])
+    live_dropna = live.dropna(subset=["agepreg", "totalwgt_lb"])
     ages = live_dropna.agepreg
     weights = live_dropna.totalwgt_lb
     inter, slope = LeastSquares(ages, weights)
@@ -3427,17 +3425,17 @@ def RunSimpleRegression(live):
     r2 = CoefDetermination(weights, res)
 
     # run the regression with statsmodels
-    formula = 'totalwgt_lb ~ agepreg'
+    formula = "totalwgt_lb ~ agepreg"
     model = smf.ols(formula, data=live)
     results = model.fit()
     SummarizeResults(results)
 
     def AlmostEquals(x, y, tol=1e-6):
-        return abs(x-y) < tol
+        return abs(x - y) < tol
 
-    assert(AlmostEquals(results.params['Intercept'], inter))
-    assert(AlmostEquals(results.params['agepreg'], slope))
-    assert(AlmostEquals(results.rsquared, r2))
+    assert AlmostEquals(results.params["Intercept"], inter)
+    assert AlmostEquals(results.params["agepreg"], slope)
+    assert AlmostEquals(results.rsquared, r2)
 
 
 def PivotTables(live):
@@ -3445,8 +3443,7 @@ def PivotTables(live):
 
     live: DataFrame of live births
     """
-    table = pd.pivot_table(live, rows='isfirst',
-                               values=['totalwgt_lb', 'agepreg'])
+    table = pd.pivot_table(live, rows="isfirst", values=["totalwgt_lb", "agepreg"])
     print(table)
 
 
@@ -3462,18 +3459,18 @@ def FormatRow(results, columns):
         coef = results.params.get(col, np.nan)
         pval = results.pvalues.get(col, np.nan)
         if np.isnan(coef):
-            s = '--'
+            s = "--"
         elif pval < 0.001:
-            s = '%0.3g (*)' % (coef)
+            s = "%0.3g (*)" % (coef)
         else:
-            s = '%0.3g (%0.2g)' % (coef, pval)
+            s = "%0.3g (%0.2g)" % (coef, pval)
         t.append(s)
 
     try:
-        t.append('%.2g' % results.rsquared)
+        t.append("%.2g" % results.rsquared)
     except AttributeError:
-        t.append('%.2g' % results.prsquared)
-        
+        t.append("%.2g" % results.prsquared)
+
     return t
 
 
@@ -3482,35 +3479,35 @@ def RunModels(live):
 
     live: DataFrame of pregnancy records
     """
-    columns = ['isfirst[T.True]', 'agepreg', 'agepreg2']
-    header = ['isfirst', 'agepreg', 'agepreg2']
+    columns = ["isfirst[T.True]", "agepreg", "agepreg2"]
+    header = ["isfirst", "agepreg", "agepreg2"]
 
     rows = []
-    formula = 'totalwgt_lb ~ isfirst'
+    formula = "totalwgt_lb ~ isfirst"
     results = smf.ols(formula, data=live).fit()
     rows.append(FormatRow(results, columns))
     print(formula)
     SummarizeResults(results)
 
-    formula = 'totalwgt_lb ~ agepreg'
+    formula = "totalwgt_lb ~ agepreg"
     results = smf.ols(formula, data=live).fit()
     rows.append(FormatRow(results, columns))
     print(formula)
     SummarizeResults(results)
-    
-    formula = 'totalwgt_lb ~ isfirst + agepreg'
+
+    formula = "totalwgt_lb ~ isfirst + agepreg"
     results = smf.ols(formula, data=live).fit()
     rows.append(FormatRow(results, columns))
     print(formula)
     SummarizeResults(results)
-    
-    live['agepreg2'] = live.agepreg**2
-    formula = 'totalwgt_lb ~ isfirst + agepreg + agepreg2'
+
+    live["agepreg2"] = live.agepreg**2
+    formula = "totalwgt_lb ~ isfirst + agepreg + agepreg2"
     results = smf.ols(formula, data=live).fit()
     rows.append(FormatRow(results, columns))
     print(formula)
     SummarizeResults(results)
-    
+
     PrintTabular(rows, header)
 
 
@@ -3520,108 +3517,106 @@ def PrintTabular(rows, header):
     rows: list of rows
     header: list of strings
     """
-    s = r'\hline ' + ' & '.join(header) + r' \\ \hline'
+    s = r"\hline " + " & ".join(header) + r" \\ \hline"
     print(s)
 
     for row in rows:
-        s = ' & '.join(row) + r' \\'
+        s = " & ".join(row) + r" \\"
         print(s)
 
-    print(r'\hline')
+    print(r"\hline")
 
 
 def LogisticRegressionExample():
-    """Runs a simple example of logistic regression and prints results.
-    """
+    """Runs a simple example of logistic regression and prints results."""
     y = np.array([0, 1, 0, 1])
     x1 = np.array([0, 0, 0, 1])
     x2 = np.array([0, 1, 1, 1])
 
     beta = [-1.5, 2.8, 1.1]
 
-    log_o = beta[0] + beta[1] * x1 + beta[2] * x2 
+    log_o = beta[0] + beta[1] * x1 + beta[2] * x2
     print(log_o)
 
     o = np.exp(log_o)
     print(o)
 
-    p = o / (o+1)
+    p = o / (o + 1)
     print(p)
 
-    like = y * p + (1-y) * (1-p)
+    like = y * p + (1 - y) * (1 - p)
     print(like)
     print(np.prod(like))
 
     df = pd.DataFrame(dict(y=y, x1=x1, x2=x2))
-    results = smf.logit('y ~ x1 + x2', data=df).fit()
+    results = smf.logit("y ~ x1 + x2", data=df).fit()
     print(results.summary())
 
-    
 
 def RunLogisticModels(live):
     """Runs regressions that predict sex.
 
     live: DataFrame of pregnancy records
     """
-    #live = linear.ResampleRowsWeighted(live)
+    # live = linear.ResampleRowsWeighted(live)
 
-    df = live[live.prglngth>30]
+    df = live[live.prglngth > 30]
 
-    df['boy'] = (df.babysex==1).astype(int)
-    df['isyoung'] = (df.agepreg<20).astype(int)
-    df['isold'] = (df.agepreg<35).astype(int)
-    df['season'] = (((df.datend+1) % 12) / 3).astype(int)
+    df["boy"] = (df.babysex == 1).astype(int)
+    df["isyoung"] = (df.agepreg < 20).astype(int)
+    df["isold"] = (df.agepreg < 35).astype(int)
+    df["season"] = (((df.datend + 1) % 12) / 3).astype(int)
 
     # run the simple model
-    model = smf.logit('boy ~ agepreg', data=df)    
+    model = smf.logit("boy ~ agepreg", data=df)
     results = model.fit()
-    print('nobs', results.nobs)
+    print("nobs", results.nobs)
     print(type(results))
     SummarizeResults(results)
 
     # run the complex model
-    model = smf.logit('boy ~ agepreg + hpagelb + birthord + C(race)', data=df)
+    model = smf.logit("boy ~ agepreg + hpagelb + birthord + C(race)", data=df)
     results = model.fit()
-    print('nobs', results.nobs)
+    print("nobs", results.nobs)
     print(type(results))
     SummarizeResults(results)
 
     # make the scatter plot
     exog = pd.DataFrame(model.exog, columns=model.exog_names)
     endog = pd.DataFrame(model.endog, columns=[model.endog_names])
-    
-    xs = exog['agepreg']
+
+    xs = exog["agepreg"]
     lo = results.fittedvalues
     o = np.exp(lo)
-    p = o / (o+1)
+    p = o / (o + 1)
 
-    #thinkplot.Scatter(xs, p, alpha=0.1)
-    #thinkplot.Show()
+    # thinkplot.Scatter(xs, p, alpha=0.1)
+    # thinkplot.Show()
 
     # compute accuracy
-    actual = endog['boy']
+    actual = endog["boy"]
     baseline = actual.mean()
 
-    predict = (results.predict() >= 0.5)
+    predict = results.predict() >= 0.5
     true_pos = predict * actual
     true_neg = (1 - predict) * (1 - actual)
 
     acc = (sum(true_pos) + sum(true_neg)) / len(actual)
     print(acc, baseline)
 
-    columns = ['agepreg', 'hpagelb', 'birthord', 'race']
+    columns = ["agepreg", "hpagelb", "birthord", "race"]
     new = pd.DataFrame([[35, 39, 3, 1]], columns=columns)
     y = results.predict(new)
     print(y)
 
 
-
 ## Normal
+
 
 class Normal(object):
     """Represents a Normal distribution"""
 
-    def __init__(self, mu, sigma2, label=''):
+    def __init__(self, mu, sigma2, label=""):
         """Initializes.
 
         mu: mean
@@ -3634,9 +3629,9 @@ class Normal(object):
     def __repr__(self):
         """Returns a string representation."""
         if self.label:
-            return 'Normal(%g, %g, %s)' % (self.mu, self.sigma2, self.label)
+            return "Normal(%g, %g, %s)" % (self.mu, self.sigma2, self.label)
         else:
-            return 'Normal(%g, %g)' % (self.mu, self.sigma2)
+            return "Normal(%g, %g)" % (self.mu, self.sigma2)
 
     __str__ = __repr__
 
@@ -3705,8 +3700,7 @@ class Normal(object):
         return Normal(n * self.mu, n * self.sigma2)
 
     def Render(self):
-        """Returns pair of xs, ys suitable for plotting.
-        """
+        """Returns pair of xs, ys suitable for plotting."""
         mean, std = self.mu, self.sigma
         low, high = mean - 3 * std, mean + 3 * std
         xs, ys = RenderNormalCdf(mean, std, low, high)
@@ -3724,10 +3718,10 @@ class Normal(object):
 
         p: percentile rank 0-100
         """
-        return EvalNormalCdfInverse(p/100, self.mu, self.sigma)
+        return EvalNormalCdfInverse(p / 100, self.mu, self.sigma)
 
 
-def NormalPlotSamples(samples, plot=1, ylabel=''):
+def NormalPlotSamples(samples, plot=1, ylabel=""):
     """Makes normal probability plots for samples.
 
     samples: list of samples
@@ -3737,11 +3731,9 @@ def NormalPlotSamples(samples, plot=1, ylabel=''):
         thinkplot.SubPlot(plot)
         NormalProbabilityPlot(sample)
 
-        thinkplot.Config(title='n=%d' % n,
-                         legend=False,
-                         xticks=[],
-                         yticks=[],
-                         ylabel=ylabel)
+        thinkplot.Config(
+            title="n=%d" % n, legend=False, xticks=[], yticks=[], ylabel=ylabel
+        )
         plot += 1
 
 
@@ -3755,8 +3747,7 @@ def MakeExpoSamples(beta=2.0, iters=1000):
     """
     samples = []
     for n in [1, 10, 100]:
-        sample = [np.sum(np.random.exponential(beta, n))
-                  for _ in range(iters)]
+        sample = [np.sum(np.random.exponential(beta, n)) for _ in range(iters)]
         samples.append((n, sample))
     return samples
 
@@ -3772,8 +3763,7 @@ def MakeLognormalSamples(mu=1.0, sigma=1.0, iters=1000):
     """
     samples = []
     for n in [1, 10, 100]:
-        sample = [np.sum(np.random.lognormal(mu, sigma, n))
-                  for _ in range(iters)]
+        sample = [np.sum(np.random.lognormal(mu, sigma, n)) for _ in range(iters)]
         samples.append((n, sample))
     return samples
 
@@ -3789,15 +3779,14 @@ def MakeParetoSamples(alpha=1.0, iters=1000):
     samples = []
 
     for n in [1, 10, 100]:
-        sample = [np.sum(np.random.pareto(alpha, n))
-                  for _ in range(iters)]
+        sample = [np.sum(np.random.pareto(alpha, n)) for _ in range(iters)]
         samples.append((n, sample))
     return samples
 
 
 def GenerateCorrelated(rho, n):
     """Generates a sequence of correlated values from a standard normal dist.
-    
+
     rho: coefficient of correlation
     n: length of sequence
 
@@ -3807,7 +3796,7 @@ def GenerateCorrelated(rho, n):
     yield x
 
     sigma = math.sqrt(1 - rho**2)
-    for _ in range(n-1):
+    for _ in range(n - 1):
         x = random.gauss(x * rho, sigma)
         yield x
 
@@ -3833,11 +3822,10 @@ def MakeCorrelatedSamples(rho=0.9, iters=1000):
     iters: number of samples to generate for each size
 
     returns: list of samples
-    """    
+    """
     samples = []
     for n in [1, 10, 100]:
-        sample = [np.sum(GenerateExpoCorrelated(rho, n))
-                  for _ in range(iters)]
+        sample = [np.sum(GenerateExpoCorrelated(rho, n)) for _ in range(iters)]
         samples.append((n, sample))
     return samples
 
@@ -3860,20 +3848,18 @@ def PlotPregLengths(live, firsts, others):
 
     live, firsts, others: DataFrames
     """
-    print('prglngth example')
+    print("prglngth example")
     delta = firsts.prglngth.mean() - others.prglngth.mean()
     print(delta)
 
     dist1 = SamplingDistMean(live.prglngth, len(firsts))
     dist2 = SamplingDistMean(live.prglngth, len(others))
     dist = dist1 - dist2
-    print('null hypothesis', dist)
+    print("null hypothesis", dist)
     print(dist.Prob(-delta), 1 - dist.Prob(delta))
 
-    thinkplot.Plot(dist, label='null hypothesis')
-    thinkplot.Save(root='normal3',
-                   xlabel='difference in means (weeks)',
-                   ylabel='CDF')
+    thinkplot.Plot(dist, label="null hypothesis")
+    thinkplot.Save(root="normal3", xlabel="difference in means (weeks)", ylabel="CDF")
 
 
 class CorrelationPermute(CorrelationPermute):
@@ -3895,7 +3881,7 @@ def ResampleCorrelations(live):
 
     returns: sample size, observed correlation, CDF of resampled correlations
     """
-    live2 = live.dropna(subset=['agepreg', 'totalwgt_lb'])
+    live2 = live.dropna(subset=["agepreg", "totalwgt_lb"])
     data = live2.agepreg.values, live2.totalwgt_lb.values
     ht = CorrelationPermute(data)
     p_value = ht.PValue()
@@ -3910,7 +3896,7 @@ def StudentCdf(n):
     returns: Cdf
     """
     ts = np.linspace(-3, 3, 101)
-    ps = scipy.stats.t.cdf(ts, df=n-2)
+    ps = scipy.stats.t.cdf(ts, df=n - 2)
     rs = ts / np.sqrt(n - 2 + ts**2)
     return Cdf(rs, ps)
 
@@ -3924,16 +3910,13 @@ def TestCorrelation(live):
     n, r, cdf = ResampleCorrelations(live)
 
     model = StudentCdf(n)
-    thinkplot.Plot(model.xs, model.ps, color='gray',
-                   alpha=0.3, label='Student t')
-    thinkplot.Cdf(cdf, label='sample')
+    thinkplot.Plot(model.xs, model.ps, color="gray", alpha=0.3, label="Student t")
+    thinkplot.Cdf(cdf, label="sample")
 
-    thinkplot.Save(root='normal4',
-                   xlabel='correlation',
-                   ylabel='CDF')
+    thinkplot.Save(root="normal4", xlabel="correlation", ylabel="CDF")
 
-    t = r * math.sqrt((n-2) / (1-r**2))
-    p_value = 1 - scipy.stats.t.cdf(t, df=n-2)
+    t = r * math.sqrt((n - 2) / (1 - r**2))
+    p_value = 1 - scipy.stats.t.cdf(t, df=n - 2)
     print(r, p_value)
 
 
@@ -3941,66 +3924,62 @@ def ChiSquaredCdf(n):
     """Discrete approximation of the chi-squared CDF with df=n-1.
 
     n: sample size
-    
+
     returns: Cdf
     """
     xs = np.linspace(0, 25, 101)
-    ps = scipy.stats.chi2.cdf(xs, df=n-1)
+    ps = scipy.stats.chi2.cdf(xs, df=n - 1)
     return Cdf(xs, ps)
 
 
 def TestChiSquared():
-    """Performs a chi-squared test analytically.
-    """
+    """Performs a chi-squared test analytically."""
     data = [8, 9, 19, 5, 8, 11]
     dt = DiceChiTest(data)
     p_value = dt.PValue(iters=1000)
     n, chi2, cdf = len(data), dt.actual, dt.test_cdf
 
     model = ChiSquaredCdf(n)
-    thinkplot.Plot(model.xs, model.ps, color='gray',
-                   alpha=0.3, label='chi squared')
-    thinkplot.Cdf(cdf, label='sample')
+    thinkplot.Plot(model.xs, model.ps, color="gray", alpha=0.3, label="chi squared")
+    thinkplot.Cdf(cdf, label="sample")
 
-    thinkplot.Save(root='normal5',
-                   xlabel='chi-squared statistic',
-                   ylabel='CDF',
-                   loc='lower right')
+    thinkplot.Save(
+        root="normal5", xlabel="chi-squared statistic", ylabel="CDF", loc="lower right"
+    )
 
     # compute the p-value
-    p_value = 1 - scipy.stats.chi2.cdf(chi2, df=n-1)
+    p_value = 1 - scipy.stats.chi2.cdf(chi2, df=n - 1)
     print(chi2, p_value)
 
 
 def MakeCltPlots():
-    """Makes plot showing distributions of sums converging to normal.
-    """
+    """Makes plot showing distributions of sums converging to normal."""
     thinkplot.PrePlot(num=3, rows=2, cols=3)
     samples = MakeExpoSamples()
-    NormalPlotSamples(samples, plot=1, ylabel='sum of expo values')
+    NormalPlotSamples(samples, plot=1, ylabel="sum of expo values")
 
     thinkplot.PrePlot(num=3)
     samples = MakeLognormalSamples()
-    NormalPlotSamples(samples, plot=4, ylabel='sum of lognormal values')
-    thinkplot.Save(root='normal1', legend=False)
-
+    NormalPlotSamples(samples, plot=4, ylabel="sum of lognormal values")
+    thinkplot.Save(root="normal1", legend=False)
 
     thinkplot.PrePlot(num=3, rows=2, cols=3)
     samples = MakeParetoSamples()
-    NormalPlotSamples(samples, plot=1, ylabel='sum of Pareto values')
+    NormalPlotSamples(samples, plot=1, ylabel="sum of Pareto values")
 
     thinkplot.PrePlot(num=3)
     samples = MakeCorrelatedSamples()
-    NormalPlotSamples(samples, plot=4, ylabel='sum of correlated expo values')
-    thinkplot.Save(root='normal2', legend=False)
+    NormalPlotSamples(samples, plot=4, ylabel="sum of correlated expo values")
+    thinkplot.Save(root="normal2", legend=False)
 
 
 ## Survival
 
+
 class SurvivalFunction(object):
     """Represents a survival function."""
 
-    def __init__(self, ts, ss, label=''):
+    def __init__(self, ts, ss, label=""):
         self.ts = ts
         self.ss = ss
         self.label = label
@@ -4032,7 +4011,7 @@ class SurvivalFunction(object):
         """
         return self.ts, self.ss
 
-    def MakeHazardFunction(self, label=''):
+    def MakeHazardFunction(self, label=""):
         """Computes the hazard function.
 
         This simple version does not take into account the
@@ -4060,14 +4039,14 @@ class SurvivalFunction(object):
 
         returns: Pmf
         """
-        cdf = Cdf(self.ts, 1-self.ss)
+        cdf = Cdf(self.ts, 1 - self.ss)
         pmf = Pmf()
         for val, prob in cdf.Items():
             pmf.Set(val, prob)
 
         cutoff = cdf.ps[-1]
         if filler is not None:
-            pmf[filler] = 1-cutoff
+            pmf[filler] = 1 - cutoff
 
         return pmf
 
@@ -4086,11 +4065,11 @@ class SurvivalFunction(object):
         return pd.Series(d)
 
 
-def MakeSurvivalFromSeq(values, label=''):
+def MakeSurvivalFromSeq(values, label=""):
     """Makes a survival function based on a complete dataset.
 
     values: sequence of observed lifespans
-    
+
     returns: SurvivalFunction
     """
     counter = Counter(values)
@@ -4102,11 +4081,11 @@ def MakeSurvivalFromSeq(values, label=''):
     return SurvivalFunction(ts, ss, label)
 
 
-def MakeSurvivalFromCdf(cdf, label=''):
+def MakeSurvivalFromCdf(cdf, label=""):
     """Makes a survival function based on a CDF.
 
     cdf: Cdf
-    
+
     returns: SurvivalFunction
     """
     ts = cdf.xs
@@ -4117,7 +4096,7 @@ def MakeSurvivalFromCdf(cdf, label=''):
 class HazardFunction(object):
     """Represents a hazard function."""
 
-    def __init__(self, d, label=''):
+    def __init__(self, d, label=""):
         """Initialize the hazard function.
 
         d: dictionary (or anything that can initialize a series)
@@ -4142,7 +4121,7 @@ class HazardFunction(object):
         """
         return self.series.index, self.series.values
 
-    def MakeSurvival(self, label=''):
+    def MakeSurvival(self, label=""):
         """Makes the survival function.
 
         returns: SurvivalFunction
@@ -4181,7 +4160,7 @@ def ConditionalSurvival(pmf, t0):
     cond = Pmf()
     for t, p in pmf.Items():
         if t >= t0:
-            cond.Set(t-t0, p)
+            cond.Set(t - t0, p)
     cond.Normalize()
     return MakeSurvivalFromCdf(cond.MakeCdf())
 
@@ -4192,13 +4171,13 @@ def PlotConditionalSurvival(durations):
     durations: list of durations
     """
     pmf = Pmf(durations)
-    
+
     times = [8, 16, 24, 32]
     thinkplot.PrePlot(len(times))
 
     for t0 in times:
         sf = ConditionalSurvival(pmf, t0)
-        label = 't0=%d' % t0
+        label = "t0=%d" % t0
         thinkplot.Plot(sf, label=label)
 
     thinkplot.Show()
@@ -4211,8 +4190,8 @@ def PlotSurvival(complete):
     """
     thinkplot.PrePlot(3, rows=2)
 
-    cdf = Cdf(complete, label='cdf')
-    sf = MakeSurvivalFromCdf(cdf, label='survival')
+    cdf = Cdf(complete, label="cdf")
+    sf = MakeSurvivalFromCdf(cdf, label="survival")
     print(cdf[13])
     print(sf[13])
 
@@ -4221,7 +4200,7 @@ def PlotSurvival(complete):
     thinkplot.Config()
 
     thinkplot.SubPlot(2)
-    hf = sf.MakeHazardFunction(label='hazard')
+    hf = sf.MakeHazardFunction(label="hazard")
     print(hf[39])
     thinkplot.Plot(hf)
     thinkplot.Config(ylim=[0, 0.75])
@@ -4235,22 +4214,22 @@ def PlotHazard(complete, ongoing):
     """
     # plot S(t) based on only complete pregnancies
     sf = MakeSurvivalFromSeq(complete)
-    thinkplot.Plot(sf, label='old S(t)', alpha=0.1)
+    thinkplot.Plot(sf, label="old S(t)", alpha=0.1)
 
     thinkplot.PrePlot(2)
 
     # plot the hazard function
     hf = EstimateHazardFunction(complete, ongoing)
-    thinkplot.Plot(hf, label='lams(t)', alpha=0.5)
+    thinkplot.Plot(hf, label="lams(t)", alpha=0.5)
 
     # plot the survival function
     sf = hf.MakeSurvival()
 
-    thinkplot.Plot(sf, label='S(t)')
-    thinkplot.Show(xlabel='t (weeks)')
+    thinkplot.Plot(sf, label="S(t)")
+    thinkplot.Show(xlabel="t (weeks)")
 
 
-def EstimateHazardFunction(complete, ongoing, label='', verbose=False):
+def EstimateHazardFunction(complete, ongoing, label="", verbose=False):
     """Estimates the hazard function by Kaplan-Meier.
 
     http://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator
@@ -4280,14 +4259,13 @@ def EstimateHazardFunction(complete, ongoing, label='', verbose=False):
 
         lams[t] = ended / at_risk
         if verbose:
-            print('%0.3g\t%d\t%d\t%d\t%0.2g' % 
-                  (t, at_risk, ended, censored, lams[t]))
+            print("%0.3g\t%d\t%d\t%d\t%0.2g" % (t, at_risk, ended, censored, lams[t]))
         at_risk -= ended + censored
 
     return HazardFunction(lams, label=label)
 
 
-def EstimateHazardNumpy(complete, ongoing, label=''):
+def EstimateHazardNumpy(complete, ongoing, label=""):
     """Estimates the hazard function by Kaplan-Meier.
 
     Just for fun, this is a version that uses NumPy to
@@ -4325,7 +4303,7 @@ def AddLabelsByDecade(groups, **options):
     """
     thinkplot.PrePlot(len(groups))
     for name, _ in groups:
-        label = '%d0s' % name
+        label = "%d0s" % name
         thinkplot.Plot([15], [1], label=label, **options)
 
 
@@ -4353,7 +4331,7 @@ def PlotPredictionsByDecade(groups, **options):
     thinkplot.PrePlot(len(hfs))
     for i, hf in enumerate(hfs):
         if i > 0:
-            hf.Extend(hfs[i-1])
+            hf.Extend(hfs[i - 1])
         sf = hf.MakeSurvival()
         thinkplot.Plot(sf, **options)
 
@@ -4363,12 +4341,12 @@ def ResampleSurvival(resp, iters=101):
 
     resp: DataFrame of respondents
     iters: number of resamples
-    """ 
+    """
     _, sf = EstimateMarriageSurvival(resp)
     thinkplot.Plot(sf)
 
     low, high = resp.agemarry.min(), resp.agemarry.max()
-    ts = np.arange(low, high, 1/12.0)
+    ts = np.arange(low, high, 1 / 12.0)
 
     ss_seq = []
     for _ in range(iters):
@@ -4377,12 +4355,14 @@ def ResampleSurvival(resp, iters=101):
         ss_seq.append(sf.Probs(ts))
 
     low, high = PercentileRows(ss_seq, [5, 95])
-    thinkplot.FillBetween(ts, low, high, color='gray', label='90% CI')
-    thinkplot.Save(root='survival3',
-                   xlabel='age (years)',
-                   ylabel='prob unmarried',
-                   xlim=[12, 46],
-                   ylim=[0, 1])
+    thinkplot.FillBetween(ts, low, high, color="gray", label="90% CI")
+    thinkplot.Save(
+        root="survival3",
+        xlabel="age (years)",
+        ylabel="prob unmarried",
+        xlim=[12, 46],
+        ylim=[0, 1],
+    )
 
 
 def EstimateMarriageSurvival(resp):
@@ -4411,21 +4391,23 @@ def PlotMarriageData(resp):
 
     thinkplot.PrePlot(rows=2)
     thinkplot.Plot(hf)
-    thinkplot.Config(ylabel='hazard', legend=False)
+    thinkplot.Config(ylabel="hazard", legend=False)
 
     thinkplot.SubPlot(2)
     thinkplot.Plot(sf)
-    thinkplot.Save(root='survival2',
-                   xlabel='age (years)',
-                   ylabel='prob unmarried',
-                   ylim=[0, 1],
-                   legend=False)
+    thinkplot.Save(
+        root="survival2",
+        xlabel="age (years)",
+        ylabel="prob unmarried",
+        ylim=[0, 1],
+        legend=False,
+    )
     return sf
 
 
 def PlotPregnancyData(preg):
     """Plots survival and hazard curves based on pregnancy lengths.
-    
+
     preg:
 
 
@@ -4440,14 +4422,13 @@ def PlotPregnancyData(preg):
     6	CURRENT PREGNANCY	352
 
     """
-    complete = preg.query('outcome in [1, 3, 4]').prglngth
-    print('Number of complete pregnancies', len(complete))
+    complete = preg.query("outcome in [1, 3, 4]").prglngth
+    print("Number of complete pregnancies", len(complete))
     ongoing = preg[preg.outcome == 6].prglngth
-    print('Number of ongoing pregnancies', len(ongoing))
+    print("Number of ongoing pregnancies", len(ongoing))
 
     PlotSurvival(complete)
-    thinkplot.Save(root='survival1',
-                   xlabel='t (weeks)')
+    thinkplot.Save(root="survival1", xlabel="t (weeks)")
 
     hf = EstimateHazardFunction(complete, ongoing)
     sf = hf.MakeSurvival()
@@ -4463,22 +4444,25 @@ def PlotRemainingLifetime(sf1, sf2):
     thinkplot.PrePlot(cols=2)
     rem_life1 = sf1.RemainingLifetime()
     thinkplot.Plot(rem_life1)
-    thinkplot.Config(title='remaining pregnancy length',
-                     xlabel='weeks',
-                     ylabel='mean remaining weeks')
+    thinkplot.Config(
+        title="remaining pregnancy length",
+        xlabel="weeks",
+        ylabel="mean remaining weeks",
+    )
 
     thinkplot.SubPlot(2)
     func = lambda pmf: pmf.Percentile(50)
     rem_life2 = sf2.RemainingLifetime(filler=np.inf, func=func)
     thinkplot.Plot(rem_life2)
-    thinkplot.Config(title='years until first marriage',
-                     ylim=[0, 15],
-                     xlim=[11, 31],
-                     xlabel='age (years)',
-                     ylabel='median remaining years')
+    thinkplot.Config(
+        title="years until first marriage",
+        ylim=[0, 15],
+        xlim=[11, 31],
+        xlabel="age (years)",
+        ylabel="median remaining years",
+    )
 
-    thinkplot.Save(root='survival6')
-
+    thinkplot.Save(root="survival6")
 
 
 def PlotResampledByDecade(resps, iters=11, predict_flag=False, omit=None):
@@ -4489,14 +4473,12 @@ def PlotResampledByDecade(resps, iters=11, predict_flag=False, omit=None):
     predict_flag: whether to also plot predictions
     """
     for i in range(iters):
-        samples = [ResampleRowsWeighted(resp) 
-                   for resp in resps]
+        samples = [ResampleRowsWeighted(resp) for resp in resps]
         sample = pd.concat(samples, ignore_index=True)
-        groups = sample.groupby('decade')
+        groups = sample.groupby("decade")
 
         if omit:
-            groups = [(name, group) for name, group in groups 
-                      if name not in omit]
+            groups = [(name, group) for name, group in groups if name not in omit]
 
         # TODO: refactor this to collect resampled estimates and
         # plot shaded areas
@@ -4510,7 +4492,7 @@ def PlotResampledByDecade(resps, iters=11, predict_flag=False, omit=None):
             EstimateMarriageSurvivalByDecade(groups, alpha=0.2)
 
 
-def ReadBabyBoom(filename='babyboom.dat'):
+def ReadBabyBoom(filename="babyboom.dat"):
     """Reads the babyboom data.
 
     filename: string
@@ -4518,18 +4500,19 @@ def ReadBabyBoom(filename='babyboom.dat'):
     returns: DataFrame
     """
     var_info = [
-        ('time', 1, 8, int),
-        ('sex', 9, 16, int),
-        ('weight_g', 17, 24, int),
-        ('minutes', 25, 32, int),
-        ]
-    columns = ['name', 'start', 'end', 'type']
+        ("time", 1, 8, int),
+        ("sex", 9, 16, int),
+        ("weight_g", 17, 24, int),
+        ("minutes", 25, 32, int),
+    ]
+    columns = ["name", "start", "end", "type"]
     variables = pd.DataFrame(var_info, columns=columns)
     variables.end += 1
     dct = FixedWidthVariables(variables, index_base=1)
 
     df = dct.ReadFixedWidth(filename, skiprows=59)
     return df
+
 
 def main():
     pass
