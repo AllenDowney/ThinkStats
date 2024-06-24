@@ -397,8 +397,7 @@ document.write(`
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
 
 
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats2.py&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -406,8 +405,8 @@ document.write(`
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 2;
-                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n        local, _ = urlretrieve(url, filename)\n        print('Downloaded ' + local)\n\n\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py')";
-                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py\")";
+                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
+                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -423,8 +422,10 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">thinkstats2</span>
-<span class="kn">import</span> <span class="nn">thinkplot</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">decorate</span>
 </pre></div>
 </div>
 </div>
@@ -432,33 +433,8 @@ document.write(`
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 3;
-                var nbb_unformatted_code = "import thinkstats2\nimport thinkplot";
-                var nbb_formatted_code = "import thinkstats2\nimport thinkplot";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 4;
-                var nbb_unformatted_code = "import numpy as np\nimport pandas as pd";
-                var nbb_formatted_code = "import numpy as np\nimport pandas as pd";
+                var nbb_unformatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
+                var nbb_formatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -485,26 +461,26 @@ statistics are the result of survival analysis.</p>
 <span class="math notranslate nohighlight">\(S(t)\)</span>, which is a function that maps from a duration, <span class="math notranslate nohighlight">\(t\)</span>, to the
 probability of surviving longer than <span class="math notranslate nohighlight">\(t\)</span>. If you know the distribution
 of durations, or “lifetimes”, finding the survival curve is easy; it’s
-just the complement of the CDF: $<span class="math notranslate nohighlight">\(S(t) = 1 - CDF(t)\)</span><span class="math notranslate nohighlight">\( where \)</span>CDF(t)<span class="math notranslate nohighlight">\( is
-the probability of a lifetime less than or equal to \)</span>t$.</p>
-<p>For example, in the NSFG dataset, we know the duration of 11189 complete
+just the complement of the CDF:</p>
+<div class="math notranslate nohighlight">
+\[S(t) = 1 - CDF(t)\]</div>
+<p>where <span class="math notranslate nohighlight">\(CDF(t)\)</span> is the probability of a lifetime less than or equal to <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>For example, in the NSFG dataset, we know the duration of 11,189 complete
 pregnancies. We can read this data and compute the CDF:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/2002FemPreg.dct&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span>
-    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/2002FemPreg.dat.gz&quot;</span>
-<span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "download('https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py')\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz'\n    )";
-                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz\"\n)";
+                var nbb_cell_id = 4;
+                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -522,17 +498,73 @@ pregnancies. We can read this data and compute the CDF:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nsfg</span>
 
 <span class="n">preg</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">read_fem_preg</span><span class="p">()</span>
-<span class="n">complete</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;outcome in [1, 3, 4]&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">prglngth</span>
-<span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;cdf&quot;</span><span class="p">)</span>
+<span class="n">preg</span><span class="o">.</span><span class="n">prglngth</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13593
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "import nsfg\n\npreg = nsfg.read_fem_preg()\npreg.prglngth.count()";
+                var nbb_formatted_code = "import nsfg\n\npreg = nsfg.read_fem_preg()\npreg.prglngth.count()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;outcome in [1, 3, 4]&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">prglngth</span>
+<span class="n">complete</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11189
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "complete = preg.query(\"outcome in [1, 3, 4]\").prglngth\ncomplete.count()";
+                var nbb_formatted_code = "complete = preg.query(\"outcome in [1, 3, 4]\").prglngth\ncomplete.count()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
+
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cdf&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 6;
-                var nbb_unformatted_code = "import nsfg\npreg = nsfg.read_fem_preg()\ncomplete = preg.query('outcome in [1, 3, 4]').prglngth\ncdf = thinkstats2.Cdf(complete, label='cdf')";
-                var nbb_formatted_code = "import nsfg\n\npreg = nsfg.read_fem_preg()\ncomplete = preg.query(\"outcome in [1, 3, 4]\").prglngth\ncdf = thinkstats2.Cdf(complete, label=\"cdf\")";
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "from empiricaldist import Cdf\n\ncdf = Cdf.from_seq(complete, name=\"cdf\")";
+                var nbb_formatted_code = "from empiricaldist import Cdf\n\ncdf = Cdf.from_seq(complete, name=\"cdf\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -549,40 +581,36 @@ pregnancies. We can read this data and compute the CDF:</p>
 miscarriage. For this analysis I am excluding induced abortions, ectopic
 pregnancies, and pregnancies that were in progress when the respondent
 was interviewed.</p>
-<p>The DataFrame method <code class="docutils literal notranslate"><span class="pre">query</span></code> takes a boolean expression and evaluates it
+<p>The <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> method <code class="docutils literal notranslate"><span class="pre">query</span></code> takes a boolean expression and evaluates it
 for each row, selecting the rows that yield True.</p>
-<p>Figure <a class="reference internal" href="#survival1"><span class="xref myst">[survival1]</span></a>{reference-type=“ref”
-reference=“survival1”} (top) shows the CDF of pregnancy length and its
-complement, the survival curve. To represent the survival curve, I
-define an object that wraps a Cdf and adapts the interface:</p>
 <p><code class="docutils literal notranslate"><span class="pre">SurvivalFunction</span></code> provides two properties: <code class="docutils literal notranslate"><span class="pre">ts</span></code>, which is the sequence
 of lifetimes, and <code class="docutils literal notranslate"><span class="pre">ss</span></code>, which is the survival curve. In Python, a
 “property” is a method that can be invoked as if it were a variable.</p>
 <p>We can instantiate a <code class="docutils literal notranslate"><span class="pre">SurvivalFunction</span></code> by passing the CDF of lifetimes:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">SurvivalFunction</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Surv</span>
 
 
-<span class="k">def</span> <span class="nf">make_survival_from_cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">make_surv_from_cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes a survival function based on a CDF.</span>
 
 <span class="sd">    cdf: Cdf</span>
 
 <span class="sd">    returns: SurvivalFunction</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">ts</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">xs</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">qs</span>
     <span class="n">ss</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">cdf</span><span class="o">.</span><span class="n">ps</span>
-    <span class="k">return</span> <span class="n">SurvivalFunction</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">ss</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Surv</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "from thinkstats2 import SurvivalFunction\n\n\ndef make_survival_from_cdf(cdf, label=''):\n    \"\"\"Makes a survival function based on a CDF.\n\n    cdf: Cdf\n\n    returns: SurvivalFunction\n    \"\"\"\n    ts = cdf.xs\n    ss = 1 - cdf.ps\n    return SurvivalFunction(ts, ss, label)";
-                var nbb_formatted_code = "from thinkstats2 import SurvivalFunction\n\n\ndef make_survival_from_cdf(cdf, label=\"\"):\n    \"\"\"Makes a survival function based on a CDF.\n\n    cdf: Cdf\n\n    returns: SurvivalFunction\n    \"\"\"\n    ts = cdf.xs\n    ss = 1 - cdf.ps\n    return SurvivalFunction(ts, ss, label)";
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "from empiricaldist import Surv\n\n\ndef make_surv_from_cdf(cdf, name=\"\"):\n    \"\"\"Makes a survival function based on a CDF.\n\n    cdf: Cdf\n\n    returns: SurvivalFunction\n    \"\"\"\n    ts = cdf.qs\n    ss = 1 - cdf.ps\n    return Surv(ss, ts, name=name)";
+                var nbb_formatted_code = "from empiricaldist import Surv\n\n\ndef make_surv_from_cdf(cdf, name=\"\"):\n    \"\"\"Makes a survival function based on a CDF.\n\n    cdf: Cdf\n\n    returns: SurvivalFunction\n    \"\"\"\n    ts = cdf.qs\n    ss = 1 - cdf.ps\n    return Surv(ss, ts, name=name)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -597,16 +625,16 @@ of lifetimes, and <code class="docutils literal notranslate"><span class="pre">s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sf</span> <span class="o">=</span> <span class="n">make_survival_from_cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;survival&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sf</span> <span class="o">=</span> <span class="n">make_surv_from_cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;survival&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "sf = make_survival_from_cdf(cdf, label='survival')";
-                var nbb_formatted_code = "sf = make_survival_from_cdf(cdf, label=\"survival\")";
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "sf = make_surv_from_cdf(cdf, name=\"survival\")";
+                var nbb_formatted_code = "sf = make_surv_from_cdf(cdf, name=\"survival\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -625,19 +653,19 @@ evaluates the survival curve:</p>
 the first trimester:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sf</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sf</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8602198587898829
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array(0.86021986)
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "sf[13]";
-                var nbb_formatted_code = "sf[13]";
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "sf(13)";
+                var nbb_formatted_code = "sf(13)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -652,19 +680,19 @@ the first trimester:</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1397801412101171
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array(0.13978014)
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 10;
-                var nbb_unformatted_code = "cdf[13]";
-                var nbb_formatted_code = "cdf[13]";
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "cdf(13)";
+                var nbb_formatted_code = "cdf(13)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -679,123 +707,24 @@ the first trimester:</p>
 </div>
 <p>About 86% of pregnancies proceed past the first trimester; about 14% do
 not.</p>
-<p><code class="docutils literal notranslate"><span class="pre">SurvivalFunction</span></code> provides <code class="docutils literal notranslate"><span class="pre">Render</span></code>, so we can plot <code class="docutils literal notranslate"><span class="pre">sf</span></code> using the
-functions in <code class="docutils literal notranslate"><span class="pre">thinkplot</span></code>:</p>
+<p>The following figure shows the CDF of pregnancy length and its
+complement, the survival curve. To represent the survival curve, I
+define an object that wraps a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> and adapts the interface:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Duration (weeks)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">thinkplot</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">)</span>
-
-<span class="nn">File ~/ThinkStats/soln/thinkplot.py:208,</span> in <span class="ni">plot</span><span class="nt">(obj, ys, style, **options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">206</span>         <span class="n">xs</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">index</span>
-<span class="g g-Whitespace">    </span><span class="mi">207</span> <span class="k">if</span> <span class="n">ys</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">208</span>     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">209</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">210</span>     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/matplotlib/pyplot.py:3708,</span> in <span class="ni">plot</span><span class="nt">(scalex, scaley, data, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3700</span> <span class="nd">@_copy_docstring_and_deprecators</span><span class="p">(</span><span class="n">Axes</span><span class="o">.</span><span class="n">plot</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3701</span> <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">3702</span>     <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">ArrayLike</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3706</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">3707</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Line2D</span><span class="p">]:</span>
-<span class="ne">-&gt; </span><span class="mi">3708</span>     <span class="k">return</span> <span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">3709</span>         <span class="o">*</span><span class="n">args</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">3710</span>         <span class="n">scalex</span><span class="o">=</span><span class="n">scalex</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">3711</span>         <span class="n">scaley</span><span class="o">=</span><span class="n">scaley</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">3712</span>         <span class="o">**</span><span class="p">({</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">}</span> <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}),</span>
-<span class="g g-Whitespace">   </span><span class="mi">3713</span>         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">3714</span>     <span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/matplotlib/axes/_axes.py:1779,</span> in <span class="ni">Axes.plot</span><span class="nt">(self, scalex, scaley, data, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1536</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1537</span><span class="sd"> Plot y versus x as lines and/or markers.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1538</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1776</span><span class="sd"> (``&#39;green&#39;``) or hex strings (``&#39;#008000&#39;``).</span>
-<span class="g g-Whitespace">   </span><span class="mi">1777</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1778</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">cbook</span><span class="o">.</span><span class="n">normalize_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">mlines</span><span class="o">.</span><span class="n">Line2D</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1779</span> <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1780</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1781</span>     <span class="bp">self</span><span class="o">.</span><span class="n">add_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/matplotlib/axes/_base.py:296,</span> in <span class="ni">_process_plot_var_args.__call__</span><span class="nt">(self, axes, data, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">294</span>     <span class="n">this</span> <span class="o">+=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">295</span>     <span class="n">args</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-<span class="ne">--&gt; </span><span class="mi">296</span> <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plot_args</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">297</span>     <span class="n">axes</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">ambiguous_fmt_datakey</span><span class="o">=</span><span class="n">ambiguous_fmt_datakey</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/matplotlib/axes/_base.py:478,</span> in <span class="ni">_process_plot_var_args._plot_args</span><span class="nt">(self, axes, tup, kwargs, return_kwargs, ambiguous_fmt_datakey)</span>
-<span class="g g-Whitespace">    </span><span class="mi">476</span>     <span class="n">y</span> <span class="o">=</span> <span class="n">_check_1d</span><span class="p">(</span><span class="n">xy</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="g g-Whitespace">    </span><span class="mi">477</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">478</span>     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">index_of</span><span class="p">(</span><span class="n">xy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="g g-Whitespace">    </span><span class="mi">480</span> <span class="k">if</span> <span class="n">axes</span><span class="o">.</span><span class="n">xaxis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="n">axes</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">update_units</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/matplotlib/cbook.py:1719,</span> in <span class="ni">index_of</span><span class="nt">(y)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1717</span>     <span class="k">pass</span>
-<span class="g g-Whitespace">   </span><span class="mi">1718</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1719</span>     <span class="n">y</span> <span class="o">=</span> <span class="n">_check_1d</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1720</span> <span class="k">except</span> <span class="p">(</span><span class="n">VisibleDeprecationWarning</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1721</span>     <span class="c1"># NumPy 1.19 will warn on ragged input, and we can&#39;t actually use it.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1722</span>     <span class="k">pass</span>
-
-<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/matplotlib/cbook.py:1411,</span> in <span class="ni">_check_1d</span><span class="nt">(x)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1405</span> <span class="c1"># plot requires `shape` and `ndim`.  If passed an</span>
-<span class="g g-Whitespace">   </span><span class="mi">1406</span> <span class="c1"># object that doesn&#39;t provide them, then force to numpy array.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1407</span> <span class="c1"># Note this will strip unit information.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1408</span> <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;shape&#39;</span><span class="p">)</span> <span class="ow">or</span>
-<span class="g g-Whitespace">   </span><span class="mi">1409</span>         <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;ndim&#39;</span><span class="p">)</span> <span class="ow">or</span>
-<span class="g g-Whitespace">   </span><span class="mi">1410</span>         <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1411</span>     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1412</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1413</span>     <span class="k">return</span> <span class="n">x</span>
-
-<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/numpy/core/shape_base.py:65,</span> in <span class="ni">atleast_1d</span><span class="nt">(*arys)</span>
-<span class="g g-Whitespace">     </span><span class="mi">63</span> <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span> <span class="k">for</span> <span class="n">ary</span> <span class="ow">in</span> <span class="n">arys</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">65</span>     <span class="n">ary</span> <span class="o">=</span> <span class="n">asanyarray</span><span class="p">(</span><span class="n">ary</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span>     <span class="k">if</span> <span class="n">ary</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span>         <span class="n">result</span> <span class="o">=</span> <span class="n">ary</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="nn">File ~/ThinkStats/soln/thinkstats2.py:3804,</span> in <span class="ni">SurvivalFunction.__getitem__</span><span class="nt">(self, t)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3803</span> <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">3804</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-
-<span class="nn">File ~/ThinkStats/soln/thinkstats2.py:3811,</span> in <span class="ni">SurvivalFunction.prob</span><span class="nt">(self, t)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3806</span> <span class="k">def</span> <span class="nf">prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">3807</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Returns S(t), the probability that corresponds to value t.</span>
-<span class="g g-Whitespace">   </span><span class="mi">3808</span><span class="sd">     t: time</span>
-<span class="g g-Whitespace">   </span><span class="mi">3809</span><span class="sd">     returns: float probability</span>
-<span class="g g-Whitespace">   </span><span class="mi">3810</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">3811</span>     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/numpy/lib/function_base.py:1599,</span> in <span class="ni">interp</span><span class="nt">(x, xp, fp, left, right, period)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1596</span>     <span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">xp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span><span class="o">-</span><span class="n">period</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">xp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">period</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1597</span>     <span class="n">fp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">fp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:],</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]))</span>
-<span class="ne">-&gt; </span><span class="mi">1599</span> <span class="k">return</span> <span class="n">interp_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
-<img alt="_images/169be4011b29a303724f83e418f7dc2df054cf23a9104843b87f6fdb32819f59.png" src="_images/169be4011b29a303724f83e418f7dc2df054cf23a9104843b87f6fdb32819f59.png" />
+<img alt="_images/3646969e95f30dd68b5c216a9a736a4ec7b03323bd8188a6ccaa9ff57b6afb48.png" src="_images/3646969e95f30dd68b5c216a9a736a4ec7b03323bd8188a6ccaa9ff57b6afb48.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 11;
-                var nbb_unformatted_code = "thinkplot.plot(sf)\nthinkplot.cdf(cdf, alpha=0.2)\nthinkplot.config(loc='center left')";
-                var nbb_formatted_code = "thinkplot.plot(sf)\nthinkplot.cdf(cdf, alpha=0.2)\nthinkplot.config(loc=\"center left\")";
+                var nbb_cell_id = 12;
+                var nbb_unformatted_code = "sf.plot()\ncdf.plot(alpha=0.4)\ndecorate(xlabel=\"Duration (weeks)\", ylabel=\"Probability\")";
+                var nbb_formatted_code = "sf.plot()\ncdf.plot(alpha=0.4)\ndecorate(xlabel=\"Duration (weeks)\", ylabel=\"Probability\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -808,8 +737,7 @@ functions in <code class="docutils literal notranslate"><span class="pre">thinkp
             }, 500);
             </script></div>
 </div>
-<p>Figure <a class="reference internal" href="#survival1"><span class="xref myst">[survival1]</span></a>{reference-type=“ref”
-reference=“survival1”} (top) shows the result. The curve is nearly flat
+<p>The curve is nearly flat
 between 13 and 26 weeks, which shows that few pregnancies end in the
 second trimester. And the curve is steepest around 39 weeks, which is
 the most common pregnancy length.</p>
@@ -819,33 +747,100 @@ the most common pregnancy length.</p>
 <p>From the survival curve we can derive the <strong>hazard function</strong>; for
 pregnancy lengths, the hazard function maps from a time, <span class="math notranslate nohighlight">\(t\)</span>, to the
 fraction of pregnancies that continue until <span class="math notranslate nohighlight">\(t\)</span> and then end at <span class="math notranslate nohighlight">\(t\)</span>. To
-be more precise: $<span class="math notranslate nohighlight">\(\lambda(t) = \frac{S(t) - S(t+1)}{S(t)}\)</span><span class="math notranslate nohighlight">\( The
-numerator is the fraction of lifetimes that end at \)</span>t<span class="math notranslate nohighlight">\(, which is also
-\)</span>\PMF(t)$.</p>
-<p><code class="docutils literal notranslate"><span class="pre">SurvivalFunction</span></code> provides <code class="docutils literal notranslate"><span class="pre">MakeHazard</span></code>, which calculates the hazard
-function:</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">HazardFunction</span></code> object is a wrapper for a pandas Series:</p>
-<p><code class="docutils literal notranslate"><span class="pre">d</span></code> can be a dictionary or any other type that can initialize a Series,
-including another Series. <code class="docutils literal notranslate"><span class="pre">label</span></code> is a string used to identify the
-HazardFunction when plotted.</p>
-<p><code class="docutils literal notranslate"><span class="pre">HazardFunction</span></code> provides <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code>, so we can evaluate it like
-this:</p>
+be more precise:</p>
+<div class="math notranslate nohighlight">
+\[\lambda(t) = \frac{S(t) - S(t+1)}{S(t)}\]</div>
+<p>The
+numerator is the fraction of lifetimes that end at <span class="math notranslate nohighlight">\(t\)</span>, which is also
+<span class="math notranslate nohighlight">\(PMF(t)\)</span>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">SurvivalFunction</span></code> provides <code class="docutils literal notranslate"><span class="pre">make_hazard_function</span></code>, which calculates the hazard function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">make_hazard_function</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;hazard&#39;</span><span class="p">)</span>
-<span class="n">hf</span><span class="p">[</span><span class="mi">39</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">make_hazard</span><span class="p">()</span>
+<span class="n">hf</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;hazard&quot;</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "hf = sf.make_hazard()\nhf.name = \"hazard\"";
+                var nbb_formatted_code = "hf = sf.make_hazard()\nhf.name = \"hazard\"";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>The result is a <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> object, whichwe can evaluate it like
+this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span><span class="p">[</span><span class="mi">39</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6767068273092369
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "hf[39]";
+                var nbb_formatted_code = "hf[39]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>So of all pregnancies that proceed until week 39, about 50% end in week
 39.</p>
-<p>Figure <a class="reference internal" href="#survival1"><span class="xref myst">[survival1]</span></a>{reference-type=“ref”
-reference=“survival1”} (bottom) shows the hazard function for pregnancy
+<p>The following figure shows the hazard function for pregnancy
 lengths. For times after week 42, the hazard function is erratic because
 it is based on a small number of cases. Other than that the shape of the
 curve is as expected: it is highest around 39 weeks, and a little higher
 in the first trimester than in the second.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Duration (weeks)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Hazard rate&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d26a0d9172fbc7fb954d28cc395775a549784abc67b9c7c6ae9ef57fc29e125e.png" src="_images/d26a0d9172fbc7fb954d28cc395775a549784abc67b9c7c6ae9ef57fc29e125e.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "hf.plot()\ndecorate(xlabel=\"Duration (weeks)\", ylabel=\"Hazard rate\")";
+                var nbb_formatted_code = "hf.plot()\ndecorate(xlabel=\"Duration (weeks)\", ylabel=\"Hazard rate\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>The hazard function is useful in its own right, but it is also an
 important tool for estimating survival curves, as we’ll see in the next
 section.</p>
@@ -896,11 +891,12 @@ at an earlier age.</p>
 <p>Here’s the code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
-<span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">HazardFunction</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Hazard</span>
 
 
-<span class="k">def</span> <span class="nf">estimate_hazard_function</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">estimate_hazard_function</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimates the hazard function by Kaplan-Meier.</span>
 
 <span class="sd">    http://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator</span>
@@ -911,14 +907,17 @@ at an earlier age.</p>
 <span class="sd">    verbose: whether to display intermediate results</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">complete</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;complete contains NaNs&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;complete contains NaNs&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">ongoing</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;ongoing contains NaNs&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ongoing contains NaNs&quot;</span><span class="p">)</span>
+
     <span class="n">hist_complete</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">complete</span><span class="p">)</span>
     <span class="n">hist_ongoing</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">ongoing</span><span class="p">)</span>
+
     <span class="n">ts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">hist_complete</span> <span class="o">|</span> <span class="n">hist_ongoing</span><span class="p">)</span>
     <span class="n">ts</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
     <span class="n">at_risk</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">complete</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">ongoing</span><span class="p">)</span>
+
     <span class="n">lams</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ts</span><span class="p">:</span>
         <span class="n">ended</span> <span class="o">=</span> <span class="n">hist_complete</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
@@ -927,10 +926,28 @@ at an earlier age.</p>
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">at_risk</span><span class="p">,</span> <span class="n">ended</span><span class="p">,</span> <span class="n">censored</span><span class="p">,</span> <span class="n">lams</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
         <span class="n">at_risk</span> <span class="o">-=</span> <span class="n">ended</span> <span class="o">+</span> <span class="n">censored</span>
-    <span class="k">return</span> <span class="n">HazardFunction</span><span class="p">(</span><span class="n">lams</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Hazard</span><span class="p">(</span><span class="n">lams</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "import pandas as pd\nfrom collections import Counter\nfrom empiricaldist import Hazard\n\n\ndef estimate_hazard_function(complete, ongoing, name=\"\", verbose=False):\n    \"\"\"Estimates the hazard function by Kaplan-Meier.\n\n    http://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator\n\n    complete: list of complete lifetimes\n    ongoing: list of ongoing lifetimes\n    label: string\n    verbose: whether to display intermediate results\n    \"\"\"\n    if np.sum(np.isnan(complete)):\n        raise ValueError(\"complete contains NaNs\")\n    if np.sum(np.isnan(ongoing)):\n        raise ValueError(\"ongoing contains NaNs\")\n\n    hist_complete = Counter(complete)\n    hist_ongoing = Counter(ongoing)\n\n    ts = list(hist_complete | hist_ongoing)\n    ts.sort()\n    at_risk = len(complete) + len(ongoing)\n\n    lams = pd.Series(index=ts, dtype=float)\n    for t in ts:\n        ended = hist_complete[t]\n        censored = hist_ongoing[t]\n        lams[t] = ended / at_risk\n        if verbose:\n            print(t, at_risk, ended, censored, lams[t])\n        at_risk -= ended + censored\n\n    return Hazard(lams, ts)";
+                var nbb_formatted_code = "import pandas as pd\nfrom collections import Counter\nfrom empiricaldist import Hazard\n\n\ndef estimate_hazard_function(complete, ongoing, name=\"\", verbose=False):\n    \"\"\"Estimates the hazard function by Kaplan-Meier.\n\n    http://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator\n\n    complete: list of complete lifetimes\n    ongoing: list of ongoing lifetimes\n    label: string\n    verbose: whether to display intermediate results\n    \"\"\"\n    if np.sum(np.isnan(complete)):\n        raise ValueError(\"complete contains NaNs\")\n    if np.sum(np.isnan(ongoing)):\n        raise ValueError(\"ongoing contains NaNs\")\n\n    hist_complete = Counter(complete)\n    hist_ongoing = Counter(ongoing)\n\n    ts = list(hist_complete | hist_ongoing)\n    ts.sort()\n    at_risk = len(complete) + len(ongoing)\n\n    lams = pd.Series(index=ts, dtype=float)\n    for t in ts:\n        ended = hist_complete[t]\n        censored = hist_ongoing[t]\n        lams[t] = ended / at_risk\n        if verbose:\n            print(t, at_risk, ended, censored, lams[t])\n        at_risk -= ended + censored\n\n    return Hazard(lams, ts)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">complete</span></code> is the set of complete observations; in this case, the ages
 when respondents got married. <code class="docutils literal notranslate"><span class="pre">ongoing</span></code> is the set of incomplete
@@ -944,7 +961,7 @@ that age.</p>
 unmarried women were interviewed, sorted in increasing order.</p>
 <p><code class="docutils literal notranslate"><span class="pre">at_risk</span></code> keeps track of the number of respondents considered “at risk”
 at each age; initially, it is the total number of respondents.</p>
-<p>The result is stored in a Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> that maps from each age to the
+<p>The result is stored in a pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> that maps from each age to the
 estimated hazard function at that age.</p>
 <p>Each time through the loop, we consider one age, <code class="docutils literal notranslate"><span class="pre">t</span></code>, and compute the
 number of events that end at <code class="docutils literal notranslate"><span class="pre">t</span></code> (that is, the number of respondents
@@ -956,7 +973,7 @@ unavailable because of the data collection process.</p>
 end at <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
 <p>At the end of the loop, we subtract from <code class="docutils literal notranslate"><span class="pre">at_risk</span></code> the number of cases
 that ended or were censored at <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
-<p>Finally, we pass <code class="docutils literal notranslate"><span class="pre">lams</span></code> to the <code class="docutils literal notranslate"><span class="pre">HazardFunction</span></code> constructor and return
+<p>Finally, we pass <code class="docutils literal notranslate"><span class="pre">lams</span></code> to the <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> constructor and return
 the result.</p>
 </section>
 <section id="the-marriage-curve">
@@ -981,21 +998,79 @@ January 1900.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nsfg</span>
+
 <span class="n">resp</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">read_fem_resp</span><span class="p">()</span>
-<span class="n">resp</span><span class="p">[</span><span class="s1">&#39;cmmarrhx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmmarrhx</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="mi">9997</span><span class="p">,</span> <span class="mi">9998</span><span class="p">,</span> <span class="mi">9999</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "import nsfg\n\nresp = nsfg.read_fem_resp()";
+                var nbb_formatted_code = "import nsfg\n\nresp = nsfg.read_fem_resp()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cmmarrhx&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmmarrhx</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="mi">9997</span><span class="p">,</span> <span class="mi">9998</span><span class="p">,</span> <span class="mi">9999</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 18;
+                var nbb_unformatted_code = "resp[\"cmmarrhx\"] = resp.cmmarrhx.replace([9997, 9998, 9999], np.nan)";
+                var nbb_formatted_code = "resp[\"cmmarrhx\"] = resp.cmmarrhx.replace([9997, 9998, 9999], np.nan)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Then we compute each respondent’s age when married and age when
 interviewed:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span><span class="p">[</span><span class="s1">&#39;agemarry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">cmmarrhx</span> <span class="o">-</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmbirth</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span>
-<span class="n">resp</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">cmintvw</span> <span class="o">-</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmbirth</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;agemarry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">cmmarrhx</span> <span class="o">-</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmbirth</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span>
+<span class="n">resp</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">cmintvw</span> <span class="o">-</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmbirth</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 19;
+                var nbb_unformatted_code = "resp[\"agemarry\"] = (resp.cmmarrhx - resp.cmbirth) / 12.0\nresp[\"age\"] = (resp.cmintvw - resp.cmbirth) / 12.0";
+                var nbb_formatted_code = "resp[\"agemarry\"] = (resp.cmmarrhx - resp.cmbirth) / 12.0\nresp[\"age\"] = (resp.cmintvw - resp.cmbirth) / 12.0";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Next we extract <code class="docutils literal notranslate"><span class="pre">complete</span></code>, which is the age at marriage for women who
 have been married, and <code class="docutils literal notranslate"><span class="pre">ongoing</span></code>, which is the age at interview for
@@ -1007,54 +1082,149 @@ women who have not:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 20;
+                var nbb_unformatted_code = "complete = resp[resp.evrmarry == 1].agemarry.dropna()\nongoing = resp[resp.evrmarry == 0].age";
+                var nbb_formatted_code = "complete = resp[resp.evrmarry == 1].agemarry.dropna()\nongoing = resp[resp.evrmarry == 0].age";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Finally we compute the hazard function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span> <span class="o">=</span> <span class="n">estimate_hazard_function</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hf</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Age (years)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Hazard&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 21;
+                var nbb_unformatted_code = "hf = estimate_hazard_function(complete, ongoing)";
+                var nbb_formatted_code = "hf = estimate_hazard_function(complete, ongoing)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-<p>Figure <a class="reference internal" href="#survival2"><span class="xref myst">[survival2]</span></a>{reference-type=“ref”
-reference=“survival2”} (top) shows the estimated hazard function; it is
+<p>The following figure shows the estimated hazard function; it is
 low in the teens, higher in the 20s, and declining in the 30s. It
 increases again in the 40s, but that is an artifact of the estimation
 process; as the number of respondents “at risk” decreases, a small
 number of women getting married yields a large estimated hazard. The
 survival curve will smooth out this noise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Hazard&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cd838e23a6a1a3d509643307bdc23475e9470f3ba70ee5a07af2c86dcbac4d9e.png" src="_images/cd838e23a6a1a3d509643307bdc23475e9470f3ba70ee5a07af2c86dcbac4d9e.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 22;
+                var nbb_unformatted_code = "hf.plot()\ndecorate(xlabel=\"Age (years)\", ylabel=\"Hazard\")";
+                var nbb_formatted_code = "hf.plot()\ndecorate(xlabel=\"Age (years)\", ylabel=\"Hazard\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 </section>
 <section id="estimating-the-survival-curve">
 <h2>Estimating the survival curve<a class="headerlink" href="#estimating-the-survival-curve" title="Link to this heading">#</a></h2>
 <p>Once we have the hazard function, we can estimate the survival curve.
 The chance of surviving past time <code class="docutils literal notranslate"><span class="pre">t</span></code> is the chance of surviving all
 times up through <code class="docutils literal notranslate"><span class="pre">t</span></code>, which is the cumulative product of the
-complementary hazard function:
-$<span class="math notranslate nohighlight">\([1-\lambda(0)] [1-\lambda(1)] \ldots [1-\lambda(t)]\)</span>$ The
-<code class="docutils literal notranslate"><span class="pre">HazardFunction</span></code> class provides <code class="docutils literal notranslate"><span class="pre">MakeSurvival</span></code>, which computes this
+complementary hazard function:</p>
+<div class="math notranslate nohighlight">
+\[[1-\lambda(0)] [1-\lambda(1)] \ldots [1-\lambda(t)]\]</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> class provides <code class="docutils literal notranslate"><span class="pre">make_surv</span></code>, which computes this
 product:</p>
 <p><code class="docutils literal notranslate"><span class="pre">ts</span></code> is the sequence of times where the hazard function is estimated.
 <code class="docutils literal notranslate"><span class="pre">ss</span></code> is the cumulative product of the complementary hazard function, so
 it is the survival curve.</p>
-<p>Because of the way <code class="docutils literal notranslate"><span class="pre">SurvivalFunction</span></code> is implemented, we have to compute
-the complement of <code class="docutils literal notranslate"><span class="pre">ss</span></code>, make a Cdf, and then instantiate a
-SurvivalFunction object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_survival</span><span class="p">()</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Age (years)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Prob unmarried&#39;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_surv</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 23;
+                var nbb_unformatted_code = "sf = hf.make_surv()";
+                var nbb_formatted_code = "sf = hf.make_surv()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-<p>Figure <a class="reference internal" href="#survival2"><span class="xref myst">[survival2]</span></a>{reference-type=“ref”
-reference=“survival2”} (bottom) shows the result. The survival curve is
+<p>The following figure shows the result. The survival curve is
 steepest between 25 and 35, when most women get married. Between 35 and
 45, the curve is nearly flat, indicating that women who do not marry
 before age 35 are unlikely to get married.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob unmarried&quot;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7cd14d5334d4b4a2fa3bb8ff1696832d8fb7e104db833224c64861853894d46f.png" src="_images/7cd14d5334d4b4a2fa3bb8ff1696832d8fb7e104db833224c64861853894d46f.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 24;
+                var nbb_unformatted_code = "sf.plot()\ndecorate(xlabel=\"Age (years)\", ylabel=\"Prob unmarried\", ylim=[0, 1])";
+                var nbb_formatted_code = "sf.plot()\ndecorate(xlabel=\"Age (years)\", ylabel=\"Prob unmarried\", ylim=[0, 1])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>A curve like this was the basis of a famous magazine article in 1986;
 <em>Newsweek</em> reported that a 40-year old unmarried woman was “more likely
 to be killed by a terrorist” than get married. These statistics were
@@ -1086,70 +1256,129 @@ they can be expected to report this information accurately.</p>
 
 <span class="sd">    resp: DataFrame of respondents</span>
 
-<span class="sd">    returns: pair of HazardFunction, SurvivalFunction</span>
+<span class="sd">    returns: pair of `Hazard`, SurvivalFunction</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">complete</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">evrmarry</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">agemarry</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
     <span class="n">ongoing</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">evrmarry</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">age</span>
     <span class="n">hf</span> <span class="o">=</span> <span class="n">estimate_hazard_function</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">)</span>
-    <span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_survival</span><span class="p">()</span>
+    <span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_surv</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">hf</span><span class="p">,</span> <span class="n">sf</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 25;
+                var nbb_unformatted_code = "def estimate_marriage_survival(resp):\n    \"\"\"Estimates the survival curve.\n\n    resp: DataFrame of respondents\n\n    returns: pair of `Hazard`, SurvivalFunction\n    \"\"\"\n    complete = resp[resp.evrmarry == 1].agemarry.dropna()\n    ongoing = resp[resp.evrmarry == 0].age\n    hf = estimate_hazard_function(complete, ongoing)\n    sf = hf.make_surv()\n    return hf, sf";
+                var nbb_formatted_code = "def estimate_marriage_survival(resp):\n    \"\"\"Estimates the survival curve.\n\n    resp: DataFrame of respondents\n\n    returns: pair of `Hazard`, SurvivalFunction\n    \"\"\"\n    complete = resp[resp.evrmarry == 1].agemarry.dropna()\n    ongoing = resp[resp.evrmarry == 0].age\n    hf = estimate_hazard_function(complete, ongoing)\n    sf = hf.make_surv()\n    return hf, sf";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resample_survival</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">resample_rows_weighted</span>
+<span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">percentile_rows</span>
+
+
+<span class="k">def</span> <span class="nf">resample_survival</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Resamples respondents and estimates the survival function.</span>
 
 <span class="sd">    resp: DataFrame of respondents</span>
 <span class="sd">    iters: number of resamples</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">estimate_marriage_survival</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
     <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">agemarry</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">resp</span><span class="o">.</span><span class="n">agemarry</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mf">12.0</span><span class="p">)</span>
     <span class="n">ss_seq</span> <span class="o">=</span> <span class="p">[]</span>
+
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
-        <span class="n">sample</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">estimate_marriage_survival</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-        <span class="n">ss_seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sf</span><span class="o">.</span><span class="n">probs</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
-    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">percentile_rows</span><span class="p">(</span><span class="n">ss_seq</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">95</span><span class="p">])</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;90% CI&#39;</span><span class="p">)</span>
+        <span class="n">ss_seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sf</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
+
+    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">percentile_rows</span><span class="p">(</span><span class="n">ss_seq</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">95</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;90% CI&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 26;
+                var nbb_unformatted_code = "from thinkstats import resample_rows_weighted\nfrom thinkstats import percentile_rows\n\n\ndef resample_survival(resp, iters=101):\n    \"\"\"Resamples respondents and estimates the survival function.\n\n    resp: DataFrame of respondents\n    iters: number of resamples\n    \"\"\"\n    _, sf = estimate_marriage_survival(resp)\n    plt.plot(sf)\n    low, high = resp.agemarry.min(), resp.agemarry.max()\n    ts = np.arange(low, high, 1 / 12.0)\n    ss_seq = []\n\n    for _ in range(iters):\n        sample = resample_rows_weighted(resp)\n        _, sf = estimate_marriage_survival(sample)\n        ss_seq.append(sf(ts))\n\n    low, high = percentile_rows(ss_seq, [5, 95])\n    plt.fill_between(ts, low, high, color=\"gray\", label=\"90% CI\")";
+                var nbb_formatted_code = "from thinkstats import resample_rows_weighted\nfrom thinkstats import percentile_rows\n\n\ndef resample_survival(resp, iters=101):\n    \"\"\"Resamples respondents and estimates the survival function.\n\n    resp: DataFrame of respondents\n    iters: number of resamples\n    \"\"\"\n    _, sf = estimate_marriage_survival(resp)\n    plt.plot(sf)\n    low, high = resp.agemarry.min(), resp.agemarry.max()\n    ts = np.arange(low, high, 1 / 12.0)\n    ss_seq = []\n\n    for _ in range(iters):\n        sample = resample_rows_weighted(resp)\n        _, sf = estimate_marriage_survival(sample)\n        ss_seq.append(sf(ts))\n\n    low, high = percentile_rows(ss_seq, [5, 95])\n    plt.fill_between(ts, low, high, color=\"gray\", label=\"90% CI\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">ResampleSurvival</span></code> takes <code class="docutils literal notranslate"><span class="pre">resp</span></code>, a DataFrame of respondents, and
+<p><code class="docutils literal notranslate"><span class="pre">resample_survival</span></code> takes <code class="docutils literal notranslate"><span class="pre">resp</span></code>, a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> of respondents, and
 <code class="docutils literal notranslate"><span class="pre">iters</span></code>, the number of times to resample. It computes <code class="docutils literal notranslate"><span class="pre">ts</span></code>, which is the
 sequence of ages where we will evaluate the survival curves.</p>
-<p>Inside the loop, <code class="docutils literal notranslate"><span class="pre">ResampleSurvival</span></code>:</p>
+<p>Inside the loop, <code class="docutils literal notranslate"><span class="pre">resample_survival</span></code>:</p>
 <ul class="simple">
-<li><p>Resamples the respondents using <code class="docutils literal notranslate"><span class="pre">ResampleRowsWeighted</span></code>, which we saw
-in Section <a class="reference internal" href="#weighted"><span class="xref myst">[weighted]</span></a>{reference-type=“ref”
-reference=“weighted”}.</p></li>
-<li><p>Calls <code class="docutils literal notranslate"><span class="pre">EstimateSurvival</span></code>, which uses the process in the previous
+<li><p>Resamples the respondents using <code class="docutils literal notranslate"><span class="pre">resample_rows_weighted</span></code>, which …</p></li>
+<li><p>Calls <code class="docutils literal notranslate"><span class="pre">estimate_marriage_survival</span></code>, which uses the process in the previous
 sections to estimate the hazard and survival curves, and</p></li>
 <li><p>Evaluates the survival curve at each age in <code class="docutils literal notranslate"><span class="pre">ts</span></code>.</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">ss_seq</span></code> is a sequence of evaluated survival curves. <code class="docutils literal notranslate"><span class="pre">PercentileRows</span></code>
+<p><code class="docutils literal notranslate"><span class="pre">ss_seq</span></code> is a sequence of evaluated survival curves. <code class="docutils literal notranslate"><span class="pre">percentile_rows</span></code>
 takes this sequence and computes the 5th and 95th percentiles, returning
 a 90% confidence interval for the survival curve.</p>
+<p>The following figure shows the result along with the survival curve we
+estimated in the previous section.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resample_survival</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Age (years)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Prob unmarried&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> 
-    <span class="mi">46</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob unmarried&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/33db631dc380d0f706f70bdffabf94a3a1e7977fb545d5d5c10865be4a697015.png" src="_images/33db631dc380d0f706f70bdffabf94a3a1e7977fb545d5d5c10865be4a697015.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 27;
+                var nbb_unformatted_code = "resample_survival(resp)\n\ndecorate(\n    xlabel=\"Age (years)\",\n    ylabel=\"Prob unmarried\",\n)";
+                var nbb_formatted_code = "resample_survival(resp)\n\ndecorate(\n    xlabel=\"Age (years)\",\n    ylabel=\"Prob unmarried\",\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-<p>Figure <a class="reference internal" href="#survival3"><span class="xref myst">[survival3]</span></a>{reference-type=“ref”
-reference=“survival3”} shows the result along with the survival curve we
-estimated in the previous section. The confidence interval takes into
+<p>The confidence interval takes into
 account the sampling weights, unlike the estimated curve. The
 discrepancy between them indicates that the sampling weights have a
-substantial effect on the estimate—we will have to keep that in mind.</p>
+substantial effect on the estimate – we will have to keep that in mind.</p>
 </section>
 <section id="cohort-effects">
 <h2>Cohort effects<a class="headerlink" href="#cohort-effects" title="Link to this heading">#</a></h2>
@@ -1167,25 +1396,37 @@ decade of birth. Groups like this, defined by date of birth or similar
 events, are called <strong>cohorts</strong>, and differences between the groups are
 called <strong>cohort effects</strong>.</p>
 <p>To investigate cohort effects in the NSFG marriage data, I gathered the
-Cycle 6 data from 2002 used throughout this book; the Cycle 7 data from
-2006–2010 used in
-Section <a class="reference internal" href="#replication"><span class="xref myst">[replication]</span></a>{reference-type=“ref”
-reference=“replication”}; and the Cycle 5 data from 1995. In total these
-datasets include 30,769 respondents.</p>
+Cycle 6 data from 2002 used throughout this book, the Cycle 7 data from
+2006–2010, and the Cycle 5 data from 1995.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
-    <span class="s1">&#39;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/1995FemRespData.dat.gz&#39;</span>
-    <span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/1995FemRespData.dat.gz&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span>
-    <span class="s1">&#39;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/2006_2010_FemRespSetup.dct&#39;</span>
-    <span class="p">)</span>
+    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2006_2010_FemRespSetup.dct&quot;</span>
+<span class="p">)</span>
 <span class="n">download</span><span class="p">(</span>
-    <span class="s1">&#39;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/2006_2010_FemResp.dat.gz&#39;</span>
-    <span class="p">)</span>
+    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2006_2010_FemResp.dat.gz&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 28;
+                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/1995FemRespData.dat.gz\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2006_2010_FemRespSetup.dct\"\n)\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2006_2010_FemResp.dat.gz\"\n)";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/1995FemRespData.dat.gz\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2006_2010_FemRespSetup.dct\"\n)\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2006_2010_FemResp.dat.gz\"\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1196,18 +1437,60 @@ datasets include 30,769 respondents.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 29;
+                var nbb_unformatted_code = "resp5 = nsfg.read_fem_resp1995()\nresp6 = nsfg.read_fem_resp2002()\nresp7 = nsfg.read_fem_resp2010()\nresps = [resp5, resp6, resp7]";
+                var nbb_formatted_code = "resp5 = nsfg.read_fem_resp1995()\nresp6 = nsfg.read_fem_resp2002()\nresp7 = nsfg.read_fem_resp2010()\nresps = [resp5, resp6, resp7]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-<p>For each DataFrame, <code class="docutils literal notranslate"><span class="pre">resp</span></code>, I use <code class="docutils literal notranslate"><span class="pre">cmbirth</span></code> to compute the decade of
+<p>For each <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> we can use <code class="docutils literal notranslate"><span class="pre">cmbirth</span></code> to compute the decade of
 birth for each respondent:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">month0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;1899-12-15&#39;</span><span class="p">)</span>
-<span class="n">dates</span> <span class="o">=</span> <span class="p">[(</span><span class="n">month0</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="n">cm</span><span class="p">))</span> <span class="k">for</span> <span class="n">cm</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmbirth</span><span class="p">]</span>
-<span class="n">resp</span><span class="p">[</span><span class="s1">&#39;decade&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1900</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">resp</span> <span class="ow">in</span> <span class="n">resps</span><span class="p">:</span>
+    <span class="n">month0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;1899-12-15&quot;</span><span class="p">)</span>
+    <span class="n">dates</span> <span class="o">=</span> <span class="p">[(</span><span class="n">month0</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="n">cm</span><span class="p">))</span> <span class="k">for</span> <span class="n">cm</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmbirth</span><span class="p">]</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;decade&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1900</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 30;
+                var nbb_unformatted_code = "for resp in resps:\n    month0 = pd.to_datetime(\"1899-12-15\")\n    dates = [(month0 + pd.DateOffset(months=cm)) for cm in resp.cmbirth]\n    resp[\"decade\"] = (pd.DatetimeIndex(dates).year - 1900) // 10";
+                var nbb_formatted_code = "for resp in resps:\n    month0 = pd.to_datetime(\"1899-12-15\")\n    dates = [(month0 + pd.DateOffset(months=cm)) for cm in resp.cmbirth]\n    resp[\"decade\"] = (pd.DatetimeIndex(dates).year - 1900) // 10";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">cmbirth</span></code> is encoded as the integer number of months since December
+1899; <code class="docutils literal notranslate"><span class="pre">month0</span></code> represents that date as a Timestamp object. For each
+birth date, we instantiate a <code class="docutils literal notranslate"><span class="pre">DateOffset</span></code> that contains the
+century-month and add it to <code class="docutils literal notranslate"><span class="pre">month0</span></code>; the result is a sequence of
+Timestamps, which is converted to a <code class="docutils literal notranslate"><span class="pre">DateTimeIndex</span></code>. Finally, we extract
+<code class="docutils literal notranslate"><span class="pre">year</span></code> and compute decades.</p>
+<p>Intro…</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_labels_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
@@ -1215,13 +1498,29 @@ birth for each respondent:</p>
 
 <span class="sd">    groups: GroupBy object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">0s&#39;</span> <span class="o">%</span> <span class="n">name</span>
-        <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">0s&quot;</span> <span class="o">%</span> <span class="n">name</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 31;
+                var nbb_unformatted_code = "def add_labels_by_decade(groups, **options):\n    \"\"\"Draws fake points in order to add labels to the legend.\n\n    groups: GroupBy object\n    \"\"\"\n    for name, _ in groups:\n        label = \"%d0s\" % name\n        plt.plot([15], [1], label=label, **options)";
+                var nbb_formatted_code = "def add_labels_by_decade(groups, **options):\n    \"\"\"Draws fake points in order to add labels to the legend.\n\n    groups: GroupBy object\n    \"\"\"\n    for name, _ in groups:\n        label = \"%d0s\" % name\n        plt.plot([15], [1], label=label, **options)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1230,14 +1529,33 @@ birth for each respondent:</p>
 
 <span class="sd">    groups: GroupBy object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">estimate_marriage_survival</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
-        <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 32;
+                var nbb_unformatted_code = "def estimate_marriage_survival_by_decade(groups, **options):\n    \"\"\"Groups respondents by decade and plots survival curves.\n\n    groups: GroupBy object\n    \"\"\"\n    for _, group in groups:\n        _, sf = estimate_marriage_survival(group)\n        plt.plot(sf, **options)";
+                var nbb_formatted_code = "def estimate_marriage_survival_by_decade(groups, **options):\n    \"\"\"Groups respondents by decade and plots survival curves.\n\n    groups: GroupBy object\n    \"\"\"\n    for _, group in groups:\n        _, sf = estimate_marriage_survival(group)\n        plt.plot(sf, **options)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
+<p>To take into account the sampling weights, and also to show variability
+due to sampling error, I resample the data, group respondents by decade,
+and plot survival curves:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_resampled_by_decade</span><span class="p">(</span><span class="n">resps</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">predict_flag</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">omit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1248,12 +1566,11 @@ birth for each respondent:</p>
 <span class="sd">    predict_flag: whether to also plot predictions</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
-        <span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span> <span class="k">for</span> <span class="n">resp</span> <span class="ow">in</span> <span class="n">resps</span><span class="p">]</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span> <span class="k">for</span> <span class="n">resp</span> <span class="ow">in</span> <span class="n">resps</span><span class="p">]</span>
         <span class="n">sample</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">groups</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;decade&#39;</span><span class="p">)</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;decade&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">omit</span><span class="p">:</span>
-            <span class="n">groups</span> <span class="o">=</span> <span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span>
-                <span class="n">omit</span><span class="p">]</span>
+            <span class="n">groups</span> <span class="o">=</span> <span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">omit</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">add_labels_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">predict_flag</span><span class="p">:</span>
@@ -1264,33 +1581,57 @@ birth for each respondent:</p>
 </pre></div>
 </div>
 </div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">cmbirth</span></code> is encoded as the integer number of months since December
-1899; <code class="docutils literal notranslate"><span class="pre">month0</span></code> represents that date as a Timestamp object. For each
-birth date, we instantiate a <code class="docutils literal notranslate"><span class="pre">DateOffset</span></code> that contains the
-century-month and add it to <code class="docutils literal notranslate"><span class="pre">month0</span></code>; the result is a sequence of
-Timestamps, which is converted to a <code class="docutils literal notranslate"><span class="pre">DateTimeIndex</span></code>. Finally, we extract
-<code class="docutils literal notranslate"><span class="pre">year</span></code> and compute decades.</p>
-<p>To take into account the sampling weights, and also to show variability
-due to sampling error, I resample the data, group respondents by decade,
-and plot survival curves:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_resampled_by_decade</span><span class="p">(</span><span class="n">resps</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Age (years)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Prob unmarried&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">13</span><span class="p">,</span> 
-    <span class="mi">45</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 33;
+                var nbb_unformatted_code = "def plot_resampled_by_decade(resps, iters=11, predict_flag=False, omit=None):\n    \"\"\"Plots survival curves for resampled data.\n\n    resps: list of DataFrames\n    iters: number of resamples to plot\n    predict_flag: whether to also plot predictions\n    \"\"\"\n    for i in range(iters):\n        samples = [resample_rows_weighted(resp) for resp in resps]\n        sample = pd.concat(samples, ignore_index=True)\n        groups = sample.groupby(\"decade\")\n        if omit:\n            groups = [(name, group) for name, group in groups if name not in omit]\n        if i == 0:\n            add_labels_by_decade(groups, alpha=0.7)\n        if predict_flag:\n            plot_predictions_by_decade(groups, alpha=0.1)\n            estimate_marriage_survival_by_decade(groups, alpha=0.1)\n        else:\n            estimate_marriage_survival_by_decade(groups, alpha=0.2)";
+                var nbb_formatted_code = "def plot_resampled_by_decade(resps, iters=11, predict_flag=False, omit=None):\n    \"\"\"Plots survival curves for resampled data.\n\n    resps: list of DataFrames\n    iters: number of resamples to plot\n    predict_flag: whether to also plot predictions\n    \"\"\"\n    for i in range(iters):\n        samples = [resample_rows_weighted(resp) for resp in resps]\n        sample = pd.concat(samples, ignore_index=True)\n        groups = sample.groupby(\"decade\")\n        if omit:\n            groups = [(name, group) for name, group in groups if name not in omit]\n        if i == 0:\n            add_labels_by_decade(groups, alpha=0.7)\n        if predict_flag:\n            plot_predictions_by_decade(groups, alpha=0.1)\n            estimate_marriage_survival_by_decade(groups, alpha=0.1)\n        else:\n            estimate_marriage_survival_by_decade(groups, alpha=0.2)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Data from the three NSFG cycles use different sampling weights, so I
 resample them separately and then use <code class="docutils literal notranslate"><span class="pre">concat</span></code> to merge them into a
-single DataFrame. The parameter <code class="docutils literal notranslate"><span class="pre">ignore_index</span></code> tells <code class="docutils literal notranslate"><span class="pre">concat</span></code> not to
+single <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. The parameter <code class="docutils literal notranslate"><span class="pre">ignore_index</span></code> tells <code class="docutils literal notranslate"><span class="pre">concat</span></code> not to
 match up respondents by index; instead it creates a new index from 0 to
 30768.</p>
-<p><code class="docutils literal notranslate"><span class="pre">EstimateSurvivalByDecade</span></code> plots survival curves for each cohort:</p>
-<p>Figure <a class="reference internal" href="#survival4"><span class="xref myst">[survival4]</span></a>{reference-type=“ref”
-reference=“survival4”} shows the results. Several patterns are visible:</p>
+<p><code class="docutils literal notranslate"><span class="pre">estimate_marriage_survival_by_decade</span></code> plots survival curves for each cohort:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_resampled_by_decade</span><span class="p">(</span><span class="n">resps</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob unmarried&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8c9daade6ad29c895d9ee76ab855e29d1dfe62ca177b8d189dc0ce7a2879062e.png" src="_images/8c9daade6ad29c895d9ee76ab855e29d1dfe62ca177b8d189dc0ce7a2879062e.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 34;
+                var nbb_unformatted_code = "plot_resampled_by_decade(resps)\ndecorate(xlabel=\"Age (years)\", ylabel=\"Prob unmarried\", xlim=[13, 45], ylim=[0, 1])";
+                var nbb_formatted_code = "plot_resampled_by_decade(resps)\ndecorate(xlabel=\"Age (years)\", ylabel=\"Prob unmarried\", xlim=[13, 45], ylim=[0, 1])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Several patterns are visible:</p>
 <ul class="simple">
 <li><p>Women born in the 50s married earliest, with successive cohorts
 marrying later and later, at least until age 30 or so.</p></li>
@@ -1322,14 +1663,42 @@ for the next cycle of the NSFG.</p></li>
 cohort it ends at age 28, and for the 90s cohort we hardly have any data
 at all.</p>
 <p>We can extrapolate these curves by “borrowing” data from the previous
-cohort. HazardFunction provides a method, <code class="docutils literal notranslate"><span class="pre">Extend</span></code>, that copies the tail
-from another longer HazardFunction:</p>
-<p>As we saw in Section <a class="reference internal" href="#hazard"><span class="xref myst">[hazard]</span></a>{reference-type=“ref”
-reference=“hazard”}, the HazardFunction contains a Series that maps from
-<span class="math notranslate nohighlight">\(t\)</span> to <span class="math notranslate nohighlight">\(\lambda(t)\)</span>. <code class="docutils literal notranslate"><span class="pre">Extend</span></code> finds <code class="docutils literal notranslate"><span class="pre">last</span></code>, which is the last index in
+cohort. <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> provides a method, <code class="docutils literal notranslate"><span class="pre">Extend</span></code>, that copies the tail
+from another longer <code class="docutils literal notranslate"><span class="pre">Hazard</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extend</span><span class="p">(</span><span class="n">haz1</span><span class="p">,</span> <span class="n">haz2</span><span class="p">):</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="n">haz1</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">more</span> <span class="o">=</span> <span class="n">haz2</span><span class="p">[</span><span class="n">haz2</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">last</span><span class="p">]</span>
+    <span class="n">extended</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">haz1</span><span class="p">,</span> <span class="n">more</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">Hazard</span><span class="p">(</span><span class="n">extended</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 35;
+                var nbb_unformatted_code = "def extend(haz1, haz2):\n    last = haz1.index[-1]\n    more = haz2[haz2.index > last]\n    extended = pd.concat([haz1, more])\n    return Hazard(extended)";
+                var nbb_formatted_code = "def extend(haz1, haz2):\n    last = haz1.index[-1]\n    more = haz2[haz2.index > last]\n    extended = pd.concat([haz1, more])\n    return Hazard(extended)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> contains a <code class="docutils literal notranslate"><span class="pre">Series</span></code> that maps from
+<span class="math notranslate nohighlight">\(t\)</span> to <span class="math notranslate nohighlight">\(\lambda(t)\)</span>.
+<code class="docutils literal notranslate"><span class="pre">Extend</span></code> finds <code class="docutils literal notranslate"><span class="pre">last</span></code>, which is the last index in
 <code class="docutils literal notranslate"><span class="pre">self.series</span></code>, selects values from <code class="docutils literal notranslate"><span class="pre">other</span></code> that come later than <code class="docutils literal notranslate"><span class="pre">last</span></code>,
 and appends them onto <code class="docutils literal notranslate"><span class="pre">self.series</span></code>.</p>
-<p>Now we can extend the HazardFunction for each cohort, using values from
+<p>Now we can extend the <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> for each cohort, using values from
 the predecessor:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1342,52 +1711,82 @@ the predecessor:</p>
     <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
         <span class="n">hf</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">estimate_marriage_survival</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
         <span class="n">hfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hf</span><span class="p">)</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hfs</span><span class="p">))</span>
+
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hf</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hfs</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">hf</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">hfs</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
-        <span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_survival</span><span class="p">()</span>
-        <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+            <span class="n">hf</span> <span class="o">=</span> <span class="n">extend</span><span class="p">(</span><span class="n">hf</span><span class="p">,</span> <span class="n">hfs</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">hfs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">hf</span>
+        <span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_surv</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 36;
+                var nbb_unformatted_code = "def plot_predictions_by_decade(groups, **options):\n    \"\"\"Groups respondents by decade and plots survival curves.\n\n    groups: GroupBy object\n    \"\"\"\n    hfs = []\n    for _, group in groups:\n        hf, sf = estimate_marriage_survival(group)\n        hfs.append(hf)\n\n    for i, hf in enumerate(hfs):\n        if i > 0:\n            hf = extend(hf, hfs[i - 1])\n            hfs[i] = hf\n        sf = hf.make_surv()\n        plt.plot(sf, **options)";
+                var nbb_formatted_code = "def plot_predictions_by_decade(groups, **options):\n    \"\"\"Groups respondents by decade and plots survival curves.\n\n    groups: GroupBy object\n    \"\"\"\n    hfs = []\n    for _, group in groups:\n        hf, sf = estimate_marriage_survival(group)\n        hfs.append(hf)\n\n    for i, hf in enumerate(hfs):\n        if i > 0:\n            hf = extend(hf, hfs[i - 1])\n            hfs[i] = hf\n        sf = hf.make_surv()\n        plt.plot(sf, **options)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">groups</span></code> is a GroupBy object with respondents grouped by decade of
+birth. The first loop computes the <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> for each group.</p>
+<p>The second loop extends each <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> with values from its
+predecessor, which might contain values from the previous group, and so
+on. Then it converts each <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> to a SurvivalFunction and plots
+it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_resampled_by_decade</span><span class="p">(</span><span class="n">resps</span><span class="p">,</span> <span class="n">predict_flag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Age (years)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Prob unmarried&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">13</span><span class="p">,</span> 
-    <span class="mi">45</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob unmarried&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/77c459c715ab3834eb3574f60affb840cbbb260c4783e218af57cfeaba31097d.png" src="_images/77c459c715ab3834eb3574f60affb840cbbb260c4783e218af57cfeaba31097d.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 37;
+                var nbb_unformatted_code = "plot_resampled_by_decade(resps, predict_flag=True)\ndecorate(xlabel=\"Age (years)\", ylabel=\"Prob unmarried\", xlim=[13, 45], ylim=[0, 1])";
+                var nbb_formatted_code = "plot_resampled_by_decade(resps, predict_flag=True)\ndecorate(xlabel=\"Age (years)\", ylabel=\"Prob unmarried\", xlim=[13, 45], ylim=[0, 1])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">groups</span></code> is a GroupBy object with respondents grouped by decade of
-birth. The first loop computes the HazardFunction for each group.</p>
-<p>The second loop extends each HazardFunction with values from its
-predecessor, which might contain values from the previous group, and so
-on. Then it converts each HazardFunction to a SurvivalFunction and plots
-it.</p>
-<p>Figure <a class="reference internal" href="#survival5"><span class="xref myst">[survival5]</span></a>{reference-type=“ref”
-reference=“survival5”} shows the results; I’ve removed the 50s cohort to
-make the predictions more visible. These results suggest that by age 40,
-the most recent cohorts will converge with the 60s cohort, with fewer
-than 20% never married.</p>
+<p>I’ve removed the 50s cohort to make the predictions more visible.
+These results suggest that by age 40, the most recent cohorts will converge with the 60s cohort, with fewer than 20% never married.</p>
 </section>
 <section id="expected-remaining-lifetime">
 <h2>Expected remaining lifetime<a class="headerlink" href="#expected-remaining-lifetime" title="Link to this heading">#</a></h2>
 <p>Given a survival curve, we can compute the expected remaining lifetime
 as a function of current age. For example, given the survival curve of
-pregnancy length from
-Section <a class="reference internal" href="#survival"><span class="xref myst">[survival]</span></a>{reference-type=“ref”
-reference=“survival”}, we can compute the expected time until delivery.</p>
+pregnancy length, we can compute the expected time until delivery.</p>
 <p>The first step is to extract the PMF of lifetimes. <code class="docutils literal notranslate"><span class="pre">SurvivalFunction</span></code>
 provides a method that does that:</p>
-<p>Remember that the SurvivalFunction contains the Cdf of lifetimes. The
-loop copies the values and probabilities from the Cdf into a Pmf.</p>
-<p><code class="docutils literal notranslate"><span class="pre">cutoff</span></code> is the highest probability in the Cdf, which is 1 if the Cdf is
-complete, and otherwise less than 1. If the Cdf is incomplete, we plug
+<p>Remember that the SurvivalFunction contains the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> of lifetimes. The
+loop copies the values and probabilities from the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> into a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cutoff</span></code> is the highest probability in the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>, which is 1 if the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> is
+complete, and otherwise less than 1. If the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> is incomplete, we plug
 in the provided value, <code class="docutils literal notranslate"><span class="pre">filler</span></code>, to cap it off.</p>
-<p>The Cdf of pregnancy lengths is complete, so we don’t have to worry
+<p>The <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> of pregnancy lengths is complete, so we don’t have to worry
 about this detail yet.</p>
 <p>The next step is to compute the expected remaining lifetime, where
 “expected” means average. <code class="docutils literal notranslate"><span class="pre">SurvivalFunction</span></code> provides a method that does
@@ -1395,12 +1794,12 @@ that, too:</p>
 <p><code class="docutils literal notranslate"><span class="pre">RemainingLifetime</span></code> takes <code class="docutils literal notranslate"><span class="pre">filler</span></code>, which is passed along to <code class="docutils literal notranslate"><span class="pre">MakePmf</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">func</span></code> which is the function used to summarize the distribution of
 remaining lifetimes.</p>
-<p><code class="docutils literal notranslate"><span class="pre">pmf</span></code> is the Pmf of lifetimes extracted from the SurvivalFunction. <code class="docutils literal notranslate"><span class="pre">d</span></code>
+<p><code class="docutils literal notranslate"><span class="pre">pmf</span></code> is the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> of lifetimes extracted from the SurvivalFunction. <code class="docutils literal notranslate"><span class="pre">d</span></code>
 is a dictionary that contains the results, a map from current age, <code class="docutils literal notranslate"><span class="pre">t</span></code>,
 to expected remaining lifetime.</p>
-<p>The loop iterates through the values in the Pmf. For each value of <code class="docutils literal notranslate"><span class="pre">t</span></code>
+<p>The loop iterates through the values in the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>. For each value of <code class="docutils literal notranslate"><span class="pre">t</span></code>
 it computes the conditional distribution of lifetimes, given that the
-lifetime exceeds <code class="docutils literal notranslate"><span class="pre">t</span></code>. It does that by removing values from the Pmf one
+lifetime exceeds <code class="docutils literal notranslate"><span class="pre">t</span></code>. It does that by removing values from the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> one
 at a time and renormalizing the remaining values.</p>
 <p>Then it uses <code class="docutils literal notranslate"><span class="pre">func</span></code> to summarize the conditional distribution. In this
 example the result is the mean pregnancy length, given that the length
@@ -1409,29 +1808,157 @@ length.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preg</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">read_fem_preg</span><span class="p">()</span>
-<span class="n">complete</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;outcome in [1, 3, 4]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">prglngth</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of complete pregnancies&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">complete</span><span class="p">))</span>
-<span class="n">ongoing</span> <span class="o">=</span> <span class="n">preg</span><span class="p">[</span><span class="n">preg</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">prglngth</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of ongoing pregnancies&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ongoing</span><span class="p">))</span>
-<span class="n">hf</span> <span class="o">=</span> <span class="n">estimate_hazard_function</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">)</span>
-<span class="n">sf1</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_survival</span><span class="p">()</span>
+<span class="n">complete</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;outcome in [1, 3, 4]&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">prglngth</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of complete pregnancies&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">complete</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of complete pregnancies 11189
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 38;
+                var nbb_unformatted_code = "preg = nsfg.read_fem_preg()\ncomplete = preg.query(\"outcome in [1, 3, 4]\").prglngth\nprint(\"Number of complete pregnancies\", len(complete))";
+                var nbb_formatted_code = "preg = nsfg.read_fem_preg()\ncomplete = preg.query(\"outcome in [1, 3, 4]\").prglngth\nprint(\"Number of complete pregnancies\", len(complete))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rem_life1</span> <span class="o">=</span> <span class="n">sf1</span><span class="o">.</span><span class="n">remaining_lifetime</span><span class="p">()</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rem_life1</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Remaining pregnancy length&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weeks&#39;</span><span class="p">,</span> <span class="n">ylabel</span>
-    <span class="o">=</span><span class="s1">&#39;Mean remaining weeks&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ongoing</span> <span class="o">=</span> <span class="n">preg</span><span class="p">[</span><span class="n">preg</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">prglngth</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of ongoing pregnancies&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ongoing</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of ongoing pregnancies 352
+</pre></div>
 </div>
-<p>Figure <a class="reference internal" href="#survival6"><span class="xref myst">[survival6]</span></a>{reference-type=“ref”
-reference=“survival6”} (left) shows the expected remaining pregnancy
-length as a function of the current duration. For example, during Week
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 39;
+                var nbb_unformatted_code = "ongoing = preg[preg.outcome == 6].prglngth\nprint(\"Number of ongoing pregnancies\", len(ongoing))";
+                var nbb_formatted_code = "ongoing = preg[preg.outcome == 6].prglngth\nprint(\"Number of ongoing pregnancies\", len(ongoing))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span> <span class="o">=</span> <span class="n">estimate_hazard_function</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">)</span>
+<span class="n">sf1</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_surv</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 40;
+                var nbb_unformatted_code = "hf = estimate_hazard_function(complete, ongoing)\nsf1 = hf.make_surv()";
+                var nbb_formatted_code = "hf = estimate_hazard_function(complete, ongoing)\nsf1 = hf.make_surv()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Pmf</span>
+
+
+<span class="k">def</span> <span class="nf">remaining_lifetime</span><span class="p">(</span><span class="n">surv</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">Pmf</span><span class="o">.</span><span class="n">mean</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes remaining lifetime as a function of age.</span>
+
+<span class="sd">    func: function from conditional Pmf to remaining lifetime</span>
+
+<span class="sd">    returns: Series that maps from age to remaining lifetime</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pmf</span> <span class="o">=</span> <span class="n">surv</span><span class="o">.</span><span class="n">make_pmf</span><span class="p">()</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">pmf</span><span class="o">.</span><span class="n">qs</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">pmf</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">pmf</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">pmf</span><span class="p">)</span> <span class="o">-</span> <span class="n">t</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 41;
+                var nbb_unformatted_code = "from empiricaldist import Pmf\n\n\ndef remaining_lifetime(surv, func=Pmf.mean):\n    \"\"\"Computes remaining lifetime as a function of age.\n\n    func: function from conditional Pmf to remaining lifetime\n\n    returns: Series that maps from age to remaining lifetime\n    \"\"\"\n    pmf = surv.make_pmf()\n    d = {}\n    for t in pmf.qs[:-1]:\n        pmf[t] = 0\n        pmf.normalize()\n        d[t] = func(pmf) - t\n    return pd.Series(d)";
+                var nbb_formatted_code = "from empiricaldist import Pmf\n\n\ndef remaining_lifetime(surv, func=Pmf.mean):\n    \"\"\"Computes remaining lifetime as a function of age.\n\n    func: function from conditional Pmf to remaining lifetime\n\n    returns: Series that maps from age to remaining lifetime\n    \"\"\"\n    pmf = surv.make_pmf()\n    d = {}\n    for t in pmf.qs[:-1]:\n        pmf[t] = 0\n        pmf.normalize()\n        d[t] = func(pmf) - t\n    return pd.Series(d)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Here’s expected remaining pregnancy
+length as a function of the current duration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rem_life1</span> <span class="o">=</span> <span class="n">remaining_lifetime</span><span class="p">(</span><span class="n">sf1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rem_life1</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Remaining pregnancy length&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Weeks&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Mean remaining weeks&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/62060e09fc0cf3bc8b1471620e12ca4f7474d8a574981744a7a65930f41ef754.png" src="_images/62060e09fc0cf3bc8b1471620e12ca4f7474d8a574981744a7a65930f41ef754.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 42;
+                var nbb_unformatted_code = "rem_life1 = remaining_lifetime(sf1)\nplt.plot(rem_life1)\ndecorate(\n    title=\"Remaining pregnancy length\", xlabel=\"Weeks\", ylabel=\"Mean remaining weeks\"\n)";
+                var nbb_formatted_code = "rem_life1 = remaining_lifetime(sf1)\nplt.plot(rem_life1)\ndecorate(\n    title=\"Remaining pregnancy length\", xlabel=\"Weeks\", ylabel=\"Mean remaining weeks\"\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>For example, during Week
 0, the expected remaining duration is about 34 weeks. That’s less than
 full term (39 weeks) because terminations of pregnancy in the first
 trimester bring the average down.</p>
@@ -1443,13 +1970,100 @@ any time during this period, the expected remaining lifetime is the
 same; with each week that passes, the destination gets no closer.
 Processes with this property are called <strong>memoryless</strong> because the past
 has no effect on the predictions. This behavior is the mathematical
-basis of the infuriating mantra of obstetrics nurses: “any day now.”</p>
-<p>Figure <a class="reference internal" href="#survival6"><span class="xref myst">[survival6]</span></a>{reference-type=“ref”
-reference=“survival6”} (right) shows the median remaining time until
+basis of the infuriating mantra of obstetrics nurses: “Any day now.”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span><span class="p">,</span> <span class="n">sf2</span> <span class="o">=</span> <span class="n">estimate_marriage_survival</span><span class="p">(</span><span class="n">resp6</span><span class="p">)</span>
+<span class="n">sf2</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a23d8909443914b3aa1cd3d7d52ea76212bd097973e8baa54a1e6d29cff4d0d2.png" src="_images/a23d8909443914b3aa1cd3d7d52ea76212bd097973e8baa54a1e6d29cff4d0d2.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 43;
+                var nbb_unformatted_code = "hf, sf2 = estimate_marriage_survival(resp6)\nsf2.plot()\ndecorate()";
+                var nbb_formatted_code = "hf, sf2 = estimate_marriage_survival(resp6)\nsf2.plot()\ndecorate()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>TODO: Explain why we need these adjustments</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sf2</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">pmf</span><span class="p">:</span> <span class="n">pmf</span><span class="o">.</span><span class="n">make_cdf</span><span class="p">()</span><span class="o">.</span><span class="n">inverse</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 44;
+                var nbb_unformatted_code = "sf2[np.inf] = 0\n\nfunc = lambda pmf: pmf.make_cdf().inverse(0.5)";
+                var nbb_formatted_code = "sf2[np.inf] = 0\n\nfunc = lambda pmf: pmf.make_cdf().inverse(0.5)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>The following figure shows the median remaining time until
 first marriage, as a function of age. For an 11 year-old girl, the
 median time until first marriage is about 14 years. The curve decreases
 until age 22 when the median remaining time is about 7 years. After that
 it increases again: by age 30 it is back where it started, at 14 years.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rem_life2</span> <span class="o">=</span> <span class="n">remaining_lifetime</span><span class="p">(</span><span class="n">sf2</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rem_life2</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Years until first marriage&quot;</span><span class="p">,</span>
+    <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+    <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">31</span><span class="p">],</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Median remaining years&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/838c07a3897e733c3e3505722de1d3b8e163b3ebdf2bdafd4276b1ae4a1cebcc.png" src="_images/838c07a3897e733c3e3505722de1d3b8e163b3ebdf2bdafd4276b1ae4a1cebcc.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 45;
+                var nbb_unformatted_code = "rem_life2 = remaining_lifetime(sf2, func=func)\nplt.plot(rem_life2)\n\ndecorate(\n    title=\"Years until first marriage\",\n    ylim=[0, 15],\n    xlim=[11, 31],\n    xlabel=\"Age (years)\",\n    ylabel=\"Median remaining years\",\n)";
+                var nbb_formatted_code = "rem_life2 = remaining_lifetime(sf2, func=func)\nplt.plot(rem_life2)\n\ndecorate(\n    title=\"Years until first marriage\",\n    ylim=[0, 15],\n    xlim=[11, 31],\n    xlabel=\"Age (years)\",\n    ylabel=\"Median remaining years\",\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>Based on this data, young women have decreasing remaining “lifetimes”.
 Mechanical components with this property are called <strong>NBUE</strong> for “new
 better than used in expectation,” meaning that a new part is expected to
@@ -1459,7 +2073,7 @@ Components with this property are called <strong>UBNE</strong> for “used bette
 new in expectation.” That is, the older the part, the longer it is
 expected to last. Newborns and cancer patients are also UBNE; their life
 expectancy increases the longer they live.</p>
-<p>For this example I computed median, rather than mean, because the Cdf is
+<p>For this example I computed median, rather than mean, because the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> is
 incomplete; the survival curve projects that about 20% of respondents
 will not marry before age 44. The age of first marriage for these women
 is unknown, and might be non-existent, so we can’t compute a mean.</p>
@@ -1468,29 +2082,6 @@ special value that represents infinity. That makes the mean infinity for
 all ages, but the median is well-defined as long as more than 50% of the
 remaining lifetimes are finite, which is true until age 30. After that
 it is hard to define a meaningful expected remaining lifetime.</p>
-<p>Here’s the code that computes and plots these functions:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span><span class="p">,</span> <span class="n">sf2</span> <span class="o">=</span> <span class="n">estimate_marriage_survival</span><span class="p">(</span><span class="n">resp6</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">pmf</span><span class="p">:</span> <span class="n">pmf</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">rem_life2</span> <span class="o">=</span> <span class="n">sf2</span><span class="o">.</span><span class="n">remaining_lifetime</span><span class="p">(</span><span class="n">filler</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rem_life2</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Years until first marriage&#39;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">11</span><span class="p">,</span>
-    <span class="mi">31</span><span class="p">],</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Age (years)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Median remaining years&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">sf1</span></code> is the survival curve for pregnancy length; in this case we can
-use the default values for <code class="docutils literal notranslate"><span class="pre">RemainingLifetime</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">sf2</span></code> is the survival curve for age at first marriage; <code class="docutils literal notranslate"><span class="pre">func</span></code> is a
-function that takes a Pmf and computes its median (50th percentile).</p>
 </section>
 <section id="glossary">
 <h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
@@ -1525,16 +2116,33 @@ than new in expectation.”</p></li>
 
 <span class="sd">    resp: DataFrame</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;cmdivorcx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmdivorcx</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="mi">9998</span><span class="p">,</span> <span class="mi">9999</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
-    <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;notdivorced&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmdivorcx</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-    <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">cmdivorcx</span> <span class="o">-</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmmarrhx</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span>
-    <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;durationsofar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">cmintvw</span> <span class="o">-</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmmarrhx</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span>
-    <span class="n">month0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;1899-12-15&#39;</span><span class="p">)</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cmdivorcx&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmdivorcx</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="mi">9998</span><span class="p">,</span> <span class="mi">9999</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;notdivorced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmdivorcx</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;duration&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">cmdivorcx</span> <span class="o">-</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmmarrhx</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;durationsofar&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">cmintvw</span> <span class="o">-</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmmarrhx</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span>
+    <span class="n">month0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;1899-12-15&quot;</span><span class="p">)</span>
     <span class="n">dates</span> <span class="o">=</span> <span class="p">[(</span><span class="n">month0</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="n">cm</span><span class="p">))</span> <span class="k">for</span> <span class="n">cm</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">cmbirth</span><span class="p">]</span>
-    <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;decade&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1900</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;decade&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1900</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 46;
+                var nbb_unformatted_code = "def clean_data(resp):\n    \"\"\"Cleans respondent data.\n\n    resp: DataFrame\n    \"\"\"\n    resp[\"cmdivorcx\"] = resp.cmdivorcx.replace([9998, 9999], np.nan)\n    resp[\"notdivorced\"] = resp.cmdivorcx.isnull().astype(int)\n    resp[\"duration\"] = (resp.cmdivorcx - resp.cmmarrhx) / 12.0\n    resp[\"durationsofar\"] = (resp.cmintvw - resp.cmmarrhx) / 12.0\n    month0 = pd.to_datetime(\"1899-12-15\")\n    dates = [(month0 + pd.DateOffset(months=cm)) for cm in resp.cmbirth]\n    resp[\"decade\"] = (pd.DatetimeIndex(dates).year - 1900) // 10";
+                var nbb_formatted_code = "def clean_data(resp):\n    \"\"\"Cleans respondent data.\n\n    resp: DataFrame\n    \"\"\"\n    resp[\"cmdivorcx\"] = resp.cmdivorcx.replace([9998, 9999], np.nan)\n    resp[\"notdivorced\"] = resp.cmdivorcx.isnull().astype(int)\n    resp[\"duration\"] = (resp.cmdivorcx - resp.cmmarrhx) / 12.0\n    resp[\"durationsofar\"] = (resp.cmintvw - resp.cmmarrhx) / 12.0\n    month0 = pd.to_datetime(\"1899-12-15\")\n    dates = [(month0 + pd.DateOffset(months=cm)) for cm in resp.cmbirth]\n    resp[\"decade\"] = (pd.DatetimeIndex(dates).year - 1900) // 10";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1545,69 +2153,23 @@ than new in expectation.”</p></li>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">add_labels_by_decade</span>
-
-
-<span class="k">def</span> <span class="nf">resample_divorce_curve_by_decade</span><span class="p">(</span><span class="n">resps</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots divorce curves for each birth cohort.</span>
-
-<span class="sd">    resps: list of respondent DataFrames</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">41</span><span class="p">):</span>
-        <span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">thinkstats2</span><span class="o">.</span><span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span> <span class="k">for</span> <span class="n">resp</span> <span class="ow">in</span> <span class="n">resps</span><span class="p">]</span>
-        <span class="n">sample</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">groups</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;decade&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">add_labels_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
-        <span class="n">estimate_survival_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Years&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Fraction undivorced&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span>
-        <span class="mi">28</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate_survival_by_decade</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Groups respondents by decade and plots survival curves.</span>
-
-<span class="sd">    groups: GroupBy object</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
-        <span class="n">_</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">estimate_survival</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
-        <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate_survival</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimates the survival curve.</span>
-
-<span class="sd">    resp: DataFrame of respondents</span>
-
-<span class="sd">    returns: pair of HazardFunction, SurvivalFunction</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">complete</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">notdivorced</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-    <span class="n">ongoing</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">resp</span><span class="o">.</span><span class="n">notdivorced</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">durationsofar</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-    <span class="n">hf</span> <span class="o">=</span> <span class="n">estimate_hazard_function</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">)</span>
-    <span class="n">sf</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">make_survival</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">hf</span><span class="p">,</span> <span class="n">sf</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resample_divorce_curve_by_decade</span><span class="p">([</span><span class="n">married6</span><span class="p">,</span> <span class="n">married7</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 47;
+                var nbb_unformatted_code = "clean_data(resp6)\nmarried6 = resp6[resp6.evrmarry == 1]\nclean_data(resp7)\nmarried7 = resp7[resp7.evrmarry == 1]";
+                var nbb_formatted_code = "clean_data(resp6)\nmarried6 = resp6[resp6.evrmarry == 1]\nclean_data(resp7)\nmarried7 = resp7[resp7.evrmarry == 1]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 </section>
 </section>

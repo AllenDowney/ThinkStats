@@ -353,20 +353,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pmfs">Pmfs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pmfs"><code class="docutils literal notranslate"><span class="pre">Pmf</span></code>s</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-pmfs">Plotting PMFs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-visualizations">Other visualizations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-class-size-paradox">The class size paradox</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-indexing">DataFrame indexing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-indexing"><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> indexing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -401,16 +394,15 @@ document.write(`
 
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats2.py&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 2;
-                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py\")";
-                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py\")";
+                var nbb_cell_id = 66;
+                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats2.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py\")";
+                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats2.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -424,35 +416,8 @@ document.write(`
             </script></div>
 </details>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/2002FemPreg.dct&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span>
-    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/2002FemPreg.dat.gz&quot;</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 3;
-                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz\"\n)";
-                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz\"\n)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
 <section id="pmfs">
-<h2>Pmfs<a class="headerlink" href="#pmfs" title="Link to this heading">#</a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">Pmf</span></code>s<a class="headerlink" href="#pmfs" title="Link to this heading">#</a></h2>
 <p>Another way to represent a distribution is a <strong>probability mass
 function</strong> (PMF), which maps from each value to its probability. A
 <strong>probability</strong> is a frequency expressed as a fraction of the sample
@@ -460,27 +425,126 @@ size, <code class="docutils literal notranslate"><span class="pre">n</span></cod
 by <code class="docutils literal notranslate"><span class="pre">n</span></code>, which is called <strong>normalization</strong>.</p>
 <p>Given a Hist, we can make a dictionary that maps from each value to its
 probability:</p>
-<p>Or we can use the Pmf class provided by <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code>. Like Hist, the
-Pmf constructor can take a list, pandas Series, dictionary, Hist, or
-another Pmf object. Here’s an example with a simple list:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">thinkstats2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">Hist</span>
 
-<span class="n">pmf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Pmf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">hist</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hist({1: 1, 2: 2, 3: 1, 5: 1})
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 67;
+                var nbb_unformatted_code = "from thinkstats2 import Hist\n\nhist = Hist([1, 2, 2, 3, 5])\nhist";
+                var nbb_formatted_code = "from thinkstats2 import Hist\n\nhist = Hist([1, 2, 2, 3, 5])\nhist";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">hist</span><span class="o">.</span><span class="n">total</span><span class="p">()</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">hist</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span> <span class="o">/</span> <span class="n">n</span>
+
+<span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{1: 0.2, 2: 0.4, 3: 0.2, 5: 0.2}
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 68;
+                var nbb_unformatted_code = "n = hist.total()\nd = {}\nfor x, freq in hist.items():\n    d[x] = freq / n\n\nd";
+                var nbb_formatted_code = "n = hist.total()\nd = {}\nfor x, freq in hist.items():\n    d[x] = freq / n\n\nd";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Or we can use the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> class provided by <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code>. Like Hist, the
+<code class="docutils literal notranslate"><span class="pre">Pmf</span></code> constructor can take a list, pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code>, dictionary, Hist, or
+another <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> object. Here’s an example with a simple list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Pmf</span>
+
+<span class="n">pmf</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 <span class="n">pmf</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pmf({1: 0.2, 2: 0.4, 3: 0.2, 5: 0.2})
-</pre></div>
-</div>
-<script type="application/javascript">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>probs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 4;
-                var nbb_unformatted_code = "import thinkstats2\n\npmf = thinkstats2.Pmf([1, 2, 2, 3, 5])\npmf";
-                var nbb_formatted_code = "import thinkstats2\n\npmf = thinkstats2.Pmf([1, 2, 2, 3, 5])\npmf";
+                var nbb_cell_id = 94;
+                var nbb_unformatted_code = "from empiricaldist import Pmf\n\npmf = Pmf.from_seq([1, 2, 2, 3, 5])\npmf";
+                var nbb_formatted_code = "from empiricaldist import Pmf\n\npmf = Pmf.from_seq([1, 2, 2, 3, 5])\npmf";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -493,16 +557,16 @@ another Pmf object. Here’s an example with a simple list:</p>
             }, 500);
             </script></div>
 </div>
-<p>The Pmf is normalized so total probability is 1.</p>
-<p>Pmf and Hist objects are similar in many ways; in fact, they inherit
+<p>The <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> is normalized so total probability is 1.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> and <code class="docutils literal notranslate"><span class="pre">Hist</span></code> objects are similar in many ways; in fact, they inherit
 many of their methods from a common parent class. For example, the
-methods <code class="docutils literal notranslate"><span class="pre">Values</span></code> and <code class="docutils literal notranslate"><span class="pre">Items</span></code> work the same way for both. The biggest
-difference is that a Hist maps from values to integer counters; a Pmf
+methods <code class="docutils literal notranslate"><span class="pre">values</span></code> and <code class="docutils literal notranslate"><span class="pre">items</span></code> work the same way for both. The biggest
+difference is that a Hist maps from values to integer counters; a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>
 maps from values to floating-point probabilities.</p>
-<p>To look up the probability associated with a value, use <code class="docutils literal notranslate"><span class="pre">Prob</span></code>:</p>
+<p>To look up the probability associated with a value, use parentheses to call the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> like a function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -512,9 +576,9 @@ maps from values to floating-point probabilities.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "pmf.prob(2)";
-                var nbb_formatted_code = "pmf.prob(2)";
+                var nbb_cell_id = 95;
+                var nbb_unformatted_code = "pmf(2)";
+                var nbb_formatted_code = "pmf(2)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -527,22 +591,23 @@ maps from values to floating-point probabilities.</p>
             }, 500);
             </script></div>
 </div>
-<p>The bracket operator is equivalent:</p>
+<p>To assign a probability to a quantity, you have to use the bracket operator.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">pmf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 6;
-                var nbb_unformatted_code = "pmf[2]";
-                var nbb_formatted_code = "pmf[2]";
+                var nbb_cell_id = 96;
+                var nbb_unformatted_code = "pmf[2] = 0.2\npmf(2)";
+                var nbb_formatted_code = "pmf[2] = 0.2\npmf(2)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -555,24 +620,24 @@ maps from values to floating-point probabilities.</p>
             }, 500);
             </script></div>
 </div>
-<p>You can modify an existing Pmf by incrementing the probability
+<p>You can modify an existing <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> by incrementing the probability
 associated with a value:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
-<span class="n">pmf</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.3</span>
+<span class="n">pmf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6000000000000001
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "pmf.incr(2, 0.2)\npmf.prob(2)";
-                var nbb_formatted_code = "pmf.incr(2, 0.2)\npmf.prob(2)";
+                var nbb_cell_id = 97;
+                var nbb_unformatted_code = "pmf[2] += 0.3\npmf(2)";
+                var nbb_formatted_code = "pmf[2] += 0.3\npmf(2)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -588,20 +653,20 @@ associated with a value:</p>
 <p>Or you can multiply a probability by a factor:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="o">.</span><span class="n">mult</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-<span class="n">pmf</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*=</span> <span class="mf">0.5</span>
+<span class="n">pmf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.30000000000000004
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.25
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "pmf.mult(2, 0.5)\npmf.prob(2)";
-                var nbb_formatted_code = "pmf.mult(2, 0.5)\npmf.prob(2)";
+                var nbb_cell_id = 98;
+                var nbb_unformatted_code = "pmf[2] *= 0.5\npmf(2)";
+                var nbb_formatted_code = "pmf[2] *= 0.5\npmf(2)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -614,24 +679,24 @@ associated with a value:</p>
             }, 500);
             </script></div>
 </div>
-<p>If you modify a Pmf, the result may not be normalized; that is, the
-probabilities may no longer add up to 1. To check, you can call <code class="docutils literal notranslate"><span class="pre">Total</span></code>,
+<p>If you modify a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, the result may not be normalized; that is, the
+probabilities may no longer add up to 1. To check, you can call <code class="docutils literal notranslate"><span class="pre">sum</span></code>,
 which returns the sum of the probabilities:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="o">.</span><span class="n">total</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8999999999999999
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8500000000000001
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "pmf.total()";
-                var nbb_formatted_code = "pmf.total()";
+                var nbb_cell_id = 101;
+                var nbb_unformatted_code = "pmf.sum()";
+                var nbb_formatted_code = "pmf.sum()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -644,11 +709,11 @@ which returns the sum of the probabilities:</p>
             }, 500);
             </script></div>
 </div>
-<p>To renormalize, call <code class="docutils literal notranslate"><span class="pre">Normalize</span></code>:</p>
+<p>To renormalize, call <code class="docutils literal notranslate"><span class="pre">normalize</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
-<span class="n">pmf</span><span class="o">.</span><span class="n">total</span><span class="p">()</span>
+<span class="n">pmf</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -658,9 +723,9 @@ which returns the sum of the probabilities:</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 10;
-                var nbb_unformatted_code = "pmf.normalize()\npmf.total()";
-                var nbb_formatted_code = "pmf.normalize()\npmf.total()";
+                var nbb_cell_id = 102;
+                var nbb_unformatted_code = "pmf.normalize()\npmf.sum()";
+                var nbb_formatted_code = "pmf.normalize()\npmf.sum()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -673,38 +738,113 @@ which returns the sum of the probabilities:</p>
             }, 500);
             </script></div>
 </div>
-<p>Pmf objects provide a <code class="docutils literal notranslate"><span class="pre">Copy</span></code> method so you can make and modify a copy
+<p><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> objects provide a <code class="docutils literal notranslate"><span class="pre">copy</span></code> method so you can make and modify a copy
 without affecting the original.</p>
-<p>My notation in this section might seem inconsistent, but there is a
-system: I use Pmf for the name of the class, <code class="docutils literal notranslate"><span class="pre">pmf</span></code> for an instance of
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>probs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.235294</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.294118</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.235294</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.235294</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 103;
+                var nbb_unformatted_code = "pmf.copy()";
+                var nbb_formatted_code = "pmf.copy()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>A note on notation: I use <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> for the name of the class, <code class="docutils literal notranslate"><span class="pre">pmf</span></code> for an instance of
 the class, and PMF for the mathematical concept of a probability mass
 function.</p>
 </section>
 <section id="plotting-pmfs">
 <h2>Plotting PMFs<a class="headerlink" href="#plotting-pmfs" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">thinkplot</span></code> provides two ways to plot Pmfs:</p>
+<p><code class="docutils literal notranslate"><span class="pre">thinkplot</span></code> provides two ways to plot a <code class="docutils literal notranslate"><span class="pre">pmf</span></code>:</p>
 <ul class="simple">
-<li><p>To plot a Pmf as a bar graph, you can use <code class="docutils literal notranslate"><span class="pre">thinkplot.Hist</span></code>. Bar
-graphs are most useful if the number of values in the Pmf is small.</p></li>
-<li><p>To plot a Pmf as a step function, you can use <code class="docutils literal notranslate"><span class="pre">thinkplot.Pmf</span></code>. This
+<li><p>To plot a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> as a bar graph, you can use <code class="docutils literal notranslate"><span class="pre">thinkplot.hist</span></code>. Bar
+graphs are most useful if the number of values in the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> is small.</p></li>
+<li><p>To plot a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> as a step function, you can use <code class="docutils literal notranslate"><span class="pre">thinkplot.pmf</span></code>. This
 option is most useful if there are a large number of values and the
-Pmf is smooth. This function also works with Hist objects.</p></li>
+<code class="docutils literal notranslate"><span class="pre">Pmf</span></code> is smooth. This function also works with <code class="docutils literal notranslate"><span class="pre">Hist</span></code> objects.</p></li>
 </ul>
-<p>In addition, <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> provides a function called <code class="docutils literal notranslate"><span class="pre">hist</span></code> that takes a
-sequence of values, computes a histogram, and plots it. Since I use Hist
-objects, I usually don’t use <code class="docutils literal notranslate"><span class="pre">pyplot.hist</span></code>.</p>
-<p><img alt="PMF of pregnancy lengths for first babies and others, using bar graphsand step functions." src="figs/probability_nsfg_pmf.pdf" />{height=“3.0in”}</p>
-<p>Figure <a class="reference internal" href="#probability_nsfg_pmf"><span class="xref myst">[probability_nsfg_pmf]</span></a>{reference-type=“ref”
-reference=“probability_nsfg_pmf”} shows PMFs of pregnancy length for
-first babies and others using bar graphs (left) and step functions
-(right).</p>
-<p>By plotting the PMF instead of the histogram, we can compare the two
-distributions without being mislead by the difference in sample size.
-Based on this figure, first babies seem to be less likely than others to
-arrive on time (week 39) and more likely to be a late (weeks 41 and 42).</p>
-<p>Here’s the code that generates
-Figure <a class="reference internal" href="#probability_nsfg_pmf"><span class="xref myst">[probability_nsfg_pmf]</span></a>{reference-type=“ref”
-reference=“probability_nsfg_pmf”}:</p>
+<p>The following figure shows PMFs of pregnancy length for first babies and others using bar graphs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 104;
+                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nsfg</span>
@@ -716,7 +856,7 @@ reference=“probability_nsfg_pmf”}:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 11;
+                var nbb_cell_id = 105;
                 var nbb_unformatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()";
                 var nbb_formatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -733,17 +873,43 @@ reference=“probability_nsfg_pmf”}:</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_pmf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Pmf</span><span class="p">(</span><span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;firsts&quot;</span><span class="p">)</span>
-<span class="n">other_pmf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Pmf</span><span class="p">(</span><span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;others&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_pmf</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">firsts</span><span class="o">.</span><span class="n">prglngth</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;firsts&quot;</span><span class="p">)</span>
+<span class="n">other_pmf</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">others</span><span class="o">.</span><span class="n">prglngth</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;others&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 12;
-                var nbb_unformatted_code = "first_pmf = thinkstats2.Pmf(firsts.prglngth, label=\"firsts\")\nother_pmf = thinkstats2.Pmf(others.prglngth, label=\"others\")";
-                var nbb_formatted_code = "first_pmf = thinkstats2.Pmf(firsts.prglngth, label=\"firsts\")\nother_pmf = thinkstats2.Pmf(others.prglngth, label=\"others\")";
+                var nbb_cell_id = 107;
+                var nbb_unformatted_code = "first_pmf = Pmf.from_seq(firsts.prglngth, name=\"firsts\")\nother_pmf = Pmf.from_seq(others.prglngth, name=\"others\")";
+                var nbb_formatted_code = "first_pmf = Pmf.from_seq(firsts.prglngth, name=\"firsts\")\nother_pmf = Pmf.from_seq(others.prglngth, name=\"others\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pmf_bar_plots</span><span class="p">(</span><span class="n">pmf1</span><span class="p">,</span> <span class="n">pmf2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+    <span class="n">pmf1</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">align</span><span class="o">=</span><span class="s2">&quot;edge&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=-</span><span class="n">width</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+    <span class="n">pmf2</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">align</span><span class="o">=</span><span class="s2">&quot;edge&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 121;
+                var nbb_unformatted_code = "def plot_pmf_bars(pmf1, pmf2, width=0.45):  \n    pmf1.bar(align=\"edge\", width=-width)\n    pmf2.bar(align=\"edge\", width=width)";
+                var nbb_formatted_code = "def plot_pmf_bars(pmf1, pmf2, width=0.45):\n    pmf1.bar(align=\"edge\", width=-width)\n    pmf2.bar(align=\"edge\", width=width)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -761,28 +927,18 @@ reference=“probability_nsfg_pmf”}:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">thinkplot</span>
 
 <span class="n">width</span> <span class="o">=</span> <span class="mf">0.45</span>
-<span class="n">axis</span> <span class="o">=</span> <span class="p">[</span><span class="mi">27</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">first_pmf</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">other_pmf</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;weeks&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;probability&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">sub_plot</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">pmfs</span><span class="p">([</span><span class="n">first_pmf</span><span class="p">,</span> <span class="n">other_pmf</span><span class="p">])</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;weeks&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+<span class="n">pmf_bar_plots</span><span class="p">(</span><span class="n">first_pmf</span><span class="p">,</span> <span class="n">other_pmf</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;weeks&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;probability&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="mi">46</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/31ff8da2275e7527c0128901a93f35a4d964b41d4a5a3296fd86bebfedbb69cd.png" src="_images/31ff8da2275e7527c0128901a93f35a4d964b41d4a5a3296fd86bebfedbb69cd.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
-</pre></div>
-</div>
+<img alt="_images/b4e19656fc96a92b474f60331fe12295823ad2741ba0028ad5ad0ef7376e70e5.png" src="_images/b4e19656fc96a92b474f60331fe12295823ad2741ba0028ad5ad0ef7376e70e5.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 13;
-                var nbb_unformatted_code = "import thinkplot\n\nwidth = 0.45\naxis = [27, 46, 0, 0.6]\nthinkplot.pre_plot(2, cols=2)\nthinkplot.hist(first_pmf, align=\"right\", width=width)\nthinkplot.hist(other_pmf, align=\"left\", width=width)\nthinkplot.config(xlabel=\"weeks\", ylabel=\"probability\", axis=axis)\nthinkplot.pre_plot(2)\nthinkplot.sub_plot(2)\nthinkplot.pmfs([first_pmf, other_pmf])\nthinkplot.show(xlabel=\"weeks\", axis=axis)";
-                var nbb_formatted_code = "import thinkplot\n\nwidth = 0.45\naxis = [27, 46, 0, 0.6]\nthinkplot.pre_plot(2, cols=2)\nthinkplot.hist(first_pmf, align=\"right\", width=width)\nthinkplot.hist(other_pmf, align=\"left\", width=width)\nthinkplot.config(xlabel=\"weeks\", ylabel=\"probability\", axis=axis)\nthinkplot.pre_plot(2)\nthinkplot.sub_plot(2)\nthinkplot.pmfs([first_pmf, other_pmf])\nthinkplot.show(xlabel=\"weeks\", axis=axis)";
+                var nbb_cell_id = 129;
+                var nbb_unformatted_code = "import thinkplot\n\nwidth = 0.45\nplot_pmf_bars(first_pmf, other_pmf)\nthinkplot.config(xlabel=\"weeks\", ylabel=\"probability\", xlim=[24, 46])";
+                var nbb_formatted_code = "import thinkplot\n\nwidth = 0.45\nplot_pmf_bars(first_pmf, other_pmf)\nthinkplot.config(xlabel=\"weeks\", ylabel=\"probability\", xlim=[24, 46])";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -795,14 +951,38 @@ reference=“probability_nsfg_pmf”}:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">PrePlot</span></code> takes optional parameters <code class="docutils literal notranslate"><span class="pre">rows</span></code> and <code class="docutils literal notranslate"><span class="pre">cols</span></code> to make a grid of
-figures, in this case one row of two figures. The first figure (on the
-left) displays the Pmfs using <code class="docutils literal notranslate"><span class="pre">thinkplot.Hist</span></code>, as we have seen before.</p>
-<p>The second call to <code class="docutils literal notranslate"><span class="pre">PrePlot</span></code> resets the color generator. Then <code class="docutils literal notranslate"><span class="pre">SubPlot</span></code>
-switches to the second figure (on the right) and displays the Pmfs using
-<code class="docutils literal notranslate"><span class="pre">thinkplot.Pmfs</span></code>. I used the <code class="docutils literal notranslate"><span class="pre">axis</span></code> option to ensure that the two
-figures are on the same axes, which is generally a good idea if you
-intend to compare two figures.</p>
+<p>The following figure shows the same PMFs as step functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_pmf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">other_pmf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;weeks&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;probability&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="mi">46</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/38d343d5f97957f2df0667da74dda1ce8e3f6c0c3c0b42a1ea9011f243352c20.png" src="_images/38d343d5f97957f2df0667da74dda1ce8e3f6c0c3c0b42a1ea9011f243352c20.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 130;
+                var nbb_unformatted_code = "first_pmf.plot()\nother_pmf.plot()\nthinkplot.config(xlabel=\"weeks\", ylabel=\"probability\", xlim=[24, 46])";
+                var nbb_formatted_code = "first_pmf.plot()\nother_pmf.plot()\nthinkplot.config(xlabel=\"weeks\", ylabel=\"probability\", xlim=[24, 46])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>By plotting the PMF instead of the histogram, we can compare the two
+distributions without being mislead by the difference in sample size.
+Based on this figure, first babies seem to be less likely than others to
+arrive on time (week 39) and more likely to be late (weeks 41 and 42).</p>
 </section>
 <section id="other-visualizations">
 <h2>Other visualizations<a class="headerlink" href="#other-visualizations" title="Link to this heading">#</a></h2>
@@ -818,21 +998,22 @@ transform the data to emphasize differences:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weeks</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">46</span><span class="p">)</span>
 <span class="n">diffs</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">week</span> <span class="ow">in</span> <span class="n">weeks</span><span class="p">:</span>
-    <span class="n">p1</span> <span class="o">=</span> <span class="n">first_pmf</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">week</span><span class="p">)</span>
-    <span class="n">p2</span> <span class="o">=</span> <span class="n">other_pmf</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">week</span><span class="p">)</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">first_pmf</span><span class="p">(</span><span class="n">week</span><span class="p">)</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">other_pmf</span><span class="p">(</span><span class="n">week</span><span class="p">)</span>
     <span class="n">diff</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">p1</span> <span class="o">-</span> <span class="n">p2</span><span class="p">)</span>
     <span class="n">diffs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
 <span class="n">thinkplot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">weeks</span><span class="p">,</span> <span class="n">diffs</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Weeks&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Difference (percentage points)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ddf23c096af84c38d441b3db664e32e34405d2acc421ac87786201942bfec72d.png" src="_images/ddf23c096af84c38d441b3db664e32e34405d2acc421ac87786201942bfec72d.png" />
+<img alt="_images/aaee8b68cbe4c94ea1b2a80913b41660787d4ba4d2e8ef019d29c91f22a6c288.png" src="_images/aaee8b68cbe4c94ea1b2a80913b41660787d4ba4d2e8ef019d29c91f22a6c288.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 14;
-                var nbb_unformatted_code = "weeks = range(35, 46)\ndiffs = []\nfor week in weeks:\n    p1 = first_pmf.prob(week)\n    p2 = other_pmf.prob(week)\n    diff = 100 * (p1 - p2)\n    diffs.append(diff)\nthinkplot.bar(weeks, diffs)";
-                var nbb_formatted_code = "weeks = range(35, 46)\ndiffs = []\nfor week in weeks:\n    p1 = first_pmf.prob(week)\n    p2 = other_pmf.prob(week)\n    diff = 100 * (p1 - p2)\n    diffs.append(diff)\nthinkplot.bar(weeks, diffs)";
+                var nbb_cell_id = 112;
+                var nbb_unformatted_code = "weeks = range(35, 46)\ndiffs = []\nfor week in weeks:\n    p1 = first_pmf(week)\n    p2 = other_pmf(week)\n    diff = 100 * (p1 - p2)\n    diffs.append(diff)\nthinkplot.bar(weeks, diffs)\nthinkplot.config(xlabel=\"Weeks\", ylabel=\"Difference (percentage points)\")";
+                var nbb_formatted_code = "weeks = range(35, 46)\ndiffs = []\nfor week in weeks:\n    p1 = first_pmf(week)\n    p2 = other_pmf(week)\n    diff = 100 * (p1 - p2)\n    diffs.append(diff)\nthinkplot.bar(weeks, diffs)\nthinkplot.config(xlabel=\"Weeks\", ylabel=\"Difference (percentage points)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -847,12 +1028,10 @@ transform the data to emphasize differences:</p>
 </div>
 <p>In this code, <code class="docutils literal notranslate"><span class="pre">weeks</span></code> is the range of weeks; <code class="docutils literal notranslate"><span class="pre">diffs</span></code> is the difference
 between the two PMFs in percentage points.
-Figure <a class="reference internal" href="#probability_nsfg_diffs"><span class="xref myst">[probability_nsfg_diffs]</span></a>{reference-type=“ref”
-reference=“probability_nsfg_diffs”} shows the result as a bar chart.
+The following figure shows the result as a bar chart.
 This figure makes the pattern clearer: first babies are less likely to
 be born in week 39, and somewhat more likely to be born in weeks 41 and
 42.</p>
-<p><img alt="Difference, in percentage points, byweek." src="figs/probability_nsfg_diffs.pdf" />{height=“2.5in”}</p>
 <p>For now we should hold this conclusion only tentatively. We used the
 same dataset to identify an apparent difference and then chose a
 visualization that makes the difference apparent. We can’t be sure this
@@ -862,7 +1041,7 @@ concern later.</p>
 <section id="the-class-size-paradox">
 <h2>The class size paradox<a class="headerlink" href="#the-class-size-paradox" title="Link to this heading">#</a></h2>
 <p>Before we go on, I want to demonstrate one kind of computation you can
-do with Pmf objects; I call this example the “class size paradox.”</p>
+do with <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> objects; I call this example the “class size paradox.”</p>
 <p>At many American colleges and universities, the student-to-faculty ratio
 is about 10:1. But students are often surprised to discover that their
 average class size is bigger than 10. There are two reasons for the
@@ -882,21 +1061,22 @@ PMF, compute the mean, and report that the average class size is 23.7.
 Here’s the code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{(</span><span class="mi">7</span><span class="p">):</span> <span class="mi">8</span><span class="p">,</span> <span class="p">(</span><span class="mi">12</span><span class="p">):</span> <span class="mi">8</span><span class="p">,</span> <span class="p">(</span><span class="mi">17</span><span class="p">):</span> <span class="mi">14</span><span class="p">,</span> <span class="p">(</span><span class="mi">22</span><span class="p">):</span> <span class="mi">4</span><span class="p">,</span> <span class="p">(</span><span class="mi">27</span><span class="p">):</span> <span class="mi">6</span><span class="p">,</span> <span class="p">(</span><span class="mi">32</span><span class="p">):</span> <span class="mi">12</span><span class="p">,</span> <span class="p">(</span><span class="mi">37</span><span class="p">):</span> <span class="mi">8</span><span class="p">,</span> <span class="p">(</span><span class="mi">42</span><span class="p">):</span> <span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">47</span><span class="p">):</span> <span class="mi">2</span><span class="p">}</span>
-<span class="n">pmf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Pmf</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;actual&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">7</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">17</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">22</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">27</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">32</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">37</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">42</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">47</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+
+<span class="n">pmf</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;actual&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">pmf</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean 23.692307692307693
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean 7.222222222222221
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 15;
-                var nbb_unformatted_code = "d = {(7): 8, (12): 8, (17): 14, (22): 4, (27): 6, (32): 12, (37): 8, (42): 3, (47): 2}\npmf = thinkstats2.Pmf(d, label=\"actual\")\nprint(\"mean\", pmf.mean())";
-                var nbb_formatted_code = "d = {(7): 8, (12): 8, (17): 14, (22): 4, (27): 6, (32): 12, (37): 8, (42): 3, (47): 2}\npmf = thinkstats2.Pmf(d, label=\"actual\")\nprint(\"mean\", pmf.mean())";
+                var nbb_cell_id = 113;
+                var nbb_unformatted_code = "d = {7: 8, 12: 8, 17: 14, 22: 4, 27: 6, 32: 12, 37: 8, 42: 3, 47: 2}\n\npmf = Pmf.from_seq(d, name=\"actual\")\nprint(\"mean\", pmf.mean())";
+                var nbb_formatted_code = "d = {7: 8, 12: 8, 17: 14, 22: 4, 27: 6, 32: 12, 37: 8, 42: 3, 47: 2}\n\npmf = Pmf.from_seq(d, name=\"actual\")\nprint(\"mean\", pmf.mean())";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -917,10 +1097,12 @@ probability associated with each class size is “biased” by the number of
 students in the class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bias_pmf</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
-    <span class="n">new_pmf</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bias_pmf</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="n">new_pmf</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">new_pmf</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
     <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pmf</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">new_pmf</span><span class="o">.</span><span class="n">mult</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">new_pmf</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">*=</span> <span class="n">x</span>
     <span class="n">new_pmf</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">new_pmf</span>
 </pre></div>
@@ -929,9 +1111,9 @@ students in the class.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 16;
-                var nbb_unformatted_code = "def bias_pmf(pmf, label):\n    new_pmf = pmf.copy(label=label)\n    for x, p in pmf.items():\n        new_pmf.mult(x, x)\n    new_pmf.normalize()\n    return new_pmf";
-                var nbb_formatted_code = "def bias_pmf(pmf, label):\n    new_pmf = pmf.copy(label=label)\n    for x, p in pmf.items():\n        new_pmf.mult(x, x)\n    new_pmf.normalize()\n    return new_pmf";
+                var nbb_cell_id = 117;
+                var nbb_unformatted_code = "def bias_pmf(pmf, name):\n    new_pmf = pmf.copy()\n    new_pmf.name = name\n    \n    for x, p in pmf.items():\n        new_pmf[x] *= x\n    new_pmf.normalize()\n    return new_pmf";
+                var nbb_formatted_code = "def bias_pmf(pmf, name):\n    new_pmf = pmf.copy()\n    new_pmf.name = name\n\n    for x, p in pmf.items():\n        new_pmf[x] *= x\n    new_pmf.normalize()\n    return new_pmf";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -945,28 +1127,21 @@ students in the class.</p>
             </script></div>
 </div>
 <p>For each class size, <code class="docutils literal notranslate"><span class="pre">x</span></code>, we multiply the probability by <code class="docutils literal notranslate"><span class="pre">x</span></code>, the number
-of students who observe that class size. The result is a new Pmf that
+of students who observe that class size. The result is a new <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> that
 represents the biased distribution.</p>
 <p>Now we can plot the actual and observed distributions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biased_pmf</span> <span class="o">=</span> <span class="n">bias_pmf</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;observed&quot;</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">pmfs</span><span class="p">([</span><span class="n">pmf</span><span class="p">,</span> <span class="n">biased_pmf</span><span class="p">])</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;class size&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biased_pmf</span> <span class="o">=</span> <span class="n">bias_pmf</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;observed&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9f0ba880261675e5f2e6d68323bb087dc4a642ddc271f7a56baf7af0343b7215.png" src="_images/9f0ba880261675e5f2e6d68323bb087dc4a642ddc271f7a56baf7af0343b7215.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
-</pre></div>
-</div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 17;
-                var nbb_unformatted_code = "biased_pmf = bias_pmf(pmf, label=\"observed\")\nthinkplot.pre_plot(2)\nthinkplot.pmfs([pmf, biased_pmf])\nthinkplot.show(xlabel=\"class size\", ylabel=\"PMF\")";
-                var nbb_formatted_code = "biased_pmf = bias_pmf(pmf, label=\"observed\")\nthinkplot.pre_plot(2)\nthinkplot.pmfs([pmf, biased_pmf])\nthinkplot.show(xlabel=\"class size\", ylabel=\"PMF\")";
+                var nbb_cell_id = 118;
+                var nbb_unformatted_code = "biased_pmf = bias_pmf(pmf, name=\"observed\")";
+                var nbb_formatted_code = "biased_pmf = bias_pmf(pmf, name=\"observed\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -979,9 +1154,33 @@ represents the biased distribution.</p>
             }, 500);
             </script></div>
 </div>
-<p><img alt="Distribution of class sizes, actual and as observed bystudents." src="figs/class_size1.pdf" />{height=“3.0in”}</p>
-<p>Figure <a class="reference internal" href="#class_size1"><span class="xref myst">[class_size1]</span></a>{reference-type=“ref”
-reference=“class_size1”} shows the result. In the biased distribution
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_bar_plots</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">biased_pmf</span><span class="p">)</span>
+<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;class size&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6e893538899afdc887419bd6ed8e22584e3dcef5d5fb743c0cc789afd0d86ca9.png" src="_images/6e893538899afdc887419bd6ed8e22584e3dcef5d5fb743c0cc789afd0d86ca9.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 131;
+                var nbb_unformatted_code = "plot_pmf_bars(pmf, biased_pmf)\nthinkplot.config(xlabel=\"class size\", ylabel=\"PMF\")";
+                var nbb_formatted_code = "plot_pmf_bars(pmf, biased_pmf)\nthinkplot.config(xlabel=\"class size\", ylabel=\"PMF\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>The following figure shows the result. In the biased distribution
 there are fewer small classes and more large ones. The mean of the
 biased distribution is 29.1, almost 25% higher than the actual mean.</p>
 <p>It is also possible to invert this operation. Suppose you want to find
@@ -990,13 +1189,16 @@ data from the Dean. An alternative is to choose a random sample of
 students and ask how many students are in their classes.</p>
 <p>The result would be biased for the reasons we’ve just seen, but you can
 use it to estimate the actual distribution. Here’s the function that
-unbiases a Pmf:</p>
+unbiases a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">unbias_pmf</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
-    <span class="n">new_pmf</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">unbias_pmf</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="n">new_pmf</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">new_pmf</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
     <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pmf</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">new_pmf</span><span class="o">.</span><span class="n">mult</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">new_pmf</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">/=</span> <span class="n">x</span>
+
     <span class="n">new_pmf</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">new_pmf</span>
 </pre></div>
@@ -1005,9 +1207,9 @@ unbiases a Pmf:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 18;
-                var nbb_unformatted_code = "def unbias_pmf(pmf, label):\n    new_pmf = pmf.copy(label=label)\n    for x, p in pmf.items():\n        new_pmf.mult(x, 1.0 / x)\n    new_pmf.normalize()\n    return new_pmf";
-                var nbb_formatted_code = "def unbias_pmf(pmf, label):\n    new_pmf = pmf.copy(label=label)\n    for x, p in pmf.items():\n        new_pmf.mult(x, 1.0 / x)\n    new_pmf.normalize()\n    return new_pmf";
+                var nbb_cell_id = 132;
+                var nbb_unformatted_code = "def unbias_pmf(pmf, name):\n    new_pmf = pmf.copy()\n    new_pmf.name = name\n    \n    for x, p in pmf.items():\n        new_pmf[x] /= x\n        \n    new_pmf.normalize()\n    return new_pmf";
+                var nbb_formatted_code = "def unbias_pmf(pmf, name):\n    new_pmf = pmf.copy()\n    new_pmf.name = name\n\n    for x, p in pmf.items():\n        new_pmf[x] /= x\n\n    new_pmf.normalize()\n    return new_pmf";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1020,23 +1222,22 @@ unbiases a Pmf:</p>
             }, 500);
             </script></div>
 </div>
-<p>It’s similar to <code class="docutils literal notranslate"><span class="pre">BiasPmf</span></code>; the only difference is that it divides each
+<p>It’s similar to <code class="docutils literal notranslate"><span class="pre">unbias_pmf</span></code>; the only difference is that it divides each
 probability by <code class="docutils literal notranslate"><span class="pre">x</span></code> instead of multiplying.</p>
 </section>
 <section id="dataframe-indexing">
-<h2>DataFrame indexing<a class="headerlink" href="#dataframe-indexing" title="Link to this heading">#</a></h2>
-<p>In Section <a class="reference internal" href="#dataframe"><span class="xref myst">[dataframe]</span></a>{reference-type=“ref”
-reference=“dataframe”} we read a pandas DataFrame and used it to select
+<h2><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> indexing<a class="headerlink" href="#dataframe-indexing" title="Link to this heading">#</a></h2>
+<p>In Chapter 2 we read a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and used it to select
 and modify data columns. Now let’s look at row selection. To start, I
 create a NumPy array of random numbers and use it to initialize a
-DataFrame:</p>
+<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
 <span class="n">df</span>
 </pre></div>
 </div>
@@ -1067,31 +1268,31 @@ DataFrame:</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.590152</td>
-      <td>0.631478</td>
+      <td>0.202705</td>
+      <td>0.273752</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.361395</td>
-      <td>-0.355633</td>
+      <td>0.709769</td>
+      <td>0.235518</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>-0.551774</td>
-      <td>1.083907</td>
+      <td>0.208707</td>
+      <td>0.615890</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1.303805</td>
-      <td>-1.116402</td>
+      <td>0.041519</td>
+      <td>0.077236</td>
     </tr>
   </tbody>
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 19;
-                var nbb_unformatted_code = "import numpy as np\nimport pandas\n\narray = np.random.randn(4, 2)\ndf = pandas.DataFrame(array)\ndf";
-                var nbb_formatted_code = "import numpy as np\nimport pandas\n\narray = np.random.randn(4, 2)\ndf = pandas.DataFrame(array)\ndf";
+                var nbb_cell_id = 134;
+                var nbb_unformatted_code = "import numpy as np\nimport pandas as pd\n\narray = np.random.random((4, 2))\ndf = pd.DataFrame(array)\ndf";
+                var nbb_formatted_code = "import numpy as np\nimport pandas as pd\n\narray = np.random.random((4, 2))\ndf = pd.DataFrame(array)\ndf";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1109,7 +1310,7 @@ can provide column names:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">]</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
 <span class="n">df</span>
 </pre></div>
 </div>
@@ -1140,31 +1341,31 @@ can provide column names:</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.590152</td>
-      <td>0.631478</td>
+      <td>0.202705</td>
+      <td>0.273752</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.361395</td>
-      <td>-0.355633</td>
+      <td>0.709769</td>
+      <td>0.235518</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>-0.551774</td>
-      <td>1.083907</td>
+      <td>0.208707</td>
+      <td>0.615890</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1.303805</td>
-      <td>-1.116402</td>
+      <td>0.041519</td>
+      <td>0.077236</td>
     </tr>
   </tbody>
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 20;
-                var nbb_unformatted_code = "columns = [\"A\", \"B\"]\ndf = pandas.DataFrame(array, columns=columns)\ndf";
-                var nbb_formatted_code = "columns = [\"A\", \"B\"]\ndf = pandas.DataFrame(array, columns=columns)\ndf";
+                var nbb_cell_id = 135;
+                var nbb_unformatted_code = "columns = [\"A\", \"B\"]\ndf = pd.DataFrame(array, columns=columns)\ndf";
+                var nbb_formatted_code = "columns = [\"A\", \"B\"]\ndf = pd.DataFrame(array, columns=columns)\ndf";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1182,7 +1383,7 @@ can provide column names:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">]</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
 <span class="n">df</span>
 </pre></div>
 </div>
@@ -1213,31 +1414,31 @@ can provide column names:</p>
   <tbody>
     <tr>
       <th>a</th>
-      <td>0.590152</td>
-      <td>0.631478</td>
+      <td>0.202705</td>
+      <td>0.273752</td>
     </tr>
     <tr>
       <th>b</th>
-      <td>0.361395</td>
-      <td>-0.355633</td>
+      <td>0.709769</td>
+      <td>0.235518</td>
     </tr>
     <tr>
       <th>c</th>
-      <td>-0.551774</td>
-      <td>1.083907</td>
+      <td>0.208707</td>
+      <td>0.615890</td>
     </tr>
     <tr>
       <th>d</th>
-      <td>1.303805</td>
-      <td>-1.116402</td>
+      <td>0.041519</td>
+      <td>0.077236</td>
     </tr>
   </tbody>
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 21;
-                var nbb_unformatted_code = "index = [\"a\", \"b\", \"c\", \"d\"]\ndf = pandas.DataFrame(array, columns=columns, index=index)\ndf";
-                var nbb_formatted_code = "index = [\"a\", \"b\", \"c\", \"d\"]\ndf = pandas.DataFrame(array, columns=columns, index=index)\ndf";
+                var nbb_cell_id = 136;
+                var nbb_unformatted_code = "index = [\"a\", \"b\", \"c\", \"d\"]\ndf = pd.DataFrame(array, columns=columns, index=index)\ndf";
+                var nbb_formatted_code = "index = [\"a\", \"b\", \"c\", \"d\"]\ndf = pd.DataFrame(array, columns=columns, index=index)\ndf";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1251,7 +1452,7 @@ can provide column names:</p>
             </script></div>
 </div>
 <p>As we saw in the previous chapter, simple indexing selects a column,
-returning a Series:</p>
+returning a <code class="docutils literal notranslate"><span class="pre">Series</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
@@ -1259,16 +1460,16 @@ returning a Series:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a    0.590152
-b    0.361395
-c   -0.551774
-d    1.303805
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a    0.202705
+b    0.709769
+c    0.208707
+d    0.041519
 Name: A, dtype: float64
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 22;
+                var nbb_cell_id = 137;
                 var nbb_unformatted_code = "df[\"A\"]";
                 var nbb_formatted_code = "df[\"A\"]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1284,7 +1485,7 @@ Name: A, dtype: float64
             </script></div>
 </div>
 <p>To select a row by label, you can use the <code class="docutils literal notranslate"><span class="pre">loc</span></code> attribute, which returns
-a Series:</p>
+a <code class="docutils literal notranslate"><span class="pre">Series</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
@@ -1292,14 +1493,14 @@ a Series:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    0.590152
-B    0.631478
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    0.202705
+B    0.273752
 Name: a, dtype: float64
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 23;
+                var nbb_cell_id = 138;
                 var nbb_unformatted_code = "df.loc[\"a\"]";
                 var nbb_formatted_code = "df.loc[\"a\"]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1315,7 +1516,7 @@ Name: a, dtype: float64
             </script></div>
 </div>
 <p>If you know the integer position of a row, rather than its label, you
-can use the <code class="docutils literal notranslate"><span class="pre">iloc</span></code> attribute, which also returns a Series.</p>
+can use the <code class="docutils literal notranslate"><span class="pre">iloc</span></code> attribute, which also returns a <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1323,14 +1524,14 @@ can use the <code class="docutils literal notranslate"><span class="pre">iloc</s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    0.590152
-B    0.631478
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    0.202705
+B    0.273752
 Name: a, dtype: float64
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 24;
+                var nbb_cell_id = 140;
                 var nbb_unformatted_code = "df.iloc[0]";
                 var nbb_formatted_code = "df.iloc[0]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1346,7 +1547,7 @@ Name: a, dtype: float64
             </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">loc</span></code> can also take a list of labels; in that case, the result is a
-DataFrame.</p>
+<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
@@ -1380,19 +1581,19 @@ DataFrame.</p>
   <tbody>
     <tr>
       <th>a</th>
-      <td>0.590152</td>
-      <td>0.631478</td>
+      <td>0.202705</td>
+      <td>0.273752</td>
     </tr>
     <tr>
       <th>c</th>
-      <td>-0.551774</td>
-      <td>1.083907</td>
+      <td>0.208707</td>
+      <td>0.615890</td>
     </tr>
   </tbody>
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 25;
+                var nbb_cell_id = 141;
                 var nbb_unformatted_code = "indices = [\"a\", \"c\"]\ndf.loc[indices]";
                 var nbb_formatted_code = "indices = [\"a\", \"c\"]\ndf.loc[indices]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1440,24 +1641,24 @@ DataFrame.</p>
   <tbody>
     <tr>
       <th>a</th>
-      <td>0.590152</td>
-      <td>0.631478</td>
+      <td>0.202705</td>
+      <td>0.273752</td>
     </tr>
     <tr>
       <th>b</th>
-      <td>0.361395</td>
-      <td>-0.355633</td>
+      <td>0.709769</td>
+      <td>0.235518</td>
     </tr>
     <tr>
       <th>c</th>
-      <td>-0.551774</td>
-      <td>1.083907</td>
+      <td>0.208707</td>
+      <td>0.615890</td>
     </tr>
   </tbody>
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 26;
+                var nbb_cell_id = 142;
                 var nbb_unformatted_code = "df[\"a\":\"c\"]";
                 var nbb_formatted_code = "df[\"a\":\"c\"]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1505,19 +1706,19 @@ DataFrame.</p>
   <tbody>
     <tr>
       <th>a</th>
-      <td>0.590152</td>
-      <td>0.631478</td>
+      <td>0.202705</td>
+      <td>0.273752</td>
     </tr>
     <tr>
       <th>b</th>
-      <td>0.361395</td>
-      <td>-0.355633</td>
+      <td>0.709769</td>
+      <td>0.235518</td>
     </tr>
   </tbody>
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 27;
+                var nbb_cell_id = 143;
                 var nbb_unformatted_code = "df[0:2]";
                 var nbb_formatted_code = "df[0:2]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1532,88 +1733,10 @@ DataFrame.</p>
             }, 500);
             </script></div>
 </div>
-<p>The result in either case is a DataFrame, but notice that the first
+<p>The result in either case is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, but notice that the first
 result includes the end of the slice; the second doesn’t.</p>
 <p>My advice: if your rows have labels that are not simple integers, use
 the labels consistently and avoid using integer positions.</p>
-</section>
-<section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
-<p>Solutions to these exercises are in <code class="docutils literal notranslate"><span class="pre">chap03soln.ipynb</span></code> and
-<code class="docutils literal notranslate"><span class="pre">chap03soln.py</span></code></p>
-<section id="exercise">
-<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
-<p>Something like the class size paradox appears if you survey children and
-ask how many children are in their family. Families with many children
-are more likely to appear in your sample, and families with no children
-have no chance to be in the sample.</p>
-<p>Use the NSFG respondent variable <code class="docutils literal notranslate"><span class="pre">NUMKDHH</span></code> to construct the actual
-distribution for the number of children under 18 in the household.</p>
-<p>Now compute the biased distribution we would see if we surveyed the
-children and asked them how many children under 18 (including
-themselves) are in their household.</p>
-<p>Plot the actual and biased distributions, and compute their means. As a
-starting place, you can use <code class="docutils literal notranslate"><span class="pre">chap03ex.ipynb</span></code>.</p>
-</section>
-<section id="id1">
-<h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
-<p>In Section <a class="reference internal" href="#mean"><span class="xref myst">[mean]</span></a>{reference-type=“ref” reference=“mean”} we
-computed the mean of a sample by adding up the elements and dividing by
-n. If you are given a PMF, you can still compute the mean, but the
-process is slightly different: $<span class="math notranslate nohighlight">\(\xbar = \sum_i p_i~x_i\)</span><span class="math notranslate nohighlight">\( where the
-\)</span>x_i<span class="math notranslate nohighlight">\( are the unique values in the PMF and \)</span>p_i=PMF(x_i)<span class="math notranslate nohighlight">\(. Similarly,
-you can compute variance like this: \)</span><span class="math notranslate nohighlight">\(S^2 = \sum_i p_i~(x_i - \xbar)^2\)</span>$
-Write functions called <code class="docutils literal notranslate"><span class="pre">PmfMean</span></code> and <code class="docutils literal notranslate"><span class="pre">PmfVar</span></code> that take a Pmf object and
-compute the mean and variance. To test these methods, check that they
-are consistent with the methods <code class="docutils literal notranslate"><span class="pre">Mean</span></code> and <code class="docutils literal notranslate"><span class="pre">Var</span></code> provided by Pmf.</p>
-</section>
-<section id="id2">
-<h3>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<p>I started with the question, “Are first babies more likely to be late?”
-To address it, I computed the difference in means between groups of
-babies, but I ignored the possibility that there might be a difference
-between first babies and others <em>for the same woman</em>.</p>
-<p>To address this version of the question, select respondents who have at
-least two babies and compute pairwise differences. Does this formulation
-of the question yield a different result?</p>
-<p>Hint: use <code class="docutils literal notranslate"><span class="pre">nsfg.MakePregMap</span></code>.</p>
-</section>
-<section id="id3">
-<h3>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
-<p>In most foot races, everyone starts at the same time. If you are a fast
-runner, you usually pass a lot of people at the beginning of the race,
-but after a few miles everyone around you is going at the same speed.</p>
-<p>When I ran a long-distance (209 miles) relay race for the first time, I
-noticed an odd phenomenon: when I overtook another runner, I was usually
-much faster, and when another runner overtook me, he was usually much
-faster.</p>
-<p>At first I thought that the distribution of speeds might be bimodal;
-that is, there were many slow runners and many fast runners, but few at
-my speed.</p>
-<p>Then I realized that I was the victim of a bias similar to the effect of
-class size. The race was unusual in two ways: it used a staggered start,
-so teams started at different times; also, many teams included runners
-at different levels of ability.</p>
-<p>As a result, runners were spread out along the course with little
-relationship between speed and location. When I joined the race, the
-runners near me were (pretty much) a random sample of the runners in the
-race.</p>
-<p>So where does the bias come from? During my time on the course, the
-chance of overtaking a runner, or being overtaken, is proportional to
-the difference in our speeds. I am more likely to catch a slow runner,
-and more likely to be caught by a fast runner. But runners at the same
-speed are unlikely to see each other.</p>
-<p>Write a function called <code class="docutils literal notranslate"><span class="pre">ObservedPmf</span></code> that takes a Pmf representing the
-actual distribution of runners’ speeds, and the speed of a running
-observer, and returns a new Pmf representing the distribution of
-runners’ speeds as seen by the observer.</p>
-<p>To test your function, you can use <code class="docutils literal notranslate"><span class="pre">relay.py</span></code>, which reads the results
-from the James Joyce Ramble 10K in Dedham MA and converts the pace of
-each runner to mph.</p>
-<p>Compute the distribution of speeds you would observe if you ran a relay
-race at 7.5 mph with this group of runners. A solution to this exercise
-is in <code class="docutils literal notranslate"><span class="pre">relay_soln.py</span></code>.</p>
-</section>
 </section>
 <section id="glossary">
 <h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
@@ -1624,13 +1747,13 @@ distribution as a function that maps from values to probabilities.</p></li>
 size.</p></li>
 <li><p><strong>normalization</strong>: The process of dividing a frequency by a sample
 size to get a probability.</p></li>
-<li><p><strong>index</strong>: In a pandas DataFrame, the index is a special column that
+<li><p><strong>index</strong>: In a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, the index is a special column that
 contains the row labels.</p></li>
 </ul>
 </section>
-<section id="id4">
-<h2>Exercises<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
-<p><strong>Exercise:</strong> In Chapter 3 we computed the mean of a sample by adding up
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong> In Section XXX we computed the mean of a sample by adding up
 the elements and dividing by n.  If you are given a PMF, you can
 still compute the mean, but the process is slightly different:</p>
 <div class="math notranslate nohighlight">
@@ -1639,59 +1762,26 @@ still compute the mean, but the process is slightly different:</p>
 Similarly, you can compute variance like this:</p>
 <div class="math notranslate nohighlight">
 \[ S^2 = \sum_i p_i~(x_i - \bar x)^2 \]</div>
-<p>Write functions called <code class="docutils literal notranslate"><span class="pre">PmfMean</span></code> and <code class="docutils literal notranslate"><span class="pre">PmfVar</span></code> that take a
-Pmf object and compute the mean and variance.  To test these methods,
-check that they are consistent with the methods <code class="docutils literal notranslate"><span class="pre">Mean</span></code> and <code class="docutils literal notranslate"><span class="pre">Var</span></code>
+<p>Write functions called <code class="docutils literal notranslate"><span class="pre">pmf_mean</span></code> and <code class="docutils literal notranslate"><span class="pre">pmf_var</span></code> that take a
+<code class="docutils literal notranslate"><span class="pre">Pmf</span></code> object and compute the mean and variance.  To test these methods,
+check that they are consistent with the methods <code class="docutils literal notranslate"><span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">var</span></code>
 provided by <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pmf_mean</span><span class="p">(</span><span class="n">pmf</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the mean of a PMF.</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        float mean</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pmf</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">pmf</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">pmf</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 28;
-                var nbb_unformatted_code = "def pmf_mean(pmf):\n    \"\"\"Computes the mean of a PMF.\n    Returns:\n        float mean\n    \"\"\"\n    return sum(p * x for x, p in pmf.items())";
-                var nbb_formatted_code = "def pmf_mean(pmf):\n    \"\"\"Computes the mean of a PMF.\n    Returns:\n        float mean\n    \"\"\"\n    return sum(p * x for x, p in pmf.items())";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pmf_var</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the variance of a PMF.</span>
-<span class="sd">    mu: the point around which the variance is computed;</span>
-<span class="sd">            if omitted, computes the mean</span>
-<span class="sd">    returns: float variance</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">mu</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">mu</span> <span class="o">=</span> <span class="n">pmf_mean</span><span class="p">(</span><span class="n">pmf</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pmf</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.6, 1.84)
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 29;
-                var nbb_unformatted_code = "def pmf_var(pmf, mu=None):\n    \"\"\"Computes the variance of a PMF.\n    mu: the point around which the variance is computed;\n            if omitted, computes the mean\n    returns: float variance\n    \"\"\"\n    if mu is None:\n        mu = pmf_mean(pmf)\n    return sum(p * (x - mu) ** 2 for x, p in pmf.items())";
-                var nbb_formatted_code = "def pmf_var(pmf, mu=None):\n    \"\"\"Computes the variance of a PMF.\n    mu: the point around which the variance is computed;\n            if omitted, computes the mean\n    returns: float variance\n    \"\"\"\n    if mu is None:\n        mu = pmf_mean(pmf)\n    return sum(p * (x - mu) ** 2 for x, p in pmf.items())";
+                var nbb_cell_id = 150;
+                var nbb_unformatted_code = "pmf = Pmf.from_seq([1, 2, 2, 3, 5])\npmf.mean(), pmf.var()";
+                var nbb_formatted_code = "pmf = Pmf.from_seq([1, 2, 2, 3, 5])\npmf.mean(), pmf.var()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1710,19 +1800,17 @@ provided by <code class="docutils literal notranslate"><span class="pre">Pmf</sp
 <p>Plot the actual and biased distributions, and compute their means.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/2002FemResp.dct&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span>
-    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/2002FemResp.dat.gz&quot;</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dct&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dat.gz&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 30;
-                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dct\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dat.gz\"\n)";
-                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dct\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemResp.dat.gz\"\n)";
+                var nbb_cell_id = 153;
+                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dat.gz\")";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dat.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1744,7 +1832,7 @@ provided by <code class="docutils literal notranslate"><span class="pre">Pmf</sp
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 31;
+                var nbb_cell_id = 154;
                 var nbb_unformatted_code = "resp = nsfg.read_fem_resp()";
                 var nbb_formatted_code = "resp = nsfg.read_fem_resp()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1759,164 +1847,8 @@ provided by <code class="docutils literal notranslate"><span class="pre">Pmf</sp
             }, 500);
             </script></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Pmf</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">numkdhh</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;numkdhh&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 32;
-                var nbb_unformatted_code = "pmf = thinkstats2.Pmf(resp.numkdhh, label=\"numkdhh\")";
-                var nbb_formatted_code = "pmf = thinkstats2.Pmf(resp.numkdhh, label=\"numkdhh\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">pmf</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Number of children&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/076761528ba46b890952416cf2e1c670d96cfaa68579dffd794d4b8505c5b4e0.png" src="_images/076761528ba46b890952416cf2e1c670d96cfaa68579dffd794d4b8505c5b4e0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 33;
-                var nbb_unformatted_code = "thinkplot.pmf(pmf)\nthinkplot.config(xlabel=\"Number of children\", ylabel=\"PMF\")";
-                var nbb_formatted_code = "thinkplot.pmf(pmf)\nthinkplot.config(xlabel=\"Number of children\", ylabel=\"PMF\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biased</span> <span class="o">=</span> <span class="n">bias_pmf</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;biased&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 34;
-                var nbb_unformatted_code = "biased = bias_pmf(pmf, label=\"biased\")";
-                var nbb_formatted_code = "biased = bias_pmf(pmf, label=\"biased\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">pre_plot</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">pmfs</span><span class="p">([</span><span class="n">pmf</span><span class="p">,</span> <span class="n">biased</span><span class="p">])</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Number of children&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/281d7231deb4adf6dfa54db69f47df3d0952c8e5d680f4ecd21b32388c2cfd63.png" src="_images/281d7231deb4adf6dfa54db69f47df3d0952c8e5d680f4ecd21b32388c2cfd63.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 35;
-                var nbb_unformatted_code = "thinkplot.pre_plot(2)\nthinkplot.pmfs([pmf, biased])\nthinkplot.config(xlabel=\"Number of children\", ylabel=\"PMF\")";
-                var nbb_formatted_code = "thinkplot.pre_plot(2)\nthinkplot.pmfs([pmf, biased])\nthinkplot.config(xlabel=\"Number of children\", ylabel=\"PMF\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.024205155043831
-</pre></div>
-</div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 36;
-                var nbb_unformatted_code = "pmf.mean()";
-                var nbb_formatted_code = "pmf.mean()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biased</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.403679100664282
-</pre></div>
-</div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 37;
-                var nbb_unformatted_code = "biased.mean()";
-                var nbb_formatted_code = "biased.mean()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
 <p><strong>Exercise:</strong> I started this book with the question, “Are first babies more likely to be late?” To address it, I computed the difference in means between groups of babies, but I ignored the possibility that there might be a difference between first babies and others for the same woman.</p>
 <p>To address this version of the question, select respondents who have at least two live births and compute pairwise differences. Does this formulation of the question yield a different result?</p>
-<p>Hint: use <code class="docutils literal notranslate"><span class="pre">nsfg.MakePregMap</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">make_frames</span><span class="p">()</span>
@@ -1926,7 +1858,7 @@ provided by <code class="docutils literal notranslate"><span class="pre">Pmf</sp
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 38;
+                var nbb_cell_id = 163;
                 var nbb_unformatted_code = "live, firsts, others = nsfg.make_frames()";
                 var nbb_formatted_code = "live, firsts, others = nsfg.make_frames()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1950,91 +1882,9 @@ provided by <code class="docutils literal notranslate"><span class="pre">Pmf</sp
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 39;
+                var nbb_cell_id = 164;
                 var nbb_unformatted_code = "preg_map = nsfg.make_preg_map(live)";
                 var nbb_formatted_code = "preg_map = nsfg.make_preg_map(live)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Hist</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">caseid</span><span class="p">,</span> <span class="n">indices</span> <span class="ow">in</span> <span class="n">preg_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">pair</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]]</span><span class="o">.</span><span class="n">prglngth</span>
-        <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">pair</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">hist</span><span class="p">[</span><span class="n">diff</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 40;
-                var nbb_unformatted_code = "hist = thinkstats2.Hist()\nfor caseid, indices in preg_map.items():\n    if len(indices) >= 2:\n        pair = live.loc[indices[0:2]].prglngth\n        diff = np.diff(pair)[0]\n        hist[diff] += 1";
-                var nbb_formatted_code = "hist = thinkstats2.Hist()\nfor caseid, indices in preg_map.items():\n    if len(indices) >= 2:\n        pair = live.loc[indices[0:2]].prglngth\n        diff = np.diff(pair)[0]\n        hist[diff] += 1";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/8a244f70be245f86fb94f7bfe76f924fa653e70f085d03fef1723686c44c4c24.png" src="_images/8a244f70be245f86fb94f7bfe76f924fa653e70f085d03fef1723686c44c4c24.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 41;
-                var nbb_unformatted_code = "thinkplot.hist(hist)";
-                var nbb_formatted_code = "thinkplot.hist(hist)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Pmf</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
-<span class="n">pmf</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.056367432150313125
-</pre></div>
-</div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 42;
-                var nbb_unformatted_code = "pmf = thinkstats2.Pmf(hist)\npmf.mean()";
-                var nbb_formatted_code = "pmf = thinkstats2.Pmf(hist)\npmf.mean()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2054,13 +1904,13 @@ When I ran a long-distance (209 miles) relay race for the first time, I noticed 
 <p>As a result, runners were spread out along the course with little relationship between speed and location. When I joined the race, the runners near me were (pretty much) a random sample of the runners in the race.</p>
 <p>So where does the bias come from? During my time on the course, the chance of overtaking a runner, or being overtaken, is proportional to the difference in our speeds. I am more likely to catch a slow runner, and more likely to be caught by a fast runner. But runners at the same speed are unlikely to see each other.</p>
 <p>Write a function called <code class="docutils literal notranslate"><span class="pre">ObservedPmf</span></code> that takes a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> representing the actual distribution of runners’ speeds, and the speed of a running observer, and returns a new <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> representing the distribution of runners’ speeds as seen by the observer.</p>
-<p>To test your function, you can use <code class="docutils literal notranslate"><span class="pre">relay.py</span></code>, which reads the results from the James Joyce Ramble 10K in Dedham MA and converts the pace of each runner to mph.</p>
+<p>To test your function, you can use <code class="docutils literal notranslate"><span class="pre">relay.py</span></code>, which reads the results from the James Joyce Ramble 10K in Dedham, Massachusetts and converts the pace of each runner to mph.</p>
 <p>Compute the distribution of speeds you would observe if you ran a relay race at 7 mph with this group of runners.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/relay.py&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span>
-    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/Apr25_27thAn_set1.shtml&quot;</span>
+    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/Apr25_27thAn_set1.shtml&quot;</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -2068,9 +1918,9 @@ When I ran a long-distance (209 miles) relay race for the first time, I noticed 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 43;
-                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/relay.py\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/Apr25_27thAn_set1.shtml\"\n)";
-                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/relay.py\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/Apr25_27thAn_set1.shtml\"\n)";
+                var nbb_cell_id = 168;
+                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/relay.py\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats/raw/v3/data/Apr25_27thAn_set1.shtml\"\n)";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/relay.py\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats/raw/v3/data/Apr25_27thAn_set1.shtml\"\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2096,106 +1946,9 @@ When I ran a long-distance (209 miles) relay race for the first time, I noticed 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 44;
+                var nbb_cell_id = 169;
                 var nbb_unformatted_code = "import relay\n\nresults = relay.read_results()\nspeeds = relay.get_speeds(results)\nspeeds = relay.bin_data(speeds, 3, 12, 100)";
                 var nbb_formatted_code = "import relay\n\nresults = relay.read_results()\nspeeds = relay.get_speeds(results)\nspeeds = relay.bin_data(speeds, 3, 12, 100)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Pmf</span><span class="p">(</span><span class="n">speeds</span><span class="p">,</span> <span class="s2">&quot;actual speeds&quot;</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">pmf</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Speed (mph)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/805286096c5f1031192633f5e4752a86dde29826436f2d7715ab8a867a0017ff.png" src="_images/805286096c5f1031192633f5e4752a86dde29826436f2d7715ab8a867a0017ff.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 45;
-                var nbb_unformatted_code = "pmf = thinkstats2.Pmf(speeds, \"actual speeds\")\nthinkplot.pmf(pmf)\nthinkplot.config(xlabel=\"Speed (mph)\", ylabel=\"PMF\")";
-                var nbb_formatted_code = "pmf = thinkstats2.Pmf(speeds, \"actual speeds\")\nthinkplot.pmf(pmf)\nthinkplot.config(xlabel=\"Speed (mph)\", ylabel=\"PMF\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">observed_pmf</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a new Pmf representing speeds observed at a given speed.</span>
-
-<span class="sd">    The chance of observing a runner is proportional to the difference</span>
-<span class="sd">    in speed.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        pmf: distribution of actual speeds</span>
-<span class="sd">        speed: speed of the observing runner</span>
-<span class="sd">        label: string label for the new dist</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Pmf object</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">new</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">new</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="n">speed</span><span class="p">)</span>
-        <span class="n">new</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">*=</span> <span class="n">diff</span>
-    <span class="n">new</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">new</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 46;
-                var nbb_unformatted_code = "def observed_pmf(pmf, speed, label=None):\n    \"\"\"Returns a new Pmf representing speeds observed at a given speed.\n\n    The chance of observing a runner is proportional to the difference\n    in speed.\n\n    Args:\n        pmf: distribution of actual speeds\n        speed: speed of the observing runner\n        label: string label for the new dist\n\n    Returns:\n        Pmf object\n    \"\"\"\n    new = pmf.copy(label=label)\n    for val in new.values():\n        diff = abs(val - speed)\n        new[val] *= diff\n    new.normalize()\n    return new";
-                var nbb_formatted_code = "def observed_pmf(pmf, speed, label=None):\n    \"\"\"Returns a new Pmf representing speeds observed at a given speed.\n\n    The chance of observing a runner is proportional to the difference\n    in speed.\n\n    Args:\n        pmf: distribution of actual speeds\n        speed: speed of the observing runner\n        label: string label for the new dist\n\n    Returns:\n        Pmf object\n    \"\"\"\n    new = pmf.copy(label=label)\n    for val in new.values():\n        diff = abs(val - speed)\n        new[val] *= diff\n    new.normalize()\n    return new";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biased</span> <span class="o">=</span> <span class="n">observed_pmf</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;observed speeds&quot;</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">biased</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Speed (mph)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/92b3b75595fbb351eca9f2b90cdd406171123c9e1b49d12b7b7cc3fe8bdbb70a.png" src="_images/92b3b75595fbb351eca9f2b90cdd406171123c9e1b49d12b7b7cc3fe8bdbb70a.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 47;
-                var nbb_unformatted_code = "biased = observed_pmf(pmf, 7, label=\"observed speeds\")\nthinkplot.pmf(biased)\nthinkplot.config(xlabel=\"Speed (mph)\", ylabel=\"PMF\")";
-                var nbb_formatted_code = "biased = observed_pmf(pmf, 7, label=\"observed speeds\")\nthinkplot.pmf(biased)\nthinkplot.config(xlabel=\"Speed (mph)\", ylabel=\"PMF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2275,20 +2028,13 @@ When I ran a long-distance (209 miles) relay race for the first time, I noticed 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pmfs">Pmfs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pmfs"><code class="docutils literal notranslate"><span class="pre">Pmf</span></code>s</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-pmfs">Plotting PMFs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-visualizations">Other visualizations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-class-size-paradox">The class size paradox</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-indexing">DataFrame indexing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-indexing"><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> indexing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
   </nav></div>
 

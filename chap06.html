@@ -357,12 +357,15 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation">Kernel density estimation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-distribution-framework">The distribution framework</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hist-implementation">Hist implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pmf-implementation">Pmf implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-implementation">Cdf implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pmf-implementation"><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-implementation"><code class="docutils literal notranslate"><span class="pre">Cdf</span></code> implementation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moments">Moments</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skewness">Skewness</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -395,7 +398,7 @@ document.write(`
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
 
 
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats2.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -404,8 +407,8 @@ document.write(`
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 2;
-                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n        local, _ = urlretrieve(url, filename)\n        print('Downloaded ' + local)\n\n\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py')";
-                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py\")";
+                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py\")";
+                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -422,8 +425,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">thinkstats2</span>
-<span class="kn">import</span> <span class="nn">thinkplot</span>
+<span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">decorate</span>
 </pre></div>
 </div>
 </div>
@@ -431,8 +433,8 @@ document.write(`
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 3;
-                var nbb_unformatted_code = "import numpy as np\nimport thinkstats2\nimport thinkplot";
-                var nbb_formatted_code = "import numpy as np\nimport thinkstats2\nimport thinkplot";
+                var nbb_unformatted_code = "import numpy as np\nfrom thinkstats import decorate";
+                var nbb_formatted_code = "import numpy as np\nfrom thinkstats import decorate";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -461,43 +463,28 @@ you have to multiply by volume or, if the density is not constant, you
 have to integrate over volume.</p>
 <p>Similarly, <strong>probability density</strong> measures probability per unit of <span class="math notranslate nohighlight">\(x\)</span>.
 In order to get a probability mass, you have to integrate over <span class="math notranslate nohighlight">\(x\)</span>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides a class called Pdf that represents a probability
-density function. Every Pdf object provides the following methods:</p>
+<p><code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides a class called <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> that represents a probability
+density function. Every <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> object provides the following methods:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Density</span></code>, which takes a value, <code class="docutils literal notranslate"><span class="pre">x</span></code>, and returns the density of the
+<li><p><code class="docutils literal notranslate"><span class="pre">density</span></code>, which takes a value, <code class="docutils literal notranslate"><span class="pre">x</span></code>, and returns the density of the
 distribution at <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Render</span></code>, which evaluates the density at a discrete set of values
+<li><p><code class="docutils literal notranslate"><span class="pre">render</span></code>, which evaluates the density at a discrete set of values
 and returns a pair of sequences: the sorted values, <code class="docutils literal notranslate"><span class="pre">xs</span></code>, and their
 probability densities, <code class="docutils literal notranslate"><span class="pre">ds</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MakePmf</span></code>, which evaluates <code class="docutils literal notranslate"><span class="pre">Density</span></code> at a discrete set of values and
-returns a normalized Pmf that approximates the Pdf.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">GetLinspace</span></code>, which returns the default set of points used by
-<code class="docutils literal notranslate"><span class="pre">Render</span></code> and <code class="docutils literal notranslate"><span class="pre">MakePmf</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make_pmf</span></code>, which evaluates <code class="docutils literal notranslate"><span class="pre">Density</span></code> at a discrete set of values and
+returns a normalized <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> that approximates the Pdf.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_linspace</span></code>, which returns the default set of points used by
+<code class="docutils literal notranslate"><span class="pre">render</span></code> and <code class="docutils literal notranslate"><span class="pre">make_pmf</span></code>.</p></li>
 </ul>
-<p>Pdf is an abstract parent class, which means you should not instantiate
-it; that is, you cannot create a Pdf object. Instead, you should define
-a child class that inherits from Pdf and provides definitions of
-<code class="docutils literal notranslate"><span class="pre">Density</span></code> and <code class="docutils literal notranslate"><span class="pre">GetLinspace</span></code>. Pdf provides <code class="docutils literal notranslate"><span class="pre">Render</span></code> and <code class="docutils literal notranslate"><span class="pre">MakePmf</span></code>.</p>
-<p>For example, <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides a class named <code class="docutils literal notranslate"><span class="pre">NormalPdf</span></code> that
+<p><code class="docutils literal notranslate"><span class="pre">Pdf</span></code> is an abstract parent class, which means you should not instantiate
+it; that is, you cannot create a <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> object. Instead, you should define
+a child class that inherits from <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> and provides definitions of
+<code class="docutils literal notranslate"><span class="pre">density</span></code> and <code class="docutils literal notranslate"><span class="pre">get_linspace</span></code>. <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> provides <code class="docutils literal notranslate"><span class="pre">render</span></code> and <code class="docutils literal notranslate"><span class="pre">make_pdf</span></code>.</p>
+<p>For example, here’s a class named <code class="docutils literal notranslate"><span class="pre">NormalPdf</span></code> that
 evaluates the normal density function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats2</span> <span class="kn">import</span> <span class="n">Pdf</span>
-
-
-<span class="k">class</span> <span class="nc">NormalPdf</span><span class="p">(</span><span class="n">Pdf</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
-
-    <span class="k">def</span> <span class="nf">density</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">get_linspace</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">NormalPdf</span>
 </pre></div>
 </div>
 </div>
@@ -505,8 +492,8 @@ evaluates the normal density function.</p>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 4;
-                var nbb_unformatted_code = "from thinkstats2 import Pdf\n\n\nclass NormalPdf(Pdf):\n\n    def __init__(self, mu=0, sigma=1, label=''):\n        self.mu = mu\n        self.sigma = sigma\n        self.label = label\n\n    def density(self, xs):\n        return scipy.stats.norm.pdf(xs, self.mu, self.sigma)\n\n    def get_linspace(self):\n        low, high = self.mu - 3 * self.sigma, self.mu + 3 * self.sigma\n        return np.linspace(low, high, 101)";
-                var nbb_formatted_code = "from thinkstats2 import Pdf\n\n\nclass NormalPdf(Pdf):\n\n    def __init__(self, mu=0, sigma=1, label=\"\"):\n        self.mu = mu\n        self.sigma = sigma\n        self.label = label\n\n    def density(self, xs):\n        return scipy.stats.norm.pdf(xs, self.mu, self.sigma)\n\n    def get_linspace(self):\n        low, high = self.mu - 3 * self.sigma, self.mu + 3 * self.sigma\n        return np.linspace(low, high, 101)";
+                var nbb_unformatted_code = "from thinkstats import NormalPdf";
+                var nbb_formatted_code = "from thinkstats import NormalPdf";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -531,7 +518,7 @@ standard deviation from the mean.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/brfss.py&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/CDBRFS08.ASC.gz&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -539,8 +526,8 @@ standard deviation from the mean.</p>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 5;
-                var nbb_unformatted_code = "download('https://github.com/AllenDowney/ThinkStats2/raw/master/code/brfss.py')\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/CDBRFS08.ASC.gz'\n    )";
-                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/brfss.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/CDBRFS08.ASC.gz\")";
+                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/brfss.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/brfss.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -565,7 +552,7 @@ standard deviation from the mean.</p>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 6;
-                var nbb_unformatted_code = "import brfss\ndf = brfss.read_brfss(nrows=None)";
+                var nbb_unformatted_code = "import brfss\n\ndf = brfss.read_brfss(nrows=None)";
                 var nbb_formatted_code = "import brfss\n\ndf = brfss.read_brfss(nrows=None)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -594,7 +581,7 @@ standard deviation from the mean.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 7;
+                var nbb_cell_id = 49;
                 var nbb_unformatted_code = "female = df[df.sex == 2]\nfemale_heights = female.htm3.dropna()\nmean, std = female_heights.mean(), female_heights.std()\nmean, std";
                 var nbb_formatted_code = "female = df[df.sex == 2]\nfemale_heights = female.htm3.dropna()\nmean, std = female_heights.mean(), female_heights.std()\nmean, std";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -611,7 +598,7 @@ standard deviation from the mean.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">NormalPdf</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pdf</span> <span class="o">=</span> <span class="n">NormalPdf</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
 <span class="n">pdf</span><span class="o">.</span><span class="n">density</span><span class="p">(</span><span class="n">mean</span> <span class="o">+</span> <span class="n">std</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -622,9 +609,9 @@ standard deviation from the mean.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "pdf = thinkstats2.NormalPdf(mean, std)\npdf.density(mean + std)";
-                var nbb_formatted_code = "pdf = thinkstats2.NormalPdf(mean, std)\npdf.density(mean + std)";
+                var nbb_cell_id = 50;
+                var nbb_unformatted_code = "pdf = NormalPdf(mean, std)\npdf.density(mean + std)";
+                var nbb_formatted_code = "pdf = NormalPdf(mean, std)\npdf.density(mean + std)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -642,21 +629,18 @@ probability density doesn’t mean much by itself. But if we plot the Pdf,
 we can see the shape of the distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thinkplot</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;height (cm)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4e2e32a478c2890703887a400acc68c80608d2aae2d8cb7fcd587fd564c61762.png" src="_images/4e2e32a478c2890703887a400acc68c80608d2aae2d8cb7fcd587fd564c61762.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x600 with 0 Axes&gt;
-</pre></div>
-</div>
+<img alt="_images/7e3b3d6d004a06c8809ebd1722ad0fe242f046a639aa13ce92b7e10ec216199c.png" src="_images/7e3b3d6d004a06c8809ebd1722ad0fe242f046a639aa13ce92b7e10ec216199c.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "thinkplot.pdf(pdf, label='normal')\nthinkplot.show()";
-                var nbb_formatted_code = "thinkplot.pdf(pdf, label=\"normal\")\nthinkplot.show()";
+                var nbb_cell_id = 52;
+                var nbb_unformatted_code = "pdf.plot()\ndecorate(xlabel=\"height (cm)\", ylabel=\"density\")";
+                var nbb_formatted_code = "pdf.plot()\ndecorate(xlabel=\"height (cm)\", ylabel=\"density\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -669,38 +653,12 @@ we can see the shape of the distribution:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">thinkplot.Pdf</span></code> plots the Pdf as a smooth function, as contrasted with
-<code class="docutils literal notranslate"><span class="pre">thinkplot.Pmf</span></code>, which renders a Pmf as a step function.
-Figure <a class="reference internal" href="#pdf_example"><span class="xref myst">[pdf_example]</span></a>{reference-type=“ref”
-reference=“pdf_example”} shows the result, as well as a PDF estimated
+<p><code class="docutils literal notranslate"><span class="pre">thinkplot.Pdf</span></code> plots the <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> as a smooth function, as contrasted with
+<code class="docutils literal notranslate"><span class="pre">thinkplot.Pmf</span></code>, which renders a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> as a step function.
+The following figure shows the result, as well as a PDF estimated
 from a sample, which we’ll compute in the next section.</p>
-<p>You can use <code class="docutils literal notranslate"><span class="pre">MakePmf</span></code> to approximate the Pdf:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">pdf</span><span class="o">.</span><span class="n">make_pmf</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 10;
-                var nbb_unformatted_code = "pmf = pdf.make_pmf()";
-                var nbb_formatted_code = "pmf = pdf.make_pmf()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<p>By default, the resulting Pmf contains 101 points equally spaced from
-<code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">-</span> <span class="pre">3*sigma</span></code> to <code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">+</span> <span class="pre">3*sigma</span></code>. Optionally, <code class="docutils literal notranslate"><span class="pre">MakePmf</span></code> and <code class="docutils literal notranslate"><span class="pre">Render</span></code> can
+<p>By default, the resulting <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> contains 101 points equally spaced from
+<code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">-</span> <span class="pre">3*sigma</span></code> to <code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">+</span> <span class="pre">3*sigma</span></code>. Optionally, <code class="docutils literal notranslate"><span class="pre">make_pmf</span></code> and <code class="docutils literal notranslate"><span class="pre">render</span></code> can
 take keyword arguments <code class="docutils literal notranslate"><span class="pre">low</span></code>, <code class="docutils literal notranslate"><span class="pre">high</span></code>, and <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 </section>
 <section id="kernel-density-estimation">
@@ -712,22 +670,16 @@ details at <a class="reference external" href="http://en.wikipedia.org/wiki/Kern
 class called <code class="docutils literal notranslate"><span class="pre">EstimatedPdf</span></code> that uses it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EstimatedPdf</span><span class="p">(</span><span class="n">Pdf</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">kde</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">gaussian_kde</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">density</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">kde</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">EstimatedPdf</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 11;
-                var nbb_unformatted_code = "class EstimatedPdf(Pdf):\n\n    def __init__(self, sample):\n        self.kde = scipy.stats.gaussian_kde(sample)\n\n    def density(self, xs):\n        return self.kde.evaluate(xs)";
-                var nbb_formatted_code = "class EstimatedPdf(Pdf):\n\n    def __init__(self, sample):\n        self.kde = scipy.stats.gaussian_kde(sample)\n\n    def density(self, xs):\n        return self.kde.evaluate(xs)";
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "from thinkstats import EstimatedPdf";
+                var nbb_formatted_code = "from thinkstats import EstimatedPdf";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -740,31 +692,25 @@ class called <code class="docutils literal notranslate"><span class="pre">Estima
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">__init__</span></code> takes a sample and computes a kernel density estimate. The
-result is a <code class="docutils literal notranslate"><span class="pre">gaussian_kde</span></code> object that provides an <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> method.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Density</span></code> takes a value or sequence, calls <code class="docutils literal notranslate"><span class="pre">gaussian_kde.evaluate</span></code>, and
-returns the resulting density. The word “Gaussian” appears in the name
-because it uses a filter based on a Gaussian distribution to smooth the
-KDE.</p>
 <p>Here’s an example that generates a sample from a normal distribution and
-then makes an EstimatedPdf to fit it:</p>
+then makes an <code class="docutils literal notranslate"><span class="pre">EstimatedPdf</span></code> to fit it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
 
 <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">)]</span>
-<span class="n">sample_pdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">EstimatedPdf</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">sample_pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sample KDE&quot;</span><span class="p">)</span>
+<span class="n">sample_pdf</span> <span class="o">=</span> <span class="n">EstimatedPdf</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sample KDE&quot;</span><span class="p">)</span>
+<span class="n">sample_pdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7497552ccb397b77c83e5eee4aa05ae3f9f6c99877dfbc858233e09f2c6bccb9.png" src="_images/7497552ccb397b77c83e5eee4aa05ae3f9f6c99877dfbc858233e09f2c6bccb9.png" />
+<img alt="_images/736ad4878e53a3d56a9649d3fe02fceebdfce392d932432dd5b2204eef2e58c7.png" src="_images/736ad4878e53a3d56a9649d3fe02fceebdfce392d932432dd5b2204eef2e58c7.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 12;
-                var nbb_unformatted_code = "import random\nsample = [random.gauss(mean, std) for i in range(500)]\nsample_pdf = thinkstats2.EstimatedPdf(sample)\nthinkplot.pdf(sample_pdf, label='sample KDE')";
-                var nbb_formatted_code = "import random\n\nsample = [random.gauss(mean, std) for i in range(500)]\nsample_pdf = thinkstats2.EstimatedPdf(sample)\nthinkplot.pdf(sample_pdf, label=\"sample KDE\")";
+                var nbb_cell_id = 53;
+                var nbb_unformatted_code = "import random\n\nsample = [random.gauss(mean, std) for i in range(500)]\nsample_pdf = EstimatedPdf(sample, name=\"sample KDE\")\nsample_pdf.plot()";
+                var nbb_formatted_code = "import random\n\nsample = [random.gauss(mean, std) for i in range(500)]\nsample_pdf = EstimatedPdf(sample, name=\"sample KDE\")\nsample_pdf.plot()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -777,10 +723,9 @@ then makes an EstimatedPdf to fit it:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">sample</span></code> is a list of 500 random heights. <code class="docutils literal notranslate"><span class="pre">sample_pdf</span></code> is a Pdf object
+<p><code class="docutils literal notranslate"><span class="pre">sample</span></code> is a list of 500 random heights. <code class="docutils literal notranslate"><span class="pre">sample_pdf</span></code> is a <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> object
 that contains the estimated KDE of the sample.</p>
-<p>Figure <a class="reference internal" href="#pdf_example"><span class="xref myst">[pdf_example]</span></a>{reference-type=“ref”
-reference=“pdf_example”} shows the normal density function and a KDE
+<p>The following figure shows the normal density function and a KDE
 based on a sample of 500 random heights. The estimate is a good match
 for the original distribution.</p>
 <p>Estimating a density function with KDE is useful for several purposes:</p>
@@ -804,12 +749,37 @@ replicating the observed data.</p></li>
 </section>
 <section id="the-distribution-framework">
 <h2>The distribution framework<a class="headerlink" href="#the-distribution-framework" title="Link to this heading">#</a></h2>
-<p><img alt="A framework that relates representations of distributionfunctions." src="figs/distribution_functions.pdf" />{height=“2.2in”}</p>
 <p>At this point we have seen PMFs, CDFs and PDFs; let’s take a minute to
 review.
-Figure <a class="reference internal" href="#dist_framework"><span class="xref myst">[dist_framework]</span></a>{reference-type=“ref”
-reference=“dist_framework”} shows how these functions relate to each
+The following figure shows how these functions relate to each
 other.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: add the figure</span>
+
+<span class="c1"># ![A framework that relates representations of distribution functions.]</span>
+<span class="c1"># (figs/distribution_functions.pdf){height=&quot;2.2in&quot;}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 54;
+                var nbb_unformatted_code = "# TODO: add the figure\n\n# ![A framework that relates representations of distribution functions.]\n# (figs/distribution_functions.pdf){height=\"2.2in\"}";
+                var nbb_formatted_code = "# TODO: add the figure\n\n# ![A framework that relates representations of distribution functions.]\n# (figs/distribution_functions.pdf){height=\"2.2in\"}";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <p>We started with PMFs, which represent the probabilities for a discrete
 set of values. To get from a PMF to a CDF, you add up the probability
 masses to get cumulative probabilities. To get from a CDF back to a PMF,
@@ -834,32 +804,23 @@ can tell no one uses that term.</p>
 <section id="hist-implementation">
 <h2>Hist implementation<a class="headerlink" href="#hist-implementation" title="Link to this heading">#</a></h2>
 <p>At this point you should know how to use the basic types provided by
-<code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code>: Hist, Pmf, Cdf, and Pdf. The next few sections provide
+<code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code>: Hist, <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>, and Pdf. The next few sections provide
 details about how they are implemented. This material might help you use
 these classes more effectively, but it is not strictly necessary.</p>
-<p>Hist and Pmf inherit from a parent class called <code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code>. The
+<p>Hist and <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> inherit from a parent class called <code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code>. The
 leading underscore indicates that this class is “internal;” that is, it
 should not be used by code in other modules. The name indicates what it
 is: a dictionary wrapper. Its primary attribute is <code class="docutils literal notranslate"><span class="pre">d</span></code>, the dictionary
 that maps from values to their frequencies.</p>
 <p>The values can be any hashable type. The frequencies should be integers,
 but can be any numeric type.</p>
-<p><code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code> contains methods appropriate for both Hist and Pmf,
-including <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, <code class="docutils literal notranslate"><span class="pre">Values</span></code>, <code class="docutils literal notranslate"><span class="pre">Items</span></code> and <code class="docutils literal notranslate"><span class="pre">Render</span></code>. It also provides
-modifier methods <code class="docutils literal notranslate"><span class="pre">Set</span></code>, <code class="docutils literal notranslate"><span class="pre">Incr</span></code>, <code class="docutils literal notranslate"><span class="pre">Mult</span></code>, and <code class="docutils literal notranslate"><span class="pre">Remove</span></code>. These methods are
+<p><code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code> contains methods appropriate for both <code class="docutils literal notranslate"><span class="pre">Hist</span></code> and <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>,
+including <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, <code class="docutils literal notranslate"><span class="pre">values</span></code>, <code class="docutils literal notranslate"><span class="pre">items</span></code> and <code class="docutils literal notranslate"><span class="pre">render</span></code>. It also provides
+modifier methods <code class="docutils literal notranslate"><span class="pre">set</span></code>, <code class="docutils literal notranslate"><span class="pre">incr</span></code>, <code class="docutils literal notranslate"><span class="pre">mult</span></code>, and <code class="docutils literal notranslate"><span class="pre">remove</span></code>. These methods are
 all implemented with dictionary operations. For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">incr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">term</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">term</span>
-
-
-<span class="k">def</span> <span class="nf">mult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">factor</span>
-
-
-<span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: Show implementation?</span>
 </pre></div>
 </div>
 </div>
@@ -867,8 +828,8 @@ all implemented with dictionary operations. For example:</p>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 13;
-                var nbb_unformatted_code = "def incr(self, x, term=1):\n    self.d[x] = self.d.get(x, 0) + term\n\n\ndef mult(self, x, factor):\n    self.d[x] = self.d.get(x, 0) * factor\n\n\ndef remove(self, x):\n    del self.d[x]";
-                var nbb_formatted_code = "def incr(self, x, term=1):\n    self.d[x] = self.d.get(x, 0) + term\n\n\ndef mult(self, x, factor):\n    self.d[x] = self.d.get(x, 0) * factor\n\n\ndef remove(self, x):\n    del self.d[x]";
+                var nbb_unformatted_code = "# TODO: Show implementation?";
+                var nbb_formatted_code = "# TODO: Show implementation?";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -881,18 +842,18 @@ all implemented with dictionary operations. For example:</p>
             }, 500);
             </script></div>
 </div>
-<p>Hist also provides <code class="docutils literal notranslate"><span class="pre">Freq</span></code>, which looks up the frequency of a given
+<p><code class="docutils literal notranslate"><span class="pre">Hist</span></code> also provides <code class="docutils literal notranslate"><span class="pre">freq</span></code>, which looks up the frequency of a given
 value.</p>
-<p>Because Hist operators and methods are based on dictionaries, these
+<p>Because <code class="docutils literal notranslate"><span class="pre">Hist</span></code> operators and methods are based on dictionaries, these
 methods are constant time operations; that is, their run time does not
 increase as the Hist gets bigger.</p>
 </section>
 <section id="pmf-implementation">
-<h2>Pmf implementation<a class="headerlink" href="#pmf-implementation" title="Link to this heading">#</a></h2>
-<p>Pmf and Hist are almost the same thing, except that a Pmf maps values to
+<h2><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> implementation<a class="headerlink" href="#pmf-implementation" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> and Hist are almost the same thing, except that a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> maps values to
 floating-point probabilities, rather than integer frequencies. If the
-sum of the probabilities is 1, the Pmf is normalized.</p>
-<p>Pmf provides <code class="docutils literal notranslate"><span class="pre">Normalize</span></code>, which computes the sum of the probabilities
+sum of the probabilities is 1, the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> is normalized.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> provides <code class="docutils literal notranslate"><span class="pre">Normalize</span></code>, which computes the sum of the probabilities
 and divides through by a factor:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -900,7 +861,8 @@ and divides through by a factor:</p>
     <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">total</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Total probability is zero.&quot;</span><span class="p">)</span>
-    <span class="n">factor</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">fraction</span><span class="p">)</span> <span class="o">/</span> <span class="n">total</span>
+
+    <span class="n">factor</span> <span class="o">=</span> <span class="n">fraction</span> <span class="o">/</span> <span class="n">total</span>
     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">*=</span> <span class="n">factor</span>
     <span class="k">return</span> <span class="n">total</span>
@@ -911,8 +873,8 @@ and divides through by a factor:</p>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 14;
-                var nbb_unformatted_code = "def normalize(self, fraction=1.0):\n    total = self.total()\n    if total == 0.0:\n        raise ValueError('Total probability is zero.')\n    factor = float(fraction) / total\n    for x in self.d:\n        self.d[x] *= factor\n    return total";
-                var nbb_formatted_code = "def normalize(self, fraction=1.0):\n    total = self.total()\n    if total == 0.0:\n        raise ValueError(\"Total probability is zero.\")\n    factor = float(fraction) / total\n    for x in self.d:\n        self.d[x] *= factor\n    return total";
+                var nbb_unformatted_code = "def normalize(self, fraction=1.0):\n    total = self.total()\n    if total == 0.0:\n        raise ValueError(\"Total probability is zero.\")\n\n    factor = fraction / total\n    for x in self.d:\n        self.d[x] *= factor\n    return total";
+                var nbb_formatted_code = "def normalize(self, fraction=1.0):\n    total = self.total()\n    if total == 0.0:\n        raise ValueError(\"Total probability is zero.\")\n\n    factor = fraction / total\n    for x in self.d:\n        self.d[x] *= factor\n    return total";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -926,34 +888,34 @@ and divides through by a factor:</p>
             </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">fraction</span></code> determines the sum of the probabilities after normalizing;
-the default value is 1. If the total probability is 0, the Pmf cannot be
+the default value is 1. If the total probability is 0, the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> cannot be
 normalized, so <code class="docutils literal notranslate"><span class="pre">Normalize</span></code> raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
-<p>Hist and Pmf have the same constructor. It can take as an argument a
-<code class="docutils literal notranslate"><span class="pre">dict</span></code>, Hist, Pmf or Cdf, a pandas Series, a list of (value, frequency)
+<p>Hist and <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> have the same constructor. It can take as an argument a
+<code class="docutils literal notranslate"><span class="pre">dict</span></code>, Hist, <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> or <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>, a pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code>, a list of (value, frequency)
 pairs, or a sequence of values.</p>
-<p>If you instantiate a Pmf, the result is normalized. If you instantiate a
-Hist, it is not. To construct an unnormalized Pmf, you can create an
-empty Pmf and modify it. The Pmf modifiers do not renormalize the Pmf.</p>
+<p>If you instantiate a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, the result is normalized. If you instantiate a
+Hist, it is not. To construct an unnormalized <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, you can create an
+empty <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> and modify it. The <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> modifiers do not renormalize the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>.</p>
 </section>
 <section id="cdf-implementation">
-<h2>Cdf implementation<a class="headerlink" href="#cdf-implementation" title="Link to this heading">#</a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">Cdf</span></code> implementation<a class="headerlink" href="#cdf-implementation" title="Link to this heading">#</a></h2>
 <p>A CDF maps from values to cumulative probabilities, so I could have
-implemented Cdf as a <code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code>. But the values in a CDF are ordered
+implemented <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> as a <code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code>. But the values in a CDF are ordered
 and the values in a <code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code> are not. Also, it is often useful to
 compute the inverse CDF; that is, the map from cumulative probability to
-value. So the implementaion I chose is two sorted lists. That way I can
+value. So the implementation I chose is two sorted lists. That way I can
 use binary search to do a forward or inverse lookup in logarithmic time.</p>
-<p>The Cdf constructor can take as a parameter a sequence of values or a
-pandas Series, a dictionary that maps from values to probabilities, a
-sequence of (value, probability) pairs, a Hist, Pmf, or Cdf. Or if it is
+<p>The <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> constructor can take as a parameter a sequence of values or a
+pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code>, a dictionary that maps from values to probabilities, a
+sequence of (value, probability) pairs, a Hist, <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, or <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>. Or if it is
 given two parameters, it treats them as a sorted sequence of values and
 the sequence of corresponding cumulative probabilities.</p>
-<p>Given a sequence, pandas Series, or dictionary, the constructor makes a
+<p>Given a sequence, pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code>, or dictionary, the constructor makes a
 Hist. Then it uses the Hist to initialize the attributes:</p>
 <p><code class="docutils literal notranslate"><span class="pre">xs</span></code> is the sorted list of values; <code class="docutils literal notranslate"><span class="pre">freqs</span></code> is the list of corresponding
 frequencies. <code class="docutils literal notranslate"><span class="pre">np.cumsum</span></code> computes the cumulative sum of the frequencies.
 Dividing through by the total frequency yields cumulative probabilities.
-For <code class="docutils literal notranslate"><span class="pre">n</span></code> values, the time to construct the Cdf is proportional to
+For <code class="docutils literal notranslate"><span class="pre">n</span></code> values, the time to construct the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> is proportional to
 <span class="math notranslate nohighlight">\(n \log n\)</span>.</p>
 <p>Here is the implementation of <code class="docutils literal notranslate"><span class="pre">Prob</span></code>, which takes a value and returns
 its cumulative probability:</p>
@@ -1003,7 +965,7 @@ probability and returns the corresponding value:</p>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 16;
-                var nbb_unformatted_code = "def value(self, p):\n    if p < 0 or p > 1:\n        raise ValueError('p must be in range [0, 1]')\n    index = bisect.bisect_left(self.ps, p)\n    return self.xs[index]";
+                var nbb_unformatted_code = "def value(self, p):\n    if p < 0 or p > 1:\n        raise ValueError(\"p must be in range [0, 1]\")\n    index = bisect.bisect_left(self.ps, p)\n    return self.xs[index]";
                 var nbb_formatted_code = "def value(self, p):\n    if p < 0 or p > 1:\n        raise ValueError(\"p must be in range [0, 1]\")\n    index = bisect.bisect_left(self.ps, p)\n    return self.xs[index]";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -1017,9 +979,9 @@ probability and returns the corresponding value:</p>
             }, 500);
             </script></div>
 </div>
-<p>Given a Cdf, we can compute the Pmf by computing differences between
-consecutive cumulative probabilities. If you call the Cdf constructor
-and pass a Pmf, it computes differences by calling <code class="docutils literal notranslate"><span class="pre">Cdf.Items</span></code>:</p>
+<p>Given a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>, we can compute the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> by computing differences between
+consecutive cumulative probabilities. If you call the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> constructor
+and pass a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, it computes differences by calling <code class="docutils literal notranslate"><span class="pre">Cdf.Items</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1052,7 +1014,7 @@ and pass a Pmf, it computes differences by calling <code class="docutils literal
 one back to the beginning. We replace the first element of <code class="docutils literal notranslate"><span class="pre">b</span></code> with 0
 and then compute the difference <code class="docutils literal notranslate"><span class="pre">a-b</span></code>. The result is a NumPy array of
 probabilities.</p>
-<p>Cdf provides <code class="docutils literal notranslate"><span class="pre">Shift</span></code> and <code class="docutils literal notranslate"><span class="pre">Scale</span></code>, which modify the values in the Cdf,
+<p><code class="docutils literal notranslate"><span class="pre">Cdf</span></code> provides <code class="docutils literal notranslate"><span class="pre">shift</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code>, which modify the values in the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>,
 but the probabilities should be treated as immutable.</p>
 </section>
 <section id="moments">
@@ -1074,7 +1036,7 @@ if you prefer Python notation:</p>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 18;
-                var nbb_unformatted_code = "def raw_moment(xs, k):\n    return sum(x ** k for x in xs) / len(xs)";
+                var nbb_unformatted_code = "def raw_moment(xs, k):\n    return sum(x**k for x in xs) / len(xs)";
                 var nbb_formatted_code = "def raw_moment(xs, k):\n    return sum(x**k for x in xs) / len(xs)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -1323,7 +1285,7 @@ skewness</strong>, <span class="math notranslate nohighlight">\(g_1\)</span>, ca
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 26;
-                var nbb_unformatted_code = "def standardized_moment(xs, k):\n    var = central_moment(xs, 2)\n    std = np.sqrt(var)\n    return central_moment(xs, k) / std ** k";
+                var nbb_unformatted_code = "def standardized_moment(xs, k):\n    var = central_moment(xs, 2)\n    std = np.sqrt(var)\n    return central_moment(xs, k) / std**k";
                 var nbb_formatted_code = "def standardized_moment(xs, k):\n    var = central_moment(xs, 2)\n    std = np.sqrt(var)\n    return central_moment(xs, k) / std**k";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -1339,21 +1301,23 @@ skewness</strong>, <span class="math notranslate nohighlight">\(g_1\)</span>, ca
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">standardized_moment</span><span class="p">(</span><span class="n">female_heights</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">standardized_moment</span><span class="p">(</span>
-    <span class="n">female_heights</span><span class="p">,</span> <span class="mi">2</span>
-<span class="p">),</span> <span class="n">standardized_moment</span><span class="p">(</span><span class="n">female_heights</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="n">standardized_moment</span><span class="p">(</span><span class="n">female_heights</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">standardized_moment</span><span class="p">(</span><span class="n">female_heights</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="n">standardized_moment</span><span class="p">(</span><span class="n">female_heights</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-1.3624108479155668e-14, 1.0, -0.1220649274510512)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-1.3624108479155668e-14, 1.0, -0.1220649274510512]
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 27;
-                var nbb_unformatted_code = "standardized_moment(female_heights, 1), standardized_moment(female_heights, 2\n    ), standardized_moment(female_heights, 3)";
-                var nbb_formatted_code = "standardized_moment(female_heights, 1), standardized_moment(\n    female_heights, 2\n), standardized_moment(female_heights, 3)";
+                var nbb_unformatted_code = "[\n    standardized_moment(female_heights, 1),\n    standardized_moment(female_heights, 2),\n    standardized_moment(female_heights, 3),\n]";
+                var nbb_formatted_code = "[\n    standardized_moment(female_heights, 1),\n    standardized_moment(female_heights, 2),\n    standardized_moment(female_heights, 3),\n]";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1437,18 +1401,21 @@ $<span class="math notranslate nohighlight">\(g_p = 3 (\bar{x} - m) / S\)</span>
 median, and \)</span>S$ is the standard deviation. Or in Python:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">median</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
-    <span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">cdf</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
+
+
+<span class="k">def</span> <span class="nf">median</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+    <span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cdf</span><span class="o">.</span><span class="n">inverse</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 51;
-                var nbb_unformatted_code = "def median(xs):\n    cdf = thinkstats2.Cdf(xs)\n    return cdf.value(0.5)";
-                var nbb_formatted_code = "def median(xs):\n    cdf = thinkstats2.Cdf(xs)\n    return cdf.value(0.5)";
+                var nbb_cell_id = 30;
+                var nbb_unformatted_code = "from empiricaldist import Cdf\n\n\ndef median(xs):\n    cdf = Cdf.from_seq(xs)\n    return cdf.inverse(0.5)";
+                var nbb_formatted_code = "from empiricaldist import Cdf\n\n\ndef median(xs):\n    cdf = Cdf.from_seq(xs)\n    return cdf.inverse(0.5)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1468,12 +1435,12 @@ median, and \)</span>S$ is the standard deviation. Or in Python:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(163.22347500412215, 163.0)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(163.22347500412215, array(163.))
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 52;
+                var nbb_cell_id = 31;
                 var nbb_unformatted_code = "mean(female_heights), median(female_heights)";
                 var nbb_formatted_code = "mean(female_heights), median(female_heights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1503,9 +1470,9 @@ median, and \)</span>S$ is the standard deviation. Or in Python:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 53;
-                var nbb_unformatted_code = "def pearson_median_skewness(xs):\n    m = compute_median(xs)\n    mean = raw_moment(xs, 1)\n    var = central_moment(xs, 2)\n    std = np.sqrt(var)\n    gp = 3 * (mean - median) / std\n    return gp";
-                var nbb_formatted_code = "def pearson_median_skewness(xs):\n    m = compute_median(xs)\n    mean = raw_moment(xs, 1)\n    var = central_moment(xs, 2)\n    std = np.sqrt(var)\n    gp = 3 * (mean - median) / std\n    return gp";
+                var nbb_cell_id = 32;
+                var nbb_unformatted_code = "def pearson_median_skewness(xs):\n    xbar = raw_moment(xs, 1)\n    m = median(xs)\n    s2 = central_moment(xs, 2)\n    s = np.sqrt(s2)\n    gp = 3 * (xbar - m) / s\n    return gp";
+                var nbb_formatted_code = "def pearson_median_skewness(xs):\n    xbar = raw_moment(xs, 1)\n    m = median(xs)\n    s2 = central_moment(xs, 2)\n    s = np.sqrt(s2)\n    gp = 3 * (xbar - m) / s\n    return gp";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1530,7 +1497,7 @@ median, and \)</span>S$ is the standard deviation. Or in Python:</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 37;
+                var nbb_cell_id = 33;
                 var nbb_unformatted_code = "pearson_median_skewness(female_heights)";
                 var nbb_formatted_code = "pearson_median_skewness(female_heights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1547,22 +1514,22 @@ median, and \)</span>S$ is the standard deviation. Or in Python:</p>
 </div>
 <p>This statistic is <strong>robust</strong>, which means that it is less vulnerable to
 the effect of outliers.</p>
+<p>As an example, let’s look at the skewness of birth weights in the NSFG
+pregnancy data. Here’s the code to estimate and plot the PDF:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/2002FemPreg.dct&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span>
-    <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/2002FemPreg.dat.gz&quot;</span>
-<span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 38;
-                var nbb_unformatted_code = "download('https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py')\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz'\n    )";
-                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dct\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats2/raw/master/code/2002FemPreg.dat.gz\"\n)";
+                var nbb_cell_id = 34;
+                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1575,8 +1542,6 @@ the effect of outliers.</p>
             }, 500);
             </script></div>
 </div>
-<p>As an example, let’s look at the skewness of birth weights in the NSFG
-pregnancy data. Here’s the code to estimate and plot the PDF:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nsfg</span>
@@ -1588,8 +1553,8 @@ pregnancy data. Here’s the code to estimate and plot the PDF:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 39;
-                var nbb_unformatted_code = "import nsfg\nlive, firsts, others = nsfg.make_frames()";
+                var nbb_cell_id = 35;
+                var nbb_unformatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()";
                 var nbb_formatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -1603,58 +1568,26 @@ pregnancy data. Here’s the code to estimate and plot the PDF:</p>
             }, 500);
             </script></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-<span class="n">pdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">EstimatedPdf</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;birth weight&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/fcc8de150bf09396f5e2966971d485fc126319cb0dcd960b1ef835e11d2759c6.png" src="_images/fcc8de150bf09396f5e2966971d485fc126319cb0dcd960b1ef835e11d2759c6.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 40;
-                var nbb_unformatted_code = "data = live.totalwgt_lb.dropna()\npdf = thinkstats2.EstimatedPdf(data)\nthinkplot.pdf(pdf, label='birth weight')";
-                var nbb_formatted_code = "data = live.totalwgt_lb.dropna()\npdf = thinkstats2.EstimatedPdf(data)\nthinkplot.pdf(pdf, label=\"birth weight\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<p>Figure <a class="reference internal" href="#density_totalwgt_kde"><span class="xref myst">[density_totalwgt_kde]</span></a>{reference-type=“ref”
-reference=“density_totalwgt_kde”} shows the result. The left tail
+<p>The following figure shows the result. The left tail
 appears longer than the right, so we suspect the distribution is skewed
 left. The mean, 7.27 lbs, is a bit less than the median, 7.38 lbs, so
 that is consistent with left skew. And both skewness coefficients are
 negative: sample skewness is -0.59; Pearson’s median skewness is -0.23.</p>
-<p><img alt="Estimated PDF of adult weight data from theBRFSS." src="figs/density_wtkg2_kde.pdf" />{height=“2.2in”}</p>
-<p>Now let’s compare this distribution to the distribution of adult weight
-in the BRFSS. Again, here’s the code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">read_brfss</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">wtkg2</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-<span class="n">pdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">EstimatedPdf</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;adult weight&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">EstimatedPdf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;birth weight&quot;</span><span class="p">)</span>
+<span class="n">pdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bc687c64fa03a807887d0c35aee2aefdf42f0b48f025c33a430592127c3e4a96.png" src="_images/bc687c64fa03a807887d0c35aee2aefdf42f0b48f025c33a430592127c3e4a96.png" />
+<img alt="_images/65f45973b9d7760d61fe9821d0964240e454f41339fabc9ce8cec470e21c9c54.png" src="_images/65f45973b9d7760d61fe9821d0964240e454f41339fabc9ce8cec470e21c9c54.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 41;
-                var nbb_unformatted_code = "df = brfss.read_brfss(nrows=None)\ndata = df.wtkg2.dropna()\npdf = thinkstats2.EstimatedPdf(data)\nthinkplot.pdf(pdf, label='adult weight')";
-                var nbb_formatted_code = "df = brfss.read_brfss(nrows=None)\ndata = df.wtkg2.dropna()\npdf = thinkstats2.EstimatedPdf(data)\nthinkplot.pdf(pdf, label=\"adult weight\")";
+                var nbb_cell_id = 36;
+                var nbb_unformatted_code = "data = live.totalwgt_lb.dropna()\npdf = EstimatedPdf(data, name=\"birth weight\")\npdf.plot()";
+                var nbb_formatted_code = "data = live.totalwgt_lb.dropna()\npdf = EstimatedPdf(data, name=\"birth weight\")\npdf.plot()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1667,8 +1600,37 @@ in the BRFSS. Again, here’s the code:</p>
             }, 500);
             </script></div>
 </div>
-<p>Figure <a class="reference internal" href="#density_wtkg2_kde"><span class="xref myst">[density_wtkg2_kde]</span></a>{reference-type=“ref”
-reference=“density_wtkg2_kde”} shows the result. The distribution
+<p>Now let’s compare this distribution to the distribution of adult weight
+in the BRFSS. Again, here’s the code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">read_brfss</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">wtkg2</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">EstimatedPdf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;adult weight&quot;</span><span class="p">)</span>
+<span class="n">pdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a868b1aa27fb23dbd08c249e10f33e71d144449021106180ec9bf0239ef155d4.png" src="_images/a868b1aa27fb23dbd08c249e10f33e71d144449021106180ec9bf0239ef155d4.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 37;
+                var nbb_unformatted_code = "df = brfss.read_brfss()\ndata = df.wtkg2.dropna()\npdf = EstimatedPdf(data, name=\"adult weight\")\npdf.plot()";
+                var nbb_formatted_code = "df = brfss.read_brfss()\ndata = df.wtkg2.dropna()\npdf = EstimatedPdf(data, name=\"adult weight\")\npdf.plot()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>The following figure shows the result. The distribution
 appears skewed to the right. Sure enough, the mean, 79.0, is bigger than
 the median, 77.3. The sample skewness is 1.1 and Pearson’s median
 skewness is 0.26.</p>
@@ -1712,13 +1674,40 @@ effect of outliers.</p></li>
 </section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<section id="exercise">
+<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <p>The distribution of income is famously skewed to the right. In this exercise, we’ll measure how strong that skew is.
 The Current Population Survey (CPS) is a joint effort of the Bureau of Labor Statistics and the Census Bureau to study income and related variables. Data collected in 2013 is available from <a class="reference external" href="http://www.census.gov/hhes/www/cpstables/032013/hhinc/toc.htm">http://www.census.gov/hhes/www/cpstables/032013/hhinc/toc.htm</a>. I downloaded <code class="docutils literal notranslate"><span class="pre">hinc06.xls</span></code>, which is an Excel spreadsheet with information about household income, and converted it to <code class="docutils literal notranslate"><span class="pre">hinc06.csv</span></code>, a CSV file you will find in the repository for this book. You will also find <code class="docutils literal notranslate"><span class="pre">hinc2.py</span></code>, which reads this file and transforms the data.</p>
 <p>The dataset is in the form of a series of income ranges and the number of respondents who fell in each range. The lowest range includes respondents who reported annual household income “Under $5000.”</p>
 <p>The highest range includes respondents who made “$250,000 or more.”</p>
-<p>To estimate mean and other statistics from these data, we have to make some assumptions about the lower and upper bounds, and how the values are distributed in each range. <code class="docutils literal notranslate"><span class="pre">hinc2.py</span></code> provides <code class="docutils literal notranslate"><span class="pre">InterpolateSample</span></code>, which shows one way to model this data. It takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column, <code class="docutils literal notranslate"><span class="pre">income</span></code>, that contains the upper bound of each range, and <code class="docutils literal notranslate"><span class="pre">freq</span></code>, which contains the number of respondents in each frame.</p>
+<p>To estimate mean and other statistics from these data, we have to make some assumptions about the lower and upper bounds, and how the values are distributed in each range. <code class="docutils literal notranslate"><span class="pre">hinc2.py</span></code> provides <code class="docutils literal notranslate"><span class="pre">interpolate_sample</span></code>, which shows one way to model this data. It takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column, <code class="docutils literal notranslate"><span class="pre">income</span></code>, that contains the upper bound of each range, and <code class="docutils literal notranslate"><span class="pre">freq</span></code>, which contains the number of respondents in each frame.</p>
 <p>It also takes <code class="docutils literal notranslate"><span class="pre">log_upper</span></code>, which is an assumed upper bound on the highest range, expressed in <code class="docutils literal notranslate"><span class="pre">log10</span></code> dollars. The default value, <code class="docutils literal notranslate"><span class="pre">log_upper=6.0</span></code> represents the assumption that the largest income among the respondents is <span class="math notranslate nohighlight">\(10^6\)</span>, or one million dollars.</p>
-<p><code class="docutils literal notranslate"><span class="pre">InterpolateSample</span></code> generates a pseudo-sample; that is, a sample of household incomes that yields the same number of respondents in each range as the actual data. It assumes that incomes in each range are equally spaced on a <code class="docutils literal notranslate"><span class="pre">log10</span></code> scale.</p>
+<p><code class="docutils literal notranslate"><span class="pre">interpolate_sample</span></code> generates a pseudo-sample; that is, a sample of household incomes that yields the same number of respondents in each range as the actual data. It assumes that incomes in each range are equally spaced on a <code class="docutils literal notranslate"><span class="pre">log10</span></code> scale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/hinc.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/hinc06.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 38;
+                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/hinc.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/hinc06.csv\")";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/hinc.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/hinc06.csv\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">interpolate_sample</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">log_upper</span><span class="o">=</span><span class="mf">6.0</span><span class="p">):</span>
@@ -1747,34 +1736,9 @@ The Current Population Survey (CPS) is a joint effort of the Bureau of Labor Sta
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 42;
-                var nbb_unformatted_code = "def interpolate_sample(df, log_upper=6.0):\n    \"\"\"Makes a sample of log10 household income.\n\n    Assumes that log10 income is uniform in each range.\n\n    df: DataFrame with columns income and freq\n    log_upper: log10 of the assumed upper bound for the highest range\n\n    returns: NumPy array of log10 household income\n    \"\"\"\n    df['log_upper'] = np.log10(df.income)\n    df['log_lower'] = df.log_upper.shift(1)\n    df.loc[0, 'log_lower'] = 3.0\n    df.loc[41, 'log_upper'] = log_upper\n    arrays = []\n    for _, row in df.iterrows():\n        vals = np.linspace(row.log_lower, row.log_upper, int(row.freq))\n        arrays.append(vals)\n    log_sample = np.concatenate(arrays)\n    return log_sample";
+                var nbb_cell_id = 39;
+                var nbb_unformatted_code = "def interpolate_sample(df, log_upper=6.0):\n    \"\"\"Makes a sample of log10 household income.\n\n    Assumes that log10 income is uniform in each range.\n\n    df: DataFrame with columns income and freq\n    log_upper: log10 of the assumed upper bound for the highest range\n\n    returns: NumPy array of log10 household income\n    \"\"\"\n    df[\"log_upper\"] = np.log10(df.income)\n    df[\"log_lower\"] = df.log_upper.shift(1)\n    df.loc[0, \"log_lower\"] = 3.0\n    df.loc[41, \"log_upper\"] = log_upper\n    arrays = []\n    for _, row in df.iterrows():\n        vals = np.linspace(row.log_lower, row.log_upper, int(row.freq))\n        arrays.append(vals)\n    log_sample = np.concatenate(arrays)\n    return log_sample";
                 var nbb_formatted_code = "def interpolate_sample(df, log_upper=6.0):\n    \"\"\"Makes a sample of log10 household income.\n\n    Assumes that log10 income is uniform in each range.\n\n    df: DataFrame with columns income and freq\n    log_upper: log10 of the assumed upper bound for the highest range\n\n    returns: NumPy array of log10 household income\n    \"\"\"\n    df[\"log_upper\"] = np.log10(df.income)\n    df[\"log_lower\"] = df.log_upper.shift(1)\n    df.loc[0, \"log_lower\"] = 3.0\n    df.loc[41, \"log_upper\"] = log_upper\n    arrays = []\n    for _, row in df.iterrows():\n        vals = np.linspace(row.log_lower, row.log_upper, int(row.freq))\n        arrays.append(vals)\n    log_sample = np.concatenate(arrays)\n    return log_sample";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/hinc.py&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/hinc06.csv&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 43;
-                var nbb_unformatted_code = "download('https://github.com/AllenDowney/ThinkStats2/raw/master/code/hinc.py')\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/hinc06.csv')";
-                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/hinc.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/hinc06.csv\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1798,8 +1762,8 @@ The Current Population Survey (CPS) is a joint effort of the Bureau of Labor Sta
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 44;
-                var nbb_unformatted_code = "import hinc\nincome_df = hinc.read_data()";
+                var nbb_cell_id = 40;
+                var nbb_unformatted_code = "import hinc\n\nincome_df = hinc.read_data()";
                 var nbb_formatted_code = "import hinc\n\nincome_df = hinc.read_data()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -1813,172 +1777,10 @@ The Current Population Survey (CPS) is a joint effort of the Bureau of Labor Sta
             }, 500);
             </script></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_sample</span> <span class="o">=</span> <span class="n">interpolate_sample</span><span class="p">(</span><span class="n">income_df</span><span class="p">,</span> <span class="n">log_upper</span><span class="o">=</span><span class="mf">6.0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 45;
-                var nbb_unformatted_code = "log_sample = interpolate_sample(income_df, log_upper=6.0)";
-                var nbb_formatted_code = "log_sample = interpolate_sample(income_df, log_upper=6.0)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">log_sample</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">log_cdf</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Household income (log $)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/23bcf3276734a9c53970271aadd54a7f61c4936d30c6f754727d37511fdf7572.png" src="_images/23bcf3276734a9c53970271aadd54a7f61c4936d30c6f754727d37511fdf7572.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 46;
-                var nbb_unformatted_code = "log_cdf = thinkstats2.Cdf(log_sample)\nthinkplot.cdf(log_cdf)\nthinkplot.config(xlabel='Household income (log $)', ylabel='CDF')";
-                var nbb_formatted_code = "log_cdf = thinkstats2.Cdf(log_sample)\nthinkplot.cdf(log_cdf)\nthinkplot.config(xlabel=\"Household income (log $)\", ylabel=\"CDF\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">log_sample</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 47;
-                var nbb_unformatted_code = "sample = np.power(10, log_sample)";
-                var nbb_formatted_code = "sample = np.power(10, log_sample)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Household income ($)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/81158a1eb1fbb9dfc6b8160e7345df427906e4e793ffd89eb1977f7fd3cdd991.png" src="_images/81158a1eb1fbb9dfc6b8160e7345df427906e4e793ffd89eb1977f7fd3cdd991.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 48;
-                var nbb_unformatted_code = "cdf = thinkstats2.Cdf(sample)\nthinkplot.cdf(cdf)\nthinkplot.config(xlabel='Household income ($)', ylabel='CDF')";
-                var nbb_formatted_code = "cdf = thinkstats2.Cdf(sample)\nthinkplot.cdf(cdf)\nthinkplot.config(xlabel=\"Household income ($)\", ylabel=\"CDF\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
 <p>Compute the median, mean, skewness and Pearson’s skewness of the resulting sample. What fraction of households report a taxable income below the mean? How do the results depend on the assumed upper bound?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">),</span> <span class="n">median</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(74278.70753118739, 51226.45447894046)
-</pre></div>
-</div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 49;
-                var nbb_unformatted_code = "mean(sample), median(sample)";
-                var nbb_formatted_code = "mean(sample), median(sample)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">skewness</span><span class="p">(</span><span class="n">sample</span><span class="p">),</span> <span class="n">pearson_median_skewness</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.660005879566872
-</pre></div>
-</div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 50;
-                var nbb_unformatted_code = "cdf.prob(mean(sample))";
-                var nbb_formatted_code = "cdf.prob(mean(sample))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
 <p>All of this is based on an assumption that the highest income is one million dollars, but that’s certainly not correct.  What happens to the skew if the upper bound is 10 million?</p>
 <p>Without better information about the top of this distribution, we can’t say much about the skewness of the distribution.</p>
+</section>
 </section>
 </section>
 
@@ -2050,12 +1852,15 @@ The Current Population Survey (CPS) is a joint effort of the Bureau of Labor Sta
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation">Kernel density estimation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-distribution-framework">The distribution framework</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hist-implementation">Hist implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pmf-implementation">Pmf implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-implementation">Cdf implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pmf-implementation"><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-implementation"><code class="docutils literal notranslate"><span class="pre">Cdf</span></code> implementation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moments">Moments</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skewness">Skewness</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

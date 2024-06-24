@@ -590,6 +590,31 @@ this book, has sent many corrections and helpful suggestions.</p></li>
 Lipták, Dan Kearney, Alexander Gryzlov, Martin Veillette, Haitao Ma,
 Jeff Pickhardt, Rohit Deshpande, Joanne Pratt, Lucian Ursu, Paul Glezen,
 Ting-kuang Lin, Scott Miller, Luigi Patruno.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">def</span> <span class="nf">replace_thinkplot_hist</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># This regular expression matches &#39;thinkplot.hist(&#39; followed by a variable name and a comma</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;thinkplot\.hist\((\w+),\s*&#39;</span>
+    <span class="n">replacement</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\1.bar(&#39;</span>
+    <span class="c1"># Using re.sub to replace matched patterns with the replacement</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">replacement</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;thinkplot.hist(variable_name, some_other_param)&quot;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">replace_thinkplot_hist</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>variable_name.bar(some_other_param)
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 

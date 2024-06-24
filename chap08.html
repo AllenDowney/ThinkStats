@@ -392,8 +392,7 @@ document.write(`
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
 
 
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats2.py&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py&quot;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -401,8 +400,8 @@ document.write(`
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 2;
-                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n        local, _ = urlretrieve(url, filename)\n        print('Downloaded ' + local)\n\n\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py'\n    )\ndownload(\n    'https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py')";
-                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkstats2.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats2/raw/master/code/thinkplot.py\")";
+                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
+                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -419,8 +418,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">thinkstats2</span>
-<span class="kn">import</span> <span class="nn">thinkplot</span>
+<span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">decorate</span>
 </pre></div>
 </div>
 </div>
@@ -428,8 +426,8 @@ document.write(`
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 3;
-                var nbb_unformatted_code = "import numpy as np\nimport thinkstats2\nimport thinkplot";
-                var nbb_formatted_code = "import numpy as np\nimport thinkstats2\nimport thinkplot";
+                var nbb_unformatted_code = "import numpy as np\nfrom thinkstats import decorate";
+                var nbb_formatted_code = "import numpy as np\nfrom thinkstats import decorate";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -469,15 +467,16 @@ whether there are outliers) and on what the goal is. Are you trying to
 minimize errors, or maximize your chance of getting the right answer?</p>
 <p>If there are no outliers, the sample mean minimizes the <strong>mean squared
 error</strong> (MSE). That is, if we play the game many times, and each time
-compute the error <span class="math notranslate nohighlight">\(\bar{x} - \mu\)</span>, the sample mean minimizes
-$<span class="math notranslate nohighlight">\(MSE = \frac{1}{m} \sum (\bar{x} - \mu)^2\)</span><span class="math notranslate nohighlight">\( Where \)</span>m<span class="math notranslate nohighlight">\( is the number of
-times you play the estimation game, not to be confused with \)</span>n<span class="math notranslate nohighlight">\(, which
-is the size of the sample used to compute \)</span>\bar{x}$.</p>
-<p>Here is a function that simulates the estimation game and computes the
-root mean squared error (RMSE), which is the square root of MSE:</p>
+compute the error <span class="math notranslate nohighlight">\(\bar{x} - \mu\)</span>, the sample mean minimizes</p>
+<div class="math notranslate nohighlight">
+\[MSE = \frac{1}{m} \sum (\bar{x} - \mu)^2\]</div>
+<p>Where <span class="math notranslate nohighlight">\(m\)</span> is the number of
+times you play the estimation game, not to be confused with <span class="math notranslate nohighlight">\(n\)</span>, which
+is the size of the sample used to compute <span class="math notranslate nohighlight">\(\bar{x}\)</span>.</p>
+<p>The following function takes a sequence of estimates and the actual value, and returns the square root of the mean squared error (RMSE).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">r_m_s_e</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rmse</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the root mean squared error of a sequence of estimates.</span>
 
 <span class="sd">    estimate: sequence of numbers</span>
@@ -495,8 +494,38 @@ root mean squared error (RMSE), which is the square root of MSE:</p>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 4;
-                var nbb_unformatted_code = "def r_m_s_e(estimates, actual):\n    \"\"\"Computes the root mean squared error of a sequence of estimates.\n\n    estimate: sequence of numbers\n    actual: actual value\n\n    returns: float RMSE\n    \"\"\"\n    e2 = [((estimate - actual) ** 2) for estimate in estimates]\n    mse = np.mean(e2)\n    return np.sqrt(mse)";
-                var nbb_formatted_code = "def r_m_s_e(estimates, actual):\n    \"\"\"Computes the root mean squared error of a sequence of estimates.\n\n    estimate: sequence of numbers\n    actual: actual value\n\n    returns: float RMSE\n    \"\"\"\n    e2 = [((estimate - actual) ** 2) for estimate in estimates]\n    mse = np.mean(e2)\n    return np.sqrt(mse)";
+                var nbb_unformatted_code = "def rmse(estimates, actual):\n    \"\"\"Computes the root mean squared error of a sequence of estimates.\n\n    estimate: sequence of numbers\n    actual: actual value\n\n    returns: float RMSE\n    \"\"\"\n    e2 = [((estimate - actual) ** 2) for estimate in estimates]\n    mse = np.mean(e2)\n    return np.sqrt(mse)";
+                var nbb_formatted_code = "def rmse(estimates, actual):\n    \"\"\"Computes the root mean squared error of a sequence of estimates.\n\n    estimate: sequence of numbers\n    actual: actual value\n\n    returns: float RMSE\n    \"\"\"\n    e2 = [((estimate - actual) ** 2) for estimate in estimates]\n    mse = np.mean(e2)\n    return np.sqrt(mse)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Now here is a function that simulates the estimation game. Each time through the loop, it generates a random sample, computes the sample mean and median, and collects them in lists.
+The it computes the RMSE of the estimates.</p>
+<p>In practice, of course, we don’t know <code class="docutils literal notranslate"><span class="pre">actual</span></code>.
+If we did, we wouldn’t have to estimate it.
+The purpose of this experiment is to
+compare the performance of the two estimators.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "np.random.seed(17)";
+                var nbb_formatted_code = "np.random.seed(17)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -513,57 +542,35 @@ root mean squared error (RMSE), which is the square root of MSE:</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
 
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">iters</span> <span class="o">=</span> <span class="mi">1001</span>
 
-<span class="k">def</span> <span class="nf">estimate1</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">means</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">medians</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-        <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-        <span class="n">xbar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-        <span class="n">median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-        <span class="n">means</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xbar</span><span class="p">)</span>
-        <span class="n">medians</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">median</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rmse xbar&quot;</span><span class="p">,</span> <span class="n">r_m_s_e</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">mu</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rmse median&quot;</span><span class="p">,</span> <span class="n">r_m_s_e</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">mu</span><span class="p">))</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">means</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">medians</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">xbar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">means</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xbar</span><span class="p">)</span>
+    <span class="n">medians</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rmse xbar&quot;</span><span class="p">,</span> <span class="n">rmse</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">mu</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rmse m&quot;</span><span class="p">,</span> <span class="n">rmse</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">mu</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "import random\n\n\ndef estimate1(n=7, m=1000):\n    mu = 0\n    sigma = 1\n    means = []\n    medians = []\n    for _ in range(m):\n        xs = [random.gauss(mu, sigma) for i in range(n)]\n        xbar = np.mean(xs)\n        median = np.median(xs)\n        means.append(xbar)\n        medians.append(median)\n    print('rmse xbar', r_m_s_e(means, mu))\n    print('rmse median', r_m_s_e(medians, mu))";
-                var nbb_formatted_code = "import random\n\n\ndef estimate1(n=7, m=1000):\n    mu = 0\n    sigma = 1\n    means = []\n    medians = []\n    for _ in range(m):\n        xs = [random.gauss(mu, sigma) for i in range(n)]\n        xbar = np.mean(xs)\n        median = np.median(xs)\n        means.append(xbar)\n        medians.append(median)\n    print(\"rmse xbar\", r_m_s_e(means, mu))\n    print(\"rmse median\", r_m_s_e(medians, mu))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate1</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rmse xbar 0.37916228788176404
-rmse median 0.47074707039064345
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rmse xbar 0.32150024725221277
+rmse m 0.37546219649035123
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 6;
-                var nbb_unformatted_code = "estimate1()";
-                var nbb_formatted_code = "estimate1()";
+                var nbb_unformatted_code = "import random\n\nn = 10\niters = 1001\n\nmu = 0\nsigma = 1\nmeans = []\nmedians = []\nfor _ in range(iters):\n    xs = [random.gauss(mu, sigma) for i in range(n)]\n    xbar = np.mean(xs)\n    m = np.median(xs)\n    means.append(xbar)\n    medians.append(m)\n\nprint(\"rmse xbar\", rmse(means, mu))\nprint(\"rmse m\", rmse(medians, mu))";
+                var nbb_formatted_code = "import random\n\nn = 10\niters = 1001\n\nmu = 0\nsigma = 1\nmeans = []\nmedians = []\nfor _ in range(iters):\n    xs = [random.gauss(mu, sigma) for i in range(n)]\n    xbar = np.mean(xs)\n    m = np.median(xs)\n    means.append(xbar)\n    medians.append(m)\n\nprint(\"rmse xbar\", rmse(means, mu))\nprint(\"rmse m\", rmse(medians, mu))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -577,45 +584,9 @@ rmse median 0.47074707039064345
             </script></div>
 </div>
 <p>Again, <code class="docutils literal notranslate"><span class="pre">n</span></code> is the size of the sample, and <code class="docutils literal notranslate"><span class="pre">m</span></code> is the number of times we
-play the game. <code class="docutils literal notranslate"><span class="pre">means</span></code> is the list of estimates based on <span class="math notranslate nohighlight">\(\bar{x}\)</span>.
-<code class="docutils literal notranslate"><span class="pre">medians</span></code> is the list of medians.</p>
-<p>Here’s the function that computes RMSE:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">r_m_s_e</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
-    <span class="n">e2</span> <span class="o">=</span> <span class="p">[((</span><span class="n">estimate</span> <span class="o">-</span> <span class="n">actual</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">estimate</span> <span class="ow">in</span> <span class="n">estimates</span><span class="p">]</span>
-    <span class="n">mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "def r_m_s_e(estimates, actual):\n    e2 = [((estimate - actual) ** 2) for estimate in estimates]\n    mse = np.mean(e2)\n    return np.sqrt(mse)";
-                var nbb_formatted_code = "def r_m_s_e(estimates, actual):\n    e2 = [((estimate - actual) ** 2) for estimate in estimates]\n    mse = np.mean(e2)\n    return np.sqrt(mse)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">estimates</span></code> is a list of estimates; <code class="docutils literal notranslate"><span class="pre">actual</span></code> is the actual value being
-estimated. In practice, of course, we don’t know <code class="docutils literal notranslate"><span class="pre">actual</span></code>; if we did, we
-wouldn’t have to estimate it. The purpose of this experiment is to
-compare the performance of the two estimators.</p>
-<p>When I ran this code, the RMSE of the sample mean was 0.41, which means
-that if we use <span class="math notranslate nohighlight">\(\bar{x}\)</span> to estimate the mean of this distribution, based
-on a sample with <span class="math notranslate nohighlight">\(n=7\)</span>, we should expect to be off by 0.41 on average.
-Using the median to estimate the mean yields RMSE 0.53, which confirms
-that <span class="math notranslate nohighlight">\(\bar{x}\)</span> yields lower RMSE, at least for this example.</p>
+play the game.</p>
+<p>The results depend on random numbers, so they vary from one run to the next.
+But most often we expect the sample mean to yield a lower RMSE than the sample median.</p>
 <p>Minimizing MSE is a nice property, but it’s not always the best
 strategy. For example, suppose we are estimating the distribution of
 wind speeds at a building site. If the estimate is too high, we might
@@ -638,21 +609,82 @@ a (familiar) sample:</p>
 <p><code class="docutils literal notranslate"><span class="pre">[-0.441,</span> <span class="pre">1.774,</span> <span class="pre">-0.101,</span> <span class="pre">-1.138,</span> <span class="pre">2.975,</span> <span class="pre">-2.138]</span></code></p>
 <p>What do you think is the variance, <span class="math notranslate nohighlight">\(\sigma^2\)</span>, of my distribution?
 Again, the obvious choice is to use the sample variance, <span class="math notranslate nohighlight">\(S^2\)</span>, as an
-estimator. $<span class="math notranslate nohighlight">\(S^2 = \frac{1}{n} \sum (x_i - \bar{x})^2\)</span><span class="math notranslate nohighlight">\( For large samples,
-\)</span>S^2$ is an adequate estimator, but for small samples it tends to be too
+estimator.</p>
+<div class="math notranslate nohighlight">
+\[S^2 = \frac{1}{n} \sum (x_i - \bar{x})^2\]</div>
+<p>For large samples,
+<span class="math notranslate nohighlight">\(S^2\)</span> is an adequate estimator, but for small samples it tends to be too
 low. Because of this unfortunate property, it is called a <strong>biased</strong>
 estimator. An estimator is <strong>unbiased</strong> if the expected total (or mean)
 error, after many iterations of the estimation game, is 0.</p>
 <p>Fortunately, there is another simple statistic that is an unbiased
-estimator of <span class="math notranslate nohighlight">\(\sigma^2\)</span>:
-$<span class="math notranslate nohighlight">\(S_{n-1}^2 = \frac{1}{n-1} \sum (x_i - \bar{x})^2\)</span><span class="math notranslate nohighlight">\( For an explanation of
-why \)</span>S^2<span class="math notranslate nohighlight">\( is biased, and a proof that \)</span>S_{n-1}^2$ is unbiased, see
+estimator of <span class="math notranslate nohighlight">\(\sigma^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[S_{n-1}^2 = \frac{1}{n-1} \sum (x_i - \bar{x})^2\]</div>
+<p>For an explanation of why <span class="math notranslate nohighlight">\(S^2\)</span> is biased, and a proof that <span class="math notranslate nohighlight">\(S_{n-1}^2\)</span> is unbiased, see
 <a class="reference external" href="http://wikipedia.org/wiki/Bias_of_an_estimator">http://wikipedia.org/wiki/Bias_of_an_estimator</a>.</p>
-<p>The biggest problem with this estimator is that its name and symbol are
-used inconsistently. The name “sample variance” can refer to either
-<span class="math notranslate nohighlight">\(S^2\)</span> or <span class="math notranslate nohighlight">\(S_{n-1}^2\)</span>, and the symbol <span class="math notranslate nohighlight">\(S^2\)</span> is used for either or both.</p>
-<p>Here is a function that simulates the estimation game and tests the
-performance of <span class="math notranslate nohighlight">\(S^2\)</span> and <span class="math notranslate nohighlight">\(S_{n-1}^2\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">var</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes variance.</span>
+
+<span class="sd">    xs: sequence of values</span>
+<span class="sd">    ddof: delta degrees of freedom</span>
+
+<span class="sd">    returns: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">xs</span> <span class="o">-</span> <span class="n">mu</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ds</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">correction</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "def var(xs, correction=0):\n    \"\"\"Computes variance.\n\n    xs: sequence of values\n    ddof: delta degrees of freedom\n\n    returns: float\n    \"\"\"\n    xs = np.asarray(xs)\n    mu = xs.mean()\n    ds = xs - mu\n    n = len(xs)\n    return np.sum(ds**2) / (n - correction)";
+                var nbb_formatted_code = "def var(xs, correction=0):\n    \"\"\"Computes variance.\n\n    xs: sequence of values\n    ddof: delta degrees of freedom\n\n    returns: float\n    \"\"\"\n    xs = np.asarray(xs)\n    mu = xs.mean()\n    ds = xs - mu\n    n = len(xs)\n    return np.sum(ds**2) / (n - correction)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: Test RMSE and then check for bias</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "# TODO: Test RMSE and then check for bias";
+                var nbb_formatted_code = "# TODO: Test RMSE and then check for bias";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mean_error</span></code> computes the mean difference between the estimates and the
+actual value:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mean_error</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
@@ -671,7 +703,7 @@ performance of <span class="math notranslate nohighlight">\(S^2\)</span> and <sp
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 8;
+                var nbb_cell_id = 9;
                 var nbb_unformatted_code = "def mean_error(estimates, actual):\n    \"\"\"Computes the mean error of a sequence of estimates.\n\n    estimate: sequence of numbers\n    actual: actual value\n\n    returns: float mean error\n    \"\"\"\n    errors = [(estimate - actual) for estimate in estimates]\n    return np.mean(errors)";
                 var nbb_formatted_code = "def mean_error(estimates, actual):\n    \"\"\"Computes the mean error of a sequence of estimates.\n\n    estimate: sequence of numbers\n    actual: actual value\n\n    returns: float mean error\n    \"\"\"\n    errors = [(estimate - actual) for estimate in estimates]\n    return np.mean(errors)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -686,58 +718,36 @@ performance of <span class="math notranslate nohighlight">\(S^2\)</span> and <sp
             }, 500);
             </script></div>
 </div>
+<p>Here is a function that simulates the estimation game and tests the
+performance of <span class="math notranslate nohighlight">\(S^2\)</span> and <span class="math notranslate nohighlight">\(S_{n-1}^2\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate2</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">estimates1</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">estimates2</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-        <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-        <span class="n">biased</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-        <span class="n">unbiased</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">estimates1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">biased</span><span class="p">)</span>
-        <span class="n">estimates2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unbiased</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean error biased&quot;</span><span class="p">,</span> <span class="n">mean_error</span><span class="p">(</span><span class="n">estimates1</span><span class="p">,</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean error unbiased&quot;</span><span class="p">,</span> <span class="n">mean_error</span><span class="p">(</span><span class="n">estimates2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">estimates1</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">estimates2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">biased</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">unbiased</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">estimates1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">biased</span><span class="p">)</span>
+    <span class="n">estimates2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unbiased</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean error biased&quot;</span><span class="p">,</span> <span class="n">mean_error</span><span class="p">(</span><span class="n">estimates1</span><span class="p">,</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean error unbiased&quot;</span><span class="p">,</span> <span class="n">mean_error</span><span class="p">(</span><span class="n">estimates2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "def estimate2(n=7, m=1000):\n    mu = 0\n    sigma = 1\n    estimates1 = []\n    estimates2 = []\n    for _ in range(m):\n        xs = [random.gauss(mu, sigma) for i in range(n)]\n        biased = np.var(xs)\n        unbiased = np.var(xs, ddof=1)\n        estimates1.append(biased)\n        estimates2.append(unbiased)\n    print('mean error biased', mean_error(estimates1, sigma ** 2))\n    print('mean error unbiased', mean_error(estimates2, sigma ** 2))";
-                var nbb_formatted_code = "def estimate2(n=7, m=1000):\n    mu = 0\n    sigma = 1\n    estimates1 = []\n    estimates2 = []\n    for _ in range(m):\n        xs = [random.gauss(mu, sigma) for i in range(n)]\n        biased = np.var(xs)\n        unbiased = np.var(xs, ddof=1)\n        estimates1.append(biased)\n        estimates2.append(unbiased)\n    print(\"mean error biased\", mean_error(estimates1, sigma**2))\n    print(\"mean error unbiased\", mean_error(estimates2, sigma**2))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate2</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean error biased -0.12190751436508195
-mean error unbiased 0.024441233240737725
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean error biased -0.10785005847344203
+mean error unbiased -0.008722287192713373
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 10;
-                var nbb_unformatted_code = "estimate2()";
-                var nbb_formatted_code = "estimate2()";
+                var nbb_unformatted_code = "mu = 0\nsigma = 1\nestimates1 = []\nestimates2 = []\nfor _ in range(iters):\n    xs = [random.gauss(mu, sigma) for i in range(n)]\n    biased = var(xs)\n    unbiased = var(xs, correction=1)\n    estimates1.append(biased)\n    estimates2.append(unbiased)\n\nprint(\"mean error biased\", mean_error(estimates1, sigma**2))\nprint(\"mean error unbiased\", mean_error(estimates2, sigma**2))";
+                var nbb_formatted_code = "mu = 0\nsigma = 1\nestimates1 = []\nestimates2 = []\nfor _ in range(iters):\n    xs = [random.gauss(mu, sigma) for i in range(n)]\n    biased = var(xs)\n    unbiased = var(xs, correction=1)\n    estimates1.append(biased)\n    estimates2.append(unbiased)\n\nprint(\"mean error biased\", mean_error(estimates1, sigma**2))\nprint(\"mean error unbiased\", mean_error(estimates2, sigma**2))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -751,12 +761,7 @@ mean error unbiased 0.024441233240737725
             </script></div>
 </div>
 <p>Again, <code class="docutils literal notranslate"><span class="pre">n</span></code> is the sample size and <code class="docutils literal notranslate"><span class="pre">m</span></code> is the number of times we play the
-game. <code class="docutils literal notranslate"><span class="pre">np.var</span></code> computes <span class="math notranslate nohighlight">\(S^2\)</span> by default and <span class="math notranslate nohighlight">\(S_{n-1}^2\)</span> if you provide
-the argument <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code>, which stands for “delta degrees of freedom.” I
-won’t explain that term, but you can read about it at
-<a class="reference external" href="http://en.wikipedia.org/wiki/Degrees_of_freedom_(statistics)">http://en.wikipedia.org/wiki/Degrees_of_freedom_(statistics)</a>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">MeanError</span></code> computes the mean difference between the estimates and the
-actual value:</p>
+game.</p>
 <p>When I ran this code, the mean error for <span class="math notranslate nohighlight">\(S^2\)</span> was -0.13. As expected,
 this biased estimator tends to be too low. For <span class="math notranslate nohighlight">\(S_{n-1}^2\)</span>, the mean
 error was 0.014, about 10 times smaller. As <code class="docutils literal notranslate"><span class="pre">m</span></code> increases, we expect the
@@ -837,20 +842,22 @@ the sample size, the number of gorillas we measured. <code class="docutils liter
 of times we run the simulation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xbars</span> <span class="o">=</span> <span class="n">simulate_sample</span><span class="p">()</span>
-<span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">xbars</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">)</span>
-<span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Sample mean&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
+
+<span class="n">xbars</span> <span class="o">=</span> <span class="n">simulate_sample</span><span class="p">()</span>
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">xbars</span><span class="p">)</span>
+<span class="n">cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Sample mean&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8883d397bf5592c8b9dd1a2147366fc997a3525cce47347f768f0db20fdaa226.png" src="_images/8883d397bf5592c8b9dd1a2147366fc997a3525cce47347f768f0db20fdaa226.png" />
+<img alt="_images/9d3d09f236494e37591365953a44893a71dafdce7c9044bda641b6d22a13668c.png" src="_images/9d3d09f236494e37591365953a44893a71dafdce7c9044bda641b6d22a13668c.png" />
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 12;
-                var nbb_unformatted_code = "xbars = simulate_sample()\ncdf = thinkstats2.Cdf(xbars)\nthinkplot.cdf(cdf)\nthinkplot.config(xlabel='Sample mean', ylabel='CDF')";
-                var nbb_formatted_code = "xbars = simulate_sample()\ncdf = thinkstats2.Cdf(xbars)\nthinkplot.cdf(cdf)\nthinkplot.config(xlabel=\"Sample mean\", ylabel=\"CDF\")";
+                var nbb_unformatted_code = "from empiricaldist import Cdf\n\nxbars = simulate_sample()\ncdf = Cdf.from_seq(xbars)\ncdf.plot()\ndecorate(xlabel=\"Sample mean\", ylabel=\"CDF\")";
+                var nbb_formatted_code = "from empiricaldist import Cdf\n\nxbars = simulate_sample()\ncdf = Cdf.from_seq(xbars)\ncdf.plot()\ndecorate(xlabel=\"Sample mean\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -883,7 +890,7 @@ off by as much as 8 kg.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>90.01905414266758
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>89.97975274187043
 </pre></div>
 </div>
 <script type="application/javascript">
@@ -905,20 +912,22 @@ off by as much as 8 kg.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ci</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">cdf</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="mi">95</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: make this a function</span>
+
+<span class="n">ci</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">inverse</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">])</span>
 <span class="n">ci</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(86.15814194098337, 94.00833587696725)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([85.9691665 , 93.89352504])
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 14;
-                var nbb_unformatted_code = "ci = cdf.percentile(5), cdf.percentile(95)\nci";
-                var nbb_formatted_code = "ci = cdf.percentile(5), cdf.percentile(95)\nci";
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "ci = cdf.inverse([0.05, 0.95])\nci";
+                var nbb_formatted_code = "ci = cdf.inverse([0.05, 0.95])\nci";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -933,20 +942,20 @@ off by as much as 8 kg.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stderr</span> <span class="o">=</span> <span class="n">r_m_s_e</span><span class="p">(</span><span class="n">xbars</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stderr</span> <span class="o">=</span> <span class="n">rmse</span><span class="p">(</span><span class="n">xbars</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
 <span class="n">stderr</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.3957063788957274
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.4328629138051032
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 15;
-                var nbb_unformatted_code = "stderr = r_m_s_e(xbars, 90)\nstderr";
-                var nbb_formatted_code = "stderr = r_m_s_e(xbars, 90)\nstderr";
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "stderr = rmse(xbars, 90)\nstderr";
+                var nbb_formatted_code = "stderr = rmse(xbars, 90)\nstderr";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1038,12 +1047,15 @@ distribution.</em> It’s an exponential distribution, and here’s a sample:</p
 <p><code class="docutils literal notranslate"><span class="pre">[5.384,</span> <span class="pre">4.493,</span> <span class="pre">19.198,</span> <span class="pre">2.790,</span> <span class="pre">6.122,</span> <span class="pre">12.844]</span></code></p>
 <p>What do you think is the parameter, <span class="math notranslate nohighlight">\(\lambda\)</span>, of this distribution?</p>
 <p>In general, the mean of an exponential distribution is <span class="math notranslate nohighlight">\(1/\lambda\)</span>, so
-working backwards, we might choose $<span class="math notranslate nohighlight">\(L= 1 / \bar{x}\)</span><span class="math notranslate nohighlight">\( \)</span>L<span class="math notranslate nohighlight">\( is an estimator
-of \)</span>\lambda<span class="math notranslate nohighlight">\(. And not just any estimator; it is also the maximum
+working backwards, we might choose</p>
+<div class="math notranslate nohighlight">
+\[L= 1 / \bar{x}\]</div>
+<p><span class="math notranslate nohighlight">\(L\)</span> is an estimator
+of <span class="math notranslate nohighlight">\(\lambda\)</span>. And not just any estimator; it is also the maximum
 likelihood estimator (see
-&lt;http://wikipedia.org/wiki/Exponential_distribution#Maximum_likelihood&gt;).
-So if you want to maximize your chance of guessing \)</span>\lambda<span class="math notranslate nohighlight">\( exactly,
-\)</span>L$ is the way to go.</p>
+<a class="reference external" href="http://wikipedia.org/wiki/Exponential_distribution#Maximum_likelihood">http://wikipedia.org/wiki/Exponential_distribution#Maximum_likelihood</a>).
+So if you want to maximize your chance of guessing <span class="math notranslate nohighlight">\(\lambda\)</span> exactly,
+<span class="math notranslate nohighlight">\(L\)</span> is the way to go.</p>
 <p>But we know that <span class="math notranslate nohighlight">\(\bar{x}\)</span> is not robust in the presence of outliers, so
 we expect <span class="math notranslate nohighlight">\(L\)</span> to have the same problem.</p>
 <p>We can choose an alternative based on the sample median. The median of
@@ -1054,29 +1066,82 @@ sample median.</p>
 sampling process:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate3</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="n">lam</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="n">means</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">medians</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">lam</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-        <span class="n">L</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-        <span class="n">Lm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-        <span class="n">means</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-        <span class="n">medians</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Lm</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rmse L&quot;</span><span class="p">,</span> <span class="n">r_m_s_e</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">lam</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rmse Lm&quot;</span><span class="p">,</span> <span class="n">r_m_s_e</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">lam</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean error L&quot;</span><span class="p">,</span> <span class="n">mean_error</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">lam</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean error Lm&quot;</span><span class="p">,</span> <span class="n">mean_error</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">lam</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">median</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 16;
-                var nbb_unformatted_code = "def estimate3(n=7, m=1000):\n    lam = 2\n    means = []\n    medians = []\n    for _ in range(m):\n        xs = np.random.exponential(1.0 / lam, n)\n        L = 1 / np.mean(xs)\n        Lm = np.log(2) / thinkstats2.median(xs)\n        means.append(L)\n        medians.append(Lm)\n    print('rmse L', r_m_s_e(means, lam))\n    print('rmse Lm', r_m_s_e(medians, lam))\n    print('mean error L', mean_error(means, lam))\n    print('mean error Lm', mean_error(medians, lam))";
-                var nbb_formatted_code = "def estimate3(n=7, m=1000):\n    lam = 2\n    means = []\n    medians = []\n    for _ in range(m):\n        xs = np.random.exponential(1.0 / lam, n)\n        L = 1 / np.mean(xs)\n        Lm = np.log(2) / thinkstats2.median(xs)\n        means.append(L)\n        medians.append(Lm)\n    print(\"rmse L\", r_m_s_e(means, lam))\n    print(\"rmse Lm\", r_m_s_e(medians, lam))\n    print(\"mean error L\", mean_error(means, lam))\n    print(\"mean error Lm\", mean_error(medians, lam))";
+                var nbb_cell_id = 18;
+                var nbb_unformatted_code = "def median(seq):\n    n = len(seq)\n    t = sorted(seq)\n    i = (n - 1) // 2\n    return t[i]";
+                var nbb_formatted_code = "def median(seq):\n    n = len(seq)\n    t = sorted(seq)\n    i = (n - 1) // 2\n    return t[i]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lam</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">ls</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">lms</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">lam</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">Lm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">median</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    <span class="n">lms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Lm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 19;
+                var nbb_unformatted_code = "lam = 2\nls = []\nlms = []\n\nfor _ in range(iters):\n    xs = np.random.exponential(1.0 / lam, n)\n    L = 1 / np.mean(xs)\n    Lm = np.log(2) / median(xs)\n    ls.append(L)\n    lms.append(Lm)";
+                var nbb_formatted_code = "lam = 2\nls = []\nlms = []\n\nfor _ in range(iters):\n    xs = np.random.exponential(1.0 / lam, n)\n    L = 1 / np.mean(xs)\n    Lm = np.log(2) / median(xs)\n    ls.append(L)\n    lms.append(Lm)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rmse L&quot;</span><span class="p">,</span> <span class="n">rmse</span><span class="p">(</span><span class="n">ls</span><span class="p">,</span> <span class="n">lam</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rmse Lm&quot;</span><span class="p">,</span> <span class="n">rmse</span><span class="p">(</span><span class="n">lms</span><span class="p">,</span> <span class="n">lam</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rmse L 0.8560691042601719
+rmse Lm 1.753367380943278
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 20;
+                var nbb_unformatted_code = "print(\"rmse L\", rmse(ls, lam))\nprint(\"rmse Lm\", rmse(lms, lam))";
+                var nbb_formatted_code = "print(\"rmse L\", rmse(ls, lam))\nprint(\"rmse Lm\", rmse(lms, lam))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1095,22 +1160,21 @@ experiment whether <span class="math notranslate nohighlight">\(L\)</span> minim
 <span class="math notranslate nohighlight">\(L_m\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate3</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean error L&quot;</span><span class="p">,</span> <span class="n">mean_error</span><span class="p">(</span><span class="n">ls</span><span class="p">,</span> <span class="n">lam</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean error Lm&quot;</span><span class="p">,</span> <span class="n">mean_error</span><span class="p">(</span><span class="n">lms</span><span class="p">,</span> <span class="n">lam</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rmse L 1.0607248561760632
-rmse Lm 1.8057886649949526
-mean error L 0.308337539417035
-mean error Lm 0.49212968150864184
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean error L 0.2540278485011342
+mean error Lm 0.7173415794334793
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 17;
-                var nbb_unformatted_code = "estimate3()";
-                var nbb_formatted_code = "estimate3()";
+                var nbb_cell_id = 21;
+                var nbb_unformatted_code = "print(\"mean error L\", mean_error(ls, lam))\nprint(\"mean error Lm\", mean_error(lms, lam))";
+                var nbb_formatted_code = "print(\"mean error L\", mean_error(ls, lam))\nprint(\"mean error Lm\", mean_error(lms, lam))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1127,7 +1191,7 @@ mean error Lm 0.49212968150864184
 is 0.33; for <span class="math notranslate nohighlight">\(L_m\)</span> it is 0.45. And neither converges to 0 as <code class="docutils literal notranslate"><span class="pre">m</span></code>
 increases.</p>
 <p>It turns out that <span class="math notranslate nohighlight">\(\bar{x}\)</span> is an unbiased estimator of the mean of the
-distribution, <span class="math notranslate nohighlight">\(1 / \lambda\)</span>, but <span class="math notranslate nohighlight">\(L\)</span> is not an unbiased estimator of
+distribution, but <span class="math notranslate nohighlight">\(L\)</span> is not an unbiased estimator of
 <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
 </section>
 <section id="glossary">
@@ -1162,66 +1226,6 @@ range of an estimator if an experiment is repeated many times.</p></li>
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p><strong>Exercise:</strong> Suppose you draw a sample with size n=10 from an exponential distribution with λ=2. Simulate this experiment 1000 times and plot the sampling distribution of the estimate L. Compute the standard error of the estimate and the 90% confidence interval.</p>
 <p>Repeat the experiment with a few different values of <code class="docutils literal notranslate"><span class="pre">n</span></code> and make a plot of standard error versus <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_sample</span><span class="p">(</span><span class="n">lam</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sampling distribution of L as an estimator of exponential parameter.</span>
-
-<span class="sd">    lam: parameter of an exponential distribution</span>
-<span class="sd">    n: sample size</span>
-<span class="sd">    iters: number of iterations</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="nf">vert_line</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.8&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-
-    <span class="n">estimates</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
-        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">lam</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-        <span class="n">lamhat</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-        <span class="n">estimates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lamhat</span><span class="p">)</span>
-    <span class="n">stderr</span> <span class="o">=</span> <span class="n">r_m_s_e</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">lam</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;standard error&quot;</span><span class="p">,</span> <span class="n">stderr</span><span class="p">)</span>
-    <span class="n">cdf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Cdf</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
-    <span class="n">ci</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">cdf</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="mi">95</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;confidence interval&quot;</span><span class="p">,</span> <span class="n">ci</span><span class="p">)</span>
-    <span class="n">vert_line</span><span class="p">(</span><span class="n">ci</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">vert_line</span><span class="p">(</span><span class="n">ci</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">)</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;estimate&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Sampling distribution&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">stderr</span>
-
-
-<span class="n">simulate_sample</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>standard error 0.7666435270048924
-confidence interval (1.2804374157853766, 3.601935475527593)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7666435270048924
-</pre></div>
-</div>
-<img alt="_images/bf39d9a8168a63c38272a3cfffa2e86326528401c9c4cdd808c6971b18c2b42c.png" src="_images/bf39d9a8168a63c38272a3cfffa2e86326528401c9c4cdd808c6971b18c2b42c.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 18;
-                var nbb_unformatted_code = "def simulate_sample(lam=2, n=10, iters=1000):\n    \"\"\"Sampling distribution of L as an estimator of exponential parameter.\n\n    lam: parameter of an exponential distribution\n    n: sample size\n    iters: number of iterations\n    \"\"\"\n\n    def vert_line(x, y=1):\n        thinkplot.plot([x, x], [0, y], color='0.8', linewidth=3)\n    estimates = []\n    for _ in range(iters):\n        xs = np.random.exponential(1.0 / lam, n)\n        lamhat = 1.0 / np.mean(xs)\n        estimates.append(lamhat)\n    stderr = r_m_s_e(estimates, lam)\n    print('standard error', stderr)\n    cdf = thinkstats2.Cdf(estimates)\n    ci = cdf.percentile(5), cdf.percentile(95)\n    print('confidence interval', ci)\n    vert_line(ci[0])\n    vert_line(ci[1])\n    thinkplot.cdf(cdf)\n    thinkplot.config(xlabel='estimate', ylabel='CDF', title=\n        'Sampling distribution')\n    return stderr\n\n\nsimulate_sample()";
-                var nbb_formatted_code = "def simulate_sample(lam=2, n=10, iters=1000):\n    \"\"\"Sampling distribution of L as an estimator of exponential parameter.\n\n    lam: parameter of an exponential distribution\n    n: sample size\n    iters: number of iterations\n    \"\"\"\n\n    def vert_line(x, y=1):\n        thinkplot.plot([x, x], [0, y], color=\"0.8\", linewidth=3)\n\n    estimates = []\n    for _ in range(iters):\n        xs = np.random.exponential(1.0 / lam, n)\n        lamhat = 1.0 / np.mean(xs)\n        estimates.append(lamhat)\n    stderr = r_m_s_e(estimates, lam)\n    print(\"standard error\", stderr)\n    cdf = thinkstats2.Cdf(estimates)\n    ci = cdf.percentile(5), cdf.percentile(95)\n    print(\"confidence interval\", ci)\n    vert_line(ci[0])\n    vert_line(ci[1])\n    thinkplot.cdf(cdf)\n    thinkplot.config(xlabel=\"estimate\", ylabel=\"CDF\", title=\"Sampling distribution\")\n    return stderr\n\n\nsimulate_sample()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
 <p><strong>Exercise:</strong> In games like hockey and soccer, the time between goals is roughly exponential. So you could estimate a team’s goal-scoring rate by observing the number of goals they score in a game. This estimation process is a little different from sampling the time between goals, so let’s see how it works.</p>
 <p>Write a function that takes a goal-scoring rate, <code class="docutils literal notranslate"><span class="pre">lam</span></code>, in goals per game, and simulates a game by generating the time between goals until the total time exceeds 1 game, then returns the number of goals scored.</p>
 <p>Write another function that simulates many games, stores the estimates of <code class="docutils literal notranslate"><span class="pre">lam</span></code>, then computes their mean error and RMSE.</p>
@@ -1249,52 +1253,9 @@ confidence interval (1.2804374157853766, 3.601935475527593)
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 19;
+                var nbb_cell_id = 29;
                 var nbb_unformatted_code = "def simulate_game(lam):\n    \"\"\"Simulates a game and returns the estimated goal-scoring rate.\n\n    lam: actual goal scoring rate in goals per game\n    \"\"\"\n    goals = 0\n    t = 0\n    while True:\n        time_between_goals = random.expovariate(lam)\n        t += time_between_goals\n        if t > 1:\n            break\n        goals += 1\n    L = goals\n    return L";
                 var nbb_formatted_code = "def simulate_game(lam):\n    \"\"\"Simulates a game and returns the estimated goal-scoring rate.\n\n    lam: actual goal scoring rate in goals per game\n    \"\"\"\n    goals = 0\n    t = 0\n    while True:\n        time_between_goals = random.expovariate(lam)\n        t += time_between_goals\n        if t > 1:\n            break\n        goals += 1\n    L = goals\n    return L";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate6</span><span class="p">(</span><span class="n">lam</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1000000</span><span class="p">):</span>
-    <span class="n">estimates</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-        <span class="n">L</span> <span class="o">=</span> <span class="n">simulate_game</span><span class="p">(</span><span class="n">lam</span><span class="p">)</span>
-        <span class="n">estimates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Experiment 4&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rmse L&quot;</span><span class="p">,</span> <span class="n">r_m_s_e</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">lam</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean error L&quot;</span><span class="p">,</span> <span class="n">mean_error</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">lam</span><span class="p">))</span>
-    <span class="n">pmf</span> <span class="o">=</span> <span class="n">thinkstats2</span><span class="o">.</span><span class="n">Pmf</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">pmf</span><span class="p">)</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Goals scored&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">)</span>
-
-
-<span class="n">estimate6</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Experiment 4
-rmse L 1.4145600022621876
-mean error L -0.000698
-</pre></div>
-</div>
-<img alt="_images/2853fb90c781b7641925a95772ef7f2f93311199d8e028dd7e11077f116df6eb.png" src="_images/2853fb90c781b7641925a95772ef7f2f93311199d8e028dd7e11077f116df6eb.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 20;
-                var nbb_unformatted_code = "def estimate6(lam=2, m=1000000):\n    estimates = []\n    for i in range(m):\n        L = simulate_game(lam)\n        estimates.append(L)\n    print('Experiment 4')\n    print('rmse L', r_m_s_e(estimates, lam))\n    print('mean error L', mean_error(estimates, lam))\n    pmf = thinkstats2.Pmf(estimates)\n    thinkplot.hist(pmf)\n    thinkplot.config(xlabel='Goals scored', ylabel='PMF')\n\n\nestimate6()";
-                var nbb_formatted_code = "def estimate6(lam=2, m=1000000):\n    estimates = []\n    for i in range(m):\n        L = simulate_game(lam)\n        estimates.append(L)\n    print(\"Experiment 4\")\n    print(\"rmse L\", r_m_s_e(estimates, lam))\n    print(\"mean error L\", mean_error(estimates, lam))\n    pmf = thinkstats2.Pmf(estimates)\n    thinkplot.hist(pmf)\n    thinkplot.config(xlabel=\"Goals scored\", ylabel=\"PMF\")\n\n\nestimate6()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1311,42 +1272,35 @@ mean error L -0.000698
 Run similar experiments to see if <span class="math notranslate nohighlight">\(\bar{x}\)</span> and median are biased estimates of µ. Also check whether <span class="math notranslate nohighlight">\(S^2\)</span> or <span class="math notranslate nohighlight">\(S_{n-1}^2\)</span> yields a lower MSE.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate4</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">100000</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mean error for xbar and median as estimators of population mean.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">iters</span> <span class="o">=</span> <span class="mi">1001</span>
 
-<span class="sd">    n: sample size</span>
-<span class="sd">    iters: number of iterations</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">means</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">medians</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
-        <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-        <span class="n">xbar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-        <span class="n">median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-        <span class="n">means</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xbar</span><span class="p">)</span>
-        <span class="n">medians</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">median</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Experiment 1&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean error xbar&quot;</span><span class="p">,</span> <span class="n">mean_error</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">mu</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean error median&quot;</span><span class="p">,</span> <span class="n">mean_error</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">mu</span><span class="p">))</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">means</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">medians</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">xbar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">means</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xbar</span><span class="p">)</span>
+    <span class="n">medians</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">median</span><span class="p">)</span>
 
-
-<span class="n">estimate4</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean error xbar&quot;</span><span class="p">,</span> <span class="n">mean_error</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">mu</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean error median&quot;</span><span class="p">,</span> <span class="n">mean_error</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">mu</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Experiment 1
-mean error xbar 0.00043464720852125194
-mean error median 0.0006624376902919732
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean error xbar 0.008203271420080288
+mean error median 0.012497819977177567
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 21;
-                var nbb_unformatted_code = "def estimate4(n=7, iters=100000):\n    \"\"\"Mean error for xbar and median as estimators of population mean.\n\n    n: sample size\n    iters: number of iterations\n    \"\"\"\n    mu = 0\n    sigma = 1\n    means = []\n    medians = []\n    for _ in range(iters):\n        xs = [random.gauss(mu, sigma) for i in range(n)]\n        xbar = np.mean(xs)\n        median = np.median(xs)\n        means.append(xbar)\n        medians.append(median)\n    print('Experiment 1')\n    print('mean error xbar', mean_error(means, mu))\n    print('mean error median', mean_error(medians, mu))\n\n\nestimate4()";
-                var nbb_formatted_code = "def estimate4(n=7, iters=100000):\n    \"\"\"Mean error for xbar and median as estimators of population mean.\n\n    n: sample size\n    iters: number of iterations\n    \"\"\"\n    mu = 0\n    sigma = 1\n    means = []\n    medians = []\n    for _ in range(iters):\n        xs = [random.gauss(mu, sigma) for i in range(n)]\n        xbar = np.mean(xs)\n        median = np.median(xs)\n        means.append(xbar)\n        medians.append(median)\n    print(\"Experiment 1\")\n    print(\"mean error xbar\", mean_error(means, mu))\n    print(\"mean error median\", mean_error(medians, mu))\n\n\nestimate4()";
+                var nbb_cell_id = 33;
+                var nbb_unformatted_code = "n = 7\niters = 1001\n\nmu = 0\nsigma = 1\nmeans = []\nmedians = []\nfor _ in range(iters):\n    xs = [random.gauss(mu, sigma) for i in range(n)]\n    xbar = np.mean(xs)\n    median = np.median(xs)\n    means.append(xbar)\n    medians.append(median)\n\nprint(\"mean error xbar\", mean_error(means, mu))\nprint(\"mean error median\", mean_error(medians, mu))";
+                var nbb_formatted_code = "n = 7\niters = 1001\n\nmu = 0\nsigma = 1\nmeans = []\nmedians = []\nfor _ in range(iters):\n    xs = [random.gauss(mu, sigma) for i in range(n)]\n    xbar = np.mean(xs)\n    median = np.median(xs)\n    means.append(xbar)\n    medians.append(median)\n\nprint(\"mean error xbar\", mean_error(means, mu))\nprint(\"mean error median\", mean_error(medians, mu))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1361,42 +1315,34 @@ mean error median 0.0006624376902919732
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate5</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">100000</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;RMSE for biased and unbiased estimators of population variance.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">iters</span> <span class="o">=</span> <span class="mi">1001</span>
 
-<span class="sd">    n: sample size</span>
-<span class="sd">    iters: number of iterations</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">estimates1</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">estimates2</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
-        <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-        <span class="n">biased</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-        <span class="n">unbiased</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">estimates1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">biased</span><span class="p">)</span>
-        <span class="n">estimates2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unbiased</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Experiment 2&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RMSE biased&quot;</span><span class="p">,</span> <span class="n">r_m_s_e</span><span class="p">(</span><span class="n">estimates1</span><span class="p">,</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RMSE unbiased&quot;</span><span class="p">,</span> <span class="n">r_m_s_e</span><span class="p">(</span><span class="n">estimates2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-
-
-<span class="n">estimate5</span><span class="p">()</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">estimates1</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">estimates2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">biased</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">unbiased</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">estimates1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">biased</span><span class="p">)</span>
+    <span class="n">estimates2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unbiased</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RMSE biased&quot;</span><span class="p">,</span> <span class="n">rmse</span><span class="p">(</span><span class="n">estimates1</span><span class="p">,</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RMSE unbiased&quot;</span><span class="p">,</span> <span class="n">rmse</span><span class="p">(</span><span class="n">estimates2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Experiment 2
-RMSE biased 0.5145678393502677
-RMSE unbiased 0.5763993580324033
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE biased 0.5348051198239759
+RMSE unbiased 0.6044002451720858
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 22;
-                var nbb_unformatted_code = "def estimate5(n=7, iters=100000):\n    \"\"\"RMSE for biased and unbiased estimators of population variance.\n\n    n: sample size\n    iters: number of iterations\n    \"\"\"\n    mu = 0\n    sigma = 1\n    estimates1 = []\n    estimates2 = []\n    for _ in range(iters):\n        xs = [random.gauss(mu, sigma) for i in range(n)]\n        biased = np.var(xs)\n        unbiased = np.var(xs, ddof=1)\n        estimates1.append(biased)\n        estimates2.append(unbiased)\n    print('Experiment 2')\n    print('RMSE biased', r_m_s_e(estimates1, sigma ** 2))\n    print('RMSE unbiased', r_m_s_e(estimates2, sigma ** 2))\n\n\nestimate5()";
-                var nbb_formatted_code = "def estimate5(n=7, iters=100000):\n    \"\"\"RMSE for biased and unbiased estimators of population variance.\n\n    n: sample size\n    iters: number of iterations\n    \"\"\"\n    mu = 0\n    sigma = 1\n    estimates1 = []\n    estimates2 = []\n    for _ in range(iters):\n        xs = [random.gauss(mu, sigma) for i in range(n)]\n        biased = np.var(xs)\n        unbiased = np.var(xs, ddof=1)\n        estimates1.append(biased)\n        estimates2.append(unbiased)\n    print(\"Experiment 2\")\n    print(\"RMSE biased\", r_m_s_e(estimates1, sigma**2))\n    print(\"RMSE unbiased\", r_m_s_e(estimates2, sigma**2))\n\n\nestimate5()";
+                var nbb_cell_id = 34;
+                var nbb_unformatted_code = "n = 7\niters = 1001\n\nmu = 0\nsigma = 1\nestimates1 = []\nestimates2 = []\nfor _ in range(iters):\n    xs = [random.gauss(mu, sigma) for i in range(n)]\n    biased = np.var(xs)\n    unbiased = np.var(xs, ddof=1)\n    estimates1.append(biased)\n    estimates2.append(unbiased)\nprint(\"RMSE biased\", rmse(estimates1, sigma**2))\nprint(\"RMSE unbiased\", rmse(estimates2, sigma**2))";
+                var nbb_formatted_code = "n = 7\niters = 1001\n\nmu = 0\nsigma = 1\nestimates1 = []\nestimates2 = []\nfor _ in range(iters):\n    xs = [random.gauss(mu, sigma) for i in range(n)]\n    biased = np.var(xs)\n    unbiased = np.var(xs, ddof=1)\n    estimates1.append(biased)\n    estimates2.append(unbiased)\nprint(\"RMSE biased\", rmse(estimates1, sigma**2))\nprint(\"RMSE unbiased\", rmse(estimates2, sigma**2))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
