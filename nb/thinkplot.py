@@ -88,7 +88,7 @@ class _Brewer(object):
         return cls.color_iter
 
 
-def _UnderrideColor(options):
+def _underrideColor(options):
     """If color is not in the options, chooses a color."""
     if "color" in options:
         return options
@@ -98,7 +98,7 @@ def _UnderrideColor(options):
     except StopIteration:
         warnings.warn("Ran out of colors.  Starting over.")
         _Brewer.clear_iter()
-        _UnderrideColor(options)
+        _underrideColor(options)
     return options
 
 
@@ -154,7 +154,7 @@ def sub_plot(plot_number, rows=None, cols=None, **options):
     return plt.subplot(rows, cols, plot_number, **options)
 
 
-def _Underride(d, **options):
+def _underride(d, **options):
     """Add key-value pairs to d only if key is not in d.
 
     If d is None, create a new dictionary.
@@ -181,7 +181,7 @@ def clf():
 
 def figure(**options):
     """Sets options for the current figure."""
-    _Underride(options, figsize=(6, 8))
+    _underride(options, figsize=(6, 8))
     plt.figure(**options)
 
 
@@ -194,9 +194,9 @@ def plot(obj, ys=None, style="", **options):
       style: style string passed along to plt.plot
       options: keyword args passed to plt.plot
     """
-    options = _UnderrideColor(options)
+    options = _underrideColor(options)
     label = getattr(obj, "label", "_nolegend_")
-    options = _Underride(options, linewidth=3, alpha=0.7, label=label)
+    options = _underride(options, linewidth=3, alpha=0.7, label=label)
     xs = obj
     if ys is None:
         if hasattr(obj, "render"):
@@ -219,8 +219,8 @@ def vlines(xs, y1, y2, **options):
       y2: sequence of y values
       options: keyword args passed to plt.vlines
     """
-    options = _UnderrideColor(options)
-    options = _Underride(options, linewidth=1, alpha=0.5)
+    options = _underrideColor(options)
+    options = _underride(options, linewidth=1, alpha=0.5)
     plt.vlines(xs, y1, y2, **options)
 
 
@@ -233,8 +233,8 @@ def hlines(ys, x1, x2, **options):
       x2: sequence of x values
       options: keyword args passed to plt.vlines
     """
-    options = _UnderrideColor(options)
-    options = _Underride(options, linewidth=1, alpha=0.5)
+    options = _underrideColor(options)
+    options = _underride(options, linewidth=1, alpha=0.5)
     plt.hlines(ys, x1, x2, **options)
 
 
@@ -245,8 +245,8 @@ def axvline(x, **options):
       x: x location
       options: keyword args passed to plt.axvline
     """
-    options = _UnderrideColor(options)
-    options = _Underride(options, linewidth=1, alpha=0.5)
+    options = _underrideColor(options)
+    options = _underride(options, linewidth=1, alpha=0.5)
     plt.axvline(x, **options)
 
 
@@ -257,14 +257,14 @@ def axhline(y, **options):
       y: y location
       options: keyword args passed to plt.axhline
     """
-    options = _UnderrideColor(options)
-    options = _Underride(options, linewidth=1, alpha=0.5)
+    options = _underrideColor(options)
+    options = _underride(options, linewidth=1, alpha=0.5)
     plt.axhline(y, **options)
 
 
 def tight_layout(**options):
     """Adjust subplots to minimize padding and margins."""
-    options = _Underride(
+    options = _underride(
         options, wspace=0.1, hspace=0.1, left=0, right=1, bottom=0, top=1
     )
     plt.tight_layout()
@@ -281,8 +281,8 @@ def fill_between(xs, y1, y2=None, where=None, **options):
       where: sequence of boolean
       options: keyword args passed to plt.fill_between
     """
-    options = _UnderrideColor(options)
-    options = _Underride(options, linewidth=0, alpha=0.5)
+    options = _underrideColor(options)
+    options = _underride(options, linewidth=0, alpha=0.5)
     plt.fill_between(xs, y1, y2, where, **options)
 
 
@@ -294,8 +294,8 @@ def bar(xs, ys, **options):
       ys: sequence of y values
       options: keyword args passed to plt.bar
     """
-    options = _UnderrideColor(options)
-    options = _Underride(options, linewidth=0, alpha=0.6)
+    options = _underrideColor(options)
+    options = _underride(options, linewidth=0, alpha=0.6)
     plt.bar(xs, ys, **options)
 
 
@@ -306,7 +306,7 @@ def scatter(xs, ys=None, **options):
     ys: y values
     options: options passed to plt.scatter
     """
-    options = _Underride(options, color="blue", alpha=0.2, s=30, edgecolors="none")
+    options = _underride(options, color="blue", alpha=0.2, s=30, edgecolors="none")
     if ys is None and isinstance(xs, pd.Series):
         ys = xs.values
         xs = xs.index
@@ -320,7 +320,7 @@ def hex_bin(xs, ys, **options):
     ys: y values
     options: options passed to plt.scatter
     """
-    options = _Underride(options, cmap=matplotlib.cm.Blues)
+    options = _underride(options, cmap=matplotlib.cm.Blues)
     plt.hexbin(xs, ys, **options)
 
 
@@ -334,7 +334,7 @@ def pdf(pdf, **options):
     low, high = options.pop("low", None), options.pop("high", None)
     n = options.pop("n", 101)
     xs, ps = pdf.render(low=low, high=high, n=n)
-    options = _Underride(options, label=pdf.label)
+    options = _underride(options, label=pdf.label)
     plot(xs, ps, **options)
 
 
@@ -378,8 +378,8 @@ def hist(hist, **options):
             warnings.warn(
                 "Hist: Can't compute bar width automatically.Check for non-numeric types in Hist.Or try providing width option."
             )
-    options = _Underride(options, label=hist.label)
-    options = _Underride(options, align="center")
+    options = _underride(options, label=hist.label)
+    options = _underride(options, align="center")
     if options["align"] == "left":
         options["align"] = "edge"
     elif options["align"] == "right":
@@ -437,7 +437,7 @@ def pmf(pmf, **options):
         pxs = np.array(pxs) - width / 2.0
     if align == "right":
         pxs = np.array(pxs) - width
-    options = _Underride(options, label=pmf.label)
+    options = _underride(options, label=pmf.label)
     plot(pxs, pys, **options)
 
 plot_pmf = pmf
@@ -509,7 +509,7 @@ def cdf(cdf, complement=False, transform=None, **options):
         ps = np.delete(ps, 0)
         ps = [(-math.log(p)) for p in ps]
         scale["yscale"] = "log"
-    options = _Underride(options, label=cdf.label)
+    options = _underride(options, label=cdf.label)
     plot(xs, ps, **options)
     return scale
 plot_cdf = cdf
@@ -539,7 +539,7 @@ def contour(obj, pcolor=False, contour=True, imshow=False, **options):
         d = obj.get_dict()
     except AttributeError:
         d = obj
-    _Underride(options, linewidth=3, cmap=matplotlib.cm.Blues)
+    _underride(options, linewidth=3, cmap=matplotlib.cm.Blues)
     xs, ys = zip(*d.keys())
     xs = sorted(set(xs))
     ys = sorted(set(ys))
@@ -570,7 +570,7 @@ def pcolor(xs, ys, zs, pcolor=True, contour=False, **options):
     contour: boolean, whether to make a contour plot
     options: keyword args passed to plt.pcolor and/or plt.contour
     """
-    _Underride(options, linewidth=3, cmap=matplotlib.cm.Blues)
+    _underride(options, linewidth=3, cmap=matplotlib.cm.Blues)
     X, Y = np.meshgrid(xs, ys)
     Z = zs
     x_formatter = matplotlib.ticker.ScalarFormatter(useOffset=False)
@@ -591,7 +591,7 @@ def text(x, y, s, **options):
     s: string
     options: keyword args passed to plt.text
     """
-    options = _Underride(
+    options = _underride(
         options, fontsize=16, verticalalignment="top", horizontalalignment="left"
     )
     plt.text(x, y, s, **options)
@@ -764,7 +764,7 @@ def save_format(root, fmt="eps", **options):
       root: string filename root
       fmt: string format
     """
-    _Underride(options, dpi=300)
+    _underride(options, dpi=300)
     filename = "%s.%s" % (root, fmt)
     print("Writing", filename)
     plt.savefig(filename, format=fmt, **options)

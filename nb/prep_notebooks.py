@@ -12,6 +12,11 @@ for filename in sorted(filenames):
     print('Removing solutions from', filename)
     ntbk = nbf.read(filename, nbf.NO_CONVERT)
 
+    # if the second element of ntbk.cells loads nb_black, remove it
+    second = ntbk.cells[1]
+    if second.source.startswith(r'%load_ext nb_black'):
+        ntbk.cells.pop(1)
+
     for cell in ntbk.cells:
         # remove tags
         if 'tags' in cell['metadata']:

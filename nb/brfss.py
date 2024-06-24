@@ -9,7 +9,7 @@ import math
 import sys
 import pandas as pd
 import numpy as np
-import thinkstats2
+import thinkstats
 import thinkplot
 
 
@@ -63,7 +63,7 @@ def read_brfss(filename="CDBRFS08.ASC.gz", compression="gzip", nrows=None):
     columns = ["name", "start", "end", "type"]
     variables = pd.DataFrame(var_info, columns=columns)
     variables.end += 1
-    dct = thinkstats2.FixedWidthVariables(variables, index_base=1)
+    dct = thinkstats.FixedWidthVariables(variables, index_base=1)
     df = dct.read_fixed_width(filename, compression=compression, nrows=nrows)
     clean_brfss_frame(df)
     return df
@@ -74,13 +74,13 @@ def make_normal_model(weights):
 
     weights: sequence
     """
-    cdf = thinkstats2.Cdf(weights, label="weights")
-    mean, var = thinkstats2.trimmed_mean_var(weights)
+    cdf = thinkstats.Cdf(weights, label="weights")
+    mean, var = thinkstats.trimmed_mean_var(weights)
     std = math.sqrt(var)
     print("n, mean, std", len(weights), mean, std)
     xmin = mean - 4 * std
     xmax = mean + 4 * std
-    xs, ps = thinkstats2.render_normal_cdf(mean, std, xmin, xmax)
+    xs, ps = thinkstats.render_normal_cdf(mean, std, xmin, xmax)
     thinkplot.plot(xs, ps, label="model", linewidth=4, color="0.8")
     thinkplot.cdf(cdf)
 
@@ -90,12 +90,12 @@ def make_normal_plot(weights):
 
     weights: sequence
     """
-    mean, var = thinkstats2.trimmed_mean_var(weights, p=0.01)
+    mean, var = thinkstats.trimmed_mean_var(weights, p=0.01)
     std = math.sqrt(var)
     xs = [-5, 5]
-    xs, ys = thinkstats2.fit_line(xs, mean, std)
+    xs, ys = thinkstats.fit_line(xs, mean, std)
     thinkplot.plot(xs, ys, color="0.8", label="model")
-    xs, ys = thinkstats2.normal_probability(weights)
+    xs, ys = thinkstats.normal_probability(weights)
     thinkplot.plot(xs, ys, label="weights")
 
 
@@ -124,7 +124,7 @@ def main(script, nrows=1000):
 
     script: string script name
     """
-    thinkstats2.random_seed(17)
+    thinkstats.random_seed(17)
     nrows = int(nrows)
     df = read_brfss(nrows=nrows)
     make_figures(df)

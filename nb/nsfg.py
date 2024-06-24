@@ -8,7 +8,7 @@ License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 from collections import defaultdict
 import numpy as np
 import pandas as pd
-import thinkstats2
+import thinkstats
 
 
 def read_fem_resp(dct_file="2002FemResp.dct", dat_file="2002FemResp.dat.gz", **options):
@@ -19,7 +19,7 @@ def read_fem_resp(dct_file="2002FemResp.dct", dat_file="2002FemResp.dat.gz", **o
 
     returns: DataFrame
     """
-    dct = thinkstats2.read_stata_dct(dct_file, encoding="iso-8859-1")
+    dct = thinkstats.read_stata_dct(dct_file, encoding="iso-8859-1")
     df = dct.read_fixed_width(dat_file, compression="gzip", **options)
     return df
 
@@ -139,7 +139,7 @@ def read_fem_preg(dct_file="2002FemPreg.dct", dat_file="2002FemPreg.dat.gz"):
 
     returns: DataFrame
     """
-    dct = thinkstats2.read_stata_dct(dct_file)
+    dct = thinkstats.read_stata_dct(dct_file)
     df = dct.read_fixed_width(dat_file, compression="gzip")
     clean_fem_preg(df)
     return df
@@ -227,7 +227,7 @@ def summarize(live, firsts, others):
     print("Difference in weeks", mean1 - mean2)
     print("Difference in hours", (mean1 - mean2) * 7 * 24)
     print("Difference relative to 39 weeks", (mean1 - mean2) / 39 * 100)
-    d = thinkstats2.cohen_effect_size(firsts.prglngth, others.prglngth)
+    d = thinkstats.cohen_effect_size(firsts.prglngth, others.prglngth)
     print("Cohen d", d)
 
 
