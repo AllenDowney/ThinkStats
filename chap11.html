@@ -177,8 +177,8 @@
 <li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
@@ -422,6 +422,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">decorate</span>
@@ -432,8 +433,8 @@ document.write(`
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 3;
-                var nbb_unformatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
-                var nbb_formatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
+                var nbb_unformatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
+                var nbb_formatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -446,47 +447,28 @@ document.write(`
             }, 500);
             </script></div>
 </div>
-<p>The linear least squares fit in the previous chapter is an example of
-<strong>regression</strong>, which is the more general problem of fitting any kind of
-model to any kind of data. This use of the term “regression” is a
-historical accident; it is only indirectly related to the original
-meaning of the word.</p>
-<p>The goal of regression analysis is to describe the relationship between
-one set of variables, called the <strong>dependent variables</strong>, and another
-set of variables, called independent or <strong>explanatory variables</strong>.</p>
-<p>In the previous chapter we used mother’s age as an explanatory variable
-to predict birth weight as a dependent variable. When there is only one
-dependent and one explanatory variable, that’s <strong>simple regression</strong>. In
-this chapter, we move on to <strong>multiple regression</strong>, with more than one
-explanatory variable. If there is more than one dependent variable,
-that’s multivariate regression.</p>
-<p>If the relationship between the dependent and explanatory variable is
-linear, that’s <strong>linear regression</strong>. For example, if the dependent
-variable is <span class="math notranslate nohighlight">\(y\)</span> and the explanatory variables are <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>, we
-would write the following linear regression model:</p>
+<p>The linear least squares fit in the previous chapter is an example of <strong>regression</strong>, which is the more general problem of fitting any kind of model to any kind of data.
+This use of the term “regression” is a historical accident; it is only indirectly related to the original meaning of the word.</p>
+<p>The goal of regression analysis is to describe the relationship between one set of variables, called the <strong>dependent variables</strong>, and another set of variables, called independent or <strong>explanatory variables</strong>.</p>
+<p>In the previous chapter we used mother’s age as an explanatory variable to predict birth weight as a dependent variable.
+When there is only one dependent and one explanatory variable, that’s <strong>simple regression</strong>.
+In this chapter, we move on to <strong>multiple regression</strong>, with more than one explanatory variable.
+If there is more than one dependent variable, that’s multivariate regression.</p>
+<p>If the relationship between the dependent and explanatory variable is linear, that’s <strong>linear regression</strong>.
+For example, if the dependent variable is <span class="math notranslate nohighlight">\(y\)</span> and the explanatory variables are <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>, we would write the following linear regression model:</p>
 <div class="math notranslate nohighlight">
 \[y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon\]</div>
-<p>where <span class="math notranslate nohighlight">\(\beta_0\)</span> is
-the intercept, <span class="math notranslate nohighlight">\(\beta_1\)</span> is the parameter associated with <span class="math notranslate nohighlight">\(x_1\)</span>,
-<span class="math notranslate nohighlight">\(\beta_2\)</span> is the parameter associated with <span class="math notranslate nohighlight">\(x_2\)</span>, and <span class="math notranslate nohighlight">\(\epsilon\)</span> is the
-residual due to random variation or other unknown factors.</p>
-<p>Given a sequence of values for <span class="math notranslate nohighlight">\(y\)</span> and sequences for <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>, we
-can find the parameters, <span class="math notranslate nohighlight">\(\beta_0\)</span>, <span class="math notranslate nohighlight">\(\beta_1\)</span>, and <span class="math notranslate nohighlight">\(\beta_2\)</span>, that
-minimize the sum of <span class="math notranslate nohighlight">\(\epsilon^2\)</span>. This process is called <strong>ordinary least
-squares</strong>. The computation is similar to <code class="docutils literal notranslate"><span class="pre">thinkstats2.LeastSquare</span></code>, but
-generalized to deal with more than one explanatory variable. You can
-find the details at
-<a class="reference external" href="https://en.wikipedia.org/wiki/Ordinary_least_squares">https://en.wikipedia.org/wiki/Ordinary_least_squares</a></p>
+<p>where <span class="math notranslate nohighlight">\(\beta_0\)</span> is the intercept, <span class="math notranslate nohighlight">\(\beta_1\)</span> is the parameter associated with <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(\beta_2\)</span> is the parameter associated with <span class="math notranslate nohighlight">\(x_2\)</span>, and <span class="math notranslate nohighlight">\(\epsilon\)</span> is the residual due to random variation or other unknown factors.</p>
+<p>Given a sequence of values for <span class="math notranslate nohighlight">\(y\)</span> and sequences for <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>, we can find the parameters, <span class="math notranslate nohighlight">\(\beta_0\)</span>, <span class="math notranslate nohighlight">\(\beta_1\)</span>, and <span class="math notranslate nohighlight">\(\beta_2\)</span>, that minimize the sum of <span class="math notranslate nohighlight">\(\epsilon^2\)</span>.
+This process is called <strong>ordinary least squares</strong>.
+The computation is similar to <code class="docutils literal notranslate"><span class="pre">thinkstats2.LeastSquare</span></code>, but generalized to deal with more than one explanatory variable.
+You can find the details at <a class="reference external" href="https://en.wikipedia.org/wiki/Ordinary_least_squares">https://en.wikipedia.org/wiki/Ordinary_least_squares</a></p>
 <section id="statsmodels">
 <h2>StatsModels<a class="headerlink" href="#statsmodels" title="Link to this heading">#</a></h2>
-<p>In the previous chapter I presented <code class="docutils literal notranslate"><span class="pre">thinkstats2.LeastSquares</span></code>, an
-implementation of simple linear regression intended to be easy to read.
-For multiple regression we’ll switch to StatsModels, a Python package
-that provides several forms of regression and other analyses. If you are
-using Anaconda, you already have StatsModels; otherwise you might have
-to install it.</p>
-<p>As an example, I’ll run the model from the previous chapter with
-StatsModels:</p>
+<p>In the previous chapter I presented <code class="docutils literal notranslate"><span class="pre">thinkstats2.LeastSquares</span></code>, an implementation of simple linear regression intended to be easy to read.
+For multiple regression we’ll switch to StatsModels, a Python package that provides several forms of regression and other analyses.
+If you are using Anaconda, you already have StatsModels; otherwise you might have to install it.</p>
+<p>As an example, I’ll run the model from the previous chapter with StatsModels:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
@@ -567,20 +549,13 @@ StatsModels:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> provides two interfaces (APIs); the “formula” API uses
-strings to identify the dependent and explanatory variables. It uses a
-syntax called <code class="docutils literal notranslate"><span class="pre">patsy</span></code>.
-In this example, the <code class="docutils literal notranslate"><span class="pre">~</span></code> operator separates the
-dependent variable on the left from the explanatory variables on the
-right.</p>
-<p><code class="docutils literal notranslate"><span class="pre">smf.ols</span></code> takes the formula string and the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, <code class="docutils literal notranslate"><span class="pre">live</span></code>, and
-returns an OLS object that represents the model. The name <code class="docutils literal notranslate"><span class="pre">ols</span></code> stands
-for “ordinary least squares.”</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">fit</span></code> method fits the model to the data and returns a
-RegressionResults object that contains the results.</p>
-<p><code class="docutils literal notranslate"><span class="pre">results</span></code> contains a <code class="docutils literal notranslate"><span class="pre">Series</span></code> called <code class="docutils literal notranslate"><span class="pre">params</span></code> that
-maps from variable names to their parameters, so we can get the
-intercept and slope like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> provides two interfaces (APIs); the “formula” API uses strings to identify the dependent and explanatory variables.
+It uses a syntax called <code class="docutils literal notranslate"><span class="pre">patsy</span></code>.
+In this example, the <code class="docutils literal notranslate"><span class="pre">~</span></code> operator separates the dependent variable on the left from the explanatory variables on the right.</p>
+<p><code class="docutils literal notranslate"><span class="pre">smf.ols</span></code> takes the formula string and the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, <code class="docutils literal notranslate"><span class="pre">live</span></code>, and returns an OLS object that represents the model.
+The name <code class="docutils literal notranslate"><span class="pre">ols</span></code> stands for “ordinary least squares.”</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fit</span></code> method fits the model to the data and returns a RegressionResults object that contains the results.</p>
+<p><code class="docutils literal notranslate"><span class="pre">results</span></code> contains a <code class="docutils literal notranslate"><span class="pre">Series</span></code> called <code class="docutils literal notranslate"><span class="pre">params</span></code> that maps from variable names to their parameters, so we can get the intercept and slope like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inter</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Intercept&quot;</span><span class="p">]</span>
@@ -610,10 +585,8 @@ intercept and slope like this:</p>
             }, 500);
             </script></div>
 </div>
-<p>The estimated parameters are the same as what we got from
-<code class="docutils literal notranslate"><span class="pre">least_squares</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">results</span></code> contains another <code class="docutils literal notranslate"><span class="pre">Series</span></code> called <code class="docutils literal notranslate"><span class="pre">pvalues</span></code> that maps from variable names to the associated p-values, so we can check whether the estimated slope is statistically
-significant:</p>
+<p>The estimated parameters are the same as what we got from <code class="docutils literal notranslate"><span class="pre">least_squares</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">results</span></code> contains another <code class="docutils literal notranslate"><span class="pre">Series</span></code> called <code class="docutils literal notranslate"><span class="pre">pvalues</span></code> that maps from variable names to the associated p-values, so we can check whether the estimated slope is statistically significant:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">slope_pvalue</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">pvalues</span><span class="p">[</span><span class="s2">&quot;agepreg&quot;</span><span class="p">]</span>
@@ -671,10 +644,8 @@ significant:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">results</span></code> also provides <code class="docutils literal notranslate"><span class="pre">resid</span></code>, a sequence of residuals, and
-<code class="docutils literal notranslate"><span class="pre">fittedvalues</span></code>, a sequence of fitted values corresponding to <code class="docutils literal notranslate"><span class="pre">agepreg</span></code>.</p>
-<p>The results object provides <code class="docutils literal notranslate"><span class="pre">summary()</span></code>, which represents the results in
-a readable format.</p>
+<p><code class="docutils literal notranslate"><span class="pre">results</span></code> also provides <code class="docutils literal notranslate"><span class="pre">resid</span></code>, a sequence of residuals, and <code class="docutils literal notranslate"><span class="pre">fittedvalues</span></code>, a sequence of fitted values corresponding to <code class="docutils literal notranslate"><span class="pre">agepreg</span></code>.</p>
+<p>The results object provides <code class="docutils literal notranslate"><span class="pre">summary()</span></code>, which represents the results in a readable format.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
@@ -694,10 +665,10 @@ a readable format.</p>
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   43.02</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sun, 23 Jun 2024</td> <th>  Prob (F-statistic):</th> <td>5.72e-11</td> 
+  <th>Date:</th>             <td>Tue, 25 Jun 2024</td> <th>  Prob (F-statistic):</th> <td>5.72e-11</td> 
 </tr>
 <tr>
-  <th>Time:</th>                 <td>18:12:02</td>     <th>  Log-Likelihood:    </th> <td> -15897.</td> 
+  <th>Time:</th>                 <td>14:26:01</td>     <th>  Log-Likelihood:    </th> <td> -15897.</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>  9038</td>      <th>  AIC:               </th> <td>3.180e+04</td>
@@ -753,8 +724,7 @@ a readable format.</p>
             }, 500);
             </script></div>
 </div>
-<p>But it prints a lot of information that is not relevant (yet), so I use
-a simpler function called <code class="docutils literal notranslate"><span class="pre">summarize_results</span></code>.</p>
+<p>But it prints a lot of information that is not relevant (yet), so I use a simpler function called <code class="docutils literal notranslate"><span class="pre">summarize_results</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">summarize_results</span>
@@ -788,26 +758,20 @@ Std(res) 1.405
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">Std(ys)</span></code> is the standard deviation of the dependent variable, which is
-the RMSE if you have to guess birth weights without the benefit of any
-explanatory variables. <code class="docutils literal notranslate"><span class="pre">Std(res)</span></code> is the standard deviation of the
-residuals, which is the RMSE if your guesses are informed by the
-mother’s age. As we have already seen, knowing the mother’s age provides
-no substantial improvement to the predictions.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Std(ys)</span></code> is the standard deviation of the dependent variable, which is the RMSE if you have to guess birth weights without the benefit of any explanatory variables.
+<code class="docutils literal notranslate"><span class="pre">Std(res)</span></code> is the standard deviation of the residuals, which is the RMSE if your guesses are informed by the mother’s age.
+As we have already seen, knowing the mother’s age provides no substantial improvement to the predictions.</p>
 </section>
 <section id="multiple-regression">
 <h2>Multiple regression<a class="headerlink" href="#multiple-regression" title="Link to this heading">#</a></h2>
-<p>We’ve seen that first babies tend to be lighter
-than others, and this effect is statistically significant. But it is a
-strange result because there is no obvious mechanism that would cause
-first babies to be lighter. So we might wonder whether this relationship
-is <strong>spurious</strong>.</p>
-<p>In fact, there is a possible explanation for this effect. We have seen
-that birth weight depends on mother’s age, and we might expect that
-mothers of first babies are younger than others.</p>
-<p>With a few calculations we can check whether this explanation is
-plausible. Then we’ll use multiple regression to investigate more
-carefully. First, let’s see how big the difference in weight is:</p>
+<p>We’ve seen that first babies tend to be lighter than others, and this effect is statistically significant.
+But it is a strange result because there is no obvious mechanism that would cause first babies to be lighter.
+So we might wonder whether this relationship is <strong>spurious</strong>.</p>
+<p>In fact, there is a possible explanation for this effect.
+We have seen that birth weight depends on mother’s age, and we might expect that mothers of first babies are younger than others.</p>
+<p>With a few calculations we can check whether this explanation is plausible.
+Then we’ll use multiple regression to investigate more carefully.
+First, let’s see how big the difference in weight is:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff_weight</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">others</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -836,8 +800,8 @@ carefully. First, let’s see how big the difference in weight is:</p>
             }, 500);
             </script></div>
 </div>
-<p>First babies are 0.125 lbs lighter, or 2 ounces. And the difference in
-ages:</p>
+<p>First babies are 0.125 lbs lighter, or 2 ounces.
+And the difference in ages:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff_age</span> <span class="o">=</span> <span class="n">firsts</span><span class="o">.</span><span class="n">agepreg</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">others</span><span class="o">.</span><span class="n">agepreg</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -866,8 +830,8 @@ ages:</p>
             }, 500);
             </script></div>
 </div>
-<p>The mothers of first babies are 3.59 years younger, on average. Running the linear
-model again, we get the change in birth weight as a function of age:</p>
+<p>The mothers of first babies are 3.59 years younger, on average.
+Running the linear model again, we get the change in birth weight as a function of age:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;totalwgt_lb ~ agepreg&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">live</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
@@ -897,9 +861,8 @@ model again, we get the change in birth weight as a function of age:</p>
             }, 500);
             </script></div>
 </div>
-<p>The slope is 0.0175 pounds per year. If we multiply the slope by the
-difference in ages, we get the expected difference in birth weight for
-first babies and others, due to mother’s age:</p>
+<p>The slope is 0.0175 pounds per year.
+If we multiply the slope by the difference in ages, we get the expected difference in birth weight for first babies and others, due to mother’s age:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">slope</span> <span class="o">*</span> <span class="n">diff_age</span>
@@ -927,11 +890,9 @@ first babies and others, due to mother’s age:</p>
             }, 500);
             </script></div>
 </div>
-<p>The result is 0.063, just about half of the observed difference. So we
-conclude, tentatively, that the observed difference in birth weight can
-be partly explained by the difference in mother’s age.</p>
-<p>Using multiple regression, we can explore these relationships more
-systematically.</p>
+<p>The result is 0.063, just about half of the observed difference.
+So we conclude, tentatively, that the observed difference in birth weight can be partly explained by the difference in mother’s age.</p>
+<p>Using multiple regression, we can explore these relationships more systematically.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">[</span><span class="s2">&quot;isfirst&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">birthord</span> <span class="o">==</span> <span class="mi">1</span>
@@ -958,9 +919,8 @@ systematically.</p>
             }, 500);
             </script></div>
 </div>
-<p>The first line creates a new column named <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> that is True for
-first babies and false otherwise. Then we fit a model using <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> as
-an explanatory variable.</p>
+<p>The first line creates a new column named <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> that is True for first babies and false otherwise.
+Then we fit a model using <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> as an explanatory variable.</p>
 <p>Here are the results:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -993,16 +953,9 @@ Std(res) 1.407
             }, 500);
             </script></div>
 </div>
-<p>Because <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> is a boolean, <code class="docutils literal notranslate"><span class="pre">ols</span></code> treats it as a <strong>categorical
-variable</strong>, which means that the values fall into categories, like True
-and False, and should not be treated as numbers. The estimated parameter
-is the effect on birth weight when <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> is true, so the result,
--0.125 lbs, is the difference in birth weight between first babies and
-others.</p>
-<p>The slope and the intercept are statistically significant, which means
-that they were unlikely to occur by chance, but the the <span class="math notranslate nohighlight">\(R^2\)</span> value for
-this model is small, which means that <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> doesn’t account for a
-substantial part of the variation in birth weight.</p>
+<p>Because <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> is a boolean, <code class="docutils literal notranslate"><span class="pre">ols</span></code> treats it as a <strong>categorical variable</strong>, which means that the values fall into categories, like True and False, and should not be treated as numbers.
+The estimated parameter is the effect on birth weight when <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> is true, so the result, -0.125 lbs, is the difference in birth weight between first babies and others.</p>
+<p>The slope and the intercept are statistically significant, which means that they were unlikely to occur by chance, but the the <span class="math notranslate nohighlight">\(R^2\)</span> value for this model is small, which means that <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> doesn’t account for a substantial part of the variation in birth weight.</p>
 <p>The results are similar with <code class="docutils literal notranslate"><span class="pre">agepreg</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1038,9 +991,9 @@ Std(res) 1.405
             </script></div>
 </div>
 <p>Again, the parameters are statistically significant, but <span class="math notranslate nohighlight">\(R^2\)</span> is low.</p>
-<p>These models confirm results we have already seen. But now we can fit a
-single model that includes both variables. With the formula
-<code class="docutils literal notranslate"><span class="pre">totalwgt_lb</span> <span class="pre">~</span> <span class="pre">isfirst</span> <span class="pre">+</span> <span class="pre">agepreg</span></code>, we get:</p>
+<p>These models confirm results we have already seen.
+But now we can fit a single model that includes both variables.
+With the formula <code class="docutils literal notranslate"><span class="pre">totalwgt_lb</span> <span class="pre">~</span> <span class="pre">isfirst</span> <span class="pre">+</span> <span class="pre">agepreg</span></code>, we get:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;totalwgt_lb ~ isfirst + agepreg&quot;</span>
@@ -1075,20 +1028,14 @@ Std(res) 1.405
             }, 500);
             </script></div>
 </div>
-<p>In the combined model, the parameter for <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> is smaller by about
-half, which means that part of the apparent effect of <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> is
-actually accounted for by <code class="docutils literal notranslate"><span class="pre">agepreg</span></code>. And the p-value for <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> is
-about 2.5%, which is on the border of statistical significance.</p>
-<p><span class="math notranslate nohighlight">\(R^2\)</span> for this model is a little higher, which indicates that the two
-variables together account for more variation in birth weight than
-either alone (but not by much).</p>
+<p>In the combined model, the parameter for <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> is smaller by about half, which means that part of the apparent effect of <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> is actually accounted for by <code class="docutils literal notranslate"><span class="pre">agepreg</span></code>.
+And the p-value for <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> is about 2.5%, which is on the border of statistical significance.</p>
+<p><span class="math notranslate nohighlight">\(R^2\)</span> for this model is a little higher, which indicates that the two variables together account for more variation in birth weight than either alone (but not by much).</p>
 </section>
 <section id="nonlinear-relationships">
 <h2>Nonlinear relationships<a class="headerlink" href="#nonlinear-relationships" title="Link to this heading">#</a></h2>
-<p>Remembering that the contribution of <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> might be nonlinear, we
-might consider adding a variable to capture more of this relationship.
-One option is to create a column, <code class="docutils literal notranslate"><span class="pre">agepreg2</span></code>, that contains the squares
-of the ages:</p>
+<p>Remembering that the contribution of <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> might be nonlinear, we might consider adding a variable to capture more of this relationship.
+One option is to create a column, <code class="docutils literal notranslate"><span class="pre">agepreg2</span></code>, that contains the squares of the ages:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">[</span><span class="s2">&quot;agepreg2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">agepreg</span><span class="o">**</span><span class="mi">2</span>
@@ -1115,8 +1062,7 @@ of the ages:</p>
             }, 500);
             </script></div>
 </div>
-<p>Now by estimating parameters for <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> and <code class="docutils literal notranslate"><span class="pre">agepreg2</span></code>, we are
-effectively fitting a parabola:</p>
+<p>Now by estimating parameters for <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> and <code class="docutils literal notranslate"><span class="pre">agepreg2</span></code>, we are effectively fitting a parabola:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summarize_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
@@ -1150,64 +1096,33 @@ Std(res) 1.403
             }, 500);
             </script></div>
 </div>
-<p>The parameter of <code class="docutils literal notranslate"><span class="pre">agepreg2</span></code> is negative, so the parabola curves
-downward, which is consistent with the shape of the lines in
-Figure <a class="reference internal" href="#linear2"><span class="xref myst">[linear2]</span></a>{reference-type=“ref”
-reference=“linear2”}.</p>
-<p>The quadratic model of <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> accounts for more of the variability in
-birth weight; the parameter for <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> is smaller in this model, and
-no longer statistically significant.</p>
-<p>Using computed variables like <code class="docutils literal notranslate"><span class="pre">agepreg2</span></code> is a common way to fit
-polynomials and other functions to data. This process is still
-considered linear regression, because the dependent variable is a linear
-function of the explanatory variables, regardless of whether some
-variables are nonlinear functions of others.</p>
+<p>The parameter of <code class="docutils literal notranslate"><span class="pre">agepreg2</span></code> is negative, so the parabola curves downward, which is consistent with the shape of the lines in Figure <a class="reference internal" href="#linear2"><span class="xref myst">[linear2]</span></a>{reference-type=“ref” reference=“linear2”}.</p>
+<p>The quadratic model of <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> accounts for more of the variability in birth weight; the parameter for <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> is smaller in this model, and no longer statistically significant.</p>
+<p>Using computed variables like <code class="docutils literal notranslate"><span class="pre">agepreg2</span></code> is a common way to fit polynomials and other functions to data.
+This process is still considered linear regression, because the dependent variable is a linear function of the explanatory variables, regardless of whether some variables are nonlinear functions of others.</p>
 <p>The following table summarizes the results of these regressions:</p>
-<p>center
-isfirst        agepreg     agepreg2     <span class="math notranslate nohighlight">\(R^2\)</span></p>
-<hr class="docutils" />
-<p>Model 1       -0.125 *         –           –        0.002
-Model 2          –          0.0175 *       –        0.0047
-Model 3    -0.0698 (0.025)   0.0154 *       –        0.0053
-Model 4    -0.0504 (0.11)    0.112 *    -0.00185 *   0.0075</p>
-<p>The columns in this table are the explanatory variables and the
-coefficient of determination, <span class="math notranslate nohighlight">\(R^2\)</span>. Each entry is an estimated
-parameter and either a p-value in parentheses or an asterisk to indicate
-a p-value less that 0.001.</p>
-<p>We conclude that the apparent difference in birth weight is explained,
-at least in part, by the difference in mother’s age. When we include
-mother’s age in the model, the effect of <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> gets smaller, and the
-remaining effect might be due to chance.</p>
-<p>In this example, mother’s age acts as a <strong>control variable</strong>; including
-<code class="docutils literal notranslate"><span class="pre">agepreg</span></code> in the model “controls for” the difference in age between
-first-time mothers and others, making it possible to isolate the effect
-(if any) of <code class="docutils literal notranslate"><span class="pre">isfirst</span></code>.</p>
+<p>center      isfirst    agepreg agepreg2 <span class="math notranslate nohighlight">\(R^2\)</span>   ——— —————– ———– ————- ——–   Model 1   -0.125 *     –   –    0.002   Model 2  –  0.0175 *   –    0.0047   Model 3    -0.0698 (0.025)   0.0154 *   –    0.0053   Model 4    -0.0504 (0.11)    0.112 *    -0.00185 *   0.0075</p>
+<p>The columns in this table are the explanatory variables and the coefficient of determination, <span class="math notranslate nohighlight">\(R^2\)</span>.
+Each entry is an estimated parameter and either a p-value in parentheses or an asterisk to indicate a p-value less that 0.001.</p>
+<p>We conclude that the apparent difference in birth weight is explained, at least in part, by the difference in mother’s age.
+When we include mother’s age in the model, the effect of <code class="docutils literal notranslate"><span class="pre">isfirst</span></code> gets smaller, and the remaining effect might be due to chance.</p>
+<p>In this example, mother’s age acts as a <strong>control variable</strong>; including <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> in the model “controls for” the difference in age between first-time mothers and others, making it possible to isolate the effect (if any) of <code class="docutils literal notranslate"><span class="pre">isfirst</span></code>.</p>
 </section>
 <section id="data-mining">
 <h2>Data mining<a class="headerlink" href="#data-mining" title="Link to this heading">#</a></h2>
-<p>So far we have used regression models for explanation; for example, in
-the previous section we discovered that an apparent difference in birth
-weight is actually due to a difference in mother’s age. But the <span class="math notranslate nohighlight">\(R^2\)</span>
-values of those models is very low, which means that they have little
-predictive power. In this section we’ll try to do better.</p>
-<p>Suppose one of your co-workers is expecting a baby and there is an
-office pool to guess the baby’s birth weight (if you are not familiar
-with betting pools, see <a class="reference external" href="https://en.wikipedia.org/wiki/Betting_pool">https://en.wikipedia.org/wiki/Betting_pool</a>).</p>
-<p>Now suppose that you <em>really</em> want to win the pool. What could you do to
-improve your chances? Well, the NSFG dataset includes 244 variables
-about each pregnancy and another 3087 variables about each respondent.
-Maybe some of those variables have predictive power. To find out which
-ones are most useful, why not try them all?</p>
-<p>Testing the variables in the pregnancy table is easy, but in order to
-use the variables in the respondent table, we have to match up each
-pregnancy with a respondent. In theory we could iterate through the rows
-of the pregnancy table, use the <code class="docutils literal notranslate"><span class="pre">caseid</span></code> to find the corresponding
-respondent, and copy the values from the correspondent table into the
-pregnancy table. But that would be slow.</p>
-<p>A better option is to recognize this process as a <strong>join</strong> operation as
-defined in SQL and other relational database languages (see
-<a class="reference external" href="https://en.wikipedia.org/wiki/Join_(SQL)">https://en.wikipedia.org/wiki/Join_(SQL)</a>). Join is implemented as a
-<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> method, so we can perform the operation like this:</p>
+<p>So far we have used regression models for explanation; for example, in the previous section we discovered that an apparent difference in birth weight is actually due to a difference in mother’s age.
+But the <span class="math notranslate nohighlight">\(R^2\)</span> values of those models is very low, which means that they have little predictive power.
+In this section we’ll try to do better.</p>
+<p>Suppose one of your co-workers is expecting a baby and there is an office pool to guess the baby’s birth weight (if you are not familiar with betting pools, see <a class="reference external" href="https://en.wikipedia.org/wiki/Betting_pool">https://en.wikipedia.org/wiki/Betting_pool</a>).</p>
+<p>Now suppose that you <em>really</em> want to win the pool.
+What could you do to improve your chances? Well, the NSFG dataset includes 244 variables about each pregnancy and another 3087 variables about each respondent.
+Maybe some of those variables have predictive power.
+To find out which ones are most useful, why not try them all?</p>
+<p>Testing the variables in the pregnancy table is easy, but in order to use the variables in the respondent table, we have to match up each pregnancy with a respondent.
+In theory we could iterate through the rows of the pregnancy table, use the <code class="docutils literal notranslate"><span class="pre">caseid</span></code> to find the corresponding respondent, and copy the values from the correspondent table into the pregnancy table.
+But that would be slow.</p>
+<p>A better option is to recognize this process as a <strong>join</strong> operation as defined in SQL and other relational database languages (see <a class="reference external" href="https://en.wikipedia.org/wiki/Join_(SQL)">https://en.wikipedia.org/wiki/Join_(SQL)</a>).
+Join is implemented as a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> method, so we can perform the operation like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dct&quot;</span><span class="p">)</span>
@@ -1285,24 +1200,17 @@ defined in SQL and other relational database languages (see
             }, 500);
             </script></div>
 </div>
-<p>The first line selects records for pregnancies longer than 30 weeks,
-assuming that the office pool is formed several weeks before the due
-date.</p>
-<p>The next line reads the respondent file. The result is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with
-integer indices; in order to look up respondents efficiently, I replace
-<code class="docutils literal notranslate"><span class="pre">resp.index</span></code> with <code class="docutils literal notranslate"><span class="pre">resp.caseid</span></code>.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">join</span></code> method is invoked on <code class="docutils literal notranslate"><span class="pre">live</span></code>, which is considered the “left”
-table, and passed <code class="docutils literal notranslate"><span class="pre">resp</span></code>, which is the “right” table. The keyword
-argument <code class="docutils literal notranslate"><span class="pre">on</span></code> indicates the variable used to match up rows from the two
-tables.</p>
-<p>In this example some column names appear in both tables, so we have to
-provide <code class="docutils literal notranslate"><span class="pre">rsuffix</span></code>, which is a string that will be appended to the names
-of overlapping columns from the right table. For example, both tables
-have a column named <code class="docutils literal notranslate"><span class="pre">race</span></code> that encodes the race of the respondent. The
-result of the join contains two columns named <code class="docutils literal notranslate"><span class="pre">race</span></code> and <code class="docutils literal notranslate"><span class="pre">race_r</span></code>.</p>
-<p>The pandas implementation is fast. Joining the NSFG tables takes less
-than a second on an ordinary desktop computer. Now we can start testing
-variables.</p>
+<p>The first line selects records for pregnancies longer than 30 weeks, assuming that the office pool is formed several weeks before the due date.</p>
+<p>The next line reads the respondent file.
+The result is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with integer indices; in order to look up respondents efficiently, I replace <code class="docutils literal notranslate"><span class="pre">resp.index</span></code> with <code class="docutils literal notranslate"><span class="pre">resp.caseid</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">join</span></code> method is invoked on <code class="docutils literal notranslate"><span class="pre">live</span></code>, which is considered the “left” table, and passed <code class="docutils literal notranslate"><span class="pre">resp</span></code>, which is the “right” table.
+The keyword argument <code class="docutils literal notranslate"><span class="pre">on</span></code> indicates the variable used to match up rows from the two tables.</p>
+<p>In this example some column names appear in both tables, so we have to provide <code class="docutils literal notranslate"><span class="pre">rsuffix</span></code>, which is a string that will be appended to the names of overlapping columns from the right table.
+For example, both tables have a column named <code class="docutils literal notranslate"><span class="pre">race</span></code> that encodes the race of the respondent.
+The result of the join contains two columns named <code class="docutils literal notranslate"><span class="pre">race</span></code> and <code class="docutils literal notranslate"><span class="pre">race_r</span></code>.</p>
+<p>The Pandas implementation is fast.
+Joining the NSFG tables takes less than a second on an ordinary desktop computer.
+Now we can start testing variables.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1442,22 +1350,19 @@ variables.</p>
             }, 500);
             </script></div>
 </div>
-<p>For each variable we construct a model, compute <span class="math notranslate nohighlight">\(R^2\)</span>, and append the
-results to a list. The models all include <code class="docutils literal notranslate"><span class="pre">agepreg</span></code>, since we already
-know that it has some predictive power.</p>
-<p>I check that each explanatory variable has some variability; otherwise
-the results of the regression are unreliable. I also check the number of
-observations for each model. Variables that contain a large number of
-<code class="docutils literal notranslate"><span class="pre">nan</span></code>s are not good candidates for prediction.</p>
-<p>For most of these variables, we haven’t done any cleaning. Some of them
-are encoded in ways that don’t work very well for linear regression. As
-a result, we might overlook some variables that would be useful if they
-were cleaned properly. But maybe we will find some good candidates.</p>
+<p>For each variable we construct a model, compute <span class="math notranslate nohighlight">\(R^2\)</span>, and append the results to a list.
+The models all include <code class="docutils literal notranslate"><span class="pre">agepreg</span></code>, since we already know that it has some predictive power.</p>
+<p>I check that each explanatory variable has some variability; otherwise the results of the regression are unreliable.
+I also check the number of observations for each model.
+Variables that contain a large number of <code class="docutils literal notranslate"><span class="pre">nan</span></code>s are not good candidates for prediction.</p>
+<p>For most of these variables, we haven’t done any cleaning.
+Some of them are encoded in ways that don’t work very well for linear regression.
+As a result, we might overlook some variables that would be useful if they were cleaned properly.
+But maybe we will find some good candidates.</p>
 </section>
 <section id="prediction">
 <h2>Prediction<a class="headerlink" href="#prediction" title="Link to this heading">#</a></h2>
-<p>The next step is to sort the results and select the variables that yield
-the highest values of <span class="math notranslate nohighlight">\(R^2\)</span>.</p>
+<p>The next step is to sort the results and select the variables that yield the highest values of <span class="math notranslate nohighlight">\(R^2\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">read_stata_dct</span>
@@ -1584,45 +1489,29 @@ the highest values of <span class="math notranslate nohighlight">\(R^2\)</span>.
             }, 500);
             </script></div>
 </div>
-<p>The first variable on the list is <code class="docutils literal notranslate"><span class="pre">totalwgt_lb</span></code>, followed by
-<code class="docutils literal notranslate"><span class="pre">birthwgt_lb</span></code>. Obviously, we can’t use birth weight to predict birth
-weight.</p>
-<p>Similarly <code class="docutils literal notranslate"><span class="pre">prglngth</span></code> has useful predictive power, but for the office
-pool we assume pregnancy length (and the related variables) are not
-known yet.</p>
-<p>The first useful predictive variable is <code class="docutils literal notranslate"><span class="pre">babysex</span></code> which indicates
-whether the baby is male or female. In the NSFG dataset, boys are about
-0.3 lbs heavier. So, assuming that the sex of the baby is known, we can
-use it for prediction.</p>
-<p>Next is <code class="docutils literal notranslate"><span class="pre">race</span></code>, which indicates whether the respondent is white, black,
-or other. As an explanatory variable, race can be problematic. In
-datasets like the NSFG, race is correlated with many other variables,
-including income and other socioeconomic factors. In a regression model,
-race acts as a <strong>proxy variable</strong>, so apparent correlations with race
-are often caused, at least in part, by other factors.</p>
-<p>The next variable on the list is <code class="docutils literal notranslate"><span class="pre">nbrnaliv</span></code>, which indicates whether the
-pregnancy yielded multiple births. Twins and triplets tend to be smaller
-than other babies, so if we know whether our hypothetical co-worker is
-expecting twins, that would help.</p>
-<p>Next on the list is <code class="docutils literal notranslate"><span class="pre">paydu</span></code>, which indicates whether the respondent owns
-her home. It is one of several income-related variables that turn out to
-be predictive. In datasets like the NSFG, income and wealth are
-correlated with just about everything. In this example, income is
-related to diet, health, health care, and other factors likely to affect
-birth weight.</p>
-<p>Some of the other variables on the list are things that would not be
-known until later, like <code class="docutils literal notranslate"><span class="pre">bfeedwks</span></code>, the number of weeks the baby was
-breast fed. We can’t use these variables for prediction, but you might
-want to speculate on reasons <code class="docutils literal notranslate"><span class="pre">bfeedwks</span></code> might be correlated with birth
-weight.</p>
-<p>Sometimes you start with a theory and use data to test it. Other times
-you start with data and go looking for possible theories. The second
-approach, which this section demonstrates, is called <strong>data mining</strong>.
-An advantage of data mining is that it can discover unexpected patterns. A
-hazard is that many of the patterns it discovers are either random or
-spurious.</p>
-<p>Having identified potential explanatory variables, I tested a few models
-and settled on this one:</p>
+<p>The first variable on the list is <code class="docutils literal notranslate"><span class="pre">totalwgt_lb</span></code>, followed by <code class="docutils literal notranslate"><span class="pre">birthwgt_lb</span></code>.
+Obviously, we can’t use birth weight to predict birth weight.</p>
+<p>Similarly <code class="docutils literal notranslate"><span class="pre">prglngth</span></code> has useful predictive power, but for the office pool we assume pregnancy length (and the related variables) are not known yet.</p>
+<p>The first useful predictive variable is <code class="docutils literal notranslate"><span class="pre">babysex</span></code> which indicates whether the baby is male or female.
+In the NSFG dataset, boys are about 0.3 lbs heavier.
+So, assuming that the sex of the baby is known, we can use it for prediction.</p>
+<p>Next is <code class="docutils literal notranslate"><span class="pre">race</span></code>, which indicates whether the respondent is white, black, or other.
+As an explanatory variable, race can be problematic.
+In datasets like the NSFG, race is correlated with many other variables, including income and other socioeconomic factors.
+In a regression model, race acts as a <strong>proxy variable</strong>, so apparent correlations with race are often caused, at least in part, by other factors.</p>
+<p>The next variable on the list is <code class="docutils literal notranslate"><span class="pre">nbrnaliv</span></code>, which indicates whether the pregnancy yielded multiple births.
+Twins and triplets tend to be smaller than other babies, so if we know whether our hypothetical co-worker is expecting twins, that would help.</p>
+<p>Next on the list is <code class="docutils literal notranslate"><span class="pre">paydu</span></code>, which indicates whether the respondent owns her home.
+It is one of several income-related variables that turn out to be predictive.
+In datasets like the NSFG, income and wealth are correlated with just about everything.
+In this example, income is related to diet, health, health care, and other factors likely to affect birth weight.</p>
+<p>Some of the other variables on the list are things that would not be known until later, like <code class="docutils literal notranslate"><span class="pre">bfeedwks</span></code>, the number of weeks the baby was breast fed.
+We can’t use these variables for prediction, but you might want to speculate on reasons <code class="docutils literal notranslate"><span class="pre">bfeedwks</span></code> might be correlated with birth weight.</p>
+<p>Sometimes you start with a theory and use data to test it. Other times you start with data and go looking for possible theories.
+The second approach, which this section demonstrates, is called <strong>data mining</strong>.
+An advantage of data mining is that it can discover unexpected patterns.
+A hazard is that many of the patterns it discovers are either random or spurious.</p>
+<p>Having identified potential explanatory variables, I tested a few models and settled on this one:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula</span> <span class="o">=</span> <span class="p">(</span>
@@ -1650,15 +1539,10 @@ and settled on this one:</p>
             }, 500);
             </script></div>
 </div>
-<p>This formula uses some syntax we have not seen yet: <code class="docutils literal notranslate"><span class="pre">C(race)</span></code> tells the
-formula parser (Patsy) to treat race as a categorical variable, even
-though it is encoded numerically.</p>
-<p>The encoding for <code class="docutils literal notranslate"><span class="pre">babysex</span></code> is 1 for male, 2 for female; writing
-<code class="docutils literal notranslate"><span class="pre">babysex==1</span></code> converts it to boolean, True for male and false for female.</p>
-<p>Similarly <code class="docutils literal notranslate"><span class="pre">nbrnaliv&gt;1</span></code> is True for multiple births and <code class="docutils literal notranslate"><span class="pre">paydu==1</span></code> is
-True for respondents who own their houses.</p>
-<p><code class="docutils literal notranslate"><span class="pre">totincr</span></code> is encoded numerically from 1-14, with each increment
-representing about $5000 in annual income.</p>
+<p>This formula uses some syntax we have not seen yet: <code class="docutils literal notranslate"><span class="pre">C(race)</span></code> tells the formula parser (Patsy) to treat race as a categorical variable, even though it is encoded numerically.</p>
+<p>The encoding for <code class="docutils literal notranslate"><span class="pre">babysex</span></code> is 1 for male, 2 for female; writing <code class="docutils literal notranslate"><span class="pre">babysex==1</span></code> converts it to boolean, True for male and false for female.</p>
+<p>Similarly <code class="docutils literal notranslate"><span class="pre">nbrnaliv&gt;1</span></code> is True for multiple births and <code class="docutils literal notranslate"><span class="pre">paydu==1</span></code> is True for respondents who own their houses.</p>
+<p><code class="docutils literal notranslate"><span class="pre">totincr</span></code> is encoded numerically from 1-14, with each increment representing about $5000 in annual income.</p>
 <p>So we can treat these values as numerical, expressed in units of $5000.</p>
 <p>Here are the results of the model:</p>
 <div class="cell docutils container">
@@ -1698,61 +1582,38 @@ Std(res) 1.232
             }, 500);
             </script></div>
 </div>
-<p>The estimated parameters for race are larger than I expected, especially
-since we control for income. The encoding is 1 for black, 2 for white,
-and 3 for other. Babies of black mothers are lighter than babies of
-other races by 0.27–0.36 lbs.</p>
-<p>As we’ve already seen, boys are heavier by about 0.3 lbs; twins and
-other multiplets are lighter by 1.4 lbs.</p>
-<p>People who own their homes have heavier babies by about 0.12 lbs, even
-when we control for income. The parameter for mother’s age is smaller
-than what we saw in
-Section <a class="reference internal" href="#multiple"><span class="xref myst">[multiple]</span></a>{reference-type=“ref”
-reference=“multiple”}, which suggests that some of the other variables
-are correlated with age, probably including <code class="docutils literal notranslate"><span class="pre">paydu</span></code> and <code class="docutils literal notranslate"><span class="pre">totincr</span></code>.</p>
-<p>All of these variables are statistically significant, some with very low
-p-values, but <span class="math notranslate nohighlight">\(R^2\)</span> is only 0.06, still quite small. RMSE without using
-the model is 1.27 lbs; with the model it drops to 1.23. So your chance
-of winning the pool is not substantially improved. Sorry!</p>
+<p>The estimated parameters for race are larger than I expected, especially since we control for income.
+The encoding is 1 for black, 2 for white, and 3 for other.
+Babies of black mothers are lighter than babies of other races by 0.27–0.36 lbs.</p>
+<p>As we’ve already seen, boys are heavier by about 0.3 lbs; twins and other multiplets are lighter by 1.4 lbs.</p>
+<p>People who own their homes have heavier babies by about 0.12 lbs, even when we control for income.
+The parameter for mother’s age is smaller than what we saw in Section <a class="reference internal" href="#multiple"><span class="xref myst">[multiple]</span></a>{reference-type=“ref” reference=“multiple”}, which suggests that some of the other variables are correlated with age, probably including <code class="docutils literal notranslate"><span class="pre">paydu</span></code> and <code class="docutils literal notranslate"><span class="pre">totincr</span></code>.</p>
+<p>All of these variables are statistically significant, some with very low p-values, but <span class="math notranslate nohighlight">\(R^2\)</span> is only 0.06, still quite small.
+RMSE without using the model is 1.27 lbs; with the model it drops to 1.23. So your chance of winning the pool is not substantially improved.
+Sorry!</p>
 </section>
 <section id="logistic-regression">
 <h2>Logistic regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h2>
-<p>In the previous examples, some of the explanatory variables were
-numerical and some categorical (including boolean). But the dependent
-variable was always numerical.</p>
-<p>Linear regression can be generalized to handle other kinds of dependent
-variables. If the dependent variable is boolean, the generalized model
-is called <strong>logistic regression</strong>. If the dependent variable is an
-integer count, it’s called <strong>Poisson regression</strong>.</p>
-<p>As an example of logistic regression, let’s consider a variation on the
-office pool scenario. Suppose a friend of yours is pregnant and you want
-to predict whether the baby is a boy or a girl. You could use data from
-the NSFG to find factors that affect the “sex ratio”, which is
-conventionally defined to be the probability of having a boy.</p>
-<p>If you encode the dependent variable numerically, for example 0 for a
-girl and 1 for a boy, you could apply ordinary least squares, but there
-would be problems. The linear model might be something like this:
-$<span class="math notranslate nohighlight">\(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \eps\)</span><span class="math notranslate nohighlight">\( Where \)</span>y<span class="math notranslate nohighlight">\( is the
-dependent variable, and \)</span>x_1<span class="math notranslate nohighlight">\( and \)</span>x_2$ are explanatory variables. Then
-we could find the parameters that minimize the residuals.</p>
-<p>The problem with this approach is that it produces predictions that are
-hard to interpret. Given estimated parameters and values for <span class="math notranslate nohighlight">\(x_1\)</span> and
-<span class="math notranslate nohighlight">\(x_2\)</span>, the model might predict <span class="math notranslate nohighlight">\(y=0.5\)</span>, but the only meaningful values
-of <span class="math notranslate nohighlight">\(y\)</span> are 0 and 1.</p>
-<p>It is tempting to interpret a result like that as a probability; for
-example, we might say that a respondent with particular values of <span class="math notranslate nohighlight">\(x_1\)</span>
-and <span class="math notranslate nohighlight">\(x_2\)</span> has a 50% chance of having a boy. But it is also possible for
-this model to predict <span class="math notranslate nohighlight">\(y=1.1\)</span> or <span class="math notranslate nohighlight">\(y=-0.1\)</span>, and those are not valid
-probabilities.</p>
-<p>Logistic regression avoids this problem by expressing predictions in
-terms of <strong>odds</strong> rather than probabilities. If you are not familiar
-with odds, “odds in favor” of an event is the ratio of the probability
-it will occur to the probability that it will not.</p>
-<p>So if I think my team has a 75% chance of winning, I would say that the
-odds in their favor are three to one, because the chance of winning is
-three times the chance of losing.</p>
-<p>Odds and probabilities are different representations of the same
-information. Given a probability, you can compute the odds like this:</p>
+<p>In the previous examples, some of the explanatory variables were numerical and some categorical (including boolean).
+But the dependent variable was always numerical.</p>
+<p>Linear regression can be generalized to handle other kinds of dependent variables.
+If the dependent variable is boolean, the generalized model is called <strong>logistic regression</strong>.
+If the dependent variable is an integer count, it’s called <strong>Poisson regression</strong>.</p>
+<p>As an example of logistic regression, let’s consider a variation on the office pool scenario.
+Suppose a friend of yours is pregnant and you want to predict whether the baby is a boy or a girl.
+You could use data from the NSFG to find factors that affect the “sex ratio”, which is conventionally defined to be the probability of having a boy.</p>
+<p>If you encode the dependent variable numerically, for example 0 for a girl and 1 for a boy, you could apply ordinary least squares, but there would be problems.
+The linear model might be something like this: $<span class="math notranslate nohighlight">\(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \eps\)</span><span class="math notranslate nohighlight">\( Where \)</span>y<span class="math notranslate nohighlight">\( is the dependent variable, and \)</span>x_1<span class="math notranslate nohighlight">\( and \)</span>x_2$ are explanatory variables.
+Then we could find the parameters that minimize the residuals.</p>
+<p>The problem with this approach is that it produces predictions that are hard to interpret.
+Given estimated parameters and values for <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>, the model might predict <span class="math notranslate nohighlight">\(y=0.5\)</span>, but the only meaningful values of <span class="math notranslate nohighlight">\(y\)</span> are 0 and 1.</p>
+<p>It is tempting to interpret a result like that as a probability; for example, we might say that a respondent with particular values of <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> has a 50% chance of having a boy.
+But it is also possible for this model to predict <span class="math notranslate nohighlight">\(y=1.1\)</span> or <span class="math notranslate nohighlight">\(y=-0.1\)</span>, and those are not valid probabilities.</p>
+<p>Logistic regression avoids this problem by expressing predictions in terms of <strong>odds</strong> rather than probabilities.
+If you are not familiar with odds, “odds in favor” of an event is the ratio of the probability it will occur to the probability that it will not.</p>
+<p>So if I think my team has a 75% chance of winning, I would say that the odds in their favor are three to one, because the chance of winning is three times the chance of losing.</p>
+<p>Odds and probabilities are different representations of the same information.
+Given a probability, you can compute the odds like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="mf">0.75</span>
@@ -1811,14 +1672,10 @@ information. Given a probability, you can compute the odds like this:</p>
             }, 500);
             </script></div>
 </div>
-<p>Logistic regression is based on the following model:
-$<span class="math notranslate nohighlight">\(\log o = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon\)</span><span class="math notranslate nohighlight">\( Where \)</span>o<span class="math notranslate nohighlight">\( is the
-odds in favor of a particular outcome; in the example, \)</span>o$ would be the
-odds of having a boy.</p>
-<p>Suppose we have estimated the parameters <span class="math notranslate nohighlight">\(\beta_0\)</span>, <span class="math notranslate nohighlight">\(\beta_1\)</span>, and
-<span class="math notranslate nohighlight">\(\beta_2\)</span> (I’ll explain how in a minute). And suppose we are given
-values for <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>. We can compute the predicted value of
-<span class="math notranslate nohighlight">\(\log o\)</span>, and then convert to a probability:</p>
+<p>Logistic regression is based on the following model: $<span class="math notranslate nohighlight">\(\log o = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon\)</span><span class="math notranslate nohighlight">\( Where \)</span>o<span class="math notranslate nohighlight">\( is the odds in favor of a particular outcome; in the example, \)</span>o$ would be the odds of having a boy.</p>
+<p>Suppose we have estimated the parameters <span class="math notranslate nohighlight">\(\beta_0\)</span>, <span class="math notranslate nohighlight">\(\beta_1\)</span>, and <span class="math notranslate nohighlight">\(\beta_2\)</span> (I’ll explain how in a minute).
+And suppose we are given values for <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>.
+We can compute the predicted value of <span class="math notranslate nohighlight">\(\log o\)</span>, and then convert to a probability:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
@@ -1849,17 +1706,14 @@ values for <span class="math notranslate nohighlight">\(x_1\)</span> and <span c
             }, 500);
             </script></div>
 </div>
-<p>So in the office pool scenario we could compute the predictive
-probability of having a boy. But how do we estimate the parameters?</p>
+<p>So in the office pool scenario we could compute the predictive probability of having a boy.
+But how do we estimate the parameters?</p>
 </section>
 <section id="estimating-parameters">
 <h2>Estimating parameters<a class="headerlink" href="#estimating-parameters" title="Link to this heading">#</a></h2>
-<p>Unlike linear regression, logistic regression does not have a closed
-form solution, so it is solved by guessing an initial solution and
-improving it iteratively.</p>
-<p>The usual goal is to find the maximum-likelihood estimate (MLE), which
-is the set of parameters that maximizes the likelihood of the data. For
-example, suppose we have the following data:</p>
+<p>Unlike linear regression, logistic regression does not have a closed form solution, so it is solved by guessing an initial solution and improving it iteratively.</p>
+<p>The usual goal is to find the maximum-likelihood estimate (MLE), which is the set of parameters that maximizes the likelihood of the data.
+For example, suppose we have the following data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
@@ -1886,8 +1740,7 @@ example, suppose we have the following data:</p>
             }, 500);
             </script></div>
 </div>
-<p>And we start with the initial guesses <span class="math notranslate nohighlight">\(\beta_0=-1.5\)</span>, <span class="math notranslate nohighlight">\(\beta_1=2.8\)</span>, and
-<span class="math notranslate nohighlight">\(\beta_2=1.1\)</span>:</p>
+<p>And we start with the initial guesses <span class="math notranslate nohighlight">\(\beta_0=-1.5\)</span>, <span class="math notranslate nohighlight">\(\beta_1=2.8\)</span>, and <span class="math notranslate nohighlight">\(\beta_2=1.1\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">]</span>
@@ -1990,12 +1843,9 @@ example, suppose we have the following data:</p>
             }, 500);
             </script></div>
 </div>
-<p>Notice that when <code class="docutils literal notranslate"><span class="pre">log_o</span></code> is greater than 0, <code class="docutils literal notranslate"><span class="pre">o</span></code> is greater than 1 and
-<code class="docutils literal notranslate"><span class="pre">p</span></code> is greater than 0.5.</p>
+<p>Notice that when <code class="docutils literal notranslate"><span class="pre">log_o</span></code> is greater than 0, <code class="docutils literal notranslate"><span class="pre">o</span></code> is greater than 1 and <code class="docutils literal notranslate"><span class="pre">p</span></code> is greater than 0.5.</p>
 <p>The likelihood of an outcome is <code class="docutils literal notranslate"><span class="pre">p</span></code> when <code class="docutils literal notranslate"><span class="pre">y==1</span></code> and <code class="docutils literal notranslate"><span class="pre">1-p</span></code> when <code class="docutils literal notranslate"><span class="pre">y==0</span></code>.
-For example, if we think the probability of a boy is 0.8 and the outcome
-is a boy, the likelihood is 0.8; if the outcome is a girl, the
-likelihood is 0.2. We can compute that like this:</p>
+For example, if we think the probability of a boy is 0.8 and the outcome is a boy, the likelihood is 0.8; if the outcome is a girl, the likelihood is 0.2. We can compute that like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">likes</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span>
@@ -2049,18 +1899,13 @@ likelihood is 0.2. We can compute that like this:</p>
             }, 500);
             </script></div>
 </div>
-<p>For these values of <code class="docutils literal notranslate"><span class="pre">beta</span></code>, the likelihood of the data is 0.18. The goal
-of logistic regression is to find parameters that maximize this
-likelihood. To do that, most statistics packages use an iterative solver
-like Newton’s method (see
-<a class="reference external" href="https://en.wikipedia.org/wiki/Logistic_regression#Model_fitting">https://en.wikipedia.org/wiki/Logistic_regression#Model_fitting</a>).</p>
+<p>For these values of <code class="docutils literal notranslate"><span class="pre">beta</span></code>, the likelihood of the data is 0.18. The goal of logistic regression is to find parameters that maximize this likelihood.
+To do that, most statistics packages use an iterative solver like Newton’s method (see <a class="reference external" href="https://en.wikipedia.org/wiki/Logistic_regression#Model_fitting">https://en.wikipedia.org/wiki/Logistic_regression#Model_fitting</a>).</p>
 </section>
 <section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
-<p>StatsModels provides an implementation of logistic regression called
-<code class="docutils literal notranslate"><span class="pre">logit</span></code>, named for the function that converts from probability to log
-odds. To demonstrate its use, I’ll look for variables that affect the
-sex ratio.</p>
+<p>StatsModels provides an implementation of logistic regression called <code class="docutils literal notranslate"><span class="pre">logit</span></code>, named for the function that converts from probability to log odds.
+To demonstrate its use, I’ll look for variables that affect the sex ratio.</p>
 <p>Again, I load the NSFG data and select pregnancies longer than 30 weeks:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2086,9 +1931,7 @@ sex ratio.</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">logit</span></code> requires the dependent variable to be binary (rather than
-boolean), so I create a new column named <code class="docutils literal notranslate"><span class="pre">boy</span></code>, using <code class="docutils literal notranslate"><span class="pre">astype(int)</span></code> to
-convert to binary integers:</p>
+<p><code class="docutils literal notranslate"><span class="pre">logit</span></code> requires the dependent variable to be binary (rather than boolean), so I create a new column named <code class="docutils literal notranslate"><span class="pre">boy</span></code>, using <code class="docutils literal notranslate"><span class="pre">astype(int)</span></code> to convert to binary integers:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">[</span><span class="s2">&quot;boy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">live</span><span class="o">.</span><span class="n">babysex</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
@@ -2117,10 +1960,9 @@ convert to binary integers:</p>
             }, 500);
             </script></div>
 </div>
-<p>Factors that have been found to affect sex ratio include parents’ age,
-birth order, race, and social status. We can use logistic regression to
-see if these effects appear in the NSFG data. I’ll start with the
-mother’s age:</p>
+<p>Factors that have been found to affect sex ratio include parents’ age, birth order, race, and social status.
+We can use logistic regression to see if these effects appear in the NSFG data.
+I’ll start with the mother’s age:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="s2">&quot;boy ~ agepreg&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">live</span><span class="p">)</span>
@@ -2151,11 +1993,10 @@ mother’s age:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">logit</span></code> takes the same arguments as <code class="docutils literal notranslate"><span class="pre">ols</span></code>, a formula in Patsy syntax and
-a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. The result is a Logit object that represents the model.</p>
-<p>The result of <code class="docutils literal notranslate"><span class="pre">model.fit</span></code> is a BinaryResults object, which is similar to
-the RegressionResults object we got from <code class="docutils literal notranslate"><span class="pre">ols</span></code>. Here is a summary of the
-results:</p>
+<p><code class="docutils literal notranslate"><span class="pre">logit</span></code> takes the same arguments as <code class="docutils literal notranslate"><span class="pre">ols</span></code>, a formula in Patsy syntax and a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.
+The result is a Logit object that represents the model.</p>
+<p>The result of <code class="docutils literal notranslate"><span class="pre">model.fit</span></code> is a BinaryResults object, which is similar to the RegressionResults object we got from <code class="docutils literal notranslate"><span class="pre">ols</span></code>.
+Here is a summary of the results:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summarize_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
@@ -2185,14 +2026,9 @@ R^2 6.144e-06
             }, 500);
             </script></div>
 </div>
-<p>The parameter of <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> is positive, which suggests that older
-mothers are more likely to have boys, but the p-value is 0.783, which
-means that the apparent effect could easily be due to chance.</p>
-<p>The coefficient of determination, <span class="math notranslate nohighlight">\(R^2\)</span>, does not apply to logistic
-regression, but there are several alternatives that are used as “pseudo
-<span class="math notranslate nohighlight">\(R^2\)</span> values.” These values can be useful for comparing models. For
-example, here’s a model that includes several factors believed to be
-associated with sex ratio:</p>
+<p>The parameter of <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> is positive, which suggests that older mothers are more likely to have boys, but the p-value is 0.783, which means that the apparent effect could easily be due to chance.</p>
+<p>The coefficient of determination, <span class="math notranslate nohighlight">\(R^2\)</span>, does not apply to logistic regression, but there are several alternatives that are used as “pseudo <span class="math notranslate nohighlight">\(R^2\)</span> values.” These values can be useful for comparing models.
+For example, here’s a model that includes several factors believed to be associated with sex ratio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;boy ~ agepreg + hpagelb + birthord + C(race)&quot;</span>
@@ -2224,9 +2060,8 @@ associated with sex ratio:</p>
             }, 500);
             </script></div>
 </div>
-<p>Along with mother’s age, this model includes father’s age at birth
-(<code class="docutils literal notranslate"><span class="pre">hpagelb</span></code>), birth order (<code class="docutils literal notranslate"><span class="pre">birthord</span></code>), and race as a categorical
-variable. Here are the results:</p>
+<p>Along with mother’s age, this model includes father’s age at birth (<code class="docutils literal notranslate"><span class="pre">hpagelb</span></code>), birth order (<code class="docutils literal notranslate"><span class="pre">birthord</span></code>), and race as a categorical variable.
+Here are the results:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summarize_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
@@ -2260,21 +2095,15 @@ R^2 0.000144
             }, 500);
             </script></div>
 </div>
-<p>None of the estimated parameters are statistically significant. The
-pseudo-<span class="math notranslate nohighlight">\(R^2\)</span> value is a little higher, but that could be due to chance.</p>
+<p>None of the estimated parameters are statistically significant.
+The pseudo-<span class="math notranslate nohighlight">\(R^2\)</span> value is a little higher, but that could be due to chance.</p>
 </section>
 <section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h2>
-<p>In the office pool scenario, we are most interested in the accuracy of
-the model: the number of successful predictions, compared with what we
-would expect by chance.</p>
-<p>In the NSFG data, there are more boys than girls, so the baseline
-strategy is to guess “boy” every time.</p>
-<p>The model contains attributes called <code class="docutils literal notranslate"><span class="pre">endog</span></code> and <code class="docutils literal notranslate"><span class="pre">exog</span></code> that contain the
-<strong>endogenous variable</strong>, another name for the dependent variable, and
-the <strong>exogenous variables</strong>, another name for the explanatory variables.
-Since they are NumPy arrays, it is sometimes convenient to convert them
-to <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s:</p>
+<p>In the office pool scenario, we are most interested in the accuracy of the model: the number of successful predictions, compared with what we would expect by chance.</p>
+<p>In the NSFG data, there are more boys than girls, so the baseline strategy is to guess “boy” every time.</p>
+<p>The model contains attributes called <code class="docutils literal notranslate"><span class="pre">endog</span></code> and <code class="docutils literal notranslate"><span class="pre">exog</span></code> that contain the <strong>endogenous variable</strong>, another name for the dependent variable, and the <strong>exogenous variables</strong>, another name for the explanatory variables.
+Since they are NumPy arrays, it is sometimes convenient to convert them to <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">endog</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">endog</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">endog_names</span><span class="p">])</span>
@@ -2300,8 +2129,7 @@ to <code class="docutils literal notranslate"><span class="pre">DataFrame</span>
             }, 500);
             </script></div>
 </div>
-<p>The accuracy of this strategy is
-just the fraction of boys:</p>
+<p>The accuracy of this strategy is just the fraction of boys:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actual</span> <span class="o">=</span> <span class="n">endog</span><span class="p">[</span><span class="s2">&quot;boy&quot;</span><span class="p">]</span>
@@ -2358,8 +2186,7 @@ just the fraction of boys:</p>
             }, 500);
             </script></div>
 </div>
-<p>Since <code class="docutils literal notranslate"><span class="pre">actual</span></code> is encoded in binary integers, the mean is the fraction
-of boys, which is 0.507.</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">actual</span></code> is encoded in binary integers, the mean is the fraction of boys, which is 0.507.</p>
 <p>Here’s how we compute the accuracy of the model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2441,11 +2268,10 @@ of boys, which is 0.507.</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">results.predict</span></code> returns a NumPy array of probabilities, which we round
-off to 0 or 1. Multiplying by <code class="docutils literal notranslate"><span class="pre">actual</span></code> yields 1 if we predict a boy and
-get it right, 0 otherwise. So, <code class="docutils literal notranslate"><span class="pre">true_pos</span></code> indicates “true positives”.</p>
-<p>Similarly, <code class="docutils literal notranslate"><span class="pre">true_neg</span></code> indicates the cases where we guess “girl” and get
-it right. Accuracy is the fraction of correct guesses:</p>
+<p><code class="docutils literal notranslate"><span class="pre">results.predict</span></code> returns a NumPy array of probabilities, which we round off to 0 or 1. Multiplying by <code class="docutils literal notranslate"><span class="pre">actual</span></code> yields 1 if we predict a boy and get it right, 0 otherwise.
+So, <code class="docutils literal notranslate"><span class="pre">true_pos</span></code> indicates “true positives”.</p>
+<p>Similarly, <code class="docutils literal notranslate"><span class="pre">true_neg</span></code> indicates the cases where we guess “girl” and get it right.
+Accuracy is the fraction of correct guesses:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">acc</span> <span class="o">=</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">true_pos</span><span class="p">)</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">true_neg</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span>
@@ -2474,13 +2300,11 @@ it right. Accuracy is the fraction of correct guesses:</p>
             }, 500);
             </script></div>
 </div>
-<p>The result is 0.512, slightly better than the baseline, 0.507. But, you
-should not take this result too seriously. We used the same data to
-build and test the model, so the model may not have predictive power on
-new data.</p>
-<p>Nevertheless, let’s use the model to make a prediction for the office
-pool. Suppose your friend is 35 years old and white, her husband is 39,
-and they are expecting their third child:</p>
+<p>The result is 0.512, slightly better than the baseline, 0.507.
+But, you should not take this result too seriously.
+We used the same data to build and test the model, so the model may not have predictive power on new data.</p>
+<p>Nevertheless, let’s use the model to make a prediction for the office pool.
+Suppose your friend is 35 years old and white, her husband is 39, and they are expecting their third child:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;agepreg&quot;</span><span class="p">,</span> <span class="s2">&quot;hpagelb&quot;</span><span class="p">,</span> <span class="s2">&quot;birthord&quot;</span><span class="p">,</span> <span class="s2">&quot;race&quot;</span><span class="p">]</span>
@@ -2511,53 +2335,36 @@ and they are expecting their third child:</p>
             }, 500);
             </script></div>
 </div>
-<p>To invoke <code class="docutils literal notranslate"><span class="pre">results.predict</span></code> for a new case, you have to construct a
-<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column for each variable in the model. The result in
-this case is 0.52, so you should guess “boy.” But if the model improves
-your chances of winning, the difference is very small.</p>
+<p>To invoke <code class="docutils literal notranslate"><span class="pre">results.predict</span></code> for a new case, you have to construct a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column for each variable in the model.
+The result in this case is 0.52, so you should guess “boy.” But if the model improves your chances of winning, the difference is very small.</p>
 </section>
 <section id="glossary">
 <h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>regression</strong>: One of several related processes for estimating
-parameters that fit a model to data.</p></li>
-<li><p><strong>dependent variables</strong>: The variables in a regression model we
-would like to predict. Also known as endogenous variables.</p></li>
-<li><p><strong>explanatory variables</strong>: The variables used to predict or explain
-the dependent variables. Also known as independent, or exogenous,
-variables.</p></li>
-<li><p><strong>simple regression</strong>: A regression with only one dependent and one
-explanatory variable.</p></li>
-<li><p><strong>multiple regression</strong>: A regression with multiple explanatory
-variables, but only one dependent variable.</p></li>
+<li><p><strong>regression</strong>: One of several related processes for estimating parameters that fit a model to data.</p></li>
+<li><p><strong>dependent variables</strong>: The variables in a regression model we would like to predict.
+Also known as endogenous variables.</p></li>
+<li><p><strong>explanatory variables</strong>: The variables used to predict or explain the dependent variables.
+Also known as independent, or exogenous, variables.</p></li>
+<li><p><strong>simple regression</strong>: A regression with only one dependent and one explanatory variable.</p></li>
+<li><p><strong>multiple regression</strong>: A regression with multiple explanatory variables, but only one dependent variable.</p></li>
 <li><p><strong>linear regression</strong>: A regression based on a linear model.</p></li>
-<li><p><strong>ordinary least squares</strong>: A linear regression that estimates
-parameters by minimizing the squared error of the residuals.</p></li>
-<li><p><strong>spurious relationship</strong>: A relationship between two variables that
-is caused by a statistical artifact or a factor, not included in the
-model, that is related to both variables.</p></li>
-<li><p><strong>control variable</strong>: A variable included in a regression to
-eliminate or “control for” a spurious relationship.</p></li>
-<li><p><strong>proxy variable</strong>: A variable that contributes information to a
-regression model indirectly because of a relationship with another
-factor, so it acts as a proxy for that factor.</p></li>
-<li><p><strong>categorical variable</strong>: A variable that can have one of a discrete
-set of unordered values.</p></li>
-<li><p><strong>join</strong>: An operation that combines data from two <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s using
-a key to match up rows in the two frames.</p></li>
-<li><p><strong>data mining</strong>: An approach to finding relationships between
-variables by testing a large number of models.</p></li>
-<li><p><strong>logistic regression</strong>: A form of regression used when the
-dependent variable is boolean.</p></li>
-<li><p><strong>Poisson regression</strong>: A form of regression used when the dependent
-variable is a non-negative integer, usually a count.</p></li>
-<li><p><strong>odds</strong>: An alternative way of representing a probability, <span class="math notranslate nohighlight">\(p\)</span>, as
-the ratio of the probability and its complement, <span class="math notranslate nohighlight">\(p / (1-p)\)</span>.</p></li>
+<li><p><strong>ordinary least squares</strong>: A linear regression that estimates parameters by minimizing the squared error of the residuals.</p></li>
+<li><p><strong>spurious relationship</strong>: A relationship between two variables that is caused by a statistical artifact or a factor, not included in the model, that is related to both variables.</p></li>
+<li><p><strong>control variable</strong>: A variable included in a regression to eliminate or “control for” a spurious relationship.</p></li>
+<li><p><strong>proxy variable</strong>: A variable that contributes information to a regression model indirectly because of a relationship with another factor, so it acts as a proxy for that factor.</p></li>
+<li><p><strong>categorical variable</strong>: A variable that can have one of a discrete set of unordered values.</p></li>
+<li><p><strong>join</strong>: An operation that combines data from two <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s using a key to match up rows in the two frames.</p></li>
+<li><p><strong>data mining</strong>: An approach to finding relationships between variables by testing a large number of models.</p></li>
+<li><p><strong>logistic regression</strong>: A form of regression used when the dependent variable is boolean.</p></li>
+<li><p><strong>Poisson regression</strong>: A form of regression used when the dependent variable is a non-negative integer, usually a count.</p></li>
+<li><p><strong>odds</strong>: An alternative way of representing a probability, <span class="math notranslate nohighlight">\(p\)</span>, as the ratio of the probability and its complement, <span class="math notranslate nohighlight">\(p / (1-p)\)</span>.</p></li>
 </ul>
 </section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
-<p><strong>Exercise:</strong> Suppose one of your co-workers is expecting a baby and you are participating in an office pool to predict the date of birth. Assuming that bets are placed during the 30th week of pregnancy, what variables could you use to make the best prediction? You should limit yourself to variables that are known before the birth, and likely to be available to the people in the pool.</p>
+<p><strong>Exercise:</strong> Suppose one of your co-workers is expecting a baby and you are participating in an office pool to predict the date of birth.
+Assuming that bets are placed during the 30th week of pregnancy, what variables could you use to make the best prediction? You should limit yourself to variables that are known before the birth, and likely to be available to the people in the pool.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nsfg</span>
@@ -2585,9 +2392,12 @@ the ratio of the probability and its complement, <span class="math notranslate n
             }, 500);
             </script></div>
 </div>
-<p><strong>Exercise:</strong> The Trivers-Willard hypothesis suggests that for many mammals the sex ratio depends on “maternal condition”; that is, factors like the mother’s age, size, health, and social status. See <a class="reference external" href="https://en.wikipedia.org/wiki/Trivers-Willard_hypothesis">https://en.wikipedia.org/wiki/Trivers-Willard_hypothesis</a></p>
-<p>Some studies have shown this effect among humans, but results are mixed. In this chapter we tested some variables related to these factors, but didn’t find any with a statistically significant effect on sex ratio.</p>
-<p>As an exercise, use a data mining approach to test the other variables in the pregnancy and respondent files. Can you find any factors with a substantial effect?</p>
+<p><strong>Exercise:</strong> The Trivers-Willard hypothesis suggests that for many mammals the sex ratio depends on “maternal condition”; that is, factors like the mother’s age, size, health, and social status.
+See <a class="reference external" href="https://en.wikipedia.org/wiki/Trivers-Willard_hypothesis">https://en.wikipedia.org/wiki/Trivers-Willard_hypothesis</a></p>
+<p>Some studies have shown this effect among humans, but results are mixed.
+In this chapter we tested some variables related to these factors, but didn’t find any with a statistically significant effect on sex ratio.</p>
+<p>As an exercise, use a data mining approach to test the other variables in the pregnancy and respondent files.
+Can you find any factors with a substantial effect?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mining_report</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
@@ -2624,14 +2434,17 @@ the ratio of the probability and its complement, <span class="math notranslate n
             }, 500);
             </script></div>
 </div>
-<p><strong>Exercise:</strong> If the quantity you want to predict is a count, you can use Poisson regression, which is implemented in StatsModels with a function called <code class="docutils literal notranslate"><span class="pre">poisson</span></code>. It works the same way as <code class="docutils literal notranslate"><span class="pre">ols</span></code> and <code class="docutils literal notranslate"><span class="pre">logit</span></code>. As an exercise, let’s use it to predict how many children a woman has born; in the NSFG dataset, this variable is called <code class="docutils literal notranslate"><span class="pre">numbabes</span></code>.</p>
-<p>Suppose you meet a woman who is 35 years old, black, and a college graduate whose annual household income exceeds $75,000. How many children would you predict she has born?</p>
-<p>Now we can predict the number of children for a woman who is 35 years old, black, and a college
-graduate whose annual household income exceeds $75,000</p>
-<p><strong>Exercise:</strong> If the quantity you want to predict is categorical, you can use multinomial logistic regression, which is implemented in StatsModels with a function called <code class="docutils literal notranslate"><span class="pre">mnlogit</span></code>. As an exercise, let’s use it to guess whether a woman is married, cohabitating, widowed, divorced, separated, or never married; in the NSFG dataset, marital status is encoded in a variable called <code class="docutils literal notranslate"><span class="pre">rmarital</span></code>.</p>
-<p>Suppose you meet a woman who is 25 years old, white, and a high school graduate whose annual household income is about $45,000. What is the probability that she is married, cohabitating, etc?</p>
-<p>Make a prediction for a woman who is 25 years old, white, and a high
-school graduate whose annual household income is about $45,000.</p>
+<p><strong>Exercise:</strong> If the quantity you want to predict is a count, you can use Poisson regression, which is implemented in StatsModels with a function called <code class="docutils literal notranslate"><span class="pre">poisson</span></code>.
+It works the same way as <code class="docutils literal notranslate"><span class="pre">ols</span></code> and <code class="docutils literal notranslate"><span class="pre">logit</span></code>.
+As an exercise, let’s use it to predict how many children a woman has born; in the NSFG dataset, this variable is called <code class="docutils literal notranslate"><span class="pre">numbabes</span></code>.</p>
+<p>Suppose you meet a woman who is 35 years old, black, and a college graduate whose annual household income exceeds $75,000.
+How many children would you predict she has born?</p>
+<p>Now we can predict the number of children for a woman who is 35 years old, black, and a college graduate whose annual household income exceeds $75,000</p>
+<p><strong>Exercise:</strong> If the quantity you want to predict is categorical, you can use multinomial logistic regression, which is implemented in StatsModels with a function called <code class="docutils literal notranslate"><span class="pre">mnlogit</span></code>.
+As an exercise, let’s use it to guess whether a woman is married, cohabitating, widowed, divorced, separated, or never married; in the NSFG dataset, marital status is encoded in a variable called <code class="docutils literal notranslate"><span class="pre">rmarital</span></code>.</p>
+<p>Suppose you meet a woman who is 25 years old, white, and a high school graduate whose annual household income is about $45,000.
+What is the probability that she is married, cohabitating, etc?</p>
+<p>Make a prediction for a woman who is 25 years old, white, and a high school graduate whose annual household income is about $45,000.</p>
 </section>
 </section>
 

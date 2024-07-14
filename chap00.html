@@ -175,8 +175,8 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
@@ -351,9 +351,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-i-wrote-this-book">How I wrote this book</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-code">Using the code</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributor-list">Contributor List</a></li>
 </ul>
             </nav>
         </div>
@@ -367,254 +365,72 @@ document.write(`
                   
   <section id="preface">
 <h1>Preface<a class="headerlink" href="#preface" title="Link to this heading">#</a></h1>
-<p>This book is an introduction to the practical tools of exploratory data
-analysis. The organization of the book follows the process I use when I
-start working with a dataset:</p>
+<p>From the earliest history of statistics, there have been two ideas about what statistics is. In one view, it is a branch of mathematics with the goal of establishing a theoretical foundation for probability and statistical inference.
+In another view, it is a set of tools and practices for working with data, answering questions, and making better decisions.
+Many introductory classes in statistics are based on the first view.
+This book is based on the second.</p>
+<p><em>Think Stats</em> is an introduction to practical methods for exploring and visualizing data, discovering relationships and trends, and communicating results.
+The organization of the book follows the process I use when I start working with a dataset:</p>
 <ul class="simple">
-<li><p>Importing and cleaning: Whatever format the data is in, it usually
-takes some time and effort to read the data, clean and transform it,
-and check that everything made it through the translation process
-intact.</p></li>
-<li><p>Single variable explorations: I usually start by examining one
-variable at a time, finding out what the variables mean, looking at
-distributions of the values, and choosing appropriate summary
-statistics.</p></li>
-<li><p>Pair-wise explorations: To identify possible relationships between
-variables, I look at tables and scatter plots, and compute
-correlations and linear fits.</p></li>
-<li><p>Multivariate analysis: If there are apparent relationships between
-variables, I use multiple regression to add control variables and
-investigate more complex relationships.</p></li>
-<li><p>Estimation and hypothesis testing: When reporting statistical
-results, it is important to answer three questions: How big is the
-effect? How much variability should we expect if we run the same
-measurement again? Is it possible that the apparent effect is due to
-chance?</p></li>
-<li><p>Visualization: During exploration, visualization is an important
-tool for finding possible relationships and effects. Then if an
-apparent effect holds up to scrutiny, visualization is an effective
-way to communicate results.</p></li>
+<li><p>Importing and cleaning: Whatever format the data is in, it usually takes some time and effort to read the data, clean and transform it, and check that everything made it through the translation process intact.</p></li>
+<li><p>Single variable explorations: I usually start by examining one variable at a time, finding out what the variables mean, looking at distributions of the values, and choosing appropriate summary statistics.</p></li>
+<li><p>Pair-wise explorations: To identify possible relationships between variables, I look at tables and scatter plots, and compute correlations and linear fits.</p></li>
+<li><p>Multivariate analysis: If there are apparent relationships between variables, I use multiple regression to add control variables and investigate more complex relationships.</p></li>
+<li><p>Estimation and hypothesis testing: When reporting statistical results, it is important to answer three questions: How big is the effect? How much variability should we expect if we run the same measurement again? Is it possible that the apparent effect is due to chance?</p></li>
+<li><p>Visualization: During exploration, visualization is an important tool for finding possible relationships and effects. Then if an apparent effect holds up to scrutiny, visualization is an effective way to communicate results.</p></li>
 </ul>
-<p>This book takes a computational approach, which has several advantages
-over mathematical approaches:</p>
+<p>This book takes a computational approach, which has several advantages over mathematical approaches:</p>
 <ul class="simple">
-<li><p>I present most ideas using Python code, rather than mathematical
-notation. In general, Python code is more readable; also, because it
-is executable, readers can download it, run it, and modify it.</p></li>
-<li><p>Each chapter includes exercises readers can do to develop and
-solidify their learning. When you write programs, you express your
-understanding in code; while you are debugging the program, you are
-also correcting your understanding.</p></li>
-<li><p>Some exercises involve experiments to test statistical behavior. For
-example, you can explore the Central Limit Theorem (CLT) by
-generating random samples and computing their sums. The resulting
-visualizations demonstrate why the CLT works and when it doesn’t.</p></li>
-<li><p>Some ideas that are hard to grasp mathematically are easy to
-understand by simulation. For example, we approximate p-values by
-running random simulations, which reinforces the meaning of the
-p-value.</p></li>
-<li><p>Because the book is based on a general-purpose programming language
-(Python), readers can import data from almost any source. They are
-not limited to datasets that have been cleaned and formatted for a
-particular statistics tool.</p></li>
+<li><p>I present most ideas using Python code, rather than mathematical notation. In general, Python code is more readable – also, because it is executable, run it and modify it to develop deeper understanding.</p></li>
+<li><p>Each chapter includes exercises readers can do to develop and solidify their learning. When you write programs, you express your understanding in code – while you are debugging the program, you are also checking your understanding.</p></li>
+<li><p>Some exercises involve experiments to test statistical behavior. For example, you can explore the Central Limit Theorem (CLT) by generating random samples and computing their sums. The resulting visualizations demonstrate why the CLT works and when it doesn’t.</p></li>
+<li><p>Some ideas that are hard to grasp mathematically are easy to understand by simulation. For example, we approximate p-values by running random simulations, which reinforces the meaning of hypothesis testing.</p></li>
+<li><p>Because the book is based on a general-purpose programming language (Python), readers can import data from almost any source. They are not limited to datasets that have been cleaned and formatted for a particular statistics tool.</p></li>
 </ul>
-<p>The book lends itself to a project-based approach. In my class, students
-work on a semester-long project that requires them to pose a statistical
-question, find a dataset that can address it, and apply each of the
-techniques they learn to their own data.</p>
-<p>To demonstrate my approach to statistical analysis, the book presents a
-case study that runs through all of the chapters. It uses data from two
-sources:</p>
+<p>The book lends itself to a project-based approach.
+In my class, students work on a semester-long project that requires them to pose a statistical question, find a dataset that can address it, and apply each of the techniques they learn to their own data.
+To demonstrate my approach to statistical analysis, the book presents a case study that runs through all of the chapters.
+It uses data from two sources:</p>
 <ul class="simple">
-<li><p>The National Survey of Family Growth (NSFG), conducted by the U.S.
-Centers for Disease Control and Prevention (CDC) to gather
-“information on family life, marriage and divorce, pregnancy,
-infertility, use of contraception, and men’s and women’s health.”
-(See <a class="reference external" href="http://cdc.gov/nchs/nsfg.htm">http://cdc.gov/nchs/nsfg.htm</a>.)</p></li>
-<li><p>The Behavioral Risk Factor Surveillance System (BRFSS), conducted by
-the National Center for Chronic Disease Prevention and Health
-Promotion to “track health conditions and risk behaviors in the
-United States.” (See <a class="reference external" href="http://cdc.gov/BRFSS/">http://cdc.gov/BRFSS/</a>.)</p></li>
+<li><p>The National Survey of Family Growth (NSFG), conducted by the U.S. Centers for Disease Control and Prevention (CDC) to gather “information on family life, marriage and divorce, pregnancy, infertility, use of contraception, and men’s and women’s health.” (See <a class="reference external" href="https://www.cdc.gov/nchs/nsfg/index.htm">https://www.cdc.gov/nchs/nsfg/index.htm</a>.)</p></li>
+<li><p>The Behavioral Risk Factor Surveillance System (BRFSS), conducted by the National Center for Chronic Disease Prevention and Health Promotion to “track health conditions and risk behaviors in the United States.” (See <a class="reference external" href="http://cdc.gov/BRFSS/">http://cdc.gov/BRFSS/</a>.)</p></li>
 </ul>
-<p>Other examples use data from the IRS, the U.S. Census, and the Boston
-Marathon.</p>
-<p>This second edition of <em>Think Stats</em> includes the chapters from the
-first edition, many of them substantially revised, and new chapters on
-regression, time series analysis, survival analysis, and analytic
-methods. The previous edition did not use pandas, SciPy, or StatsModels,
-so all of that material is new.</p>
-<section id="how-i-wrote-this-book">
-<h2>How I wrote this book<a class="headerlink" href="#how-i-wrote-this-book" title="Link to this heading">#</a></h2>
-<p>When people write a new textbook, they usually start by reading a stack
-of old textbooks. As a result, most books contain the same material in
-pretty much the same order.</p>
-<p>I did not do that. In fact, I used almost no printed material while I
-was writing this book, for several reasons:</p>
-<ul class="simple">
-<li><p>My goal was to explore a new approach to this material, so I didn’t
-want much exposure to existing approaches.</p></li>
-<li><p>Since I am making this book available under a free license, I wanted
-to make sure that no part of it was encumbered by copyright
-restrictions.</p></li>
-<li><p>Many readers of my books don’t have access to libraries of printed
-material, so I tried to make references to resources that are freely
-available on the Internet.</p></li>
-<li><p>Some proponents of old media think that the exclusive use of
-electronic resources is lazy and unreliable. They might be right
-about the first part, but I think they are wrong about the second,
-so I wanted to test my theory.</p></li>
-</ul>
-<p>The resource I used more than any other is Wikipedia. In general, the
-articles I read on statistical topics were very good (although I made a
-few small changes along the way). I include references to Wikipedia
-pages throughout the book and I encourage you to follow those links; in
-many cases, the Wikipedia page picks up where my description leaves off.
-The vocabulary and notation in this book are generally consistent with
-Wikipedia, unless I had a good reason to deviate. Other resources I
-found useful were Wolfram MathWorld and the Reddit statistics forum,
-<a class="reference external" href="http://www.reddit.com/r/statistics">http://www.reddit.com/r/statistics</a>.</p>
-</section>
+<p>Other examples use data from the IRS, the U.S. Census, and the Boston Marathon.</p>
+<p>This third edition of <em>Think Stats</em> … WHAT’s NEW…</p>
 <section id="using-the-code">
 <h2>Using the code<a class="headerlink" href="#using-the-code" title="Link to this heading">#</a></h2>
-<p>The code and data used in this book are available from
-<a class="github reference external" href="https://github.com/AllenDowney/ThinkStats">AllenDowney/ThinkStats</a>. Git is a version control
-system that allows you to keep track of the files that make up a
-project. A collection of files under Git’s control is called a
-<strong>repository</strong>. GitHub is a hosting service that provides storage for
-Git repositories and a convenient web interface.</p>
-<p>The GitHub homepage for my repository provides several ways to work with
-the code:</p>
-<ul class="simple">
-<li><p>You can create a copy of my repository on GitHub by pressing the
-Fork button. If you don’t already have a GitHub account, you’ll need
-to create one. After forking, you’ll have your own repository on
-GitHub that you can use to keep track of code you write while
-working on this book. Then you can clone the repo, which means that
-you make a copy of the files on your computer.</p></li>
-<li><p>Or you could clone my repository. You don’t need a GitHub account to
-do this, but you won’t be able to write your changes back to GitHub.</p></li>
-<li><p>If you don’t want to use Git at all, you can download the files in a
-Zip file using the button in the lower-right corner of the GitHub
-page.</p></li>
-</ul>
-<p>All of the code is written to work in both Python 2 and Python 3 with no
-translation.</p>
-<p>I developed this book using Anaconda from Continuum Analytics, which is
-a free Python distribution that includes all the packages you’ll need to
-run the code (and lots more). I found Anaconda easy to install. By
-default it does a user-level installation, not system-level, so you
-don’t need administrative privileges. And it supports both Python 2 and
-Python 3. You can download Anaconda from
-<a class="reference external" href="http://continuum.io/downloads">http://continuum.io/downloads</a>.</p>
+<p>The code and data used in this book are available from <a class="github reference external" href="https://github.com/AllenDowney/ThinkStats">AllenDowney/ThinkStats</a>.
+Git is a version control system that allows you to keep track of the files that make up a project.
+A collection of files under Git’s control is called a <strong>repository</strong>.
+GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.</p>
+<p>All of the code is written to work in both Python 2 and Python 3 with no translation.
+I developed this book using Anaconda from Continuum Analytics, which is a free Python distribution that includes all the packages you’ll need to run the code (and lots more).
+I found Anaconda easy to install.
+By default it does a user-level installation, not system-level, so you don’t need administrative privileges.
+And it supports both Python 2 and Python 3.
+You can download Anaconda from <a class="reference external" href="http://continuum.io/downloads">http://continuum.io/downloads</a>.</p>
 <p>If you don’t want to use Anaconda, you will need the following packages:</p>
 <ul class="simple">
-<li><p>pandas for representing and analyzing data,
-<a class="reference external" href="http://pandas.pydata.org/">http://pandas.pydata.org/</a>;</p></li>
+<li><p>Pandas for representing and analyzing data, <a class="reference external" href="http://Pandas.pydata.org/">http://Pandas.pydata.org/</a>;</p></li>
 <li><p>NumPy for basic numerical computation, <a class="reference external" href="http://www.numpy.org/">http://www.numpy.org/</a>;</p></li>
-<li><p>SciPy for scientific computation including statistics,
-<a class="reference external" href="http://www.scipy.org/">http://www.scipy.org/</a>;</p></li>
-<li><p>StatsModels for regression and other statistical analysis,
-<a class="reference external" href="http://statsmodels.sourceforge.net/">http://statsmodels.sourceforge.net/</a>; and</p></li>
-<li><p>matplotlib for visualization, <a class="reference external" href="http://matplotlib.org/">http://matplotlib.org/</a>.</p></li>
+<li><p>SciPy for scientific computation including statistics, <a class="reference external" href="http://www.scipy.org/">http://www.scipy.org/</a>;</p></li>
+<li><p>StatsModels for regression and other statistical analysis, <a class="reference external" href="http://statsmodels.sourceforge.net/">http://statsmodels.sourceforge.net/</a>; and</p></li>
+<li><p>Matplotlib for visualization, <a class="reference external" href="http://matplotlib.org/">http://matplotlib.org/</a>.</p></li>
 </ul>
-<p>Although these are commonly used packages, they are not included with
-all Python installations, and they can be hard to install in some
-environments. If you have trouble installing them, I strongly recommend
-using Anaconda or one of the other Python distributions that include
-these packages.</p>
-<p>After you clone the repository or unzip the zip file, you should have a
-folder called <code class="docutils literal notranslate"><span class="pre">ThinkStats2/code</span></code> with a file called <a class="reference external" href="http://nsfg.py">nsfg.py</a>. If you run
-<a class="reference external" href="http://nsfg.py">nsfg.py</a>, it should read a data file, run some tests, and print a message
-like, “All tests passed.” If you get import errors, it probably means
-there are packages you need to install.</p>
-<p>Most exercises use Python scripts, but some also use the IPython
-notebook. If you have not used IPython notebook before, I suggest you
-start with the documentation at
-<a class="reference external" href="http://ipython.org/ipython-doc/stable/notebook/notebook.html">http://ipython.org/ipython-doc/stable/notebook/notebook.html</a>.</p>
-<p>I wrote this book assuming that the reader is familiar with core Python,
-including object-oriented features, but not pandas, NumPy, and SciPy. If
-you are already familiar with these modules, you can skip a few
-sections.</p>
-<p>I assume that the reader knows basic mathematics, including logarithms,
-for example, and summations. I refer to calculus concepts in a few
-places, but you don’t have to do any calculus.</p>
-<p>If you have never studied statistics, I think this book is a good place
-to start. And if you have taken a traditional statistics class, I hope
-this book will help repair the damage.</p>
-</section>
-<section id="contributor-list">
-<h2>Contributor List<a class="headerlink" href="#contributor-list" title="Link to this heading">#</a></h2>
-<p>If you have a suggestion or correction, please send email to
-<code class="docutils literal notranslate"><span class="pre">downey&#64;allendowney.com</span></code>. If I make a change based on your feedback, I
-will add you to the contributor list (unless you ask to be omitted).</p>
-<p>If you include at least part of the sentence the error appears in, that
-makes it easy for me to search. Page and section numbers are fine, too,
-but not quite as easy to work with. Thanks!</p>
-<ul class="simple">
-<li><p>Lisa Downey and June Downey read an early draft and made many
-corrections and suggestions.</p></li>
-<li><p>Steven Zhang found several errors.</p></li>
-<li><p>Andy Pethan and Molly Farison helped debug some of the solutions,
-and Molly spotted several typos.</p></li>
-<li><p>Dr. Nikolas Akerblom knows how big a Hyracotherium is.</p></li>
-<li><p>Alex Morrow clarified one of the code examples.</p></li>
-<li><p>Jonathan Street caught an error in the nick of time.</p></li>
-<li><p>Many thanks to Kevin Smith and Tim Arnold for their work on plasTeX,
-which I used to convert this book to DocBook.</p></li>
-<li><p>George Caplan sent several suggestions for improving clarity.</p></li>
-<li><p>Julian Ceipek found an error and a number of typos.</p></li>
-<li><p>Stijn Debrouwere, Leo Marihart III, Jonathan Hammler, and Kent
-Johnson found errors in the first print edition.</p></li>
-<li><p>Jörg Beyer found typos in the book and made many corrections in the
-docstrings of the accompanying code.</p></li>
-<li><p>Tommie Gannert sent a patch file with a number of corrections.</p></li>
-<li><p>Christoph Lendenmann submitted several errata.</p></li>
-<li><p>Michael Kearney sent me many excellent suggestions.</p></li>
-<li><p>Alex Birch made a number of helpful suggestions.</p></li>
-<li><p>Lindsey Vanderlyn, Griffin Tschurwald, and Ben Small read an early
-version of this book and found many errors.</p></li>
-<li><p>John Roth, Carol Willing, and Carol Novitsky performed technical
-reviews of the book. They found many errors and made many helpful
-suggestions.</p></li>
-<li><p>David Palmer sent many helpful suggestions and corrections.</p></li>
-<li><p>Erik Kulyk found many typos.</p></li>
-<li><p>Nir Soffer sent several excellent pull requests for both the book
-and the supporting code.</p></li>
-<li><p>GitHub user flothesof sent a number of corrections.</p></li>
-<li><p>Toshiaki Kurokawa, who is working on the Japanese translation of
-this book, has sent many corrections and helpful suggestions.</p></li>
-<li><p>Benjamin White suggested more idiomatic Pandas code.</p></li>
-<li><p>Takashi Sato spotted a code error.</p></li>
-</ul>
-<p>Other people who found typos and similar errors are Andrew Heine, Gábor
-Lipták, Dan Kearney, Alexander Gryzlov, Martin Veillette, Haitao Ma,
-Jeff Pickhardt, Rohit Deshpande, Joanne Pratt, Lucian Ursu, Paul Glezen,
-Ting-kuang Lin, Scott Miller, Luigi Patruno.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
-
-<span class="k">def</span> <span class="nf">replace_thinkplot_hist</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-    <span class="c1"># This regular expression matches &#39;thinkplot.hist(&#39; followed by a variable name and a comma</span>
-    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;thinkplot\.hist\((\w+),\s*&#39;</span>
-    <span class="n">replacement</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\1.bar(&#39;</span>
-    <span class="c1"># Using re.sub to replace matched patterns with the replacement</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">replacement</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span>
-
-<span class="c1"># Example usage</span>
-<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;thinkplot.hist(variable_name, some_other_param)&quot;</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">replace_thinkplot_hist</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>variable_name.bar(some_other_param)
-</pre></div>
-</div>
-</div>
-</div>
+<p>Although these are commonly used packages, they are not included with all Python installations, and they can be hard to install in some environments.
+If you have trouble installing them, I strongly recommend using Anaconda or one of the other Python distributions that include these packages.
+After you clone the repository or unzip the zip file, you should have a folder called <code class="docutils literal notranslate"><span class="pre">ThinkStats2/code</span></code> with a file called <a class="reference external" href="http://nsfg.py">nsfg.py</a>.
+If you run <a class="reference external" href="http://nsfg.py">nsfg.py</a>, it should read a data file, run some tests, and print a message like, “All tests passed.” If you get import errors, it probably means there are packages you need to install.</p>
+<p>All chapters are available in Jupyter notebooks.
+If you have not used Jupyter notebook before, I suggest you start with the documentation at &lt;<a class="reference external" href="http://ipython.org/ipython-doc/stable">http://ipython.org/ipython-doc/stable</a>
+otebook
+otebook.html&gt;.
+I wrote this book assuming that the reader is familiar with core Python, including object-oriented features, but not Pandas, NumPy, and SciPy.
+If you are already familiar with these modules, you can skip a few sections.
+I assume that the reader knows basic mathematics, including logarithms, for example, and summations.
+I refer to calculus concepts in a few places, but you don’t have to do any calculus.
+If you have never studied statistics, I think this book is a good place to start.
+And if you have taken a traditional statistics class, I hope this book will help repair the damage.</p>
 </section>
 </section>
 
@@ -682,9 +498,7 @@ Ting-kuang Lin, Scott Miller, Luigi Patruno.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-i-wrote-this-book">How I wrote this book</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-code">Using the code</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributor-list">Contributor List</a></li>
 </ul>
   </nav></div>
 

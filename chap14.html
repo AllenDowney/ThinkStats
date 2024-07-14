@@ -176,8 +176,8 @@
 <li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
@@ -352,7 +352,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions">Normal distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions"><code class="docutils literal notranslate"><span class="pre">Normal</span></code> distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distributions">Sampling distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-normal-distributions">Representing normal distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">Central limit theorem</a></li>
@@ -375,12 +375,9 @@ document.write(`
                   
   <section id="analytic-methods">
 <h1>Analytic methods<a class="headerlink" href="#analytic-methods" title="Link to this heading">#</a></h1>
-<p>This book has focused on computational methods like simulation and
-resampling, but some of the problems we solved have analytic solutions
-that can be much faster.</p>
-<p>I present some of these methods in this chapter, and explain how they
-work. At the end of the chapter, I make suggestions for integrating
-computational and analytic methods for exploratory data analysis.</p>
+<p>This book has focused on computational methods like simulation and resampling, but some of the problems we solved have analytic solutions that can be much faster.</p>
+<p>I present some of these methods in this chapter, and explain how they work.
+At the end of the chapter, I make suggestions for integrating computational and analytic methods for exploratory data analysis.</p>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -426,7 +423,9 @@ computational and analytic methods for exploratory data analysis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
 <span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">decorate</span>
 </pre></div>
 </div>
@@ -435,8 +434,8 @@ computational and analytic methods for exploratory data analysis.</p>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 3;
-                var nbb_unformatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\nfrom thinkstats import decorate";
-                var nbb_formatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\nfrom thinkstats import decorate";
+                var nbb_unformatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
+                var nbb_formatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -450,98 +449,72 @@ computational and analytic methods for exploratory data analysis.</p>
             </script></div>
 </div>
 <section id="normal-distributions">
-<h2>Normal distributions<a class="headerlink" href="#normal-distributions" title="Link to this heading">#</a></h2>
-<p>As a motivating example, let’s review the problem from
-Section <a class="reference internal" href="#gorilla"><span class="xref myst">[gorilla]</span></a>{reference-type=“ref”
-reference=“gorilla”}:</p>
+<h2><code class="docutils literal notranslate"><span class="pre">Normal</span></code> distributions<a class="headerlink" href="#normal-distributions" title="Link to this heading">#</a></h2>
+<p>As a motivating example, let’s review the problem from Section <a class="reference internal" href="#gorilla"><span class="xref myst">[gorilla]</span></a>{reference-type=“ref” reference=“gorilla”}:</p>
 <blockquote>
 <div><p>Suppose you are a scientist studying gorillas in a wildlife preserve.
-Having weighed 9 gorillas, you find sample mean <span class="math notranslate nohighlight">\(\bar{x}=90\)</span> kg and
-sample standard deviation, <span class="math notranslate nohighlight">\(S=7.5\)</span> kg. If you use <span class="math notranslate nohighlight">\(\bar{x}\)</span> to estimate
-the population mean, what is the standard error of the estimate?</p>
+Having weighed 9 gorillas, you find sample mean <span class="math notranslate nohighlight">\(\bar{x}=90\)</span> kg and &gt; sample standard deviation, <span class="math notranslate nohighlight">\(S=7.5\)</span> kg. If you use <span class="math notranslate nohighlight">\(\bar{x}\)</span> to estimate &gt; the population mean, what is the standard error of the estimate?</p>
 </div></blockquote>
 <p>To answer that question, we need the sampling distribution of <span class="math notranslate nohighlight">\(\bar{x}\)</span>.
-In Section <a class="reference internal" href="#gorilla"><span class="xref myst">[gorilla]</span></a>{reference-type=“ref”
-reference=“gorilla”} we approximated this distribution by simulating the
-experiment (weighing 9 gorillas), computing <span class="math notranslate nohighlight">\(\bar{x}\)</span> for each simulated
-experiment, and accumulating the distribution of estimates.</p>
-<p>The result is an approximation of the sampling distribution. Then we use
-the sampling distribution to compute standard errors and confidence
-intervals:</p>
+In Section <a class="reference internal" href="#gorilla"><span class="xref myst">[gorilla]</span></a>{reference-type=“ref” reference=“gorilla”} we approximated this distribution by simulating the experiment (weighing 9 gorillas), computing <span class="math notranslate nohighlight">\(\bar{x}\)</span> for each simulated experiment, and accumulating the distribution of estimates.</p>
+<p>The result is an approximation of the sampling distribution.
+Then we use the sampling distribution to compute standard errors and confidence intervals:</p>
 <ol class="arabic simple">
-<li><p>The standard deviation of the sampling distribution is the standard
-error of the estimate; in the example, it is about 2.5 kg.</p></li>
-<li><p>The interval between the 5th and 95th percentile of the sampling
-distribution is a 90% confidence interval. If we run the experiment
-many times, we expect the estimate to fall in this interval 90% of
-the time. In the example, the 90% CI is <span class="math notranslate nohighlight">\((86, 94)\)</span> kg.</p></li>
+<li><p>The standard deviation of the sampling distribution is the standard error of the estimate; in the example, it is about 2.5 kg.</p></li>
+<li><p>The interval between the 5th and 95th percentile of the sampling distribution is a 90% confidence interval.
+If we run the experiment many times, we expect the estimate to fall in this interval 90% of the time.
+In the example, the 90% CI is <span class="math notranslate nohighlight">\((86, 94)\)</span> kg.</p></li>
 </ol>
-<p>Now we’ll do the same calculation analytically. We take advantage of the
-fact that the weights of adult female gorillas are roughly normally
-distributed. Normal distributions have two properties that make them
-amenable for analysis: they are “closed” under linear transformation and
-addition. To explain what that means, I need some notation.</p>
-<p>If the distribution of a quantity, <span class="math notranslate nohighlight">\(X\)</span>, is normal with parameters <span class="math notranslate nohighlight">\(\mu\)</span>
-and <span class="math notranslate nohighlight">\(\sigma\)</span>, you can write</p>
+<p>Now we’ll do the same calculation analytically.
+We take advantage of the fact that the weights of adult female gorillas are roughly normally distributed.
+<code class="docutils literal notranslate"><span class="pre">Normal</span></code> distributions have two properties that make them amenable for analysis: they are “closed” under linear transformation and addition.
+To explain what that means, I need some notation.</p>
+<p>If the distribution of a quantity, <span class="math notranslate nohighlight">\(X\)</span>, is normal with parameters <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, you can write</p>
 <div class="math notranslate nohighlight">
-\[X \sim Normal~(\mu, \sigma^{2})\]</div>
-<p>where
-the symbol <span class="math notranslate nohighlight">\(\sim\)</span> means “is distributed” and the script letter <span class="math notranslate nohighlight">\(Normal\)</span>
-stands for “normal.”</p>
-<p>A linear transformation of <span class="math notranslate nohighlight">\(X\)</span> is something like <span class="math notranslate nohighlight">\(X' = a X + b\)</span>, where
-<span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are real numbers. A family of distributions is closed under
-linear transformation if <span class="math notranslate nohighlight">\(X'\)</span> is in the same family as <span class="math notranslate nohighlight">\(X\)</span>. The normal
-distribution has this property; if <span class="math notranslate nohighlight">\(X \sim Normal~(\mu,
-\sigma^2)\)</span>,</p>
+\[X \sim `Normal`~(\mu, \sigma^{2})\]</div>
+<p>where the symbol <span class="math notranslate nohighlight">\(\sim\)</span> means “is distributed” and the script letter <span class="math notranslate nohighlight">\(`Normal`\)</span> stands for “normal.”</p>
+<p>A linear transformation of <span class="math notranslate nohighlight">\(X\)</span> is something like <span class="math notranslate nohighlight">\(X' = a X + b\)</span>, where <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are real numbers.
+A family of distributions is closed under linear transformation if <span class="math notranslate nohighlight">\(X'\)</span> is in the same family as <span class="math notranslate nohighlight">\(X\)</span>.
+The normal distribution has this property; if <span class="math notranslate nohighlight">\(X \sim `Normal`~(\mu, \sigma^2)\)</span>,</p>
 <div class="math notranslate nohighlight">
-\[X' \sim Normal~(a \mu + b, a^{2} \sigma^2) \tag*{(1)}\]</div>
-<p>Normal distributions are also closed under addition. If <span class="math notranslate nohighlight">\(Z = X + Y\)</span> and</p>
-<p><span class="math notranslate nohighlight">\(X \sim Normal~(\mu_{X}, \sigma_{X}^{2})\)</span> and</p>
-<p><span class="math notranslate nohighlight">\(Y \sim Normal~(\mu_{Y}, \sigma_{Y}^{2})\)</span> then</p>
+\[X' \sim `Normal`~(a \mu + b, a^{2} \sigma^2) \tag*{(1)}\]</div>
+<p><code class="docutils literal notranslate"><span class="pre">Normal</span></code> distributions are also closed under addition.
+If <span class="math notranslate nohighlight">\(Z = X + Y\)</span> and</p>
+<p><span class="math notranslate nohighlight">\(X \sim `Normal`~(\mu_{X}, \sigma_{X}^{2})\)</span> and</p>
+<p><span class="math notranslate nohighlight">\(Y \sim `Normal`~(\mu_{Y}, \sigma_{Y}^{2})\)</span> then</p>
 <div class="math notranslate nohighlight">
-\[Z \sim Normal~(\mu_X + \mu_Y, \sigma_X^2 + \sigma_Y^2)  \tag*{(2)}\]</div>
+\[Z \sim `Normal`~(\mu_X + \mu_Y, \sigma_X^2 + \sigma_Y^2)  \tag*{(2)}\]</div>
 <p>In the special case <span class="math notranslate nohighlight">\(Z = X + X\)</span>, we have</p>
 <div class="math notranslate nohighlight">
-\[Z \sim Normal~(2 \mu_X, 2 \sigma_X^2)\]</div>
+\[Z \sim `Normal`~(2 \mu_X, 2 \sigma_X^2)\]</div>
 <p>and in general if we draw <span class="math notranslate nohighlight">\(n\)</span> values of <span class="math notranslate nohighlight">\(X\)</span> and add them up, we have</p>
 <div class="math notranslate nohighlight">
-\[Z \sim Normal~(n \mu_X, n \sigma_X^2)  \tag*{(3)}\]</div>
+\[Z \sim `Normal`~(n \mu_X, n \sigma_X^2)  \tag*{(3)}\]</div>
 </section>
 <section id="sampling-distributions">
 <h2>Sampling distributions<a class="headerlink" href="#sampling-distributions" title="Link to this heading">#</a></h2>
-<p>Now we have everything we need to compute the sampling distribution of
-<span class="math notranslate nohighlight">\(\bar{x}\)</span>. Remember that we compute <span class="math notranslate nohighlight">\(\bar{x}\)</span> by weighing <span class="math notranslate nohighlight">\(n\)</span> gorillas,
-adding up the total weight, and dividing by <span class="math notranslate nohighlight">\(n\)</span>.</p>
-<p>Assume that the distribution of gorilla weights, <span class="math notranslate nohighlight">\(X\)</span>, is approximately
-normal:</p>
+<p>Now we have everything we need to compute the sampling distribution of <span class="math notranslate nohighlight">\(\bar{x}\)</span>.
+Remember that we compute <span class="math notranslate nohighlight">\(\bar{x}\)</span> by weighing <span class="math notranslate nohighlight">\(n\)</span> gorillas, adding up the total weight, and dividing by <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>Assume that the distribution of gorilla weights, <span class="math notranslate nohighlight">\(X\)</span>, is approximately normal:</p>
 <div class="math notranslate nohighlight">
-\[X \sim Normal~(\mu, \sigma^2)\]</div>
-<p>If we weigh <span class="math notranslate nohighlight">\(n\)</span> gorillas, the
-total weight, <span class="math notranslate nohighlight">\(Y\)</span>, is distributed</p>
+\[X \sim `Normal`~(\mu, \sigma^2)\]</div>
+<p>If we weigh <span class="math notranslate nohighlight">\(n\)</span> gorillas, the total weight, <span class="math notranslate nohighlight">\(Y\)</span>, is distributed</p>
 <div class="math notranslate nohighlight">
-\[Y \sim Normal~(n \mu, n \sigma^2)\]</div>
-<p>using Equation 3. And if we divide by <span class="math notranslate nohighlight">\(n\)</span>, the sample mean, <span class="math notranslate nohighlight">\(Z\)</span>, is
-distributed</p>
+\[Y \sim `Normal`~(n \mu, n \sigma^2)\]</div>
+<p>using Equation 3. And if we divide by <span class="math notranslate nohighlight">\(n\)</span>, the sample mean, <span class="math notranslate nohighlight">\(Z\)</span>, is distributed</p>
 <div class="math notranslate nohighlight">
-\[Z \sim Normal~(\mu, \sigma^2/n)\]</div>
+\[Z \sim `Normal`~(\mu, \sigma^2/n)\]</div>
 <p>using Equation 1 with <span class="math notranslate nohighlight">\(a = 1/n\)</span>.</p>
 <p>The distribution of <span class="math notranslate nohighlight">\(Z\)</span> is the sampling distribution of <span class="math notranslate nohighlight">\(\bar{x}\)</span>.
-The mean of <span class="math notranslate nohighlight">\(Z\)</span> is <span class="math notranslate nohighlight">\(\mu\)</span>, which shows that <span class="math notranslate nohighlight">\(\bar{x}\)</span> is an unbiased estimate
-of <span class="math notranslate nohighlight">\(\mu\)</span>. The variance of the sampling distribution is <span class="math notranslate nohighlight">\(\sigma^2 / n\)</span>.</p>
-<p>So the standard deviation of the sampling distribution, which is the
-standard error of the estimate, is <span class="math notranslate nohighlight">\(\sigma / \sqrt{n}\)</span>. In the example,
-<span class="math notranslate nohighlight">\(\sigma\)</span> is 7.5 kg and <span class="math notranslate nohighlight">\(n\)</span> is 9, so the standard error is 2.5 kg. That
-result is consistent with what we estimated by simulation, but much
-faster to compute!</p>
-<p>We can also use the sampling distribution to compute confidence
-intervals. A 90% confidence interval for <span class="math notranslate nohighlight">\(\bar{x}\)</span> is the interval between
-the 5th and 95th percentiles of <span class="math notranslate nohighlight">\(Z\)</span>. Since <span class="math notranslate nohighlight">\(Z\)</span> is normally distributed,
-we can compute percentiles by evaluating the inverse CDF.</p>
-<p>There is no closed form for the CDF of the normal distribution or its
-inverse, but there are fast numerical methods and they are implemented
-in SciPy.
-<code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides a wrapper function that makes the SciPy function
-a little easier to use:</p>
+The mean of <span class="math notranslate nohighlight">\(Z\)</span> is <span class="math notranslate nohighlight">\(\mu\)</span>, which shows that <span class="math notranslate nohighlight">\(\bar{x}\)</span> is an unbiased estimate of <span class="math notranslate nohighlight">\(\mu\)</span>.
+The variance of the sampling distribution is <span class="math notranslate nohighlight">\(\sigma^2 / n\)</span>.</p>
+<p>So the standard deviation of the sampling distribution, which is the standard error of the estimate, is <span class="math notranslate nohighlight">\(\sigma / \sqrt{n}\)</span>.
+In the example, <span class="math notranslate nohighlight">\(\sigma\)</span> is 7.5 kg and <span class="math notranslate nohighlight">\(n\)</span> is 9, so the standard error is 2.5 kg. That result is consistent with what we estimated by simulation, but much faster to compute!</p>
+<p>We can also use the sampling distribution to compute confidence intervals.
+A 90% confidence interval for <span class="math notranslate nohighlight">\(\bar{x}\)</span> is the interval between the 5th and 95th percentiles of <span class="math notranslate nohighlight">\(Z\)</span>.
+Since <span class="math notranslate nohighlight">\(Z\)</span> is normally distributed, we can compute percentiles by evaluating the inverse CDF.</p>
+<p>There is no closed form for the CDF of the normal distribution or its inverse, but there are fast numerical methods and they are implemented in SciPy.
+<code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides a wrapper function that makes the SciPy function a little easier to use:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
@@ -570,10 +543,8 @@ a little easier to use:</p>
             }, 500);
             </script></div>
 </div>
-<p>Given a probability, <code class="docutils literal notranslate"><span class="pre">p</span></code>, it returns the corresponding percentile from a
-normal distribution with parameters <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code>. For the 90%
-confidence interval of <span class="math notranslate nohighlight">\(\bar{x}\)</span>, we compute the 5th and 95th percentiles
-like this:</p>
+<p>Given a probability, <code class="docutils literal notranslate"><span class="pre">p</span></code>, it returns the corresponding percentile from a normal distribution with parameters <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code>.
+For the 90% confidence interval of <span class="math notranslate nohighlight">\(\bar{x}\)</span>, we compute the 5th and 95th percentiles like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eval_normal_cdf_inverse</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
@@ -628,17 +599,14 @@ like this:</p>
             }, 500);
             </script></div>
 </div>
-<p>So if we run the experiment many times, we expect the estimate, <span class="math notranslate nohighlight">\(\bar{x}\)</span>,
-to fall in the range <span class="math notranslate nohighlight">\((85.9, 94.1)\)</span> about 90% of the time. Again, this
-is consistent with the result we got by simulation.</p>
+<p>So if we run the experiment many times, we expect the estimate, <span class="math notranslate nohighlight">\(\bar{x}\)</span>, to fall in the range <span class="math notranslate nohighlight">\((85.9, 94.1)\)</span> about 90% of the time.
+Again, this is consistent with the result we got by simulation.</p>
 </section>
 <section id="representing-normal-distributions">
 <h2>Representing normal distributions<a class="headerlink" href="#representing-normal-distributions" title="Link to this heading">#</a></h2>
-<p>To make these calculations easier, I have defined a class called
-<code class="docutils literal notranslate"><span class="pre">Normal</span></code> that represents a normal distribution and encodes the equations
-in the previous sections. Here’s what it looks like:</p>
-<p>So we can instantiate a <code class="docutils literal notranslate"><span class="pre">Normal</span></code> that represents the distribution of
-gorilla weights:</p>
+<p>To make these calculations easier, I have defined a class called <code class="docutils literal notranslate"><span class="pre">Normal</span></code> that represents a normal distribution and encodes the equations in the previous sections.
+Here’s what it looks like:</p>
+<p>So we can instantiate a <code class="docutils literal notranslate"><span class="pre">Normal</span></code> that represents the distribution of gorilla weights:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">Normal</span>
@@ -665,10 +633,8 @@ gorilla weights:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">Normal</span></code> provides <code class="docutils literal notranslate"><span class="pre">sum</span></code>, which takes a sample size, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and returns the
-distribution of the sum of <code class="docutils literal notranslate"><span class="pre">n</span></code> values, using Equation 3.</p>
-<p>So we can compute the sampling distribution of the mean with sample size
-9:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Normal</span></code> provides <code class="docutils literal notranslate"><span class="pre">sum</span></code>, which takes a sample size, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and returns the distribution of the sum of <code class="docutils literal notranslate"><span class="pre">n</span></code> values, using Equation 3.</p>
+<p>So we can compute the sampling distribution of the mean with sample size 9:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist_xbar</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="o">/</span> <span class="mi">9</span>
@@ -697,9 +663,8 @@ distribution of the sum of <code class="docutils literal notranslate"><span clas
             }, 500);
             </script></div>
 </div>
-<p>The standard deviation of the sampling distribution is 2.5 kg, as we saw
-in the previous section. Finally, Normal provides <code class="docutils literal notranslate"><span class="pre">percentile</span></code>, which we
-can use to compute a confidence interval:</p>
+<p>The standard deviation of the sampling distribution is 2.5 kg, as we saw in the previous section.
+Finally, <code class="docutils literal notranslate"><span class="pre">Normal</span></code> provides <code class="docutils literal notranslate"><span class="pre">percentile</span></code>, which we can use to compute a confidence interval:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist_xbar</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">dist_xbar</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="mi">95</span><span class="p">)</span>
@@ -727,45 +692,35 @@ can use to compute a confidence interval:</p>
             }, 500);
             </script></div>
 </div>
-<p>And that’s the same answer we got before. We’ll use the <code class="docutils literal notranslate"><span class="pre">Normal</span></code> class
-again later, but before we go on, we need one more bit of analysis.</p>
+<p>And that’s the same answer we got before.
+We’ll use the <code class="docutils literal notranslate"><span class="pre">Normal</span></code> class again later, but before we go on, we need one more bit of analysis.</p>
 </section>
 <section id="central-limit-theorem">
 <h2>Central limit theorem<a class="headerlink" href="#central-limit-theorem" title="Link to this heading">#</a></h2>
-<p>As we saw in the previous sections, if we add values drawn from normal
-distributions, the distribution of the sum is normal. Most other
-distributions don’t have this property; if we add values drawn from
-other distributions, the sum does not generally have an analytic
-distribution.</p>
-<p>But if we add up <code class="docutils literal notranslate"><span class="pre">n</span></code> values from almost any distribution, the
-distribution of the sum converges to normal as <code class="docutils literal notranslate"><span class="pre">n</span></code> increases.</p>
-<p>More specifically, if the distribution of the values has mean and
-standard deviation <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, the distribution of the sum is
-approximately <span class="math notranslate nohighlight">\(Normal(n \mu, n \sigma^2)\)</span>.</p>
-<p>This result is the Central Limit Theorem (CLT). It is one of the most
-useful tools for statistical analysis, but it comes with caveats:</p>
+<p>As we saw in the previous sections, if we add values drawn from normal distributions, the distribution of the sum is normal.
+Most other distributions don’t have this property; if we add values drawn from other distributions, the sum does not generally have an analytic distribution.</p>
+<p>But if we add up <code class="docutils literal notranslate"><span class="pre">n</span></code> values from almost any distribution, the distribution of the sum converges to normal as <code class="docutils literal notranslate"><span class="pre">n</span></code> increases.</p>
+<p>More specifically, if the distribution of the values has mean and standard deviation <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, the distribution of the sum is approximately <span class="math notranslate nohighlight">\(`Normal`(n \mu, n \sigma^2)\)</span>.</p>
+<p>This result is the Central Limit Theorem (CLT).
+It is one of the most useful tools for statistical analysis, but it comes with caveats:</p>
 <ul class="simple">
-<li><p>The values have to be drawn independently. If they are correlated,
-the CLT doesn’t apply (although this is seldom a problem in
-practice).</p></li>
-<li><p>The values have to come from the same distribution (although this
-requirement can be relaxed).</p></li>
-<li><p>The values have to be drawn from a distribution with finite mean and
-variance. So most Pareto distributions are out.</p></li>
+<li><p>The values have to be drawn independently.
+If they are correlated, the CLT doesn’t apply (although this is seldom a problem in practice).</p></li>
+<li><p>The values have to come from the same distribution (although this requirement can be relaxed).</p></li>
+<li><p>The values have to be drawn from a distribution with finite mean and variance.
+So most Pareto distributions are out.</p></li>
 <li><p>The rate of convergence depends on the skewness of the distribution.
-Sums from an exponential distribution converge for small <code class="docutils literal notranslate"><span class="pre">n</span></code>. Sums
-from a lognormal distribution require larger sizes.</p></li>
+Sums from an exponential distribution converge for small <code class="docutils literal notranslate"><span class="pre">n</span></code>.
+Sums from a lognormal distribution require larger sizes.</p></li>
 </ul>
-<p>The Central Limit Theorem explains the prevalence of normal
-distributions in the natural world. Many characteristics of living
-things are affected by genetic and environmental factors whose effect is
-additive. The characteristics we measure are the sum of a large number
-of small effects, so their distribution tends to be normal.</p>
+<p>The Central Limit Theorem explains the prevalence of normal distributions in the natural world.
+Many characteristics of living things are affected by genetic and environmental factors whose effect is additive.
+The characteristics we measure are the sum of a large number of small effects, so their distribution tends to be normal.</p>
 </section>
 <section id="testing-the-clt">
 <h2>Testing the CLT<a class="headerlink" href="#testing-the-clt" title="Link to this heading">#</a></h2>
-<p>To see how the Central Limit Theorem works, and when it doesn’t, let’s
-try some experiments. First, we’ll try an exponential distribution:</p>
+<p>To see how the Central Limit Theorem works, and when it doesn’t, let’s try some experiments.
+First, we’ll try an exponential distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_expo_samples</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
@@ -802,25 +757,57 @@ try some experiments. First, we’ll try an exponential distribution:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">make_expo_samples</span></code> generates samples of sums of exponential values (I use
-“exponential values” as shorthand for “values from an exponential
-distribution”). <code class="docutils literal notranslate"><span class="pre">beta</span></code> is the parameter of the distribution; <code class="docutils literal notranslate"><span class="pre">iters</span></code> is
-the number of sums to generate.</p>
-<p>To explain this function, I’ll start from the inside and work my way
-out. Each time we call <code class="docutils literal notranslate"><span class="pre">np.random.exponential</span></code>, we get a sequence of <code class="docutils literal notranslate"><span class="pre">n</span></code>
-exponential values and compute its sum. <code class="docutils literal notranslate"><span class="pre">sample</span></code> is a list of these
-sums, with length <code class="docutils literal notranslate"><span class="pre">iters</span></code>.</p>
-<p>It is easy to get <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">iters</span></code> confused: <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of terms
-in each sum; <code class="docutils literal notranslate"><span class="pre">iters</span></code> is the number of sums we compute in order to
-characterize the distribution of sums.</p>
-<p>The return value is a list of <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">sample)</span></code> pairs. For each pair, we
-make a normal probability plot:</p>
+<p><code class="docutils literal notranslate"><span class="pre">make_expo_samples</span></code> generates samples of sums of exponential values (I use “exponential values” as shorthand for “values from an exponential distribution”).
+<code class="docutils literal notranslate"><span class="pre">beta</span></code> is the parameter of the distribution; <code class="docutils literal notranslate"><span class="pre">iters</span></code> is the number of sums to generate.</p>
+<p>To explain this function, I’ll start from the inside and work my way out.
+Each time we call <code class="docutils literal notranslate"><span class="pre">np.random.exponential</span></code>, we get a sequence of <code class="docutils literal notranslate"><span class="pre">n</span></code> exponential values and compute its sum.
+<code class="docutils literal notranslate"><span class="pre">sample</span></code> is a list of these sums, with length <code class="docutils literal notranslate"><span class="pre">iters</span></code>.</p>
+<p>It is easy to get <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">iters</span></code> confused: <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of terms in each sum; <code class="docutils literal notranslate"><span class="pre">iters</span></code> is the number of sums we compute in order to characterize the distribution of sums.</p>
+<p>The return value is a list of <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">sample)</span></code> pairs.
+For each pair, we make a normal probability plot:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">normal_probability_plot</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">normal_probability_plot</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">fit_color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes a normal probability plot with a fitted line.</span>
 
+<span class="sd">    sample: sequence of numbers</span>
+<span class="sd">    fit_color: color string for the fitted line</span>
+<span class="sd">    options: passed along to Plot</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">normal_plot_samples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+    <span class="n">fit_ys</span> <span class="o">=</span> <span class="n">inter</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">xs</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">fit_ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">fit_color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "from thinkstats import fit_line\n\n\ndef normal_probability_plot(sample, fit_color=\"gray\", **options):\n    \"\"\"Makes a normal probability plot with a fitted line.\n\n    sample: sequence of numbers\n    fit_color: color string for the fitted line\n    options: passed along to Plot\n    \"\"\"\n    n = len(sample)\n    xs = np.random.normal(0, 1, n)\n    xs.sort()\n    ys = np.sort(sample)\n\n    inter, slope = np.mean(sample), np.std(sample)\n    fit_ys = inter + slope * xs\n    plt.plot(xs, fit_ys, color=fit_color, label=\"model\")\n\n    plt.plot(xs, ys, **options)";
+                var nbb_formatted_code = "from thinkstats import fit_line\n\n\ndef normal_probability_plot(sample, fit_color=\"gray\", **options):\n    \"\"\"Makes a normal probability plot with a fitted line.\n\n    sample: sequence of numbers\n    fit_color: color string for the fitted line\n    options: passed along to Plot\n    \"\"\"\n    n = len(sample)\n    xs = np.random.normal(0, 1, n)\n    xs.sort()\n    ys = np.sort(sample)\n\n    inter, slope = np.mean(sample), np.std(sample)\n    fit_ys = inter + slope * xs\n    plt.plot(xs, fit_ys, color=fit_color, label=\"model\")\n\n    plt.plot(xs, ys, **options)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">normal_plot_samples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes normal probability plots for samples.</span>
 
 <span class="sd">    samples: list of samples</span>
@@ -844,9 +831,9 @@ make a normal probability plot:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 11;
-                var nbb_unformatted_code = "from thinkstats import normal_probability_plot\n\n\ndef normal_plot_samples(samples, plot=1, ylabel=\"\"):\n    \"\"\"Makes normal probability plots for samples.\n\n    samples: list of samples\n    label: string\n    \"\"\"\n    for n, sample in samples:\n        plt.subplot(1, 3, plot)\n        normal_probability_plot(sample)\n        decorate(\n            title=\"n=%d\" % n,\n            legend=False,\n            xticks=[],\n            yticks=[],\n            xlabel=\"random normal variate\",\n            ylabel=ylabel,\n        )\n        plot += 1";
-                var nbb_formatted_code = "from thinkstats import normal_probability_plot\n\n\ndef normal_plot_samples(samples, plot=1, ylabel=\"\"):\n    \"\"\"Makes normal probability plots for samples.\n\n    samples: list of samples\n    label: string\n    \"\"\"\n    for n, sample in samples:\n        plt.subplot(1, 3, plot)\n        normal_probability_plot(sample)\n        decorate(\n            title=\"n=%d\" % n,\n            legend=False,\n            xticks=[],\n            yticks=[],\n            xlabel=\"random normal variate\",\n            ylabel=ylabel,\n        )\n        plot += 1";
+                var nbb_cell_id = 12;
+                var nbb_unformatted_code = "def normal_plot_samples(samples, plot=1, ylabel=\"\"):\n    \"\"\"Makes normal probability plots for samples.\n\n    samples: list of samples\n    label: string\n    \"\"\"\n    for n, sample in samples:\n        plt.subplot(1, 3, plot)\n        normal_probability_plot(sample)\n        decorate(\n            title=\"n=%d\" % n,\n            legend=False,\n            xticks=[],\n            yticks=[],\n            xlabel=\"random normal variate\",\n            ylabel=ylabel,\n        )\n        plot += 1";
+                var nbb_formatted_code = "def normal_plot_samples(samples, plot=1, ylabel=\"\"):\n    \"\"\"Makes normal probability plots for samples.\n\n    samples: list of samples\n    label: string\n    \"\"\"\n    for n, sample in samples:\n        plt.subplot(1, 3, plot)\n        normal_probability_plot(sample)\n        decorate(\n            title=\"n=%d\" % n,\n            legend=False,\n            xticks=[],\n            yticks=[],\n            xlabel=\"random normal variate\",\n            ylabel=ylabel,\n        )\n        plot += 1";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -859,8 +846,7 @@ make a normal probability plot:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">normal_plot_samples</span></code> takes the list of pairs from <code class="docutils literal notranslate"><span class="pre">make_expo_samples</span></code> and
-generates a row of normal probability plots.</p>
+<p><code class="docutils literal notranslate"><span class="pre">normal_plot_samples</span></code> takes the list of pairs from <code class="docutils literal notranslate"><span class="pre">make_expo_samples</span></code> and generates a row of normal probability plots.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">make_expo_samples</span><span class="p">()</span>
@@ -869,10 +855,10 @@ generates a row of normal probability plots.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/126cf234d571c9cdaa7a79a9d4a97892a2327790c52bf6fd3ee6c21da96991e9.png" src="_images/126cf234d571c9cdaa7a79a9d4a97892a2327790c52bf6fd3ee6c21da96991e9.png" />
+<img alt="_images/d767b9f8b146e6978325f6dcaceb475b39af494e9a771b7750025ba922b93a06.png" src="_images/d767b9f8b146e6978325f6dcaceb475b39af494e9a771b7750025ba922b93a06.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 12;
+                var nbb_cell_id = 13;
                 var nbb_unformatted_code = "samples = make_expo_samples()\nnormal_plot_samples(samples, plot=1, ylabel=\"sum of expo values\")";
                 var nbb_formatted_code = "samples = make_expo_samples()\nnormal_plot_samples(samples, plot=1, ylabel=\"sum of expo values\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -887,15 +873,11 @@ generates a row of normal probability plots.</p>
             }, 500);
             </script></div>
 </div>
-<p>With <code class="docutils literal notranslate"><span class="pre">n=1</span></code>, the distribution of the sum is
-still exponential, so the normal probability plot is not a straight
-line. But with <code class="docutils literal notranslate"><span class="pre">n=10</span></code> the distribution of the sum is approximately
-normal, and with <code class="docutils literal notranslate"><span class="pre">n=100</span></code> it is all but indistinguishable from normal.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">n=1</span></code>, the distribution of the sum is still exponential, so the normal probability plot is not a straight line.
+But with <code class="docutils literal notranslate"><span class="pre">n=10</span></code> the distribution of the sum is approximately normal, and with <code class="docutils literal notranslate"><span class="pre">n=100</span></code> it is all but indistinguishable from normal.</p>
 <p>The following shows similar results for a lognormal distribution.
-Lognormal distributions are generally more skewed than exponential
-distributions, so the distribution of sums takes longer to converge.
-With <code class="docutils literal notranslate"><span class="pre">n=10</span></code> the normal probability plot is nowhere near straight, but
-with <code class="docutils literal notranslate"><span class="pre">n=100</span></code> it is approximately normal.</p>
+Lognormal distributions are generally more skewed than exponential distributions, so the distribution of sums takes longer to converge.
+With <code class="docutils literal notranslate"><span class="pre">n=10</span></code> the normal probability plot is nowhere near straight, but with <code class="docutils literal notranslate"><span class="pre">n=100</span></code> it is approximately normal.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_lognormal_samples</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
@@ -918,7 +900,7 @@ with <code class="docutils literal notranslate"><span class="pre">n=100</span></
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 13;
+                var nbb_cell_id = 14;
                 var nbb_unformatted_code = "def make_lognormal_samples(mu=1.0, sigma=1.0, iters=1000):\n    \"\"\"Generates samples from a lognormal distribution.\n\n    mu: parmeter\n    sigma: parameter\n    iters: number of samples to generate for each size\n\n    returns: list of samples\n    \"\"\"\n    samples = []\n    for n in [1, 10, 100]:\n        sample = [np.sum(np.random.lognormal(mu, sigma, n)) for _ in range(iters)]\n        samples.append((n, sample))\n    return samples";
                 var nbb_formatted_code = "def make_lognormal_samples(mu=1.0, sigma=1.0, iters=1000):\n    \"\"\"Generates samples from a lognormal distribution.\n\n    mu: parmeter\n    sigma: parameter\n    iters: number of samples to generate for each size\n\n    returns: list of samples\n    \"\"\"\n    samples = []\n    for n in [1, 10, 100]:\n        sample = [np.sum(np.random.lognormal(mu, sigma, n)) for _ in range(iters)]\n        samples.append((n, sample))\n    return samples";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -941,10 +923,10 @@ with <code class="docutils literal notranslate"><span class="pre">n=100</span></
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e1be00c21e6f1f427077cb3a9c4edda670e191637779ec20908e965fb0195fe4.png" src="_images/e1be00c21e6f1f427077cb3a9c4edda670e191637779ec20908e965fb0195fe4.png" />
+<img alt="_images/d49e8be90898db7d2a9e75d3c00f0a1b7903c0d6fe508c5544ca067bd839bf55.png" src="_images/d49e8be90898db7d2a9e75d3c00f0a1b7903c0d6fe508c5544ca067bd839bf55.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 14;
+                var nbb_cell_id = 15;
                 var nbb_unformatted_code = "samples = make_lognormal_samples()\nnormal_plot_samples(samples, ylabel=\"sum of lognormal values\")";
                 var nbb_formatted_code = "samples = make_lognormal_samples()\nnormal_plot_samples(samples, ylabel=\"sum of lognormal values\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -959,12 +941,11 @@ with <code class="docutils literal notranslate"><span class="pre">n=100</span></
             }, 500);
             </script></div>
 </div>
-<p>Pareto distributions are even more skewed than lognormal. Depending on
-the parameters, many Pareto distributions do not have finite mean and
-variance. As a result, the Central Limit Theorem does not apply.
-Figure <a class="reference internal" href="#normal2"><span class="xref myst">[normal2]</span></a>{reference-type=“ref” reference=“normal2”}
-(top row) shows distributions of sums of Pareto values. Even with
-<code class="docutils literal notranslate"><span class="pre">n=100</span></code> the normal probability plot is far from straight.</p>
+<p>Pareto distributions are even more skewed than lognormal.
+Depending on the parameters, many Pareto distributions do not have finite mean and variance.
+As a result, the Central Limit Theorem does not apply.
+Figure <a class="reference internal" href="#normal2"><span class="xref myst">[normal2]</span></a>{reference-type=“ref” reference=“normal2”} (top row) shows distributions of sums of Pareto values.
+Even with <code class="docutils literal notranslate"><span class="pre">n=100</span></code> the normal probability plot is far from straight.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_pareto_samples</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
@@ -986,7 +967,7 @@ Figure <a class="reference internal" href="#normal2"><span class="xref myst">[n
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 15;
+                var nbb_cell_id = 16;
                 var nbb_unformatted_code = "def make_pareto_samples(alpha=1.0, iters=1000):\n    \"\"\"Generates samples from a Pareto distribution.\n\n    alpha: parameter\n    iters: number of samples to generate for each size\n\n    returns: list of samples\n    \"\"\"\n    samples = []\n    for n in [1, 10, 100]:\n        sample = [np.sum(np.random.pareto(alpha, n)) for _ in range(iters)]\n        samples.append((n, sample))\n    return samples";
                 var nbb_formatted_code = "def make_pareto_samples(alpha=1.0, iters=1000):\n    \"\"\"Generates samples from a Pareto distribution.\n\n    alpha: parameter\n    iters: number of samples to generate for each size\n\n    returns: list of samples\n    \"\"\"\n    samples = []\n    for n in [1, 10, 100]:\n        sample = [np.sum(np.random.pareto(alpha, n)) for _ in range(iters)]\n        samples.append((n, sample))\n    return samples";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1009,10 +990,10 @@ Figure <a class="reference internal" href="#normal2"><span class="xref myst">[n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e7f887608559438e68e5c3dd5f3a5fdf1512d353dd5b23ae6913d218eb52c1ae.png" src="_images/e7f887608559438e68e5c3dd5f3a5fdf1512d353dd5b23ae6913d218eb52c1ae.png" />
+<img alt="_images/c53eceb29c690848d681954508ae57cae95b23e3f80232fe5daaa4fb605c40c6.png" src="_images/c53eceb29c690848d681954508ae57cae95b23e3f80232fe5daaa4fb605c40c6.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 16;
+                var nbb_cell_id = 17;
                 var nbb_unformatted_code = "samples = make_pareto_samples()\nnormal_plot_samples(samples, ylabel=\"sum of Pareto values\")";
                 var nbb_formatted_code = "samples = make_pareto_samples()\nnormal_plot_samples(samples, ylabel=\"sum of Pareto values\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1028,13 +1009,9 @@ Figure <a class="reference internal" href="#normal2"><span class="xref myst">[n
             </script></div>
 </div>
 <p>I also mentioned that CLT does not apply if the values are correlated.
-To test that, I generate correlated values from an exponential
-distribution. The algorithm for generating correlated values is (1)
-generate correlated normal values, (2) use the normal CDF to transform
-the values to uniform, and (3) use the inverse exponential CDF to
-transform the uniform values to exponential.</p>
-<p><code class="docutils literal notranslate"><span class="pre">generate_correlated</span></code> returns an iterator of <code class="docutils literal notranslate"><span class="pre">n</span></code> normal values with
-serial correlation <code class="docutils literal notranslate"><span class="pre">rho</span></code>:</p>
+To test that, I generate correlated values from an exponential distribution.
+The algorithm for generating correlated values is (1) generate correlated normal values, (2) use the normal CDF to transform the values to uniform, and (3) use the inverse exponential CDF to transform the uniform values to exponential.</p>
+<p><code class="docutils literal notranslate"><span class="pre">generate_correlated</span></code> returns an iterator of <code class="docutils literal notranslate"><span class="pre">n</span></code> normal values with serial correlation <code class="docutils literal notranslate"><span class="pre">rho</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -1060,7 +1037,7 @@ serial correlation <code class="docutils literal notranslate"><span class="pre">
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 17;
+                var nbb_cell_id = 18;
                 var nbb_unformatted_code = "import random\n\n\ndef generate_correlated(rho, n):\n    \"\"\"Generates a sequence of correlated values from a standard normal dist.\n\n    rho: coefficient of correlation\n    n: length of sequence\n\n    returns: iterator\n    \"\"\"\n    x = random.gauss(0, 1)\n    yield x\n    sigma = np.sqrt(1 - rho**2)\n    for _ in range(n - 1):\n        x = random.gauss(x * rho, sigma)\n        yield x";
                 var nbb_formatted_code = "import random\n\n\ndef generate_correlated(rho, n):\n    \"\"\"Generates a sequence of correlated values from a standard normal dist.\n\n    rho: coefficient of correlation\n    n: length of sequence\n\n    returns: iterator\n    \"\"\"\n    x = random.gauss(0, 1)\n    yield x\n    sigma = np.sqrt(1 - rho**2)\n    for _ in range(n - 1):\n        x = random.gauss(x * rho, sigma)\n        yield x";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1075,13 +1052,10 @@ serial correlation <code class="docutils literal notranslate"><span class="pre">
             }, 500);
             </script></div>
 </div>
-<p>The first value is a standard normal value. Each subsequent value
-depends on its predecessor: if the previous value is <code class="docutils literal notranslate"><span class="pre">x</span></code>, the mean of
-the next value is <code class="docutils literal notranslate"><span class="pre">x*rho</span></code>, with variance <code class="docutils literal notranslate"><span class="pre">1-rho**2</span></code>. Note that
-<code class="docutils literal notranslate"><span class="pre">random.gauss</span></code> takes the standard deviation as the second argument, not
-variance.</p>
-<p><code class="docutils literal notranslate"><span class="pre">generate_expo_correlated</span></code> takes the resulting sequence and transforms it
-to exponential:</p>
+<p>The first value is a standard normal value.
+Each subsequent value depends on its predecessor: if the previous value is <code class="docutils literal notranslate"><span class="pre">x</span></code>, the mean of the next value is <code class="docutils literal notranslate"><span class="pre">x*rho</span></code>, with variance <code class="docutils literal notranslate"><span class="pre">1-rho**2</span></code>.
+Note that <code class="docutils literal notranslate"><span class="pre">random.gauss</span></code> takes the standard deviation as the second argument, not variance.</p>
+<p><code class="docutils literal notranslate"><span class="pre">generate_expo_correlated</span></code> takes the resulting sequence and transforms it to exponential:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">expon</span>
@@ -1105,7 +1079,7 @@ to exponential:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 18;
+                var nbb_cell_id = 19;
                 var nbb_unformatted_code = "from scipy.stats import expon\n\n\ndef generate_expo_correlated(rho, n):\n    \"\"\"Generates a sequence of correlated values from an exponential dist.\n\n    rho: coefficient of correlation\n    n: length of sequence\n\n    returns: NumPy array\n    \"\"\"\n    normal = list(generate_correlated(rho, n))\n    uniform = norm.cdf(normal)\n    expo = expon.ppf(uniform)\n    return expo";
                 var nbb_formatted_code = "from scipy.stats import expon\n\n\ndef generate_expo_correlated(rho, n):\n    \"\"\"Generates a sequence of correlated values from an exponential dist.\n\n    rho: coefficient of correlation\n    n: length of sequence\n\n    returns: NumPy array\n    \"\"\"\n    normal = list(generate_correlated(rho, n))\n    uniform = norm.cdf(normal)\n    expo = expon.ppf(uniform)\n    return expo";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1120,10 +1094,9 @@ to exponential:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">normal</span></code> is a list of correlated normal values. <code class="docutils literal notranslate"><span class="pre">uniform</span></code> is a sequence
-of uniform values between 0 and 1. <code class="docutils literal notranslate"><span class="pre">expo</span></code> is a correlated sequence of
-exponential values. <code class="docutils literal notranslate"><span class="pre">ppf</span></code> stands for “percent point function,” which is
-another name for the inverse CDF.</p>
+<p><code class="docutils literal notranslate"><span class="pre">normal</span></code> is a list of correlated normal values.
+<code class="docutils literal notranslate"><span class="pre">uniform</span></code> is a sequence of uniform values between 0 and 1. <code class="docutils literal notranslate"><span class="pre">expo</span></code> is a correlated sequence of exponential values.
+<code class="docutils literal notranslate"><span class="pre">ppf</span></code> stands for “percent point function,” which is another name for the inverse CDF.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_correlated_samples</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
@@ -1145,7 +1118,7 @@ another name for the inverse CDF.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 19;
+                var nbb_cell_id = 20;
                 var nbb_unformatted_code = "def make_correlated_samples(rho=0.9, iters=1000):\n    \"\"\"Generates samples from a correlated exponential distribution.\n\n    rho: correlation\n    iters: number of samples to generate for each size\n\n    returns: list of samples\n    \"\"\"\n    samples = []\n    for n in [1, 10, 100]:\n        sample = [np.sum(generate_expo_correlated(rho, n)) for _ in range(iters)]\n        samples.append((n, sample))\n    return samples";
                 var nbb_formatted_code = "def make_correlated_samples(rho=0.9, iters=1000):\n    \"\"\"Generates samples from a correlated exponential distribution.\n\n    rho: correlation\n    iters: number of samples to generate for each size\n\n    returns: list of samples\n    \"\"\"\n    samples = []\n    for n in [1, 10, 100]:\n        sample = [np.sum(generate_expo_correlated(rho, n)) for _ in range(iters)]\n        samples.append((n, sample))\n    return samples";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1160,11 +1133,8 @@ another name for the inverse CDF.</p>
             }, 500);
             </script></div>
 </div>
-<p>The following figure shows distributions of sums of correlated exponential
-values with <code class="docutils literal notranslate"><span class="pre">rho=0.9</span></code>. The correlation slows the rate of convergence;
-nevertheless, with <code class="docutils literal notranslate"><span class="pre">n=100</span></code> the normal probability plot is nearly
-straight. So even though CLT does not strictly apply when the values are
-correlated, moderate correlations are seldom a problem in practice.</p>
+<p>The following figure shows distributions of sums of correlated exponential values with <code class="docutils literal notranslate"><span class="pre">rho=0.9</span></code>. The correlation slows the rate of convergence; nevertheless, with <code class="docutils literal notranslate"><span class="pre">n=100</span></code> the normal probability plot is nearly straight.
+So even though CLT does not strictly apply when the values are correlated, moderate correlations are seldom a problem in practice.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">make_correlated_samples</span><span class="p">()</span>
@@ -1173,10 +1143,10 @@ correlated, moderate correlations are seldom a problem in practice.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/023e4bf4dab8fb046c1c3e3f9c8b6724343de7b7c033607374e36e15754f890f.png" src="_images/023e4bf4dab8fb046c1c3e3f9c8b6724343de7b7c033607374e36e15754f890f.png" />
+<img alt="_images/2bfe1014e4e9ca8208a8eea70471923056a0624e59edc77e692ef7ad467d1852.png" src="_images/2bfe1014e4e9ca8208a8eea70471923056a0624e59edc77e692ef7ad467d1852.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 20;
+                var nbb_cell_id = 21;
                 var nbb_unformatted_code = "samples = make_correlated_samples()\nnormal_plot_samples(samples, ylabel=\"sum of correlated exponential values\")";
                 var nbb_formatted_code = "samples = make_correlated_samples()\nnormal_plot_samples(samples, ylabel=\"sum of correlated exponential values\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1191,15 +1161,13 @@ correlated, moderate correlations are seldom a problem in practice.</p>
             }, 500);
             </script></div>
 </div>
-<p>These experiments are meant to show how the Central Limit Theorem works,
-and what happens when it doesn’t. Now let’s see how we can use it.</p>
+<p>These experiments are meant to show how the Central Limit Theorem works, and what happens when it doesn’t.
+Now let’s see how we can use it.</p>
 </section>
 <section id="applying-the-clt">
 <h2>Applying the CLT<a class="headerlink" href="#applying-the-clt" title="Link to this heading">#</a></h2>
-<p>To see why the Central Limit Theorem is useful, let’s get back to the
-example in Section XXX: testing the apparent difference in mean pregnancy
-length for first babies and others. As we’ve seen, the apparent
-difference is about 0.078 weeks:</p>
+<p>To see why the Central Limit Theorem is useful, let’s get back to the example in Section XXX: testing the apparent difference in mean pregnancy length for first babies and others.
+As we’ve seen, the apparent difference is about 0.078 weeks:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
@@ -1211,7 +1179,7 @@ difference is about 0.078 weeks:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 21;
+                var nbb_cell_id = 22;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1237,7 +1205,7 @@ difference is about 0.078 weeks:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 22;
+                var nbb_cell_id = 23;
                 var nbb_unformatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()";
                 var nbb_formatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1265,7 +1233,7 @@ difference is about 0.078 weeks:</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 23;
+                var nbb_cell_id = 24;
                 var nbb_unformatted_code = "delta = firsts.prglngth.mean() - others.prglngth.mean()\ndelta";
                 var nbb_formatted_code = "delta = firsts.prglngth.mean() - others.prglngth.mean()\ndelta";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1280,13 +1248,9 @@ difference is about 0.078 weeks:</p>
             }, 500);
             </script></div>
 </div>
-<p>Remember the logic of hypothesis testing: we compute a p-value, which is
-the probability of the observed difference under the null hypothesis; if
-it is small, we conclude that the observed difference is unlikely to be
-due to chance.</p>
-<p>In this example, the null hypothesis is that the distribution of
-pregnancy lengths is the same for first babies and others. So we can
-compute the sampling distribution of the mean like this:</p>
+<p>Remember the logic of hypothesis testing: we compute a p-value, which is the probability of the observed difference under the null hypothesis; if it is small, we conclude that the observed difference is unlikely to be due to chance.</p>
+<p>In this example, the null hypothesis is that the distribution of pregnancy lengths is the same for first babies and others.
+So we can compute the sampling distribution of the mean like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sampling_dist_mean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -1306,7 +1270,7 @@ compute the sampling distribution of the mean like this:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 24;
+                var nbb_cell_id = 25;
                 var nbb_unformatted_code = "def sampling_dist_mean(data, n):\n    \"\"\"Computes the sampling distribution of the mean.\n\n    data: sequence of values representing the population\n    n: sample size\n\n    returns: Normal object\n    \"\"\"\n    mean, var = data.mean(), data.var()\n    dist = Normal(mean, var)\n    return dist.sum(n) / n";
                 var nbb_formatted_code = "def sampling_dist_mean(data, n):\n    \"\"\"Computes the sampling distribution of the mean.\n\n    data: sequence of values representing the population\n    n: sample size\n\n    returns: Normal object\n    \"\"\"\n    mean, var = data.mean(), data.var()\n    dist = Normal(mean, var)\n    return dist.sum(n) / n";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1331,7 +1295,7 @@ compute the sampling distribution of the mean like this:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 25;
+                var nbb_cell_id = 26;
                 var nbb_unformatted_code = "dist1 = sampling_dist_mean(live.prglngth, len(firsts))\ndist2 = sampling_dist_mean(live.prglngth, len(others))";
                 var nbb_formatted_code = "dist1 = sampling_dist_mean(live.prglngth, len(firsts))\ndist2 = sampling_dist_mean(live.prglngth, len(others))";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1346,20 +1310,15 @@ compute the sampling distribution of the mean like this:</p>
             }, 500);
             </script></div>
 </div>
-<p>Both sampling distributions are based on the same population, which is
-the pool of all live births. <code class="docutils literal notranslate"><span class="pre">SamplingDistMean</span></code> takes this sequence of
-values and the sample size, and returns a Normal object representing the
-sampling distribution:</p>
-<p><code class="docutils literal notranslate"><span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">var</span></code> are the mean and variance of <code class="docutils literal notranslate"><span class="pre">data</span></code>. We approximate the
-distribution of the data with a normal distribution, <code class="docutils literal notranslate"><span class="pre">dist</span></code>.</p>
-<p>In this example, the data are not normally distributed, so this
-approximation is not very good. But then we compute <code class="docutils literal notranslate"><span class="pre">dist.Sum(n)</span> <span class="pre">/</span> <span class="pre">n</span></code>,
-which is the sampling distribution of the mean of <code class="docutils literal notranslate"><span class="pre">n</span></code> values. Even if
-the data are not normally distributed, the sampling distribution of the
-mean is, by the Central Limit Theorem.</p>
-<p>Next, we compute the sampling distribution of the difference in the
-means. The <code class="docutils literal notranslate"><span class="pre">Normal</span></code> class knows how to perform subtraction using
-Equation 2:</p>
+<p>Both sampling distributions are based on the same population, which is the pool of all live births.
+<code class="docutils literal notranslate"><span class="pre">SamplingDistMean</span></code> takes this sequence of values and the sample size, and returns a <code class="docutils literal notranslate"><span class="pre">Normal</span></code> object representing the sampling distribution:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">var</span></code> are the mean and variance of <code class="docutils literal notranslate"><span class="pre">data</span></code>.
+We approximate the distribution of the data with a normal distribution, <code class="docutils literal notranslate"><span class="pre">dist</span></code>.</p>
+<p>In this example, the data are not normally distributed, so this approximation is not very good.
+But then we compute <code class="docutils literal notranslate"><span class="pre">dist.Sum(n)</span> <span class="pre">/</span> <span class="pre">n</span></code>, which is the sampling distribution of the mean of <code class="docutils literal notranslate"><span class="pre">n</span></code> values.
+Even if the data are not normally distributed, the sampling distribution of the mean is, by the Central Limit Theorem.</p>
+<p>Next, we compute the sampling distribution of the difference in the means.
+The <code class="docutils literal notranslate"><span class="pre">Normal</span></code> class knows how to perform subtraction using Equation 2:</p>
 <p>So we can compute the sampling distribution of the difference like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1374,7 +1333,7 @@ Equation 2:</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 26;
+                var nbb_cell_id = 27;
                 var nbb_unformatted_code = "dist = dist1 - dist2\ndist";
                 var nbb_formatted_code = "dist = dist1 - dist2\ndist";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1389,12 +1348,10 @@ Equation 2:</p>
             }, 500);
             </script></div>
 </div>
-<p>The mean is 0, which makes sense because we expect two samples from the
-same distribution to have the same mean, on average. The variance of the
-sampling distribution is 0.0032.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Normal</span></code> provides <code class="docutils literal notranslate"><span class="pre">Prob</span></code>, which evaluates the normal CDF. We can use
-<code class="docutils literal notranslate"><span class="pre">Prob</span></code> to compute the probability of a difference as large as <code class="docutils literal notranslate"><span class="pre">delta</span></code>
-under the null hypothesis:</p>
+<p>The mean is 0, which makes sense because we expect two samples from the same distribution to have the same mean, on average.
+The variance of the sampling distribution is 0.0032.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Normal</span></code> provides <code class="docutils literal notranslate"><span class="pre">Prob</span></code>, which evaluates the normal CDF.
+We can use <code class="docutils literal notranslate"><span class="pre">Prob</span></code> to compute the probability of a difference as large as <code class="docutils literal notranslate"><span class="pre">delta</span></code> under the null hypothesis:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">-</span> <span class="n">dist</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
@@ -1407,7 +1364,7 @@ under the null hypothesis:</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 27;
+                var nbb_cell_id = 28;
                 var nbb_unformatted_code = "1 - dist.prob(delta)";
                 var nbb_formatted_code = "1 - dist.prob(delta)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1422,8 +1379,8 @@ under the null hypothesis:</p>
             }, 500);
             </script></div>
 </div>
-<p>Which means that the p-value for a one-sided test is 0.084. For a
-two-sided test we would also compute</p>
+<p>Which means that the p-value for a one-sided test is 0.084.
+For a two-sided test we would also compute</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="o">-</span><span class="n">delta</span><span class="p">)</span>
@@ -1436,7 +1393,7 @@ two-sided test we would also compute</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 28;
+                var nbb_cell_id = 29;
                 var nbb_unformatted_code = "dist.prob(-delta)";
                 var nbb_formatted_code = "dist.prob(-delta)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1451,30 +1408,19 @@ two-sided test we would also compute</p>
             }, 500);
             </script></div>
 </div>
-<p>Which is the same because the normal distribution is symmetric. The sum
-of the tails is 0.168, which is consistent with the estimate in
-Section XXX, which was 0.17.</p>
+<p>Which is the same because the normal distribution is symmetric.
+The sum of the tails is 0.168, which is consistent with the estimate in Section XXX, which was 0.17.</p>
 </section>
 <section id="correlation-test">
 <h2>Correlation test<a class="headerlink" href="#correlation-test" title="Link to this heading">#</a></h2>
-<p>In Section xxx we used a permutation test for the correlation
-between birth weight and mother’s age, and found that it is
-statistically significant, with p-value less than 0.001.</p>
-<p>Now we can do the same thing analytically. The method is based on this
-mathematical result: given two variables that are normally distributed
-and uncorrelated, if we generate a sample with size <span class="math notranslate nohighlight">\(n\)</span>, compute
-Pearson’s correlation, <span class="math notranslate nohighlight">\(r\)</span>, and then compute the transformed correlation
-$<span class="math notranslate nohighlight">\(t = r \sqrt{\frac{n-2}{1-r^2}}\)</span><span class="math notranslate nohighlight">\( the distribution of \)</span>t<span class="math notranslate nohighlight">\( is Student's
-t-distribution with parameter \)</span>n-2$. The t-distribution is an analytic
-distribution; the CDF can be computed efficiently using gamma functions.</p>
-<p>We can use this result to compute the sampling distribution of
-correlation under the null hypothesis; that is, if we generate
-uncorrelated sequences of normal values, what is the distribution of
-their correlation? <code class="docutils literal notranslate"><span class="pre">student_cdf</span></code> takes the sample size, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and returns
-the sampling distribution of correlation:</p>
+<p>In Section xxx we used a permutation test for the correlation between birth weight and mother’s age, and found that it is statistically significant, with p-value less than 0.001.</p>
+<p>Now we can do the same thing analytically.
+The method is based on this mathematical result: given two variables that are normally distributed and uncorrelated, if we generate a sample with size <span class="math notranslate nohighlight">\(n\)</span>, compute Pearson’s correlation, <span class="math notranslate nohighlight">\(r\)</span>, and then compute the transformed correlation $<span class="math notranslate nohighlight">\(t = r \sqrt{\frac{n-2}{1-r^2}}\)</span><span class="math notranslate nohighlight">\( the distribution of \)</span>t<span class="math notranslate nohighlight">\( is Student's t-distribution with parameter \)</span>n-2$.
+The t-distribution is an analytic distribution; the CDF can be computed efficiently using gamma functions.</p>
+<p>We can use this result to compute the sampling distribution of correlation under the null hypothesis; that is, if we generate uncorrelated sequences of normal values, what is the distribution of their correlation? <code class="docutils literal notranslate"><span class="pre">student_cdf</span></code> takes the sample size, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and returns the sampling distribution of correlation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span> <span class="k">as</span> <span class="n">studentt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span> <span class="k">as</span> <span class="n">student_t</span>
 <span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
 
 
@@ -1486,7 +1432,7 @@ the sampling distribution of correlation:</p>
 <span class="sd">    returns: Cdf</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
-    <span class="n">ps</span> <span class="o">=</span> <span class="n">studentt</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">ps</span> <span class="o">=</span> <span class="n">student_t</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">rs</span> <span class="o">=</span> <span class="n">ts</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">ts</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Cdf</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">rs</span><span class="p">)</span>
 </pre></div>
@@ -1495,9 +1441,9 @@ the sampling distribution of correlation:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 29;
-                var nbb_unformatted_code = "from scipy.stats import t as studentt\nfrom empiricaldist import Cdf\n\n\ndef student_cdf(n):\n    \"\"\"Computes the CDF correlations from uncorrelated variables.\n\n    n: sample size\n\n    returns: Cdf\n    \"\"\"\n    ts = np.linspace(-3, 3, 101)\n    ps = studentt.cdf(ts, df=n - 2)\n    rs = ts / np.sqrt(n - 2 + ts**2)\n    return Cdf(ps, rs)";
-                var nbb_formatted_code = "from scipy.stats import t as studentt\nfrom empiricaldist import Cdf\n\n\ndef student_cdf(n):\n    \"\"\"Computes the CDF correlations from uncorrelated variables.\n\n    n: sample size\n\n    returns: Cdf\n    \"\"\"\n    ts = np.linspace(-3, 3, 101)\n    ps = studentt.cdf(ts, df=n - 2)\n    rs = ts / np.sqrt(n - 2 + ts**2)\n    return Cdf(ps, rs)";
+                var nbb_cell_id = 30;
+                var nbb_unformatted_code = "from scipy.stats import t as student_t\nfrom empiricaldist import Cdf\n\n\ndef student_cdf(n):\n    \"\"\"Computes the CDF correlations from uncorrelated variables.\n\n    n: sample size\n\n    returns: Cdf\n    \"\"\"\n    ts = np.linspace(-3, 3, 101)\n    ps = student_t.cdf(ts, df=n - 2)\n    rs = ts / np.sqrt(n - 2 + ts**2)\n    return Cdf(ps, rs)";
+                var nbb_formatted_code = "from scipy.stats import t as student_t\nfrom empiricaldist import Cdf\n\n\ndef student_cdf(n):\n    \"\"\"Computes the CDF correlations from uncorrelated variables.\n\n    n: sample size\n\n    returns: Cdf\n    \"\"\"\n    ts = np.linspace(-3, 3, 101)\n    ps = student_t.cdf(ts, df=n - 2)\n    rs = ts / np.sqrt(n - 2 + ts**2)\n    return Cdf(ps, rs)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1511,23 +1457,16 @@ the sampling distribution of correlation:</p>
             </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">ts</span></code> is a NumPy array of values for <span class="math notranslate nohighlight">\(t\)</span>, the transformed correlation.
-<code class="docutils literal notranslate"><span class="pre">ps</span></code> contains the corresponding probabilities, computed using the CDF of
-the Student’s t-distribution implemented in SciPy. The parameter of the
-t-distribution, <code class="docutils literal notranslate"><span class="pre">df</span></code>, stands for “degrees of freedom.” I won’t explain
-that term, but you can read about it at
-<a class="reference external" href="http://en.wikipedia.org/wiki/Degrees_of_freedom_(statistics)">http://en.wikipedia.org/wiki/Degrees_of_freedom_(statistics)</a>.</p>
-<p>To get from <code class="docutils literal notranslate"><span class="pre">ts</span></code> to the correlation coefficients, <code class="docutils literal notranslate"><span class="pre">rs</span></code>, we apply the
-inverse transform,</p>
+<code class="docutils literal notranslate"><span class="pre">ps</span></code> contains the corresponding probabilities, computed using the CDF of the Student’s t-distribution implemented in SciPy.
+The parameter of the t-distribution, <code class="docutils literal notranslate"><span class="pre">df</span></code>, stands for “degrees of freedom.” I won’t explain that term, but you can read about it at <a class="reference external" href="http://en.wikipedia.org/wiki/Degrees_of_freedom_(statistics)">http://en.wikipedia.org/wiki/Degrees_of_freedom_(statistics)</a>.</p>
+<p>To get from <code class="docutils literal notranslate"><span class="pre">ts</span></code> to the correlation coefficients, <code class="docutils literal notranslate"><span class="pre">rs</span></code>, we apply the inverse transform,</p>
 <div class="math notranslate nohighlight">
 \[r = t / \sqrt{n - 2 + t^2}\]</div>
-<p>The result is the
-sampling distribution of <span class="math notranslate nohighlight">\(r\)</span> under the null hypothesis.</p>
-<p>The following figure
-shows this distribution along with the distribution we generated by resampling. They are nearly identical. Although
-the actual distributions are not normal, Pearson’s coefficient of
-correlation is based on sample means and variances. By the Central Limit
-Theorem, these moment-based statistics are normally distributed even if
-the data are not.</p>
+<p>The result is the sampling distribution of <span class="math notranslate nohighlight">\(r\)</span> under the null hypothesis.</p>
+<p>The following figure shows this distribution along with the distribution we generated by resampling.
+They are nearly identical.
+Although the actual distributions are not normal, Pearson’s coefficient of correlation is based on sample means and variances.
+By the Central Limit Theorem, these moment-based statistics are normally distributed even if the data are not.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">CorrelationPermute</span>
@@ -1537,7 +1476,7 @@ the data are not.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 30;
+                var nbb_cell_id = 31;
                 var nbb_unformatted_code = "from thinkstats import CorrelationPermute";
                 var nbb_formatted_code = "from thinkstats import CorrelationPermute";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1572,7 +1511,7 @@ the data are not.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 31;
+                var nbb_cell_id = 32;
                 var nbb_unformatted_code = "def resample_correlations(live):\n    \"\"\"Tests the correlation between birth weight and mother's age.\n\n    live: DataFrame for live births\n\n    returns: sample size, observed correlation, CDF of resampled correlations\n    \"\"\"\n    live2 = live.dropna(subset=[\"agepreg\", \"totalwgt_lb\"])\n    data = live2.agepreg.values, live2.totalwgt_lb.values\n    ht = CorrelationPermute(data)\n    p_value = ht.p_value()\n    return len(live2), ht.actual, ht.test_cdf";
                 var nbb_formatted_code = "def resample_correlations(live):\n    \"\"\"Tests the correlation between birth weight and mother's age.\n\n    live: DataFrame for live births\n\n    returns: sample size, observed correlation, CDF of resampled correlations\n    \"\"\"\n    live2 = live.dropna(subset=[\"agepreg\", \"totalwgt_lb\"])\n    data = live2.agepreg.values, live2.totalwgt_lb.values\n    ht = CorrelationPermute(data)\n    p_value = ht.p_value()\n    return len(live2), ht.actual, ht.test_cdf";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1596,7 +1535,7 @@ the data are not.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 32;
+                var nbb_cell_id = 33;
                 var nbb_unformatted_code = "n, r_actual, test_cdf = resample_correlations(live)";
                 var nbb_formatted_code = "n, r_actual, test_cdf = resample_correlations(live)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1622,10 +1561,10 @@ the data are not.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8e85dcdc504d6d9153a4db7e01df9895cf284ce97d8f06bf5e084ebe8ce032d4.png" src="_images/8e85dcdc504d6d9153a4db7e01df9895cf284ce97d8f06bf5e084ebe8ce032d4.png" />
+<img alt="_images/603c40c6770ab790411a9f366068290bfc61d4c341005f2ea85bc1422f05515b.png" src="_images/603c40c6770ab790411a9f366068290bfc61d4c341005f2ea85bc1422f05515b.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 33;
+                var nbb_cell_id = 34;
                 var nbb_unformatted_code = "model = student_cdf(n)\nplt.plot(model.qs, model.ps, color=\"gray\", alpha=0.5, label=\"Student t\")\n\ntest_cdf.plot(label=\"sample\")\ndecorate(xlabel=\"correlation\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "model = student_cdf(n)\nplt.plot(model.qs, model.ps, color=\"gray\", alpha=0.5, label=\"Student t\")\n\ntest_cdf.plot(label=\"sample\")\ndecorate(xlabel=\"correlation\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1640,13 +1579,12 @@ the data are not.</p>
             }, 500);
             </script></div>
 </div>
-<p>We can see that the observed correlation, 0.07, is
-unlikely to occur if the variables are actually uncorrelated. Using the
-analytic distribution, we can compute just how unlikely:</p>
+<p>We can see that the observed correlation, 0.07, is unlikely to occur if the variables are actually uncorrelated.
+Using the analytic distribution, we can compute just how unlikely:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">r_actual</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">r_actual</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-<span class="n">p_value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">studentt</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">p_value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">student_t</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">p_value</span>
 </pre></div>
 </div>
@@ -1657,9 +1595,9 @@ analytic distribution, we can compute just how unlikely:</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 34;
-                var nbb_unformatted_code = "t = r_actual * np.sqrt((n - 2) / (1 - r_actual**2))\np_value = 1 - studentt.cdf(t, df=n - 2)\np_value";
-                var nbb_formatted_code = "t = r_actual * np.sqrt((n - 2) / (1 - r_actual**2))\np_value = 1 - studentt.cdf(t, df=n - 2)\np_value";
+                var nbb_cell_id = 36;
+                var nbb_unformatted_code = "t = r_actual * np.sqrt((n - 2) / (1 - r_actual**2))\np_value = 1 - student_t.cdf(t, df=n - 2)\np_value";
+                var nbb_formatted_code = "t = r_actual * np.sqrt((n - 2) / (1 - r_actual**2))\np_value = 1 - student_t.cdf(t, df=n - 2)\np_value";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1672,26 +1610,20 @@ analytic distribution, we can compute just how unlikely:</p>
             }, 500);
             </script></div>
 </div>
-<p>We compute the value of <code class="docutils literal notranslate"><span class="pre">t</span></code> that corresponds to <code class="docutils literal notranslate"><span class="pre">r=0.07</span></code>, and then
-evaluate the t-distribution at <code class="docutils literal notranslate"><span class="pre">t</span></code>. The result is <code class="docutils literal notranslate"><span class="pre">2.9e-11</span></code>. This
-example demonstrates an advantage of the analytic method: we can compute
-very small p-values. But in practice it usually doesn’t matter.</p>
+<p>We compute the value of <code class="docutils literal notranslate"><span class="pre">t</span></code> that corresponds to <code class="docutils literal notranslate"><span class="pre">r=0.07</span></code>, and then evaluate the t-distribution at <code class="docutils literal notranslate"><span class="pre">t</span></code>.
+The result is <code class="docutils literal notranslate"><span class="pre">2.9e-11</span></code>.
+This example demonstrates an advantage of the analytic method: we can compute very small p-values.
+But in practice it usually doesn’t matter.</p>
 </section>
 <section id="chi-squared-test">
 <h2>Chi-squared test<a class="headerlink" href="#chi-squared-test" title="Link to this heading">#</a></h2>
-<p>In Section XXX we used the chi-squared statistic to test whether a
-die is crooked. The chi-squared statistic measures the total normalized
-deviation from the expected values in a table:</p>
+<p>In Section XXX we used the chi-squared statistic to test whether a die is crooked.
+The chi-squared statistic measures the total normalized deviation from the expected values in a table:</p>
 <div class="math notranslate nohighlight">
 \[\chi^2 = \sum_i \frac{{(O_i - E_i)}^2}{E_i}\]</div>
-<p>One reason the
-chi-squared statistic is widely used is that its sampling distribution
-under the null hypothesis is analytic; by a remarkable coincidence (not really),
-it is called the chi-squared distribution. Like the t-distribution, the
-chi-squared CDF can be computed efficiently using gamma functions.</p>
-<p>SciPy provides an implementation of the chi-squared distribution, which
-we use to compute the sampling distribution of the chi-squared
-statistic:</p>
+<p>One reason the chi-squared statistic is widely used is that its sampling distribution under the null hypothesis is analytic; by a remarkable coincidence (not really), it is called the chi-squared distribution.
+Like the t-distribution, the chi-squared CDF can be computed efficiently using gamma functions.</p>
+<p>SciPy provides an implementation of the chi-squared distribution, which we use to compute the sampling distribution of the chi-squared statistic:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span> <span class="k">as</span> <span class="n">chi2_dist</span>
@@ -1713,7 +1645,7 @@ statistic:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 35;
+                var nbb_cell_id = 37;
                 var nbb_unformatted_code = "from scipy.stats import chi2 as chi2_dist\n\n\ndef chi_squared_cdf(n):\n    \"\"\"Discrete approximation of the chi-squared CDF with df=n-1.\n\n    n: sample size\n\n    returns: Cdf\n    \"\"\"\n    xs = np.linspace(0, 25, 101)\n    ps = chi2_dist.cdf(xs, df=n - 1)\n    return Cdf(ps, xs)";
                 var nbb_formatted_code = "from scipy.stats import chi2 as chi2_dist\n\n\ndef chi_squared_cdf(n):\n    \"\"\"Discrete approximation of the chi-squared CDF with df=n-1.\n\n    n: sample size\n\n    returns: Cdf\n    \"\"\"\n    xs = np.linspace(0, 25, 101)\n    ps = chi2_dist.cdf(xs, df=n - 1)\n    return Cdf(ps, xs)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1728,11 +1660,9 @@ statistic:</p>
             }, 500);
             </script></div>
 </div>
-<p>The following figure shows the analytic result along with the distribution we got by
-resampling. They are very similar, especially in the tail, which is the
-part we usually care most about.</p>
-<p>We can use this distribution to compute the p-value of the observed test
-statistic, <code class="docutils literal notranslate"><span class="pre">chi2</span></code>:</p>
+<p>The following figure shows the analytic result along with the distribution we got by resampling.
+They are very similar, especially in the tail, which is the part we usually care most about.</p>
+<p>We can use this distribution to compute the p-value of the observed test statistic, <code class="docutils literal notranslate"><span class="pre">chi2</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">DiceChiTest</span>
@@ -1750,7 +1680,7 @@ statistic, <code class="docutils literal notranslate"><span class="pre">chi2</sp
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 36;
+                var nbb_cell_id = 38;
                 var nbb_unformatted_code = "from thinkstats import DiceChiTest\n\ndata = [8, 9, 19, 5, 8, 11]\n\ndt = DiceChiTest(data)\np_value = dt.p_value(iters=1000)\nn, chi2, test_cdf = len(data), dt.actual, dt.test_cdf\n\nmodel = chi_squared_cdf(n)";
                 var nbb_formatted_code = "from thinkstats import DiceChiTest\n\ndata = [8, 9, 19, 5, 8, 11]\n\ndt = DiceChiTest(data)\np_value = dt.p_value(iters=1000)\nn, chi2, test_cdf = len(data), dt.actual, dt.test_cdf\n\nmodel = chi_squared_cdf(n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1775,10 +1705,10 @@ statistic, <code class="docutils literal notranslate"><span class="pre">chi2</sp
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1eee8dfa438f1c5c3662ea74db43a86479664140c77347c80c46a45d63443a8a.png" src="_images/1eee8dfa438f1c5c3662ea74db43a86479664140c77347c80c46a45d63443a8a.png" />
+<img alt="_images/de48eee79cae439e969786871d0dc2b56e80b2842490b7ede901acb59f666eda.png" src="_images/de48eee79cae439e969786871d0dc2b56e80b2842490b7ede901acb59f666eda.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 37;
+                var nbb_cell_id = 39;
                 var nbb_unformatted_code = "plt.plot(model.qs, model.ps, color=\"gray\", alpha=0.3, label=\"chi squared\")\n\ntest_cdf.plot(label=\"sample\")\ndecorate(xlabel=\"chi-squared statistic\", ylabel=\"CDF\", loc=\"lower right\")";
                 var nbb_formatted_code = "plt.plot(model.qs, model.ps, color=\"gray\", alpha=0.3, label=\"chi squared\")\n\ntest_cdf.plot(label=\"sample\")\ndecorate(xlabel=\"chi-squared statistic\", ylabel=\"CDF\", loc=\"lower right\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1806,7 +1736,7 @@ statistic, <code class="docutils literal notranslate"><span class="pre">chi2</sp
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 38;
+                var nbb_cell_id = 40;
                 var nbb_unformatted_code = "p_value = 1 - chi2_dist.cdf(chi2, df=n - 1)\np_value";
                 var nbb_formatted_code = "p_value = 1 - chi2_dist.cdf(chi2, df=n - 1)\np_value";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1821,62 +1751,50 @@ statistic, <code class="docutils literal notranslate"><span class="pre">chi2</sp
             }, 500);
             </script></div>
 </div>
-<p>The result is 0.041, which is consistent with the result from
-resampling.</p>
-<p>The parameter of the chi-squared distribution is “degrees of freedom”
-again. In this case the correct parameter is <code class="docutils literal notranslate"><span class="pre">n-1</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the
-size of the table, 6. Choosing this parameter can be tricky; to be
-honest, I am never confident that I have it right until I generate
-something like the previous figure to compare the analytic results to the resampling
-results.</p>
+<p>The result is 0.041, which is consistent with the result from resampling.</p>
+<p>The parameter of the chi-squared distribution is “degrees of freedom” again.
+In this case the correct parameter is <code class="docutils literal notranslate"><span class="pre">n-1</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the size of the table, 6. Choosing this parameter can be tricky; to be honest, I am never confident that I have it right until I generate something like the previous figure to compare the analytic results to the resampling results.</p>
 </section>
 <section id="discussion">
 <h2>Discussion<a class="headerlink" href="#discussion" title="Link to this heading">#</a></h2>
-<p>This book focuses on computational methods like resampling and
-permutation. These methods have several advantages over analysis:</p>
+<p>This book focuses on computational methods like resampling and permutation.
+These methods have several advantages over analysis:</p>
 <ul class="simple">
-<li><p>They are easier to explain and understand. For example, one of the
-most difficult topics in an introductory statistics class is
-hypothesis testing. Many students don’t really understand what
-p-values are. I think the approach I presented in
-Chapter <a class="reference internal" href="#testing"><span class="xref myst">[testing]</span></a>{reference-type=“ref”
-reference=“testing”}—simulating the null hypothesis and computing
-test statistics—makes the fundamental idea clearer.</p></li>
-<li><p>They are robust and versatile. Analytic methods are often based on
-assumptions that might not hold in practice. Computational methods
-require fewer assumptions, and can be adapted and extended more
-easily.</p></li>
-<li><p>They are debuggable. Analytic methods are often like a black box:
-you plug in numbers and they spit out results. But it’s easy to make
-subtle errors, hard to be confident that the results are right, and
-hard to find the problem if they are not. Computational methods lend
-themselves to incremental development and testing, which fosters
-confidence in the results.</p></li>
+<li><p>They are easier to explain and understand.
+For example, one of the most difficult topics in an introductory statistics class is hypothesis testing.
+Many students don’t really understand what p-values are.
+I think the approach I presented in Chapter <a class="reference internal" href="#testing"><span class="xref myst">[testing]</span></a>{reference-type=“ref” reference=“testing”}—simulating the null hypothesis and computing test statistics—makes the fundamental idea clearer.</p></li>
+<li><p>They are robust and versatile.
+Analytic methods are often based on assumptions that might not hold in practice.
+Computational methods require fewer assumptions, and can be adapted and extended more easily.</p></li>
+<li><p>They are debuggable.
+Analytic methods are often like a black box: you plug in numbers and they spit out results.
+But it’s easy to make subtle errors, hard to be confident that the results are right, and hard to find the problem if they are not.
+Computational methods lend themselves to incremental development and testing, which fosters confidence in the results.</p></li>
 </ul>
-<p>But there is one drawback: computational methods can be slow. Taking
-into account these pros and cons, I recommend the following process:</p>
+<p>But there is one drawback: computational methods can be slow.
+Taking into account these pros and cons, I recommend the following process:</p>
 <ol class="arabic simple">
-<li><p>Use computational methods during exploration. If you find a
-satisfactory answer and the run time is acceptable, you can stop.</p></li>
+<li><p>Use computational methods during exploration.
+If you find a satisfactory answer and the run time is acceptable, you can stop.</p></li>
 <li><p>If run time is not acceptable, look for opportunities to optimize.
 Using analytic methods is one of several methods of optimization.</p></li>
-<li><p>If replacing a computational method with an analytic method is
-appropriate, use the computational method as a basis of comparison,
-providing mutual validation between the computational and analytic
-results.</p></li>
+<li><p>If replacing a computational method with an analytic method is appropriate, use the computational method as a basis of comparison, providing mutual validation between the computational and analytic results.</p></li>
 </ol>
-<p>For the vast majority of problems I have worked on, I didn’t have to go
-past Step 1.</p>
+<p>For the vast majority of problems I have worked on, I didn’t have to go past Step 1.</p>
 </section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
-<p><strong>Exercise:</strong>    In Section 5.4, we saw that the distribution of adult weights is approximately lognormal. One possible explanation is that the weight a person gains each year is proportional to their current weight. In that case, adult weight is the product of a large number of multiplicative factors:</p>
+<p><strong>Exercise:</strong>    In Section 5.4, we saw that the distribution of adult weights is approximately lognormal.
+One possible explanation is that the weight a person gains each year is proportional to their current weight.
+In that case, adult weight is the product of a large number of multiplicative factors:</p>
 <p>w = w0 f1 f2 … fn</p>
 <p>where w is adult weight, w0 is birth weight, and fi is the weight gain factor for year i.</p>
 <p>The log of a product is the sum of the logs of the factors:</p>
 <p>logw = logw0 + logf1 + logf2 + … + logfn</p>
 <p>So by the Central Limit Theorem, the distribution of logw is approximately normal for large n, which implies that the distribution of w is lognormal.</p>
-<p>To model this phenomenon, choose a distribution for f that seems reasonable, then generate a sample of adult weights by choosing a random value from the distribution of birth weights, choosing a sequence of factors from the distribution of f, and computing the product. What value of n is needed to converge to a lognormal distribution?</p>
+<p>To model this phenomenon, choose a distribution for f that seems reasonable, then generate a sample of adult weights by choosing a random value from the distribution of birth weights, choosing a sequence of factors from the distribution of f, and computing the product.
+What value of n is needed to converge to a lognormal distribution?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_adult_weight</span><span class="p">(</span><span class="n">birth_weights</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -1897,7 +1815,7 @@ past Step 1.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 39;
+                var nbb_cell_id = 41;
                 var nbb_unformatted_code = "def generate_adult_weight(birth_weights, n):\n    \"\"\"Generate a random adult weight by simulating annual gain.\n\n    birth_weights: sequence of birth weights in lbs\n    n: number of years to simulate\n\n    returns: adult weight in lbs\n    \"\"\"\n    bw = random.choice(birth_weights)\n    factors = np.random.normal(1.09, 0.03, n)\n    aw = bw * np.prod(factors)\n    return aw";
                 var nbb_formatted_code = "def generate_adult_weight(birth_weights, n):\n    \"\"\"Generate a random adult weight by simulating annual gain.\n\n    birth_weights: sequence of birth weights in lbs\n    n: number of years to simulate\n\n    returns: adult weight in lbs\n    \"\"\"\n    bw = random.choice(birth_weights)\n    factors = np.random.normal(1.09, 0.03, n)\n    aw = bw * np.prod(factors)\n    return aw";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1936,7 +1854,7 @@ past Step 1.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 40;
+                var nbb_cell_id = 42;
                 var nbb_unformatted_code = "def plot_adult_weights(live):\n    \"\"\"Makes a normal probability plot of log10 adult weight.\n\n    live: DataFrame of live births\n\n\n    \"\"\"\n    birth_weights = live.totalwgt_lb.dropna().values\n    aws = [generate_adult_weight(birth_weights, 40) for _ in range(1000)]\n    log_aws = np.log10(aws)\n    normal_probability_plot(log_aws)\n    decorate(\n        xlabel=\"standard normal values\",\n        ylabel=\"adult weight (log10 lbs)\",\n        loc=\"lower right\",\n    )";
                 var nbb_formatted_code = "def plot_adult_weights(live):\n    \"\"\"Makes a normal probability plot of log10 adult weight.\n\n    live: DataFrame of live births\n\n\n    \"\"\"\n    birth_weights = live.totalwgt_lb.dropna().values\n    aws = [generate_adult_weight(birth_weights, 40) for _ in range(1000)]\n    log_aws = np.log10(aws)\n    normal_probability_plot(log_aws)\n    decorate(\n        xlabel=\"standard normal values\",\n        ylabel=\"adult weight (log10 lbs)\",\n        loc=\"lower right\",\n    )";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1958,10 +1876,10 @@ past Step 1.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/39756def246aa5b1aafe7c32cef5c289b4f91a2af05bd984598d2c5120ce851f.png" src="_images/39756def246aa5b1aafe7c32cef5c289b4f91a2af05bd984598d2c5120ce851f.png" />
+<img alt="_images/d31cf6399b9f7499b18ea24c31fbe9ef9722f7f19445af0f85ef7fcc7c392faa.png" src="_images/d31cf6399b9f7499b18ea24c31fbe9ef9722f7f19445af0f85ef7fcc7c392faa.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 41;
+                var nbb_cell_id = 43;
                 var nbb_unformatted_code = "plot_adult_weights(live)";
                 var nbb_formatted_code = "plot_adult_weights(live)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1977,7 +1895,8 @@ past Step 1.</p>
             </script></div>
 </div>
 <p><strong>Exercise:</strong> In Section 14.6 we used the Central Limit Theorem to find the sampling distribution of the difference in means, δ, under the null hypothesis that both samples are drawn from the same population.</p>
-<p>We can also use this distribution to find the standard error of the estimate and confidence intervals, but that would only be approximately correct. To be more precise, we should compute the sampling distribution of δ under the alternate hypothesis that the samples are drawn from different populations.</p>
+<p>We can also use this distribution to find the standard error of the estimate and confidence intervals, but that would only be approximately correct.
+To be more precise, we should compute the sampling distribution of δ under the alternate hypothesis that the samples are drawn from different populations.</p>
 <p>Compute this distribution and use it to calculate the standard error and a 90% confidence interval for the difference in means.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1991,7 +1910,7 @@ past Step 1.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 45;
+                var nbb_cell_id = 47;
                 var nbb_unformatted_code = "dist_diff_null";
                 var nbb_formatted_code = "dist_diff_null";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2009,13 +1928,12 @@ past Step 1.</p>
 <p><strong>Exercise:</strong> <a class="reference external" href="http://ieeexplore.ieee.org/document/7044435/">In a 2014 paper</a>, Stein et al. investigate the effects of an intervention intended to mitigate gender-stereotypical task allocation within student engineering teams.</p>
 <p>Before and after the intervention, students responded to a survey that asked them to rate their contribution to each aspect of class projects on a 7-point scale.</p>
 <p>Before the intervention, male students reported higher scores for the programming aspect of the project than female students; on average men reported a score of 3.57 with standard error 0.28. Women reported 1.91, on average, with standard error 0.32.</p>
-<p>Compute the sampling distribution of the gender gap (the difference in means), and test whether it is statistically significant. Because you are given standard errors for the estimated means, you don’t need to know the sample size to figure out the sampling distributions.</p>
-<p>After the intervention, the gender gap was smaller: the average score for men was 3.44 (SE 0.16); the average score for women was 3.18 (SE 0.16). Again, compute the sampling distribution of the gender gap and test it.</p>
+<p>Compute the sampling distribution of the gender gap (the difference in means), and test whether it is statistically significant.
+Because you are given standard errors for the estimated means, you don’t need to know the sample size to figure out the sampling distributions.</p>
+<p>After the intervention, the gender gap was smaller: the average score for men was 3.44 (SE 0.16); the average score for women was 3.18 (SE 0.16).
+Again, compute the sampling distribution of the gender gap and test it.</p>
 <p>Finally, estimate the change in gender gap; what is the sampling distribution of this change, and is it statistically significant?</p>
-<p>“Evidence for the persistent effects of an intervention to
-mitigate gender-stereotypical task allocation within student
-engineering teams,” Proceedings of the IEEE Frontiers in Education
-Conference, 2014.</p>
+<p>“Evidence for the persistent effects of an intervention to mitigate gender-stereotypical task allocation within student engineering teams,” Proceedings of the IEEE Frontiers in Education Conference, 2014.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean, p-value&quot;</span><span class="p">,</span> <span class="n">diff_before</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">diff_before</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
@@ -2032,7 +1950,7 @@ stderr 0.425205832509386
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 57;
+                var nbb_cell_id = 51;
                 var nbb_unformatted_code = "print(\"mean, p-value\", diff_before.mu, 1 - diff_before.prob(0))\nprint(\"CI\", diff_before.percentile(5), diff_before.percentile(95))\nprint(\"stderr\", diff_before.sigma)";
                 var nbb_formatted_code = "print(\"mean, p-value\", diff_before.mu, 1 - diff_before.prob(0))\nprint(\"CI\", diff_before.percentile(5), diff_before.percentile(95))\nprint(\"stderr\", diff_before.sigma)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2105,7 +2023,7 @@ stderr 0.425205832509386
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions">Normal distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions"><code class="docutils literal notranslate"><span class="pre">Normal</span></code> distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distributions">Sampling distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-normal-distributions">Representing normal distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">Central limit theorem</a></li>

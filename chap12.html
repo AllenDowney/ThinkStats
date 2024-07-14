@@ -177,8 +177,8 @@
 <li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
@@ -422,6 +422,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">decorate</span>
@@ -432,8 +433,8 @@ document.write(`
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 3;
-                var nbb_unformatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
-                var nbb_formatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
+                var nbb_unformatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
+                var nbb_formatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -446,29 +447,18 @@ document.write(`
             }, 500);
             </script></div>
 </div>
-<p>A <strong>time series</strong> is a sequence of measurements from a system that
-varies in time. One famous example is the “hockey stick graph” that
-shows global average temperature over time (see
-<a class="reference external" href="https://en.wikipedia.org/wiki/Hockey_stick_graph">https://en.wikipedia.org/wiki/Hockey_stick_graph</a>).</p>
-<p>The example I work with in this chapter comes from Zachary M. Jones, a
-researcher in political science who studies the black market for
-cannabis in the U.S. (<a class="reference external" href="http://zmjones.com/marijuana">http://zmjones.com/marijuana</a>). He collected data
-from a web site called “Price of Weed” that crowdsources market
-information by asking participants to report the price, quantity,
-quality, and location of cannabis transactions
-(<a class="reference external" href="http://www.priceofweed.com/">http://www.priceofweed.com/</a>). The goal of his project is to
-investigate the effect of policy decisions, like legalization, on
-markets. I find this project appealing because it is an example that
-uses data to address important political questions, like drug policy.</p>
-<p>I hope you will find this chapter interesting, but I’ll take this
-opportunity to reiterate the importance of maintaining a professional
-attitude to data analysis. Whether and which drugs should be illegal are
-important and difficult public policy questions; our decisions should be
-informed by accurate data reported honestly.</p>
+<p>A <strong>time series</strong> is a sequence of measurements from a system that varies in time.
+One famous example is the “hockey stick graph” that shows global average temperature over time (see <a class="reference external" href="https://en.wikipedia.org/wiki/Hockey_stick_graph">https://en.wikipedia.org/wiki/Hockey_stick_graph</a>).</p>
+<p>The example I work with in this chapter comes from Zachary M. Jones, a researcher in political science who studies the black market for cannabis in the U.S. (<a class="reference external" href="http://zmjones.com/marijuana">http://zmjones.com/marijuana</a>).
+He collected data from a web site called “Price of Weed” that crowdsources market information by asking participants to report the price, quantity, quality, and location of cannabis transactions (<a class="reference external" href="http://www.priceofweed.com/">http://www.priceofweed.com/</a>).
+The goal of his project is to investigate the effect of policy decisions, like legalization, on markets.
+I find this project appealing because it is an example that uses data to address important political questions, like drug policy.</p>
+<p>I hope you will find this chapter interesting, but I’ll take this opportunity to reiterate the importance of maintaining a professional attitude to data analysis.
+Whether and which drugs should be illegal are important and difficult public policy questions; our decisions should be informed by accurate data reported honestly.</p>
 <section id="importing-and-cleaning">
 <h2>Importing and cleaning<a class="headerlink" href="#importing-and-cleaning" title="Link to this heading">#</a></h2>
-<p>The data I downloaded from Mr. Jones’s site is in the repository for
-this book. The following code reads it into a pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
+<p>The data I downloaded from Mr. Jones’s site is in the repository for this book.
+The following code reads it into a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/mj-clean.csv&quot;</span><span class="p">)</span>
@@ -618,10 +608,8 @@ this book. The following code reads it into a pandas <code class="docutils liter
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">parse_dates</span></code> tells <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> to interpret values in column 5 as dates
-and convert them to NumPy <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> objects.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> has a row for each reported transaction and the following
-columns:</p>
+<p><code class="docutils literal notranslate"><span class="pre">parse_dates</span></code> tells <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> to interpret values in column 5 as dates and convert them to NumPy <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> objects.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> has a row for each reported transaction and the following columns:</p>
 <ul class="simple">
 <li><p>city: string city name.</p></li>
 <li><p>state: two-letter state abbreviation.</p></li>
@@ -634,14 +622,10 @@ columns:</p>
 <li><p>lat: approximate latitude of the transaction, based on city name.</p></li>
 <li><p>lon: approximate longitude of the transaction.</p></li>
 </ul>
-<p>Each transaction is an event in time, so we could treat this dataset as
-a time series. But the events are not equally spaced in time; the number
-of transactions reported each day varies from 0 to several hundred. Many
-methods used to analyze time series require the measurements to be
-equally spaced, or at least things are simpler if they are.</p>
-<p>In order to demonstrate these methods, I divide the dataset into groups
-by reported quality, and then transform each group into an equally
-spaced series by computing the mean daily price per gram.</p>
+<p>Each transaction is an event in time, so we could treat this dataset as a time series.
+But the events are not equally spaced in time; the number of transactions reported each day varies from 0 to several hundred.
+Many methods used to analyze time series require the measurements to be equally spaced, or at least things are simpler if they are.</p>
+<p>In order to demonstrate these methods, I divide the dataset into groups by reported quality, and then transform each group into an equally spaced series by computing the mean daily price per gram.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">group_by_quality_and_day</span><span class="p">(</span><span class="n">transactions</span><span class="p">):</span>
@@ -677,12 +661,9 @@ spaced series by computing the mean daily price per gram.</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">groupby</span></code> is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> method that returns a GroupBy object, <code class="docutils literal notranslate"><span class="pre">groups</span></code>;
-used in a for loop, it iterates the names of the groups and the
-<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s that represent them. Since the values of <code class="docutils literal notranslate"><span class="pre">quality</span></code> are <code class="docutils literal notranslate"><span class="pre">low</span></code>,
-<code class="docutils literal notranslate"><span class="pre">medium</span></code>, and <code class="docutils literal notranslate"><span class="pre">high</span></code>, we get three groups with those names.</p>
-<p>The loop iterates through the groups and calls <code class="docutils literal notranslate"><span class="pre">GroupByDay</span></code>, which
-computes the daily average price and returns a new <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">groupby</span></code> is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> method that returns a GroupBy object, <code class="docutils literal notranslate"><span class="pre">groups</span></code>; used in a for loop, it iterates the names of the groups and the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s that represent them.
+Since the values of <code class="docutils literal notranslate"><span class="pre">quality</span></code> are <code class="docutils literal notranslate"><span class="pre">low</span></code>, <code class="docutils literal notranslate"><span class="pre">medium</span></code>, and <code class="docutils literal notranslate"><span class="pre">high</span></code>, we get three groups with those names.</p>
+<p>The loop iterates through the groups and calls <code class="docutils literal notranslate"><span class="pre">GroupByDay</span></code>, which computes the daily average price and returns a new <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">group_by_day</span><span class="p">(</span><span class="n">transactions</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">):</span>
@@ -720,20 +701,14 @@ computes the daily average price and returns a new <code class="docutils literal
             }, 500);
             </script></div>
 </div>
-<p>The parameter, <code class="docutils literal notranslate"><span class="pre">transactions</span></code>, is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> that contains columns
-<code class="docutils literal notranslate"><span class="pre">date</span></code> and <code class="docutils literal notranslate"><span class="pre">ppg</span></code>. We select these two columns, then group by <code class="docutils literal notranslate"><span class="pre">date</span></code>.</p>
-<p>The result, <code class="docutils literal notranslate"><span class="pre">grouped</span></code>, is a map from each date to a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> that
-contains prices reported on that date. <code class="docutils literal notranslate"><span class="pre">aggregate</span></code> is a GroupBy method
-that iterates through the groups and applies a function to each column
-of the group; in this case there is only one column, <code class="docutils literal notranslate"><span class="pre">ppg</span></code>. So the
-result of <code class="docutils literal notranslate"><span class="pre">aggregate</span></code> is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with one row for each date and one
-column, <code class="docutils literal notranslate"><span class="pre">ppg</span></code>.</p>
-<p>Dates in these <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s are stored as NumPy <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> objects,
-which are represented as 64-bit integers in nanoseconds. For some of the
-analyses coming up, it will be convenient to work with time in more
-human-friendly units, like years. So <code class="docutils literal notranslate"><span class="pre">GroupByDay</span></code> adds a column named
-<code class="docutils literal notranslate"><span class="pre">date</span></code> by copying the <code class="docutils literal notranslate"><span class="pre">index</span></code>, then adds <code class="docutils literal notranslate"><span class="pre">years</span></code>, which contains the
-number of years since the first transaction as a floating-point number.</p>
+<p>The parameter, <code class="docutils literal notranslate"><span class="pre">transactions</span></code>, is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> that contains columns <code class="docutils literal notranslate"><span class="pre">date</span></code> and <code class="docutils literal notranslate"><span class="pre">ppg</span></code>.
+We select these two columns, then group by <code class="docutils literal notranslate"><span class="pre">date</span></code>.</p>
+<p>The result, <code class="docutils literal notranslate"><span class="pre">grouped</span></code>, is a map from each date to a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> that contains prices reported on that date.
+<code class="docutils literal notranslate"><span class="pre">aggregate</span></code> is a GroupBy method that iterates through the groups and applies a function to each column of the group; in this case there is only one column, <code class="docutils literal notranslate"><span class="pre">ppg</span></code>.
+So the result of <code class="docutils literal notranslate"><span class="pre">aggregate</span></code> is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with one row for each date and one column, <code class="docutils literal notranslate"><span class="pre">ppg</span></code>.</p>
+<p>Dates in these <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s are stored as NumPy <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> objects, which are represented as 64-bit integers in nanoseconds.
+For some of the analyses coming up, it will be convenient to work with time in more human-friendly units, like years.
+So <code class="docutils literal notranslate"><span class="pre">GroupByDay</span></code> adds a column named <code class="docutils literal notranslate"><span class="pre">date</span></code> by copying the <code class="docutils literal notranslate"><span class="pre">index</span></code>, then adds <code class="docutils literal notranslate"><span class="pre">years</span></code>, which contains the number of years since the first transaction as a floating-point number.</p>
 <p>The resulting <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> has columns <code class="docutils literal notranslate"><span class="pre">ppg</span></code>, <code class="docutils literal notranslate"><span class="pre">date</span></code>, and <code class="docutils literal notranslate"><span class="pre">years</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -762,9 +737,8 @@ number of years since the first transaction as a floating-point number.</p>
 </section>
 <section id="plotting">
 <h2>Plotting<a class="headerlink" href="#plotting" title="Link to this heading">#</a></h2>
-<p>The result from <code class="docutils literal notranslate"><span class="pre">GroupByQualityAndDay</span></code> is a map from each quality to a
-<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> of daily prices. Here’s the code I use to plot the three time
-series:</p>
+<p>The result from <code class="docutils literal notranslate"><span class="pre">GroupByQualityAndDay</span></code> is a map from each quality to a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> of daily prices.
+Here’s the code I use to plot the three time series:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -786,7 +760,7 @@ series:</p>
 <img alt="_images/75fdde38c0de38f732b531772ef8d7a515b7687ec275432e42245cd76145fd43.png" src="_images/75fdde38c0de38f732b531772ef8d7a515b7687ec275432e42245cd76145fd43.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 10;
+                var nbb_cell_id = 9;
                 var nbb_unformatted_code = "import matplotlib.pyplot as plt\n\nfor i, (name, daily) in enumerate(dailies.items()):\n    plt.subplot(3, 1, i + 1)\n    title = \"Price per gram ($)\" if i == 0 else \"\"\n    plt.scatter(daily.index, daily.ppg, s=10, label=name)\n    decorate(ylim=[0, 20], title=title)\n\n    if i == 2:\n        plt.xticks(rotation=30)\n    else:\n        plt.xticks([])";
                 var nbb_formatted_code = "import matplotlib.pyplot as plt\n\nfor i, (name, daily) in enumerate(dailies.items()):\n    plt.subplot(3, 1, i + 1)\n    title = \"Price per gram ($)\" if i == 0 else \"\"\n    plt.scatter(daily.index, daily.ppg, s=10, label=name)\n    decorate(ylim=[0, 20], title=title)\n\n    if i == 2:\n        plt.xticks(rotation=30)\n    else:\n        plt.xticks([])";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -801,31 +775,20 @@ series:</p>
             }, 500);
             </script></div>
 </div>
-<p>The loop iterates through the
-<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s and creates a scatter plot for each. It is common to plot
-time series with line segments between the points, but in this case
-there are many data points and prices are highly variable, so adding
-lines would not help.</p>
-<p>Since the labels on the x-axis are dates, I use <code class="docutils literal notranslate"><span class="pre">plt.xticks</span></code> to
-rotate the “ticks” 30 degrees, making them more readable.</p>
-<p>One apparent feature in these
-plots is a gap around November 2013. It’s possible that data collection
-was not active during this time, or the data might not be available. We
-will consider ways to deal with this missing data later.</p>
-<p>Visually, it looks like the price of high quality cannabis is declining
-during this period, and the price of medium quality is increasing. The
-price of low quality might also be increasing, but it is harder to tell,
-since it seems to be more volatile. Keep in mind that quality data is
-reported by volunteers, so trends over time might reflect changes in how
-participants apply these labels.</p>
+<p>The loop iterates through the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s and creates a scatter plot for each.
+It is common to plot time series with line segments between the points, but in this case there are many data points and prices are highly variable, so adding lines would not help.</p>
+<p>Since the labels on the x-axis are dates, I use <code class="docutils literal notranslate"><span class="pre">plt.xticks</span></code> to rotate the “ticks” 30 degrees, making them more readable.</p>
+<p>One apparent feature in these plots is a gap around November 2013.
+It’s possible that data collection was not active during this time, or the data might not be available.
+We will consider ways to deal with this missing data later.</p>
+<p>Visually, it looks like the price of high quality cannabis is declining during this period, and the price of medium quality is increasing.
+The price of low quality might also be increasing, but it is harder to tell, since it seems to be more volatile.
+Keep in mind that quality data is reported by volunteers, so trends over time might reflect changes in how participants apply these labels.</p>
 </section>
 <section id="linear-regression">
 <h2>Linear regression<a class="headerlink" href="#linear-regression" title="Link to this heading">#</a></h2>
-<p>Although there are methods specific to time series analysis, for many
-problems a simple way to get started is by applying general-purpose
-tools like linear regression. The following function takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>
-of daily prices and computes a least squares fit, returning the model
-and results objects from StatsModels:</p>
+<p>Although there are methods specific to time series analysis, for many problems a simple way to get started is by applying general-purpose tools like linear regression.
+The following function takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> of daily prices and computes a least squares fit, returning the model and results objects from StatsModels:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
@@ -841,7 +804,7 @@ and results objects from StatsModels:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 11;
+                var nbb_cell_id = 10;
                 var nbb_unformatted_code = "import statsmodels.formula.api as smf\n\n\ndef run_linear_model(daily):\n    model = smf.ols(\"ppg ~ years\", data=daily)\n    results = model.fit()\n    return model, results";
                 var nbb_formatted_code = "import statsmodels.formula.api as smf\n\n\ndef run_linear_model(daily):\n    model = smf.ols(\"ppg ~ years\", data=daily)\n    results = model.fit()\n    return model, results";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -894,7 +857,7 @@ Std(res) 1.272
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 12;
+                var nbb_cell_id = 11;
                 var nbb_unformatted_code = "from thinkstats import summarize_results\n\nfor name, daily in dailies.items():\n    model, results = run_linear_model(daily)\n    print(name)\n    summarize_results(results)\n    print()";
                 var nbb_formatted_code = "from thinkstats import summarize_results\n\nfor name, daily in dailies.items():\n    model, results = run_linear_model(daily)\n    print(name)\n    summarize_results(results)\n    print()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -909,16 +872,10 @@ Std(res) 1.272
             }, 500);
             </script></div>
 </div>
-<p>The estimated slopes indicate that the price of high quality cannabis
-dropped by about 71 cents per year during the observed interval; for
-medium quality it increased by 28 cents per year, and for low quality it
-increased by 57 cents per year. These estimates are all statistically
-significant with very small p-values.</p>
-<p>The <span class="math notranslate nohighlight">\(R^2\)</span> value for high quality cannabis is 0.44, which means that time
-as an explanatory variable accounts for 44% of the observed variability
-in price. For the other qualities, the change in price is smaller, and
-variability in prices is higher, so the values of <span class="math notranslate nohighlight">\(R^2\)</span> are smaller (but
-still statistically significant).</p>
+<p>The estimated slopes indicate that the price of high quality cannabis dropped by about 71 cents per year during the observed interval; for medium quality it increased by 28 cents per year, and for low quality it increased by 57 cents per year.
+These estimates are all statistically significant with very small p-values.</p>
+<p>The <span class="math notranslate nohighlight">\(R^2\)</span> value for high quality cannabis is 0.44, which means that time as an explanatory variable accounts for 44% of the observed variability in price.
+For the other qualities, the change in price is smaller, and variability in prices is higher, so the values of <span class="math notranslate nohighlight">\(R^2\)</span> are smaller (but still statistically significant).</p>
 <p>The following code plots the observed prices and the fitted values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -934,7 +891,7 @@ still statistically significant).</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 80;
+                var nbb_cell_id = 12;
                 var nbb_unformatted_code = "def plot_fitted_values(model, results, label=\"\"):\n    years = model.exog[:, 1]\n    values = model.endog\n    plt.scatter(years, values, s=15, label=label)\n    plt.plot(years, results.fittedvalues, color=\"C1\", label=\"model\")\n    decorate()";
                 var nbb_formatted_code = "def plot_fitted_values(model, results, label=\"\"):\n    years = model.exog[:, 1]\n    values = model.endog\n    plt.scatter(years, values, s=15, label=label)\n    plt.plot(years, results.fittedvalues, color=\"C1\", label=\"model\")\n    decorate()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -949,11 +906,8 @@ still statistically significant).</p>
             }, 500);
             </script></div>
 </div>
-<p>From <code class="docutils literal notranslate"><span class="pre">model</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_fitted_values</span></code> gets <code class="docutils literal notranslate"><span class="pre">exog</span></code> and <code class="docutils literal notranslate"><span class="pre">endog</span></code> , NumPy
-arrays with the exogenous (explanatory) and endogenous (dependent)
-variables.
-Then it makes a scatter plot of the data points and a line
-plot of the fitted values.</p>
+<p>From <code class="docutils literal notranslate"><span class="pre">model</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_fitted_values</span></code> gets <code class="docutils literal notranslate"><span class="pre">exog</span></code> and <code class="docutils literal notranslate"><span class="pre">endog</span></code> , NumPy arrays with the exogenous (explanatory) and endogenous (dependent) variables.
+Then it makes a scatter plot of the data points and a line plot of the fitted values.</p>
 <p>The following figure shows the results for high quality cannabis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -966,7 +920,7 @@ plot of the fitted values.</p>
 <img alt="_images/fb9b89bdc4511b1e440a79a32fef258fe9618858c47d5758755c1697f9281c89.png" src="_images/fb9b89bdc4511b1e440a79a32fef258fe9618858c47d5758755c1697f9281c89.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 81;
+                var nbb_cell_id = 13;
                 var nbb_unformatted_code = "model, results = run_linear_model(dailies[\"high\"])\nplot_fitted_values(model, results, label=\"high\")";
                 var nbb_formatted_code = "model, results = run_linear_model(dailies[\"high\"])\nplot_fitted_values(model, results, label=\"high\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -981,44 +935,31 @@ plot of the fitted values.</p>
             }, 500);
             </script></div>
 </div>
-<p>The model seems like a good linear fit for the data; nevertheless,
-linear regression is not the most appropriate choice for this data:</p>
+<p>The model seems like a good linear fit for the data; nevertheless, linear regression is not the most appropriate choice for this data:</p>
 <ul class="simple">
-<li><p>First, there is no reason to expect the long-term trend to be a line
-or any other simple function. In general, prices are determined by
-supply and demand, both of which vary over time in unpredictable
-ways.</p></li>
-<li><p>Second, the linear regression model gives equal weight to all data,
-recent and past. For purposes of prediction, we should probably give
-more weight to recent data.</p></li>
-<li><p>Finally, one of the assumptions of linear regression is that the
-residuals are uncorrelated noise. With time series data, this
-assumption is often false because successive values are correlated.</p></li>
+<li><p>First, there is no reason to expect the long-term trend to be a line or any other simple function.
+In general, prices are determined by supply and demand, both of which vary over time in unpredictable ways.</p></li>
+<li><p>Second, the linear regression model gives equal weight to all data, recent and past.
+For purposes of prediction, we should probably give more weight to recent data.</p></li>
+<li><p>Finally, one of the assumptions of linear regression is that the residuals are uncorrelated noise.
+With time series data, this assumption is often false because successive values are correlated.</p></li>
 </ul>
-<p>The next section presents an alternative that is more appropriate for
-time series data.</p>
+<p>The next section presents an alternative that is more appropriate for time series data.</p>
 </section>
 <section id="moving-averages">
 <h2>Moving averages<a class="headerlink" href="#moving-averages" title="Link to this heading">#</a></h2>
-<p>Most time series analysis is based on the modeling assumption that the
-observed series is the sum of three components:</p>
+<p>Most time series analysis is based on the modeling assumption that the observed series is the sum of three components:</p>
 <ul class="simple">
 <li><p>Trend: A smooth function that captures persistent changes.</p></li>
-<li><p>Seasonality: Periodic variation, possibly including daily, weekly,
-monthly, or yearly cycles.</p></li>
+<li><p>Seasonality: Periodic variation, possibly including daily, weekly, monthly, or yearly cycles.</p></li>
 <li><p>Noise: Random variation around the long-term trend.</p></li>
 </ul>
-<p>Regression is one way to extract the trend from a series, as we saw in
-the previous section. But if the trend is not a simple function, a good
-alternative is a <strong>moving average</strong>. A moving average divides the series
-into overlapping regions, called <strong>windows</strong>, and computes the average
-of the values in each window.</p>
-<p>One of the simplest moving averages is the <strong>rolling mean</strong>, which
-computes the mean of the values in each window. For example, if the
-window size is 3, the rolling mean computes the mean of values 0 through
-2, 1 through 3, 2 through 4, etc.</p>
-<p>pandas provides <code class="docutils literal notranslate"><span class="pre">rolling_mean</span></code>, which takes a <code class="docutils literal notranslate"><span class="pre">Series</span></code> and a window size
-and returns a new <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
+<p>Regression is one way to extract the trend from a series, as we saw in the previous section.
+But if the trend is not a simple function, a good alternative is a <strong>moving average</strong>.
+A moving average divides the series into overlapping regions, called <strong>windows</strong>, and computes the average of the values in each window.</p>
+<p>One of the simplest moving averages is the <strong>rolling mean</strong>, which computes the mean of the values in each window.
+For example, if the window size is 3, the rolling mean computes the mean of values 0 through 2, 1 through 3, 2 through 4, etc.</p>
+<p>Pandas provides <code class="docutils literal notranslate"><span class="pre">rolling_mean</span></code>, which takes a <code class="docutils literal notranslate"><span class="pre">Series</span></code> and a window size and returns a new <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -1028,7 +969,7 @@ and returns a new <code class="docutils literal notranslate"><span class="pre">S
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 82;
+                var nbb_cell_id = 14;
                 var nbb_unformatted_code = "array = np.arange(10)";
                 var nbb_formatted_code = "array = np.arange(10)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1066,7 +1007,7 @@ dtype: float64
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 83;
+                var nbb_cell_id = 15;
                 var nbb_unformatted_code = "series = pd.Series(array)\nseries.rolling(3).mean()";
                 var nbb_formatted_code = "series = pd.Series(array)\nseries.rolling(3).mean()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1081,17 +1022,12 @@ dtype: float64
             }, 500);
             </script></div>
 </div>
-<p>The first two values are <code class="docutils literal notranslate"><span class="pre">nan</span></code>; the next value is the mean of the first
-three elements, 0, 1, and 2. The next value is the mean of 1, 2, and 3.
-And so on.</p>
-<p>Before we can apply <code class="docutils literal notranslate"><span class="pre">rolling_mean</span></code> to the cannabis data, we have to deal
-with missing values. There are a few days in the observed interval with
-no reported transactions for one or more quality categories, and a
-period in 2013 when data collection was not active.</p>
-<p>In the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s we have used so far, these dates are absent; the index
-skips days with no data. For the analysis that follows, we need to
-represent this missing data explicitly. We can do that by “reindexing”
-the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
+<p>The first two values are <code class="docutils literal notranslate"><span class="pre">nan</span></code>; the next value is the mean of the first three elements, 0, 1, and 2. The next value is the mean of 1, 2, and 3. And so on.</p>
+<p>Before we can apply <code class="docutils literal notranslate"><span class="pre">rolling_mean</span></code> to the cannabis data, we have to deal with missing values.
+There are a few days in the observed interval with no reported transactions for one or more quality categories, and a period in 2013 when data collection was not active.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s we have used so far, these dates are absent; the index skips days with no data.
+For the analysis that follows, we need to represent this missing data explicitly.
+We can do that by “reindexing” the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
@@ -1102,7 +1038,7 @@ the <code class="docutils literal notranslate"><span class="pre">DataFrame</span
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 84;
+                var nbb_cell_id = 16;
                 var nbb_unformatted_code = "dates = pd.date_range(daily.index.min(), daily.index.max())\nreindexed = daily.reindex(dates)";
                 var nbb_formatted_code = "dates = pd.date_range(daily.index.min(), daily.index.max())\nreindexed = daily.reindex(dates)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1117,10 +1053,8 @@ the <code class="docutils literal notranslate"><span class="pre">DataFrame</span
             }, 500);
             </script></div>
 </div>
-<p>The first line computes a date range that includes every day from the
-beginning to the end of the observed interval. The second line creates a
-new <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with all of the data from <code class="docutils literal notranslate"><span class="pre">daily</span></code>, but including rows for
-all dates, filled with <code class="docutils literal notranslate"><span class="pre">nan</span></code>.</p>
+<p>The first line computes a date range that includes every day from the beginning to the end of the observed interval.
+The second line creates a new <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with all of the data from <code class="docutils literal notranslate"><span class="pre">daily</span></code>, but including rows for all dates, filled with <code class="docutils literal notranslate"><span class="pre">nan</span></code>.</p>
 <p>Now we can plot the rolling mean like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1143,7 +1077,7 @@ all dates, filled with <code class="docutils literal notranslate"><span class="p
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 85;
+                var nbb_cell_id = 17;
                 var nbb_unformatted_code = "from thinkstats import underride\n\n\ndef scatter_series(xs, **options):\n    \"\"\"Makes a scatter plot from a Series.\n\n    xs: Series\n    options: options passed to scatter\n    \"\"\"\n    options = underride(options, color=\"blue\", alpha=0.2, s=30, edgecolors=\"none\")\n    ys = xs.values\n    xs = xs.index\n    plt.scatter(xs, ys, **options)";
                 var nbb_formatted_code = "from thinkstats import underride\n\n\ndef scatter_series(xs, **options):\n    \"\"\"Makes a scatter plot from a Series.\n\n    xs: Series\n    options: options passed to scatter\n    \"\"\"\n    options = underride(options, color=\"blue\", alpha=0.2, s=30, edgecolors=\"none\")\n    ys = xs.values\n    xs = xs.index\n    plt.scatter(xs, ys, **options)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1178,7 +1112,7 @@ all dates, filled with <code class="docutils literal notranslate"><span class="p
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 87;
+                var nbb_cell_id = 18;
                 var nbb_unformatted_code = "def plot_rolling_mean(daily, label):\n    \"\"\"Plots rolling mean.\n\n    daily: DataFrame of daily prices\n    \"\"\"\n    dates = pd.date_range(daily.index.min(), daily.index.max())\n    reindexed = daily.reindex(dates)\n    scatter_series(reindexed.ppg, s=15, alpha=0.2, label=label)\n    roll_mean = pd.Series(reindexed.ppg).rolling(30).mean()\n    plt.plot(roll_mean, label=\"rolling mean\", color=\"#ff7f00\")\n    plt.xticks(rotation=30)\n    decorate(ylabel=\"price per gram ($)\")";
                 var nbb_formatted_code = "def plot_rolling_mean(daily, label):\n    \"\"\"Plots rolling mean.\n\n    daily: DataFrame of daily prices\n    \"\"\"\n    dates = pd.date_range(daily.index.min(), daily.index.max())\n    reindexed = daily.reindex(dates)\n    scatter_series(reindexed.ppg, s=15, alpha=0.2, label=label)\n    roll_mean = pd.Series(reindexed.ppg).rolling(30).mean()\n    plt.plot(roll_mean, label=\"rolling mean\", color=\"#ff7f00\")\n    plt.xticks(rotation=30)\n    decorate(ylabel=\"price per gram ($)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1200,10 +1134,10 @@ all dates, filled with <code class="docutils literal notranslate"><span class="p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/befea18e4abcb7570e8e928cde800febca292a9ae51109748cd6be9bc2c018be.png" src="_images/befea18e4abcb7570e8e928cde800febca292a9ae51109748cd6be9bc2c018be.png" />
+<img alt="_images/0e7d762d1c81c6a184ea69f03de735923821ebf1f6f8d77c1ef3042850c0543f.png" src="_images/0e7d762d1c81c6a184ea69f03de735923821ebf1f6f8d77c1ef3042850c0543f.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 88;
+                var nbb_cell_id = 19;
                 var nbb_unformatted_code = "plot_rolling_mean(daily, name)";
                 var nbb_formatted_code = "plot_rolling_mean(daily, name)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1218,18 +1152,13 @@ all dates, filled with <code class="docutils literal notranslate"><span class="p
             }, 500);
             </script></div>
 </div>
-<p>The window size is 30, so each value in <code class="docutils literal notranslate"><span class="pre">roll_mean</span></code> is the mean of 30
-values from <code class="docutils literal notranslate"><span class="pre">reindexed.ppg</span></code>.
-The rolling mean
-seems to do a good job of smoothing out the noise and extracting the
-trend. The first 29 values are <code class="docutils literal notranslate"><span class="pre">nan</span></code>, and wherever there’s a missing
-value, it’s followed by another 29 <code class="docutils literal notranslate"><span class="pre">nan</span></code>s. There are ways to fill in
-these gaps, but they are a minor nuisance.</p>
-<p>An alternative is the <strong>exponentially-weighted moving average</strong> (EWMA),
-which has two advantages. First, as the name suggests, it computes a
-weighted average where the most recent value has the highest weight and
-the weights for previous values drop off exponentially. Second, the
-pandas implementation of EWMA handles missing values better.</p>
+<p>The window size is 30, so each value in <code class="docutils literal notranslate"><span class="pre">roll_mean</span></code> is the mean of 30 values from <code class="docutils literal notranslate"><span class="pre">reindexed.ppg</span></code>.
+The rolling mean seems to do a good job of smoothing out the noise and extracting the trend.
+The first 29 values are <code class="docutils literal notranslate"><span class="pre">nan</span></code>, and wherever there’s a missing value, it’s followed by another 29 <code class="docutils literal notranslate"><span class="pre">nan</span></code>s.
+There are ways to fill in these gaps, but they are a minor nuisance.</p>
+<p>An alternative is the <strong>exponentially-weighted moving average</strong> (EWMA), which has two advantages.
+First, as the name suggests, it computes a weighted average where the most recent value has the highest weight and the weights for previous values drop off exponentially.
+Second, the Pandas implementation of EWMA handles missing values better.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_ewma</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
@@ -1250,7 +1179,7 @@ pandas implementation of EWMA handles missing values better.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 89;
+                var nbb_cell_id = 20;
                 var nbb_unformatted_code = "def plot_ewma(daily, label):\n    \"\"\"Plots rolling mean.\n\n    daily: DataFrame of daily prices\n    \"\"\"\n    dates = pd.date_range(daily.index.min(), daily.index.max())\n    reindexed = daily.reindex(dates)\n    scatter_series(reindexed.ppg, s=15, alpha=0.2, label=label)\n    roll_mean = reindexed.ppg.ewm(30).mean()\n    plt.plot(roll_mean, label=\"EWMA\", color=\"#ff7f00\")\n    plt.xticks(rotation=30)\n    decorate(ylabel=\"price per gram ($)\")";
                 var nbb_formatted_code = "def plot_ewma(daily, label):\n    \"\"\"Plots rolling mean.\n\n    daily: DataFrame of daily prices\n    \"\"\"\n    dates = pd.date_range(daily.index.min(), daily.index.max())\n    reindexed = daily.reindex(dates)\n    scatter_series(reindexed.ppg, s=15, alpha=0.2, label=label)\n    roll_mean = reindexed.ppg.ewm(30).mean()\n    plt.plot(roll_mean, label=\"EWMA\", color=\"#ff7f00\")\n    plt.xticks(rotation=30)\n    decorate(ylabel=\"price per gram ($)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1265,10 +1194,7 @@ pandas implementation of EWMA handles missing values better.</p>
             }, 500);
             </script></div>
 </div>
-<p>The <strong>span</strong> parameter corresponds roughly to the window size of a
-moving average; it controls how fast the weights drop off, so it
-determines the number of points that make a non-negligible contribution
-to each average.</p>
+<p>The <strong>span</strong> parameter corresponds roughly to the window size of a moving average; it controls how fast the weights drop off, so it determines the number of points that make a non-negligible contribution to each average.</p>
 <p>The following figure shows the EWMA for the same data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1277,10 +1203,10 @@ to each average.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a591d0f3e6dd53d2049563ad9dfa848a411f6c4714bff2b215dd511d6ab8ecbb.png" src="_images/a591d0f3e6dd53d2049563ad9dfa848a411f6c4714bff2b215dd511d6ab8ecbb.png" />
+<img alt="_images/b1f9347884c0405608d4a6b8ed0b13cf1875212aa6f6dbad706b16788d99b893.png" src="_images/b1f9347884c0405608d4a6b8ed0b13cf1875212aa6f6dbad706b16788d99b893.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 90;
+                var nbb_cell_id = 21;
                 var nbb_unformatted_code = "plot_ewma(daily, name)";
                 var nbb_formatted_code = "plot_ewma(daily, name)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1295,19 +1221,14 @@ to each average.</p>
             }, 500);
             </script></div>
 </div>
-<p>It is similar to the rolling mean, where they are both defined, but it has
-no missing values, which makes it easier to work with. The values are
-noisy at the beginning of the time series, because they are based on
-fewer data points.</p>
+<p>It is similar to the rolling mean, where they are both defined, but it has no missing values, which makes it easier to work with.
+The values are noisy at the beginning of the time series, because they are based on fewer data points.</p>
 </section>
 <section id="missing-values">
 <h2>Missing values<a class="headerlink" href="#missing-values" title="Link to this heading">#</a></h2>
-<p>Now that we have characterized the trend of the time series, the next
-step is to investigate seasonality, which is periodic behavior. Time
-series data based on human behavior often exhibits daily, weekly,
-monthly, or yearly cycles. In the next section I present methods to test
-for seasonality, but they don’t work well with missing data, so we have
-to solve that problem first.</p>
+<p>Now that we have characterized the trend of the time series, the next step is to investigate seasonality, which is periodic behavior.
+Time series data based on human behavior often exhibits daily, weekly, monthly, or yearly cycles.
+In the next section I present methods to test for seasonality, but they don’t work well with missing data, so we have to solve that problem first.</p>
 <p>A simple and common way to fill missing data is to use a moving average.
 The <code class="docutils literal notranslate"><span class="pre">Series</span></code> method <code class="docutils literal notranslate"><span class="pre">fillna</span></code> does just what we want:</p>
 <div class="cell docutils container">
@@ -1340,7 +1261,7 @@ The <code class="docutils literal notranslate"><span class="pre">Series</span></
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 91;
+                var nbb_cell_id = 22;
                 var nbb_unformatted_code = "from thinkstats import resample\n\n\ndef fill_missing(daily, span=30):\n    \"\"\"Fills missing values with an exponentially weighted moving average.\n\n    Resulting DataFrame has new columns 'ewma' and 'resid'.\n\n    daily: DataFrame of daily prices\n    span: window size (sort of) passed to ewma\n\n    returns: new DataFrame of daily prices\n    \"\"\"\n    dates = pd.date_range(daily.index.min(), daily.index.max())\n    reindexed = daily.reindex(dates)\n    ewma = pd.Series(reindexed.ppg).ewm(span=span).mean()\n    resid = (reindexed.ppg - ewma).dropna()\n    fake_data = ewma + resample(resid, len(reindexed))\n    reindexed[\"ppg\"] = reindexed.ppg.fillna(fake_data)\n    reindexed[\"ewma\"] = ewma\n    reindexed[\"resid\"] = reindexed.ppg - ewma\n    return reindexed";
                 var nbb_formatted_code = "from thinkstats import resample\n\n\ndef fill_missing(daily, span=30):\n    \"\"\"Fills missing values with an exponentially weighted moving average.\n\n    Resulting DataFrame has new columns 'ewma' and 'resid'.\n\n    daily: DataFrame of daily prices\n    span: window size (sort of) passed to ewma\n\n    returns: new DataFrame of daily prices\n    \"\"\"\n    dates = pd.date_range(daily.index.min(), daily.index.max())\n    reindexed = daily.reindex(dates)\n    ewma = pd.Series(reindexed.ppg).ewm(span=span).mean()\n    resid = (reindexed.ppg - ewma).dropna()\n    fake_data = ewma + resample(resid, len(reindexed))\n    reindexed[\"ppg\"] = reindexed.ppg.fillna(fake_data)\n    reindexed[\"ewma\"] = ewma\n    reindexed[\"resid\"] = reindexed.ppg - ewma\n    return reindexed";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1373,7 +1294,7 @@ The <code class="docutils literal notranslate"><span class="pre">Series</span></
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 92;
+                var nbb_cell_id = 23;
                 var nbb_unformatted_code = "def plot_filled(daily, label):\n    \"\"\"Plots the EWMA and filled data.\n\n    daily: DataFrame of daily prices\n    \"\"\"\n    filled = fill_missing(daily, span=30)\n    scatter_series(filled.ppg, s=15, alpha=0.2, label=label)\n    plt.plot(filled.ewma, label=\"EWMA\", color=\"#ff7f00\")\n    plt.xticks(rotation=30)\n    decorate(ylabel=\"Price per gram ($)\")";
                 var nbb_formatted_code = "def plot_filled(daily, label):\n    \"\"\"Plots the EWMA and filled data.\n\n    daily: DataFrame of daily prices\n    \"\"\"\n    filled = fill_missing(daily, span=30)\n    scatter_series(filled.ppg, s=15, alpha=0.2, label=label)\n    plt.plot(filled.ewma, label=\"EWMA\", color=\"#ff7f00\")\n    plt.xticks(rotation=30)\n    decorate(ylabel=\"Price per gram ($)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1397,10 +1318,10 @@ The <code class="docutils literal notranslate"><span class="pre">Series</span></
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7c8a31c8bc3defadb52ac46b0f1d8e29eb2c0249040ef7ad35021a1e6d3a8204.png" src="_images/7c8a31c8bc3defadb52ac46b0f1d8e29eb2c0249040ef7ad35021a1e6d3a8204.png" />
+<img alt="_images/442cc6f28164dbfe37c86d1bd6eadc4818a932e1e52afd63ca80ab92a462c175.png" src="_images/442cc6f28164dbfe37c86d1bd6eadc4818a932e1e52afd63ca80ab92a462c175.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 93;
+                var nbb_cell_id = 24;
                 var nbb_unformatted_code = "plot_filled(daily, name)\n\n# TODO, what's up with that blip near the end?";
                 var nbb_formatted_code = "plot_filled(daily, name)\n\n# TODO, what's up with that blip near the end?";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1415,10 +1336,9 @@ The <code class="docutils literal notranslate"><span class="pre">Series</span></
             }, 500);
             </script></div>
 </div>
-<p>Wherever <code class="docutils literal notranslate"><span class="pre">reindexed.ppg</span></code> is <code class="docutils literal notranslate"><span class="pre">nan</span></code>, <code class="docutils literal notranslate"><span class="pre">fillna</span></code> replaces it with the
-corresponding value from <code class="docutils literal notranslate"><span class="pre">ewma</span></code>.</p>
-<p>A drawback of this method is that it understates the noise in the
-series. We can solve that problem by adding in resampled residuals:</p>
+<p>Wherever <code class="docutils literal notranslate"><span class="pre">reindexed.ppg</span></code> is <code class="docutils literal notranslate"><span class="pre">nan</span></code>, <code class="docutils literal notranslate"><span class="pre">fillna</span></code> replaces it with the corresponding value from <code class="docutils literal notranslate"><span class="pre">ewma</span></code>.</p>
+<p>A drawback of this method is that it understates the noise in the series.
+We can solve that problem by adding in resampled residuals:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">daily</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
@@ -1430,7 +1350,7 @@ series. We can solve that problem by adding in resampled residuals:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 94;
+                var nbb_cell_id = 25;
                 var nbb_unformatted_code = "dates = pd.date_range(daily.index.min(), daily.index.max())\nreindexed = daily.reindex(dates)\newma = pd.Series(reindexed.ppg).ewm(span=30).mean()";
                 var nbb_formatted_code = "dates = pd.date_range(daily.index.min(), daily.index.max())\nreindexed = daily.reindex(dates)\newma = pd.Series(reindexed.ppg).ewm(span=30).mean()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1456,7 +1376,7 @@ series. We can solve that problem by adding in resampled residuals:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 95;
+                var nbb_cell_id = 26;
                 var nbb_unformatted_code = "resid = (reindexed.ppg - ewma).dropna()\nfake_data = ewma + resample(resid, len(reindexed))\nreindexed[\"ppg\"] = reindexed.ppg.fillna(ewma)";
                 var nbb_formatted_code = "resid = (reindexed.ppg - ewma).dropna()\nfake_data = ewma + resample(resid, len(reindexed))\nreindexed[\"ppg\"] = reindexed.ppg.fillna(ewma)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1471,10 +1391,9 @@ series. We can solve that problem by adding in resampled residuals:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">resid</span></code> contains the residual values, not including days when <code class="docutils literal notranslate"><span class="pre">ppg</span></code> is
-<code class="docutils literal notranslate"><span class="pre">nan</span></code>. <code class="docutils literal notranslate"><span class="pre">fake_data</span></code> contains the sum of the moving average and a random
-sample of residuals. Finally, <code class="docutils literal notranslate"><span class="pre">fillna</span></code> replaces <code class="docutils literal notranslate"><span class="pre">nan</span></code> with values from
-<code class="docutils literal notranslate"><span class="pre">fake_data</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">resid</span></code> contains the residual values, not including days when <code class="docutils literal notranslate"><span class="pre">ppg</span></code> is <code class="docutils literal notranslate"><span class="pre">nan</span></code>.
+<code class="docutils literal notranslate"><span class="pre">fake_data</span></code> contains the sum of the moving average and a random sample of residuals.
+Finally, <code class="docutils literal notranslate"><span class="pre">fillna</span></code> replaces <code class="docutils literal notranslate"><span class="pre">nan</span></code> with values from <code class="docutils literal notranslate"><span class="pre">fake_data</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: missing figure in the sequence here?</span>
@@ -1484,7 +1403,7 @@ sample of residuals. Finally, <code class="docutils literal notranslate"><span c
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 96;
+                var nbb_cell_id = 27;
                 var nbb_unformatted_code = "# TODO: missing figure in the sequence here?";
                 var nbb_formatted_code = "# TODO: missing figure in the sequence here?";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1499,21 +1418,15 @@ sample of residuals. Finally, <code class="docutils literal notranslate"><span c
             }, 500);
             </script></div>
 </div>
-<p>The filled data is visually
-similar to the actual values. Since the resampled residuals are random,
-the results are different every time; later we’ll see how to
-characterize the error created by missing values.</p>
+<p>The filled data is visually similar to the actual values.
+Since the resampled residuals are random, the results are different every time; later we’ll see how to characterize the error created by missing values.</p>
 </section>
 <section id="serial-correlation">
 <h2>Serial correlation<a class="headerlink" href="#serial-correlation" title="Link to this heading">#</a></h2>
-<p>As prices vary from day to day, you might expect to see patterns. If the
-price is high on Monday, you might expect it to be high for a few more
-days; and if it’s low, you might expect it to stay low. A pattern like
-this is called <strong>serial correlation</strong>, because each value is correlated
-with the next one in the series.</p>
-<p>To compute serial correlation, we can shift the time series by an
-interval called a <strong>lag</strong>, and then compute the correlation of the
-shifted series with the original:</p>
+<p>As prices vary from day to day, you might expect to see patterns.
+If the price is high on Monday, you might expect it to be high for a few more days; and if it’s low, you might expect it to stay low.
+A pattern like this is called <strong>serial correlation</strong>, because each value is correlated with the next one in the series.</p>
+<p>To compute serial correlation, we can shift the time series by an interval called a <strong>lag</strong>, and then compute the correlation of the shifted series with the original:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">corr</span>
@@ -1529,7 +1442,7 @@ shifted series with the original:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 97;
+                var nbb_cell_id = 28;
                 var nbb_unformatted_code = "from thinkstats import corr\n\n\ndef serial_corr(series, lag=1):\n    xs = series[lag:]\n    ys = series.shift(lag)[lag:]\n    return corr(xs, ys)";
                 var nbb_formatted_code = "from thinkstats import corr\n\n\ndef serial_corr(series, lag=1):\n    xs = series[lag:]\n    ys = series.shift(lag)[lag:]\n    return corr(xs, ys)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1544,17 +1457,11 @@ shifted series with the original:</p>
             }, 500);
             </script></div>
 </div>
-<p>After the shift, the first <code class="docutils literal notranslate"><span class="pre">lag</span></code> values are <code class="docutils literal notranslate"><span class="pre">nan</span></code>, so I use a slice to
-remove them before computing <code class="docutils literal notranslate"><span class="pre">Corr</span></code>.</p>
-<p>If we apply <code class="docutils literal notranslate"><span class="pre">SerialCorr</span></code> to the raw price data with lag 1, we find
-serial correlation 0.48 for the high quality category, 0.16 for medium
-and 0.10 for low. In any time series with a long-term trend, we expect
-to see strong serial correlations; for example, if prices are falling,
-we expect to see values above the mean in the first half of the series
-and values below the mean in the second half.</p>
-<p>It is more interesting to see if the correlation persists if you
-subtract away the trend. For example, we can compute the residual of the
-EWMA and then compute its serial correlation:</p>
+<p>After the shift, the first <code class="docutils literal notranslate"><span class="pre">lag</span></code> values are <code class="docutils literal notranslate"><span class="pre">nan</span></code>, so I use a slice to remove them before computing <code class="docutils literal notranslate"><span class="pre">Corr</span></code>.</p>
+<p>If we apply <code class="docutils literal notranslate"><span class="pre">SerialCorr</span></code> to the raw price data with lag 1, we find serial correlation 0.48 for the high quality category, 0.16 for medium and 0.10 for low.
+In any time series with a long-term trend, we expect to see strong serial correlations; for example, if prices are falling, we expect to see values above the mean in the first half of the series and values below the mean in the second half.</p>
+<p>It is more interesting to see if the correlation persists if you subtract away the trend.
+For example, we can compute the residual of the EWMA and then compute its serial correlation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filled_dailies</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1566,7 +1473,7 @@ EWMA and then compute its serial correlation:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 98;
+                var nbb_cell_id = 29;
                 var nbb_unformatted_code = "filled_dailies = {}\nfor name, daily in dailies.items():\n    filled_dailies[name] = fill_missing(daily, span=30)";
                 var nbb_formatted_code = "filled_dailies = {}\nfor name, daily in dailies.items():\n    filled_dailies[name] = fill_missing(daily, span=30)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1590,14 +1497,14 @@ EWMA and then compute its serial correlation:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high 0.49630148461047113
-low 0.1116987636490842
-medium 0.16276015825653836
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high 0.4869645585016254
+low 0.11730067146829114
+medium 0.18876645108422843
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 99;
+                var nbb_cell_id = 30;
                 var nbb_unformatted_code = "for name, filled in filled_dailies.items():\n    r = serial_corr(filled.ppg, lag=1)\n    print(name, r)";
                 var nbb_formatted_code = "for name, filled in filled_dailies.items():\n    r = serial_corr(filled.ppg, lag=1)\n    print(name, r)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1612,12 +1519,10 @@ medium 0.16276015825653836
             }, 500);
             </script></div>
 </div>
-<p>With lag=1, the serial correlations for the de-trended data are -0.022
-for high quality, -0.015 for medium, and 0.036 for low. These values are
-small, indicating that there is little or no one-day serial correlation
-in this series.</p>
-<p>To check for weekly, monthly, and yearly seasonality, I ran the analysis
-again with different lags. Here are the results:</p>
+<p>With lag=1, the serial correlations for the de-trended data are -0.022 for high quality, -0.015 for medium, and 0.036 for low.
+These values are small, indicating that there is little or no one-day serial correlation in this series.</p>
+<p>To check for weekly, monthly, and yearly seasonality, I ran the analysis again with different lags.
+Here are the results:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">filled</span> <span class="ow">in</span> <span class="n">filled_dailies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -1627,14 +1532,14 @@ again with different lags. Here are the results:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high -0.010251108312451834
-low 0.0342130403697428
-medium -0.013904924660188788
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high -0.004114986228242842
+low 0.045461650184415815
+medium -0.010294571597965742
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 100;
+                var nbb_cell_id = 31;
                 var nbb_unformatted_code = "for name, filled in filled_dailies.items():\n    r = serial_corr(filled.resid, lag=1)\n    print(name, r)";
                 var nbb_formatted_code = "for name, filled in filled_dailies.items():\n    r = serial_corr(filled.resid, lag=1)\n    print(name, r)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1649,20 +1554,13 @@ medium -0.013904924660188788
             }, 500);
             </script></div>
 </div>
-<p>In the next section we’ll test whether these correlations are
-statistically significant (they are not), but at this point we can
-tentatively conclude that there are no substantial seasonal patterns in
-these series, at least not with these lags.</p>
+<p>In the next section we’ll test whether these correlations are statistically significant (they are not), but at this point we can tentatively conclude that there are no substantial seasonal patterns in these series, at least not with these lags.</p>
 </section>
 <section id="autocorrelation">
 <h2>Autocorrelation<a class="headerlink" href="#autocorrelation" title="Link to this heading">#</a></h2>
-<p>If you think a series might have some serial correlation, but you don’t
-know which lags to test, you can test them all! The <strong>autocorrelation
-function</strong> is a function that maps from lag to the serial correlation
-with the given lag. “Autocorrelation” is another name for serial
-correlation, used more often when the lag is not 1.</p>
-<p>StatsModels provides functions for time series
-analysis, including <code class="docutils literal notranslate"><span class="pre">acf</span></code>, which computes the autocorrelation function:</p>
+<p>If you think a series might have some serial correlation, but you don’t know which lags to test, you can test them all! The <strong>autocorrelation function</strong> is a function that maps from lag to the serial correlation with the given lag.
+“Autocorrelation” is another name for serial correlation, used more often when the lag is not 1.</p>
+<p>StatsModels provides functions for time series analysis, including <code class="docutils literal notranslate"><span class="pre">acf</span></code>, which computes the autocorrelation function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="k">as</span> <span class="nn">smtsa</span>
@@ -1675,7 +1573,7 @@ analysis, including <code class="docutils literal notranslate"><span class="pre"
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 101;
+                var nbb_cell_id = 32;
                 var nbb_unformatted_code = "import statsmodels.tsa.stattools as smtsa\n\nfilled = filled_dailies[\"high\"]\nacf = smtsa.acf(filled.resid, nlags=365, adjusted=True, fft=False)";
                 var nbb_formatted_code = "import statsmodels.tsa.stattools as smtsa\n\nfilled = filled_dailies[\"high\"]\nacf = smtsa.acf(filled.resid, nlags=365, adjusted=True, fft=False)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1690,12 +1588,10 @@ analysis, including <code class="docutils literal notranslate"><span class="pre"
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">acf</span></code> computes serial correlations with lags from 0 through <code class="docutils literal notranslate"><span class="pre">nlags</span></code>. The
-<code class="docutils literal notranslate"><span class="pre">unbiased</span></code> flag tells <code class="docutils literal notranslate"><span class="pre">acf</span></code> to correct the estimates for the sample
-size. The result is an array of correlations. If we select daily prices
-for high quality, and extract correlations for lags 1, 7, 30, and 365,
-we can confirm that <code class="docutils literal notranslate"><span class="pre">acf</span></code> and <code class="docutils literal notranslate"><span class="pre">SerialCorr</span></code> yield approximately the same
-results:</p>
+<p><code class="docutils literal notranslate"><span class="pre">acf</span></code> computes serial correlations with lags from 0 through <code class="docutils literal notranslate"><span class="pre">nlags</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">unbiased</span></code> flag tells <code class="docutils literal notranslate"><span class="pre">acf</span></code> to correct the estimates for the sample size.
+The result is an array of correlations.
+If we select daily prices for high quality, and extract correlations for lags 1, 7, 30, and 365, we can confirm that <code class="docutils literal notranslate"><span class="pre">acf</span></code> and <code class="docutils literal notranslate"><span class="pre">SerialCorr</span></code> yield approximately the same results:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">acf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">acf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">acf</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="si">:</span><span class="s2">.2</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">acf</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span><span class="si">:</span><span class="s2">.2</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">acf</span><span class="p">[</span><span class="mi">365</span><span class="p">]</span><span class="si">:</span><span class="s2">.2</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -1703,12 +1599,12 @@ results:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;1.0 -0.01 0.021 0.0051 0.057&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;1.0 -0.0041 0.011 -0.0042 0.055&#39;
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 102;
+                var nbb_cell_id = 33;
                 var nbb_unformatted_code = "f\"{acf[0]:.2} {acf[1]:.2} {acf[7]:.2} {acf[30]:.2} {acf[365]:.2}\"";
                 var nbb_formatted_code = "f\"{acf[0]:.2} {acf[1]:.2} {acf[7]:.2} {acf[30]:.2} {acf[365]:.2}\"";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1723,10 +1619,8 @@ results:</p>
             }, 500);
             </script></div>
 </div>
-<p>With <code class="docutils literal notranslate"><span class="pre">lag=0</span></code>, <code class="docutils literal notranslate"><span class="pre">acf</span></code> computes the correlation of the series with itself,
-which is always 1.</p>
-<p>The following figure shows autocorrelation functions for the
-three quality categories, with <code class="docutils literal notranslate"><span class="pre">nlags=40</span></code>.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">lag=0</span></code>, <code class="docutils literal notranslate"><span class="pre">acf</span></code> computes the correlation of the series with itself, which is always 1.</p>
+<p>The following figure shows autocorrelation functions for the three quality categories, with <code class="docutils literal notranslate"><span class="pre">nlags=40</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_autocorrelation</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1001</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">40</span><span class="p">):</span>
@@ -1752,7 +1646,7 @@ three quality categories, with <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 107;
+                var nbb_cell_id = 34;
                 var nbb_unformatted_code = "def simulate_autocorrelation(daily, iters=1001, nlags=40):\n    \"\"\"Resample residuals, compute autocorrelation, and plot percentiles.\n\n    daily: DataFrame\n    iters: number of simulations to run\n    nlags: maximum lags to compute autocorrelation\n    \"\"\"\n    t = []\n    for _ in range(iters):\n        filled = fill_missing(daily, span=30)\n        resid = resample(filled.resid)\n        acf = smtsa.acf(resid, nlags=nlags, adjusted=True, fft=False)[1:]\n        t.append(np.abs(acf))\n    high = percentile_rows(t, [97.5])[0]\n    low = -high\n    lags = range(1, nlags + 1)\n    plt.fill_between(lags, low, high, alpha=0.2, color=\"gray\")";
                 var nbb_formatted_code = "def simulate_autocorrelation(daily, iters=1001, nlags=40):\n    \"\"\"Resample residuals, compute autocorrelation, and plot percentiles.\n\n    daily: DataFrame\n    iters: number of simulations to run\n    nlags: maximum lags to compute autocorrelation\n    \"\"\"\n    t = []\n    for _ in range(iters):\n        filled = fill_missing(daily, span=30)\n        resid = resample(filled.resid)\n        acf = smtsa.acf(resid, nlags=nlags, adjusted=True, fft=False)[1:]\n        t.append(np.abs(acf))\n    high = percentile_rows(t, [97.5])[0]\n    low = -high\n    lags = range(1, nlags + 1)\n    plt.fill_between(lags, low, high, alpha=0.2, color=\"gray\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1794,8 +1688,8 @@ three quality categories, with <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 110;
-                var nbb_unformatted_code = "from thinkstats import percentile_rows\n\n\ndef plot_auto_correlation(dailies, nlags=40, add_weekly=False):\n    \"\"\"Plots autocorrelation functions.\n\n    dailies: map from category name to DataFrame of daily prices\n    nlags: number of lags to compute\n    add_weekly: boolean, whether to add a simulated weekly pattern\n    \"\"\"\n    daily = dailies[\"high\"]\n    simulate_autocorrelation(daily)\n    for name, daily in dailies.items():\n        if add_weekly:\n            daily.ppg = add_weekly_seasonality(daily)\n        filled = fill_missing(daily, span=30)\n        acf = smtsa.acf(filled.resid, nlags=nlags, adjusted=True, fft=False)\n        lags = np.arange(len(acf))\n        plt.plot(lags[1:], acf[1:], label=name)";
+                var nbb_cell_id = 39;
+                var nbb_unformatted_code = "from thinkstats import percentile_rows\n\ndef plot_auto_correlation(dailies, nlags=40, add_weekly=False):\n    \"\"\"Plots autocorrelation functions.\n\n    dailies: map from category name to DataFrame of daily prices\n    nlags: number of lags to compute\n    add_weekly: boolean, whether to add a simulated weekly pattern\n    \"\"\"\n    daily = dailies[\"high\"]\n    simulate_autocorrelation(daily)\n    for name, daily in dailies.items():\n        if add_weekly:\n            daily.ppg = add_weekly_seasonality(daily)\n        filled = fill_missing(daily, span=30)\n        acf = smtsa.acf(filled.resid, nlags=nlags, adjusted=True, fft=False)\n        lags = np.arange(len(acf))\n        plt.plot(lags[1:], acf[1:], label=name)";
                 var nbb_formatted_code = "from thinkstats import percentile_rows\n\n\ndef plot_auto_correlation(dailies, nlags=40, add_weekly=False):\n    \"\"\"Plots autocorrelation functions.\n\n    dailies: map from category name to DataFrame of daily prices\n    nlags: number of lags to compute\n    add_weekly: boolean, whether to add a simulated weekly pattern\n    \"\"\"\n    daily = dailies[\"high\"]\n    simulate_autocorrelation(daily)\n    for name, daily in dailies.items():\n        if add_weekly:\n            daily.ppg = add_weekly_seasonality(daily)\n        filled = fill_missing(daily, span=30)\n        acf = smtsa.acf(filled.resid, nlags=nlags, adjusted=True, fft=False)\n        lags = np.arange(len(acf))\n        plt.plot(lags[1:], acf[1:], label=name)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -1818,10 +1712,10 @@ three quality categories, with <code class="docutils literal notranslate"><span 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a36391fe5abfacfecb4e4653bf029652efd5cfcc542436b3bb630c926a4bac8a.png" src="_images/a36391fe5abfacfecb4e4653bf029652efd5cfcc542436b3bb630c926a4bac8a.png" />
+<img alt="_images/82f686979805f09bd5dbad62c5415dca83d80c26fb5ed3f9b03eb88660ad8f1d.png" src="_images/82f686979805f09bd5dbad62c5415dca83d80c26fb5ed3f9b03eb88660ad8f1d.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 112;
+                var nbb_cell_id = 40;
                 var nbb_unformatted_code = "axis = [0, 41, -0.2, 0.2]\nplot_auto_correlation(dailies, add_weekly=False)\ndecorate(xlabel=\"lag (day)\", ylabel=\"correlation\", loc=\"lower right\")";
                 var nbb_formatted_code = "axis = [0, 41, -0.2, 0.2]\nplot_auto_correlation(dailies, add_weekly=False)\ndecorate(xlabel=\"lag (day)\", ylabel=\"correlation\", loc=\"lower right\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1836,23 +1730,13 @@ three quality categories, with <code class="docutils literal notranslate"><span 
             }, 500);
             </script></div>
 </div>
-<p>The gray region shows the
-normal variability we would expect if there is no actual
-autocorrelation; anything that falls outside this range is statistically
-significant, with a p-value less than 5%. Since the false positive rate
-is 5%, and we are computing 120 correlations (40 lags for each of 3
-times series), we expect to see about 6 points outside this region. In
-fact, there are 7. We conclude that there are no autocorrelations in
-these series that could not be explained by chance.</p>
-<p>I computed the gray regions by resampling the residuals. You can see my
-code in <code class="docutils literal notranslate"><span class="pre">timeseries.py</span></code>; the function is called
-<code class="docutils literal notranslate"><span class="pre">SimulateAutocorrelation</span></code>.</p>
-<p>To see what the autocorrelation function looks like when there is a
-seasonal component, I generated simulated data by adding a weekly cycle.
-Assuming that demand for cannabis is higher on weekends, we might expect
-the price to be higher. To simulate this effect, I select dates that
-fall on Friday or Saturday and add a random amount to the price, chosen
-from a uniform distribution from $0 to $2.</p>
+<p>The gray region shows the normal variability we would expect if there is no actual autocorrelation; anything that falls outside this range is statistically significant, with a p-value less than 5%. Since the false positive rate is 5%, and we are computing 120 correlations (40 lags for each of 3 times series), we expect to see about 6 points outside this region.
+In fact, there are 7. We conclude that there are no autocorrelations in these series that could not be explained by chance.</p>
+<p>I computed the gray regions by resampling the residuals.
+You can see my code in <code class="docutils literal notranslate"><span class="pre">timeseries.py</span></code>; the function is called <code class="docutils literal notranslate"><span class="pre">SimulateAutocorrelation</span></code>.</p>
+<p>To see what the autocorrelation function looks like when there is a seasonal component, I generated simulated data by adding a weekly cycle.
+Assuming that demand for cannabis is higher on weekends, we might expect the price to be higher.
+To simulate this effect, I select dates that fall on Friday or Saturday and add a random amount to the price, chosen from a uniform distribution from $0 to $2.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_weekly_seasonality</span><span class="p">(</span><span class="n">daily</span><span class="p">):</span>
@@ -1872,7 +1756,7 @@ from a uniform distribution from $0 to $2.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 113;
+                var nbb_cell_id = 41;
                 var nbb_unformatted_code = "def add_weekly_seasonality(daily):\n    \"\"\"Adds a weekly pattern.\n\n    daily: DataFrame of daily prices\n\n    returns: new DataFrame of daily prices\n    \"\"\"\n    fri_or_sat = (daily.index.dayofweek == 4) | (daily.index.dayofweek == 5)\n    fake = daily.ppg.copy()\n    fake[fri_or_sat] += np.random.uniform(0, 2, fri_or_sat.sum())\n    return fake";
                 var nbb_formatted_code = "def add_weekly_seasonality(daily):\n    \"\"\"Adds a weekly pattern.\n\n    daily: DataFrame of daily prices\n\n    returns: new DataFrame of daily prices\n    \"\"\"\n    fri_or_sat = (daily.index.dayofweek == 4) | (daily.index.dayofweek == 5)\n    fake = daily.ppg.copy()\n    fake[fri_or_sat] += np.random.uniform(0, 2, fri_or_sat.sum())\n    return fake";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1887,13 +1771,10 @@ from a uniform distribution from $0 to $2.</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">frisat</span></code> is a boolean <code class="docutils literal notranslate"><span class="pre">Series</span></code>, <code class="docutils literal notranslate"><span class="pre">True</span></code> if the day of the week is Friday or
-Saturday. <code class="docutils literal notranslate"><span class="pre">fake</span></code> is a new <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, initially a copy of <code class="docutils literal notranslate"><span class="pre">daily</span></code>, which
-we modify by adding random values to <code class="docutils literal notranslate"><span class="pre">ppg</span></code>. <code class="docutils literal notranslate"><span class="pre">frisat.sum()</span></code> is the total
-number of Fridays and Saturdays, which is the number of random values we
-have to generate.</p>
-<p>The following figure shows autocorrelation functions for
-prices with this simulated seasonality.</p>
+<p><code class="docutils literal notranslate"><span class="pre">frisat</span></code> is a boolean <code class="docutils literal notranslate"><span class="pre">Series</span></code>, <code class="docutils literal notranslate"><span class="pre">True</span></code> if the day of the week is Friday or Saturday.
+<code class="docutils literal notranslate"><span class="pre">fake</span></code> is a new <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, initially a copy of <code class="docutils literal notranslate"><span class="pre">daily</span></code>, which we modify by adding random values to <code class="docutils literal notranslate"><span class="pre">ppg</span></code>.
+<code class="docutils literal notranslate"><span class="pre">frisat.sum()</span></code> is the total number of Fridays and Saturdays, which is the number of random values we have to generate.</p>
+<p>The following figure shows autocorrelation functions for prices with this simulated seasonality.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axis</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
@@ -1903,10 +1784,10 @@ prices with this simulated seasonality.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/87dae2a7defcc6ca9266dcd15042711498c261ab95feb31e327e34577a9e96c3.png" src="_images/87dae2a7defcc6ca9266dcd15042711498c261ab95feb31e327e34577a9e96c3.png" />
+<img alt="_images/cac745bdaab115414bc9ed6e3e8342e4dadbc4504b2ba05818483837c4f9bbe3.png" src="_images/cac745bdaab115414bc9ed6e3e8342e4dadbc4504b2ba05818483837c4f9bbe3.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 116;
+                var nbb_cell_id = 42;
                 var nbb_unformatted_code = "axis = [0, 41, -0.2, 0.2]\nplot_auto_correlation(dailies, add_weekly=True)\ndecorate(xlabel=\"lag (day)\", ylabel=\"correlation\", loc=\"lower right\")";
                 var nbb_formatted_code = "axis = [0, 41, -0.2, 0.2]\nplot_auto_correlation(dailies, add_weekly=True)\ndecorate(xlabel=\"lag (day)\", ylabel=\"correlation\", loc=\"lower right\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1921,22 +1802,16 @@ prices with this simulated seasonality.</p>
             }, 500);
             </script></div>
 </div>
-<p>As expected, the correlations
-are highest when the lag is a multiple of 7. For high and medium
-quality, the new correlations are statistically significant. For low
-quality they are not, because residuals in this category are large; the
-effect would have to be bigger to be visible through the noise.</p>
+<p>As expected, the correlations are highest when the lag is a multiple of 7. For high and medium quality, the new correlations are statistically significant.
+For low quality they are not, because residuals in this category are large; the effect would have to be bigger to be visible through the noise.</p>
 </section>
 <section id="prediction">
 <h2>Prediction<a class="headerlink" href="#prediction" title="Link to this heading">#</a></h2>
-<p>Time series analysis can be used to investigate, and sometimes explain,
-the behavior of systems that vary in time. It can also make predictions.</p>
-<p>The linear regressions we used in
-Section <a class="reference internal" href="#timeregress"><span class="xref myst">[timeregress]</span></a>{reference-type=“ref”
-reference=“timeregress”} can be used for prediction. The
-RegressionResults class provides <code class="docutils literal notranslate"><span class="pre">predict</span></code>, which takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>
-containing the explanatory variables and returns a sequence of
-predictions. Here’s the code:</p>
+<p>Time series analysis can be used to investigate, and sometimes explain, the behavior of systems that vary in time.
+It can also make predictions.</p>
+<p>The linear regressions we used in Section <a class="reference internal" href="#timeregress"><span class="xref myst">[timeregress]</span></a>{reference-type=“ref” reference=“timeregress”} can be used for prediction.
+The RegressionResults class provides <code class="docutils literal notranslate"><span class="pre">predict</span></code>, which takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> containing the explanatory variables and returns a sequence of predictions.
+Here’s the code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_simple_prediction</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">years</span><span class="p">):</span>
@@ -1959,7 +1834,7 @@ predictions. Here’s the code:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 117;
+                var nbb_cell_id = 43;
                 var nbb_unformatted_code = "def generate_simple_prediction(results, years):\n    \"\"\"Generates a simple prediction.\n\n    results: results object\n    years: sequence of times (in years) to make predictions for\n\n    returns: sequence of predicted values\n    \"\"\"\n    n = len(years)\n    inter = np.ones(n)\n    d = dict(Intercept=inter, years=years, years2=years**2)\n    predict_df = pd.DataFrame(d)\n    predict = results.predict(predict_df)\n    return predict";
                 var nbb_formatted_code = "def generate_simple_prediction(results, years):\n    \"\"\"Generates a simple prediction.\n\n    results: results object\n    years: sequence of times (in years) to make predictions for\n\n    returns: sequence of predicted values\n    \"\"\"\n    n = len(years)\n    inter = np.ones(n)\n    d = dict(Intercept=inter, years=years, years2=years**2)\n    predict_df = pd.DataFrame(d)\n    predict = results.predict(predict_df)\n    return predict";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1994,7 +1869,7 @@ predictions. Here’s the code:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 118;
+                var nbb_cell_id = 44;
                 var nbb_unformatted_code = "def plot_simple_prediction(name, results, years):\n    predict = generate_simple_prediction(results, years)\n    plt.scatter(daily.years, daily.ppg, alpha=0.2, label=name)\n    plt.plot(years, predict, color=\"#ff7f00\")\n    xlim = years[0] - 0.1, years[-1] + 0.1\n    decorate(\n        title=\"Predictions\",\n        xlabel=\"Years\",\n        xlim=xlim,\n        ylabel=\"Price per gram ($)\",\n        loc=\"upper right\",\n    )";
                 var nbb_formatted_code = "def plot_simple_prediction(name, results, years):\n    predict = generate_simple_prediction(results, years)\n    plt.scatter(daily.years, daily.ppg, alpha=0.2, label=name)\n    plt.plot(years, predict, color=\"#ff7f00\")\n    xlim = years[0] - 0.1, years[-1] + 0.1\n    decorate(\n        title=\"Predictions\",\n        xlabel=\"Years\",\n        xlim=xlim,\n        ylabel=\"Price per gram ($)\",\n        loc=\"upper right\",\n    )";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2020,10 +1895,10 @@ predictions. Here’s the code:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/72912245d81e44979e5334b156e90676343c10778a60f1dfd5313afb975096c1.png" src="_images/72912245d81e44979e5334b156e90676343c10778a60f1dfd5313afb975096c1.png" />
+<img alt="_images/b030ef68e4bd1bed0e393faa38d1551ad023cb24a6dcf038d752ba25cf0ac4ab.png" src="_images/b030ef68e4bd1bed0e393faa38d1551ad023cb24a6dcf038d752ba25cf0ac4ab.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 119;
+                var nbb_cell_id = 45;
                 var nbb_unformatted_code = "name = \"high\"\ndaily = dailies[name]\n_, results = run_linear_model(daily)\nyears = np.linspace(0, 5, 101)\nplot_simple_prediction(name, results, years)";
                 var nbb_formatted_code = "name = \"high\"\ndaily = dailies[name]\n_, results = run_linear_model(daily)\nyears = np.linspace(0, 5, 101)\nplot_simple_prediction(name, results, years)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2038,40 +1913,29 @@ predictions. Here’s the code:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">results</span></code> is a RegressionResults object; <code class="docutils literal notranslate"><span class="pre">years</span></code> is the sequence of time
-values we want predictions for. The function constructs a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>,
-passes it to <code class="docutils literal notranslate"><span class="pre">predict</span></code>, and returns the result.</p>
-<p>If all we want is a single, best-guess prediction, we’re done. But for
-most purposes it is important to quantify error. In other words, we want
-to know how accurate the prediction is likely to be.</p>
+<p><code class="docutils literal notranslate"><span class="pre">results</span></code> is a RegressionResults object; <code class="docutils literal notranslate"><span class="pre">years</span></code> is the sequence of time values we want predictions for.
+The function constructs a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, passes it to <code class="docutils literal notranslate"><span class="pre">predict</span></code>, and returns the result.</p>
+<p>If all we want is a single, best-guess prediction, we’re done.
+But for most purposes it is important to quantify error.
+In other words, we want to know how accurate the prediction is likely to be.</p>
 <p>There are three sources of error we should take into account:</p>
 <ul class="simple">
-<li><p>Sampling error: The prediction is based on estimated parameters,
-which depend on random variation in the sample. If we run the
-experiment again, we expect the estimates to vary.</p></li>
-<li><p>Random variation: Even if the estimated parameters are perfect, the
-observed data varies randomly around the long-term trend, and we
-expect this variation to continue in the future.</p></li>
-<li><p>Modeling error: We have already seen evidence that the long-term
-trend is not linear, so predictions based on a linear model will
-eventually fail.</p></li>
+<li><p>Sampling error: The prediction is based on estimated parameters, which depend on random variation in the sample.
+If we run the experiment again, we expect the estimates to vary.</p></li>
+<li><p>Random variation: Even if the estimated parameters are perfect, the observed data varies randomly around the long-term trend, and we expect this variation to continue in the future.</p></li>
+<li><p>Modeling error: We have already seen evidence that the long-term trend is not linear, so predictions based on a linear model will eventually fail.</p></li>
 </ul>
 <p>Another source of error to consider is unexpected future events.
-Agricultural prices are affected by weather, and all prices are affected
-by politics and law. As I write this, cannabis is legal in two states
-and legal for medical purposes in 20 more. If more states legalize it,
-the price is likely to go down. But if the federal government cracks
-down, the price might go up.</p>
+Agricultural prices are affected by weather, and all prices are affected by politics and law.
+As I write this, cannabis is legal in two states and legal for medical purposes in 20 more.
+If more states legalize it, the price is likely to go down.
+But if the federal government cracks down, the price might go up.</p>
 <p>Modeling errors and unexpected future events are hard to quantify.
-Sampling error and random variation are easier to deal with, so we’ll do
-that first.</p>
-<p>To quantify sampling error, I use resampling, as we did in
-Section <a class="reference internal" href="#regest"><span class="xref myst">[regest]</span></a>{reference-type=“ref” reference=“regest”}.
-As always, the goal is to use the actual observations to simulate what
-would happen if we ran the experiment again. The simulations are based
-on the assumption that the estimated parameters are correct, but the
-random residuals could have been different. Here is a function that runs
-the simulations:</p>
+Sampling error and random variation are easier to deal with, so we’ll do that first.</p>
+<p>To quantify sampling error, I use resampling, as we did in Section <a class="reference internal" href="#regest"><span class="xref myst">[regest]</span></a>{reference-type=“ref” reference=“regest”}.
+As always, the goal is to use the actual observations to simulate what would happen if we ran the experiment again.
+The simulations are based on the assumption that the estimated parameters are correct, but the random residuals could have been different.
+Here is a function that runs the simulations:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_results</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">run_linear_model</span><span class="p">):</span>
@@ -2097,7 +1961,7 @@ the simulations:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 120;
+                var nbb_cell_id = 46;
                 var nbb_unformatted_code = "def simulate_results(daily, iters=101, func=run_linear_model):\n    \"\"\"Run simulations based on resampling residuals.\n\n    daily: DataFrame of daily prices\n    iters: number of simulations\n    func: function that fits a model to the data\n\n    returns: list of result objects\n    \"\"\"\n    _, results = func(daily)\n    fake = daily.copy()\n    result_seq = []\n    for _ in range(iters):\n        fake.ppg = results.fittedvalues + resample(results.resid)\n        _, fake_results = func(fake)\n        result_seq.append(fake_results)\n    return result_seq";
                 var nbb_formatted_code = "def simulate_results(daily, iters=101, func=run_linear_model):\n    \"\"\"Run simulations based on resampling residuals.\n\n    daily: DataFrame of daily prices\n    iters: number of simulations\n    func: function that fits a model to the data\n\n    returns: list of result objects\n    \"\"\"\n    _, results = func(daily)\n    fake = daily.copy()\n    result_seq = []\n    for _ in range(iters):\n        fake.ppg = results.fittedvalues + resample(results.resid)\n        _, fake_results = func(fake)\n        result_seq.append(fake_results)\n    return result_seq";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2112,15 +1976,10 @@ the simulations:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">daily</span></code> is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> containing the observed prices; <code class="docutils literal notranslate"><span class="pre">iters</span></code> is the
-number of simulations to run.</p>
-<p><code class="docutils literal notranslate"><span class="pre">SimulateResults</span></code> uses <code class="docutils literal notranslate"><span class="pre">RunLinearModel</span></code>, from
-Section <a class="reference internal" href="#timeregress"><span class="xref myst">[timeregress]</span></a>{reference-type=“ref”
-reference=“timeregress”}, to estimate the slope and intercept of the
-observed values.</p>
-<p>Each time through the loop, it generates a “fake” dataset by resampling
-the residuals and adding them to the fitted values. Then it runs a
-linear model on the fake data and stores the RegressionResults object.</p>
+<p><code class="docutils literal notranslate"><span class="pre">daily</span></code> is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> containing the observed prices; <code class="docutils literal notranslate"><span class="pre">iters</span></code> is the number of simulations to run.</p>
+<p><code class="docutils literal notranslate"><span class="pre">SimulateResults</span></code> uses <code class="docutils literal notranslate"><span class="pre">RunLinearModel</span></code>, from Section <a class="reference internal" href="#timeregress"><span class="xref myst">[timeregress]</span></a>{reference-type=“ref” reference=“timeregress”}, to estimate the slope and intercept of the observed values.</p>
+<p>Each time through the loop, it generates a “fake” dataset by resampling the residuals and adding them to the fitted values.
+Then it runs a linear model on the fake data and stores the RegressionResults object.</p>
 <p>The next step is to use the simulated results to generate predictions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2154,7 +2013,7 @@ linear model on the fake data and stores the RegressionResults object.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 121;
+                var nbb_cell_id = 47;
                 var nbb_unformatted_code = "def generate_predictions(result_seq, years, add_resid=False):\n    \"\"\"Generates an array of predicted values from a list of model results.\n\n    When add_resid is False, predictions represent sampling error only.\n\n    When add_resid is True, they also include residual error (which is\n    more relevant to prediction).\n\n    result_seq: list of model results\n    years: sequence of times (in years) to make predictions for\n    add_resid: boolean, whether to add in resampled residuals\n\n    returns: sequence of predictions\n    \"\"\"\n    n = len(years)\n    d = dict(Intercept=np.ones(n), years=years, years2=years**2)\n    predict_df = pd.DataFrame(d)\n    predict_seq = []\n    for fake_results in result_seq:\n        predict = fake_results.predict(predict_df)\n        if add_resid:\n            predict += resample(fake_results.resid, n)\n        predict_seq.append(predict)\n    return predict_seq";
                 var nbb_formatted_code = "def generate_predictions(result_seq, years, add_resid=False):\n    \"\"\"Generates an array of predicted values from a list of model results.\n\n    When add_resid is False, predictions represent sampling error only.\n\n    When add_resid is True, they also include residual error (which is\n    more relevant to prediction).\n\n    result_seq: list of model results\n    years: sequence of times (in years) to make predictions for\n    add_resid: boolean, whether to add in resampled residuals\n\n    returns: sequence of predictions\n    \"\"\"\n    n = len(years)\n    d = dict(Intercept=np.ones(n), years=years, years2=years**2)\n    predict_df = pd.DataFrame(d)\n    predict_seq = []\n    for fake_results in result_seq:\n        predict = fake_results.predict(predict_df)\n        if add_resid:\n            predict += resample(fake_results.resid, n)\n        predict_seq.append(predict)\n    return predict_seq";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2169,14 +2028,9 @@ linear model on the fake data and stores the RegressionResults object.</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">GeneratePredictions</span></code> takes the sequence of results from the previous
-step, as well as <code class="docutils literal notranslate"><span class="pre">years</span></code>, which is a sequence of floats that specifies
-the interval to generate predictions for, and <code class="docutils literal notranslate"><span class="pre">add_resid</span></code>, which
-indicates whether it should add resampled residuals to the straight-line
-prediction. <code class="docutils literal notranslate"><span class="pre">GeneratePredictions</span></code> iterates through the sequence of
-RegressionResults and generates a sequence of predictions.</p>
-<p>Finally, here’s the code that plots a 90% confidence interval for the
-predictions:</p>
+<p><code class="docutils literal notranslate"><span class="pre">GeneratePredictions</span></code> takes the sequence of results from the previous step, as well as <code class="docutils literal notranslate"><span class="pre">years</span></code>, which is a sequence of floats that specifies the interval to generate predictions for, and <code class="docutils literal notranslate"><span class="pre">add_resid</span></code>, which indicates whether it should add resampled residuals to the straight-line prediction.
+<code class="docutils literal notranslate"><span class="pre">GeneratePredictions</span></code> iterates through the sequence of RegressionResults and generates a sequence of predictions.</p>
+<p>Finally, here’s the code that plots a 90% confidence interval for the predictions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_predictions</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">run_linear_model</span><span class="p">):</span>
@@ -2204,7 +2058,7 @@ predictions:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 122;
+                var nbb_cell_id = 48;
                 var nbb_unformatted_code = "def plot_predictions(daily, years, iters=101, percent=90, func=run_linear_model):\n    \"\"\"Plots predictions.\n\n    daily: DataFrame of daily prices\n    years: sequence of times (in years) to make predictions for\n    iters: number of simulations\n    percent: what percentile range to show\n    func: function that fits a model to the data\n    \"\"\"\n    result_seq = simulate_results(daily, iters=iters, func=func)\n    p = (100 - percent) / 2\n    percents = p, 100 - p\n    predict_seq = generate_predictions(result_seq, years, add_resid=True)\n    low, high = percentile_rows(predict_seq, percents)\n    plt.fill_between(years, low, high, alpha=0.3, color=\"gray\")\n\n    predict_seq = generate_predictions(result_seq, years, add_resid=False)\n    low, high = percentile_rows(predict_seq, percents)\n    plt.fill_between(years, low, high, alpha=0.5, color=\"gray\")";
                 var nbb_formatted_code = "def plot_predictions(daily, years, iters=101, percent=90, func=run_linear_model):\n    \"\"\"Plots predictions.\n\n    daily: DataFrame of daily prices\n    years: sequence of times (in years) to make predictions for\n    iters: number of simulations\n    percent: what percentile range to show\n    func: function that fits a model to the data\n    \"\"\"\n    result_seq = simulate_results(daily, iters=iters, func=func)\n    p = (100 - percent) / 2\n    percents = p, 100 - p\n    predict_seq = generate_predictions(result_seq, years, add_resid=True)\n    low, high = percentile_rows(predict_seq, percents)\n    plt.fill_between(years, low, high, alpha=0.3, color=\"gray\")\n\n    predict_seq = generate_predictions(result_seq, years, add_resid=False)\n    low, high = percentile_rows(predict_seq, percents)\n    plt.fill_between(years, low, high, alpha=0.5, color=\"gray\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2219,10 +2073,8 @@ predictions:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">PlotPredictions</span></code> calls <code class="docutils literal notranslate"><span class="pre">GeneratePredictions</span></code> twice: once with
-<code class="docutils literal notranslate"><span class="pre">add_resid=True</span></code> and again with <code class="docutils literal notranslate"><span class="pre">add_resid=False</span></code>. It uses
-<code class="docutils literal notranslate"><span class="pre">PercentileRows</span></code> to select the 5th and 95th percentiles for each year,
-then plots a gray region between these bounds.</p>
+<p><code class="docutils literal notranslate"><span class="pre">PlotPredictions</span></code> calls <code class="docutils literal notranslate"><span class="pre">GeneratePredictions</span></code> twice: once with <code class="docutils literal notranslate"><span class="pre">add_resid=True</span></code> and again with <code class="docutils literal notranslate"><span class="pre">add_resid=False</span></code>.
+It uses <code class="docutils literal notranslate"><span class="pre">PercentileRows</span></code> to select the 5th and 95th percentiles for each year, then plots a gray region between these bounds.</p>
 <p>The following figure shows the result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2235,10 +2087,10 @@ then plots a gray region between these bounds.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/78bc80ac57a98030e71eeed01b9685e88ca5188ef8f00814bcfbc28c45257c52.png" src="_images/78bc80ac57a98030e71eeed01b9685e88ca5188ef8f00814bcfbc28c45257c52.png" />
+<img alt="_images/eeaf09e222dc55b3ac99f86210355ed49c78e62018b60ddb928dcde2db86e33e.png" src="_images/eeaf09e222dc55b3ac99f86210355ed49c78e62018b60ddb928dcde2db86e33e.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 123;
+                var nbb_cell_id = 49;
                 var nbb_unformatted_code = "years = np.linspace(0, 5, 101)\nplt.scatter(daily.years, daily.ppg, alpha=0.1, label=name)\nplot_predictions(daily, years)\nxlim = years[0] - 0.1, years[-1] + 0.1\ndecorate(title=\"Predictions\", xlabel=\"Years\", xlim=xlim, ylabel=\"Price per gram ($)\")";
                 var nbb_formatted_code = "years = np.linspace(0, 5, 101)\nplt.scatter(daily.years, daily.ppg, alpha=0.1, label=name)\nplot_predictions(daily, years)\nxlim = years[0] - 0.1, years[-1] + 0.1\ndecorate(title=\"Predictions\", xlabel=\"Years\", xlim=xlim, ylabel=\"Price per gram ($)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2253,27 +2105,15 @@ then plots a gray region between these bounds.</p>
             }, 500);
             </script></div>
 </div>
-<p>The dark gray region
-represents a 90% confidence interval for the sampling error; that is,
-uncertainty about the estimated slope and intercept due to sampling.</p>
-<p>The lighter region shows a 90% confidence interval for prediction error,
-which is the sum of sampling error and random variation.</p>
-<p>These regions quantify sampling error and random variation, but not
-modeling error. In general modeling error is hard to quantify, but in
-this case we can address at least one source of error, unpredictable
-external events.</p>
-<p>The regression model is based on the assumption that the system is
-<strong>stationary</strong>; that is, that the parameters of the model don’t change
-over time. Specifically, it assumes that the slope and intercept are
-constant, as well as the distribution of residuals.</p>
-<p>But looking at the moving averages in
-[which figure?], it seems like the slope changes at least once
-during the observed interval, and the variance of the residuals seems
-bigger in the first half than the second.</p>
-<p>As a result, the parameters we get depend on the interval we observe. To
-see how much effect this has on the predictions, we can extend
-<code class="docutils literal notranslate"><span class="pre">simulate_results</span></code> to use intervals of observation with different start
-and end dates.</p>
+<p>The dark gray region represents a 90% confidence interval for the sampling error; that is, uncertainty about the estimated slope and intercept due to sampling.</p>
+<p>The lighter region shows a 90% confidence interval for prediction error, which is the sum of sampling error and random variation.</p>
+<p>These regions quantify sampling error and random variation, but not modeling error.
+In general modeling error is hard to quantify, but in this case we can address at least one source of error, unpredictable external events.</p>
+<p>The regression model is based on the assumption that the system is <strong>stationary</strong>; that is, that the parameters of the model don’t change over time.
+Specifically, it assumes that the slope and intercept are constant, as well as the distribution of residuals.</p>
+<p>But looking at the moving averages in [which figure?], it seems like the slope changes at least once during the observed interval, and the variance of the residuals seems bigger in the first half than the second.</p>
+<p>As a result, the parameters we get depend on the interval we observe.
+To see how much effect this has on the predictions, we can extend <code class="docutils literal notranslate"><span class="pre">simulate_results</span></code> to use intervals of observation with different start and end dates.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_intervals</span><span class="p">(</span><span class="n">daily</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">run_linear_model</span><span class="p">):</span>
@@ -2302,7 +2142,7 @@ and end dates.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 124;
+                var nbb_cell_id = 50;
                 var nbb_unformatted_code = "def simulate_intervals(daily, iters=101, func=run_linear_model):\n    \"\"\"Run simulations based on different subsets of the data.\n\n    daily: DataFrame of daily prices\n    iters: number of simulations\n    func: function that fits a model to the data\n\n    returns: list of result objects\n    \"\"\"\n    result_seq = []\n    starts = np.linspace(0, len(daily), iters).astype(int)\n    for start in starts[:-2]:\n        subset = daily[start:]\n        _, results = func(subset)\n        fake = subset.copy()\n        for _ in range(iters):\n            fake.ppg = results.fittedvalues + resample(results.resid)\n            _, fake_results = func(fake)\n            result_seq.append(fake_results)\n    return result_seq";
                 var nbb_formatted_code = "def simulate_intervals(daily, iters=101, func=run_linear_model):\n    \"\"\"Run simulations based on different subsets of the data.\n\n    daily: DataFrame of daily prices\n    iters: number of simulations\n    func: function that fits a model to the data\n\n    returns: list of result objects\n    \"\"\"\n    result_seq = []\n    starts = np.linspace(0, len(daily), iters).astype(int)\n    for start in starts[:-2]:\n        subset = daily[start:]\n        _, results = func(subset)\n        fake = subset.copy()\n        for _ in range(iters):\n            fake.ppg = results.fittedvalues + resample(results.resid)\n            _, fake_results = func(fake)\n            result_seq.append(fake_results)\n    return result_seq";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2340,7 +2180,7 @@ and end dates.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 125;
+                var nbb_cell_id = 51;
                 var nbb_unformatted_code = "def plot_intervals(daily, years, iters=101, percent=90, func=run_linear_model):\n    \"\"\"Plots predictions based on different intervals.\n\n    daily: DataFrame of daily prices\n    years: sequence of times (in years) to make predictions for\n    iters: number of simulations\n    percent: what percentile range to show\n    func: function that fits a model to the data\n    \"\"\"\n    result_seq = simulate_intervals(daily, iters=iters, func=func)\n    p = (100 - percent) / 2\n    percents = p, 100 - p\n    predict_seq = generate_predictions(result_seq, years, add_resid=True)\n    low, high = percentile_rows(predict_seq, percents)\n    plt.fill_between(years, low, high, alpha=0.2, color=\"gray\")";
                 var nbb_formatted_code = "def plot_intervals(daily, years, iters=101, percent=90, func=run_linear_model):\n    \"\"\"Plots predictions based on different intervals.\n\n    daily: DataFrame of daily prices\n    years: sequence of times (in years) to make predictions for\n    iters: number of simulations\n    percent: what percentile range to show\n    func: function that fits a model to the data\n    \"\"\"\n    result_seq = simulate_intervals(daily, iters=iters, func=func)\n    p = (100 - percent) / 2\n    percents = p, 100 - p\n    predict_seq = generate_predictions(result_seq, years, add_resid=True)\n    low, high = percentile_rows(predict_seq, percents)\n    plt.fill_between(years, low, high, alpha=0.2, color=\"gray\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2355,8 +2195,7 @@ and end dates.</p>
             }, 500);
             </script></div>
 </div>
-<p>The following figure shows the result for the medium quality
-category.</p>
+<p>The following figure shows the result for the medium quality category.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;high&quot;</span>
@@ -2371,10 +2210,10 @@ category.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5ce0af78364f63fffcdcc2f8413b72c81335b5bb05fc289ad71fd35f6d6fa85f.png" src="_images/5ce0af78364f63fffcdcc2f8413b72c81335b5bb05fc289ad71fd35f6d6fa85f.png" />
+<img alt="_images/c6f181612b582a7be1667e6b197f9e1f61f0738d2b70f9d31210931257546d8c.png" src="_images/c6f181612b582a7be1667e6b197f9e1f61f0738d2b70f9d31210931257546d8c.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 126;
+                var nbb_cell_id = 52;
                 var nbb_unformatted_code = "name = \"high\"\ndaily = dailies[name]\nplt.scatter(daily.years, daily.ppg, alpha=0.1, label=name)\n\nplot_intervals(daily, years)\nplot_predictions(daily, years)\nxlim = years[0] - 0.1, years[-1] + 0.1\ndecorate(title=\"Predictions\", xlabel=\"Years\", xlim=xlim, ylabel=\"Price per gram ($)\")";
                 var nbb_formatted_code = "name = \"high\"\ndaily = dailies[name]\nplt.scatter(daily.years, daily.ppg, alpha=0.1, label=name)\n\nplot_intervals(daily, years)\nplot_predictions(daily, years)\nxlim = years[0] - 0.1, years[-1] + 0.1\ndecorate(title=\"Predictions\", xlabel=\"Years\", xlim=xlim, ylabel=\"Price per gram ($)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2389,62 +2228,41 @@ category.</p>
             }, 500);
             </script></div>
 </div>
-<p>The lightest gray area shows a confidence interval that
-includes uncertainty due to sampling error, random variation, and
-variation in the interval of observation.</p>
-<p>The model based on the entire interval has positive slope, indicating
-that prices were increasing. But the most recent interval shows signs of
-decreasing prices, so models based on the most recent data have negative
-slope. As a result, the widest predictive interval includes the
-possibility of decreasing prices over the next year.</p>
+<p>The lightest gray area shows a confidence interval that includes uncertainty due to sampling error, random variation, and variation in the interval of observation.</p>
+<p>The model based on the entire interval has positive slope, indicating that prices were increasing.
+But the most recent interval shows signs of decreasing prices, so models based on the most recent data have negative slope.
+As a result, the widest predictive interval includes the possibility of decreasing prices over the next year.</p>
 </section>
 <section id="further-reading">
 <h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
-<p>Time series analysis is a big topic; this chapter has only scratched the
-surface. An important tool for working with time series data is
-autoregression, which I did not cover here, mostly because it turns out
-not to be useful for the example data I worked with.</p>
-<p>But once you have learned the material in this chapter, you are well
-prepared to learn about autoregression. One resource I recommend is
-Philipp Janert’s book, <em>Data Analysis with Open Source Tools</em>, O’Reilly
-Media, 2011. His chapter on time series analysis picks up where this one
-leaves off.</p>
+<p>Time series analysis is a big topic; this chapter has only scratched the surface.
+An important tool for working with time series data is autoregression, which I did not cover here, mostly because it turns out not to be useful for the example data I worked with.</p>
+<p>But once you have learned the material in this chapter, you are well prepared to learn about autoregression.
+One resource I recommend is Philipp Janert’s book, <em>Data Analysis with Open Source Tools</em>, O’Reilly Media, 2011.
+His chapter on time series analysis picks up where this one leaves off.</p>
 </section>
 <section id="glossary">
 <h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>time series</strong>: A dataset where each value is associated with a
-timestamp, often a series of measurements and the times they were
-collected.</p></li>
-<li><p><strong>window</strong>: A sequence of consecutive values in a time series, often
-used to compute a moving average.</p></li>
-<li><p><strong>moving average</strong>: One of several statistics intended to estimate
-the underlying trend in a time series by computing averages (of some
-kind) for a series of overlapping windows.</p></li>
-<li><p><strong>rolling mean</strong>: A moving average based on the mean value in each
-window.</p></li>
-<li><p><strong>exponentially-weighted moving average (EWMA)</strong>: A moving average
-based on a weighted mean that gives the highest weight to the most
-recent values, and exponentially decreasing weights to earlier
-values.</p></li>
-<li><p><strong>span</strong>: A parameter of EWMA that determines how quickly the
-weights decrease.</p></li>
-<li><p><strong>serial correlation</strong>: Correlation between a time series and a
-shifted or lagged version of itself.</p></li>
-<li><p><strong>lag</strong>: The size of the shift in a serial correlation or
-autocorrelation.</p></li>
-<li><p><strong>autocorrelation</strong>: A more general term for a serial correlation
-with any amount of lag.</p></li>
-<li><p><strong>autocorrelation function</strong>: A function that maps from lag to
-serial correlation.</p></li>
-<li><p><strong>stationary</strong>: A model is stationary if the parameters and the
-distribution of residuals does not change over time.</p></li>
+<li><p><strong>time series</strong>: A dataset where each value is associated with a timestamp, often a series of measurements and the times they were collected.</p></li>
+<li><p><strong>window</strong>: A sequence of consecutive values in a time series, often used to compute a moving average.</p></li>
+<li><p><strong>moving average</strong>: One of several statistics intended to estimate the underlying trend in a time series by computing averages (of some kind) for a series of overlapping windows.</p></li>
+<li><p><strong>rolling mean</strong>: A moving average based on the mean value in each window.</p></li>
+<li><p><strong>exponentially-weighted moving average (EWMA)</strong>: A moving average based on a weighted mean that gives the highest weight to the most recent values, and exponentially decreasing weights to earlier values.</p></li>
+<li><p><strong>span</strong>: A parameter of EWMA that determines how quickly the weights decrease.</p></li>
+<li><p><strong>serial correlation</strong>: Correlation between a time series and a shifted or lagged version of itself.</p></li>
+<li><p><strong>lag</strong>: The size of the shift in a serial correlation or autocorrelation.</p></li>
+<li><p><strong>autocorrelation</strong>: A more general term for a serial correlation with any amount of lag.</p></li>
+<li><p><strong>autocorrelation function</strong>: A function that maps from lag to serial correlation.</p></li>
+<li><p><strong>stationary</strong>: A model is stationary if the parameters and the distribution of residuals does not change over time.</p></li>
 </ul>
 </section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
-<p><strong>Exercise:</strong>   The linear model I used in this chapter has the obvious drawback that it is linear, and there is no reason to expect prices to change linearly over time. We can add flexibility to the model by adding a quadratic term, as we did in Section 11.3.</p>
-<p>Use a quadratic model to fit the time series of daily prices, and use the model to generate predictions. You will have to write a version of <code class="docutils literal notranslate"><span class="pre">RunLinearModel</span></code> that runs that quadratic model, but after that you should be able to reuse code from the chapter to generate predictions.</p>
+<p><strong>Exercise:</strong>   The linear model I used in this chapter has the obvious drawback that it is linear, and there is no reason to expect prices to change linearly over time.
+We can add flexibility to the model by adding a quadratic term, as we did in Section 11.3.</p>
+<p>Use a quadratic model to fit the time series of daily prices, and use the model to generate predictions.
+You will have to write a version of <code class="docutils literal notranslate"><span class="pre">RunLinearModel</span></code> that runs that quadratic model, but after that you should be able to reuse code from the chapter to generate predictions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_quadratic_model</span><span class="p">(</span><span class="n">daily</span><span class="p">):</span>
@@ -2464,7 +2282,7 @@ distribution of residuals does not change over time.</p></li>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 127;
+                var nbb_cell_id = 53;
                 var nbb_unformatted_code = "def run_quadratic_model(daily):\n    \"\"\"Runs a linear model of prices versus years.\n\n    daily: DataFrame of daily prices\n\n    returns: model, results\n    \"\"\"\n    daily[\"years2\"] = daily.years**2\n    model = smf.ols(\"ppg ~ years + years2\", data=daily)\n    results = model.fit()\n    return model, results";
                 var nbb_formatted_code = "def run_quadratic_model(daily):\n    \"\"\"Runs a linear model of prices versus years.\n\n    daily: DataFrame of daily prices\n\n    returns: model, results\n    \"\"\"\n    daily[\"years2\"] = daily.years**2\n    model = smf.ols(\"ppg ~ years + years2\", data=daily)\n    results = model.fit()\n    return model, results";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2492,31 +2310,31 @@ distribution of residuals does not change over time.</p></li>
 <div class="output text_html"><table class="simpletable">
 <caption>OLS Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>           <td>ppg</td>       <th>  R-squared:         </th> <td>   0.250</td>
+  <th>Dep. Variable:</th>           <td>ppg</td>       <th>  R-squared:         </th> <td>   0.386</td> 
 </tr>
 <tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.249</td>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.385</td> 
 </tr>
 <tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   206.7</td>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   389.6</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Mon, 24 Jun 2024</td> <th>  Prob (F-statistic):</th> <td>3.49e-78</td>
+  <th>Date:</th>             <td>Tue, 25 Jun 2024</td> <th>  Prob (F-statistic):</th> <td>5.79e-132</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>19:18:15</td>     <th>  Log-Likelihood:    </th> <td> -2059.9</td>
+  <th>Time:</th>                 <td>14:31:10</td>     <th>  Log-Likelihood:    </th> <td> -1674.7</td> 
 </tr>
 <tr>
-  <th>No. Observations:</th>      <td>  1241</td>      <th>  AIC:               </th> <td>   4126.</td>
+  <th>No. Observations:</th>      <td>  1241</td>      <th>  AIC:               </th> <td>   3355.</td> 
 </tr>
 <tr>
-  <th>Df Residuals:</th>          <td>  1238</td>      <th>  BIC:               </th> <td>   4141.</td>
+  <th>Df Residuals:</th>          <td>  1238</td>      <th>  BIC:               </th> <td>   3371.</td> 
 </tr>
 <tr>
-  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>    
 </tr>
 <tr>
-  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
 </tr>
 </table>
 <table class="simpletable">
@@ -2524,31 +2342,31 @@ distribution of residuals does not change over time.</p></li>
       <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>Intercept</th> <td>   14.3071</td> <td>    0.105</td> <td>  136.593</td> <td> 0.000</td> <td>   14.102</td> <td>   14.513</td>
+  <th>Intercept</th> <td>   13.9874</td> <td>    0.077</td> <td>  182.140</td> <td> 0.000</td> <td>   13.837</td> <td>   14.138</td>
 </tr>
 <tr>
-  <th>years</th>     <td>   -1.1535</td> <td>    0.131</td> <td>   -8.776</td> <td> 0.000</td> <td>   -1.411</td> <td>   -0.896</td>
+  <th>years</th>     <td>   -1.1405</td> <td>    0.096</td> <td>  -11.835</td> <td> 0.000</td> <td>   -1.330</td> <td>   -0.951</td>
 </tr>
 <tr>
-  <th>years2</th>    <td>    0.1253</td> <td>    0.035</td> <td>    3.583</td> <td> 0.000</td> <td>    0.057</td> <td>    0.194</td>
+  <th>years2</th>    <td>    0.1201</td> <td>    0.026</td> <td>    4.687</td> <td> 0.000</td> <td>    0.070</td> <td>    0.170</td>
 </tr>
 </table>
 <table class="simpletable">
 <tr>
-  <th>Omnibus:</th>       <td>135.324</td> <th>  Durbin-Watson:     </th> <td>   1.712</td>
+  <th>Omnibus:</th>       <td>85.242</td> <th>  Durbin-Watson:     </th> <td>   1.870</td>
 </tr>
 <tr>
-  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td> 181.647</td>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td> 128.354</td>
 </tr>
 <tr>
-  <th>Skew:</th>          <td> 0.864</td>  <th>  Prob(JB):          </th> <td>3.60e-40</td>
+  <th>Skew:</th>          <td> 0.544</td> <th>  Prob(JB):          </th> <td>1.34e-28</td>
 </tr>
 <tr>
-  <th>Kurtosis:</th>      <td> 3.725</td>  <th>  Cond. No.          </th> <td>    27.6</td>
+  <th>Kurtosis:</th>      <td> 4.139</td> <th>  Cond. No.          </th> <td>    27.6</td>
 </tr>
 </table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 128;
+                var nbb_cell_id = 54;
                 var nbb_unformatted_code = "name = \"high\"\ndaily = dailies[name]\nmodel, results = run_quadratic_model(daily)\nresults.summary()";
                 var nbb_formatted_code = "name = \"high\"\ndaily = dailies[name]\nmodel, results = run_quadratic_model(daily)\nresults.summary()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2573,10 +2391,10 @@ distribution of residuals does not change over time.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5e97041fc2c561e8c673bff941aa2a642c9d5627e55537771f6b9bc05817b465.png" src="_images/5e97041fc2c561e8c673bff941aa2a642c9d5627e55537771f6b9bc05817b465.png" />
+<img alt="_images/a46ad48ea86b1bbb6af1c56d24e126a6d28d60b0da5536be41201db3278e3766.png" src="_images/a46ad48ea86b1bbb6af1c56d24e126a6d28d60b0da5536be41201db3278e3766.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 129;
+                var nbb_cell_id = 55;
                 var nbb_unformatted_code = "plot_fitted_values(model, results, label=name)\ndecorate(\n    title=\"Fitted values\", xlabel=\"Years\", xlim=[-0.1, 3.8], ylabel=\"price per gram ($)\"\n)";
                 var nbb_formatted_code = "plot_fitted_values(model, results, label=name)\ndecorate(\n    title=\"Fitted values\", xlabel=\"Years\", xlim=[-0.1, 3.8], ylabel=\"price per gram ($)\"\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2606,10 +2424,10 @@ distribution of residuals does not change over time.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/94905395968f648c2673197c661d5db104061d5174fdbfb6e37de733274e894f.png" src="_images/94905395968f648c2673197c661d5db104061d5174fdbfb6e37de733274e894f.png" />
+<img alt="_images/6331f4a688f5209df43b5524ea2e931f6bd1790d70c197ef0fac43121d26ff96.png" src="_images/6331f4a688f5209df43b5524ea2e931f6bd1790d70c197ef0fac43121d26ff96.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 131;
+                var nbb_cell_id = 56;
                 var nbb_unformatted_code = "years = np.linspace(0, 5, 101)\nplt.scatter(daily.years, daily.ppg, alpha=0.1, label=name)\nplot_predictions(daily, years, func=run_quadratic_model)\ndecorate(\n    title=\"predictions\",\n    xlabel=\"Years\",\n    xlim=[years[0] - 0.1, years[-1] + 0.1],\n    ylabel=\"Price per gram ($)\",\n)";
                 var nbb_formatted_code = "years = np.linspace(0, 5, 101)\nplt.scatter(daily.years, daily.ppg, alpha=0.1, label=name)\nplot_predictions(daily, years, func=run_quadratic_model)\ndecorate(\n    title=\"predictions\",\n    xlabel=\"Years\",\n    xlim=[years[0] - 0.1, years[-1] + 0.1],\n    ylabel=\"Price per gram ($)\",\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2625,7 +2443,8 @@ distribution of residuals does not change over time.</p></li>
             </script></div>
 </div>
 <p><strong>Exercise:</strong> Write a definition for a class named <code class="docutils literal notranslate"><span class="pre">SerialCorrelationTest</span></code> that extends <code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code> from Section 9.2. It should take a series and a lag as data, compute the serial correlation of the series with the given lag, and then compute the p-value of the observed correlation.</p>
-<p>Use this class to test whether the serial correlation in raw price data is statistically significant. Also test the residuals of the linear model and (if you did the previous exercise), the quadratic model.</p>
+<p>Use this class to test whether the serial correlation in raw price data is statistically significant.
+Also test the residuals of the linear model and (if you did the previous exercise), the quadratic model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">HypothesisTest</span>
@@ -2657,8 +2476,8 @@ distribution of residuals does not change over time.</p></li>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 132;
-                var nbb_unformatted_code = "from thinkstats import HypothesisTest\n\nclass SerialCorrelationTest(HypothesisTest):\n    \"\"\"Tests serial correlations by permutation.\"\"\"\n\n    def test_statistic(self, data):\n        \"\"\"Computes the test statistic.\n\n        data: tuple of xs and ys\n        \"\"\"\n        series, lag = data\n        test_stat = abs(serial_corr(series, lag))\n        return test_stat\n\n    def run_model(self):\n        \"\"\"Run the model of the null hypothesis.\n\n        returns: simulated data\n        \"\"\"\n        series, lag = self.data\n        permutation = series.reindex(np.random.permutation(series.index))\n        return permutation, lag";
+                var nbb_cell_id = 57;
+                var nbb_unformatted_code = "from thinkstats import HypothesisTest\n\n\nclass SerialCorrelationTest(HypothesisTest):\n    \"\"\"Tests serial correlations by permutation.\"\"\"\n\n    def test_statistic(self, data):\n        \"\"\"Computes the test statistic.\n\n        data: tuple of xs and ys\n        \"\"\"\n        series, lag = data\n        test_stat = abs(serial_corr(series, lag))\n        return test_stat\n\n    def run_model(self):\n        \"\"\"Run the model of the null hypothesis.\n\n        returns: simulated data\n        \"\"\"\n        series, lag = self.data\n        permutation = series.reindex(np.random.permutation(series.index))\n        return permutation, lag";
                 var nbb_formatted_code = "from thinkstats import HypothesisTest\n\n\nclass SerialCorrelationTest(HypothesisTest):\n    \"\"\"Tests serial correlations by permutation.\"\"\"\n\n    def test_statistic(self, data):\n        \"\"\"Computes the test statistic.\n\n        data: tuple of xs and ys\n        \"\"\"\n        series, lag = data\n        test_stat = abs(serial_corr(series, lag))\n        return test_stat\n\n    def run_model(self):\n        \"\"\"Run the model of the null hypothesis.\n\n        returns: simulated data\n        \"\"\"\n        series, lag = self.data\n        permutation = series.reindex(np.random.permutation(series.index))\n        return permutation, lag";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -2684,12 +2503,12 @@ distribution of residuals does not change over time.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.35706475336261834 0.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4246466698622278 0.0
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 133;
+                var nbb_cell_id = 58;
                 var nbb_unformatted_code = "name = \"high\"\ndaily = dailies[name]\nseries = daily.ppg\ntest = SerialCorrelationTest((series, 1))\npvalue = test.p_value()\nprint(test.actual, pvalue)";
                 var nbb_formatted_code = "name = \"high\"\ndaily = dailies[name]\nseries = daily.ppg\ntest = SerialCorrelationTest((series, 1))\npvalue = test.p_value()\nprint(test.actual, pvalue)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2715,12 +2534,12 @@ distribution of residuals does not change over time.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.15206130168503018 0.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0802755322515312 0.005
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 134;
+                var nbb_cell_id = 59;
                 var nbb_unformatted_code = "_, results = run_linear_model(daily)\nseries = results.resid\ntest = SerialCorrelationTest((series, 1))\npvalue = test.p_value()\nprint(test.actual, pvalue)";
                 var nbb_formatted_code = "_, results = run_linear_model(daily)\nseries = results.resid\ntest = SerialCorrelationTest((series, 1))\npvalue = test.p_value()\nprint(test.actual, pvalue)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2746,12 +2565,12 @@ distribution of residuals does not change over time.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.14290016928319302 0.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.06339927437143862 0.03
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 135;
+                var nbb_cell_id = 60;
                 var nbb_unformatted_code = "_, results = run_quadratic_model(daily)\nseries = results.resid\ntest = SerialCorrelationTest((series, 1))\npvalue = test.p_value()\nprint(test.actual, pvalue)";
                 var nbb_formatted_code = "_, results = run_quadratic_model(daily)\nseries = results.resid\ntest = SerialCorrelationTest((series, 1))\npvalue = test.p_value()\nprint(test.actual, pvalue)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2766,7 +2585,8 @@ distribution of residuals does not change over time.</p></li>
             }, 500);
             </script></div>
 </div>
-<p><strong>Bonus Example:</strong> There are several ways to extend the EWMA model to generate predictions. One of the simplest is something like this:</p>
+<p><strong>Bonus Example:</strong> There are several ways to extend the EWMA model to generate predictions.
+One of the simplest is something like this:</p>
 <ol class="arabic simple">
 <li><p>Compute the EWMA of the time series and use the last point as an intercept, <code class="docutils literal notranslate"><span class="pre">inter</span></code>.</p></li>
 <li><p>Compute the EWMA of differences between successive elements in the time series and use the last point as a slope, <code class="docutils literal notranslate"><span class="pre">slope</span></code>.</p></li>
@@ -2785,10 +2605,10 @@ distribution of residuals does not change over time.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/87b7dd48e09ef51e12a2bc4986cadd09b10eea30cca1f592a99b482ec4e52ee3.png" src="_images/87b7dd48e09ef51e12a2bc4986cadd09b10eea30cca1f592a99b482ec4e52ee3.png" />
+<img alt="_images/beac9eab8cb168f316e5e4f9c00cf133797e0a3e37411644e47542e30a30d1a8.png" src="_images/beac9eab8cb168f316e5e4f9c00cf133797e0a3e37411644e47542e30a30d1a8.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 136;
+                var nbb_cell_id = 61;
                 var nbb_unformatted_code = "name = \"high\"\ndaily = dailies[name]\nfilled = fill_missing(daily)\ndiffs = filled.ppg.diff()\nplt.plot(diffs)\nplt.xticks(rotation=30)\ndecorate(ylabel=\"Daily change in price per gram ($)\")";
                 var nbb_formatted_code = "name = \"high\"\ndaily = dailies[name]\nfilled = fill_missing(daily)\ndiffs = filled.ppg.diff()\nplt.plot(diffs)\nplt.xticks(rotation=30)\ndecorate(ylabel=\"Daily change in price per gram ($)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2813,10 +2633,10 @@ distribution of residuals does not change over time.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1b826796876a3c5316418861cac720545db83d51f9db5f26698ebd208e721032.png" src="_images/1b826796876a3c5316418861cac720545db83d51f9db5f26698ebd208e721032.png" />
+<img alt="_images/acbd0102046350d3062b73dd00b16a27e6419f7485900eafbaba4660c0b26810.png" src="_images/acbd0102046350d3062b73dd00b16a27e6419f7485900eafbaba4660c0b26810.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 137;
+                var nbb_cell_id = 62;
                 var nbb_unformatted_code = "filled[\"slope\"] = diffs.ewm(span=365).mean()\nplt.plot(filled.slope[-365:])\nplt.xticks(rotation=30)\ndecorate(ylabel=\"EWMA of diff ($)\")";
                 var nbb_formatted_code = "filled[\"slope\"] = diffs.ewm(span=365).mean()\nplt.plot(filled.slope[-365:])\nplt.xticks(rotation=30)\ndecorate(ylabel=\"EWMA of diff ($)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2841,12 +2661,12 @@ distribution of residuals does not change over time.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Timestamp(&#39;2014-05-13 00:00:00&#39;), 11.521289432497232, -0.0026258713650699162)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Timestamp(&#39;2014-05-13 00:00:00&#39;), 11.308532771389483, -0.0019024650874003618)
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 138;
+                var nbb_cell_id = 63;
                 var nbb_unformatted_code = "start = filled.index[-1]\ninter = filled.ewma.iloc[-1]\nslope = filled.slope[-30:].mean()\nstart, inter, slope";
                 var nbb_formatted_code = "start = filled.index[-1]\ninter = filled.ewma.iloc[-1]\nslope = filled.slope[-30:].mean()\nstart, inter, slope";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2871,7 +2691,7 @@ distribution of residuals does not change over time.</p></li>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 139;
+                var nbb_cell_id = 64;
                 var nbb_unformatted_code = "dates = pd.date_range(filled.index.min(), filled.index.max() + np.timedelta64(365, \"D\"))\npredicted = filled.reindex(dates)";
                 var nbb_formatted_code = "dates = pd.date_range(filled.index.min(), filled.index.max() + np.timedelta64(365, \"D\"))\npredicted = filled.reindex(dates)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2899,7 +2719,7 @@ distribution of residuals does not change over time.</p></li>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 140;
+                var nbb_cell_id = 65;
                 var nbb_unformatted_code = "predicted[\"date\"] = predicted.index\none_day = np.timedelta64(1, \"D\")\npredicted[\"days\"] = (predicted.date - start) / one_day\npredict = inter + slope * predicted.days\npredicted[\"ewma\"] = predicted.ewma.fillna(predict)";
                 var nbb_formatted_code = "predicted[\"date\"] = predicted.index\none_day = np.timedelta64(1, \"D\")\npredicted[\"days\"] = (predicted.date - start) / one_day\npredict = inter + slope * predicted.days\npredicted[\"ewma\"] = predicted.ewma.fillna(predict)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2923,10 +2743,10 @@ distribution of residuals does not change over time.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c2674682153be8fcade618cd7981b7d29b2bff8f79918f344c01884005cdbc24.png" src="_images/c2674682153be8fcade618cd7981b7d29b2bff8f79918f344c01884005cdbc24.png" />
+<img alt="_images/c89139ac8d2c9b2bbfbc376c83e0ee5b955a811e6fac6b3182e6c23ea0ace85a.png" src="_images/c89139ac8d2c9b2bbfbc376c83e0ee5b955a811e6fac6b3182e6c23ea0ace85a.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 144;
+                var nbb_cell_id = 66;
                 var nbb_unformatted_code = "scatter_series(daily.ppg, alpha=0.1, label=name)\nplt.plot(predicted.ewma, color=\"#ff7f00\")\ndecorate()";
                 var nbb_formatted_code = "scatter_series(daily.ppg, alpha=0.1, label=name)\nplt.plot(predicted.ewma, color=\"#ff7f00\")\ndecorate()";
                 var nbb_cells = Jupyter.notebook.get_cells();

@@ -177,8 +177,8 @@
 <li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Relationships between variables</a></li>
@@ -376,13 +376,12 @@ document.write(`
                   
   <section id="relationships-between-variables">
 <h1>Relationships between variables<a class="headerlink" href="#relationships-between-variables" title="Link to this heading">#</a></h1>
-<p>So far we have only looked at one variable at a time. In this chapter we
-look at relationships between variables. Two variables are related if
-knowing one gives you information about the other. For example, height
-and weight are related; people who are taller tend to be heavier. Of
-course, it is not a perfect relationship: there are short heavy people
-and tall light ones. But if you are trying to guess someone’s weight,
-you will be more accurate if you know their height than if you don’t.</p>
+<p>So far we have only looked at one variable at a time.
+In this chapter we look at relationships between variables.
+Two variables are related if knowing one gives you information about the other.
+For example, height and weight are related; people who are taller tend to be heavier.
+Of course, it is not a perfect relationship: there are short heavy people and tall light ones.
+But if you are trying to guess someone’s weight, you will be more accurate if you know their height than if you don’t.</p>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -403,7 +402,6 @@ you will be more accurate if you know their height than if you don’t.</p>
 
 
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -411,8 +409,8 @@ you will be more accurate if you know their height than if you don’t.</p>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 2;
-                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py\")";
-                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py\")";
+                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
+                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -428,38 +426,29 @@ you will be more accurate if you know their height than if you don’t.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">statadict</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>statadict
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">empiricaldist</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>empiricaldist
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">decorate</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
-                var nbb_formatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <section id="scatter-plots">
 <h2>Scatter plots<a class="headerlink" href="#scatter-plots" title="Link to this heading">#</a></h2>
-<p>The simplest way to check for a relationship between two variables is a
-<strong>scatter plot</strong>, but making a good scatter plot is not always easy. As
-an example, I’ll plot weight versus height for the respondents in the
-BRFSS (see Section <a class="reference internal" href="#lognormal"><span class="xref myst">[lognormal]</span></a>{reference-type=“ref”
-reference=“lognormal”}).</p>
+<p>The simplest way to check for a relationship between two variables is a <strong>scatter plot</strong>, but making a good scatter plot is not always easy.
+As an example, I’ll plot weight versus height for the respondents in the BRFSS (see Section <a class="reference internal" href="#lognormal"><span class="xref myst">[lognormal]</span></a>{reference-type=“ref” reference=“lognormal”}).</p>
 <p>Here’s the code that reads the data file and extracts height and weight:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -497,7 +486,7 @@ reference=“lognormal”}).</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 5;
+                var nbb_cell_id = 36;
                 var nbb_unformatted_code = "import brfss\n\ndf = brfss.read_brfss(nrows=None)";
                 var nbb_formatted_code = "import brfss\n\ndf = brfss.read_brfss(nrows=None)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -523,7 +512,7 @@ reference=“lognormal”}).</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 6;
+                var nbb_cell_id = 37;
                 var nbb_unformatted_code = "sample = df.sample(5000, replace=False)\nheights, weights = sample.htm3, sample.wtkg2";
                 var nbb_formatted_code = "sample = df.sample(5000, replace=False)\nheights, weights = sample.htm3, sample.wtkg2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -538,22 +527,21 @@ reference=“lognormal”}).</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">thinkplot</span></code> provides <code class="docutils literal notranslate"><span class="pre">scatter</span></code>, which makes scatter plots.
+<p>Pyplot provides <code class="docutils literal notranslate"><span class="pre">scatter</span></code>, which makes scatter plots.
 Here’s a scatter plot of weight versus height.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
-<span class="n">axis</span> <span class="o">=</span> <span class="p">[</span><span class="mi">140</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Height (cm)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Weight (kg)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7f44ac7a0dbb60d2b441d124bdf29a2159d3947e2193eb5a120323f8f6ce6af6.png" src="_images/7f44ac7a0dbb60d2b441d124bdf29a2159d3947e2193eb5a120323f8f6ce6af6.png" />
+<img alt="_images/584a4c4e5ade13b1c383466f240e226b374c182a4670b3bfdb36b9a6ec8bfe16.png" src="_images/584a4c4e5ade13b1c383466f240e226b374c182a4670b3bfdb36b9a6ec8bfe16.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 10;
-                var nbb_unformatted_code = "plt.scatter(heights, weights)\naxis=[140, 210, 20, 200]\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\")";
+                var nbb_cell_id = 38;
+                var nbb_unformatted_code = "plt.scatter(heights, weights)\naxis = [140, 210, 20, 200]\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\")";
                 var nbb_formatted_code = "plt.scatter(heights, weights)\naxis = [140, 210, 20, 200]\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -568,13 +556,10 @@ Here’s a scatter plot of weight versus height.</p>
             </script></div>
 </div>
 <p>The scatter plot shows the shape of the relationship – taller people tend to be heavier.</p>
-<p>But this is not the best representation of the data, because the data
-are packed into columns. The problem is that the heights are rounded to
-the nearest inch, converted to centimeters, and then rounded again. Some
-information is lost in translation.</p>
-<p>We can’t get that information back, but we can minimize the effect on
-the scatter plot by <strong>jittering</strong> the data, which means adding random
-noise to reverse the effect of rounding off.</p>
+<p>But this is not the best representation of the data, because the data are packed into columns.
+The problem is that the heights are rounded to the nearest inch, converted to centimeters, and then rounded again.
+Some information is lost in translation.</p>
+<p>We can’t get that information back, but we can minimize the effect on the scatter plot by <strong>jittering</strong> the data, which means adding random noise to reverse the effect of rounding off.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">jitter</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
@@ -593,7 +578,7 @@ noise to reverse the effect of rounding off.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 11;
+                var nbb_cell_id = 39;
                 var nbb_unformatted_code = "def jitter(seq, std=0.5):\n    \"\"\"Jitters the values by adding random Gaussian noise.\n\n    seq: sequence of numbers\n    std: standard deviation of the added noise\n\n    returns: new Numpy array\n    \"\"\"\n    n = len(seq)\n    return np.random.normal(0, std, n) + seq";
                 var nbb_formatted_code = "def jitter(seq, std=0.5):\n    \"\"\"Jitters the values by adding random Gaussian noise.\n\n    seq: sequence of numbers\n    std: standard deviation of the added noise\n\n    returns: new Numpy array\n    \"\"\"\n    n = len(seq)\n    return np.random.normal(0, std, n) + seq";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -619,7 +604,7 @@ noise to reverse the effect of rounding off.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 12;
+                var nbb_cell_id = 40;
                 var nbb_unformatted_code = "heights_jittered = jitter(heights, 1.3)\nweights_jittered = jitter(weights, 0.5)";
                 var nbb_formatted_code = "heights_jittered = jitter(heights, 1.3)\nweights_jittered = jitter(weights, 0.5)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -634,24 +619,23 @@ noise to reverse the effect of rounding off.</p>
             }, 500);
             </script></div>
 </div>
-<p>Since these measurements
-were rounded to the nearest inch, they might be off by up to 0.5 inches
-or 1.3 cm. Similarly, the weights might be off by 0.5 kg.</p>
+<p>Since these measurements were rounded to the nearest inch, they might be off by up to 0.5 inches or 1.3 cm. Similarly, the weights might be off by 0.5 kg.</p>
 <p>The following figure shows the result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">heights_jittered</span><span class="p">,</span> <span class="n">weights_jittered</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Height (cm)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Weight (kg)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f382d67bc70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7feb29116140&gt;
 </pre></div>
 </div>
-<img alt="_images/9fb8cc3274cc65358016adbfa6536c67ce4c202ae89e0876cb83edd6a3de7272.png" src="_images/9fb8cc3274cc65358016adbfa6536c67ce4c202ae89e0876cb83edd6a3de7272.png" />
+<img alt="_images/e1030d3775d36be4702330ec58b041f354eb55cc39a132aa120ba051539eb7d0.png" src="_images/e1030d3775d36be4702330ec58b041f354eb55cc39a132aa120ba051539eb7d0.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 13;
+                var nbb_cell_id = 41;
                 var nbb_unformatted_code = "plt.scatter(heights_jittered, weights_jittered)";
                 var nbb_formatted_code = "plt.scatter(heights_jittered, weights_jittered)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -666,30 +650,27 @@ or 1.3 cm. Similarly, the weights might be off by 0.5 kg.</p>
             }, 500);
             </script></div>
 </div>
-<p>Jittering reduces the
-visual effect of rounding and makes the shape of the relationship
-clearer. But in general you should only jitter data for purposes of
-visualization and avoid using jittered data for analysis.</p>
+<p>Jittering reduces the visual effect of rounding and makes the shape of the relationship clearer.
+But in general you should only jitter data for purposes of visualization and avoid using jittered data for analysis.</p>
 <p>Even with jittering, this is not the best way to represent the data.
-There are many overlapping points, which hides data in the dense parts
-of the figure and gives disproportionate emphasis to outliers. This
-effect is called <strong>saturation</strong>.</p>
-<p>We can solve this problem with the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> parameter, which makes the
-points partly transparent:</p>
+There are many overlapping points, which hides data in the dense parts of the figure and gives disproportionate emphasis to outliers.
+This effect is called <strong>saturation</strong>.</p>
+<p>We can solve this problem with the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> parameter, which makes the points partly transparent:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">heights_jittered</span><span class="p">,</span> <span class="n">weights_jittered</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Height (cm)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Weight (kg)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f382d70c4f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7feb31d19690&gt;
 </pre></div>
 </div>
-<img alt="_images/6b827f85e8cfcfbe1a438879ba3d792434dbb4d90ce5b8cd618ebf7d0ced05f4.png" src="_images/6b827f85e8cfcfbe1a438879ba3d792434dbb4d90ce5b8cd618ebf7d0ced05f4.png" />
+<img alt="_images/d4eaa61ec598017ec007d00baa03c5ce849bd61f182e4083a39f9767c74fa442.png" src="_images/d4eaa61ec598017ec007d00baa03c5ce849bd61f182e4083a39f9767c74fa442.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 14;
+                var nbb_cell_id = 42;
                 var nbb_unformatted_code = "plt.scatter(heights_jittered, weights_jittered, alpha=0.05)";
                 var nbb_formatted_code = "plt.scatter(heights_jittered, weights_jittered, alpha=0.05)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -704,35 +685,25 @@ points partly transparent:</p>
             }, 500);
             </script></div>
 </div>
-<p>With transparency, overlapping data points
-look darker, so darkness is proportional to density.
-In this version of
-the plot we can see a detail that were not apparent before: a horizontal line near 90 kg or 200
-pounds.
-Since this data is based on self-reports in pounds, the most
-likely explanation is that some respondents reported rounded values.</p>
-<p>Using transparency works well for moderate-sized datasets, but this
-figure only shows the first 5000 records in the BRFSS, out of a total of
-414 509.</p>
-<p>To handle larger datasets, another option is a hexbin plot, which
-divides the graph into hexagonal bins and colors each bin according to
-how many data points fall in it. <code class="docutils literal notranslate"><span class="pre">thinkplot</span></code> provides <code class="docutils literal notranslate"><span class="pre">hex_bin</span></code>:</p>
+<p>With transparency, overlapping data points look darker, so darkness is proportional to density.
+In this version of the plot we can see a detail that were not apparent before: a horizontal line near 90 kg or 200 pounds.
+Since this data is based on self-reports in pounds, the most likely explanation is that some respondents reported rounded values.</p>
+<p>Using transparency works well for moderate-sized datasets, but this figure only shows the first 5000 records in the BRFSS, out of a total of 414 509.</p>
+<p>To handle larger datasets, another option is a hexbin plot, which divides the graph into hexagonal bins and colors each bin according to how many data points fall in it. Pyplot provides <code class="docutils literal notranslate"><span class="pre">hex_bin</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7f382b5b1ff0&gt;
-</pre></div>
-</div>
-<img alt="_images/f317cfffbc875265bb6b820f22a8c07020f553695c21e0c883e9bbd0e41c333c.png" src="_images/f317cfffbc875265bb6b820f22a8c07020f553695c21e0c883e9bbd0e41c333c.png" />
+<img alt="_images/5d9432e8d76af6827c7e696eac2a59491cb42d54d141ff3acd6644cb629cdb92.png" src="_images/5d9432e8d76af6827c7e696eac2a59491cb42d54d141ff3acd6644cb629cdb92.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 17;
-                var nbb_unformatted_code = "plt.hexbin(heights, weights)";
-                var nbb_formatted_code = "plt.hexbin(heights, weights)";
+                var nbb_cell_id = 47;
+                var nbb_unformatted_code = "plt.hexbin(heights, weights, cmap='Blues')\ndecorate()";
+                var nbb_formatted_code = "plt.hexbin(heights, weights, cmap=\"Blues\")\ndecorate()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -745,21 +716,15 @@ how many data points fall in it. <code class="docutils literal notranslate"><spa
             }, 500);
             </script></div>
 </div>
-<p>An advantage of a hexbin
-is that it shows the shape of the relationship well, and it is efficient
-for large datasets, both in time and in the size of the file it
-generates. A drawback is that it makes the outliers invisible.</p>
-<p>The point of this example is that it is not easy to make a scatter plot
-that shows relationships clearly without introducing misleading
-artifacts.</p>
+<p>An advantage of a hexbin is that it shows the shape of the relationship well, and it is efficient for large datasets, both in time and in the size of the file it generates.
+A drawback is that it makes the outliers invisible.</p>
+<p>The point of this example is that it is not easy to make a scatter plot that shows relationships clearly without introducing misleading artifacts.</p>
 </section>
 <section id="characterizing-relationships">
 <h2>Characterizing relationships<a class="headerlink" href="#characterizing-relationships" title="Link to this heading">#</a></h2>
-<p>Scatter plots provide a general impression of the relationship between
-variables, but there are other visualizations that provide more insight
-into the nature of the relationship. One option is to bin one variable
-and plot percentiles of the other.</p>
-<p>NumPy and pandas provide functions for binning data:</p>
+<p>Scatter plots provide a general impression of the relationship between variables, but there are other visualizations that provide more insight into the nature of the relationship.
+One option is to bin one variable and plot percentiles of the other.</p>
+<p>NumPy and Pandas provide functions for binning data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;htm3&quot;</span><span class="p">,</span> <span class="s2">&quot;wtkg2&quot;</span><span class="p">])</span>
@@ -772,7 +737,7 @@ and plot percentiles of the other.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 18;
+                var nbb_cell_id = 13;
                 var nbb_unformatted_code = "df = df.dropna(subset=[\"htm3\", \"wtkg2\"])\nbins = np.arange(135, 210, 5)\nindices = np.digitize(df.htm3, bins)\ngroups = df.groupby(indices)";
                 var nbb_formatted_code = "df = df.dropna(subset=[\"htm3\", \"wtkg2\"])\nbins = np.arange(135, 210, 5)\nindices = np.digitize(df.htm3, bins)\ngroups = df.groupby(indices)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -787,17 +752,13 @@ and plot percentiles of the other.</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">dropna</span></code> drops rows with <code class="docutils literal notranslate"><span class="pre">nan</span></code> in any of the listed columns. <code class="docutils literal notranslate"><span class="pre">arange</span></code>
-makes a NumPy array of bins from 135 to, but not including, 210, in
-increments of 5.</p>
-<p><code class="docutils literal notranslate"><span class="pre">digitize</span></code> computes the index of the bin that contains each value in
-<code class="docutils literal notranslate"><span class="pre">df.htm3</span></code>. The result is a NumPy array of integer indices. Values that
-fall below the lowest bin are mapped to index 0. Values above the
-highest bin are mapped to <code class="docutils literal notranslate"><span class="pre">len(bins)</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">groupby</span></code> is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> method that returns a GroupBy object; used in a
-<code class="docutils literal notranslate"><span class="pre">for</span></code> loop, <code class="docutils literal notranslate"><span class="pre">groups</span></code> iterates the names of the groups and the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s
-that represent them. So, for example, we can print the number of rows in
-each group like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">dropna</span></code> drops rows with <code class="docutils literal notranslate"><span class="pre">nan</span></code> in any of the listed columns.
+<code class="docutils literal notranslate"><span class="pre">arange</span></code> makes a NumPy array of bins from 135 to, but not including, 210, in increments of 5.</p>
+<p><code class="docutils literal notranslate"><span class="pre">digitize</span></code> computes the index of the bin that contains each value in <code class="docutils literal notranslate"><span class="pre">df.htm3</span></code>.
+The result is a NumPy array of integer indices.
+Values that fall below the lowest bin are mapped to index 0. Values above the highest bin are mapped to <code class="docutils literal notranslate"><span class="pre">len(bins)</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">groupby</span></code> is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> method that returns a GroupBy object; used in a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, <code class="docutils literal notranslate"><span class="pre">groups</span></code> iterates the names of the groups and the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s that represent them.
+So, for example, we can print the number of rows in each group like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
@@ -826,7 +787,7 @@ each group like this:</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 19;
+                var nbb_cell_id = 14;
                 var nbb_unformatted_code = "for i, group in groups:\n    print(i, len(group))";
                 var nbb_formatted_code = "for i, group in groups:\n    print(i, len(group))";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -854,7 +815,7 @@ each group like this:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 20;
+                var nbb_cell_id = 15;
                 var nbb_unformatted_code = "from empiricaldist import Cdf\n\nheight_means = [group.htm3.mean() for i, group in groups]\ncdfs = [Cdf.from_seq(group.wtkg2) for i, group in groups]";
                 var nbb_formatted_code = "from empiricaldist import Cdf\n\nheight_means = [group.htm3.mean() for i, group in groups]\ncdfs = [Cdf.from_seq(group.wtkg2) for i, group in groups]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -876,6 +837,8 @@ each group like this:</p>
     <span class="n">weight_percentiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">cdf</span><span class="o">.</span><span class="n">inverse</span><span class="p">(</span><span class="n">percent</span><span class="p">)</span> <span class="k">for</span> <span class="n">cdf</span> <span class="ow">in</span> <span class="n">cdfs</span><span class="p">]</span>
     <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">th&quot;</span> <span class="o">%</span> <span class="n">percent</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">height_means</span><span class="p">,</span> <span class="n">weight_percentiles</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Height (cm)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Weight (kg)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -883,7 +846,7 @@ each group like this:</p>
 <img alt="_images/87034bafdc9ee00707bc387221f6cc3f60e72a6a01571b09eeb57484acd68572.png" src="_images/87034bafdc9ee00707bc387221f6cc3f60e72a6a01571b09eeb57484acd68572.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 23;
+                var nbb_cell_id = 16;
                 var nbb_unformatted_code = "for percent in [0.75, 0.50, 0.25]:\n    weight_percentiles = [cdf.inverse(percent) for cdf in cdfs]\n    label = \"%dth\" % percent\n    plt.plot(height_means, weight_percentiles, label=label)";
                 var nbb_formatted_code = "for percent in [0.75, 0.50, 0.25]:\n    weight_percentiles = [cdf.inverse(percent) for cdf in cdfs]\n    label = \"%dth\" % percent\n    plt.plot(height_means, weight_percentiles, label=label)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -898,65 +861,47 @@ each group like this:</p>
             }, 500);
             </script></div>
 </div>
-<p>The following figure shows the result. Between 140 and 200 cm the
-relationship between these variables is roughly linear. This range
-includes more than 99% of the data, so we don’t have to worry too much
-about the extremes.</p>
+<p>The following figure shows the result.
+Between 140 and 200 cm the relationship between these variables is roughly linear.
+This range includes more than 99% of the data, so we don’t have to worry too much about the extremes.</p>
 </section>
 <section id="correlation">
 <h2>Correlation<a class="headerlink" href="#correlation" title="Link to this heading">#</a></h2>
-<p>A <strong>correlation</strong> is a statistic intended to quantify the strength of
-the relationship between two variables.</p>
-<p>A challenge in measuring correlation is that the variables we want to
-compare are often not expressed in the same units. And even if they are
-in the same units, they come from different distributions.</p>
+<p>A <strong>correlation</strong> is a statistic intended to quantify the strength of the relationship between two variables.</p>
+<p>A challenge in measuring correlation is that the variables we want to compare are often not expressed in the same units.
+And even if they are in the same units, they come from different distributions.</p>
 <p>There are two common solutions to these problems:</p>
 <ol class="arabic simple">
-<li><p>Transform each value to a <strong>standard score</strong>, which is the number of
-standard deviations from the mean. This transform leads to the
-“Pearson product-moment correlation coefficient.”</p></li>
-<li><p>Transform each value to its <strong>rank</strong>, which is its index in the
-sorted list of values. This transform leads to the “Spearman rank
-correlation coefficient.”</p></li>
+<li><p>Transform each value to a <strong>standard score</strong>, which is the number of standard deviations from the mean.
+This transform leads to the “Pearson product-moment correlation coefficient.”</p></li>
+<li><p>Transform each value to its <strong>rank</strong>, which is its index in the sorted list of values.
+This transform leads to the “Spearman rank correlation coefficient.”</p></li>
 </ol>
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is a series of <span class="math notranslate nohighlight">\(n\)</span> values, <span class="math notranslate nohighlight">\(x_i\)</span>, we can convert to standard
-scores by subtracting the mean and dividing by the standard deviation:
-<span class="math notranslate nohighlight">\(z_i = (x_i - \mu) / \sigma\)</span>.</p>
-<p>The numerator is a deviation: the distance from the mean. Dividing by
-<span class="math notranslate nohighlight">\(\sigma\)</span> <strong>standardizes</strong> the deviation, so the values of <span class="math notranslate nohighlight">\(Z\)</span> are
-dimensionless (no units) and their distribution has mean 0 and variance
-1.</p>
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is normally distributed, so is <span class="math notranslate nohighlight">\(Z\)</span>. But if <span class="math notranslate nohighlight">\(X\)</span> is skewed or has
-outliers, so does <span class="math notranslate nohighlight">\(Z\)</span>; in those cases, it is more robust to use
-percentile ranks. If we compute a new variable, <span class="math notranslate nohighlight">\(R\)</span>, so that <span class="math notranslate nohighlight">\(r_i\)</span> is
-the rank of <span class="math notranslate nohighlight">\(x_i\)</span>, the distribution of <span class="math notranslate nohighlight">\(R\)</span> is uniform from 1 to <span class="math notranslate nohighlight">\(n\)</span>,
-regardless of the distribution of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is a series of <span class="math notranslate nohighlight">\(n\)</span> values, <span class="math notranslate nohighlight">\(x_i\)</span>, we can convert to standard scores by subtracting the mean and dividing by the standard deviation: <span class="math notranslate nohighlight">\(z_i = (x_i - \mu) / \sigma\)</span>.</p>
+<p>The numerator is a deviation: the distance from the mean.
+Dividing by <span class="math notranslate nohighlight">\(\sigma\)</span> <strong>standardizes</strong> the deviation, so the values of <span class="math notranslate nohighlight">\(Z\)</span> are dimensionless (no units) and their distribution has mean 0 and variance 1.</p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is normally distributed, so is <span class="math notranslate nohighlight">\(Z\)</span>.
+But if <span class="math notranslate nohighlight">\(X\)</span> is skewed or has outliers, so does <span class="math notranslate nohighlight">\(Z\)</span>; in those cases, it is more robust to use percentile ranks.
+If we compute a new variable, <span class="math notranslate nohighlight">\(R\)</span>, so that <span class="math notranslate nohighlight">\(r_i\)</span> is the rank of <span class="math notranslate nohighlight">\(x_i\)</span>, the distribution of <span class="math notranslate nohighlight">\(R\)</span> is uniform from 1 to <span class="math notranslate nohighlight">\(n\)</span>, regardless of the distribution of <span class="math notranslate nohighlight">\(X\)</span>.</p>
 </section>
 <section id="covariance">
 <h2>Covariance<a class="headerlink" href="#covariance" title="Link to this heading">#</a></h2>
-<p><strong>Covariance</strong> is a measure of the tendency of two variables to vary
-together. If we have two series, <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, their deviations from the
-mean are</p>
+<p><strong>Covariance</strong> is a measure of the tendency of two variables to vary together.
+If we have two series, <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, their deviations from the mean are</p>
 <div class="math notranslate nohighlight">
 \[dx_i = x_i - \bar{x}\]</div>
 <div class="math notranslate nohighlight">
 \[dy_i = y_i - \bar{y}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\bar{x}\)</span> is
-the sample mean of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(\bar{y}\)</span> is the sample mean of <span class="math notranslate nohighlight">\(Y\)</span>. If <span class="math notranslate nohighlight">\(X\)</span> and
-<span class="math notranslate nohighlight">\(Y\)</span> vary together, their deviations tend to have the same sign.</p>
-<p>If we multiply them together, the product is positive when the
-deviations have the same sign and negative when they have the opposite
-sign. So adding up the products gives a measure of the tendency to vary
-together.</p>
+<p>where <span class="math notranslate nohighlight">\(\bar{x}\)</span> is the sample mean of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(\bar{y}\)</span> is the sample mean of <span class="math notranslate nohighlight">\(Y\)</span>.
+If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> vary together, their deviations tend to have the same sign.</p>
+<p>If we multiply them together, the product is positive when the deviations have the same sign and negative when they have the opposite sign.
+So adding up the products gives a measure of the tendency to vary together.</p>
 <p>Covariance is the mean of these products:</p>
 <div class="math notranslate nohighlight">
 \[Cov(X,Y) = \frac{1}{n} \sum dx_i~dy_i\]</div>
-<p>where <span class="math notranslate nohighlight">\(n\)</span> is the length of the
-two series (they have to be the same length).</p>
-<p>If you have studied linear algebra, you might recognize that <code class="docutils literal notranslate"><span class="pre">cov</span></code> is
-the dot product of the deviations, divided by their length. So the
-covariance is maximized if the two vectors are identical, 0 if they are
-orthogonal, and negative if they point in opposite directions.</p>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> is the length of the two series (they have to be the same length).</p>
+<p>If you have studied linear algebra, you might recognize that <code class="docutils literal notranslate"><span class="pre">cov</span></code> is the dot product of the deviations, divided by their length.
+So the covariance is maximized if the two vectors are identical, 0 if they are orthogonal, and negative if they point in opposite directions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cov</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">):</span>
@@ -964,7 +909,7 @@ orthogonal, and negative if they point in opposite directions.</p>
     <span class="n">ybar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
     <span class="n">dx</span> <span class="o">=</span> <span class="n">xs</span> <span class="o">-</span> <span class="n">xbar</span>
     <span class="n">dy</span> <span class="o">=</span> <span class="n">ys</span> <span class="o">-</span> <span class="n">ybar</span>
-    <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dx</span> <span class="o">*</span> <span class="n">dy</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dx</span> <span class="o">*</span> <span class="n">dy</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">cov</span>
 </pre></div>
 </div>
@@ -972,9 +917,9 @@ orthogonal, and negative if they point in opposite directions.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 24;
-                var nbb_unformatted_code = "def cov(xs, ys):\n    xbar = np.mean(xs)\n    ybar = np.mean(ys)\n    dx = xs - xbar\n    dy = ys - ybar\n    cov = np.sum(dx * dy) / len(xs)\n    return cov";
-                var nbb_formatted_code = "def cov(xs, ys):\n    xbar = np.mean(xs)\n    ybar = np.mean(ys)\n    dx = xs - xbar\n    dy = ys - ybar\n    cov = np.sum(dx * dy) / len(xs)\n    return cov";
+                var nbb_cell_id = 34;
+                var nbb_unformatted_code = "def cov(xs, ys):\n    xbar = np.mean(xs)\n    ybar = np.mean(ys)\n    dx = xs - xbar\n    dy = ys - ybar\n    cov = np.mean(dx * dy)\n    return cov";
+                var nbb_formatted_code = "def cov(xs, ys):\n    xbar = np.mean(xs)\n    ybar = np.mean(ys)\n    dx = xs - xbar\n    dy = ys - ybar\n    cov = np.mean(dx * dy)\n    return cov";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -987,12 +932,8 @@ orthogonal, and negative if they point in opposite directions.</p>
             }, 500);
             </script></div>
 </div>
-<p>This implementation of covariance is meant to be simple for purposes of
-explanation. NumPy and pandas also provide implementations of
-covariance, but pandas applies a correction for small sample sizes
-that we have not covered yet,
-and NumPy returns a covariance matrix,
-which is more than we need for now.</p>
+<p>This implementation of covariance is meant to be simple for purposes of explanation.
+NumPy and Pandas also provide implementations of covariance, but Pandas applies a correction for small sample sizes that we have not covered yet,  and NumPy returns a covariance matrix, which is more than we need for now.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
@@ -1000,12 +941,12 @@ which is more than we need for now.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>98.19405888111724
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.0999731968491508
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 25;
+                var nbb_cell_id = 35;
                 var nbb_unformatted_code = "cov(heights, weights)";
                 var nbb_formatted_code = "cov(heights, weights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1020,29 +961,25 @@ which is more than we need for now.</p>
             }, 500);
             </script></div>
 </div>
-<p>TODO: What does it mean? Nothing. Note the units.</p>
+<p>TODO: What does it mean? Nothing.
+Note the units.</p>
 </section>
 <section id="pearsons-correlation">
 <h2>Pearson’s correlation<a class="headerlink" href="#pearsons-correlation" title="Link to this heading">#</a></h2>
-<p>Covariance is useful in some computations, but it is seldom reported as
-a summary statistic because it is hard to interpret. Among other
-problems, its units are the product of the units of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>. For
-example, the covariance of weight and height in the BRFSS dataset is 113
-kilogram-centimeters, whatever that means.</p>
-<p>One solution to this problem is to divide the deviations by the standard
-deviation, which yields standard scores, and compute the product of
-standard scores:</p>
+<p>Covariance is useful in some computations, but it is seldom reported as a summary statistic because it is hard to interpret.
+Among other problems, its units are the product of the units of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>.
+For example, the covariance of weight and height in the BRFSS dataset is 113 kilogram-centimeters, whatever that means.</p>
+<p>One solution to this problem is to divide the deviations by the standard deviation, which yields standard scores, and compute the product of standard scores:</p>
 <div class="math notranslate nohighlight">
 \[p_i = \frac{(x_i - \bar{x})}{S_X} \frac{(y_i - \bar{y})}{S_Y}\]</div>
-<p>Where <span class="math notranslate nohighlight">\(S_X\)</span> and <span class="math notranslate nohighlight">\(S_Y\)</span> are the standard deviations of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>. The mean of
-these products is $<span class="math notranslate nohighlight">\(\rho = \frac{1}{n} \sum p_i\)</span>$</p>
+<p>Where <span class="math notranslate nohighlight">\(S_X\)</span> and <span class="math notranslate nohighlight">\(S_Y\)</span> are the standard deviations of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>.
+The mean of these products is $<span class="math notranslate nohighlight">\(\rho = \frac{1}{n} \sum p_i\)</span>$</p>
 <p>Or we can rewrite <span class="math notranslate nohighlight">\(\rho\)</span> by factoring out <span class="math notranslate nohighlight">\(S_X\)</span> and <span class="math notranslate nohighlight">\(S_Y\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\rho = \frac{Cov(X,Y)}{S_X S_Y}\]</div>
-<p>This value is called <strong>Pearson’s
-correlation</strong> after Karl Pearson, an influential early statistician. It
-is easy to compute and easy to interpret. Because standard scores are
-dimensionless, so is <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
+<p>This value is called <strong>Pearson’s correlation</strong> after Karl Pearson, an influential early statistician.
+It is easy to compute and easy to interpret.
+Because standard scores are dimensionless, so is <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
 <p>Here’s a function that computes correlations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1057,7 +994,7 @@ dimensionless, so is <span class="math notranslate nohighlight">\(\rho\)</span>.
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 26;
+                var nbb_cell_id = 19;
                 var nbb_unformatted_code = "def corr(xs, ys):\n    sx = np.std(xs)\n    sy = np.std(ys)\n    corr = cov(xs, ys) / sx / sy\n    return corr";
                 var nbb_formatted_code = "def corr(xs, ys):\n    sx = np.std(xs)\n    sy = np.std(ys)\n    corr = cov(xs, ys) / sx / sy\n    return corr";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1072,14 +1009,11 @@ dimensionless, so is <span class="math notranslate nohighlight">\(\rho\)</span>.
             }, 500);
             </script></div>
 </div>
-<p>Pearson’s correlation is always between -1 and +1 (including both). If
-<span class="math notranslate nohighlight">\(\rho\)</span> is positive, we say that the correlation is positive, which means
-that when one variable is high, the other tends to be high. If <span class="math notranslate nohighlight">\(\rho\)</span> is
-negative, the correlation is negative, so when one variable is high, the
-other is low.</p>
-<p>The magnitude of <span class="math notranslate nohighlight">\(\rho\)</span> indicates the strength of the correlation. If
-<span class="math notranslate nohighlight">\(\rho\)</span> is 1 or -1, the variables are perfectly correlated, which means
-that if you know one, you can make a perfect prediction about the other.</p>
+<p>Pearson’s correlation is always between -1 and +1 (including both).
+If <span class="math notranslate nohighlight">\(\rho\)</span> is positive, we say that the correlation is positive, which means that when one variable is high, the other tends to be high.
+If <span class="math notranslate nohighlight">\(\rho\)</span> is negative, the correlation is negative, so when one variable is high, the other is low.</p>
+<p>The magnitude of <span class="math notranslate nohighlight">\(\rho\)</span> indicates the strength of the correlation.
+If <span class="math notranslate nohighlight">\(\rho\)</span> is 1 or -1, the variables are perfectly correlated, which means that if you know one, you can make a perfect prediction about the other.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
@@ -1087,12 +1021,12 @@ that if you know one, you can make a perfect prediction about the other.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4804786378776745
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4909057148335197
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 27;
+                var nbb_cell_id = 20;
                 var nbb_unformatted_code = "corr(heights, weights)";
                 var nbb_formatted_code = "corr(heights, weights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1107,20 +1041,16 @@ that if you know one, you can make a perfect prediction about the other.</p>
             }, 500);
             </script></div>
 </div>
-<p>Most correlation in the real world is not perfect, but it is still
-useful. The correlation of height and weight is 0.51, which is a strong
-correlation compared to similar human-related variables.</p>
+<p>Most correlation in the real world is not perfect, but it is still useful.
+The correlation of height and weight is 0.51, which is a strong correlation compared to similar human-related variables.</p>
 </section>
 <section id="nonlinear-relationships">
 <h2>Nonlinear relationships<a class="headerlink" href="#nonlinear-relationships" title="Link to this heading">#</a></h2>
-<p>If Pearson’s correlation is near 0, it is tempting to conclude that
-there is no relationship between the variables, but that conclusion is
-not valid. Pearson’s correlation only measures <em>linear</em> relationships.
+<p>If Pearson’s correlation is near 0, it is tempting to conclude that there is no relationship between the variables, but that conclusion is not valid.
+Pearson’s correlation only measures <em>linear</em> relationships.
 If there’s a nonlinear relationship, <span class="math notranslate nohighlight">\(\rho\)</span> understates its strength.</p>
-<p>The following figure is from
-<a class="reference external" href="http://wikipedia.org/wiki/Correlation_and_dependence">http://wikipedia.org/wiki/Correlation_and_dependence</a>. It shows scatter
-plots and correlation coefficients for several carefully constructed
-datasets.</p>
+<p>The following figure is from <a class="reference external" href="http://wikipedia.org/wiki/Correlation_and_dependence">http://wikipedia.org/wiki/Correlation_and_dependence</a>.
+It shows scatter plots and correlation coefficients for several carefully constructed datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO insert figure</span>
@@ -1130,7 +1060,7 @@ datasets.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 28;
+                var nbb_cell_id = 21;
                 var nbb_unformatted_code = "# TODO insert figure";
                 var nbb_formatted_code = "# TODO insert figure";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1145,26 +1075,18 @@ datasets.</p>
             }, 500);
             </script></div>
 </div>
-<p>The top row shows linear relationships with a range of correlations; you
-can use this row to get a sense of what different values of <span class="math notranslate nohighlight">\(\rho\)</span> look
-like. The second row shows perfect correlations with a range of slopes,
-which demonstrates that correlation is unrelated to slope (we’ll talk
-about estimating slope soon). The third row shows variables that are
-clearly related, but because the relationship is nonlinear, the
-correlation coefficient is 0.</p>
-<p>The moral of this story is that you should always look at a scatter plot
-of your data before blindly computing a correlation coefficient.</p>
+<p>The top row shows linear relationships with a range of correlations; you can use this row to get a sense of what different values of <span class="math notranslate nohighlight">\(\rho\)</span> look like.
+The second row shows perfect correlations with a range of slopes, which demonstrates that correlation is unrelated to slope (we’ll talk about estimating slope soon).
+The third row shows variables that are clearly related, but because the relationship is nonlinear, the correlation coefficient is 0.</p>
+<p>The moral of this story is that you should always look at a scatter plot of your data before blindly computing a correlation coefficient.</p>
 </section>
 <section id="spearmans-rank-correlation">
 <h2>Spearman’s rank correlation<a class="headerlink" href="#spearmans-rank-correlation" title="Link to this heading">#</a></h2>
-<p>Pearson’s correlation works well if the relationship between variables
-is linear and if the variables are roughly normal. But it is not robust
-in the presence of outliers. Spearman’s rank correlation is an
-alternative that mitigates the effect of outliers and skewed
-distributions. To compute Spearman’s correlation, we have to compute the
-<strong>rank</strong> of each value, which is its index in the sorted sample. For
-example, in the sample <code class="docutils literal notranslate"><span class="pre">[5,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">7]</span></code> the rank of the value 5 is 3,
-because it appears third in the sorted list.</p>
+<p>Pearson’s correlation works well if the relationship between variables is linear and if the variables are roughly normal.
+But it is not robust in the presence of outliers.
+Spearman’s rank correlation is an alternative that mitigates the effect of outliers and skewed distributions.
+To compute Spearman’s correlation, we have to compute the <strong>rank</strong> of each value, which is its index in the sorted sample.
+For example, in the sample <code class="docutils literal notranslate"><span class="pre">[5,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">7]</span></code> the rank of the value 5 is 3, because it appears third in the sorted list.</p>
 <p>To compute ranks…</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1185,7 +1107,7 @@ dtype: float64
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 29;
+                var nbb_cell_id = 22;
                 var nbb_unformatted_code = "import pandas as pd\n\nt = [5, 1, 2, 7]\npd.Series(t).rank()";
                 var nbb_formatted_code = "import pandas as pd\n\nt = [5, 1, 2, 7]\npd.Series(t).rank()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1216,7 +1138,7 @@ dtype: float64
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 30;
+                var nbb_cell_id = 23;
                 var nbb_unformatted_code = "import pandas as pd\n\n\ndef spearman_corr(xs, ys):\n    xranks = pd.Series(xs).rank()\n    yranks = pd.Series(ys).rank()\n    return corr(xranks, yranks)";
                 var nbb_formatted_code = "import pandas as pd\n\n\ndef spearman_corr(xs, ys):\n    xranks = pd.Series(xs).rank()\n    yranks = pd.Series(ys).rank()\n    return corr(xranks, yranks)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1238,12 +1160,12 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5186827508670038
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5167067762755635
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 31;
+                var nbb_cell_id = 24;
                 var nbb_unformatted_code = "spearman_corr(heights, weights)";
                 var nbb_formatted_code = "spearman_corr(heights, weights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1258,21 +1180,14 @@ dtype: float64
             }, 500);
             </script></div>
 </div>
-<p>The Spearman rank correlation for the BRFSS data is 0.53, a little
-higher than the Pearson correlation, 0.51. There are several possible
-reasons for the difference, including:</p>
+<p>The Spearman rank correlation for the BRFSS data is 0.53, a little higher than the Pearson correlation, 0.51. There are several possible reasons for the difference, including:</p>
 <ul class="simple">
-<li><p>If the relationship is nonlinear, Pearson’s correlation tends to
-underestimate the strength of the relationship, and</p></li>
-<li><p>Pearson’s correlation can be affected (in either direction) if one
-of the distributions is skewed or contains outliers. Spearman’s rank
-correlation is more robust.</p></li>
+<li><p>If the relationship is nonlinear, Pearson’s correlation tends to underestimate the strength of the relationship, and</p></li>
+<li><p>Pearson’s correlation can be affected (in either direction) if one of the distributions is skewed or contains outliers.
+Spearman’s rank correlation is more robust.</p></li>
 </ul>
-<p>In the BRFSS example, we know that the distribution of weights is
-roughly lognormal; under a log transform it approximates a normal
-distribution, so it has no skew. So another way to eliminate the effect
-of skewness is to compute Pearson’s correlation with log-weight and
-height:</p>
+<p>In the BRFSS example, we know that the distribution of weights is roughly lognormal; under a log transform it approximates a normal distribution, so it has no skew.
+So another way to eliminate the effect of skewness is to compute Pearson’s correlation with log-weight and height:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span>
@@ -1280,12 +1195,12 @@ height:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5063605656415053
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5070358113902116
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 32;
+                var nbb_cell_id = 25;
                 var nbb_unformatted_code = "corr(heights, np.log10(weights))";
                 var nbb_formatted_code = "corr(heights, np.log10(weights))";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1301,92 +1216,60 @@ height:</p>
             </script></div>
 </div>
 <p>The result is very close to the rank correlation.
-So that suggests that skewness in the distribution of weight explains most of
-the difference between Pearson’s and Spearman’s correlation.</p>
+So that suggests that skewness in the distribution of weight explains most of the difference between Pearson’s and Spearman’s correlation.</p>
 </section>
 <section id="correlation-and-causation">
 <h2>Correlation and causation<a class="headerlink" href="#correlation-and-causation" title="Link to this heading">#</a></h2>
-<p>If variables A and B are correlated, there are three possible
-explanations: A causes B, or B causes A, or some other set of factors
-causes both A and B. These explanations are called “causal
-relationships”.</p>
-<p>Correlation alone does not distinguish between these explanations, so it
-does not tell you which ones are true. This rule is often summarized
-with the phrase “Correlation does not imply causation,” which is so
-pithy it has its own Wikipedia page:
-<a class="reference external" href="http://wikipedia.org/wiki/Correlation_does_not_imply_causation">http://wikipedia.org/wiki/Correlation_does_not_imply_causation</a>.</p>
+<p>If variables A and B are correlated, there are three possible explanations: A causes B, or B causes A, or some other set of factors causes both A and B. These explanations are called “causal relationships”.</p>
+<p>Correlation alone does not distinguish between these explanations, so it does not tell you which ones are true.
+This rule is often summarized with the phrase “Correlation does not imply causation,” which is so pithy it has its own Wikipedia page: <a class="reference external" href="http://wikipedia.org/wiki/Correlation_does_not_imply_causation">http://wikipedia.org/wiki/Correlation_does_not_imply_causation</a>.</p>
 <p>So what can you do to provide evidence of causation?</p>
 <ol class="arabic simple">
-<li><p>Use time. If A comes before B, then A can cause B but not the other
-way around (at least according to our common understanding of
-causation). The order of events can help us infer the direction of
-causation, but it does not preclude the possibility that something
-else causes both A and B.</p></li>
-<li><p>Use randomness. If you divide a large sample into two groups at
-random and compute the means of almost any variable, you expect the
-difference to be small. If the groups are nearly identical in all
-variables but one, you can eliminate spurious relationships.</p></li>
+<li><p>Use time.
+If A comes before B, then A can cause B but not the other way around (at least according to our common understanding of causation).
+The order of events can help us infer the direction of causation, but it does not preclude the possibility that something else causes both A and B.</p></li>
+<li><p>Use randomness.
+If you divide a large sample into two groups at random and compute the means of almost any variable, you expect the difference to be small.
+If the groups are nearly identical in all variables but one, you can eliminate spurious relationships.</p></li>
 </ol>
-<p>This works even if you don’t know what the relevant variables are,
-but it works even better if you do, because you can check that the
-groups are identical.</p>
-<p>These ideas are the motivation for the <strong>randomized controlled trial</strong>,
-in which subjects are assigned randomly to two (or more) groups: a
-<strong>treatment group</strong> that receives some kind of intervention, like a new
-medicine, and a <strong>control group</strong> that receives no intervention, or
-another treatment whose effects are known.</p>
-<p>A randomized controlled trial is the most reliable way to demonstrate a
-causal relationship, and the foundation of science-based medicine (see
-<a class="reference external" href="http://wikipedia.org/wiki/Randomized_controlled_trial">http://wikipedia.org/wiki/Randomized_controlled_trial</a>).</p>
-<p>Unfortunately, controlled trials are only possible in the laboratory
-sciences, medicine, and a few other disciplines. In the social sciences,
-controlled experiments are rare, usually because they are impossible or
-unethical.</p>
-<p>An alternative is to look for a <strong>natural experiment</strong>, where different
-“treatments” are applied to groups that are otherwise similar. One
-danger of natural experiments is that the groups might differ in ways
-that are not apparent. You can read more about this topic at
-<a class="reference external" href="http://wikipedia.org/wiki/Natural_experiment">http://wikipedia.org/wiki/Natural_experiment</a>.</p>
-<p>In some cases it is possible to infer causal relationships using
-<strong>regression analysis</strong>, which is the topic of
-Chapter <a class="reference internal" href="#regression"><span class="xref myst">[regression]</span></a>{reference-type=“ref”
-reference=“regression”}.</p>
+<p>This works even if you don’t know what the relevant variables are, but it works even better if you do, because you can check that the groups are identical.</p>
+<p>These ideas are the motivation for the <strong>randomized controlled trial</strong>, in which subjects are assigned randomly to two (or more) groups: a <strong>treatment group</strong> that receives some kind of intervention, like a new medicine, and a <strong>control group</strong> that receives no intervention, or another treatment whose effects are known.</p>
+<p>A randomized controlled trial is the most reliable way to demonstrate a causal relationship, and the foundation of science-based medicine (see <a class="reference external" href="http://wikipedia.org/wiki/Randomized_controlled_trial">http://wikipedia.org/wiki/Randomized_controlled_trial</a>).</p>
+<p>Unfortunately, controlled trials are only possible in the laboratory sciences, medicine, and a few other disciplines.
+In the social sciences, controlled experiments are rare, usually because they are impossible or unethical.</p>
+<p>An alternative is to look for a <strong>natural experiment</strong>, where different “treatments” are applied to groups that are otherwise similar.
+One danger of natural experiments is that the groups might differ in ways that are not apparent.
+You can read more about this topic at <a class="reference external" href="http://wikipedia.org/wiki/Natural_experiment">http://wikipedia.org/wiki/Natural_experiment</a>.</p>
+<p>In some cases it is possible to infer causal relationships using <strong>regression analysis</strong>, which is the topic of Chapter <a class="reference internal" href="#regression"><span class="xref myst">[regression]</span></a>{reference-type=“ref” reference=“regression”}.</p>
 </section>
 <section id="glossary">
 <h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>scatter plot</strong>: A visualization of the relationship between two
-variables, showing one point for each row of data.</p></li>
-<li><p><strong>jitter</strong>: Random noise added to data for purposes of
-visualization.</p></li>
-<li><p><strong>saturation</strong>: Loss of information when multiple points are plotted
-on top of each other.</p></li>
-<li><p><strong>correlation</strong>: A statistic that measures the strength of the
-relationship between two variables.</p></li>
-<li><p><strong>standardize</strong>: To transform a set of values so that their mean is
-0 and their variance is 1.</p></li>
-<li><p><strong>standard score</strong>: A value that has been standardized so that it is
-expressed in standard deviations from the mean.</p></li>
-<li><p><strong>covariance</strong>: A measure of the tendency of two variables to vary
-together.</p></li>
+<li><p><strong>scatter plot</strong>: A visualization of the relationship between two variables, showing one point for each row of data.</p></li>
+<li><p><strong>jitter</strong>: Random noise added to data for purposes of visualization.</p></li>
+<li><p><strong>saturation</strong>: Loss of information when multiple points are plotted on top of each other.</p></li>
+<li><p><strong>correlation</strong>: A statistic that measures the strength of the relationship between two variables.</p></li>
+<li><p><strong>standardize</strong>: To transform a set of values so that their mean is 0 and their variance is 1.</p></li>
+<li><p><strong>standard score</strong>: A value that has been standardized so that it is expressed in standard deviations from the mean.</p></li>
+<li><p><strong>covariance</strong>: A measure of the tendency of two variables to vary together.</p></li>
 <li><p><strong>rank</strong>: The index where an element appears in a sorted list.</p></li>
-<li><p><strong>randomized controlled trial</strong>: An experimental design in which
-subjects are divided into groups at random, and different groups are
-given different treatments.</p></li>
-<li><p><strong>treatment group</strong>: A group in a controlled trial that receives
-some kind of intervention.</p></li>
-<li><p><strong>control group</strong>: A group in a controlled trial that receives no
-treatment, or a treatment whose effect is known.</p></li>
-<li><p><strong>natural experiment</strong>: An experimental design that takes advantage
-of a natural division of subjects into groups in ways that are at
-least approximately random.</p></li>
+<li><p><strong>randomized controlled trial</strong>: An experimental design in which subjects are divided into groups at random, and different groups are given different treatments.</p></li>
+<li><p><strong>treatment group</strong>: A group in a controlled trial that receives some kind of intervention.</p></li>
+<li><p><strong>control group</strong>: A group in a controlled trial that receives no treatment, or a treatment whose effect is known.</p></li>
+<li><p><strong>natural experiment</strong>: An experimental design that takes advantage of a natural division of subjects into groups in ways that are at least approximately random.</p></li>
 </ul>
-<p><strong>Exercise:</strong>  So far we have been working with a subset of only 5000 respondents.  When we include the entire dataset, making an effective scatter plot can be tricky.  As an exercise, experiment with <code class="docutils literal notranslate"><span class="pre">scatter</span></code> and <code class="docutils literal notranslate"><span class="pre">hex_bin</span></code> to make a plot that represents the entire dataset well.</p>
-<p><strong>Exercise:</strong> Yet another option is to divide the dataset into groups and then plot the CDF for each group.  As an exercise, divide the dataset into a smaller number of groups and plot the CDF for each group.</p>
+<p><strong>Exercise:</strong>  So far we have been working with a subset of only 5000 respondents.
+When we include the entire dataset, making an effective scatter plot can be tricky.
+As an exercise, experiment with <code class="docutils literal notranslate"><span class="pre">scatter</span></code> and <code class="docutils literal notranslate"><span class="pre">hex_bin</span></code> to make a plot that represents the entire dataset well.</p>
+<p><strong>Exercise:</strong> Yet another option is to divide the dataset into groups and then plot the CDF for each group.
+As an exercise, divide the dataset into a smaller number of groups and plot the CDF for each group.</p>
 </section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
-<p>Using data from the NSFG, make a scatter plot of birth weight versus mother’s age. Plot percentiles of birth weight versus mother’s age. Compute Pearson’s and Spearman’s correlations. How would you characterize the relationship between these variables?</p>
+<p>Using data from the NSFG, make a scatter plot of birth weight versus mother’s age.
+Plot percentiles of birth weight versus mother’s age.
+Compute Pearson’s and Spearman’s correlations.
+How would you characterize the relationship between these variables?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
@@ -1398,7 +1281,7 @@ least approximately random.</p></li>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 41;
+                var nbb_cell_id = 29;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1425,7 +1308,7 @@ least approximately random.</p></li>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 42;
+                var nbb_cell_id = 30;
                 var nbb_unformatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()\nlive = live.dropna(subset=[\"agepreg\", \"totalwgt_lb\"])";
                 var nbb_formatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()\nlive = live.dropna(subset=[\"agepreg\", \"totalwgt_lb\"])";
                 var nbb_cells = Jupyter.notebook.get_cells();

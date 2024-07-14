@@ -177,8 +177,8 @@
 <li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Probability density functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
@@ -399,7 +399,6 @@ document.write(`
 
 
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -407,8 +406,8 @@ document.write(`
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 2;
-                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py\")";
-                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py\")";
+                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
+                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -425,6 +424,9 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
 <span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">decorate</span>
 </pre></div>
 </div>
@@ -433,8 +435,8 @@ document.write(`
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 3;
-                var nbb_unformatted_code = "import numpy as np\nfrom thinkstats import decorate";
-                var nbb_formatted_code = "import numpy as np\nfrom thinkstats import decorate";
+                var nbb_unformatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
+                var nbb_formatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -450,38 +452,24 @@ document.write(`
 <p>I’ll start with the data from the BRFSS again.</p>
 <section id="pdfs">
 <h2>PDFs<a class="headerlink" href="#pdfs" title="Link to this heading">#</a></h2>
-<p>The derivative of a CDF is called a <strong>probability density function</strong>, or
-PDF. For example, the PDF of an exponential distribution is
-$<span class="math notranslate nohighlight">\(PDF_{expo}(x) = \lambda e^{-\lambda x}\)</span><span class="math notranslate nohighlight">\( The PDF of a normal
-distribution is \)</span><span class="math notranslate nohighlight">\(PDF_{normal}(x) = \frac{1}{\sigma \sqrt{2 \pi}} 
-                 \exp \left[ -\frac{1}{2} 
-                 \left( \frac{x - \mu}{\sigma} \right)^2 \right]\)</span><span class="math notranslate nohighlight">\(
-Evaluating a PDF for a particular value of \)</span>x$ is usually not useful.
+<p>The derivative of a CDF is called a <strong>probability density function</strong>, or PDF.
+For example, the PDF of an exponential distribution is $<span class="math notranslate nohighlight">\(PDF_{expo}(x) = \lambda e^{-\lambda x}\)</span><span class="math notranslate nohighlight">\( The PDF of a normal distribution is \)</span><span class="math notranslate nohighlight">\(PDF_{normal}(x) = \frac{1}{\sigma \sqrt{2 \pi}}       \exp \left[ -\frac{1}{2}       \left( \frac{x - \mu}{\sigma} \right)^2 \right]\)</span><span class="math notranslate nohighlight">\( Evaluating a PDF for a particular value of \)</span>x$ is usually not useful.
 The result is not a probability; it is a probability <em>density</em>.</p>
-<p>In physics, density is mass per unit of volume; in order to get a mass,
-you have to multiply by volume or, if the density is not constant, you
-have to integrate over volume.</p>
+<p>In physics, density is mass per unit of volume; in order to get a mass, you have to multiply by volume or, if the density is not constant, you have to integrate over volume.</p>
 <p>Similarly, <strong>probability density</strong> measures probability per unit of <span class="math notranslate nohighlight">\(x\)</span>.
 In order to get a probability mass, you have to integrate over <span class="math notranslate nohighlight">\(x\)</span>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides a class called <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> that represents a probability
-density function. Every <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> object provides the following methods:</p>
+<p><code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides a class called <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> that represents a probability density function.
+Every <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> object provides the following methods:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">density</span></code>, which takes a value, <code class="docutils literal notranslate"><span class="pre">x</span></code>, and returns the density of the
-distribution at <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">render</span></code>, which evaluates the density at a discrete set of values
-and returns a pair of sequences: the sorted values, <code class="docutils literal notranslate"><span class="pre">xs</span></code>, and their
-probability densities, <code class="docutils literal notranslate"><span class="pre">ds</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">make_pmf</span></code>, which evaluates <code class="docutils literal notranslate"><span class="pre">Density</span></code> at a discrete set of values and
-returns a normalized <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> that approximates the Pdf.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">get_linspace</span></code>, which returns the default set of points used by
-<code class="docutils literal notranslate"><span class="pre">render</span></code> and <code class="docutils literal notranslate"><span class="pre">make_pmf</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">density</span></code>, which takes a value, <code class="docutils literal notranslate"><span class="pre">x</span></code>, and returns the density of the distribution at <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">render</span></code>, which evaluates the density at a discrete set of values and returns a pair of sequences: the sorted values, <code class="docutils literal notranslate"><span class="pre">xs</span></code>, and their probability densities, <code class="docutils literal notranslate"><span class="pre">ds</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make_pmf</span></code>, which evaluates <code class="docutils literal notranslate"><span class="pre">Density</span></code> at a discrete set of values and returns a normalized <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> that approximates the Pdf.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_linspace</span></code>, which returns the default set of points used by <code class="docutils literal notranslate"><span class="pre">render</span></code> and <code class="docutils literal notranslate"><span class="pre">make_pmf</span></code>.</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">Pdf</span></code> is an abstract parent class, which means you should not instantiate
-it; that is, you cannot create a <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> object. Instead, you should define
-a child class that inherits from <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> and provides definitions of
-<code class="docutils literal notranslate"><span class="pre">density</span></code> and <code class="docutils literal notranslate"><span class="pre">get_linspace</span></code>. <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> provides <code class="docutils literal notranslate"><span class="pre">render</span></code> and <code class="docutils literal notranslate"><span class="pre">make_pdf</span></code>.</p>
-<p>For example, here’s a class named <code class="docutils literal notranslate"><span class="pre">NormalPdf</span></code> that
-evaluates the normal density function.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Pdf</span></code> is an abstract parent class, which means you should not instantiate it; that is, you cannot create a <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> object.
+Instead, you should define a child class that inherits from <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> and provides definitions of <code class="docutils literal notranslate"><span class="pre">density</span></code> and <code class="docutils literal notranslate"><span class="pre">get_linspace</span></code>.
+<code class="docutils literal notranslate"><span class="pre">Pdf</span></code> provides <code class="docutils literal notranslate"><span class="pre">render</span></code> and <code class="docutils literal notranslate"><span class="pre">make_pdf</span></code>.</p>
+<p>For example, here’s a class named <code class="docutils literal notranslate"><span class="pre">NormalPdf</span></code> that evaluates the normal density function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">NormalPdf</span>
@@ -506,15 +494,10 @@ evaluates the normal density function.</p>
             }, 500);
             </script></div>
 </div>
-<p>The NormalPdf object contains the parameters <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code>. <code class="docutils literal notranslate"><span class="pre">Density</span></code>
-uses <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm</span></code>, which is an object that represents a normal
-distribution and provides <code class="docutils literal notranslate"><span class="pre">cdf</span></code> and <code class="docutils literal notranslate"><span class="pre">pdf</span></code>, among other methods (see
-Section <a class="reference internal" href="#normal"><span class="xref myst">[normal]</span></a>{reference-type=“ref” reference=“normal”}).</p>
-<p>The following example creates a NormalPdf with the mean and variance of
-adult female heights, in cm, from the BRFSS (see
-Section <a class="reference internal" href="#brfss"><span class="xref myst">[brfss]</span></a>{reference-type=“ref” reference=“brfss”}).
-Then it computes the density of the distribution at a location one
-standard deviation from the mean.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Normal</span></code>Pdf object contains the parameters <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code>.
+<code class="docutils literal notranslate"><span class="pre">Density</span></code> uses <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm</span></code>, which is an object that represents a normal distribution and provides <code class="docutils literal notranslate"><span class="pre">cdf</span></code> and <code class="docutils literal notranslate"><span class="pre">pdf</span></code>, among other methods (see Section <a class="reference internal" href="#normal"><span class="xref myst">[normal]</span></a>{reference-type=“ref” reference=“normal”}).</p>
+<p>The following example creates a <code class="docutils literal notranslate"><span class="pre">Normal</span></code>Pdf with the mean and variance of adult female heights, in cm, from the BRFSS (see Section <a class="reference internal" href="#brfss"><span class="xref myst">[brfss]</span></a>{reference-type=“ref” reference=“brfss”}).
+Then it computes the density of the distribution at a location one standard deviation from the mean.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/brfss.py&quot;</span><span class="p">)</span>
@@ -581,7 +564,7 @@ standard deviation from the mean.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 49;
+                var nbb_cell_id = 7;
                 var nbb_unformatted_code = "female = df[df.sex == 2]\nfemale_heights = female.htm3.dropna()\nmean, std = female_heights.mean(), female_heights.std()\nmean, std";
                 var nbb_formatted_code = "female = df[df.sex == 2]\nfemale_heights = female.htm3.dropna()\nmean, std = female_heights.mean(), female_heights.std()\nmean, std";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -609,7 +592,7 @@ standard deviation from the mean.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 50;
+                var nbb_cell_id = 9;
                 var nbb_unformatted_code = "pdf = NormalPdf(mean, std)\npdf.density(mean + std)";
                 var nbb_formatted_code = "pdf = NormalPdf(mean, std)\npdf.density(mean + std)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -624,9 +607,8 @@ standard deviation from the mean.</p>
             }, 500);
             </script></div>
 </div>
-<p>The result is about 0.03, in units of probability mass per cm. Again, a
-probability density doesn’t mean much by itself. But if we plot the Pdf,
-we can see the shape of the distribution:</p>
+<p>The result is about 0.03, in units of probability mass per cm. Again, a probability density doesn’t mean much by itself.
+But if we plot the Pdf, we can see the shape of the distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -638,7 +620,7 @@ we can see the shape of the distribution:</p>
 <img alt="_images/7e3b3d6d004a06c8809ebd1722ad0fe242f046a639aa13ce92b7e10ec216199c.png" src="_images/7e3b3d6d004a06c8809ebd1722ad0fe242f046a639aa13ce92b7e10ec216199c.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 52;
+                var nbb_cell_id = 10;
                 var nbb_unformatted_code = "pdf.plot()\ndecorate(xlabel=\"height (cm)\", ylabel=\"density\")";
                 var nbb_formatted_code = "pdf.plot()\ndecorate(xlabel=\"height (cm)\", ylabel=\"density\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -653,21 +635,13 @@ we can see the shape of the distribution:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">thinkplot.Pdf</span></code> plots the <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> as a smooth function, as contrasted with
-<code class="docutils literal notranslate"><span class="pre">thinkplot.Pmf</span></code>, which renders a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> as a step function.
-The following figure shows the result, as well as a PDF estimated
-from a sample, which we’ll compute in the next section.</p>
-<p>By default, the resulting <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> contains 101 points equally spaced from
-<code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">-</span> <span class="pre">3*sigma</span></code> to <code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">+</span> <span class="pre">3*sigma</span></code>. Optionally, <code class="docutils literal notranslate"><span class="pre">make_pmf</span></code> and <code class="docutils literal notranslate"><span class="pre">render</span></code> can
-take keyword arguments <code class="docutils literal notranslate"><span class="pre">low</span></code>, <code class="docutils literal notranslate"><span class="pre">high</span></code>, and <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p>By default, the resulting <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> contains 101 points equally spaced from <code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">-</span> <span class="pre">3*sigma</span></code> to <code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">+</span> <span class="pre">3*sigma</span></code>.</p>
 </section>
 <section id="kernel-density-estimation">
 <h2>Kernel density estimation<a class="headerlink" href="#kernel-density-estimation" title="Link to this heading">#</a></h2>
-<p><strong>Kernel density estimation</strong> (KDE) is an algorithm that takes a sample
-and finds an appropriately smooth PDF that fits the data. You can read
-details at <a class="reference external" href="http://en.wikipedia.org/wiki/Kernel_density_estimation">http://en.wikipedia.org/wiki/Kernel_density_estimation</a>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">scipy</span></code> provides an implementation of KDE and <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides a
-class called <code class="docutils literal notranslate"><span class="pre">EstimatedPdf</span></code> that uses it:</p>
+<p><strong>Kernel density estimation</strong> (KDE) is an algorithm that takes a sample and finds an appropriately smooth PDF that fits the data.
+You can read details at <a class="reference external" href="http://en.wikipedia.org/wiki/Kernel_density_estimation">http://en.wikipedia.org/wiki/Kernel_density_estimation</a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">scipy</span></code> provides an implementation of KDE and <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> provides a class called <code class="docutils literal notranslate"><span class="pre">EstimatedPdf</span></code> that uses it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">EstimatedPdf</span>
@@ -677,7 +651,7 @@ class called <code class="docutils literal notranslate"><span class="pre">Estima
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 10;
+                var nbb_cell_id = 11;
                 var nbb_unformatted_code = "from thinkstats import EstimatedPdf";
                 var nbb_formatted_code = "from thinkstats import EstimatedPdf";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -692,8 +666,7 @@ class called <code class="docutils literal notranslate"><span class="pre">Estima
             }, 500);
             </script></div>
 </div>
-<p>Here’s an example that generates a sample from a normal distribution and
-then makes an <code class="docutils literal notranslate"><span class="pre">EstimatedPdf</span></code> to fit it:</p>
+<p>Here’s an example that generates a sample from a normal distribution and then makes an <code class="docutils literal notranslate"><span class="pre">EstimatedPdf</span></code> to fit it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -705,10 +678,10 @@ then makes an <code class="docutils literal notranslate"><span class="pre">Estim
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/736ad4878e53a3d56a9649d3fe02fceebdfce392d932432dd5b2204eef2e58c7.png" src="_images/736ad4878e53a3d56a9649d3fe02fceebdfce392d932432dd5b2204eef2e58c7.png" />
+<img alt="_images/9cbcedb988ecd831daf027d09aba8063c561d94dadda53e704cdda1ed8e25f1f.png" src="_images/9cbcedb988ecd831daf027d09aba8063c561d94dadda53e704cdda1ed8e25f1f.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 53;
+                var nbb_cell_id = 12;
                 var nbb_unformatted_code = "import random\n\nsample = [random.gauss(mean, std) for i in range(500)]\nsample_pdf = EstimatedPdf(sample, name=\"sample KDE\")\nsample_pdf.plot()";
                 var nbb_formatted_code = "import random\n\nsample = [random.gauss(mean, std) for i in range(500)]\nsample_pdf = EstimatedPdf(sample, name=\"sample KDE\")\nsample_pdf.plot()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -723,36 +696,25 @@ then makes an <code class="docutils literal notranslate"><span class="pre">Estim
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">sample</span></code> is a list of 500 random heights. <code class="docutils literal notranslate"><span class="pre">sample_pdf</span></code> is a <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> object
-that contains the estimated KDE of the sample.</p>
-<p>The following figure shows the normal density function and a KDE
-based on a sample of 500 random heights. The estimate is a good match
-for the original distribution.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sample</span></code> is a list of 500 random heights.
+<code class="docutils literal notranslate"><span class="pre">sample_pdf</span></code> is a <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> object that contains the estimated KDE of the sample.</p>
+<p>The following figure shows the normal density function and a KDE based on a sample of 500 random heights.
+The estimate is a good match for the original distribution.</p>
 <p>Estimating a density function with KDE is useful for several purposes:</p>
 <ul class="simple">
-<li><p><em>Visualization:</em> During the exploration phase of a project, CDFs are
-usually the best visualization of a distribution. After you look at
-a CDF, you can decide whether an estimated PDF is an appropriate
-model of the distribution. If so, it can be a better choice for
-presenting the distribution to an audience that is unfamiliar with
-CDFs.</p></li>
-<li><p><em>Interpolation:</em> An estimated PDF is a way to get from a sample to a
-model of the population. If you have reason to believe that the
-population distribution is smooth, you can use KDE to interpolate
-the density for values that don’t appear in the sample.</p></li>
-<li><p><em>Simulation:</em> Simulations are often based on the distribution of a
-sample. If the sample size is small, it might be appropriate to
-smooth the sample distribution using KDE, which allows the
-simulation to explore more possible outcomes, rather than
-replicating the observed data.</p></li>
+<li><p><em>Visualization:</em> During the exploration phase of a project, CDFs are usually the best visualization of a distribution.
+After you look at a CDF, you can decide whether an estimated PDF is an appropriate model of the distribution.
+If so, it can be a better choice for presenting the distribution to an audience that is unfamiliar with CDFs.</p></li>
+<li><p><em>Interpolation:</em> An estimated PDF is a way to get from a sample to a model of the population.
+If you have reason to believe that the population distribution is smooth, you can use KDE to interpolate the density for values that don’t appear in the sample.</p></li>
+<li><p><em>Simulation:</em> Simulations are often based on the distribution of a sample.
+If the sample size is small, it might be appropriate to smooth the sample distribution using KDE, which allows the simulation to explore more possible outcomes, rather than replicating the observed data.</p></li>
 </ul>
 </section>
 <section id="the-distribution-framework">
 <h2>The distribution framework<a class="headerlink" href="#the-distribution-framework" title="Link to this heading">#</a></h2>
-<p>At this point we have seen PMFs, CDFs and PDFs; let’s take a minute to
-review.
-The following figure shows how these functions relate to each
-other.</p>
+<p>At this point we have seen PMFs, CDFs and PDFs; let’s take a minute to review.
+The following figure shows how these functions relate to each other.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: add the figure</span>
@@ -765,7 +727,7 @@ other.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 54;
+                var nbb_cell_id = 13;
                 var nbb_unformatted_code = "# TODO: add the figure\n\n# ![A framework that relates representations of distribution functions.]\n# (figs/distribution_functions.pdf){height=\"2.2in\"}";
                 var nbb_formatted_code = "# TODO: add the figure\n\n# ![A framework that relates representations of distribution functions.]\n# (figs/distribution_functions.pdf){height=\"2.2in\"}";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -780,44 +742,35 @@ other.</p>
             }, 500);
             </script></div>
 </div>
-<p>We started with PMFs, which represent the probabilities for a discrete
-set of values. To get from a PMF to a CDF, you add up the probability
-masses to get cumulative probabilities. To get from a CDF back to a PMF,
-you compute differences in cumulative probabilities. We’ll see the
-implementation of these operations in the next few sections.</p>
-<p>A PDF is the derivative of a continuous CDF; or, equivalently, a CDF is
-the integral of a PDF. Remember that a PDF maps from values to
-probability densities; to get a probability, you have to integrate.</p>
-<p>To get from a discrete to a continuous distribution, you can perform
-various kinds of smoothing. One form of smoothing is to assume that the
-data come from an analytic continuous distribution (like exponential or
-normal) and to estimate the parameters of that distribution. Another
-option is kernel density estimation.</p>
-<p>The opposite of smoothing is <strong>discretizing</strong>, or quantizing. If you
-evaluate a PDF at discrete points, you can generate a PMF that is an
-approximation of the PDF. You can get a better approximation using
-numerical integration.</p>
-<p>To distinguish between continuous and discrete CDFs, it might be better
-for a discrete CDF to be a “cumulative mass function,” but as far as I
-can tell no one uses that term.</p>
+<p>We started with PMFs, which represent the probabilities for a discrete set of values.
+To get from a PMF to a CDF, you add up the probability masses to get cumulative probabilities.
+To get from a CDF back to a PMF, you compute differences in cumulative probabilities.
+We’ll see the implementation of these operations in the next few sections.</p>
+<p>A PDF is the derivative of a continuous CDF; or, equivalently, a CDF is the integral of a PDF.
+Remember that a PDF maps from values to probability densities; to get a probability, you have to integrate.</p>
+<p>To get from a discrete to a continuous distribution, you can perform various kinds of smoothing.
+One form of smoothing is to assume that the data come from an analytic continuous distribution (like exponential or normal) and to estimate the parameters of that distribution.
+Another option is kernel density estimation.</p>
+<p>The opposite of smoothing is <strong>discretizing</strong>, or quantizing.
+If you evaluate a PDF at discrete points, you can generate a PMF that is an approximation of the PDF.
+You can get a better approximation using numerical integration.</p>
+<p>To distinguish between continuous and discrete CDFs, it might be better for a discrete CDF to be a “cumulative mass function,” but as far as I can tell no one uses that term.</p>
 </section>
 <section id="hist-implementation">
 <h2>Hist implementation<a class="headerlink" href="#hist-implementation" title="Link to this heading">#</a></h2>
-<p>At this point you should know how to use the basic types provided by
-<code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code>: Hist, <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>, and Pdf. The next few sections provide
-details about how they are implemented. This material might help you use
-these classes more effectively, but it is not strictly necessary.</p>
-<p>Hist and <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> inherit from a parent class called <code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code>. The
-leading underscore indicates that this class is “internal;” that is, it
-should not be used by code in other modules. The name indicates what it
-is: a dictionary wrapper. Its primary attribute is <code class="docutils literal notranslate"><span class="pre">d</span></code>, the dictionary
-that maps from values to their frequencies.</p>
-<p>The values can be any hashable type. The frequencies should be integers,
-but can be any numeric type.</p>
-<p><code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code> contains methods appropriate for both <code class="docutils literal notranslate"><span class="pre">Hist</span></code> and <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>,
-including <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, <code class="docutils literal notranslate"><span class="pre">values</span></code>, <code class="docutils literal notranslate"><span class="pre">items</span></code> and <code class="docutils literal notranslate"><span class="pre">render</span></code>. It also provides
-modifier methods <code class="docutils literal notranslate"><span class="pre">set</span></code>, <code class="docutils literal notranslate"><span class="pre">incr</span></code>, <code class="docutils literal notranslate"><span class="pre">mult</span></code>, and <code class="docutils literal notranslate"><span class="pre">remove</span></code>. These methods are
-all implemented with dictionary operations. For example:</p>
+<p>At this point you should know how to use the basic types provided by <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code>: Hist, <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>, and Pdf.
+The next few sections provide details about how they are implemented.
+This material might help you use these classes more effectively, but it is not strictly necessary.</p>
+<p>Hist and <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> inherit from a parent class called <code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code>.
+The leading underscore indicates that this class is “internal;” that is, it should not be used by code in other modules.
+The name indicates what it is: a dictionary wrapper.
+Its primary attribute is <code class="docutils literal notranslate"><span class="pre">d</span></code>, the dictionary that maps from values to their frequencies.</p>
+<p>The values can be any hashable type.
+The frequencies should be integers, but can be any numeric type.</p>
+<p><code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code> contains methods appropriate for both <code class="docutils literal notranslate"><span class="pre">Hist</span></code> and <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, including <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, <code class="docutils literal notranslate"><span class="pre">values</span></code>, <code class="docutils literal notranslate"><span class="pre">items</span></code> and <code class="docutils literal notranslate"><span class="pre">render</span></code>.
+It also provides modifier methods <code class="docutils literal notranslate"><span class="pre">set</span></code>, <code class="docutils literal notranslate"><span class="pre">incr</span></code>, <code class="docutils literal notranslate"><span class="pre">mult</span></code>, and <code class="docutils literal notranslate"><span class="pre">remove</span></code>.
+These methods are all implemented with dictionary operations.
+For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: Show implementation?</span>
@@ -827,7 +780,7 @@ all implemented with dictionary operations. For example:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 13;
+                var nbb_cell_id = 14;
                 var nbb_unformatted_code = "# TODO: Show implementation?";
                 var nbb_formatted_code = "# TODO: Show implementation?";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -842,19 +795,14 @@ all implemented with dictionary operations. For example:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">Hist</span></code> also provides <code class="docutils literal notranslate"><span class="pre">freq</span></code>, which looks up the frequency of a given
-value.</p>
-<p>Because <code class="docutils literal notranslate"><span class="pre">Hist</span></code> operators and methods are based on dictionaries, these
-methods are constant time operations; that is, their run time does not
-increase as the Hist gets bigger.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Hist</span></code> also provides <code class="docutils literal notranslate"><span class="pre">freq</span></code>, which looks up the frequency of a given value.</p>
+<p>Because <code class="docutils literal notranslate"><span class="pre">Hist</span></code> operators and methods are based on dictionaries, these methods are constant time operations; that is, their run time does not increase as the Hist gets bigger.</p>
 </section>
 <section id="pmf-implementation">
 <h2><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> implementation<a class="headerlink" href="#pmf-implementation" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> and Hist are almost the same thing, except that a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> maps values to
-floating-point probabilities, rather than integer frequencies. If the
-sum of the probabilities is 1, the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> is normalized.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> provides <code class="docutils literal notranslate"><span class="pre">Normalize</span></code>, which computes the sum of the probabilities
-and divides through by a factor:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> and Hist are almost the same thing, except that a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> maps values to floating-point probabilities, rather than integer frequencies.
+If the sum of the probabilities is 1, the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> is normalized.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> provides <code class="docutils literal notranslate"><span class="pre">Normalize</span></code>, which computes the sum of the probabilities and divides through by a factor:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
@@ -872,7 +820,7 @@ and divides through by a factor:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 14;
+                var nbb_cell_id = 15;
                 var nbb_unformatted_code = "def normalize(self, fraction=1.0):\n    total = self.total()\n    if total == 0.0:\n        raise ValueError(\"Total probability is zero.\")\n\n    factor = fraction / total\n    for x in self.d:\n        self.d[x] *= factor\n    return total";
                 var nbb_formatted_code = "def normalize(self, fraction=1.0):\n    total = self.total()\n    if total == 0.0:\n        raise ValueError(\"Total probability is zero.\")\n\n    factor = fraction / total\n    for x in self.d:\n        self.d[x] *= factor\n    return total";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -887,38 +835,29 @@ and divides through by a factor:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">fraction</span></code> determines the sum of the probabilities after normalizing;
-the default value is 1. If the total probability is 0, the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> cannot be
-normalized, so <code class="docutils literal notranslate"><span class="pre">Normalize</span></code> raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
-<p>Hist and <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> have the same constructor. It can take as an argument a
-<code class="docutils literal notranslate"><span class="pre">dict</span></code>, Hist, <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> or <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>, a pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code>, a list of (value, frequency)
-pairs, or a sequence of values.</p>
-<p>If you instantiate a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, the result is normalized. If you instantiate a
-Hist, it is not. To construct an unnormalized <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, you can create an
-empty <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> and modify it. The <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> modifiers do not renormalize the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">fraction</span></code> determines the sum of the probabilities after normalizing; the default value is 1. If the total probability is 0, the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> cannot be normalized, so <code class="docutils literal notranslate"><span class="pre">Normalize</span></code> raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
+<p>Hist and <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> have the same constructor.
+It can take as an argument a <code class="docutils literal notranslate"><span class="pre">dict</span></code>, Hist, <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> or <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>, a Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code>, a list of (value, frequency) pairs, or a sequence of values.</p>
+<p>If you instantiate a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, the result is normalized.
+If you instantiate a Hist, it is not.
+To construct an unnormalized <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, you can create an empty <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> and modify it. The <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> modifiers do not renormalize the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>.</p>
 </section>
 <section id="cdf-implementation">
 <h2><code class="docutils literal notranslate"><span class="pre">Cdf</span></code> implementation<a class="headerlink" href="#cdf-implementation" title="Link to this heading">#</a></h2>
-<p>A CDF maps from values to cumulative probabilities, so I could have
-implemented <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> as a <code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code>. But the values in a CDF are ordered
-and the values in a <code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code> are not. Also, it is often useful to
-compute the inverse CDF; that is, the map from cumulative probability to
-value. So the implementation I chose is two sorted lists. That way I can
-use binary search to do a forward or inverse lookup in logarithmic time.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> constructor can take as a parameter a sequence of values or a
-pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code>, a dictionary that maps from values to probabilities, a
-sequence of (value, probability) pairs, a Hist, <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, or <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>. Or if it is
-given two parameters, it treats them as a sorted sequence of values and
-the sequence of corresponding cumulative probabilities.</p>
-<p>Given a sequence, pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code>, or dictionary, the constructor makes a
-Hist. Then it uses the Hist to initialize the attributes:</p>
-<p><code class="docutils literal notranslate"><span class="pre">xs</span></code> is the sorted list of values; <code class="docutils literal notranslate"><span class="pre">freqs</span></code> is the list of corresponding
-frequencies. <code class="docutils literal notranslate"><span class="pre">np.cumsum</span></code> computes the cumulative sum of the frequencies.
+<p>A CDF maps from values to cumulative probabilities, so I could have implemented <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> as a <code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code>.
+But the values in a CDF are ordered and the values in a <code class="docutils literal notranslate"><span class="pre">_DictWrapper</span></code> are not.
+Also, it is often useful to compute the inverse CDF; that is, the map from cumulative probability to value.
+So the implementation I chose is two sorted lists.
+That way I can use binary search to do a forward or inverse lookup in logarithmic time.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> constructor can take as a parameter a sequence of values or a Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code>, a dictionary that maps from values to probabilities, a sequence of (value, probability) pairs, a Hist, <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, or <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>.
+Or if it is given two parameters, it treats them as a sorted sequence of values and the sequence of corresponding cumulative probabilities.</p>
+<p>Given a sequence, Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code>, or dictionary, the constructor makes a Hist.
+Then it uses the Hist to initialize the attributes:</p>
+<p><code class="docutils literal notranslate"><span class="pre">xs</span></code> is the sorted list of values; <code class="docutils literal notranslate"><span class="pre">freqs</span></code> is the list of corresponding frequencies.
+<code class="docutils literal notranslate"><span class="pre">np.cumsum</span></code> computes the cumulative sum of the frequencies.
 Dividing through by the total frequency yields cumulative probabilities.
-For <code class="docutils literal notranslate"><span class="pre">n</span></code> values, the time to construct the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> is proportional to
-<span class="math notranslate nohighlight">\(n \log n\)</span>.</p>
-<p>Here is the implementation of <code class="docutils literal notranslate"><span class="pre">Prob</span></code>, which takes a value and returns
-its cumulative probability:</p>
+For <code class="docutils literal notranslate"><span class="pre">n</span></code> values, the time to construct the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> is proportional to <span class="math notranslate nohighlight">\(n \log n\)</span>.</p>
+<p>Here is the implementation of <code class="docutils literal notranslate"><span class="pre">Prob</span></code>, which takes a value and returns its cumulative probability:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -933,7 +872,7 @@ its cumulative probability:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 15;
+                var nbb_cell_id = 16;
                 var nbb_unformatted_code = "def prob(self, x):\n    if x < self.xs[0]:\n        return 0.0\n    index = bisect.bisect(self.xs, x)\n    p = self.ps[index - 1]\n    return p";
                 var nbb_formatted_code = "def prob(self, x):\n    if x < self.xs[0]:\n        return 0.0\n    index = bisect.bisect(self.xs, x)\n    p = self.ps[index - 1]\n    return p";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -948,9 +887,8 @@ its cumulative probability:</p>
             }, 500);
             </script></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">bisect</span></code> module provides an implementation of binary search. And
-here is the implementation of <code class="docutils literal notranslate"><span class="pre">Value</span></code>, which takes a cumulative
-probability and returns the corresponding value:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">bisect</span></code> module provides an implementation of binary search.
+And here is the implementation of <code class="docutils literal notranslate"><span class="pre">Value</span></code>, which takes a cumulative probability and returns the corresponding value:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
@@ -964,7 +902,7 @@ probability and returns the corresponding value:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 16;
+                var nbb_cell_id = 17;
                 var nbb_unformatted_code = "def value(self, p):\n    if p < 0 or p > 1:\n        raise ValueError(\"p must be in range [0, 1]\")\n    index = bisect.bisect_left(self.ps, p)\n    return self.xs[index]";
                 var nbb_formatted_code = "def value(self, p):\n    if p < 0 or p > 1:\n        raise ValueError(\"p must be in range [0, 1]\")\n    index = bisect.bisect_left(self.ps, p)\n    return self.xs[index]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -979,9 +917,8 @@ probability and returns the corresponding value:</p>
             }, 500);
             </script></div>
 </div>
-<p>Given a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>, we can compute the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> by computing differences between
-consecutive cumulative probabilities. If you call the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> constructor
-and pass a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, it computes differences by calling <code class="docutils literal notranslate"><span class="pre">Cdf.Items</span></code>:</p>
+<p>Given a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>, we can compute the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> by computing differences between consecutive cumulative probabilities.
+If you call the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> constructor and pass a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, it computes differences by calling <code class="docutils literal notranslate"><span class="pre">Cdf.Items</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -995,7 +932,7 @@ and pass a <code class="docutils literal notranslate"><span class="pre">Pmf</spa
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 17;
+                var nbb_cell_id = 18;
                 var nbb_unformatted_code = "def items(self):\n    a = self.ps\n    b = np.roll(a, 1)\n    b[0] = 0\n    return zip(self.xs, a - b)";
                 var nbb_formatted_code = "def items(self):\n    a = self.ps\n    b = np.roll(a, 1)\n    b[0] = 0\n    return zip(self.xs, a - b)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1010,21 +947,17 @@ and pass a <code class="docutils literal notranslate"><span class="pre">Pmf</spa
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">np.roll</span></code> shifts the elements of <code class="docutils literal notranslate"><span class="pre">a</span></code> to the right, and “rolls” the last
-one back to the beginning. We replace the first element of <code class="docutils literal notranslate"><span class="pre">b</span></code> with 0
-and then compute the difference <code class="docutils literal notranslate"><span class="pre">a-b</span></code>. The result is a NumPy array of
-probabilities.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Cdf</span></code> provides <code class="docutils literal notranslate"><span class="pre">shift</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code>, which modify the values in the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>,
-but the probabilities should be treated as immutable.</p>
+<p><code class="docutils literal notranslate"><span class="pre">np.roll</span></code> shifts the elements of <code class="docutils literal notranslate"><span class="pre">a</span></code> to the right, and “rolls” the last one back to the beginning.
+We replace the first element of <code class="docutils literal notranslate"><span class="pre">b</span></code> with 0 and then compute the difference <code class="docutils literal notranslate"><span class="pre">a-b</span></code>.
+The result is a NumPy array of probabilities.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Cdf</span></code> provides <code class="docutils literal notranslate"><span class="pre">shift</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code>, which modify the values in the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>, but the probabilities should be treated as immutable.</p>
 </section>
 <section id="moments">
 <h2>Moments<a class="headerlink" href="#moments" title="Link to this heading">#</a></h2>
-<p>Any time you take a sample and reduce it to a single number, that number
-is a statistic. The statistics we have seen so far include mean,
-variance, median, and interquartile range.</p>
-<p>A <strong>raw moment</strong> is a kind of statistic. If you have a sample of values,
-<span class="math notranslate nohighlight">\(x_i\)</span>, the <span class="math notranslate nohighlight">\(k\)</span>th raw moment is: $<span class="math notranslate nohighlight">\(m'_k = \frac{1}{n} \sum_i x_i^k\)</span>$ Or
-if you prefer Python notation:</p>
+<p>Any time you take a sample and reduce it to a single number, that number is a statistic.
+The statistics we have seen so far include mean, variance, median, and interquartile range.</p>
+<p>A <strong>raw moment</strong> is a kind of statistic.
+If you have a sample of values, <span class="math notranslate nohighlight">\(x_i\)</span>, the <span class="math notranslate nohighlight">\(k\)</span>th raw moment is: $<span class="math notranslate nohighlight">\(m'_k = \frac{1}{n} \sum_i x_i^k\)</span>$ Or if you prefer Python notation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">raw_moment</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
@@ -1035,7 +968,7 @@ if you prefer Python notation:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 18;
+                var nbb_cell_id = 19;
                 var nbb_unformatted_code = "def raw_moment(xs, k):\n    return sum(x**k for x in xs) / len(xs)";
                 var nbb_formatted_code = "def raw_moment(xs, k):\n    return sum(x**k for x in xs) / len(xs)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1060,7 +993,7 @@ if you prefer Python notation:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 19;
+                var nbb_cell_id = 20;
                 var nbb_unformatted_code = "def mean(xs):\n    return raw_moment(xs, 1)";
                 var nbb_formatted_code = "def mean(xs):\n    return raw_moment(xs, 1)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1087,7 +1020,7 @@ if you prefer Python notation:</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 20;
+                var nbb_cell_id = 21;
                 var nbb_unformatted_code = "mean(female_heights)";
                 var nbb_formatted_code = "mean(female_heights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1102,10 +1035,10 @@ if you prefer Python notation:</p>
             }, 500);
             </script></div>
 </div>
-<p>When <span class="math notranslate nohighlight">\(k=1\)</span> the result is the sample mean, <span class="math notranslate nohighlight">\(\bar{x}\)</span>. The other raw moments
-don’t mean much by themselves, but they are used in some computations.</p>
-<p>The <strong>central moments</strong> are more useful. The <span class="math notranslate nohighlight">\(k\)</span>th central moment is:
-$<span class="math notranslate nohighlight">\(m_k = \frac{1}{n} \sum_i (x_i - \bar{x})^k\)</span>$ Or in Python:</p>
+<p>When <span class="math notranslate nohighlight">\(k=1\)</span> the result is the sample mean, <span class="math notranslate nohighlight">\(\bar{x}\)</span>.
+The other raw moments don’t mean much by themselves, but they are used in some computations.</p>
+<p>The <strong>central moments</strong> are more useful.
+The <span class="math notranslate nohighlight">\(k\)</span>th central moment is: $<span class="math notranslate nohighlight">\(m_k = \frac{1}{n} \sum_i (x_i - \bar{x})^k\)</span>$ Or in Python:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">central_moment</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
@@ -1117,7 +1050,7 @@ $<span class="math notranslate nohighlight">\(m_k = \frac{1}{n} \sum_i (x_i - \b
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 21;
+                var nbb_cell_id = 22;
                 var nbb_unformatted_code = "def central_moment(xs, k):\n    mean = raw_moment(xs, 1)\n    return sum((x - mean) ** k for x in xs) / len(xs)";
                 var nbb_formatted_code = "def central_moment(xs, k):\n    mean = raw_moment(xs, 1)\n    return sum((x - mean) ** k for x in xs) / len(xs)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1144,7 +1077,7 @@ $<span class="math notranslate nohighlight">\(m_k = \frac{1}{n} \sum_i (x_i - \b
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 22;
+                var nbb_cell_id = 23;
                 var nbb_unformatted_code = "central_moment(female_heights, 1)";
                 var nbb_formatted_code = "central_moment(female_heights, 1)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1171,7 +1104,7 @@ $<span class="math notranslate nohighlight">\(m_k = \frac{1}{n} \sum_i (x_i - \b
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 23;
+                var nbb_cell_id = 24;
                 var nbb_unformatted_code = "central_moment(female_heights, 2)";
                 var nbb_formatted_code = "central_moment(female_heights, 2)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1198,7 +1131,7 @@ $<span class="math notranslate nohighlight">\(m_k = \frac{1}{n} \sum_i (x_i - \b
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 24;
+                var nbb_cell_id = 25;
                 var nbb_unformatted_code = "central_moment(female_heights, 3)";
                 var nbb_formatted_code = "central_moment(female_heights, 3)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1213,13 +1146,10 @@ $<span class="math notranslate nohighlight">\(m_k = \frac{1}{n} \sum_i (x_i - \b
             }, 500);
             </script></div>
 </div>
-<p>When <span class="math notranslate nohighlight">\(k=2\)</span> the result is the second central moment, which you might
-recognize as variance. The definition of variance gives a hint about why
-these statistics are called moments. If we attach a weight along a ruler
-at each location, <span class="math notranslate nohighlight">\(x_i\)</span>, and then spin the ruler around the mean, the
-moment of inertia of the spinning weights is the variance of the values.
-If you are not familiar with moment of inertia, see
-<a class="reference external" href="http://en.wikipedia.org/wiki/Moment_of_inertia">http://en.wikipedia.org/wiki/Moment_of_inertia</a>.</p>
+<p>When <span class="math notranslate nohighlight">\(k=2\)</span> the result is the second central moment, which you might recognize as variance.
+The definition of variance gives a hint about why these statistics are called moments.
+If we attach a weight along a ruler at each location, <span class="math notranslate nohighlight">\(x_i\)</span>, and then spin the ruler around the mean, the moment of inertia of the spinning weights is the variance of the values.
+If you are not familiar with moment of inertia, see <a class="reference external" href="http://en.wikipedia.org/wiki/Moment_of_inertia">http://en.wikipedia.org/wiki/Moment_of_inertia</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">var</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
@@ -1236,7 +1166,7 @@ If you are not familiar with moment of inertia, see
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 25;
+                var nbb_cell_id = 26;
                 var nbb_unformatted_code = "def var(xs):\n    return central_moment(xs, 2)\n\n\nvar(female_heights)";
                 var nbb_formatted_code = "def var(xs):\n    return central_moment(xs, 2)\n\n\nvar(female_heights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1251,27 +1181,19 @@ If you are not familiar with moment of inertia, see
             }, 500);
             </script></div>
 </div>
-<p>When you report moment-based statistics, it is important to think about
-the units. For example, if the values <span class="math notranslate nohighlight">\(x_i\)</span> are in cm, the first raw
-moment is also in cm. But the second moment is in cm<span class="math notranslate nohighlight">\(^2\)</span>, the third
-moment is in cm<span class="math notranslate nohighlight">\(^3\)</span>, and so on.</p>
+<p>When you report moment-based statistics, it is important to think about the units.
+For example, if the values <span class="math notranslate nohighlight">\(x_i\)</span> are in cm, the first raw moment is also in cm. But the second moment is in cm<span class="math notranslate nohighlight">\(^2\)</span>, the third moment is in cm<span class="math notranslate nohighlight">\(^3\)</span>, and so on.</p>
 <p>Because of these units, moments are hard to interpret by themselves.
-That’s why, for the second moment, it is common to report standard
-deviation, which is the square root of variance, so it is in the same
-units as <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
+That’s why, for the second moment, it is common to report standard deviation, which is the square root of variance, so it is in the same units as <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
 </section>
 <section id="skewness">
 <h2>Skewness<a class="headerlink" href="#skewness" title="Link to this heading">#</a></h2>
 <p><strong>Skewness</strong> is a property that describes the shape of a distribution.
-If the distribution is symmetric around its central tendency, it is
-unskewed. If the values extend farther to the right, it is “right
-skewed” and if the values extend left, it is “left skewed.”</p>
-<p>This use of “skewed” does not have the usual connotation of “biased.”
-Skewness only describes the shape of the distribution; it says nothing
-about whether the sampling process might have been biased.</p>
-<p>Several statistics are commonly used to quantify the skewness of a
-distribution. Given a sequence of values, <span class="math notranslate nohighlight">\(x_i\)</span>, the <strong>sample
-skewness</strong>, <span class="math notranslate nohighlight">\(g_1\)</span>, can be computed like this:</p>
+If the distribution is symmetric around its central tendency, it is unskewed.
+If the values extend farther to the right, it is “right skewed” and if the values extend left, it is “left skewed.”</p>
+<p>This use of “skewed” does not have the usual connotation of “biased.” Skewness only describes the shape of the distribution; it says nothing about whether the sampling process might have been biased.</p>
+<p>Several statistics are commonly used to quantify the skewness of a distribution.
+Given a sequence of values, <span class="math notranslate nohighlight">\(x_i\)</span>, the <strong>sample skewness</strong>, <span class="math notranslate nohighlight">\(g_1\)</span>, can be computed like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">standardized_moment</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
@@ -1284,7 +1206,7 @@ skewness</strong>, <span class="math notranslate nohighlight">\(g_1\)</span>, ca
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 26;
+                var nbb_cell_id = 27;
                 var nbb_unformatted_code = "def standardized_moment(xs, k):\n    var = central_moment(xs, 2)\n    std = np.sqrt(var)\n    return central_moment(xs, k) / std**k";
                 var nbb_formatted_code = "def standardized_moment(xs, k):\n    var = central_moment(xs, 2)\n    std = np.sqrt(var)\n    return central_moment(xs, k) / std**k";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1315,7 +1237,7 @@ skewness</strong>, <span class="math notranslate nohighlight">\(g_1\)</span>, ca
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 27;
+                var nbb_cell_id = 28;
                 var nbb_unformatted_code = "[\n    standardized_moment(female_heights, 1),\n    standardized_moment(female_heights, 2),\n    standardized_moment(female_heights, 3),\n]";
                 var nbb_formatted_code = "[\n    standardized_moment(female_heights, 1),\n    standardized_moment(female_heights, 2),\n    standardized_moment(female_heights, 3),\n]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1340,7 +1262,7 @@ skewness</strong>, <span class="math notranslate nohighlight">\(g_1\)</span>, ca
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 28;
+                var nbb_cell_id = 29;
                 var nbb_unformatted_code = "def skewness(xs):\n    return standardized_moment(xs, 3)";
                 var nbb_formatted_code = "def skewness(xs):\n    return standardized_moment(xs, 3)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1367,7 +1289,7 @@ skewness</strong>, <span class="math notranslate nohighlight">\(g_1\)</span>, ca
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 29;
+                var nbb_cell_id = 30;
                 var nbb_unformatted_code = "skewness(female_heights)";
                 var nbb_formatted_code = "skewness(female_heights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1382,23 +1304,16 @@ skewness</strong>, <span class="math notranslate nohighlight">\(g_1\)</span>, ca
             }, 500);
             </script></div>
 </div>
-<p><span class="math notranslate nohighlight">\(g_1\)</span> is the third <strong>standardized moment</strong>, which means that it has been
-normalized so it has no units.</p>
-<p>Negative skewness indicates that a distribution skews left; positive
-skewness indicates that a distribution skews right. The magnitude of
-<span class="math notranslate nohighlight">\(g_1\)</span> indicates the strength of the skewness, but by itself it is not
-easy to interpret.</p>
-<p>In practice, computing sample skewness is usually not a good idea. If
-there are any outliers, they have a disproportionate effect on <span class="math notranslate nohighlight">\(g_1\)</span>.</p>
-<p>Another way to evaluate the asymmetry of a distribution is to look at
-the relationship between the mean and median. Extreme values have more
-effect on the mean than the median, so in a distribution that skews
-left, the mean is less than the median. In a distribution that skews
-right, the mean is greater.</p>
-<p><strong>Pearson’s median skewness coefficient</strong> is a measure of skewness based
-on the difference between the sample mean and median:
-$<span class="math notranslate nohighlight">\(g_p = 3 (\bar{x} - m) / S\)</span><span class="math notranslate nohighlight">\( Where \)</span>\bar{x}<span class="math notranslate nohighlight">\( is the sample mean, \)</span>m<span class="math notranslate nohighlight">\( is the
-median, and \)</span>S$ is the standard deviation. Or in Python:</p>
+<p><span class="math notranslate nohighlight">\(g_1\)</span> is the third <strong>standardized moment</strong>, which means that it has been normalized so it has no units.</p>
+<p>Negative skewness indicates that a distribution skews left; positive skewness indicates that a distribution skews right.
+The magnitude of <span class="math notranslate nohighlight">\(g_1\)</span> indicates the strength of the skewness, but by itself it is not easy to interpret.</p>
+<p>In practice, computing sample skewness is usually not a good idea.
+If there are any outliers, they have a disproportionate effect on <span class="math notranslate nohighlight">\(g_1\)</span>.</p>
+<p>Another way to evaluate the asymmetry of a distribution is to look at the relationship between the mean and median.
+Extreme values have more effect on the mean than the median, so in a distribution that skews left, the mean is less than the median.
+In a distribution that skews right, the mean is greater.</p>
+<p><strong>Pearson’s median skewness coefficient</strong> is a measure of skewness based on the difference between the sample mean and median: $<span class="math notranslate nohighlight">\(g_p = 3 (\bar{x} - m) / S\)</span><span class="math notranslate nohighlight">\( Where \)</span>\bar{x}<span class="math notranslate nohighlight">\( is the sample mean, \)</span>m<span class="math notranslate nohighlight">\( is the median, and \)</span>S$ is the standard deviation.
+Or in Python:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
@@ -1413,7 +1328,7 @@ median, and \)</span>S$ is the standard deviation. Or in Python:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 30;
+                var nbb_cell_id = 31;
                 var nbb_unformatted_code = "from empiricaldist import Cdf\n\n\ndef median(xs):\n    cdf = Cdf.from_seq(xs)\n    return cdf.inverse(0.5)";
                 var nbb_formatted_code = "from empiricaldist import Cdf\n\n\ndef median(xs):\n    cdf = Cdf.from_seq(xs)\n    return cdf.inverse(0.5)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1440,7 +1355,7 @@ median, and \)</span>S$ is the standard deviation. Or in Python:</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 31;
+                var nbb_cell_id = 32;
                 var nbb_unformatted_code = "mean(female_heights), median(female_heights)";
                 var nbb_formatted_code = "mean(female_heights), median(female_heights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1470,7 +1385,7 @@ median, and \)</span>S$ is the standard deviation. Or in Python:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 32;
+                var nbb_cell_id = 33;
                 var nbb_unformatted_code = "def pearson_median_skewness(xs):\n    xbar = raw_moment(xs, 1)\n    m = median(xs)\n    s2 = central_moment(xs, 2)\n    s = np.sqrt(s2)\n    gp = 3 * (xbar - m) / s\n    return gp";
                 var nbb_formatted_code = "def pearson_median_skewness(xs):\n    xbar = raw_moment(xs, 1)\n    m = median(xs)\n    s2 = central_moment(xs, 2)\n    s = np.sqrt(s2)\n    gp = 3 * (xbar - m) / s\n    return gp";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1497,7 +1412,7 @@ median, and \)</span>S$ is the standard deviation. Or in Python:</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 33;
+                var nbb_cell_id = 34;
                 var nbb_unformatted_code = "pearson_median_skewness(female_heights)";
                 var nbb_formatted_code = "pearson_median_skewness(female_heights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1512,10 +1427,9 @@ median, and \)</span>S$ is the standard deviation. Or in Python:</p>
             }, 500);
             </script></div>
 </div>
-<p>This statistic is <strong>robust</strong>, which means that it is less vulnerable to
-the effect of outliers.</p>
-<p>As an example, let’s look at the skewness of birth weights in the NSFG
-pregnancy data. Here’s the code to estimate and plot the PDF:</p>
+<p>This statistic is <strong>robust</strong>, which means that it is less vulnerable to the effect of outliers.</p>
+<p>As an example, let’s look at the skewness of birth weights in the NSFG pregnancy data.
+Here’s the code to estimate and plot the PDF:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
@@ -1527,7 +1441,7 @@ pregnancy data. Here’s the code to estimate and plot the PDF:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 34;
+                var nbb_cell_id = 35;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1553,7 +1467,7 @@ pregnancy data. Here’s the code to estimate and plot the PDF:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 35;
+                var nbb_cell_id = 36;
                 var nbb_unformatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()";
                 var nbb_formatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1568,11 +1482,10 @@ pregnancy data. Here’s the code to estimate and plot the PDF:</p>
             }, 500);
             </script></div>
 </div>
-<p>The following figure shows the result. The left tail
-appears longer than the right, so we suspect the distribution is skewed
-left. The mean, 7.27 lbs, is a bit less than the median, 7.38 lbs, so
-that is consistent with left skew. And both skewness coefficients are
-negative: sample skewness is -0.59; Pearson’s median skewness is -0.23.</p>
+<p>The following figure shows the result.
+The left tail appears longer than the right, so we suspect the distribution is skewed left.
+The mean, 7.27 lbs, is a bit less than the median, 7.38 lbs, so that is consistent with left skew.
+And both skewness coefficients are negative: sample skewness is -0.59; Pearson’s median skewness is -0.23.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
@@ -1585,7 +1498,7 @@ negative: sample skewness is -0.59; Pearson’s median skewness is -0.23.</p>
 <img alt="_images/65f45973b9d7760d61fe9821d0964240e454f41339fabc9ce8cec470e21c9c54.png" src="_images/65f45973b9d7760d61fe9821d0964240e454f41339fabc9ce8cec470e21c9c54.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 36;
+                var nbb_cell_id = 37;
                 var nbb_unformatted_code = "data = live.totalwgt_lb.dropna()\npdf = EstimatedPdf(data, name=\"birth weight\")\npdf.plot()";
                 var nbb_formatted_code = "data = live.totalwgt_lb.dropna()\npdf = EstimatedPdf(data, name=\"birth weight\")\npdf.plot()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1600,8 +1513,8 @@ negative: sample skewness is -0.59; Pearson’s median skewness is -0.23.</p>
             }, 500);
             </script></div>
 </div>
-<p>Now let’s compare this distribution to the distribution of adult weight
-in the BRFSS. Again, here’s the code:</p>
+<p>Now let’s compare this distribution to the distribution of adult weight in the BRFSS.
+Again, here’s the code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">read_brfss</span><span class="p">()</span>
@@ -1615,7 +1528,7 @@ in the BRFSS. Again, here’s the code:</p>
 <img alt="_images/a868b1aa27fb23dbd08c249e10f33e71d144449021106180ec9bf0239ef155d4.png" src="_images/a868b1aa27fb23dbd08c249e10f33e71d144449021106180ec9bf0239ef155d4.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 37;
+                var nbb_cell_id = 38;
                 var nbb_unformatted_code = "df = brfss.read_brfss()\ndata = df.wtkg2.dropna()\npdf = EstimatedPdf(data, name=\"adult weight\")\npdf.plot()";
                 var nbb_formatted_code = "df = brfss.read_brfss()\ndata = df.wtkg2.dropna()\npdf = EstimatedPdf(data, name=\"adult weight\")\npdf.plot()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1630,59 +1543,51 @@ in the BRFSS. Again, here’s the code:</p>
             }, 500);
             </script></div>
 </div>
-<p>The following figure shows the result. The distribution
-appears skewed to the right. Sure enough, the mean, 79.0, is bigger than
-the median, 77.3. The sample skewness is 1.1 and Pearson’s median
-skewness is 0.26.</p>
-<p>The sign of the skewness coefficient indicates whether the distribution
-skews left or right, but other than that, they are hard to interpret.
-Sample skewness is less robust; that is, it is more susceptible to
-outliers. As a result it is less reliable when applied to skewed
-distributions, exactly when it would be most relevant.</p>
-<p>Pearson’s median skewness is based on a computed mean and variance, so
-it is also susceptible to outliers, but since it does not depend on a
-third moment, it is somewhat more robust.</p>
+<p>The following figure shows the result.
+The distribution appears skewed to the right.
+Sure enough, the mean, 79.0, is bigger than the median, 77.3. The sample skewness is 1.1 and Pearson’s median skewness is 0.26.</p>
+<p>The sign of the skewness coefficient indicates whether the distribution skews left or right, but other than that, they are hard to interpret.
+Sample skewness is less robust; that is, it is more susceptible to outliers.
+As a result it is less reliable when applied to skewed distributions, exactly when it would be most relevant.</p>
+<p>Pearson’s median skewness is based on a computed mean and variance, so it is also susceptible to outliers, but since it does not depend on a third moment, it is somewhat more robust.</p>
 </section>
 <section id="glossary">
 <h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Probability density function (PDF)</strong>: The derivative of a
-continuous CDF, a function that maps a value to its probability
-density.</p></li>
-<li><p><strong>Probability density</strong>: A quantity that can be integrated over a
-range of values to yield a probability. If the values are in units
-of cm, for example, probability density is in units of probability
-per cm.</p></li>
-<li><p><strong>Kernel density estimation (KDE)</strong>: An algorithm that estimates a
-PDF based on a sample.</p></li>
-<li><p><strong>discretize</strong>: To approximate a continuous function or distribution
-with a discrete function. The opposite of smoothing.</p></li>
-<li><p><strong>raw moment</strong>: A statistic based on the sum of data raised to a
-power.</p></li>
-<li><p><strong>central moment</strong>: A statistic based on deviation from the mean,
-raised to a power.</p></li>
+<li><p><strong>Probability density function (PDF)</strong>: The derivative of a continuous CDF, a function that maps a value to its probability density.</p></li>
+<li><p><strong>Probability density</strong>: A quantity that can be integrated over a range of values to yield a probability.
+If the values are in units of cm, for example, probability density is in units of probability per cm.</p></li>
+<li><p><strong>Kernel density estimation (KDE)</strong>: An algorithm that estimates a PDF based on a sample.</p></li>
+<li><p><strong>discretize</strong>: To approximate a continuous function or distribution with a discrete function.
+The opposite of smoothing.</p></li>
+<li><p><strong>raw moment</strong>: A statistic based on the sum of data raised to a power.</p></li>
+<li><p><strong>central moment</strong>: A statistic based on deviation from the mean, raised to a power.</p></li>
 <li><p><strong>standardized moment</strong>: A ratio of moments that has no units.</p></li>
 <li><p><strong>skewness</strong>: A measure of how asymmetric a distribution is.</p></li>
-<li><p><strong>sample skewness</strong>: A moment-based statistic intended to quantify
-the skewness of a distribution.</p></li>
-<li><p><strong>Pearson’s median skewness coefficient</strong>: A statistic intended to
-quantify the skewness of a distribution based on the median, mean,
-and standard deviation.</p></li>
-<li><p><strong>robust</strong>: A statistic is robust if it is relatively immune to the
-effect of outliers.</p></li>
+<li><p><strong>sample skewness</strong>: A moment-based statistic intended to quantify the skewness of a distribution.</p></li>
+<li><p><strong>Pearson’s median skewness coefficient</strong>: A statistic intended to quantify the skewness of a distribution based on the median, mean, and standard deviation.</p></li>
+<li><p><strong>robust</strong>: A statistic is robust if it is relatively immune to the effect of outliers.</p></li>
 </ul>
 </section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="exercise">
 <h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
-<p>The distribution of income is famously skewed to the right. In this exercise, we’ll measure how strong that skew is.
-The Current Population Survey (CPS) is a joint effort of the Bureau of Labor Statistics and the Census Bureau to study income and related variables. Data collected in 2013 is available from <a class="reference external" href="http://www.census.gov/hhes/www/cpstables/032013/hhinc/toc.htm">http://www.census.gov/hhes/www/cpstables/032013/hhinc/toc.htm</a>. I downloaded <code class="docutils literal notranslate"><span class="pre">hinc06.xls</span></code>, which is an Excel spreadsheet with information about household income, and converted it to <code class="docutils literal notranslate"><span class="pre">hinc06.csv</span></code>, a CSV file you will find in the repository for this book. You will also find <code class="docutils literal notranslate"><span class="pre">hinc2.py</span></code>, which reads this file and transforms the data.</p>
-<p>The dataset is in the form of a series of income ranges and the number of respondents who fell in each range. The lowest range includes respondents who reported annual household income “Under $5000.”</p>
+<p>The distribution of income is famously skewed to the right.
+In this exercise, we’ll measure how strong that skew is. The Current Population Survey (CPS) is a joint effort of the Bureau of Labor Statistics and the Census Bureau to study income and related variables.
+Data collected in 2013 is available from <a class="reference external" href="http://www.census.gov/hhes/www/cpstables/032013/hhinc/toc.htm">http://www.census.gov/hhes/www/cpstables/032013/hhinc/toc.htm</a>.
+I downloaded <code class="docutils literal notranslate"><span class="pre">hinc06.xls</span></code>, which is an Excel spreadsheet with information about household income, and converted it to <code class="docutils literal notranslate"><span class="pre">hinc06.csv</span></code>, a CSV file you will find in the repository for this book.
+You will also find <code class="docutils literal notranslate"><span class="pre">hinc2.py</span></code>, which reads this file and transforms the data.</p>
+<p>The dataset is in the form of a series of income ranges and the number of respondents who fell in each range.
+The lowest range includes respondents who reported annual household income “Under $5000.”</p>
 <p>The highest range includes respondents who made “$250,000 or more.”</p>
-<p>To estimate mean and other statistics from these data, we have to make some assumptions about the lower and upper bounds, and how the values are distributed in each range. <code class="docutils literal notranslate"><span class="pre">hinc2.py</span></code> provides <code class="docutils literal notranslate"><span class="pre">interpolate_sample</span></code>, which shows one way to model this data. It takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column, <code class="docutils literal notranslate"><span class="pre">income</span></code>, that contains the upper bound of each range, and <code class="docutils literal notranslate"><span class="pre">freq</span></code>, which contains the number of respondents in each frame.</p>
-<p>It also takes <code class="docutils literal notranslate"><span class="pre">log_upper</span></code>, which is an assumed upper bound on the highest range, expressed in <code class="docutils literal notranslate"><span class="pre">log10</span></code> dollars. The default value, <code class="docutils literal notranslate"><span class="pre">log_upper=6.0</span></code> represents the assumption that the largest income among the respondents is <span class="math notranslate nohighlight">\(10^6\)</span>, or one million dollars.</p>
-<p><code class="docutils literal notranslate"><span class="pre">interpolate_sample</span></code> generates a pseudo-sample; that is, a sample of household incomes that yields the same number of respondents in each range as the actual data. It assumes that incomes in each range are equally spaced on a <code class="docutils literal notranslate"><span class="pre">log10</span></code> scale.</p>
+<p>To estimate mean and other statistics from these data, we have to make some assumptions about the lower and upper bounds, and how the values are distributed in each range.
+<code class="docutils literal notranslate"><span class="pre">hinc2.py</span></code> provides <code class="docutils literal notranslate"><span class="pre">interpolate_sample</span></code>, which shows one way to model this data.
+It takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column, <code class="docutils literal notranslate"><span class="pre">income</span></code>, that contains the upper bound of each range, and <code class="docutils literal notranslate"><span class="pre">freq</span></code>, which contains the number of respondents in each frame.</p>
+<p>It also takes <code class="docutils literal notranslate"><span class="pre">log_upper</span></code>, which is an assumed upper bound on the highest range, expressed in <code class="docutils literal notranslate"><span class="pre">log10</span></code> dollars.
+The default value, <code class="docutils literal notranslate"><span class="pre">log_upper=6.0</span></code> represents the assumption that the largest income among the respondents is <span class="math notranslate nohighlight">\(10^6\)</span>, or one million dollars.</p>
+<p><code class="docutils literal notranslate"><span class="pre">interpolate_sample</span></code> generates a pseudo-sample; that is, a sample of household incomes that yields the same number of respondents in each range as the actual data.
+It assumes that incomes in each range are equally spaced on a <code class="docutils literal notranslate"><span class="pre">log10</span></code> scale.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/hinc.py&quot;</span><span class="p">)</span>
@@ -1693,7 +1598,7 @@ The Current Population Survey (CPS) is a joint effort of the Bureau of Labor Sta
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 38;
+                var nbb_cell_id = 39;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/hinc.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/hinc06.csv\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/hinc.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/hinc06.csv\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1736,7 +1641,7 @@ The Current Population Survey (CPS) is a joint effort of the Bureau of Labor Sta
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 39;
+                var nbb_cell_id = 40;
                 var nbb_unformatted_code = "def interpolate_sample(df, log_upper=6.0):\n    \"\"\"Makes a sample of log10 household income.\n\n    Assumes that log10 income is uniform in each range.\n\n    df: DataFrame with columns income and freq\n    log_upper: log10 of the assumed upper bound for the highest range\n\n    returns: NumPy array of log10 household income\n    \"\"\"\n    df[\"log_upper\"] = np.log10(df.income)\n    df[\"log_lower\"] = df.log_upper.shift(1)\n    df.loc[0, \"log_lower\"] = 3.0\n    df.loc[41, \"log_upper\"] = log_upper\n    arrays = []\n    for _, row in df.iterrows():\n        vals = np.linspace(row.log_lower, row.log_upper, int(row.freq))\n        arrays.append(vals)\n    log_sample = np.concatenate(arrays)\n    return log_sample";
                 var nbb_formatted_code = "def interpolate_sample(df, log_upper=6.0):\n    \"\"\"Makes a sample of log10 household income.\n\n    Assumes that log10 income is uniform in each range.\n\n    df: DataFrame with columns income and freq\n    log_upper: log10 of the assumed upper bound for the highest range\n\n    returns: NumPy array of log10 household income\n    \"\"\"\n    df[\"log_upper\"] = np.log10(df.income)\n    df[\"log_lower\"] = df.log_upper.shift(1)\n    df.loc[0, \"log_lower\"] = 3.0\n    df.loc[41, \"log_upper\"] = log_upper\n    arrays = []\n    for _, row in df.iterrows():\n        vals = np.linspace(row.log_lower, row.log_upper, int(row.freq))\n        arrays.append(vals)\n    log_sample = np.concatenate(arrays)\n    return log_sample";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1762,7 +1667,7 @@ The Current Population Survey (CPS) is a joint effort of the Bureau of Labor Sta
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 40;
+                var nbb_cell_id = 41;
                 var nbb_unformatted_code = "import hinc\n\nincome_df = hinc.read_data()";
                 var nbb_formatted_code = "import hinc\n\nincome_df = hinc.read_data()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1777,8 +1682,10 @@ The Current Population Survey (CPS) is a joint effort of the Bureau of Labor Sta
             }, 500);
             </script></div>
 </div>
-<p>Compute the median, mean, skewness and Pearson’s skewness of the resulting sample. What fraction of households report a taxable income below the mean? How do the results depend on the assumed upper bound?</p>
-<p>All of this is based on an assumption that the highest income is one million dollars, but that’s certainly not correct.  What happens to the skew if the upper bound is 10 million?</p>
+<p>Compute the median, mean, skewness and Pearson’s skewness of the resulting sample.
+What fraction of households report a taxable income below the mean? How do the results depend on the assumed upper bound?</p>
+<p>All of this is based on an assumption that the highest income is one million dollars, but that’s certainly not correct.
+What happens to the skew if the upper bound is 10 million?</p>
 <p>Without better information about the top of this distribution, we can’t say much about the skewness of the distribution.</p>
 </section>
 </section>

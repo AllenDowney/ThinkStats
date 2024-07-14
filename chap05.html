@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Probability density functions" href="chap06.html" />
-    <link rel="prev" title="Cumulative distribution functions" href="chap04.html" />
+    <link rel="prev" title="Cumulative Distribution Functions" href="chap04.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,8 +177,8 @@
 <li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Modeling distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
@@ -355,7 +355,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-distribution">The exponential distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-normal-distribution">The normal distribution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-probability-plot">Normal probability plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-probability-plot"><code class="docutils literal notranslate"><span class="pre">Normal</span></code> probability plot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-lognormal-distribution">The lognormal distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pareto-distribution">The Pareto distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-random-numbers">Generating random numbers</a></li>
@@ -381,15 +381,11 @@ document.write(`
                   
   <section id="modeling-distributions">
 <h1>Modeling distributions<a class="headerlink" href="#modeling-distributions" title="Link to this heading">#</a></h1>
-<p>The distributions we have used so far are called <strong>empirical
-distributions</strong> because they are based on empirical observations, which
-are necessarily finite samples.</p>
-<p>The alternative is an <strong>analytic distribution</strong>, which is characterized
-by a CDF that is a mathematical function. Analytic distributions can be
-used to model empirical distributions. In this context, a <strong>model</strong> is a
-simplification that leaves out unneeded details. This chapter presents
-common analytic distributions and uses them to model data from a variety
-of sources.</p>
+<p>The distributions we have used so far are called <strong>empirical distributions</strong> because they are based on empirical observations, which are necessarily finite samples.</p>
+<p>The alternative is an <strong>analytic distribution</strong>, which is characterized by a CDF that is a mathematical function.
+Analytic distributions can be used to model empirical distributions.
+In this context, a <strong>model</strong> is a simplification that leaves out unneeded details.
+This chapter presents common analytic distributions and uses them to model data from a variety of sources.</p>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -410,7 +406,6 @@ of sources.</p>
 
 
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -418,8 +413,8 @@ of sources.</p>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 2;
-                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py\")";
-                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkplot.py\")";
+                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
+                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -436,7 +431,9 @@ of sources.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
 <span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">decorate</span>
 </pre></div>
 </div>
@@ -444,9 +441,9 @@ of sources.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\nfrom thinkstats import decorate";
-                var nbb_formatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\nfrom thinkstats import decorate";
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
+                var nbb_formatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -461,10 +458,8 @@ of sources.</p>
 </div>
 <section id="the-exponential-distribution">
 <h2>The exponential distribution<a class="headerlink" href="#the-exponential-distribution" title="Link to this heading">#</a></h2>
-<p>I’ll start with the <strong>exponential distribution</strong> because it is
-relatively simple. The CDF of the exponential distribution is
-$<span class="math notranslate nohighlight">\(CDF(x) = 1 - e^{-\lambda x}\)</span><span class="math notranslate nohighlight">\( The parameter, \)</span>\lambda$, determines
-the shape of the distribution.</p>
+<p>I’ll start with the <strong>exponential distribution</strong> because it is relatively simple.
+The CDF of the exponential distribution is $<span class="math notranslate nohighlight">\(CDF(x) = 1 - e^{-\lambda x}\)</span><span class="math notranslate nohighlight">\( The parameter, \)</span>\lambda$, determines the shape of the distribution.</p>
 <p>The following figure shows what this CDF looks like with <span class="math notranslate nohighlight">\(\lambda =\)</span> 0.5, 1, and 2.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -482,7 +477,7 @@ the shape of the distribution.</p>
 <img alt="_images/24485c75d916e76b5e586770c5916491e72b2eca8e0833f6141d13e688107a95.png" src="_images/24485c75d916e76b5e586770c5916491e72b2eca8e0833f6141d13e688107a95.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 7;
+                var nbb_cell_id = 4;
                 var nbb_unformatted_code = "from thinkstats import render_expo_cdf\n\nfor lam in [2.0, 1, 0.5]:\n    xs, ps = render_expo_cdf(lam, 0, 3.0, 50)\n    label = \"$\\\\lambda=%g$\" % lam\n    plt.plot(xs, ps, label=label)\ndecorate(title=\"Exponential CDF\", xlabel=\"x\", ylabel=\"CDF\", loc=\"lower right\")";
                 var nbb_formatted_code = "from thinkstats import render_expo_cdf\n\nfor lam in [2.0, 1, 0.5]:\n    xs, ps = render_expo_cdf(lam, 0, 3.0, 50)\n    label = \"$\\\\lambda=%g$\" % lam\n    plt.plot(xs, ps, label=label)\ndecorate(title=\"Exponential CDF\", xlabel=\"x\", ylabel=\"CDF\", loc=\"lower right\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -497,16 +492,10 @@ the shape of the distribution.</p>
             }, 500);
             </script></div>
 </div>
-<p>In the real world, exponential distributions come up when we look at a
-series of events and measure the times between events, called
-<strong>interarrival times</strong>. If the events are equally likely to occur at any
-time, the distribution of interarrival times tends to look like an
-exponential distribution.</p>
-<p>As an example, we will look at the interarrival time of births. On
-December 18, 1997, 44 babies were born in a hospital in Brisbane,
-Australia.[^1] The time of birth for all 44 babies was reported in the
-local paper; the complete dataset is in a file called <code class="docutils literal notranslate"><span class="pre">babyboom.dat</span></code>, in
-the <code class="docutils literal notranslate"><span class="pre">ThinkStats2</span></code> repository.</p>
+<p>In the real world, exponential distributions come up when we look at a series of events and measure the times between events, called <strong>interarrival times</strong>.
+If the events are equally likely to occur at any time, the distribution of interarrival times tends to look like an exponential distribution.</p>
+<p>As an example, we will look at the interarrival time of births.
+On December 18, 1997, 44 babies were born in a hospital in Brisbane, Australia.[^1] The time of birth for all 44 babies was reported in the local paper; the complete dataset is in a file called <code class="docutils literal notranslate"><span class="pre">babyboom.dat</span></code>, in the <code class="docutils literal notranslate"><span class="pre">ThinkStats2</span></code> repository.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/babyboom.dat&quot;</span><span class="p">)</span>
@@ -516,7 +505,7 @@ the <code class="docutils literal notranslate"><span class="pre">ThinkStats2</sp
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 8;
+                var nbb_cell_id = 5;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/babyboom.dat\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/babyboom.dat\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -543,7 +532,7 @@ the <code class="docutils literal notranslate"><span class="pre">ThinkStats2</sp
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 9;
+                var nbb_cell_id = 6;
                 var nbb_unformatted_code = "from thinkstats import read_baby_boom\n\ndf = read_baby_boom()\ndiffs = df.minutes.diff()";
                 var nbb_formatted_code = "from thinkstats import read_baby_boom\n\ndf = read_baby_boom()\ndiffs = df.minutes.diff()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -572,7 +561,7 @@ the <code class="docutils literal notranslate"><span class="pre">ThinkStats2</sp
 <img alt="_images/64e58f6647ce43e66a6ea5f649a8cfce1b4b4b2dae37045391aecea8beac63e3.png" src="_images/64e58f6647ce43e66a6ea5f649a8cfce1b4b4b2dae37045391aecea8beac63e3.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 10;
+                var nbb_cell_id = 7;
                 var nbb_unformatted_code = "from empiricaldist import Cdf\n\ncdf = Cdf.from_seq(diffs, name=\"actual\")\ncdf.plot()\ndecorate(xlabel=\"minutes\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "from empiricaldist import Cdf\n\ncdf = Cdf.from_seq(diffs, name=\"actual\")\ncdf.plot()\ndecorate(xlabel=\"minutes\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -587,22 +576,15 @@ the <code class="docutils literal notranslate"><span class="pre">ThinkStats2</sp
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">ReadBabyBoom</span></code> reads the data file and returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with columns
-<code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">sex</span></code>, <code class="docutils literal notranslate"><span class="pre">weight_g</span></code>, and <code class="docutils literal notranslate"><span class="pre">minutes</span></code>, where <code class="docutils literal notranslate"><span class="pre">minutes</span></code> is time of
-birth converted to minutes since midnight.</p>
-<p><code class="docutils literal notranslate"><span class="pre">diffs</span></code> is the difference between consecutive birth times, and <code class="docutils literal notranslate"><span class="pre">cdf</span></code> is
-the distribution of these interarrival times.
-The following figure (left) shows the CDF. It seems to
-have the general shape of an exponential distribution, but how can we
-tell?</p>
-<p>One way is to plot the <strong>complementary CDF</strong>, which is <span class="math notranslate nohighlight">\(1 - CDF(x)\)</span>, on
-a log-y scale. For data from an exponential distribution, the result is
-a straight line. Let’s see why that works.</p>
-<p>If you plot the complementary CDF (CCDF) of a dataset that you think is
-exponential, you expect to see a function like:
-$<span class="math notranslate nohighlight">\(y \approx e^{-\lambda x}\)</span><span class="math notranslate nohighlight">\( Taking the log of both sides yields:
-\)</span><span class="math notranslate nohighlight">\(\log y \approx -\lambda x\)</span><span class="math notranslate nohighlight">\( So on a log-y scale the CCDF is a straight
-line with slope \)</span>-\lambda$. Here’s how we can generate a plot like that:</p>
+<p><code class="docutils literal notranslate"><span class="pre">ReadBabyBoom</span></code> reads the data file and returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with columns <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">sex</span></code>, <code class="docutils literal notranslate"><span class="pre">weight_g</span></code>, and <code class="docutils literal notranslate"><span class="pre">minutes</span></code>, where <code class="docutils literal notranslate"><span class="pre">minutes</span></code> is time of birth converted to minutes since midnight.</p>
+<p><code class="docutils literal notranslate"><span class="pre">diffs</span></code> is the difference between consecutive birth times, and <code class="docutils literal notranslate"><span class="pre">cdf</span></code> is the distribution of these interarrival times.
+The following figure (left) shows the CDF.
+It seems to have the general shape of an exponential distribution, but how can we tell?</p>
+<p>One way is to plot the <strong>complementary CDF</strong>, which is <span class="math notranslate nohighlight">\(1 - CDF(x)\)</span>, on a log-y scale.
+For data from an exponential distribution, the result is a straight line.
+Let’s see why that works.</p>
+<p>If you plot the complementary CDF (CCDF) of a dataset that you think is exponential, you expect to see a function like: $<span class="math notranslate nohighlight">\(y \approx e^{-\lambda x}\)</span><span class="math notranslate nohighlight">\( Taking the log of both sides yields: \)</span><span class="math notranslate nohighlight">\(\log y \approx -\lambda x\)</span><span class="math notranslate nohighlight">\( So on a log-y scale the CCDF is a straight line with slope \)</span>-\lambda$.
+Here’s how we can generate a plot like that:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">cdf</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -614,8 +596,8 @@ line with slope \)</span>-\lambda$. Here’s how we can generate a plot like tha
 <img alt="_images/bb2faed2d3131298791536f34366c8f41a2231da3e2494ca13e6e722c5846889.png" src="_images/bb2faed2d3131298791536f34366c8f41a2231da3e2494ca13e6e722c5846889.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 13;
-                var nbb_unformatted_code = "(1-cdf).plot()\ndecorate(xlabel=\"minutes\", ylabel=\"CCDF\", yscale=\"log\")";
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "(1 - cdf).plot()\ndecorate(xlabel=\"minutes\", ylabel=\"CCDF\", yscale=\"log\")";
                 var nbb_formatted_code = "(1 - cdf).plot()\ndecorate(xlabel=\"minutes\", ylabel=\"CCDF\", yscale=\"log\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -629,36 +611,24 @@ line with slope \)</span>-\lambda$. Here’s how we can generate a plot like tha
             }, 500);
             </script></div>
 </div>
-<p>With the argument <code class="docutils literal notranslate"><span class="pre">complement=True</span></code>, <code class="docutils literal notranslate"><span class="pre">thinkplot.Cdf</span></code> computes the
-complementary CDF before plotting. And with <code class="docutils literal notranslate"><span class="pre">yscale='log'</span></code>,
-<code class="docutils literal notranslate"><span class="pre">thinkplot.Show</span></code> sets the <code class="docutils literal notranslate"><span class="pre">y</span></code> axis to a logarithmic scale.</p>
-<p>The following figure (right) shows the result. It is
-not exactly straight, which indicates that the exponential distribution
-is not a perfect model for this data. Most likely the underlying
-assumption—that a birth is equally likely at any time of day—is not
-exactly true. Nevertheless, it might be reasonable to model this dataset
-with an exponential distribution. With that simplification, we can
-summarize the distribution with a single parameter.</p>
-<p>The parameter, <span class="math notranslate nohighlight">\(\lambda\)</span>, can be interpreted as a rate; that is, the
-number of events that occur, on average, in a unit of time. In this
-example, 44 babies are born in 24 hours, so the rate is <span class="math notranslate nohighlight">\(\lambda =
-0.0306\)</span> births per minute. The mean of an exponential distribution is
-<span class="math notranslate nohighlight">\(1/\lambda\)</span>, so the mean time between births is 32.7 minutes.</p>
+<p>It is not exactly straight, which indicates that the exponential distribution is not a perfect model for this data.
+Most likely the underlying assumption—that a birth is equally likely at any time of day—is not exactly true.
+Nevertheless, it might be reasonable to model this dataset with an exponential distribution.
+With that simplification, we can summarize the distribution with a single parameter.</p>
+<p>The parameter, <span class="math notranslate nohighlight">\(\lambda\)</span>, can be interpreted as a rate; that is, the number of events that occur, on average, in a unit of time.
+In this example, 44 babies are born in 24 hours, so the rate is <span class="math notranslate nohighlight">\(\lambda = 0.0306\)</span> births per minute.
+The mean of an exponential distribution is <span class="math notranslate nohighlight">\(1/\lambda\)</span>, so the mean time between births is 32.7 minutes.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">yscale='log'</span></code> the <code class="docutils literal notranslate"><span class="pre">y</span></code> axis is on a logarithmic scale.</p>
+<p>The following figure (right) shows the result.</p>
 </section>
 <section id="the-normal-distribution">
 <h2>The normal distribution<a class="headerlink" href="#the-normal-distribution" title="Link to this heading">#</a></h2>
-<p>The <strong>normal distribution</strong>, also called Gaussian, is commonly used
-because it describes many phenomena, at least approximately. It turns
-out that there is a good reason for its ubiquity, which we will get to
-in Section <a class="reference internal" href="#CLT"><span class="xref myst">[CLT]</span></a>{reference-type=“ref” reference=“CLT”}.</p>
-<p>The normal distribution is characterized by two parameters: the mean,
-<span class="math notranslate nohighlight">\(\mu\)</span>, and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>. The normal distribution with
-<span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma=1\)</span> is called the <strong>standard normal distribution</strong>.
-Its CDF is defined by an integral that does not have a closed form
-solution, but there are algorithms that evaluate it efficiently. One of
-them is provided by SciPy: <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm</span></code> is an object that
-represents a normal distribution; it provides a method, <code class="docutils literal notranslate"><span class="pre">cdf</span></code>, that
-evaluates the standard normal CDF:</p>
+<p>The <strong>normal distribution</strong>, also called Gaussian, is commonly used because it describes many phenomena, at least approximately.
+It turns out that there is a good reason for its ubiquity, which we will get to in Section <a class="reference internal" href="#CLT"><span class="xref myst">[CLT]</span></a>{reference-type=“ref” reference=“CLT”}.</p>
+<p>The normal distribution is characterized by two parameters: the mean, <span class="math notranslate nohighlight">\(\mu\)</span>, and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.
+The normal distribution with <span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma=1\)</span> is called the <strong>standard normal distribution</strong>.
+Its CDF is defined by an integral that does not have a closed form solution, but there are algorithms that evaluate it efficiently.
+One of them is provided by SciPy: <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm</span></code> is an object that represents a normal distribution; it provides a method, <code class="docutils literal notranslate"><span class="pre">cdf</span></code>, that evaluates the standard normal CDF:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span>
@@ -673,7 +643,7 @@ evaluates the standard normal CDF:</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 14;
+                var nbb_cell_id = 9;
                 var nbb_unformatted_code = "import scipy.stats\n\nscipy.stats.norm.cdf(0)";
                 var nbb_formatted_code = "import scipy.stats\n\nscipy.stats.norm.cdf(0)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -688,14 +658,9 @@ evaluates the standard normal CDF:</p>
             }, 500);
             </script></div>
 </div>
-<p>This result is correct: the median of the standard normal distribution
-is 0 (the same as the mean), and half of the values fall below the
-median, so <span class="math notranslate nohighlight">\(CDF(0)\)</span> is 0.5.</p>
-<p><code class="docutils literal notranslate"><span class="pre">norm.cdf</span></code> takes optional parameters: <code class="docutils literal notranslate"><span class="pre">loc</span></code>, which specifies the mean,
-and <code class="docutils literal notranslate"><span class="pre">scale</span></code>, which specifies the standard deviation.</p>
-<p><code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> makes this function a little easier to use by providing
-<code class="docutils literal notranslate"><span class="pre">EvalNormalCdf</span></code>, which takes parameters <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code> and evaluates
-the CDF at <code class="docutils literal notranslate"><span class="pre">x</span></code>:</p>
+<p>This result is correct: the median of the standard normal distribution is 0 (the same as the mean), and half of the values fall below the median, so <span class="math notranslate nohighlight">\(CDF(0)\)</span> is 0.5.</p>
+<p><code class="docutils literal notranslate"><span class="pre">norm.cdf</span></code> takes optional parameters: <code class="docutils literal notranslate"><span class="pre">loc</span></code>, which specifies the mean, and <code class="docutils literal notranslate"><span class="pre">scale</span></code>, which specifies the standard deviation.</p>
+<p><code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> makes this function a little easier to use by providing <code class="docutils literal notranslate"><span class="pre">Eval</span></code>Normal<code class="docutils literal notranslate"><span class="pre">Cdf</span></code>, which takes parameters <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code> and evaluates the CDF at <code class="docutils literal notranslate"><span class="pre">x</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eval_normal_cdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -706,7 +671,7 @@ the CDF at <code class="docutils literal notranslate"><span class="pre">x</span>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 15;
+                var nbb_cell_id = 10;
                 var nbb_unformatted_code = "def eval_normal_cdf(x, mu=0, sigma=1):\n    return scipy.stats.norm.cdf(x, loc=mu, scale=sigma)";
                 var nbb_formatted_code = "def eval_normal_cdf(x, mu=0, sigma=1):\n    return scipy.stats.norm.cdf(x, loc=mu, scale=sigma)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -721,9 +686,8 @@ the CDF at <code class="docutils literal notranslate"><span class="pre">x</span>
             }, 500);
             </script></div>
 </div>
-<p>The following figure shows CDFs for normal distributions
-with a range of parameters. The sigmoid shape of these curves is a
-recognizable characteristic of a normal distribution.</p>
+<p>The following figure shows CDFs for normal distributions with a range of parameters.
+The sigmoid shape of these curves is a recognizable characteristic of a normal distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">render_normal_cdf</span>
@@ -742,7 +706,7 @@ recognizable characteristic of a normal distribution.</p>
 <img alt="_images/6530219c4e36b3007ce6530a33fd636022b43b25b2dc2f3316dbde14ae14a022.png" src="_images/6530219c4e36b3007ce6530a33fd636022b43b25b2dc2f3316dbde14ae14a022.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 16;
+                var nbb_cell_id = 11;
                 var nbb_unformatted_code = "from thinkstats import render_normal_cdf\n\nmus = [1.0, 2.0, 3.0]\nsigmas = [0.5, 0.4, 0.3]\nfor mu, sigma in zip(mus, sigmas):\n    xs, ps = render_normal_cdf(mu=mu, sigma=sigma, low=-1.0, high=4.0)\n    label = \"$\\\\mu=%g$, $\\\\sigma=%g$\" % (mu, sigma)\n    plt.plot(xs, ps, label=label)\ndecorate(title=\"Normal CDF\", xlabel=\"x\", ylabel=\"CDF\", loc=\"upper left\")";
                 var nbb_formatted_code = "from thinkstats import render_normal_cdf\n\nmus = [1.0, 2.0, 3.0]\nsigmas = [0.5, 0.4, 0.3]\nfor mu, sigma in zip(mus, sigmas):\n    xs, ps = render_normal_cdf(mu=mu, sigma=sigma, low=-1.0, high=4.0)\n    label = \"$\\\\mu=%g$, $\\\\sigma=%g$\" % (mu, sigma)\n    plt.plot(xs, ps, label=label)\ndecorate(title=\"Normal CDF\", xlabel=\"x\", ylabel=\"CDF\", loc=\"upper left\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -757,11 +721,8 @@ recognizable characteristic of a normal distribution.</p>
             }, 500);
             </script></div>
 </div>
-<p>In the previous chapter we looked at the distribution of birth weights
-in the NSFG.
-The following figure shows the empirical CDF of weights
-for all live births and the CDF of a normal distribution with the same
-mean and variance.</p>
+<p>In the previous chapter we looked at the distribution of birth weights in the NSFG.
+The following figure shows the empirical CDF of weights for all live births and the CDF of a normal distribution with the same mean and variance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
@@ -773,7 +734,7 @@ mean and variance.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 18;
+                var nbb_cell_id = 12;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -793,16 +754,16 @@ mean and variance.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nsfg</span>
 
 <span class="n">preg</span> <span class="o">=</span> <span class="n">nsfg</span><span class="o">.</span><span class="n">read_fem_preg</span><span class="p">()</span>
-<span class="n">weights</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">birth_weights</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">totalwgt_lb</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 19;
-                var nbb_unformatted_code = "import nsfg\n\npreg = nsfg.read_fem_preg()\nweights = preg.totalwgt_lb.dropna()";
-                var nbb_formatted_code = "import nsfg\n\npreg = nsfg.read_fem_preg()\nweights = preg.totalwgt_lb.dropna()";
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "import nsfg\n\npreg = nsfg.read_fem_preg()\nbirth_weights = preg.totalwgt_lb.dropna()";
+                var nbb_formatted_code = "import nsfg\n\npreg = nsfg.read_fem_preg()\nbirth_weights = preg.totalwgt_lb.dropna()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -817,81 +778,60 @@ mean and variance.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">trimmed_mean_var</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">trim</span>
 
-<span class="n">mu</span><span class="p">,</span> <span class="n">var</span> <span class="o">=</span> <span class="n">trimmed_mean_var</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean, Var&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean, Var 7.280883100022579 1.5452125703544901
-</pre></div>
-</div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 20;
-                var nbb_unformatted_code = "from thinkstats import trimmed_mean_var\n\nmu, var = trimmed_mean_var(weights, p=0.01)\nprint(\"Mean, Var\", mu, var)";
-                var nbb_formatted_code = "from thinkstats import trimmed_mean_var\n\nmu, var = trimmed_mean_var(weights, p=0.01)\nprint(\"Mean, Var\", mu, var)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sigma&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sigma 1.2430657948614345
-</pre></div>
-</div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 21;
-                var nbb_unformatted_code = "sigma = np.sqrt(var)\nprint(\"Sigma\", sigma)";
-                var nbb_formatted_code = "sigma = np.sqrt(var)\nprint(\"Sigma\", sigma)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xs</span><span class="p">,</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">render_normal_cdf</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">12.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ps</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.6&quot;</span><span class="p">)</span>
 
-<span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
-<span class="n">cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">plot_normal_model</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">num_sigmas</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots a CDF with a Normal model.</span>
+
+<span class="sd">    sample: sequence</span>
+<span class="sd">    num_sigmas: number of standard deviations from the mean</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sample&quot;</span><span class="p">)</span>
+    <span class="n">trimmed</span> <span class="o">=</span> <span class="n">trim</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">trimmed</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">trimmed</span><span class="p">)</span>
+
+    <span class="n">xmin</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="n">num_sigmas</span> <span class="o">*</span> <span class="n">s</span>
+    <span class="n">xmax</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">num_sigmas</span> <span class="o">*</span> <span class="n">s</span>
+    <span class="n">xs</span><span class="p">,</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">render_normal_cdf</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ps</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.8&quot;</span><span class="p">)</span>
+    <span class="n">cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "from thinkstats import trim\n\n\ndef plot_normal_model(sample, num_sigmas=4):\n    \"\"\"Plots a CDF with a Normal model.\n\n    sample: sequence\n    num_sigmas: number of standard deviations from the mean\n    \"\"\"\n    cdf = Cdf.from_seq(sample, name=\"sample\")\n    trimmed = trim(sample, 0.01)\n    m, s = np.mean(trimmed), np.std(trimmed)\n\n    xmin = m - num_sigmas * s\n    xmax = m + num_sigmas * s\n    xs, ps = render_normal_cdf(m, s, xmin, xmax)\n    plt.plot(xs, ps, label=\"model\", linewidth=4, color=\"0.8\")\n    cdf.plot()";
+                var nbb_formatted_code = "from thinkstats import trim\n\n\ndef plot_normal_model(sample, num_sigmas=4):\n    \"\"\"Plots a CDF with a Normal model.\n\n    sample: sequence\n    num_sigmas: number of standard deviations from the mean\n    \"\"\"\n    cdf = Cdf.from_seq(sample, name=\"sample\")\n    trimmed = trim(sample, 0.01)\n    m, s = np.mean(trimmed), np.std(trimmed)\n\n    xmin = m - num_sigmas * s\n    xmax = m + num_sigmas * s\n    xs, ps = render_normal_cdf(m, s, xmin, xmax)\n    plt.plot(xs, ps, label=\"model\", linewidth=4, color=\"0.8\")\n    cdf.plot()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_normal_model</span><span class="p">(</span><span class="n">birth_weights</span><span class="p">,</span> <span class="n">num_sigmas</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 
 <span class="n">decorate</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Birth weights&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Birth weight (pounds)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/59d5498161ea5ff8ef2d203039fe7034a446fadef25678b36330e3da37994b08.png" src="_images/59d5498161ea5ff8ef2d203039fe7034a446fadef25678b36330e3da37994b08.png" />
+<img alt="_images/61c3ca6a0e0d1863c69a861d16b4b00c90443bb4d3351fbe5730d1ba002ba87d.png" src="_images/61c3ca6a0e0d1863c69a861d16b4b00c90443bb4d3351fbe5730d1ba002ba87d.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 24;
-                var nbb_unformatted_code = "xs, ps = render_normal_cdf(mu, sigma, low=0, high=12.5)\nplt.plot(xs, ps, label=\"model\", color=\"0.6\")\n\ncdf = Cdf.from_seq(weights, name=\"data\")\ncdf.plot()\n\ndecorate(title=\"Birth weights\", xlabel=\"Birth weight (pounds)\", ylabel=\"CDF\")";
-                var nbb_formatted_code = "xs, ps = render_normal_cdf(mu, sigma, low=0, high=12.5)\nplt.plot(xs, ps, label=\"model\", color=\"0.6\")\n\ncdf = Cdf.from_seq(weights, name=\"data\")\ncdf.plot()\n\ndecorate(title=\"Birth weights\", xlabel=\"Birth weight (pounds)\", ylabel=\"CDF\")";
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "plot_normal_model(birth_weights, num_sigmas=6)\n\ndecorate(title=\"Birth weights\", xlabel=\"Birth weight (pounds)\", ylabel=\"CDF\")";
+                var nbb_formatted_code = "plot_normal_model(birth_weights, num_sigmas=6)\n\ndecorate(title=\"Birth weights\", xlabel=\"Birth weight (pounds)\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -904,50 +844,52 @@ mean and variance.</p>
             }, 500);
             </script></div>
 </div>
-<p>The normal distribution is a good model for this dataset, so if we
-summarize the distribution with the parameters <span class="math notranslate nohighlight">\(\mu = 7.28\)</span> and
-<span class="math notranslate nohighlight">\(\sigma = 1.24\)</span>, the resulting error (difference between the model and
-the data) is small.</p>
-<p>Below the 10th percentile there is a discrepancy between the data and
-the model; there are more light babies than we would expect in a normal
-distribution. If we are specifically interested in preterm babies, it
-would be important to get this part of the distribution right, so it
-might not be appropriate to use the normal model.</p>
+<p>The normal distribution is a good model for this dataset, so if we summarize the distribution with the parameters <span class="math notranslate nohighlight">\(\mu = 7.28\)</span> and <span class="math notranslate nohighlight">\(\sigma = 1.24\)</span>, the resulting error (difference between the model and the data) is small.</p>
+<p>Below the 10th percentile there is a discrepancy between the data and the model; there are more light babies than we would expect in a normal distribution.
+If we are specifically interested in preterm babies, it would be important to get this part of the distribution right, so it might not be appropriate to use the normal model.</p>
 </section>
 <section id="normal-probability-plot">
-<h2>Normal probability plot<a class="headerlink" href="#normal-probability-plot" title="Link to this heading">#</a></h2>
-<p>For the exponential distribution, and a few others, there are simple
-transformations we can use to test whether an analytic distribution is a
-good model for a dataset.</p>
-<p>For the normal distribution there is no such transformation, but there
-is an alternative called a <strong>normal probability plot</strong>. There are two
-ways to generate a normal probability plot: the hard way and the easy
-way. If you are interested in the hard way, you can read about it at
-<a class="reference external" href="https://en.wikipedia.org/wiki/Normal_probability_plot">https://en.wikipedia.org/wiki/Normal_probability_plot</a>. Here’s the easy
-way:</p>
+<h2><code class="docutils literal notranslate"><span class="pre">Normal</span></code> probability plot<a class="headerlink" href="#normal-probability-plot" title="Link to this heading">#</a></h2>
+<p>For the exponential distribution, and a few others, there are simple transformations we can use to test whether an analytic distribution is a good model for a dataset.</p>
+<p>For the normal distribution there is no such transformation, but there is an alternative called a <strong>normal probability plot</strong>.
+There are two ways to generate a normal probability plot: the hard way and the easy way.
+If you are interested in the hard way, you can read about it at <a class="reference external" href="https://en.wikipedia.org/wiki/%60Normal%60_probability_plot">https://en.wikipedia.org/wiki/`Normal`_probability_plot</a>.
+Here’s the easy way:</p>
 <ol class="arabic simple">
 <li><p>Sort the values in the sample.</p></li>
-<li><p>From a standard normal distribution (<span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma=1\)</span>),
-generate a random sample with the same size as the sample, and sort
-it.</p></li>
+<li><p>From a standard normal distribution (<span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma=1\)</span>), generate a random sample with the same size as the sample, and sort it.</p></li>
 <li><p>Plot the sorted values from the sample versus the random values.</p></li>
 </ol>
-<p>If the distribution of the sample is approximately normal, the result is
-a straight line with intercept <code class="docutils literal notranslate"><span class="pre">mu</span></code> and slope <code class="docutils literal notranslate"><span class="pre">sigma</span></code>. <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code>
-provides <code class="docutils literal notranslate"><span class="pre">normal_probability</span></code>, which takes a sample and returns two NumPy
-arrays:</p>
+<p>If the distribution of the sample is approximately normal, the result is a straight line with intercept <code class="docutils literal notranslate"><span class="pre">mu</span></code> and slope <code class="docutils literal notranslate"><span class="pre">sigma</span></code>.
+The following function takes a sample and generates a normal probability plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">normal_probability</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">normal_probability_plot</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">show_model</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes a normal probability plot with a fitted line.</span>
+
+<span class="sd">    sample: sequence of numbers</span>
+<span class="sd">    show_model: whether to plot the model line</span>
+<span class="sd">    options: passed along to plt.plot</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ys</span><span class="p">))</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">show_model</span><span class="p">:</span>
+        <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+        <span class="n">fit_ys</span> <span class="o">=</span> <span class="n">inter</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">xs</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">fit_ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 25;
-                var nbb_unformatted_code = "from thinkstats import normal_probability";
-                var nbb_formatted_code = "from thinkstats import normal_probability";
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "def normal_probability_plot(sample, show_model=True, **options):\n    \"\"\"Makes a normal probability plot with a fitted line.\n\n    sample: sequence of numbers\n    show_model: whether to plot the model line\n    options: passed along to plt.plot\n    \"\"\"\n    ys = np.sort(sample)\n    xs = np.random.normal(0, 1, len(ys))\n    xs.sort()\n\n    if show_model:\n        inter, slope = np.mean(sample), np.std(sample)\n        fit_ys = inter + slope * xs\n        plt.plot(xs, fit_ys, color=\"gray\", label=\"model\")\n\n    plt.plot(xs, ys, **options)";
+                var nbb_formatted_code = "def normal_probability_plot(sample, show_model=True, **options):\n    \"\"\"Makes a normal probability plot with a fitted line.\n\n    sample: sequence of numbers\n    show_model: whether to plot the model line\n    options: passed along to plt.plot\n    \"\"\"\n    ys = np.sort(sample)\n    xs = np.random.normal(0, 1, len(ys))\n    xs.sort()\n\n    if show_model:\n        inter, slope = np.mean(sample), np.std(sample)\n        fit_ys = inter + slope * xs\n        plt.plot(xs, fit_ys, color=\"gray\", label=\"model\")\n\n    plt.plot(xs, ys, **options)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -960,13 +902,9 @@ arrays:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">ys</span></code> contains the sorted values from <code class="docutils literal notranslate"><span class="pre">sample</span></code>; <code class="docutils literal notranslate"><span class="pre">xs</span></code> contains the random
-values from the standard normal distribution.</p>
-<p>To test <code class="docutils literal notranslate"><span class="pre">normal_probability</span></code> I generated some fake samples that were
-actually drawn from normal distributions with various parameters.
-The following figure shows the results. The lines
-are approximately straight, with values in the tails deviating more than
-values near the mean.</p>
+<p>To test it, we’ll generate samples from normal distributions with various parameters.
+The following figure shows the results.
+The lines are approximately straight, with values in the tails deviating more than values near the mean.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -975,9 +913,7 @@ values near the mean.</p>
 
 <span class="k">for</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mus</span><span class="p">,</span> <span class="n">sigmas</span><span class="p">):</span>
     <span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">normal_probability</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">mu=</span><span class="si">%d</span><span class="s2">$, $</span><span class="se">\\</span><span class="s2">sigma=</span><span class="si">%d</span><span class="s2">$&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">normal_probability_plot</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
 
 <span class="n">decorate</span><span class="p">(</span>
     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Normal probability plot&quot;</span><span class="p">,</span>
@@ -988,12 +924,12 @@ values near the mean.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e00258fcba4d8cc55f1f867125e71b1f58b6587da1a196c4f979c5266f0decd0.png" src="_images/e00258fcba4d8cc55f1f867125e71b1f58b6587da1a196c4f979c5266f0decd0.png" />
+<img alt="_images/0af11c1647cc5001773c43f18ab05c838d9291d4709343e41df2f70d5c169148.png" src="_images/0af11c1647cc5001773c43f18ab05c838d9291d4709343e41df2f70d5c169148.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 28;
-                var nbb_unformatted_code = "n = 1000\nmus = [0, 1, 5]\nsigmas = [1, 1, 2]\n\nfor mu, sigma in zip(mus, sigmas):\n    sample = np.random.normal(mu, sigma, n)\n    xs, ys = normal_probability(sample)\n    label = \"$\\\\mu=%d$, $\\\\sigma=%d$\" % (mu, sigma)\n    plt.plot(xs, ys, label=label)\n\ndecorate(\n    title=\"Normal probability plot\",\n    xlabel=\"standard normal sample\",\n    ylabel=\"sample values\",\n)";
-                var nbb_formatted_code = "n = 1000\nmus = [0, 1, 5]\nsigmas = [1, 1, 2]\n\nfor mu, sigma in zip(mus, sigmas):\n    sample = np.random.normal(mu, sigma, n)\n    xs, ys = normal_probability(sample)\n    label = \"$\\\\mu=%d$, $\\\\sigma=%d$\" % (mu, sigma)\n    plt.plot(xs, ys, label=label)\n\ndecorate(\n    title=\"Normal probability plot\",\n    xlabel=\"standard normal sample\",\n    ylabel=\"sample values\",\n)";
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "n = 1000\nmus = [0, 1, 5]\nsigmas = [1, 1, 2]\n\nfor mu, sigma in zip(mus, sigmas):\n    sample = np.random.normal(mu, sigma, n)\n    normal_probability_plot(sample, label=label)\n\ndecorate(\n    title=\"Normal probability plot\",\n    xlabel=\"standard normal sample\",\n    ylabel=\"sample values\",\n)";
+                var nbb_formatted_code = "n = 1000\nmus = [0, 1, 5]\nsigmas = [1, 1, 2]\n\nfor mu, sigma in zip(mus, sigmas):\n    sample = np.random.normal(mu, sigma, n)\n    normal_probability_plot(sample, label=label)\n\ndecorate(\n    title=\"Normal probability plot\",\n    xlabel=\"standard normal sample\",\n    ylabel=\"sample values\",\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1006,107 +942,12 @@ values near the mean.</p>
             }, 500);
             </script></div>
 </div>
-<p>Now let’s try it with real data. Here’s code to generate a normal
-probability plot for the birth weight data from the previous section. It
-plots a gray line that represents the model and a blue line that
-represents the data.</p>
+<p>Now let’s try it with real data.
+Here’s code to generate a normal probability plot for the birth weight data from the previous section.
+It plots a gray line that represents the model and a blue line that represents the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_normal_plot</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
-    <span class="n">mean</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-    <span class="n">std</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
-    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-    <span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span> <span class="o">=</span> <span class="n">fit_line</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">inter</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="n">std</span><span class="p">)</span>
-    <span class="n">thinkplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
-
-    <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">normal_probability</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;birth weights&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 30;
-                var nbb_unformatted_code = "def make_normal_plot(weights):\n    mean = weights.mean()\n    std = weights.std()\n    xs = [-4, 4]\n    fxs, fys = fit_line(xs, inter=mean, slope=std)\n    thinkplot.plot(fxs, fys, color=\"gray\", name=\"model\")\n\n    xs, ys = normal_probability(weights)\n    plt.plot(xs, ys, label=\"birth weights\")";
-                var nbb_formatted_code = "def make_normal_plot(weights):\n    mean = weights.mean()\n    std = weights.std()\n    xs = [-4, 4]\n    fxs, fys = fit_line(xs, inter=mean, slope=std)\n    thinkplot.plot(fxs, fys, color=\"gray\", name=\"model\")\n\n    xs, ys = normal_probability(weights)\n    plt.plot(xs, ys, label=\"birth weights\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">weights</span></code> is a pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> of birth weights; <code class="docutils literal notranslate"><span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">std</span></code> are the
-mean and standard deviation.</p>
-<p><code class="docutils literal notranslate"><span class="pre">fit_line</span></code> takes a sequence of <code class="docutils literal notranslate"><span class="pre">xs</span></code>, an intercept, and a slope; it
-returns <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> that represent a line with the given parameters,
-evaluated at the values in <code class="docutils literal notranslate"><span class="pre">xs</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">fit_line</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 31;
-                var nbb_unformatted_code = "from thinkstats import fit_line";
-                var nbb_formatted_code = "from thinkstats import fit_line";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">normal_probability</span></code> returns <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> that contain values from the
-standard normal distribution and values from <code class="docutils literal notranslate"><span class="pre">weights</span></code>. If the
-distribution of weights is normal, the data should match the model.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span><span class="p">,</span> <span class="n">var</span> <span class="o">=</span> <span class="n">trimmed_mean_var</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-<span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 32;
-                var nbb_unformatted_code = "mean, var = trimmed_mean_var(weights, p=0.01)\nstd = np.sqrt(var)";
-                var nbb_formatted_code = "mean, var = trimmed_mean_var(weights, p=0.01)\nstd = np.sqrt(var)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-<span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span> <span class="o">=</span> <span class="n">fit_line</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fxs</span><span class="p">,</span> <span class="n">fys</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.8&quot;</span><span class="p">)</span>
-
-<span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">normal_probability</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;all live&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normal_probability_plot</span><span class="p">(</span><span class="n">birth_weights</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
 <span class="n">decorate</span><span class="p">(</span>
     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Normal probability plot&quot;</span><span class="p">,</span>
     <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Standard deviations from mean&quot;</span><span class="p">,</span>
@@ -1116,12 +957,12 @@ distribution of weights is normal, the data should match the model.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/14c67a5cad173e5287649c8f85fc837bb44c730c6b28158fb85c0d688751f05d.png" src="_images/14c67a5cad173e5287649c8f85fc837bb44c730c6b28158fb85c0d688751f05d.png" />
+<img alt="_images/29d21d0fba40dd959bc0a9fb155f448959aa7ba2fd9d7432659afe7f8bebce29.png" src="_images/29d21d0fba40dd959bc0a9fb155f448959aa7ba2fd9d7432659afe7f8bebce29.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 34;
-                var nbb_unformatted_code = "xs = [-4, 4]\nfxs, fys = fit_line(xs, mean, std)\nplt.plot(fxs, fys, linewidth=4, color=\"0.8\")\n\nxs, ys = normal_probability(weights)\nplt.plot(xs, ys, label=\"all live\")\ndecorate(\n    title=\"Normal probability plot\",\n    xlabel=\"Standard deviations from mean\",\n    ylabel=\"Birth weight (lbs)\",\n)";
-                var nbb_formatted_code = "xs = [-4, 4]\nfxs, fys = fit_line(xs, mean, std)\nplt.plot(fxs, fys, linewidth=4, color=\"0.8\")\n\nxs, ys = normal_probability(weights)\nplt.plot(xs, ys, label=\"all live\")\ndecorate(\n    title=\"Normal probability plot\",\n    xlabel=\"Standard deviations from mean\",\n    ylabel=\"Birth weight (lbs)\",\n)";
+                var nbb_cell_id = 18;
+                var nbb_unformatted_code = "normal_probability_plot(birth_weights, label=\"data\")\ndecorate(\n    title=\"Normal probability plot\",\n    xlabel=\"Standard deviations from mean\",\n    ylabel=\"Birth weight (lbs)\",\n)";
+                var nbb_formatted_code = "normal_probability_plot(birth_weights, label=\"data\")\ndecorate(\n    title=\"Normal probability plot\",\n    xlabel=\"Standard deviations from mean\",\n    ylabel=\"Birth weight (lbs)\",\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1134,48 +975,25 @@ distribution of weights is normal, the data should match the model.</p>
             }, 500);
             </script></div>
 </div>
-<p>The following figure shows the results for all live
-births, and also for full term births (pregnancy length greater than 36
-weeks). Both curves match the model near the mean and deviate in the
-tails. The heaviest babies are heavier than what the model expects, and
-the lightest babies are lighter.</p>
-<p>When we select only full term births, we remove some of the lightest
-weights, which reduces the discrepancy in the lower tail of the
-distribution.</p>
-<p>This plot suggests that the normal model describes the distribution well
-within a few standard deviations from the mean, but not in the tails.
-Whether it is good enough for practical purposes depends on the
-purposes.</p>
+<p>Near the middle…</p>
+<p>The heaviest babies are heavier than what the model expects, and the lightest babies are lighter.</p>
+<p>This plot suggests that the normal model describes the distribution well within a few standard deviations from the mean, but not in the tails.
+Whether it is good enough for practical purposes depends on the purposes.</p>
 </section>
 <section id="the-lognormal-distribution">
 <h2>The lognormal distribution<a class="headerlink" href="#the-lognormal-distribution" title="Link to this heading">#</a></h2>
-<p>If the logarithms of a set of values have a normal distribution, the
-values have a <strong>lognormal distribution</strong>. The CDF of the lognormal
-distribution is the same as the CDF of the normal distribution, with
-<span class="math notranslate nohighlight">\(\log x\)</span> substituted for <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>If the logarithms of a set of values have a normal distribution, the values have a <strong>lognormal distribution</strong>.
+The CDF of the lognormal distribution is the same as the CDF of the normal distribution, with <span class="math notranslate nohighlight">\(\log x\)</span> substituted for <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[CDF_{lognormal}(x) = CDF_{normal}(\log x)\]</div>
-<p>The parameters of the
-lognormal distribution are usually denoted <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. But
-remember that these parameters are <em>not</em> the mean and standard
-deviation; the mean of a lognormal distribution is
-<span class="math notranslate nohighlight">\(\exp(\mu +\sigma^2/2)\)</span> and the standard deviation is ugly (see
-<a class="reference external" href="http://wikipedia.org/wiki/Log-normal_distribution">http://wikipedia.org/wiki/Log-normal_distribution</a>).</p>
-<p>If a sample is approximately lognormal and you plot its CDF on a log-x
-scale, it will have the characteristic shape of a normal distribution.
-To test how well the sample fits a lognormal model, you can make a
-normal probability plot using the log of the values in the sample.</p>
-<p>As an example, let’s look at the distribution of adult weights, which is
-approximately lognormal.[^2]</p>
-<p>The National Center for Chronic Disease Prevention and Health Promotion
-conducts an annual survey as part of the Behavioral Risk Factor
-Surveillance System (BRFSS).[^3] In 2008, they interviewed 414,509
-respondents and asked about their demographics, health, and health
-risks. Among the data they collected are the weights in kilograms of
-398,484 respondents.</p>
-<p>The repository for this book contains <code class="docutils literal notranslate"><span class="pre">CDBRFS08.ASC.gz</span></code>, a fixed-width
-ASCII file that contains data from the BRFSS, and <code class="docutils literal notranslate"><span class="pre">brfss.py</span></code>, which
-reads the file and analyzes the data.</p>
+<p>The parameters of the lognormal distribution are usually denoted <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>.
+But remember that these parameters are <em>not</em> the mean and standard deviation; the mean of a lognormal distribution is <span class="math notranslate nohighlight">\(\exp(\mu +\sigma^2/2)\)</span> and the standard deviation is ugly (see <a class="reference external" href="http://wikipedia.org/wiki/Log-normal_distribution">http://wikipedia.org/wiki/Log-normal_distribution</a>).</p>
+<p>If a sample is approximately lognormal and you plot its CDF on a log-x scale, it will have the characteristic shape of a normal distribution.
+To test how well the sample fits a lognormal model, you can make a normal probability plot using the log of the values in the sample.</p>
+<p>As an example, let’s look at the distribution of adult weights, which is approximately lognormal.[^2]</p>
+<p>The National Center for Chronic Disease Prevention and Health Promotion conducts an annual survey as part of the Behavioral Risk Factor Surveillance System (BRFSS).[^3] In 2008, they interviewed 414,509 respondents and asked about their demographics, health, and health risks.
+Among the data they collected are the weights in kilograms of 398,484 respondents.</p>
+<p>The repository for this book contains <code class="docutils literal notranslate"><span class="pre">CDBRFS08.ASC.gz</span></code>, a fixed-width ASCII file that contains data from the BRFSS, and <code class="docutils literal notranslate"><span class="pre">brfss.py</span></code>, which reads the file and analyzes the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/brfss.py&quot;</span><span class="p">)</span>
@@ -1186,7 +1004,7 @@ reads the file and analyzes the data.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 35;
+                var nbb_cell_id = 19;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/brfss.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/brfss.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1213,7 +1031,7 @@ reads the file and analyzes the data.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 36;
+                var nbb_cell_id = 20;
                 var nbb_unformatted_code = "import brfss\n\ndf = brfss.read_brfss()\nweights = df.wtkg2.dropna()";
                 var nbb_formatted_code = "import brfss\n\ndf = brfss.read_brfss()\nweights = df.wtkg2.dropna()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1230,45 +1048,7 @@ reads the file and analyzes the data.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_normal_model</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots a CDF with a Normal model.</span>
-
-<span class="sd">    weights: sequence</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;weights&quot;</span><span class="p">)</span>
-    <span class="n">mean</span><span class="p">,</span> <span class="n">var</span> <span class="o">=</span> <span class="n">trimmed_mean_var</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
-    <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;n, mean, std&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">),</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
-
-    <span class="n">xmin</span> <span class="o">=</span> <span class="n">mean</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">std</span>
-    <span class="n">xmax</span> <span class="o">=</span> <span class="n">mean</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">std</span>
-    <span class="n">xs</span><span class="p">,</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">render_normal_cdf</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ps</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.8&quot;</span><span class="p">)</span>
-    <span class="n">cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 39;
-                var nbb_unformatted_code = "def make_normal_model(weights):\n    \"\"\"Plots a CDF with a Normal model.\n\n    weights: sequence\n    \"\"\"\n    cdf = Cdf.from_seq(weights, name=\"weights\")\n    mean, var = trimmed_mean_var(weights)\n    std = np.sqrt(var)\n    print(\"n, mean, std\", len(weights), mean, std)\n\n    xmin = mean - 4 * std\n    xmax = mean + 4 * std\n    xs, ps = render_normal_cdf(mean, std, xmin, xmax)\n    plt.plot(xs, ps, label=\"model\", linewidth=4, color=\"0.8\")\n    cdf.plot()";
-                var nbb_formatted_code = "def make_normal_model(weights):\n    \"\"\"Plots a CDF with a Normal model.\n\n    weights: sequence\n    \"\"\"\n    cdf = Cdf.from_seq(weights, name=\"weights\")\n    mean, var = trimmed_mean_var(weights)\n    std = np.sqrt(var)\n    print(\"n, mean, std\", len(weights), mean, std)\n\n    xmin = mean - 4 * std\n    xmax = mean + 4 * std\n    xs, ps = render_normal_cdf(mean, std, xmin, xmax)\n    plt.plot(xs, ps, label=\"model\", linewidth=4, color=\"0.8\")\n    cdf.plot()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">make_normal_model</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_normal_model</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 
 <span class="n">decorate</span><span class="p">(</span>
     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Adult weight, linear scale&quot;</span><span class="p">,</span>
@@ -1280,15 +1060,12 @@ reads the file and analyzes the data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n, mean, std 398484 78.59599565702814 17.754555191798282
-</pre></div>
-</div>
-<img alt="_images/fb999d3d0159fe2cbb82092568706a79c758f03ef652bdf672febe1f13be8a57.png" src="_images/fb999d3d0159fe2cbb82092568706a79c758f03ef652bdf672febe1f13be8a57.png" />
+<img alt="_images/f4b26444b3fc3667434b97b3e8c7e039e78df06d1175aafecf244f71a460582b.png" src="_images/f4b26444b3fc3667434b97b3e8c7e039e78df06d1175aafecf244f71a460582b.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 40;
-                var nbb_unformatted_code = "make_normal_model(weights)\n\ndecorate(\n    title=\"Adult weight, linear scale\",\n    xlabel=\"Weight (kg)\",\n    ylabel=\"CDF\",\n    loc=\"upper right\",\n)";
-                var nbb_formatted_code = "make_normal_model(weights)\n\ndecorate(\n    title=\"Adult weight, linear scale\",\n    xlabel=\"Weight (kg)\",\n    ylabel=\"CDF\",\n    loc=\"upper right\",\n)";
+                var nbb_cell_id = 21;
+                var nbb_unformatted_code = "plot_normal_model(weights)\n\ndecorate(\n    title=\"Adult weight, linear scale\",\n    xlabel=\"Weight (kg)\",\n    ylabel=\"CDF\",\n    loc=\"upper right\",\n)";
+                var nbb_formatted_code = "plot_normal_model(weights)\n\ndecorate(\n    title=\"Adult weight, linear scale\",\n    xlabel=\"Weight (kg)\",\n    ylabel=\"CDF\",\n    loc=\"upper right\",\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1304,7 +1081,7 @@ reads the file and analyzes the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
-<span class="n">make_normal_model</span><span class="p">(</span><span class="n">log_weights</span><span class="p">)</span>
+<span class="n">plot_normal_model</span><span class="p">(</span><span class="n">log_weights</span><span class="p">)</span>
 <span class="n">decorate</span><span class="p">(</span>
     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Adult weight, log scale&quot;</span><span class="p">,</span>
     <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Weight (log10 kg)&quot;</span><span class="p">,</span>
@@ -1315,15 +1092,12 @@ reads the file and analyzes the data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n, mean, std 398484 1.884660713731975 0.09623580259151703
-</pre></div>
-</div>
-<img alt="_images/7c31ecdd5bdf8e5d6f31268b4370601d18d6270738851633d36c875f78fa0725.png" src="_images/7c31ecdd5bdf8e5d6f31268b4370601d18d6270738851633d36c875f78fa0725.png" />
+<img alt="_images/97b197a639837fdf01e37f275550617119d5a5f551f9ee268f7927e09d1b0ab0.png" src="_images/97b197a639837fdf01e37f275550617119d5a5f551f9ee268f7927e09d1b0ab0.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 41;
-                var nbb_unformatted_code = "log_weights = np.log10(weights)\nmake_normal_model(log_weights)\ndecorate(\n    title=\"Adult weight, log scale\",\n    xlabel=\"Weight (log10 kg)\",\n    ylabel=\"CDF\",\n    loc=\"upper right\",\n)";
-                var nbb_formatted_code = "log_weights = np.log10(weights)\nmake_normal_model(log_weights)\ndecorate(\n    title=\"Adult weight, log scale\",\n    xlabel=\"Weight (log10 kg)\",\n    ylabel=\"CDF\",\n    loc=\"upper right\",\n)";
+                var nbb_cell_id = 22;
+                var nbb_unformatted_code = "log_weights = np.log10(weights)\nplot_normal_model(log_weights)\ndecorate(\n    title=\"Adult weight, log scale\",\n    xlabel=\"Weight (log10 kg)\",\n    ylabel=\"CDF\",\n    loc=\"upper right\",\n)";
+                var nbb_formatted_code = "log_weights = np.log10(weights)\nplot_normal_model(log_weights)\ndecorate(\n    title=\"Adult weight, log scale\",\n    xlabel=\"Weight (log10 kg)\",\n    ylabel=\"CDF\",\n    loc=\"upper right\",\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1336,33 +1110,22 @@ reads the file and analyzes the data.</p>
             }, 500);
             </script></div>
 </div>
-<p>The following figure (left) shows the distribution of adult weights
-on a linear scale with a normal model.
-The following figure (right) shows the same distribution on a log
-scale with a lognormal model. The lognormal model is a better fit, but
-this representation of the data does not make the difference
-particularly dramatic.</p>
-<p>The following figure shows normal probability plots for
-adult weights, <span class="math notranslate nohighlight">\(w\)</span>, and for their logarithms, <span class="math notranslate nohighlight">\(\log_{10} w\)</span>. Now it is
-apparent that the data deviate substantially from the normal model. On
-the other hand, the lognormal model is a good match for the data.</p>
+<p>The following figure (left) shows the distribution of adult weights on a linear scale with a normal model.
+The following figure (right) shows the same distribution on a log scale with a lognormal model.
+The lognormal model is a better fit, but this representation of the data does not make the difference particularly dramatic.</p>
+<p>The following figure shows normal probability plots for adult weights, <span class="math notranslate nohighlight">\(w\)</span>, and for their logarithms, <span class="math notranslate nohighlight">\(\log_{10} w\)</span>. Now it is apparent that the data deviate substantially from the normal model.
+On the other hand, the lognormal model is a good match for the data.</p>
 </section>
 <section id="the-pareto-distribution">
 <h2>The Pareto distribution<a class="headerlink" href="#the-pareto-distribution" title="Link to this heading">#</a></h2>
-<p>The <strong>Pareto distribution</strong> is named after the economist Vilfredo
-Pareto, who used it to describe the distribution of wealth (see
-<a class="reference external" href="http://wikipedia.org/wiki/Pareto_distribution">http://wikipedia.org/wiki/Pareto_distribution</a>). Since then, it has
-been used to describe phenomena in the natural and social sciences
-including sizes of cities and towns, sand particles and meteorites,
-forest fires and earthquakes.</p>
+<p>The <strong>Pareto distribution</strong> is named after the economist Vilfredo Pareto, who used it to describe the distribution of wealth (see <a class="reference external" href="http://wikipedia.org/wiki/Pareto_distribution">http://wikipedia.org/wiki/Pareto_distribution</a>).
+Since then, it has been used to describe phenomena in the natural and social sciences including sizes of cities and towns, sand particles and meteorites, forest fires and earthquakes.</p>
 <p>The CDF of the Pareto distribution is:</p>
 <div class="math notranslate nohighlight">
 \[CDF(x) = 1 - \left( \frac{x}{x_m} \right) ^{-\alpha}\]</div>
-<p>The parameters
-<span class="math notranslate nohighlight">\(x_{m}\)</span> and <span class="math notranslate nohighlight">\(\alpha\)</span> determine the location and shape of the
-distribution. <span class="math notranslate nohighlight">\(x_{m}\)</span> is the minimum possible value.
-The following figure shows CDFs of Pareto distributions with
-<span class="math notranslate nohighlight">\(x_{m} = 0.5\)</span> and different values of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<p>The parameters <span class="math notranslate nohighlight">\(x_{m}\)</span> and <span class="math notranslate nohighlight">\(\alpha\)</span> determine the location and shape of the distribution.
+<span class="math notranslate nohighlight">\(x_{m}\)</span> is the minimum possible value.
+The following figure shows CDFs of Pareto distributions with <span class="math notranslate nohighlight">\(x_{m} = 0.5\)</span> and different values of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">render_pareto_cdf</span>
@@ -1380,7 +1143,7 @@ The following figure shows CDFs of Pareto distributions with
 <img alt="_images/3c7a738924cd5c546874dc567ad3efaf4178d1b06b6f6dc4b94bf3e29f88bf39.png" src="_images/3c7a738924cd5c546874dc567ad3efaf4178d1b06b6f6dc4b94bf3e29f88bf39.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 43;
+                var nbb_cell_id = 23;
                 var nbb_unformatted_code = "from thinkstats import render_pareto_cdf\n\nxmin = 0.5\nfor alpha in [2.0, 1.0, 0.5]:\n    xs, ps = render_pareto_cdf(xmin, alpha, 0, 10.0, n=100)\n    plt.plot(xs, ps, label=\"$\\\\alpha=%g$\" % alpha)\n\ndecorate(title=\"Pareto CDF\", xlabel=\"x\", ylabel=\"CDF\", loc=\"lower right\")";
                 var nbb_formatted_code = "from thinkstats import render_pareto_cdf\n\nxmin = 0.5\nfor alpha in [2.0, 1.0, 0.5]:\n    xs, ps = render_pareto_cdf(xmin, alpha, 0, 10.0, n=100)\n    plt.plot(xs, ps, label=\"$\\\\alpha=%g$\" % alpha)\n\ndecorate(title=\"Pareto CDF\", xlabel=\"x\", ylabel=\"CDF\", loc=\"lower right\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1395,18 +1158,11 @@ The following figure shows CDFs of Pareto distributions with
             }, 500);
             </script></div>
 </div>
-<p>There is a simple visual test that indicates whether an empirical
-distribution fits a Pareto distribution: on a log-log scale, the CCDF
-looks like a straight line. Let’s see why that works.</p>
-<p>If you plot the CCDF of a sample from a Pareto distribution on a linear
-scale, you expect to see a function like:
-$<span class="math notranslate nohighlight">\(y \approx \left( \frac{x}{x_m} \right) ^{-\alpha}\)</span><span class="math notranslate nohighlight">\( Taking the log of
-both sides yields: \)</span><span class="math notranslate nohighlight">\(\log y \approx -\alpha (\log x - \log x_{m})\)</span><span class="math notranslate nohighlight">\( So
-if you plot \)</span>\log y<span class="math notranslate nohighlight">\( versus \)</span>\log x<span class="math notranslate nohighlight">\(, it should look like a straight
-line with slope \)</span>-\alpha<span class="math notranslate nohighlight">\( and intercept \)</span>\alpha \log x_{m}$.</p>
-<p>As an example, let’s look at the sizes of cities and towns. The
-U.S. Census Bureau publishes the population of every incorporated city
-and town in the United States.</p>
+<p>There is a simple visual test that indicates whether an empirical distribution fits a Pareto distribution: on a log-log scale, the CCDF looks like a straight line.
+Let’s see why that works.</p>
+<p>If you plot the CCDF of a sample from a Pareto distribution on a linear scale, you expect to see a function like: $<span class="math notranslate nohighlight">\(y \approx \left( \frac{x}{x_m} \right) ^{-\alpha}\)</span><span class="math notranslate nohighlight">\( Taking the log of both sides yields: \)</span><span class="math notranslate nohighlight">\(\log y \approx -\alpha (\log x - \log x_{m})\)</span><span class="math notranslate nohighlight">\( So if you plot \)</span>\log y<span class="math notranslate nohighlight">\( versus \)</span>\log x<span class="math notranslate nohighlight">\(, it should look like a straight line with slope \)</span>-\alpha<span class="math notranslate nohighlight">\( and intercept \)</span>\alpha \log x_{m}$.</p>
+<p>As an example, let’s look at the sizes of cities and towns.
+The U.S. Census Bureau publishes the population of every incorporated city and town in the United States.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/populations.py&quot;</span><span class="p">)</span>
@@ -1419,7 +1175,7 @@ and town in the United States.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 44;
+                var nbb_cell_id = 24;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/populations.py\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats/raw/v3/data/PEP_2012_PEPANNRES_with_ann.csv\"\n)";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/populations.py\")\ndownload(\n    \"https://github.com/AllenDowney/ThinkStats/raw/v3/data/PEP_2012_PEPANNRES_with_ann.csv\"\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1449,7 +1205,7 @@ and town in the United States.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 45;
+                var nbb_cell_id = 25;
                 var nbb_unformatted_code = "import populations\n\npops = populations.read_data()\nprint(\"Number of cities/towns\", len(pops))";
                 var nbb_formatted_code = "import populations\n\npops = populations.read_data()\nprint(\"Number of cities/towns\", len(pops))";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1464,24 +1220,18 @@ and town in the United States.</p>
             }, 500);
             </script></div>
 </div>
-<p>I downloaded their data from
-<a class="reference external" href="http://www.census.gov/popest/data/cities/totals/2012/SUB-EST2012-3.html">http://www.census.gov/popest/data/cities/totals/2012/SUB-EST2012-3.html</a>;
-it is in the repository for this book in a file named
-<code class="docutils literal notranslate"><span class="pre">PEP_2012_PEPANNRES_with_ann.csv</span></code>. The repository also contains
-<code class="docutils literal notranslate"><span class="pre">populations.py</span></code>, which reads the file and plots the distribution of
-populations.</p>
-<p>The following figure shows the CCDF of populations on a
-log-log scale. The largest 1% of cities and towns, below <span class="math notranslate nohighlight">\(10^{-2}\)</span>, fall
-along a straight line. So we could conclude, as some researchers have,
-that the tail of this distribution fits a Pareto model.</p>
+<p>I downloaded their data from <a class="reference external" href="http://www.census.gov/popest/data/cities/totals/2012/SUB-EST2012-3.html">http://www.census.gov/popest/data/cities/totals/2012/SUB-EST2012-3.html</a>; it is in the repository for this book in a file named <code class="docutils literal notranslate"><span class="pre">PEP_2012_PEPANNRES_with_ann.csv</span></code>.
+The repository also contains <code class="docutils literal notranslate"><span class="pre">populations.py</span></code>, which reads the file and plots the distribution of populations.</p>
+<p>The following figure shows the CCDF of populations on a log-log scale.
+The largest 1% of cities and towns, below <span class="math notranslate nohighlight">\(10^{-2}\)</span>, fall along a straight line.
+So we could conclude, as some researchers have, that the tail of this distribution fits a Pareto model.</p>
 <p>On the other hand, a lognormal distribution also models the data well.
-The following figure shows the CDF of populations and a
-lognormal model (left), and a normal probability plot (right). Both
-plots show good agreement between the data and the model.</p>
-<p>Neither model is perfect. The Pareto model only applies to the largest
-1% of cities, but it is a better fit for that part of the distribution.
-The lognormal model is a better fit for the other 99%. Which model is
-appropriate depends on which part of the distribution is relevant.</p>
+The following figure shows the CDF of populations and a lognormal model (left), and a normal probability plot (right).
+Both plots show good agreement between the data and the model.</p>
+<p>Neither model is perfect.
+The Pareto model only applies to the largest 1% of cities, but it is a better fit for that part of the distribution.
+The lognormal model is a better fit for the other 99%.
+Which model is appropriate depends on which part of the distribution is relevant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_pops</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">pops</span><span class="p">)</span>
@@ -1493,7 +1243,7 @@ appropriate depends on which part of the distribution is relevant.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 46;
+                var nbb_cell_id = 26;
                 var nbb_unformatted_code = "log_pops = np.log10(pops)\ncdf = Cdf.from_seq(pops, name=\"data\")\ncdf_log = Cdf.from_seq(log_pops, name=\"data\")";
                 var nbb_formatted_code = "log_pops = np.log10(pops)\ncdf = Cdf.from_seq(pops, name=\"data\")\ncdf_log = Cdf.from_seq(log_pops, name=\"data\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1523,8 +1273,8 @@ appropriate depends on which part of the distribution is relevant.</p>
 <img alt="_images/703abb693777ee5f433d2f92aaf59659a011e5eb76a76e9d91cdd2f0ff641612.png" src="_images/703abb693777ee5f433d2f92aaf59659a011e5eb76a76e9d91cdd2f0ff641612.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 47;
-                var nbb_unformatted_code = "xs, ys = render_pareto_cdf(xmin=5000, alpha=1.4, low=0, high=10000000.0)\nplt.plot(np.log10(xs), 1 - ys, label=\"model\", color=\"0.8\")\n\n(1-cdf_log).plot()\n\ndecorate(\n    xlabel=\"log10 population\", ylabel=\"CCDF\", yscale=\"log\", loc=\"lower left\"\n)";
+                var nbb_cell_id = 27;
+                var nbb_unformatted_code = "xs, ys = render_pareto_cdf(xmin=5000, alpha=1.4, low=0, high=10000000.0)\nplt.plot(np.log10(xs), 1 - ys, label=\"model\", color=\"0.8\")\n\n(1 - cdf_log).plot()\n\ndecorate(xlabel=\"log10 population\", ylabel=\"CCDF\", yscale=\"log\", loc=\"lower left\")";
                 var nbb_formatted_code = "xs, ys = render_pareto_cdf(xmin=5000, alpha=1.4, low=0, high=10000000.0)\nplt.plot(np.log10(xs), 1 - ys, label=\"model\", color=\"0.8\")\n\n(1 - cdf_log).plot()\n\ndecorate(xlabel=\"log10 population\", ylabel=\"CCDF\", yscale=\"log\", loc=\"lower left\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -1552,7 +1302,7 @@ appropriate depends on which part of the distribution is relevant.</p>
 <img alt="_images/2e42ec3a78dfb8caa2a1ff714a45b61260ef8a1a27aa9ab957a595759eea6857.png" src="_images/2e42ec3a78dfb8caa2a1ff714a45b61260ef8a1a27aa9ab957a595759eea6857.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 49;
+                var nbb_cell_id = 28;
                 var nbb_unformatted_code = "mu, sigma = log_pops.mean(), log_pops.std()\nxs, ps = render_normal_cdf(mu, sigma, low=0, high=8)\nplt.plot(xs, ps, label=\"model\", color=\"0.8\")\ncdf_log.plot()\ndecorate(xlabel=\"log10 population\", ylabel=\"CDF\", loc=\"lower right\")";
                 var nbb_formatted_code = "mu, sigma = log_pops.mean(), log_pops.std()\nxs, ps = render_normal_cdf(mu, sigma, low=0, high=8)\nplt.plot(xs, ps, label=\"model\", color=\"0.8\")\ncdf_log.plot()\ndecorate(xlabel=\"log10 population\", ylabel=\"CDF\", loc=\"lower right\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1570,14 +1320,9 @@ appropriate depends on which part of the distribution is relevant.</p>
 </section>
 <section id="generating-random-numbers">
 <h2>Generating random numbers<a class="headerlink" href="#generating-random-numbers" title="Link to this heading">#</a></h2>
-<p>Analytic CDFs can be used to generate random numbers with a given
-distribution function, <span class="math notranslate nohighlight">\(p = CDF(x)\)</span>. If there is an efficient way to
-compute the inverse CDF, we can generate random values with the
-appropriate distribution by choosing <span class="math notranslate nohighlight">\(p\)</span> from a uniform distribution
-between 0 and 1, then choosing <span class="math notranslate nohighlight">\(x = ICDF(p)\)</span>.</p>
-<p>For example, the CDF of the exponential distribution is
-$<span class="math notranslate nohighlight">\(p = 1 - e^{-\lambda x}\)</span><span class="math notranslate nohighlight">\( Solving for \)</span>x<span class="math notranslate nohighlight">\( yields:
-\)</span><span class="math notranslate nohighlight">\(x = -\log (1 - p) / \lambda\)</span>$ So in Python we can write</p>
+<p>Analytic CDFs can be used to generate random numbers with a given distribution function, <span class="math notranslate nohighlight">\(p = CDF(x)\)</span>.
+If there is an efficient way to compute the inverse CDF, we can generate random values with the appropriate distribution by choosing <span class="math notranslate nohighlight">\(p\)</span> from a uniform distribution between 0 and 1, then choosing <span class="math notranslate nohighlight">\(x = ICDF(p)\)</span>.</p>
+<p>For example, the CDF of the exponential distribution is $<span class="math notranslate nohighlight">\(p = 1 - e^{-\lambda x}\)</span><span class="math notranslate nohighlight">\( Solving for \)</span>x<span class="math notranslate nohighlight">\( yields: \)</span><span class="math notranslate nohighlight">\(x = -\log (1 - p) / \lambda\)</span>$ So in Python we can write</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -1593,7 +1338,7 @@ $<span class="math notranslate nohighlight">\(p = 1 - e^{-\lambda x}\)</span><sp
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 50;
+                var nbb_cell_id = 29;
                 var nbb_unformatted_code = "import random\n\n\ndef expovariate(lam):\n    p = random.random()\n    x = -np.log(1 - p) / lam\n    return x";
                 var nbb_formatted_code = "import random\n\n\ndef expovariate(lam):\n    p = random.random()\n    x = -np.log(1 - p) / lam\n    return x";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1608,13 +1353,10 @@ $<span class="math notranslate nohighlight">\(p = 1 - e^{-\lambda x}\)</span><sp
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">expovariate</span></code> takes <code class="docutils literal notranslate"><span class="pre">lam</span></code> and returns a random value chosen from the
-exponential distribution with parameter <code class="docutils literal notranslate"><span class="pre">lam</span></code>.</p>
-<p>Two notes about this implementation: I called the parameter <code class="docutils literal notranslate"><span class="pre">lam</span></code>
-because <code class="docutils literal notranslate"><span class="pre">lambda</span></code> is a Python keyword. Also, since <span class="math notranslate nohighlight">\(\log 0\)</span> is undefined,
-we have to be a little careful. The implementation of <code class="docutils literal notranslate"><span class="pre">random.random</span></code>
-can return 0 but not 1, so <span class="math notranslate nohighlight">\(1 - p\)</span> can be 1 but not 0, so <code class="docutils literal notranslate"><span class="pre">log(1-p)</span></code> is
-always defined.</p>
+<p><code class="docutils literal notranslate"><span class="pre">expovariate</span></code> takes <code class="docutils literal notranslate"><span class="pre">lam</span></code> and returns a random value chosen from the exponential distribution with parameter <code class="docutils literal notranslate"><span class="pre">lam</span></code>.</p>
+<p>Two notes about this implementation: I called the parameter <code class="docutils literal notranslate"><span class="pre">lam</span></code> because <code class="docutils literal notranslate"><span class="pre">lambda</span></code> is a Python keyword.
+Also, since <span class="math notranslate nohighlight">\(\log 0\)</span> is undefined, we have to be a little careful.
+The implementation of <code class="docutils literal notranslate"><span class="pre">random.random</span></code> can return 0 but not 1, so <span class="math notranslate nohighlight">\(1 - p\)</span> can be 1 but not 0, so <code class="docutils literal notranslate"><span class="pre">log(1-p)</span></code> is always defined.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="n">expovariate</span><span class="p">(</span><span class="n">lam</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
@@ -1624,7 +1366,7 @@ always defined.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 51;
+                var nbb_cell_id = 30;
                 var nbb_unformatted_code = "t = [expovariate(lam=2) for _ in range(1000)]";
                 var nbb_formatted_code = "t = [expovariate(lam=2) for _ in range(1000)]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1648,11 +1390,11 @@ always defined.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1a1d6c2c6104e8fce10fa00b9536e7539bb002d6eca6b0da4b76babd5e5a12ee.png" src="_images/1a1d6c2c6104e8fce10fa00b9536e7539bb002d6eca6b0da4b76babd5e5a12ee.png" />
+<img alt="_images/defedb78f532411cfee62c7ba82c907a28f4a7e5d0b19d006b87e6eeebb92d5d.png" src="_images/defedb78f532411cfee62c7ba82c907a28f4a7e5d0b19d006b87e6eeebb92d5d.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 53;
-                var nbb_unformatted_code = "cdf = Cdf.from_seq(t)\n(1-cdf).plot()\ndecorate(xlabel=\"Exponential variate\", ylabel=\"CCDF\", yscale=\"log\")";
+                var nbb_cell_id = 31;
+                var nbb_unformatted_code = "cdf = Cdf.from_seq(t)\n(1 - cdf).plot()\ndecorate(xlabel=\"Exponential variate\", ylabel=\"CCDF\", yscale=\"log\")";
                 var nbb_formatted_code = "cdf = Cdf.from_seq(t)\n(1 - cdf).plot()\ndecorate(xlabel=\"Exponential variate\", ylabel=\"CCDF\", yscale=\"log\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -1669,42 +1411,31 @@ always defined.</p>
 </section>
 <section id="why-model">
 <h2>Why model?<a class="headerlink" href="#why-model" title="Link to this heading">#</a></h2>
-<p>At the beginning of this chapter, I said that many real world phenomena
-can be modeled with analytic distributions. “So,” you might ask, “what?”</p>
-<p>Like all models, analytic distributions are abstractions, which means
-they leave out details that are considered irrelevant. For example, an
-observed distribution might have measurement errors or quirks that are
-specific to the sample; analytic models smooth out these idiosyncrasies.</p>
-<p>Analytic models are also a form of data compression. When a model fits a
-dataset well, a small set of parameters can summarize a large amount of
-data.</p>
-<p>It is sometimes surprising when data from a natural phenomenon fit an
-analytic distribution, but these observations can provide insight into
-physical systems. Sometimes we can explain why an observed distribution
-has a particular form. For example, Pareto distributions are often the
-result of generative processes with positive feedback (so-called
-preferential attachment processes: see
-<a class="reference external" href="http://wikipedia.org/wiki/Preferential_attachment">http://wikipedia.org/wiki/Preferential_attachment</a>.).</p>
-<p>Also, analytic distributions lend themselves to mathematical analysis,
-as we will see in Chapter <a class="reference internal" href="#analysis"><span class="xref myst">[analysis]</span></a>{reference-type=“ref”
-reference=“analysis”}.</p>
-<p>But it is important to remember that all models are imperfect. Data from
-the real world never fit an analytic distribution perfectly. People
-sometimes talk as if data are generated by models; for example, they
-might say that the distribution of human heights is normal, or the
-distribution of income is lognormal. Taken literally, these claims
-cannot be true; there are always differences between the real world and
-mathematical models.</p>
-<p>Models are useful if they capture the relevant aspects of the real world
-and leave out unneeded details. But what is “relevant” or “unneeded”
-depends on what you are planning to use the model for.</p>
+<p>At the beginning of this chapter, I said that many real world phenomena can be modeled with analytic distributions.
+“So,” you might ask, “what?”</p>
+<p>Like all models, analytic distributions are abstractions, which means they leave out details that are considered irrelevant.
+For example, an observed distribution might have measurement errors or quirks that are specific to the sample; analytic models smooth out these idiosyncrasies.</p>
+<p>Analytic models are also a form of data compression.
+When a model fits a dataset well, a small set of parameters can summarize a large amount of data.</p>
+<p>It is sometimes surprising when data from a natural phenomenon fit an analytic distribution, but these observations can provide insight into physical systems.
+Sometimes we can explain why an observed distribution has a particular form.
+For example, Pareto distributions are often the result of generative processes with positive feedback (so-called preferential attachment processes: see <a class="reference external" href="http://wikipedia.org/wiki/Preferential_attachment">http://wikipedia.org/wiki/Preferential_attachment</a>.).</p>
+<p>Also, analytic distributions lend themselves to mathematical analysis, as we will see in Chapter <a class="reference internal" href="#analysis"><span class="xref myst">[analysis]</span></a>{reference-type=“ref” reference=“analysis”}.</p>
+<p>But it is important to remember that all models are imperfect.
+Data from the real world never fit an analytic distribution perfectly.
+People sometimes talk as if data are generated by models; for example, they might say that the distribution of human heights is normal, or the distribution of income is lognormal.
+Taken literally, these claims cannot be true; there are always differences between the real world and mathematical models.</p>
+<p>Models are useful if they capture the relevant aspects of the real world and leave out unneeded details.
+But what is “relevant” or “unneeded” depends on what you are planning to use the model for.</p>
 <p>A straight line is consistent with an exponential distribution.</p>
 </section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="exercise">
 <h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
-<p>Write a function that generates a Pareto variate. Generate a sample and plot its complementary CDF on a log-log scale. Does it look like a straight line?</p>
+<p>Write a function that generates a Pareto variate.
+Generate a sample and plot its complementary CDF on a log-log scale.
+Does it look like a straight line?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_pareto</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">x_m</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
@@ -1716,7 +1447,7 @@ depends on what you are planning to use the model for.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 54;
+                var nbb_cell_id = 32;
                 var nbb_unformatted_code = "def sample_pareto(alpha, x_m, size):\n    u = np.random.random(size)\n    return x_m * pow(1 - u, -1 / alpha)";
                 var nbb_formatted_code = "def sample_pareto(alpha, x_m, size):\n    u = np.random.random(size)\n    return x_m * pow(1 - u, -1 / alpha)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1741,11 +1472,11 @@ depends on what you are planning to use the model for.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b167fbe7ac349e6b7cda30b25670a7980eb532a8b48209b6e730a3bc4e5fa8b5.png" src="_images/b167fbe7ac349e6b7cda30b25670a7980eb532a8b48209b6e730a3bc4e5fa8b5.png" />
+<img alt="_images/ce6acdd4ded92729fb5101e99050aff45f97748f237afe4b7526128d0afe538b.png" src="_images/ce6acdd4ded92729fb5101e99050aff45f97748f237afe4b7526128d0afe538b.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 55;
-                var nbb_unformatted_code = "sample = sample_pareto(1, 2, 1000)\ncdf = Cdf.from_seq(sample)\n(1-cdf).plot()\ndecorate(xlabel=\"Random values\", ylabel=\"CCDF\", xscale=\"log\", yscale=\"log\")";
+                var nbb_cell_id = 33;
+                var nbb_unformatted_code = "sample = sample_pareto(1, 2, 1000)\ncdf = Cdf.from_seq(sample)\n(1 - cdf).plot()\ndecorate(xlabel=\"Random values\", ylabel=\"CCDF\", xscale=\"log\", yscale=\"log\")";
                 var nbb_formatted_code = "sample = sample_pareto(1, 2, 1000)\ncdf = Cdf.from_seq(sample)\n(1 - cdf).plot()\ndecorate(xlabel=\"Random values\", ylabel=\"CCDF\", xscale=\"log\", yscale=\"log\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -1763,7 +1494,8 @@ depends on what you are planning to use the model for.</p>
 <section id="id1">
 <h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>In the BRFSS (see Section 5.4), the distribution of heights is roughly normal with parameters µ = 178 cm and σ = 7.7 cm for men, and µ = 163 cm and σ = 7.3 cm for women.</p>
-<p>In order to join Blue Man Group, you have to be male between 5’10” and 6’1” (see <a class="reference external" href="http://bluemancasting.com">http://bluemancasting.com</a>). What percentage of the U.S. male population is in this range? Hint: use <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm.cdf</span></code>.</p>
+<p>In order to join Blue Man Group, you have to be male between 5’10” and 6’1” (see <a class="reference external" href="http://bluemancasting.com">http://bluemancasting.com</a>).
+What percentage of the U.S. male population is in this range? Hint: use <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm.cdf</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> contains objects that represent analytic distributions</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1774,7 +1506,7 @@ depends on what you are planning to use the model for.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 56;
+                var nbb_cell_id = 34;
                 var nbb_unformatted_code = "import scipy.stats";
                 var nbb_formatted_code = "import scipy.stats";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1795,19 +1527,15 @@ depends on what you are planning to use the model for.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">178</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mf">7.7</span>
 <span class="n">dist</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scipy.stats._distn_infrastructure.rv_continuous_frozen
-</pre></div>
-</div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 57;
-                var nbb_unformatted_code = "mu = 178\nsigma = 7.7\ndist = scipy.stats.norm(loc=mu, scale=sigma)\ntype(dist)";
-                var nbb_formatted_code = "mu = 178\nsigma = 7.7\ndist = scipy.stats.norm(loc=mu, scale=sigma)\ntype(dist)";
+                var nbb_cell_id = 35;
+                var nbb_unformatted_code = "mu = 178\nsigma = 7.7\ndist = scipy.stats.norm(loc=mu, scale=sigma)";
+                var nbb_formatted_code = "mu = 178\nsigma = 7.7\ndist = scipy.stats.norm(loc=mu, scale=sigma)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1833,7 +1561,7 @@ depends on what you are planning to use the model for.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 58;
+                var nbb_cell_id = 36;
                 var nbb_unformatted_code = "dist.mean(), dist.std()";
                 var nbb_formatted_code = "dist.mean(), dist.std()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1848,7 +1576,8 @@ depends on what you are planning to use the model for.</p>
             }, 500);
             </script></div>
 </div>
-<p>It can also evaluate its CDF.  How many people are below the mean by more than one standard deviation?  About 16%</p>
+<p>It can also evaluate its CDF.
+How many people are below the mean by more than one standard deviation?  About 16%</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="n">sigma</span><span class="p">)</span>
@@ -1861,7 +1590,7 @@ depends on what you are planning to use the model for.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 59;
+                var nbb_cell_id = 37;
                 var nbb_unformatted_code = "dist.cdf(mu - sigma)";
                 var nbb_formatted_code = "dist.cdf(mu - sigma)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1891,7 +1620,7 @@ depends on what you are planning to use the model for.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 60;
+                var nbb_cell_id = 38;
                 var nbb_unformatted_code = "low = dist.cdf(177.8)\nhigh = dist.cdf(185.4)\nlow, high, high - low";
                 var nbb_formatted_code = "low = dist.cdf(177.8)\nhigh = dist.cdf(185.4)\nlow, high, high - low";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1909,9 +1638,13 @@ depends on what you are planning to use the model for.</p>
 </section>
 <section id="id2">
 <h3>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<p>To get a feel for the Pareto distribution, let’s see how different the world would be if the distribution of human height were Pareto. With the parameters xm = 1 m and α = 1.7, we get a distribution with a reasonable minimum, 1 m, and median, 1.5 m.</p>
-<p>Plot this distribution. What is the mean human height in Pareto world? What fraction of the population is shorter than the mean? If there are 7 billion people in Pareto world, how many do we expect to be taller than 1 km? How tall do we expect the tallest person to be?</p>
-<p><code class="docutils literal notranslate"><span class="pre">scipy.stats.pareto</span></code> represents a Pareto distribution.  In Pareto world, the distribution of human heights has parameters alpha=1.7 and xmin=1 meter.  So the shortest person is 100 cm and the median is 150.</p>
+<p>To get a feel for the Pareto distribution, let’s see how different the world would be if the distribution of human height were Pareto.
+With the parameters xm = 1 m and α = 1.7, we get a distribution with a reasonable minimum, 1 m, and median, 1.5 m.</p>
+<p>Plot this distribution.
+What is the mean human height in Pareto world? What fraction of the population is shorter than the mean? If there are 7 billion people in Pareto world, how many do we expect to be taller than 1 km? How tall do we expect the tallest person to be?</p>
+<p><code class="docutils literal notranslate"><span class="pre">scipy.stats.pareto</span></code> represents a Pareto distribution.
+In Pareto world, the distribution of human heights has parameters alpha=1.7 and xmin=1 meter.
+So the shortest person is 100 cm and the median is 150.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.7</span>
@@ -1927,7 +1660,7 @@ depends on what you are planning to use the model for.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 61;
+                var nbb_cell_id = 39;
                 var nbb_unformatted_code = "alpha = 1.7\nxmin = 1\ndist = scipy.stats.pareto(b=alpha, scale=xmin)\ndist.median()";
                 var nbb_formatted_code = "alpha = 1.7\nxmin = 1\ndist = scipy.stats.pareto(b=alpha, scale=xmin)\ndist.median()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1955,7 +1688,7 @@ depends on what you are planning to use the model for.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 62;
+                var nbb_cell_id = 40;
                 var nbb_unformatted_code = "dist.mean()";
                 var nbb_formatted_code = "dist.mean()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1983,7 +1716,7 @@ depends on what you are planning to use the model for.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 63;
+                var nbb_cell_id = 41;
                 var nbb_unformatted_code = "dist.cdf(dist.mean())";
                 var nbb_formatted_code = "dist.cdf(dist.mean())";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2011,7 +1744,7 @@ depends on what you are planning to use the model for.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 64;
+                var nbb_cell_id = 42;
                 var nbb_unformatted_code = "(1 - dist.cdf(1000)) * 7000000000.0, dist.sf(1000) * 7000000000.0";
                 var nbb_formatted_code = "(1 - dist.cdf(1000)) * 7000000000.0, dist.sf(1000) * 7000000000.0";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2039,7 +1772,7 @@ depends on what you are planning to use the model for.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 65;
+                var nbb_cell_id = 43;
                 var nbb_unformatted_code = "dist.sf(600000) * 7000000000.0";
                 var nbb_formatted_code = "dist.sf(600000) * 7000000000.0";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2066,7 +1799,7 @@ depends on what you are planning to use the model for.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 66;
+                var nbb_cell_id = 44;
                 var nbb_unformatted_code = "dist.ppf(1 - 1 / 7000000000.0)";
                 var nbb_formatted_code = "dist.ppf(1 - 1 / 7000000000.0)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2084,12 +1817,13 @@ depends on what you are planning to use the model for.</p>
 </section>
 <section id="id3">
 <h3>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
-<p>The Weibull distribution is a generalization of the exponential distribution that comes up in failure analysis (see <a class="reference external" href="http://wikipedia.org/wiki/Weibull_distribution">http://wikipedia.org/wiki/Weibull_distribution</a>). Its CDF is</p>
+<p>The Weibull distribution is a generalization of the exponential distribution that comes up in failure analysis (see <a class="reference external" href="http://wikipedia.org/wiki/Weibull_distribution">http://wikipedia.org/wiki/Weibull_distribution</a>).
+Its CDF is</p>
 <p><span class="math notranslate nohighlight">\(\mathrm{CDF}(x) = 1 − \exp[−(x / λ)^k]\)</span></p>
 <p>Can you find a transformation that makes a Weibull distribution look like a straight line? What do the slope and intercept of the line indicate?</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">random.weibullvariate</span></code> to generate a sample from a Weibull distribution and use it to test your transformation.</p>
 <p>Generate a sample from a Weibull distribution and plot it using a transform that makes a Weibull distribution look like a straight line.</p>
-<p>If you are stuck, you can get a hint from <code class="docutils literal notranslate"><span class="pre">thinkplot.Cdf</span></code>, which provides a transform that makes the CDF of a Weibull distribution look like a straight line.  Here’s an example that shows how it’s used.</p>
+<p>Here’s an example that shows how it’s used.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: implement the Weibull transform</span>
@@ -2099,7 +1833,7 @@ depends on what you are planning to use the model for.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 68;
+                var nbb_cell_id = 45;
                 var nbb_unformatted_code = "# TODO: implement the Weibull transform";
                 var nbb_formatted_code = "# TODO: implement the Weibull transform";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2124,10 +1858,10 @@ depends on what you are planning to use the model for.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a19ff395987ca0e8e1bded2e88b2cab156474b04b098174ee9bca04854191d53.png" src="_images/a19ff395987ca0e8e1bded2e88b2cab156474b04b098174ee9bca04854191d53.png" />
+<img alt="_images/e2396e6f8b170c361a10f30d9efe82e200b3f23ffc60cad049e53f4752d7f6a5.png" src="_images/e2396e6f8b170c361a10f30d9efe82e200b3f23ffc60cad049e53f4752d7f6a5.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 69;
+                var nbb_cell_id = 46;
                 var nbb_unformatted_code = "sample = [random.weibullvariate(2, 1) for _ in range(1000)]\ncdf = Cdf.from_seq(sample)\ncdf.plot()\ndecorate(xlabel=\"Weibull variate\", ylabel=\"CCDF\", xscale=\"log\", yscale=\"log\")";
                 var nbb_formatted_code = "sample = [random.weibullvariate(2, 1) for _ in range(1000)]\ncdf = Cdf.from_seq(sample)\ncdf.plot()\ndecorate(xlabel=\"Weibull variate\", ylabel=\"CCDF\", xscale=\"log\", yscale=\"log\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2145,9 +1879,13 @@ depends on what you are planning to use the model for.</p>
 </section>
 <section id="id4">
 <h3>Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
-<p>For small values of <code class="docutils literal notranslate"><span class="pre">n</span></code>, we don’t expect an empirical distribution to fit an analytic distribution exactly. One way to evaluate the quality of fit is to generate a sample from an analytic distribution and see how well it matches the data.</p>
-<p>For example, in Section 5.1 we plotted the distribution of time between births and saw that it is approximately exponential. But the distribution is based on only 44 data points. To see whether the data might have come from an exponential distribution, generate 44 values from an exponential distribution with the same mean as the data, about 33 minutes between births.</p>
-<p>Plot the distribution of the random values and compare it to the actual distribution. You can use random.expovariate to generate the values.</p>
+<p>For small values of <code class="docutils literal notranslate"><span class="pre">n</span></code>, we don’t expect an empirical distribution to fit an analytic distribution exactly.
+One way to evaluate the quality of fit is to generate a sample from an analytic distribution and see how well it matches the data.</p>
+<p>For example, in Section 5.1 we plotted the distribution of time between births and saw that it is approximately exponential.
+But the distribution is based on only 44 data points.
+To see whether the data might have come from an exponential distribution, generate 44 values from an exponential distribution with the same mean as the data, about 33 minutes between births.</p>
+<p>Plot the distribution of the random values and compare it to the actual distribution.
+You can use random.expovariate to generate the values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">read_baby_boom</span><span class="p">()</span>
@@ -2159,7 +1897,7 @@ depends on what you are planning to use the model for.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 74;
+                var nbb_cell_id = 47;
                 var nbb_unformatted_code = "df = read_baby_boom()\ndiffs = df.minutes.diff()\ncdf_diffs = Cdf.from_seq(diffs, name=\"actual\")";
                 var nbb_formatted_code = "df = read_baby_boom()\ndiffs = df.minutes.diff()\ncdf_diffs = Cdf.from_seq(diffs, name=\"actual\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2184,12 +1922,12 @@ depends on what you are planning to use the model for.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(32.72727272727273, 25.613889732228078)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(32.72727272727273, 40.85751680004956)
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 75;
+                var nbb_cell_id = 48;
                 var nbb_unformatted_code = "n = len(diffs)\nlam = 44.0 / 24 / 60\nsample = [random.expovariate(lam) for _ in range(n)]\n1 / lam, np.mean(sample)";
                 var nbb_formatted_code = "n = len(diffs)\nlam = 44.0 / 24 / 60\nsample = [random.expovariate(lam) for _ in range(n)]\n1 / lam, np.mean(sample)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2213,7 +1951,7 @@ depends on what you are planning to use the model for.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 76;
+                var nbb_cell_id = 49;
                 var nbb_unformatted_code = "model = Cdf.from_seq(sample, name=\"model\")";
                 var nbb_formatted_code = "model = Cdf.from_seq(sample, name=\"model\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2237,10 +1975,10 @@ depends on what you are planning to use the model for.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8ffa094218a51db0e18196ecd699a7898390940d20ba30775de016e2be794f5b.png" src="_images/8ffa094218a51db0e18196ecd699a7898390940d20ba30775de016e2be794f5b.png" />
+<img alt="_images/fb2e6f7ad9e2d9710e80302bbed89df2832771d9613b30ac8e7839d624ac4bee.png" src="_images/fb2e6f7ad9e2d9710e80302bbed89df2832771d9613b30ac8e7839d624ac4bee.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 77;
+                var nbb_cell_id = 50;
                 var nbb_unformatted_code = "(1 - model).plot()\n(1 - cdf_diffs).plot()\ndecorate(xlabel=\"Time between births (minutes)\", ylabel=\"CCDF\", yscale=\"log\")";
                 var nbb_formatted_code = "(1 - model).plot()\n(1 - cdf_diffs).plot()\ndecorate(xlabel=\"Time between births (minutes)\", ylabel=\"CCDF\", yscale=\"log\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2267,10 +2005,10 @@ depends on what you are planning to use the model for.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a8963764a3d32fa47978c9062e750b8a20f34632ef143054a17bdd9bb87504c9.png" src="_images/a8963764a3d32fa47978c9062e750b8a20f34632ef143054a17bdd9bb87504c9.png" />
+<img alt="_images/1d84fd01945951aa93cb346a00d998a60c477552c3c0ebff0fc387ca2d9ebf0c.png" src="_images/1d84fd01945951aa93cb346a00d998a60c477552c3c0ebff0fc387ca2d9ebf0c.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 80;
+                var nbb_cell_id = 51;
                 var nbb_unformatted_code = "for i in range(100):\n    sample = [random.expovariate(lam) for _ in range(n)]\n    cdf = Cdf.from_seq(sample, name=\"\")\n    (1 - cdf).plot(color=\"0.9\")\n(1 - cdf_diffs).plot()\ndecorate(xlabel=\"Time between births (minutes)\", ylabel=\"CCDF\", yscale=\"log\")";
                 var nbb_formatted_code = "for i in range(100):\n    sample = [random.expovariate(lam) for _ in range(n)]\n    cdf = Cdf.from_seq(sample, name=\"\")\n    (1 - cdf).plot(color=\"0.9\")\n(1 - cdf_diffs).plot()\ndecorate(xlabel=\"Time between births (minutes)\", ylabel=\"CCDF\", yscale=\"log\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2285,9 +2023,14 @@ depends on what you are planning to use the model for.</p>
             }, 500);
             </script></div>
 </div>
-<p><strong>Bonus Example:</strong> The distributions of wealth and income are sometimes modeled using lognormal and Pareto distributions. To see which is better, let’s look at some data.</p>
-<p>The Current Population Survey (CPS) is a joint effort of the Bureau of Labor Statistics and the Census Bureau to study income and related variables. Data collected in 2013 is available from <a class="reference external" href="http://www.census.gov/hhes/www/cpstables/032013/hhinc/toc.htm">http://www.census.gov/hhes/www/cpstables/032013/hhinc/toc.htm</a>. I downloaded <code class="docutils literal notranslate"><span class="pre">hinc06.xls</span></code>, which is an Excel spreadsheet with information about household income, and converted it to <code class="docutils literal notranslate"><span class="pre">hinc06.csv</span></code>, a CSV file you will find in the repository for this book. You will also find <code class="docutils literal notranslate"><span class="pre">hinc.py</span></code>, which reads this file.</p>
-<p>Extract the distribution of incomes from this dataset. Are any of the analytic distributions in this chapter a good model of the data?</p>
+<p><strong>Bonus Example:</strong> The distributions of wealth and income are sometimes modeled using lognormal and Pareto distributions.
+To see which is better, let’s look at some data.</p>
+<p>The Current Population Survey (CPS) is a joint effort of the Bureau of Labor Statistics and the Census Bureau to study income and related variables.
+Data collected in 2013 is available from <a class="reference external" href="http://www.census.gov/hhes/www/cpstables/032013/hhinc/toc.htm">http://www.census.gov/hhes/www/cpstables/032013/hhinc/toc.htm</a>.
+I downloaded <code class="docutils literal notranslate"><span class="pre">hinc06.xls</span></code>, which is an Excel spreadsheet with information about household income, and converted it to <code class="docutils literal notranslate"><span class="pre">hinc06.csv</span></code>, a CSV file you will find in the repository for this book.
+You will also find <code class="docutils literal notranslate"><span class="pre">hinc.py</span></code>, which reads this file.</p>
+<p>Extract the distribution of incomes from this dataset.
+Are any of the analytic distributions in this chapter a good model of the data?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/hinc.py&quot;</span><span class="p">)</span>
@@ -2298,7 +2041,7 @@ depends on what you are planning to use the model for.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 81;
+                var nbb_cell_id = 52;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/hinc.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/hinc06.csv\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/hinc.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/hinc06.csv\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2646,7 +2389,7 @@ depends on what you are planning to use the model for.</p>
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 82;
+                var nbb_cell_id = 53;
                 var nbb_unformatted_code = "import hinc\n\ndf = hinc.read_data()\ndf";
                 var nbb_formatted_code = "import hinc\n\ndf = hinc.read_data()\ndf";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2674,7 +2417,7 @@ depends on what you are planning to use the model for.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 99;
+                var nbb_cell_id = 54;
                 var nbb_unformatted_code = "xs, ps = df.income.values, df.ps.values\n\ncdf = Cdf(ps, xs, name=\"data\")\ncdf_log = Cdf(ps, np.log10(xs), name=\"log data\")";
                 var nbb_formatted_code = "xs, ps = df.income.values, df.ps.values\n\ncdf = Cdf(ps, xs, name=\"data\")\ncdf_log = Cdf(ps, np.log10(xs), name=\"log data\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2700,7 +2443,7 @@ depends on what you are planning to use the model for.</p>
 <img alt="_images/a0b35d13c8e221c90854378029e18fae7f01e3963cf5c6c1e81f1699b57b7079.png" src="_images/a0b35d13c8e221c90854378029e18fae7f01e3963cf5c6c1e81f1699b57b7079.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 100;
+                var nbb_cell_id = 55;
                 var nbb_unformatted_code = "cdf.plot()\ndecorate(xlabel=\"household income\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "cdf.plot()\ndecorate(xlabel=\"household income\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2736,7 +2479,7 @@ depends on what you are planning to use the model for.</p>
 <img alt="_images/17a8aee495865a6cd8ca9ddc3e81a6d0c2f32a40b2b1fcfc621c0aab71902b25.png" src="_images/17a8aee495865a6cd8ca9ddc3e81a6d0c2f32a40b2b1fcfc621c0aab71902b25.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 101;
+                var nbb_cell_id = 56;
                 var nbb_unformatted_code = "xs, ys = render_pareto_cdf(xmin=55000, alpha=2.5, low=0, high=250000)\nplt.plot(xs, 1 - ys, label=\"model\", color=\"0.8\")\n(1 - cdf).plot()\ndecorate(\n    xlabel=\"log10 household income\",\n    ylabel=\"CCDF\",\n    xscale=\"log\",\n    yscale=\"log\",\n    loc=\"lower left\",\n)";
                 var nbb_formatted_code = "xs, ys = render_pareto_cdf(xmin=55000, alpha=2.5, low=0, high=250000)\nplt.plot(xs, 1 - ys, label=\"model\", color=\"0.8\")\n(1 - cdf).plot()\ndecorate(\n    xlabel=\"log10 household income\",\n    ylabel=\"CCDF\",\n    xscale=\"log\",\n    yscale=\"log\",\n    loc=\"lower left\",\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2768,7 +2511,7 @@ depends on what you are planning to use the model for.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 108;
+                var nbb_cell_id = 57;
                 var nbb_unformatted_code = "median = cdf_log.inverse(0.5)\niqr = cdf_log.inverse([0.25, 0.75])\nstd = np.diff(iqr) / 1.349\nstd = 0.35\nprint(median, std)";
                 var nbb_formatted_code = "median = cdf_log.inverse(0.5)\niqr = cdf_log.inverse([0.25, 0.75])\nstd = np.diff(iqr) / 1.349\nstd = 0.35\nprint(median, std)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2797,7 +2540,7 @@ depends on what you are planning to use the model for.</p>
 <img alt="_images/da5673c2dcb3c0db072128bdcf11bf9181f3a2a04ac8211902021e22fce0674e.png" src="_images/da5673c2dcb3c0db072128bdcf11bf9181f3a2a04ac8211902021e22fce0674e.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 109;
+                var nbb_cell_id = 58;
                 var nbb_unformatted_code = "xs, ps = render_normal_cdf(median, std, low=3.5, high=5.5)\nplt.plot(xs, ps, label=\"model\", color=\"0.8\")\ncdf_log.plot()\ndecorate(xlabel=\"log10 household income\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "xs, ps = render_normal_cdf(median, std, low=3.5, high=5.5)\nplt.plot(xs, ps, label=\"model\", color=\"0.8\")\ncdf_log.plot()\ndecorate(xlabel=\"log10 household income\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2814,19 +2557,12 @@ depends on what you are planning to use the model for.</p>
 </div>
 <p>My conclusions based on these figures are:</p>
 <ol class="arabic simple">
-<li><p>The Pareto model might be a reasonable choice for the top
-10-20% of incomes.</p></li>
-<li><p>The lognormal model captures the shape of the distribution better,
-with some deviation in the left tail.  With different
-choices for sigma, you could match the upper or lower tail, but not
-both at the same time.</p></li>
-</ol>
-<p>In summary I would say that neither model captures the whole distribution,
-so you might have to</p>
-<ol class="arabic simple">
+<li><p>The Pareto model might be a reasonable choice for the top    10-20% of incomes.</p></li>
+<li><p>The lognormal model captures the shape of the distribution better,    with some deviation in the left tail.
+With different    choices for sigma, you could match the upper or lower tail, but not    both at the same time.
+In summary I would say that neither model captures the whole distribution, so you might have to</p></li>
 <li><p>look for another analytic model,</p></li>
-<li><p>choose one that captures the part of the distribution that is most
-relevent, or</p></li>
+<li><p>choose one that captures the part of the distribution that is most relevent, or</p></li>
 <li><p>avoid using an analytic model altogether.</p></li>
 </ol>
 </section>
@@ -2869,7 +2605,7 @@ relevent, or</p></li>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Cumulative distribution functions</p>
+        <p class="prev-next-title">Cumulative Distribution Functions</p>
       </div>
     </a>
     <a class="right-next"
@@ -2899,7 +2635,7 @@ relevent, or</p></li>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-distribution">The exponential distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-normal-distribution">The normal distribution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-probability-plot">Normal probability plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-probability-plot"><code class="docutils literal notranslate"><span class="pre">Normal</span></code> probability plot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-lognormal-distribution">The lognormal distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pareto-distribution">The Pareto distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-random-numbers">Generating random numbers</a></li>

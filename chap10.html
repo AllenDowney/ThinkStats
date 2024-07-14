@@ -177,8 +177,8 @@
 <li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability mass functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
@@ -405,7 +405,7 @@ document.write(`
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 2;
+                var nbb_cell_id = 12;
                 var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
                 var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -424,6 +424,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">decorate</span>
@@ -433,9 +434,9 @@ document.write(`
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 3;
-                var nbb_unformatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
-                var nbb_formatted_code = "import numpy as np\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
+                var nbb_formatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -450,50 +451,31 @@ document.write(`
 </div>
 <section id="least-squares-fit">
 <h2>Least squares fit<a class="headerlink" href="#least-squares-fit" title="Link to this heading">#</a></h2>
-<p>Correlation coefficients measure the strength and sign of a
-relationship, but not the slope. There are several ways to estimate the
-slope; the most common is a <strong>linear least squares fit</strong>. A “linear fit”
-is a line intended to model the relationship between variables. A “least
-squares” fit is one that minimizes the mean squared error (MSE) between
-the line and the data.</p>
-<p>Suppose we have a sequence of points, <code class="docutils literal notranslate"><span class="pre">ys</span></code>, that we want to express as a
-function of another sequence <code class="docutils literal notranslate"><span class="pre">xs</span></code>. If there is a linear relationship
-between <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> with intercept <code class="docutils literal notranslate"><span class="pre">inter</span></code> and slope <code class="docutils literal notranslate"><span class="pre">slope</span></code>, we
-expect each <code class="docutils literal notranslate"><span class="pre">y[i]</span></code> to be <code class="docutils literal notranslate"><span class="pre">inter</span> <span class="pre">+</span> <span class="pre">slope</span> <span class="pre">*</span> <span class="pre">x[i]</span></code>.</p>
-<p>But unless the correlation is perfect, this prediction is only
-approximate. The vertical deviation from the line, or <strong>residual</strong>, is</p>
-<p>The residuals might be due to random factors like measurement error, or
-non-random factors that are unknown. For example, if we are trying to
-predict weight as a function of height, unknown factors might include
-diet, exercise, and body type.</p>
-<p>If we get the parameters <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code> wrong, the residuals get
-bigger, so it makes intuitive sense that the parameters we want are the
-ones that minimize the residuals.</p>
-<p>We might try to minimize the absolute value of the residuals, or their
-squares, or their cubes; but the most common choice is to minimize the
-sum of squared residuals, <code class="docutils literal notranslate"><span class="pre">sum(res**2)</span></code>.</p>
+<p>Correlation coefficients measure the strength and sign of a relationship, but not the slope.
+There are several ways to estimate the slope; the most common is a <strong>linear least squares fit</strong>.
+A “linear fit” is a line intended to model the relationship between variables.
+A “least squares” fit is one that minimizes the mean squared error (MSE) between the line and the data.</p>
+<p>Suppose we have a sequence of points, <code class="docutils literal notranslate"><span class="pre">ys</span></code>, that we want to express as a function of another sequence <code class="docutils literal notranslate"><span class="pre">xs</span></code>.
+If there is a linear relationship between <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> with intercept <code class="docutils literal notranslate"><span class="pre">inter</span></code> and slope <code class="docutils literal notranslate"><span class="pre">slope</span></code>, we expect each <code class="docutils literal notranslate"><span class="pre">y[i]</span></code> to be <code class="docutils literal notranslate"><span class="pre">inter</span> <span class="pre">+</span> <span class="pre">slope</span> <span class="pre">*</span> <span class="pre">x[i]</span></code>.</p>
+<p>But unless the correlation is perfect, this prediction is only approximate.
+The vertical deviation from the line, or <strong>residual</strong>, is</p>
+<p>The residuals might be due to random factors like measurement error, or non-random factors that are unknown.
+For example, if we are trying to predict weight as a function of height, unknown factors might include diet, exercise, and body type.</p>
+<p>If we get the parameters <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code> wrong, the residuals get bigger, so it makes intuitive sense that the parameters we want are the ones that minimize the residuals.</p>
+<p>We might try to minimize the absolute value of the residuals, or their squares, or their cubes; but the most common choice is to minimize the sum of squared residuals, <code class="docutils literal notranslate"><span class="pre">sum(res**2)</span></code>.</p>
 <p>Why? There are three good reasons and one less important one:</p>
 <ul class="simple">
-<li><p>Squaring has the feature of treating positive and negative residuals
-the same, which is usually what we want.</p></li>
-<li><p>Squaring gives more weight to large residuals, but not so much
-weight that the largest residual always dominates.</p></li>
-<li><p>If the residuals are uncorrelated and normally distributed with mean
-0 and constant (but unknown) variance, then the least squares fit is
-also the maximum likelihood estimator of <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code>. See
-<a class="reference external" href="https://en.wikipedia.org/wiki/Linear_regression">https://en.wikipedia.org/wiki/Linear_regression</a>.</p></li>
-<li><p>The values of <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code> that minimize the squared
-residuals can be computed efficiently.</p></li>
+<li><p>Squaring has the feature of treating positive and negative residuals the same, which is usually what we want.</p></li>
+<li><p>Squaring gives more weight to large residuals, but not so much weight that the largest residual always dominates.</p></li>
+<li><p>If the residuals are uncorrelated and normally distributed with mean 0 and constant (but unknown) variance, then the least squares fit is also the maximum likelihood estimator of <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code>.
+See <a class="reference external" href="https://en.wikipedia.org/wiki/Linear_regression">https://en.wikipedia.org/wiki/Linear_regression</a>.</p></li>
+<li><p>The values of <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code> that minimize the squared residuals can be computed efficiently.</p></li>
 </ul>
-<p>The last reason made sense when computational efficiency was more
-important than choosing the method most appropriate to the problem at
-hand. That’s no longer the case, so it is worth considering whether
-squared residuals are the right thing to minimize.</p>
-<p>For example, if you are using <code class="docutils literal notranslate"><span class="pre">xs</span></code> to predict values of <code class="docutils literal notranslate"><span class="pre">ys</span></code>, guessing
-too high might be better (or worse) than guessing too low. In that case
-you might want to compute some cost function for each residual, and
-minimize total cost, <code class="docutils literal notranslate"><span class="pre">sum(cost(res))</span></code>. However, computing a least
-squares fit is quick, easy and often good enough.</p>
+<p>The last reason made sense when computational efficiency was more important than choosing the method most appropriate to the problem at hand.
+That’s no longer the case, so it is worth considering whether squared residuals are the right thing to minimize.</p>
+<p>For example, if you are using <code class="docutils literal notranslate"><span class="pre">xs</span></code> to predict values of <code class="docutils literal notranslate"><span class="pre">ys</span></code>, guessing too high might be better (or worse) than guessing too low.
+In that case you might want to compute some cost function for each residual, and minimize total cost, <code class="docutils literal notranslate"><span class="pre">sum(cost(res))</span></code>.
+However, computing a least squares fit is quick, easy and often good enough.</p>
 </section>
 <section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
@@ -516,7 +498,7 @@ squares fit is quick, easy and often good enough.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 4;
+                var nbb_cell_id = 14;
                 var nbb_unformatted_code = "from thinkstats import cov\n\n\ndef least_squares(xs, ys):\n    xbar = np.mean(xs)\n    ybar = np.mean(ys)\n    slope = cov(xs, ys) / np.var(xs)\n    inter = ybar - slope * xbar\n    return inter, slope";
                 var nbb_formatted_code = "from thinkstats import cov\n\n\ndef least_squares(xs, ys):\n    xbar = np.mean(xs)\n    ybar = np.mean(ys)\n    slope = cov(xs, ys) / np.var(xs)\n    inter = ybar - slope * xbar\n    return inter, slope";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -531,10 +513,8 @@ squares fit is quick, easy and often good enough.</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">least_squares</span></code> takes sequences <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> and returns the estimated
-parameters <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code>.</p>
-<p>We can use these functions to compute the least squares fit for birth
-weight as a function of mother’s age.</p>
+<p><code class="docutils literal notranslate"><span class="pre">least_squares</span></code> takes sequences <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> and returns the estimated parameters <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code>.</p>
+<p>We can use these functions to compute the least squares fit for birth weight as a function of mother’s age.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
@@ -546,7 +526,7 @@ weight as a function of mother’s age.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 5;
+                var nbb_cell_id = 15;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -575,7 +555,7 @@ weight as a function of mother’s age.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 6;
+                var nbb_cell_id = 16;
                 var nbb_unformatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()\nlive = live.dropna(subset=[\"agepreg\", \"totalwgt_lb\"])\nages = live.agepreg\nweights = live.totalwgt_lb";
                 var nbb_formatted_code = "import nsfg\n\nlive, firsts, others = nsfg.make_frames()\nlive = live.dropna(subset=[\"agepreg\", \"totalwgt_lb\"])\nages = live.agepreg\nweights = live.totalwgt_lb";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -603,7 +583,7 @@ weight as a function of mother’s age.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 7;
+                var nbb_cell_id = 17;
                 var nbb_unformatted_code = "inter, slope = least_squares(ages, weights)\ninter, slope";
                 var nbb_formatted_code = "inter, slope = least_squares(ages, weights)\ninter, slope";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -619,13 +599,9 @@ weight as a function of mother’s age.</p>
             </script></div>
 </div>
 <p>The estimated intercept and slope are 6.8 lbs and 0.017 lbs per year.
-These values are hard to interpret in this form: the intercept is the
-expected weight of a baby whose mother is 0 years old, which doesn’t
-make sense in context, and the slope is too small to grasp easily.</p>
-<p>Instead of presenting the intercept at <span class="math notranslate nohighlight">\(x=0\)</span>, it is often helpful to
-present the intercept at the mean of <span class="math notranslate nohighlight">\(x\)</span>. In this case the mean age is
-about 25 years and the mean baby weight for a 25 year old mother is 7.3
-pounds.</p>
+These values are hard to interpret in this form: the intercept is the expected weight of a baby whose mother is 0 years old, which doesn’t make sense in context, and the slope is too small to grasp easily.</p>
+<p>Instead of presenting the intercept at <span class="math notranslate nohighlight">\(x=0\)</span>, it is often helpful to present the intercept at the mean of <span class="math notranslate nohighlight">\(x\)</span>.
+In this case the mean age is about 25 years and the mean baby weight for a 25 year old mother is 7.3 pounds.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">25</span>
@@ -639,7 +615,7 @@ pounds.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 8;
+                var nbb_cell_id = 18;
                 var nbb_unformatted_code = "x = 25\ninter + x * slope";
                 var nbb_formatted_code = "x = 25\ninter + x * slope";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -666,7 +642,7 @@ pounds.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 9;
+                var nbb_cell_id = 19;
                 var nbb_unformatted_code = "def predict(xs, inter, slope):\n    xs = np.asarray(xs)\n    return inter + slope * xs";
                 var nbb_formatted_code = "def predict(xs, inter, slope):\n    xs = np.asarray(xs)\n    return inter + slope * xs";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -694,7 +670,7 @@ pounds.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 10;
+                var nbb_cell_id = 20;
                 var nbb_unformatted_code = "def fit_line(xs, inter, slope):\n    low, high = np.min(xs), np.max(xs)\n    fit_xs = np.linspace(low, high)\n    fit_ys = predict(fit_xs, inter, slope)\n    return fit_xs, fit_ys";
                 var nbb_formatted_code = "def fit_line(xs, inter, slope):\n    low, high = np.min(xs), np.max(xs)\n    fit_xs = np.linspace(low, high)\n    fit_ys = predict(fit_xs, inter, slope)\n    return fit_xs, fit_ys";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -718,7 +694,7 @@ pounds.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 11;
+                var nbb_cell_id = 21;
                 var nbb_unformatted_code = "fit_xs, fit_ys = fit_line(ages, inter, slope)";
                 var nbb_formatted_code = "fit_xs, fit_ys = fit_line(ages, inter, slope)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -749,7 +725,7 @@ pounds.</p>
 <img alt="_images/dc14c8eb8681fde6626e75a2bb68b0a4b1b96c2b12a27fd8d16d3ba6c794a3f4.png" src="_images/dc14c8eb8681fde6626e75a2bb68b0a4b1b96c2b12a27fd8d16d3ba6c794a3f4.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 12;
+                var nbb_cell_id = 22;
                 var nbb_unformatted_code = "plt.scatter(ages, weights, alpha=0.1, s=5)\nplt.plot(fit_xs, fit_ys, color=\"C1\", linewidth=2)\ndecorate(\n    xlabel=\"Mother's age (years)\",\n    ylabel=\"Birth weight (lbs)\",\n)";
                 var nbb_formatted_code = "plt.scatter(ages, weights, alpha=0.1, s=5)\nplt.plot(fit_xs, fit_ys, color=\"C1\", linewidth=2)\ndecorate(\n    xlabel=\"Mother's age (years)\",\n    ylabel=\"Birth weight (lbs)\",\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -764,9 +740,7 @@ pounds.</p>
             }, 500);
             </script></div>
 </div>
-<p>It’s a good idea to look at a figure like this to assess whether the
-relationship is linear and whether the fitted line seems like a good
-model of the relationship.</p>
+<p>It’s a good idea to look at a figure like this to assess whether the relationship is linear and whether the fitted line seems like a good model of the relationship.</p>
 </section>
 <section id="residuals">
 <h2>Residuals<a class="headerlink" href="#residuals" title="Link to this heading">#</a></h2>
@@ -784,7 +758,7 @@ model of the relationship.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 13;
+                var nbb_cell_id = 23;
                 var nbb_unformatted_code = "def residuals(xs, ys, inter, slope):\n    fit_ys = predict(xs, inter, slope)\n    return ys - fit_ys";
                 var nbb_formatted_code = "def residuals(xs, ys, inter, slope):\n    fit_ys = predict(xs, inter, slope)\n    return ys - fit_ys";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -799,9 +773,8 @@ model of the relationship.</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">residuals</span></code> takes sequences <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> and estimated parameters
-<code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code>. It returns the differences between the actual
-values and the fitted line.</p>
+<p><code class="docutils literal notranslate"><span class="pre">residuals</span></code> takes sequences <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> and estimated parameters <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code>.
+It returns the differences between the actual values and the fitted line.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">[</span><span class="s2">&quot;residual&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">residuals</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
@@ -811,7 +784,7 @@ values and the fitted line.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 14;
+                var nbb_cell_id = 24;
                 var nbb_unformatted_code = "live[\"residual\"] = residuals(ages, weights, inter, slope)";
                 var nbb_formatted_code = "live[\"residual\"] = residuals(ages, weights, inter, slope)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -851,7 +824,7 @@ values and the fitted line.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 15;
+                var nbb_cell_id = 25;
                 var nbb_unformatted_code = "bins = np.arange(10, 48, 3)\nindices = np.digitize(live.agepreg, bins)\ngroups = live.groupby(indices)\nage_means = [group.agepreg.mean() for _, group in groups][1:-1]\nage_means";
                 var nbb_formatted_code = "bins = np.arange(10, 48, 3)\nindices = np.digitize(live.agepreg, bins)\ngroups = live.groupby(indices)\nage_means = [group.agepreg.mean() for _, group in groups][1:-1]\nage_means";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -866,10 +839,8 @@ values and the fitted line.</p>
             }, 500);
             </script></div>
 </div>
-<p>To visualize the residuals, I group respondents by age and compute
-percentiles in each group. The following figure
-shows the 25th, 50th and 75th percentiles of the residuals for each age
-group.</p>
+<p>To visualize the residuals, I group respondents by age and compute percentiles in each group.
+The following figure shows the 25th, 50th and 75th percentiles of the residuals for each age group.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
@@ -883,7 +854,7 @@ group.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 16;
+                var nbb_cell_id = 26;
                 var nbb_unformatted_code = "from empiricaldist import Cdf\n\n# TODO: Do this with a simpler version of percentile\n\ncdfs = [Cdf.from_seq(group.residual) for _, group in groups][1:-1]";
                 var nbb_formatted_code = "from empiricaldist import Cdf\n\n# TODO: Do this with a simpler version of percentile\n\ncdfs = [Cdf.from_seq(group.residual) for _, group in groups][1:-1]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -913,7 +884,7 @@ group.</p>
 <img alt="_images/652509b19ff5855dcc657a00b5557fba529f25c494d19b9eedcb710fe8946c92.png" src="_images/652509b19ff5855dcc657a00b5557fba529f25c494d19b9eedcb710fe8946c92.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 17;
+                var nbb_cell_id = 27;
                 var nbb_unformatted_code = "for percent in [0.75, 0.50, 0.25]:\n    weight_percentiles = [cdf.inverse(percent) for cdf in cdfs]\n    label = \"%dth\" % percent\n    plt.plot(age_means, weight_percentiles, label=label)\n\ndecorate(xlabel=\"Mother's age (years)\", ylabel=\"Residual (lbs)\")";
                 var nbb_formatted_code = "for percent in [0.75, 0.50, 0.25]:\n    weight_percentiles = [cdf.inverse(percent) for cdf in cdfs]\n    label = \"%dth\" % percent\n    plt.plot(age_means, weight_percentiles, label=label)\n\ndecorate(xlabel=\"Mother's age (years)\", ylabel=\"Residual (lbs)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -928,32 +899,18 @@ group.</p>
             }, 500);
             </script></div>
 </div>
-<p>The median is near zero, as expected, and the interquartile range
-is about 2 pounds. So if we know the mother’s age, we can guess the
-baby’s weight within a pound, about 50% of the time.</p>
-<p>Ideally these lines should be flat, indicating that the residuals are
-random, and parallel, indicating that the variance of the residuals is
-the same for all age groups. In fact, the lines are close to parallel,
-so that’s good; but they have some curvature, indicating that the
-relationship is nonlinear. Nevertheless, the linear fit is a simple
-model that is probably good enough for some purposes.</p>
+<p>The median is near zero, as expected, and the interquartile range is about 2 pounds.
+So if we know the mother’s age, we can guess the baby’s weight within a pound, about 50% of the time.</p>
+<p>Ideally these lines should be flat, indicating that the residuals are random, and parallel, indicating that the variance of the residuals is the same for all age groups.
+In fact, the lines are close to parallel, so that’s good; but they have some curvature, indicating that the relationship is nonlinear.
+Nevertheless, the linear fit is a simple model that is probably good enough for some purposes.</p>
 </section>
 <section id="estimation">
 <h2>Estimation<a class="headerlink" href="#estimation" title="Link to this heading">#</a></h2>
-<p>The parameters <code class="docutils literal notranslate"><span class="pre">slope</span></code> and <code class="docutils literal notranslate"><span class="pre">inter</span></code> are estimates based on a sample; like
-other estimates, they are vulnerable to sampling bias, measurement
-error, and sampling error.</p>
-<p>Sampling bias is caused by non-representative
-sampling, measurement error is caused by errors in collecting and
-recording data, and sampling error is the result of measuring a sample
-rather than the entire population.</p>
-<p>To assess sampling error, we ask, “If we run this experiment again, how
-much variability do we expect in the estimates?” We can answer this
-question by running simulated experiments and computing sampling
-distributions of the estimates.</p>
-<p>We can simulate the experiments by resampling the data; that is, by treating the
-observed pregnancies as if they were the entire population and drawing
-samples, with replacement, from the observed sample.</p>
+<p>The parameters <code class="docutils literal notranslate"><span class="pre">slope</span></code> and <code class="docutils literal notranslate"><span class="pre">inter</span></code> are estimates based on a sample; like other estimates, they are vulnerable to sampling bias, measurement error, and sampling error.</p>
+<p>Sampling bias is caused by non-representative sampling, measurement error is caused by errors in collecting and recording data, and sampling error is the result of measuring a sample rather than the entire population.</p>
+<p>To assess sampling error, we ask, “If we run this experiment again, how much variability do we expect in the estimates?” We can answer this question by running simulated experiments and computing sampling distributions of the estimates.</p>
+<p>We can simulate the experiments by resampling the data; that is, by treating the observed pregnancies as if they were the entire population and drawing samples, with replacement, from the observed sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resample_rows</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
@@ -971,7 +928,7 @@ samples, with replacement, from the observed sample.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 18;
+                var nbb_cell_id = 28;
                 var nbb_unformatted_code = "def resample_rows(df):\n    \"\"\"Resamples rows from a DataFrame.\n\n    df: DataFrame\n\n    returns: DataFrame\n    \"\"\"\n    n = len(df)\n    return df.sample(n, replace=True)";
                 var nbb_formatted_code = "def resample_rows(df):\n    \"\"\"Resamples rows from a DataFrame.\n\n    df: DataFrame\n\n    returns: DataFrame\n    \"\"\"\n    n = len(df)\n    return df.sample(n, replace=True)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1004,7 +961,7 @@ samples, with replacement, from the observed sample.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 19;
+                var nbb_cell_id = 29;
                 var nbb_unformatted_code = "def sampling_distributions(live, iters=101):\n    t = []\n    for _ in range(iters):\n        sample = resample_rows(live)\n        ages = sample.agepreg\n        weights = sample.totalwgt_lb\n        estimates = least_squares(ages, weights)\n        t.append(estimates)\n    inters, slopes = zip(*t)\n    return inters, slopes";
                 var nbb_formatted_code = "def sampling_distributions(live, iters=101):\n    t = []\n    for _ in range(iters):\n        sample = resample_rows(live)\n        ages = sample.agepreg\n        weights = sample.totalwgt_lb\n        estimates = least_squares(ages, weights)\n        t.append(estimates)\n    inters, slopes = zip(*t)\n    return inters, slopes";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1028,7 +985,7 @@ samples, with replacement, from the observed sample.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 20;
+                var nbb_cell_id = 30;
                 var nbb_unformatted_code = "inters, slopes = sampling_distributions(live, iters=1001)";
                 var nbb_formatted_code = "inters, slopes = sampling_distributions(live, iters=1001)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1043,17 +1000,13 @@ samples, with replacement, from the observed sample.</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">SamplingDistributions</span></code> takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with one row per live birth,
-and <code class="docutils literal notranslate"><span class="pre">iters</span></code>, the number of experiments to simulate. It uses
-<code class="docutils literal notranslate"><span class="pre">ResampleRows</span></code> to resample the observed pregnancies. We’ve already seen
-<code class="docutils literal notranslate"><span class="pre">SampleRows</span></code>, which chooses random rows from a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code>
-also provides <code class="docutils literal notranslate"><span class="pre">ResampleRows</span></code>, which returns a sample the same size as
-the original:</p>
+<p><code class="docutils literal notranslate"><span class="pre">SamplingDistributions</span></code> takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with one row per live birth, and <code class="docutils literal notranslate"><span class="pre">iters</span></code>, the number of experiments to simulate.
+It uses <code class="docutils literal notranslate"><span class="pre">ResampleRows</span></code> to resample the observed pregnancies.
+We’ve already seen <code class="docutils literal notranslate"><span class="pre">SampleRows</span></code>, which chooses random rows from a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.
+<code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> also provides <code class="docutils literal notranslate"><span class="pre">ResampleRows</span></code>, which returns a sample the same size as the original:</p>
 <p>After resampling, we use the simulated sample to estimate parameters.
-The result is two sequences: the estimated intercepts and estimated
-slopes.</p>
-<p>I summarize the sampling distributions by printing the standard error
-and confidence interval:</p>
+The result is two sequences: the estimated intercepts and estimated slopes.</p>
+<p>I summarize the sampling distributions by printing the standard error and confidence interval:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">actual</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1066,7 +1019,7 @@ and confidence interval:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 21;
+                var nbb_cell_id = 31;
                 var nbb_unformatted_code = "def summarize(estimates, actual=None):\n    se = np.std(estimates)\n    ci = np.percentile(estimates, [5, 95])\n    print(se, ci)";
                 var nbb_formatted_code = "def summarize(estimates, actual=None):\n    se = np.std(estimates)\n    ci = np.percentile(estimates, [5, 95])\n    print(se, ci)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1081,9 +1034,8 @@ and confidence interval:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">summarize</span></code> takes a sequence of estimates and the actual value. It
-prints the mean of the estimates, the standard error and a 90%
-confidence interval.</p>
+<p><code class="docutils literal notranslate"><span class="pre">summarize</span></code> takes a sequence of estimates and the actual value.
+It prints the mean of the estimates, the standard error and a 90% confidence interval.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summarize</span><span class="p">(</span><span class="n">inters</span><span class="p">)</span>
@@ -1091,12 +1043,12 @@ confidence interval.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.07360262598491336 [6.71556126 6.94837017]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.06964945727524441 [6.71608999 6.94716849]
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 22;
+                var nbb_cell_id = 32;
                 var nbb_unformatted_code = "summarize(inters)";
                 var nbb_formatted_code = "summarize(inters)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1111,8 +1063,7 @@ confidence interval.</p>
             }, 500);
             </script></div>
 </div>
-<p>For the intercept, the standard error is 0.071
-and 90% confidence interval (6.71, 6.94).</p>
+<p>For the intercept, the standard error is 0.071 and 90% confidence interval (6.71, 6.94).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summarize</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
@@ -1120,12 +1071,12 @@ and 90% confidence interval (6.71, 6.94).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0029038252450210764 [0.01294269 0.02209669]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.002716555769151588 [0.01292544 0.02181252]
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 23;
+                var nbb_cell_id = 33;
                 var nbb_unformatted_code = "summarize(slopes)";
                 var nbb_formatted_code = "summarize(slopes)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1141,9 +1092,7 @@ and 90% confidence interval (6.71, 6.94).</p>
             </script></div>
 </div>
 <p>For the slope, the standard error is 0.0174, and 90% CI (0.0126, 0.0220).
-There is almost
-a factor of two between the low and high ends of this CI, so it should
-be considered a rough estimate.</p>
+There is almost a factor of two between the low and high ends of this CI, so it should be considered a rough estimate.</p>
 <p>To visualize the sampling error of the estimate, we can plot all of the fitted lines.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1156,10 +1105,10 @@ be considered a rough estimate.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5b5cf619d1dadfe7bb2486d440b845a122294be15cf1a05b646803925f51e333.png" src="_images/5b5cf619d1dadfe7bb2486d440b845a122294be15cf1a05b646803925f51e333.png" />
+<img alt="_images/3a663347c585f10fbf62ee4efa1312f610487635df2b3b77a1151af8d7991b7b.png" src="_images/3a663347c585f10fbf62ee4efa1312f610487635df2b3b77a1151af8d7991b7b.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 24;
+                var nbb_cell_id = 34;
                 var nbb_unformatted_code = "for slope, inter in zip(slopes, inters):\n    fxs, fys = fit_line(age_means, inter, slope)\n    plt.plot(fxs, fys, color=\"gray\", alpha=0.01)\n\ndecorate(xlabel=\"Mother's age (years)\", ylabel=\"Residual (lbs)\")";
                 var nbb_formatted_code = "for slope, inter in zip(slopes, inters):\n    fxs, fys = fit_line(age_means, inter, slope)\n    plt.plot(fxs, fys, color=\"gray\", alpha=0.01)\n\ndecorate(xlabel=\"Mother's age (years)\", ylabel=\"Residual (lbs)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1174,8 +1123,8 @@ be considered a rough estimate.</p>
             }, 500);
             </script></div>
 </div>
-<p>Or for a less cluttered representation, we can plot a 90%
-confidence interval for each age. Here’s the code:</p>
+<p>Or for a less cluttered representation, we can plot a 90% confidence interval for each age.
+Here’s the code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">percentile_rows</span>
@@ -1196,7 +1145,7 @@ confidence interval for each age. Here’s the code:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 25;
+                var nbb_cell_id = 36;
                 var nbb_unformatted_code = "from thinkstats import percentile_rows\n\n\ndef plot_confidence_intervals(xs, inters, slopes, percent=90, **options):\n    fys_seq = []\n    for inter, slope in zip(inters, slopes):\n        fxs, fys = fit_line(xs, inter, slope)\n        fys_seq.append(fys)\n    p = (100 - percent) / 2\n    percents = p, 100 - p\n    low, high = percentile_rows(fys_seq, percents)\n    plt.fill_between(fxs, low, high, **options)";
                 var nbb_formatted_code = "from thinkstats import percentile_rows\n\n\ndef plot_confidence_intervals(xs, inters, slopes, percent=90, **options):\n    fys_seq = []\n    for inter, slope in zip(inters, slopes):\n        fxs, fys = fit_line(xs, inter, slope)\n        fys_seq.append(fys)\n    p = (100 - percent) / 2\n    percents = p, 100 - p\n    low, high = percentile_rows(fys_seq, percents)\n    plt.fill_between(fxs, low, high, **options)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1211,15 +1160,13 @@ confidence interval for each age. Here’s the code:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">xs</span></code> is the sequence of mother’s age. <code class="docutils literal notranslate"><span class="pre">inters</span></code> and <code class="docutils literal notranslate"><span class="pre">slopes</span></code> are the
-estimated parameters generated by <code class="docutils literal notranslate"><span class="pre">sampling_distributions</span></code>. <code class="docutils literal notranslate"><span class="pre">percent</span></code>
-indicates which confidence interval to plot.</p>
-<p><code class="docutils literal notranslate"><span class="pre">plot_confidence_intervals</span></code> generates a fitted line for each pair of
-<code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code> and stores the results in a sequence, <code class="docutils literal notranslate"><span class="pre">fys_seq</span></code>.
-Then it uses <code class="docutils literal notranslate"><span class="pre">percentile_rows</span></code> to select the upper and lower percentiles
-of <code class="docutils literal notranslate"><span class="pre">y</span></code> for each value of <code class="docutils literal notranslate"><span class="pre">x</span></code>. For a 90% confidence interval, it selects
-the 5th and 95th percentiles. <code class="docutils literal notranslate"><span class="pre">fill_between</span></code> draws a polygon that fills
-the space between two lines.</p>
+<p><code class="docutils literal notranslate"><span class="pre">xs</span></code> is the sequence of mother’s age.
+<code class="docutils literal notranslate"><span class="pre">inters</span></code> and <code class="docutils literal notranslate"><span class="pre">slopes</span></code> are the estimated parameters generated by <code class="docutils literal notranslate"><span class="pre">sampling_distributions</span></code>.
+<code class="docutils literal notranslate"><span class="pre">percent</span></code> indicates which confidence interval to plot.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot_confidence_intervals</span></code> generates a fitted line for each pair of <code class="docutils literal notranslate"><span class="pre">inter</span></code> and <code class="docutils literal notranslate"><span class="pre">slope</span></code> and stores the results in a sequence, <code class="docutils literal notranslate"><span class="pre">fys_seq</span></code>.
+Then it uses <code class="docutils literal notranslate"><span class="pre">percentile_rows</span></code> to select the upper and lower percentiles of <code class="docutils literal notranslate"><span class="pre">y</span></code> for each value of <code class="docutils literal notranslate"><span class="pre">x</span></code>.
+For a 90% confidence interval, it selects the 5th and 95th percentiles.
+<code class="docutils literal notranslate"><span class="pre">fill_between</span></code> draws a polygon that fills the space between two lines.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_confidence_intervals</span><span class="p">(</span>
@@ -1230,10 +1177,10 @@ the space between two lines.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b4bf3506cf4f2b917701ffe7765f5860452a994d4dab7070d2fd80befe4b5015.png" src="_images/b4bf3506cf4f2b917701ffe7765f5860452a994d4dab7070d2fd80befe4b5015.png" />
+<img alt="_images/c949955b9c9671878948ad9a4fb1bd297c080f4188338c7aa6370497aca10d97.png" src="_images/c949955b9c9671878948ad9a4fb1bd297c080f4188338c7aa6370497aca10d97.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 26;
+                var nbb_cell_id = 37;
                 var nbb_unformatted_code = "plot_confidence_intervals(\n    age_means, inters, slopes, percent=90, color=\"gray\", alpha=0.3, label=\"90% CI\"\n)\ndecorate(xlabel=\"Mother's age (years)\", ylabel=\"Residual (lbs)\")";
                 var nbb_formatted_code = "plot_confidence_intervals(\n    age_means, inters, slopes, percent=90, color=\"gray\", alpha=0.3, label=\"90% CI\"\n)\ndecorate(xlabel=\"Mother's age (years)\", ylabel=\"Residual (lbs)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1248,19 +1195,14 @@ the space between two lines.</p>
             }, 500);
             </script></div>
 </div>
-<p>The vertical width of the region
-represents the effect of sampling error – the effect is smaller for
-values near the mean and larger for the extremes.</p>
+<p>The vertical width of the region represents the effect of sampling error – the effect is smaller for values near the mean and larger for the extremes.</p>
 </section>
 <section id="goodness-of-fit">
 <h2>Goodness of fit<a class="headerlink" href="#goodness-of-fit" title="Link to this heading">#</a></h2>
-<p>There are several ways to measure the quality of a linear model, or
-<strong>goodness of fit</strong>. One of the simplest is the standard deviation of
-the residuals.</p>
-<p>If you use a linear model to make predictions, <code class="docutils literal notranslate"><span class="pre">std(res)</span></code> is the root
-mean squared error (RMSE) of your predictions. For example, if you use
-mother’s age to guess birth weight, the RMSE of your guess would be 1.40
-lbs.</p>
+<p>There are several ways to measure the quality of a linear model, or <strong>goodness of fit</strong>.
+One of the simplest is the standard deviation of the residuals.</p>
+<p>If you use a linear model to make predictions, <code class="docutils literal notranslate"><span class="pre">std(res)</span></code> is the root mean squared error (RMSE) of your predictions.
+For example, if you use mother’s age to guess birth weight, the RMSE of your guess would be 1.40 lbs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inter</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">least_squares</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
@@ -1271,7 +1213,7 @@ lbs.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 27;
+                var nbb_cell_id = 38;
                 var nbb_unformatted_code = "inter, slope = least_squares(ages, weights)\nres = residuals(ages, weights, inter, slope)";
                 var nbb_formatted_code = "inter, slope = least_squares(ages, weights)\nres = residuals(ages, weights, inter, slope)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1300,7 +1242,7 @@ Std(res) 1.4048754287857832
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 28;
+                var nbb_cell_id = 39;
                 var nbb_unformatted_code = "print(\"Std(ys)\", np.std(weights))\nprint(\"Std(res)\", np.std(res))";
                 var nbb_formatted_code = "print(\"Std(ys)\", np.std(weights))\nprint(\"Std(res)\", np.std(res))";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1315,11 +1257,9 @@ Std(res) 1.4048754287857832
             }, 500);
             </script></div>
 </div>
-<p>If you guess birth weight without knowing the mother’s age, the RMSE of
-your guess is <code class="docutils literal notranslate"><span class="pre">Std(ys)</span></code>, which is 1.41 lbs. So in this example, knowing
-a mother’s age does not improve the predictions substantially.</p>
-<p>Another way to measure goodness of fit is the <strong>coefficient of
-determination</strong>, usually denoted <span class="math notranslate nohighlight">\(R^2\)</span> and called “R-squared”:</p>
+<p>If you guess birth weight without knowing the mother’s age, the RMSE of your guess is <code class="docutils literal notranslate"><span class="pre">Std(ys)</span></code>, which is 1.41 lbs.
+So in this example, knowing a mother’s age does not improve the predictions substantially.</p>
+<p>Another way to measure goodness of fit is the <strong>coefficient of determination</strong>, usually denoted <span class="math notranslate nohighlight">\(R^2\)</span> and called “R-squared”:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">coef_determination</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
@@ -1330,7 +1270,7 @@ determination</strong>, usually denoted <span class="math notranslate nohighligh
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 29;
+                var nbb_cell_id = 40;
                 var nbb_unformatted_code = "def coef_determination(ys, res):\n    return 1 - np.var(res) / np.var(ys)";
                 var nbb_formatted_code = "def coef_determination(ys, res):\n    return 1 - np.var(res) / np.var(ys)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1358,7 +1298,7 @@ determination</strong>, usually denoted <span class="math notranslate nohighligh
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 30;
+                var nbb_cell_id = 41;
                 var nbb_unformatted_code = "r2 = coef_determination(weights, res)\nr2";
                 var nbb_formatted_code = "r2 = coef_determination(weights, res)\nr2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1389,7 +1329,7 @@ R 0.0688339703541099
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 31;
+                var nbb_cell_id = 42;
                 var nbb_unformatted_code = "from thinkstats import corr\n\nprint(\"rho\", corr(ages, weights))\nprint(\"R\", np.sqrt(r2))";
                 var nbb_formatted_code = "from thinkstats import corr\n\nprint(\"rho\", corr(ages, weights))\nprint(\"R\", np.sqrt(r2))";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1404,28 +1344,15 @@ R 0.0688339703541099
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">Var(res)</span></code> is the MSE of your guesses using the model, <code class="docutils literal notranslate"><span class="pre">Var(ys)</span></code> is the
-MSE without it. So their ratio is the fraction of MSE that remains if
-you use the model, and <span class="math notranslate nohighlight">\(R^2\)</span> is the fraction of MSE the model
-eliminates.</p>
-<p>For birth weight and mother’s age, <span class="math notranslate nohighlight">\(R^2\)</span> is 0.0047, which means that
-mother’s age predicts about half of 1% of variance in birth weight.</p>
-<p>There is a simple relationship between the coefficient of determination
-and Pearson’s coefficient of correlation: <span class="math notranslate nohighlight">\(R^2 = \rho^2\)</span>. For example,
-if <span class="math notranslate nohighlight">\(\rho\)</span> is 0.8 or -0.8, <span class="math notranslate nohighlight">\(R^2 = 0.64\)</span>.</p>
-<p>Although <span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(R^2\)</span> are often used to quantify the strength of a
-relationship, they are not easy to interpret in terms of predictive
-power. In my opinion, <code class="docutils literal notranslate"><span class="pre">Std(res)</span></code> is the best representation of the
-quality of prediction, especially if it is presented in relation to
-<code class="docutils literal notranslate"><span class="pre">Std(ys)</span></code>.</p>
-<p>For example, when people talk about the validity of the SAT (a
-standardized test used for college admission in the U.S.) they often
-talk about correlations between SAT scores and other measures of
-intelligence.</p>
-<p>According to one study, there is a Pearson correlation of <span class="math notranslate nohighlight">\(\rho=0.72\)</span>
-between total SAT scores and IQ scores, which sounds like a strong
-correlation. But <span class="math notranslate nohighlight">\(R^2 = \rho^2 = 0.52\)</span>, so SAT scores account for only
-52% of variance in IQ.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Var(res)</span></code> is the MSE of your guesses using the model, <code class="docutils literal notranslate"><span class="pre">Var(ys)</span></code> is the MSE without it. So their ratio is the fraction of MSE that remains if you use the model, and <span class="math notranslate nohighlight">\(R^2\)</span> is the fraction of MSE the model eliminates.</p>
+<p>For birth weight and mother’s age, <span class="math notranslate nohighlight">\(R^2\)</span> is 0.0047, which means that mother’s age predicts about half of 1% of variance in birth weight.</p>
+<p>There is a simple relationship between the coefficient of determination and Pearson’s coefficient of correlation: <span class="math notranslate nohighlight">\(R^2 = \rho^2\)</span>.
+For example, if <span class="math notranslate nohighlight">\(\rho\)</span> is 0.8 or -0.8, <span class="math notranslate nohighlight">\(R^2 = 0.64\)</span>.</p>
+<p>Although <span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(R^2\)</span> are often used to quantify the strength of a relationship, they are not easy to interpret in terms of predictive power.
+In my opinion, <code class="docutils literal notranslate"><span class="pre">Std(res)</span></code> is the best representation of the quality of prediction, especially if it is presented in relation to <code class="docutils literal notranslate"><span class="pre">Std(ys)</span></code>.</p>
+<p>For example, when people talk about the validity of the SAT (a standardized test used for college admission in the U.S.) they often talk about correlations between SAT scores and other measures of intelligence.</p>
+<p>According to one study, there is a Pearson correlation of <span class="math notranslate nohighlight">\(\rho=0.72\)</span> between total SAT scores and IQ scores, which sounds like a strong correlation.
+But <span class="math notranslate nohighlight">\(R^2 = \rho^2 = 0.52\)</span>, so SAT scores account for only 52% of variance in IQ.</p>
 <p>IQ scores are normalized with <code class="docutils literal notranslate"><span class="pre">Std(ys)</span> <span class="pre">=</span> <span class="pre">15</span></code>, so</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1444,7 +1371,7 @@ correlation. But <span class="math notranslate nohighlight">\(R^2 = \rho^2 = 0.5
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 32;
+                var nbb_cell_id = 43;
                 var nbb_unformatted_code = "var_ys = 15**2\nrho = 0.72\nr2 = rho**2\nvar_res = (1 - r2) * var_ys\nstd_res = np.sqrt(var_res)\nstd_res";
                 var nbb_formatted_code = "var_ys = 15**2\nrho = 0.72\nr2 = rho**2\nvar_res = (1 - r2) * var_ys\nstd_res = np.sqrt(var_res)\nstd_res";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1459,31 +1386,22 @@ correlation. But <span class="math notranslate nohighlight">\(R^2 = \rho^2 = 0.5
             }, 500);
             </script></div>
 </div>
-<p>So using SAT score to predict IQ reduces RMSE from 15 points to 10.4
-points. A correlation of 0.72 yields a reduction in RMSE of only 31%.</p>
-<p>If you see a correlation that looks impressive, remember that <span class="math notranslate nohighlight">\(R^2\)</span> is a
-better indicator of reduction in MSE, and reduction in RMSE is a better
-indicator of predictive power.</p>
+<p>So using SAT score to predict IQ reduces RMSE from 15 points to 10.4 points.
+A correlation of 0.72 yields a reduction in RMSE of only 31%.</p>
+<p>If you see a correlation that looks impressive, remember that <span class="math notranslate nohighlight">\(R^2\)</span> is a better indicator of reduction in MSE, and reduction in RMSE is a better indicator of predictive power.</p>
 </section>
 <section id="testing-a-linear-model">
 <h2>Testing a linear model<a class="headerlink" href="#testing-a-linear-model" title="Link to this heading">#</a></h2>
-<p>The effect of mother’s age on birth weight is small, and has little
-predictive power. So is it possible that the apparent relationship is
-due to chance? There are several ways we might test the results of a
-linear fit.</p>
-<p>One option is to test whether the apparent reduction in MSE is due to
-chance. In that case, the test statistic is <span class="math notranslate nohighlight">\(R^2\)</span> and the null
-hypothesis is that there is no relationship between the variables. We
-can simulate the null hypothesis by permutation.</p>
-<p>In fact, because <span class="math notranslate nohighlight">\(R^2 = \rho^2\)</span>, a one-sided test
-of <span class="math notranslate nohighlight">\(R^2\)</span> is equivalent to a two-sided test of <span class="math notranslate nohighlight">\(\rho\)</span>. We’ve already done
-that test, and found <span class="math notranslate nohighlight">\(p &lt; 0.001\)</span>, so we conclude that the apparent
-relationship between mother’s age and birth weight is statistically
-significant.</p>
+<p>The effect of mother’s age on birth weight is small, and has little predictive power.
+So is it possible that the apparent relationship is due to chance? There are several ways we might test the results of a linear fit.</p>
+<p>One option is to test whether the apparent reduction in MSE is due to chance.
+In that case, the test statistic is <span class="math notranslate nohighlight">\(R^2\)</span> and the null hypothesis is that there is no relationship between the variables.
+We can simulate the null hypothesis by permutation.</p>
+<p>In fact, because <span class="math notranslate nohighlight">\(R^2 = \rho^2\)</span>, a one-sided test of <span class="math notranslate nohighlight">\(R^2\)</span> is equivalent to a two-sided test of <span class="math notranslate nohighlight">\(\rho\)</span>.
+We’ve already done that test, and found <span class="math notranslate nohighlight">\(p &lt; 0.001\)</span>, so we conclude that the apparent relationship between mother’s age and birth weight is statistically significant.</p>
 <p>Another approach is to test whether the apparent slope is due to chance.
-The null hypothesis is that the slope is actually zero; in that case we
-can model the birth weights as random variations around their mean.
-Here’s a HypothesisTest for this model:</p>
+The null hypothesis is that the slope is actually zero; in that case we can model the birth weights as random variations around their mean.
+Here’s a <code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code> for this model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">HypothesisTest</span>
@@ -1511,7 +1429,7 @@ Here’s a HypothesisTest for this model:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 33;
+                var nbb_cell_id = 44;
                 var nbb_unformatted_code = "from thinkstats import HypothesisTest\n\n\nclass SlopeTest(HypothesisTest):\n\n    def test_statistic(self, data):\n        ages, weights = data\n        _, slope = least_squares(ages, weights)\n        return slope\n\n    def make_model(self):\n        _, weights = self.data\n        self.ybar = weights.mean()\n        self.res = weights - self.ybar\n\n    def run_model(self):\n        ages, _ = self.data\n        weights = self.ybar + np.random.permutation(self.res)\n        return ages, weights";
                 var nbb_formatted_code = "from thinkstats import HypothesisTest\n\n\nclass SlopeTest(HypothesisTest):\n\n    def test_statistic(self, data):\n        ages, weights = data\n        _, slope = least_squares(ages, weights)\n        return slope\n\n    def make_model(self):\n        _, weights = self.data\n        self.ybar = weights.mean()\n        self.res = weights - self.ybar\n\n    def run_model(self):\n        ages, _ = self.data\n        weights = self.ybar + np.random.permutation(self.res)\n        return ages, weights";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1526,11 +1444,10 @@ Here’s a HypothesisTest for this model:</p>
             }, 500);
             </script></div>
 </div>
-<p>The data are represented as sequences of ages and weights. The test
-statistic is the slope estimated by <code class="docutils literal notranslate"><span class="pre">LeastSquares</span></code>. The model of the
-null hypothesis is represented by the mean weight of all babies and the
-deviations from the mean. To generate simulated data, we permute the
-deviations and add them to the mean.</p>
+<p>The data are represented as sequences of ages and weights.
+The test statistic is the slope estimated by <code class="docutils literal notranslate"><span class="pre">LeastSquares</span></code>.
+The model of the null hypothesis is represented by the mean weight of all babies and the deviations from the mean.
+To generate simulated data, we permute the deviations and add them to the mean.</p>
 <p>Here’s the code that runs the hypothesis test:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1547,7 +1464,7 @@ deviations and add them to the mean.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 34;
+                var nbb_cell_id = 45;
                 var nbb_unformatted_code = "live = live.dropna(subset=[\"agepreg\", \"totalwgt_lb\"])\nht = SlopeTest((live.agepreg, live.totalwgt_lb))\np_value = ht.p_value()\np_value";
                 var nbb_formatted_code = "live = live.dropna(subset=[\"agepreg\", \"totalwgt_lb\"])\nht = SlopeTest((live.agepreg, live.totalwgt_lb))\np_value = ht.p_value()\np_value";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1569,12 +1486,12 @@ deviations and add them to the mean.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.01745385147180276, 0.00761638296935237)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.01745385147180276, 0.008240178819182216)
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 35;
+                var nbb_cell_id = 46;
                 var nbb_unformatted_code = "ht.actual, max(ht.test_stats)";
                 var nbb_formatted_code = "ht.actual, max(ht.test_stats)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1589,43 +1506,24 @@ deviations and add them to the mean.</p>
             }, 500);
             </script></div>
 </div>
-<p>The p-value is less than <span class="math notranslate nohighlight">\(0.001\)</span>, so although the estimated slope is
-small, it is unlikely to be due to chance.</p>
-<p>Estimating the p-value by simulating the null hypothesis is strictly
-correct, but there is a simpler alternative.</p>
+<p>The p-value is less than <span class="math notranslate nohighlight">\(0.001\)</span>, so although the estimated slope is small, it is unlikely to be due to chance.</p>
+<p>Estimating the p-value by simulating the null hypothesis is strictly correct, but there is a simpler alternative.</p>
 </section>
 <section id="weighted-resampling">
 <h2>Weighted resampling<a class="headerlink" href="#weighted-resampling" title="Link to this heading">#</a></h2>
-<p>So far we have treated the NSFG data as if it were a representative
-sample, but as I mentioned in
-Section <a class="reference internal" href="#nsfg"><span class="xref myst">[nsfg]</span></a>{reference-type=“ref” reference=“nsfg”}, it is
-not. The survey deliberately oversamples several groups in order to
-improve the chance of getting statistically significant results; that
-is, in order to improve the power of tests involving these groups.</p>
-<p>This survey design is useful for many purposes, but it means that we
-cannot use the sample to estimate values for the general population
-without accounting for the sampling process.</p>
-<p>For each respondent, the NSFG data includes a variable called
-<code class="docutils literal notranslate"><span class="pre">finalwgt</span></code>, which is the number of people in the general population the
-respondent represents. This value is called a <strong>sampling weight</strong>, or
-just “weight.”</p>
-<p>As an example, if you survey 100,000 people in a country of 300 million,
-each respondent represents 3,000 people. If you oversample one group by
-a factor of 2, each person in the oversampled group would have a lower
-weight, about 1500.</p>
-<p>To correct for oversampling, we can use resampling; that is, we can draw
-samples from the survey using probabilities proportional to sampling
-weights. Then, for any quantity we want to estimate, we can generate
-sampling distributions, standard errors, and confidence intervals. As an
-example, I will estimate mean birth weight with and without sampling
-weights.</p>
-<p>In Section <a class="reference internal" href="#regest"><span class="xref myst">[regest]</span></a>{reference-type=“ref”
-reference=“regest”}, we saw <code class="docutils literal notranslate"><span class="pre">ResampleRows</span></code>, which chooses rows from a
-<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, giving each row the same probability. Now we need to do the
-same thing using probabilities proportional to sampling weights.
-<code class="docutils literal notranslate"><span class="pre">ResampleRowsWeighted</span></code> takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, resamples rows according to
-the weights in <code class="docutils literal notranslate"><span class="pre">finalwgt</span></code>, and returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> containing the
-resampled rows:</p>
+<p>So far we have treated the NSFG data as if it were a representative sample, but as I mentioned in Section <a class="reference internal" href="#nsfg"><span class="xref myst">[nsfg]</span></a>{reference-type=“ref” reference=“nsfg”}, it is not.
+The survey deliberately oversamples several groups in order to improve the chance of getting statistically significant results; that is, in order to improve the power of tests involving these groups.</p>
+<p>This survey design is useful for many purposes, but it means that we cannot use the sample to estimate values for the general population without accounting for the sampling process.</p>
+<p>For each respondent, the NSFG data includes a variable called <code class="docutils literal notranslate"><span class="pre">finalwgt</span></code>, which is the number of people in the general population the respondent represents.
+This value is called a <strong>sampling weight</strong>, or just “weight.”</p>
+<p>As an example, if you survey 100,000 people in a country of 300 million, each respondent represents 3,000 people.
+If you oversample one group by a factor of 2, each person in the oversampled group would have a lower weight, about 1500.</p>
+<p>To correct for oversampling, we can use resampling; that is, we can draw samples from the survey using probabilities proportional to sampling weights.
+Then, for any quantity we want to estimate, we can generate sampling distributions, standard errors, and confidence intervals.
+As an example, I will estimate mean birth weight with and without sampling weights.</p>
+<p>In Section <a class="reference internal" href="#regest"><span class="xref myst">[regest]</span></a>{reference-type=“ref” reference=“regest”}, we saw <code class="docutils literal notranslate"><span class="pre">ResampleRows</span></code>, which chooses rows from a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, giving each row the same probability.
+Now we need to do the same thing using probabilities proportional to sampling weights.
+<code class="docutils literal notranslate"><span class="pre">ResampleRowsWeighted</span></code> takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, resamples rows according to the weights in <code class="docutils literal notranslate"><span class="pre">finalwgt</span></code>, and returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> containing the resampled rows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resample_rows_weighted</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s2">&quot;finalwgt&quot;</span><span class="p">):</span>
@@ -1645,7 +1543,7 @@ resampled rows:</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 36;
+                var nbb_cell_id = 47;
                 var nbb_unformatted_code = "def resample_rows_weighted(df, column=\"finalwgt\"):\n    \"\"\"Resamples a DataFrame using probabilities proportional to given column.\n\n    df: DataFrame\n    column: string column name to use as weights\n\n    returns: DataFrame\n    \"\"\"\n    n = len(df)\n    weights = df[column]\n    return df.sample(n, weights=weights, replace=True)";
                 var nbb_formatted_code = "def resample_rows_weighted(df, column=\"finalwgt\"):\n    \"\"\"Resamples a DataFrame using probabilities proportional to given column.\n\n    df: DataFrame\n    column: string column name to use as weights\n\n    returns: DataFrame\n    \"\"\"\n    n = len(df)\n    weights = df[column]\n    return df.sample(n, weights=weights, replace=True)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1660,12 +1558,10 @@ resampled rows:</p>
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">weights</span></code> is a <code class="docutils literal notranslate"><span class="pre">Series</span></code>; converting it to a dictionary makes a map from
-the indices to the weights. In <code class="docutils literal notranslate"><span class="pre">cdf</span></code> the values are indices and the
-probabilities are proportional to the weights.</p>
-<p><code class="docutils literal notranslate"><span class="pre">indices</span></code> is a sequence of row indices; <code class="docutils literal notranslate"><span class="pre">sample</span></code> is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> that
-contains the selected rows. Since we sample with replacement, the same
-row might appear more than once.</p>
+<p><code class="docutils literal notranslate"><span class="pre">weights</span></code> is a <code class="docutils literal notranslate"><span class="pre">Series</span></code>; converting it to a dictionary makes a map from the indices to the weights.
+In <code class="docutils literal notranslate"><span class="pre">cdf</span></code> the values are indices and the probabilities are proportional to the weights.</p>
+<p><code class="docutils literal notranslate"><span class="pre">indices</span></code> is a sequence of row indices; <code class="docutils literal notranslate"><span class="pre">sample</span></code> is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> that contains the selected rows.
+Since we sample with replacement, the same row might appear more than once.</p>
 <p>Now we can compare the effect of resampling with and without weights.
 Without weights, we generate the sampling distribution like this:</p>
 <div class="cell docutils container">
@@ -1677,12 +1573,12 @@ Without weights, we generate the sampling distribution like this:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.013713824965826186 [7.32564934 7.37366605]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.01469685829984119 [7.32071912 7.36884474]
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 37;
+                var nbb_cell_id = 48;
                 var nbb_unformatted_code = "iters = 100\nestimates = [resample_rows_weighted(live).totalwgt_lb.mean() for _ in range(iters)]\nsummarize(estimates)";
                 var nbb_formatted_code = "iters = 100\nestimates = [resample_rows_weighted(live).totalwgt_lb.mean() for _ in range(iters)]\nsummarize(estimates)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1706,12 +1602,12 @@ Without weights, we generate the sampling distribution like this:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.013758749116514889 [7.24538753 7.29130788]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.014874719257520609 [7.24043656 7.28823855]
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 38;
+                var nbb_cell_id = 49;
                 var nbb_unformatted_code = "estimates = [resample_rows(live).totalwgt_lb.mean() for _ in range(iters)]\nsummarize(estimates)";
                 var nbb_formatted_code = "estimates = [resample_rows(live).totalwgt_lb.mean() for _ in range(iters)]\nsummarize(estimates)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1728,39 +1624,27 @@ Without weights, we generate the sampling distribution like this:</p>
 </div>
 <p>The following table summarizes the results:</p>
 <p>TODO: recompute this table, replacing the means of the sampling distributions with the actual estimates</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">------------</span> <span class="o">--------------</span> <span class="o">----------</span> <span class="o">--------------</span>
-                <span class="n">mean</span> <span class="n">birth</span>    <span class="n">standard</span>      <span class="mi">90</span><span class="o">%</span> <span class="n">CI</span>
-               <span class="n">weight</span> <span class="p">(</span><span class="n">lbs</span><span class="p">)</span>    <span class="n">error</span>    
- <span class="n">Unweighted</span>        <span class="mf">7.27</span>        <span class="mf">0.014</span>     <span class="p">(</span><span class="mf">7.24</span><span class="p">,</span> <span class="mf">7.29</span><span class="p">)</span>
- <span class="n">Weighted</span>          <span class="mf">7.35</span>        <span class="mf">0.014</span>     <span class="p">(</span><span class="mf">7.32</span><span class="p">,</span> <span class="mf">7.37</span><span class="p">)</span>
- <span class="o">------------</span> <span class="o">--------------</span> <span class="o">----------</span> <span class="o">--------------</span>
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate">&#160; <span class="pre">------------</span> <span class="pre">--------------</span> <span class="pre">----------</span> <span class="pre">--------------</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">mean</span> <span class="pre">birth</span>&#160;&#160;&#160; <span class="pre">standard</span>&#160; <span class="pre">90%</span> <span class="pre">CI</span>&#160;&#160;&#160;&#160; <span class="pre">weight</span> <span class="pre">(lbs)</span>&#160;&#160;&#160; <span class="pre">error</span>&#160;&#160; <span class="pre">Unweighted</span>&#160;&#160;&#160; <span class="pre">7.27</span>&#160;&#160;&#160; <span class="pre">0.014</span> <span class="pre">(7.24,</span> <span class="pre">7.29)</span>&#160;&#160; <span class="pre">Weighted</span>&#160; <span class="pre">7.35</span>&#160;&#160;&#160; <span class="pre">0.014</span> <span class="pre">(7.32,</span> <span class="pre">7.37)</span>&#160;&#160; <span class="pre">------------</span> <span class="pre">--------------</span> <span class="pre">----------</span> <span class="pre">--------------</span></code></p>
 <p>In this example, the effect of weighting is small but non-negligible.
-The difference in estimated means, with and without weighting, is about
-0.08 pounds, or 1.3 ounces. This difference is substantially larger than
-the standard error of the estimate, 0.014 pounds, which implies that the
-difference is not due to chance.</p>
+The difference in estimated means, with and without weighting, is about 0.08 pounds, or 1.3 ounces.
+This difference is substantially larger than the standard error of the estimate, 0.014 pounds, which implies that the difference is not due to chance.</p>
 </section>
 <section id="glossary">
 <h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>linear fit</strong>: a line intended to model the relationship between
-variables.</p></li>
-<li><p><strong>least squares fit</strong>: A model of a dataset that minimizes the sum
-of squares of the residuals.</p></li>
+<li><p><strong>linear fit</strong>: a line intended to model the relationship between variables.</p></li>
+<li><p><strong>least squares fit</strong>: A model of a dataset that minimizes the sum of squares of the residuals.</p></li>
 <li><p><strong>residual</strong>: The deviation of an actual value from a model.</p></li>
 <li><p><strong>goodness of fit</strong>: A measure of how well a model fits data.</p></li>
-<li><p><strong>coefficient of determination</strong>: A statistic intended to quantify
-goodness of fit.</p></li>
-<li><p><strong>sampling weight</strong>: A value associated with an observation in a
-sample that indicates what part of the population it represents.</p></li>
+<li><p><strong>coefficient of determination</strong>: A statistic intended to quantify goodness of fit.</p></li>
+<li><p><strong>sampling weight</strong>: A value associated with an observation in a sample that indicates what part of the population it represents.</p></li>
 </ul>
 </section>
 </section>
 <section id="exercises">
 <h1>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h1>
-<p><strong>Exercise:</strong> Use <code class="docutils literal notranslate"><span class="pre">resample_rows</span></code> and generate a list of estimates for the mean birth weight.  Use <code class="docutils literal notranslate"><span class="pre">summarize</span></code> to compute the SE and CI for these estimates.</p>
+<p><strong>Exercise:</strong> Use <code class="docutils literal notranslate"><span class="pre">resample_rows</span></code> and generate a list of estimates for the mean birth weight.
+Use <code class="docutils literal notranslate"><span class="pre">summarize</span></code> to compute the SE and CI for these estimates.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iters</span> <span class="o">=</span> <span class="mi">1001</span>
@@ -1770,12 +1654,12 @@ sample that indicates what part of the population it represents.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.01448003908733273 [7.23953723 7.28781948]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.014941389918226933 [7.24083038 7.28975575]
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 39;
+                var nbb_cell_id = 50;
                 var nbb_unformatted_code = "iters = 1001\nestimates = [resample_rows(live).totalwgt_lb.mean() for _ in range(iters)]\nsummarize(estimates)";
                 var nbb_formatted_code = "iters = 1001\nestimates = [resample_rows(live).totalwgt_lb.mean() for _ in range(iters)]\nsummarize(estimates)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1790,8 +1674,12 @@ sample that indicates what part of the population it represents.</p></li>
             }, 500);
             </script></div>
 </div>
-<p><strong>Exercise:</strong> Using the data from the BRFSS, compute the linear least squares fit for log(weight) versus height. How would you best present the estimated parameters for a model like this where one of the variables is log-transformed? If you were trying to guess someone’s weight, how much would it help to know their height?</p>
-<p>Like the NSFG, the BRFSS oversamples some groups and provides a sampling weight for each respondent. In the BRFSS data, the variable name for these weights is totalwt. Use resampling, with and without weights, to estimate the mean height of respondents in the BRFSS, the standard error of the mean, and a 90% confidence interval. How much does correct weighting affect the estimates?</p>
+<p><strong>Exercise:</strong> Using the data from the BRFSS, compute the linear least squares fit for log(weight) versus height.
+How would you best present the estimated parameters for a model like this where one of the variables is log-transformed? If you were trying to guess someone’s weight, how much would it help to know their height?</p>
+<p>Like the NSFG, the BRFSS oversamples some groups and provides a sampling weight for each respondent.
+In the BRFSS data, the variable name for these weights is totalwt.
+Use resampling, with and without weights, to estimate the mean height of respondents in the BRFSS, the standard error of the mean, and a 90% confidence interval.
+How much does correct weighting affect the estimates?</p>
 <p>Read the BRFSS data and extract heights and log weights.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1803,7 +1691,7 @@ sample that indicates what part of the population it represents.</p></li>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 40;
+                var nbb_cell_id = 51;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/brfss.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/brfss.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1829,7 +1717,7 @@ sample that indicates what part of the population it represents.</p></li>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 41;
+                var nbb_cell_id = 52;
                 var nbb_unformatted_code = "import brfss\n\ndf = brfss.read_brfss()";
                 var nbb_formatted_code = "import brfss\n\ndf = brfss.read_brfss()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1855,7 +1743,7 @@ sample that indicates what part of the population it represents.</p></li>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 42;
+                var nbb_cell_id = 53;
                 var nbb_unformatted_code = "df = df.dropna(subset=[\"htm3\", \"wtkg2\"])\nheights, weights = df.htm3, df.wtkg2\nlog_weights = np.log10(weights)";
                 var nbb_formatted_code = "df = df.dropna(subset=[\"htm3\", \"wtkg2\"])\nheights, weights = df.htm3, df.wtkg2\nlog_weights = np.log10(weights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1884,7 +1772,7 @@ sample that indicates what part of the population it represents.</p></li>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 43;
+                var nbb_cell_id = 54;
                 var nbb_unformatted_code = "inter, slope = least_squares(heights, log_weights)\ninter, slope";
                 var nbb_formatted_code = "inter, slope = least_squares(heights, log_weights)\ninter, slope";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1909,7 +1797,7 @@ sample that indicates what part of the population it represents.</p></li>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 44;
+                var nbb_cell_id = 55;
                 var nbb_unformatted_code = "fxs, fys = fit_line(heights, inter, slope)";
                 var nbb_formatted_code = "fxs, fys = fit_line(heights, inter, slope)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1936,7 +1824,7 @@ sample that indicates what part of the population it represents.</p></li>
 <img alt="_images/cc767da1409a423ab583eacdd03d625d74b22bacc061419ff59cbb9a786603bf.png" src="_images/cc767da1409a423ab583eacdd03d625d74b22bacc061419ff59cbb9a786603bf.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 45;
+                var nbb_cell_id = 56;
                 var nbb_unformatted_code = "plt.scatter(heights, log_weights, alpha=0.01, s=5)\nplt.plot(fxs, fys, color=\"C1\")\ndecorate(xlabel=\"Height (cm)\", ylabel=\"log10 weight (kg)\")";
                 var nbb_formatted_code = "plt.scatter(heights, log_weights, alpha=0.01, s=5)\nplt.plot(fxs, fys, color=\"C1\")\ndecorate(xlabel=\"Height (cm)\", ylabel=\"log10 weight (kg)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1965,7 +1853,7 @@ sample that indicates what part of the population it represents.</p></li>
 <img alt="_images/729c8b655ba9c47b10eebbdd3fd5642aa3b759ff7bd87b8950259cb1606057dd.png" src="_images/729c8b655ba9c47b10eebbdd3fd5642aa3b759ff7bd87b8950259cb1606057dd.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 46;
+                var nbb_cell_id = 57;
                 var nbb_unformatted_code = "plt.scatter(heights, weights, alpha=0.01, s=5)\nfxs, fys = fit_line(heights, inter, slope)\nplt.plot(fxs, 10**fys, color=\"C1\")\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\", legend=False)";
                 var nbb_formatted_code = "plt.scatter(heights, weights, alpha=0.01, s=5)\nfxs, fys = fit_line(heights, inter, slope)\nplt.plot(fxs, 10**fys, color=\"C1\")\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\", legend=False)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1991,7 +1879,7 @@ sample that indicates what part of the population it represents.</p></li>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 47;
+                var nbb_cell_id = 58;
                 var nbb_unformatted_code = "res = residuals(heights, log_weights, inter, slope)\ndf[\"residual\"] = res";
                 var nbb_formatted_code = "res = residuals(heights, log_weights, inter, slope)\ndf[\"residual\"] = res";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2019,7 +1907,7 @@ sample that indicates what part of the population it represents.</p></li>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 48;
+                var nbb_cell_id = 59;
                 var nbb_unformatted_code = "bins = np.arange(130, 210, 5)\nindices = np.digitize(df.htm3, bins)\ngroups = df.groupby(indices)\nmeans = [group.htm3.mean() for i, group in groups][1:-1]\ncdfs = [Cdf.from_seq(group.residual) for i, group in groups][1:-1]";
                 var nbb_formatted_code = "bins = np.arange(130, 210, 5)\nindices = np.digitize(df.htm3, bins)\ngroups = df.groupby(indices)\nmeans = [group.htm3.mean() for i, group in groups][1:-1]\ncdfs = [Cdf.from_seq(group.residual) for i, group in groups][1:-1]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2049,7 +1937,7 @@ sample that indicates what part of the population it represents.</p></li>
 <img alt="_images/a7516023925d8c22689ac0d517afbaf34b2a9238c0b43b468628e2c84e7acb87.png" src="_images/a7516023925d8c22689ac0d517afbaf34b2a9238c0b43b468628e2c84e7acb87.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 49;
+                var nbb_cell_id = 60;
                 var nbb_unformatted_code = "for percent in [0.75, 0.50, 0.25]:\n    ys = [cdf.inverse(percent) for cdf in cdfs]\n    label = \"%dth\" % percent\n    plt.plot(means, ys, label=label)\n\ndecorate(xlabel=\"height (cm)\", ylabel=\"residual weight (kg)\")";
                 var nbb_formatted_code = "for percent in [0.75, 0.50, 0.25]:\n    ys = [cdf.inverse(percent) for cdf in cdfs]\n    label = \"%dth\" % percent\n    plt.plot(means, ys, label=label)\n\ndecorate(xlabel=\"height (cm)\", ylabel=\"residual weight (kg)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2078,7 +1966,7 @@ sample that indicates what part of the population it represents.</p></li>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 50;
+                var nbb_cell_id = 61;
                 var nbb_unformatted_code = "rho = corr(heights, log_weights)\nrho";
                 var nbb_formatted_code = "rho = corr(heights, log_weights)\nrho";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2107,7 +1995,7 @@ sample that indicates what part of the population it represents.</p></li>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 51;
+                var nbb_cell_id = 62;
                 var nbb_unformatted_code = "r2 = coef_determination(log_weights, res)\nr2";
                 var nbb_formatted_code = "r2 = coef_determination(log_weights, res)\nr2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2135,7 +2023,7 @@ sample that indicates what part of the population it represents.</p></li>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 52;
+                var nbb_cell_id = 63;
                 var nbb_unformatted_code = "np.isclose(rho**2, r2)";
                 var nbb_formatted_code = "np.isclose(rho**2, r2)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2164,7 +2052,7 @@ sample that indicates what part of the population it represents.</p></li>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 54;
+                var nbb_cell_id = 64;
                 var nbb_unformatted_code = "std_ys = np.std(log_weights)\nstd_ys";
                 var nbb_formatted_code = "std_ys = np.std(log_weights)\nstd_ys";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2193,7 +2081,7 @@ sample that indicates what part of the population it represents.</p></li>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 55;
+                var nbb_cell_id = 65;
                 var nbb_unformatted_code = "std_res = np.std(res)\nstd_res";
                 var nbb_formatted_code = "std_res = np.std(res)\nstd_res";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2221,7 +2109,7 @@ sample that indicates what part of the population it represents.</p></li>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 56;
+                var nbb_cell_id = 66;
                 var nbb_unformatted_code = "1 - std_res / std_ys";
                 var nbb_formatted_code = "1 - std_res / std_ys";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2251,7 +2139,7 @@ sample that indicates what part of the population it represents.</p></li>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 57;
+                var nbb_cell_id = 67;
                 var nbb_unformatted_code = "t = []\nfor _ in range(100):\n    sample = resample_rows(df)\n    estimates = least_squares(sample.htm3, np.log10(sample.wtkg2))\n    t.append(estimates)\ninters, slopes = zip(*t)";
                 var nbb_formatted_code = "t = []\nfor _ in range(100):\n    sample = resample_rows(df)\n    estimates = least_squares(sample.htm3, np.log10(sample.wtkg2))\n    t.append(estimates)\ninters, slopes = zip(*t)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2276,10 +2164,10 @@ sample that indicates what part of the population it represents.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/68479a44ac32c62294cd03027e679cce2efa5764fb21c2cc6d4cf104a6d1fadd.png" src="_images/68479a44ac32c62294cd03027e679cce2efa5764fb21c2cc6d4cf104a6d1fadd.png" />
+<img alt="_images/0be92c4aacefaeeb0997731661efa988b77498b504c6862e5704fdf33fccdad3.png" src="_images/0be92c4aacefaeeb0997731661efa988b77498b504c6862e5704fdf33fccdad3.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 58;
+                var nbb_cell_id = 68;
                 var nbb_unformatted_code = "cdf = Cdf.from_seq(slopes)\ncdf.plot()\ndecorate()";
                 var nbb_formatted_code = "cdf = Cdf.from_seq(slopes)\ncdf.plot()\ndecorate()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2308,7 +2196,7 @@ sample that indicates what part of the population it represents.</p></li>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 59;
+                var nbb_cell_id = 69;
                 var nbb_unformatted_code = "p_value = cdf(0)\np_value";
                 var nbb_formatted_code = "p_value = cdf(0)\np_value";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2326,7 +2214,8 @@ sample that indicates what part of the population it represents.</p></li>
 <p>Compute the 90% confidence interval of slope.</p>
 <p>Compute the standard deviation of the sampling distribution, which is the standard error.</p>
 <p>Resample rows without weights, compute mean height, and summarize results.</p>
-<p>Resample rows with weights.  Note that the weight column in this dataset is called <code class="docutils literal notranslate"><span class="pre">finalwt</span></code>.</p>
+<p>Resample rows with weights.
+Note that the weight column in this dataset is called <code class="docutils literal notranslate"><span class="pre">finalwt</span></code>.</p>
 </section>
 
     <script type="text/x-thebe-config">
