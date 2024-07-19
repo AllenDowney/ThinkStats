@@ -7,34 +7,126 @@ License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
 import bisect
-import re
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
 import scipy
+from statadict import parse_stata_dict
 
 from empiricaldist import Pmf, Cdf
 
+
+# Make the figures smaller to save some screen real estate.
+# The figures generated for the book have DPI 400, so scaling
+# them by a factor of 4 restores them to the size in the notebooks.
+plt.rcParams['figure.dpi'] = 75
+plt.rcParams['figure.figsize'] = [6, 3.5]
+
+
+## Chapter 1
+
+def read_stata(dct_file, dat_file, **options):
+    """Read NSFG data.
+
+    dct_file: string file name
+    dat_file: string file name
+
+    returns: DataFrame
+    """
+    stata_dict = parse_stata_dict(dct_file)
+
+    underride(options, compression="gzip")
+    resp = pd.read_fwf(
+        dat_file,
+        names=stata_dict.names,
+        colspecs=stata_dict.colspecs,
+        **options,
+    )
+    return resp
+
 ## Chapter 2
 
-class Hist(Pmf):
+def two_bar_plots(dist1, dist2, width=0.45, **options):
+    """Makes two back-to-back bar plots.
 
-    @staticmethod
-    def from_seq(seq, normalize=False, **options):
-        """Make a distribution from a sequence of values.
+    dist1: Hist or Pmf object
+    dist2: Hist or Pmf object
+    width: width of the bars
+    options: passed along to plt.bar
+    """
+    underride(options, alpha=0.6)
+    dist1.bar(align="edge", width=-width, **options)
+    dist2.bar(align="edge", width=width, **options)
 
-        seq: sequence of anything
-        normalize: whether to normalize the probabilities
-        options: passed along to Pmf
 
-        returns: Counter object
-        """
-        pmf = Pmf.from_seq(seq, normalize=normalize, **options)
-        return Hist(pmf, copy=False)
+def cohen_effect_size(group1, group2):
+    """Computes Cohen's effect size for two groups.
+
+    group1: Series
+    group2: Series
+
+    returns: float
+    """
+    diff = group1.mean() - group2.mean()
+
+    v1, v2 = group1.var(), group2.var()
+    n1, n2 = group1.count(), group2.count()
+    pooled_var = (n1 * v1 + n2 * v2) / (n1 + n2)
+
+    return diff / np.sqrt(pooled_var)
+
+
+## Chapter 3
 
 
 
 ## Chapter 5
+
+def read_brfss(filename="CDBRFS08.ASC.gz", compression="gzip", nrows=None):
+    """Reads the BRFSS data.
+
+    filename: string
+    compression: string
+    nrows: int number of rows to read, or None for all
+
+    returns: DataFrame
+    """
+    var_info = [
+        ("age", 100, 102, int),
+        ("sex", 142, 143, int),
+        ("wtyrago", 126, 130, int),
+        ("finalwt", 798, 808, int),
+        ("wtkg2", 1253, 1258, int),
+        ("htm3", 1250, 1253, int),
+    ]
+    columns = ["name", "start", "end", "type"]
+    variables = pd.DataFrame(var_info, columns=columns)
+    # variables["end"] += 1
+
+    colspecs = variables[["start", "end"]].values.tolist()
+    names = variables["name"].tolist()
+
+    df = pd.read_fwf(filename, 
+                     colspecs=colspecs,
+                     names=names,
+                     compression=compression,
+                     nrows=nrows)
+    
+    clean_brfss(df)
+    return df
+
+
+def clean_brfss(df):
+    """Recodes BRFSS variables.
+
+    df: DataFrame
+    """
+    df["age"] = df["age"].replace([7, 9], np.nan)
+    df["htm3"] = df["htm3"].replace([999], np.nan)
+    df["wtkg2"] = df["wtkg2"].replace([99999], np.nan) / 100
+    df["wtyrago"] = df.wtyrago.replace([7777, 9999], np.nan)
+    df["wtyrago"] = df.wtyrago.apply(lambda x: x / 2.2 if x < 9000 else x - 9000)
+
 
 def normal_probability_plot(sample, show_model=True, **options):
     """Makes a normal probability plot with a fitted line.
@@ -413,70 +505,6 @@ class EstimatedPdf(Pdf):
         n: size of sample
         """
         return self.kde.resample(n).flatten()
-
-
-class FixedWidthVariables(object):
-    """Represents a set of variables in a fixed width file."""
-
-    def __init__(self, variables, index_base=0):
-        """Initializes.
-
-        variables: DataFrame
-        index_base: are the indices 0 or 1 based?
-
-        Attributes:
-        colspecs: list of (start, end) index tuples
-        names: list of string variable names
-        """
-        self.variables = variables
-        self.colspecs = variables[["start", "end"]] - index_base
-        self.colspecs = self.colspecs.astype(int).values.tolist()
-        self.names = variables["name"]
-
-    def read_fixed_width(self, filename, **options):
-        """Reads a fixed width ASCII file.
-
-        filename: string filename
-
-        returns: DataFrame
-        """
-        df = pd.read_fwf(filename, colspecs=self.colspecs, names=self.names, **options)
-        return df
-
-
-def read_stata_dct(dct_file, **options):
-    """Reads a Stata dictionary file.
-
-    dct_file: string filename
-    options: dict of options passed to open()
-
-    returns: FixedWidthVariables object
-    """
-    type_map = dict(
-        byte=int, int=int, long=int, float=float, double=float, numeric=float
-    )
-    var_info = []
-    with open(dct_file, **options) as f:
-        for line in f:
-            match = re.search("_column\\(([^)]*)\\)", line)
-            if not match:
-                continue
-            start = int(match.group(1))
-            t = line.split()
-            vtype, name, fstring = t[1:4]
-            name = name.lower()
-            if vtype.startswith("str"):
-                vtype = str
-            else:
-                vtype = type_map[vtype]
-            long_desc = " ".join(t[4:]).strip('"')
-            var_info.append((start, vtype, name, fstring, long_desc))
-    columns = ["start", "type", "name", "fstring", "desc"]
-    variables = pd.DataFrame(var_info, columns=columns)
-    variables["end"] = variables.start.shift(-1)
-    variables.loc[len(variables) - 1, "end"] = -1
-    dct = FixedWidthVariables(variables, index_base=1)
-    return dct
 
 
 def resample(xs, n=None):
@@ -972,18 +1000,6 @@ def read_baby_boom(filename="babyboom.dat"):
 
 
 ##  Plotting functions
-
-
-def two_bar_plots(pmf1, pmf2, width=0.45, **options):
-    """Makes two back-to-back bar plots.
-
-    pmf1: Pmf object
-    pmf2: Pmf object
-    width: width of the bars
-    options: passed along to plt.bar
-    """
-    pmf1.bar(align="edge", width=-width, **options)
-    pmf2.bar(align="edge", width=width, **options)
 
 
 def underride(d, **options):
