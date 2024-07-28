@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Estimation" href="chap08.html" />
-    <link rel="prev" title="Probability density functions" href="chap06.html" />
+    <link rel="prev" title="Probability Density Functions" href="chap06.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,8 +179,8 @@
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability density functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Relationships between variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis testing</a></li>
@@ -407,36 +407,33 @@ But if you are trying to guess someone’s weight, you will be more accurate if 
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 2;
-                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
-                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 2;
+            var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
 </details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">statadict</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>statadict
-
-<span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">empiricaldist</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>empiricaldist
-
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
@@ -444,6 +441,20 @@ But if you are trying to guess someone’s weight, you will be more accurate if 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+        setTimeout(function() {
+            var nbb_cell_id = 8;
+            var nbb_formatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
+                }
+            }
+        }, 500);
+        </script></div>
 </div>
 <section id="scatter-plots">
 <h2>Scatter plots<a class="headerlink" href="#scatter-plots" title="Link to this heading">#</a></h2>
@@ -452,108 +463,95 @@ As an example, I’ll plot weight versus height for the respondents in the BRFSS
 <p>Here’s the code that reads the data file and extracts height and weight:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/brfss.py&quot;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 4;
-                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/brfss.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
-                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/brfss.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 9;
+            var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/brfss.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">brfss</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">read_brfss</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">read_brfss</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">brfss</span> <span class="o">=</span> <span class="n">read_brfss</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 36;
-                var nbb_unformatted_code = "import brfss\n\ndf = brfss.read_brfss(nrows=None)";
-                var nbb_formatted_code = "import brfss\n\ndf = brfss.read_brfss(nrows=None)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 10;
+            var nbb_formatted_code = "from thinkstats import read_brfss\n\nbrfss = read_brfss(nrows=None)";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
 </div>
 <p>To choose a random subset of the data, we’ll use the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> method <code class="docutils literal notranslate"><span class="pre">sample</span></code> with the keyword argument <code class="docutils literal notranslate"><span class="pre">replace=False</span></code>, which means that no row can appear in the sample more than once.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">heights</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">htm3</span><span class="p">,</span> <span class="n">sample</span><span class="o">.</span><span class="n">wtkg2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">heights</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;htm3&quot;</span><span class="p">],</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;wtkg2&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 37;
-                var nbb_unformatted_code = "sample = df.sample(5000, replace=False)\nheights, weights = sample.htm3, sample.wtkg2";
-                var nbb_formatted_code = "sample = df.sample(5000, replace=False)\nheights, weights = sample.htm3, sample.wtkg2";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 12;
+            var nbb_formatted_code = "sample = brfss.sample(5000, replace=False)\nheights, weights = sample[\"htm3\"], sample[\"wtkg2\"]";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
 </div>
-<p>Pyplot provides <code class="docutils literal notranslate"><span class="pre">scatter</span></code>, which makes scatter plots.
-Here’s a scatter plot of weight versus height.</p>
+<p>Here’s a scatter plot of weight versus height.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">)</span>
+
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Height (cm)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Weight (kg)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/584a4c4e5ade13b1c383466f240e226b374c182a4670b3bfdb36b9a6ec8bfe16.png" src="_images/584a4c4e5ade13b1c383466f240e226b374c182a4670b3bfdb36b9a6ec8bfe16.png" />
+<img alt="_images/7fd56ac3bf58ac82b34051991500ad6b7955efc31b2f09de67f987129a44f36f.png" src="_images/7fd56ac3bf58ac82b34051991500ad6b7955efc31b2f09de67f987129a44f36f.png" />
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 38;
-                var nbb_unformatted_code = "plt.scatter(heights, weights)\naxis = [140, 210, 20, 200]\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\")";
-                var nbb_formatted_code = "plt.scatter(heights, weights)\naxis = [140, 210, 20, 200]\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 15;
+            var nbb_formatted_code = "plt.plot(heights, weights, \"o\")\n\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\")";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
 </div>
 <p>The scatter plot shows the shape of the relationship – taller people tend to be heavier.</p>
 <p>But this is not the best representation of the data, because the data are packed into columns.
@@ -577,21 +575,18 @@ Some information is lost in translation.</p>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 39;
-                var nbb_unformatted_code = "def jitter(seq, std=0.5):\n    \"\"\"Jitters the values by adding random Gaussian noise.\n\n    seq: sequence of numbers\n    std: standard deviation of the added noise\n\n    returns: new Numpy array\n    \"\"\"\n    n = len(seq)\n    return np.random.normal(0, std, n) + seq";
-                var nbb_formatted_code = "def jitter(seq, std=0.5):\n    \"\"\"Jitters the values by adding random Gaussian noise.\n\n    seq: sequence of numbers\n    std: standard deviation of the added noise\n\n    returns: new Numpy array\n    \"\"\"\n    n = len(seq)\n    return np.random.normal(0, std, n) + seq";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 16;
+            var nbb_formatted_code = "def jitter(seq, std=0.5):\n    \"\"\"Jitters the values by adding random Gaussian noise.\n\n    seq: sequence of numbers\n    std: standard deviation of the added noise\n\n    returns: new Numpy array\n    \"\"\"\n    n = len(seq)\n    return np.random.normal(0, std, n) + seq";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
 </div>
 <p>The values can be any sequence; the result is a NumPy array.</p>
 <div class="cell docutils container">
@@ -603,52 +598,43 @@ Some information is lost in translation.</p>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 40;
-                var nbb_unformatted_code = "heights_jittered = jitter(heights, 1.3)\nweights_jittered = jitter(weights, 0.5)";
-                var nbb_formatted_code = "heights_jittered = jitter(heights, 1.3)\nweights_jittered = jitter(weights, 0.5)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 17;
+            var nbb_formatted_code = "heights_jittered = jitter(heights, 1.3)\nweights_jittered = jitter(weights, 0.5)";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
 </div>
 <p>Since these measurements were rounded to the nearest inch, they might be off by up to 0.5 inches or 1.3 cm. Similarly, the weights might be off by 0.5 kg.</p>
 <p>The following figure shows the result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">heights_jittered</span><span class="p">,</span> <span class="n">weights_jittered</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">heights_jittered</span><span class="p">,</span> <span class="n">weights_jittered</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">)</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Height (cm)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Weight (kg)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7feb29116140&gt;
-</pre></div>
-</div>
-<img alt="_images/e1030d3775d36be4702330ec58b041f354eb55cc39a132aa120ba051539eb7d0.png" src="_images/e1030d3775d36be4702330ec58b041f354eb55cc39a132aa120ba051539eb7d0.png" />
+<img alt="_images/0aabae7ada0000ad414f32cc8858548c8780f548e7dcac45a2109c5c56aea707.png" src="_images/0aabae7ada0000ad414f32cc8858548c8780f548e7dcac45a2109c5c56aea707.png" />
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 41;
-                var nbb_unformatted_code = "plt.scatter(heights_jittered, weights_jittered)";
-                var nbb_formatted_code = "plt.scatter(heights_jittered, weights_jittered)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 18;
+            var nbb_formatted_code = "plt.plot(heights_jittered, weights_jittered, \"o\")\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\")";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
 </div>
 <p>Jittering reduces the visual effect of rounding and makes the shape of the relationship clearer.
 But in general you should only jitter data for purposes of visualization and avoid using jittered data for analysis.</p>
@@ -658,32 +644,26 @@ This effect is called <strong>saturation</strong>.</p>
 <p>We can solve this problem with the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> parameter, which makes the points partly transparent:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">heights_jittered</span><span class="p">,</span> <span class="n">weights_jittered</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">heights_jittered</span><span class="p">,</span> <span class="n">weights_jittered</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Height (cm)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Weight (kg)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7feb31d19690&gt;
-</pre></div>
-</div>
-<img alt="_images/d4eaa61ec598017ec007d00baa03c5ce849bd61f182e4083a39f9767c74fa442.png" src="_images/d4eaa61ec598017ec007d00baa03c5ce849bd61f182e4083a39f9767c74fa442.png" />
+<img alt="_images/1126cddfbc2d8315b2aab92c2e8f444cf09869f51af4d2c3f008a152fd743aa4.png" src="_images/1126cddfbc2d8315b2aab92c2e8f444cf09869f51af4d2c3f008a152fd743aa4.png" />
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 42;
-                var nbb_unformatted_code = "plt.scatter(heights_jittered, weights_jittered, alpha=0.05)";
-                var nbb_formatted_code = "plt.scatter(heights_jittered, weights_jittered, alpha=0.05)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 19;
+            var nbb_formatted_code = "plt.plot(heights_jittered, weights_jittered, \"o\", alpha=0.05)\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\")";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
 </div>
 <p>With transparency, overlapping data points look darker, so darkness is proportional to density.
 In this version of the plot we can see a detail that were not apparent before: a horizontal line near 90 kg or 200 pounds.
@@ -692,29 +672,26 @@ Since this data is based on self-reports in pounds, the most likely explanation 
 <p>To handle larger datasets, another option is a hexbin plot, which divides the graph into hexagonal bins and colors each bin according to how many data points fall in it. Pyplot provides <code class="docutils literal notranslate"><span class="pre">hex_bin</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">brfss</span><span class="p">[</span><span class="s2">&quot;htm3&quot;</span><span class="p">],</span> <span class="n">brfss</span><span class="p">[</span><span class="s2">&quot;wtkg2&quot;</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 <span class="n">decorate</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5d9432e8d76af6827c7e696eac2a59491cb42d54d141ff3acd6644cb629cdb92.png" src="_images/5d9432e8d76af6827c7e696eac2a59491cb42d54d141ff3acd6644cb629cdb92.png" />
+<img alt="_images/f2674534aa0ccc1b9c133a7517c8f0049158f00a00e2042031dc6c296db7b49a.png" src="_images/f2674534aa0ccc1b9c133a7517c8f0049158f00a00e2042031dc6c296db7b49a.png" />
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 47;
-                var nbb_unformatted_code = "plt.hexbin(heights, weights, cmap='Blues')\ndecorate()";
-                var nbb_formatted_code = "plt.hexbin(heights, weights, cmap=\"Blues\")\ndecorate()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 21;
+            var nbb_formatted_code = "plt.hexbin(brfss[\"htm3\"], brfss[\"wtkg2\"], cmap=\"Blues\")\ndecorate()";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
 </div>
 <p>An advantage of a hexbin is that it shows the shape of the relationship well, and it is efficient for large datasets, both in time and in the size of the file it generates.
 A drawback is that it makes the outliers invisible.</p>
@@ -727,30 +704,67 @@ One option is to bin one variable and plot percentiles of the other.</p>
 <p>NumPy and Pandas provide functions for binning data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;htm3&quot;</span><span class="p">,</span> <span class="s2">&quot;wtkg2&quot;</span><span class="p">])</span>
-<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">135</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">htm3</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
-<span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cleaned</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;htm3&quot;</span><span class="p">,</span> <span class="s2">&quot;wtkg2&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 13;
-                var nbb_unformatted_code = "df = df.dropna(subset=[\"htm3\", \"wtkg2\"])\nbins = np.arange(135, 210, 5)\nindices = np.digitize(df.htm3, bins)\ngroups = df.groupby(indices)";
-                var nbb_formatted_code = "df = df.dropna(subset=[\"htm3\", \"wtkg2\"])\nbins = np.arange(135, 210, 5)\nindices = np.digitize(df.htm3, bins)\ngroups = df.groupby(indices)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 26;
+            var nbb_formatted_code = "subset = brfss.dropna(subset=[\"htm3\", \"wtkg2\"])";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">135</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">cleaned</span><span class="p">[</span><span class="s2">&quot;htm3&quot;</span><span class="p">],</span> <span class="n">bins</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+        setTimeout(function() {
+            var nbb_cell_id = 27;
+            var nbb_formatted_code = "bins = np.arange(135, 210, 5)\nindices = np.digitize(subset[\"htm3\"], bins)";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
+                }
+            }
+        }, 500);
+        </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">=</span> <span class="n">cleaned</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+        setTimeout(function() {
+            var nbb_cell_id = 28;
+            var nbb_formatted_code = "groups = subset.groupby(indices)";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
+                }
+            }
+        }, 500);
+        </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">dropna</span></code> drops rows with <code class="docutils literal notranslate"><span class="pre">nan</span></code> in any of the listed columns.
 <code class="docutils literal notranslate"><span class="pre">arange</span></code> makes a NumPy array of bins from 135 to, but not including, 210, in increments of 5.</p>
@@ -786,80 +800,71 @@ So, for example, we can print the number of rows in each group like this:</p>
 </pre></div>
 </div>
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 14;
-                var nbb_unformatted_code = "for i, group in groups:\n    print(i, len(group))";
-                var nbb_formatted_code = "for i, group in groups:\n    print(i, len(group))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 29;
+            var nbb_formatted_code = "for i, group in groups:\n    print(i, len(group))";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
 </div>
 <p>Now for each group we can compute the mean height and the CDF of weight:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
 
-<span class="n">height_means</span> <span class="o">=</span> <span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">htm3</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">]</span>
-<span class="n">cdfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">wtkg2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">]</span>
+<span class="n">height_means</span> <span class="o">=</span> <span class="p">[</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;htm3&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">]</span>
+<span class="n">cdfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;wtkg2&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 15;
-                var nbb_unformatted_code = "from empiricaldist import Cdf\n\nheight_means = [group.htm3.mean() for i, group in groups]\ncdfs = [Cdf.from_seq(group.wtkg2) for i, group in groups]";
-                var nbb_formatted_code = "from empiricaldist import Cdf\n\nheight_means = [group.htm3.mean() for i, group in groups]\ncdfs = [Cdf.from_seq(group.wtkg2) for i, group in groups]";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 30;
+            var nbb_formatted_code = "from empiricaldist import Cdf\n\nheight_means = [group.htm3.mean() for i, group in groups]\ncdfs = [Cdf.from_seq(group.wtkg2) for i, group in groups]";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
 </div>
 <p>Finally, we can plot percentiles of weight versus height:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">percent</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]:</span>
     <span class="n">weight_percentiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">cdf</span><span class="o">.</span><span class="n">inverse</span><span class="p">(</span><span class="n">percent</span><span class="p">)</span> <span class="k">for</span> <span class="n">cdf</span> <span class="ow">in</span> <span class="n">cdfs</span><span class="p">]</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">th&quot;</span> <span class="o">%</span> <span class="n">percent</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">percent</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s2">th&quot;</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">height_means</span><span class="p">,</span> <span class="n">weight_percentiles</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
-    
+
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Height (cm)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Weight (kg)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/87034bafdc9ee00707bc387221f6cc3f60e72a6a01571b09eeb57484acd68572.png" src="_images/87034bafdc9ee00707bc387221f6cc3f60e72a6a01571b09eeb57484acd68572.png" />
+<img alt="_images/e891947bd52978d5f1357544bbe4fc1a0979adadd80f8da5216a3f9ff609e18f.png" src="_images/e891947bd52978d5f1357544bbe4fc1a0979adadd80f8da5216a3f9ff609e18f.png" />
 <script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 16;
-                var nbb_unformatted_code = "for percent in [0.75, 0.50, 0.25]:\n    weight_percentiles = [cdf.inverse(percent) for cdf in cdfs]\n    label = \"%dth\" % percent\n    plt.plot(height_means, weight_percentiles, label=label)";
-                var nbb_formatted_code = "for percent in [0.75, 0.50, 0.25]:\n    weight_percentiles = [cdf.inverse(percent) for cdf in cdfs]\n    label = \"%dth\" % percent\n    plt.plot(height_means, weight_percentiles, label=label)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
+        setTimeout(function() {
+            var nbb_cell_id = 33;
+            var nbb_formatted_code = "for percent in [0.75, 0.50, 0.25]:\n    weight_percentiles = [cdf.inverse(percent) for cdf in cdfs]\n    label = f\"{percent*100}th\"\n    plt.plot(height_means, weight_percentiles, label=label)\n\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\")";
+            var nbb_cells = Jupyter.notebook.get_cells();
+            for (var i = 0; i < nbb_cells.length; ++i) {
+                if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                    nbb_cells[i].set_text(nbb_formatted_code);
+                    break;
                 }
-            }, 500);
-            </script></div>
+            }
+        }, 500);
+        </script></div>
 </div>
 <p>The following figure shows the result.
 Between 140 and 200 cm the relationship between these variables is roughly linear.
@@ -1362,7 +1367,7 @@ How would you characterize the relationship between these variables?</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Probability density functions</p>
+        <p class="prev-next-title">Probability Density Functions</p>
       </div>
     </a>
     <a class="right-next"
