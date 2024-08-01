@@ -2500,7 +2500,7 @@ Let’s see what fraction of the male adult population in the United States meet
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">read_brfss</span>
 
-<span class="n">brfss</span> <span class="o">=</span> <span class="n">read_brfss</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">brfss</span> <span class="o">=</span> <span class="n">read_brfss</span><span class="p">()</span>
 <span class="n">male</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;sex == 1&quot;</span><span class="p">)</span>
 <span class="n">heights</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="s2">&quot;htm3&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 </pre></div>
@@ -2510,8 +2510,8 @@ Let’s see what fraction of the male adult population in the United States meet
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 75;
-                var nbb_unformatted_code = "from thinkstats import read_brfss\n\nbrfss = read_brfss(nrows=None)\nmale = brfss.query(\"sex == 1\")\nheights = male[\"htm3\"].dropna()";
-                var nbb_formatted_code = "from thinkstats import read_brfss\n\nbrfss = read_brfss(nrows=None)\nmale = brfss.query(\"sex == 1\")\nheights = male[\"htm3\"].dropna()";
+                var nbb_unformatted_code = "from thinkstats import read_brfss\n\nbrfss = read_brfss()\nmale = brfss.query(\"sex == 1\")\nheights = male[\"htm3\"].dropna()";
+                var nbb_formatted_code = "from thinkstats import read_brfss\n\nbrfss = read_brfss()\nmale = brfss.query(\"sex == 1\")\nheights = male[\"htm3\"].dropna()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {

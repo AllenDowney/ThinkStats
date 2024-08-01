@@ -2,9 +2,9 @@
 
 *Think Stats* is an introduction to Probability and Statistics for Python programmers. If you have basic skills in Python, you can use them to learn concepts in probability and statistics and practical skills for working with data.
 
-[Here is the landing page for the book at Green Tea Press](https://greenteapress.com/wp/think-stats-2e/).
+[Here is the landing page for the third edition at Green Tea Press](https://greenteapress.com/wp/think-stats-3e/).
 
-* This book emphasizes simple techniques you can use to explore real datasets and answer interesting questions.
+* This book emphasizes simple techniques you can use to explore real datasets and answer questions that matter.
 
 * It includes case studies using datasets from the National Institutes of Health and other sources.
 
