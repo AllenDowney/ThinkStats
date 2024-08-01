@@ -6,8 +6,7 @@ License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
 import numpy as np
-import thinkplot
-import thinkstats2
+import pandas as pd
 
 """
 Sample line.
@@ -28,16 +27,23 @@ def convert_pace_to_speed(pace):
 
 def clean_line(line):
     """Converts a line from coolrunning results to a tuple of values."""
+    line = line[:44]
     t = line.split()
-    if len(t) < 6:
-        return None
-    place, divtot, div, gun, net, pace = t[0:6]
-    if not "/" in divtot:
-        return None
+    if len(t) == 6:
+        place, divtot, div, gun, net, pace = t
+    elif len(t) == 4:
+        place, gun, net, pace = t
+        divtot = ''
+        div = ''
+    else:
+        return None 
+      
     for time in [gun, net, pace]:
         if ":" not in time:
             return None
-    return place, divtot, div, gun, net, pace
+        
+    speed = convert_pace_to_speed(pace)
+    return int(place), divtot, div, gun, net, pace, speed
 
 
 def read_results(filename="Apr25_27thAn_set1.shtml"):
@@ -47,8 +53,10 @@ def read_results(filename="Apr25_27thAn_set1.shtml"):
         t = clean_line(line)
         if t:
             results.append(t)
-    return results
 
+    columns = ['Place', 'Div/Tot', 'Division', 'Guntime', 'Nettime', 'Min/Mile', 'MPH']
+    df = pd.DataFrame(results, columns=columns)
+    return df
 
 def get_speeds(results, column=5):
     """Extract the pace column and return a list of speeds in MPH."""
@@ -79,11 +87,6 @@ def main():
     results = read_results()
     speeds = get_speeds(results)
     speeds = bin_data(speeds, 3, 12, 100)
-    pmf = thinkstats2.Pmf(speeds, "speeds")
-    thinkplot.pmf(pmf)
-    thinkplot.show(
-        title="PMF of running speed", xlabel="speed (mph)", ylabel="probability"
-    )
 
 
 if __name__ == "__main__":

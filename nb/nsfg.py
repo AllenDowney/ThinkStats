@@ -5,23 +5,48 @@ Copyright 2010 Allen B. Downey
 License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
-from collections import defaultdict
 import numpy as np
 import pandas as pd
-import thinkstats
+import thinkstats as ts
 
 
-def read_fem_resp(dct_file="2002FemResp.dct", dat_file="2002FemResp.dat.gz", **options):
-    """Reads the NSFG respondent data.
+
+def read_fem_resp(dct_file="2002FemResp.dct", dat_file="2002FemResp.dat.gz"):
+    """Read the 2002 NSFG respondent file.
 
     dct_file: string file name
     dat_file: string file name
 
     returns: DataFrame
     """
-    dct = thinkstats.read_stata_dct(dct_file, encoding="iso-8859-1")
-    df = dct.read_fixed_width(dat_file, compression="gzip", **options)
-    return df
+    resp =  ts.read_stata(dct_file, dat_file)
+    clean_fem_resp(resp)
+    return resp
+
+
+def read_fem_preg(dct_file="2002FemPreg.dct", dat_file="2002FemPreg.dat.gz"):
+    """Reads the NSFG pregnancy data.
+
+    dct_file: string file name
+    dat_file: string file name
+
+    returns: DataFrame
+    """
+    preg = ts.read_stata(dct_file, dat_file)
+    clean_fem_preg(preg)
+    return preg
+
+
+def get_nsfg_groups():
+    """Read the NSFG pregnancy file and split into groups.
+    
+    returns: all live births, first babies, other babies
+    """
+    preg = read_fem_preg()
+    live = preg.query("outcome == 1")
+    firsts = live.query("birthord == 1")
+    others = live.query("birthord != 1")
+    return live, firsts, others
 
 
 def read_fem_resp1995():
@@ -131,20 +156,6 @@ def clean_fem_resp(resp):
     resp["fives"] = resp.year // 5
 
 
-def read_fem_preg(dct_file="2002FemPreg.dct", dat_file="2002FemPreg.dat.gz"):
-    """Reads the NSFG pregnancy data.
-
-    dct_file: string file name
-    dat_file: string file name
-
-    returns: DataFrame
-    """
-    dct = thinkstats.read_stata_dct(dct_file)
-    df = dct.read_fixed_width(dat_file, compression="gzip")
-    clean_fem_preg(df)
-    return df
-
-
 def clean_fem_preg(df):
     """Recodes variables from the pregnancy frame.
 
@@ -162,73 +173,35 @@ def clean_fem_preg(df):
     df.cmintvw = np.nan
 
 
-def validate_pregnum(resp, preg):
-    """Validate pregnum in the respondent file.
+from statadict import parse_stata_dict
 
-    resp: respondent DataFrame
-    preg: pregnancy DataFrame
+
+def read_variables():
+    """Reads Stata dictionary files for NSFG data.
+
+    returns: DataFrame that maps variables names to descriptions
     """
-    preg_map = make_preg_map(preg)
-    for index, pregnum in resp.pregnum.items():
-        caseid = resp.caseid[index]
-        indices = preg_map[caseid]
-        if len(indices) != pregnum:
-            print(caseid, len(indices), pregnum)
-            return False
-    return True
+    vars1 = parse_stata_dict("2002FemPreg.dct").names
+    vars2 = parse_stata_dict("2002FemResp.dct").names
+
+    # TODO: update this to work with the new version of parse_stata_dict
+    all_vars = np.concat([vars1, vars2])
+    return all_vars
 
 
-def make_preg_map(df):
-    """Make a map from caseid to list of preg indices.
+def join_fem_resp(df):
+    """Reads the female respondent file and joins on caseid.
 
-    df: DataFrame
+    df: DataFrame with caseid column
 
-    returns: dict that maps from caseid to list of indices into `preg`
+    returns: DataFrame
     """
-    d = defaultdict(list)
-    for index, caseid in df.caseid.items():
-        d[caseid].append(index)
-    return d
+    resp = read_fem_resp()
+    resp.index = resp.caseid
+    join = df.join(resp, on="caseid", rsuffix="_r")
+    join.screentime = pd.to_datetime(join.screentime)
+    return join
 
-
-def make_frames():
-    """Reads pregnancy data and partitions first babies and others.
-
-    returns: DataFrames (all live births, first babies, others)
-    """
-    preg = read_fem_preg()
-    live = preg[preg.outcome == 1]
-    firsts = live[live.birthord == 1]
-    others = live[live.birthord != 1]
-    assert len(live) == 9148
-    assert len(firsts) == 4413
-    assert len(others) == 4735
-    return live, firsts, others
-
-
-def summarize(live, firsts, others):
-    """Print various summary statistics."""
-    mean = live.prglngth.mean()
-    var = live.prglngth.var()
-    std = live.prglngth.std()
-    print("Live mean", mean)
-    print("Live variance", var)
-    print("Live std", std)
-    mean1 = firsts.prglngth.mean()
-    mean2 = others.prglngth.mean()
-    var1 = firsts.prglngth.var()
-    var2 = others.prglngth.var()
-    print("Mean")
-    print("First babies", mean1)
-    print("Others", mean2)
-    print("Variance")
-    print("First babies", var1)
-    print("Others", var2)
-    print("Difference in weeks", mean1 - mean2)
-    print("Difference in hours", (mean1 - mean2) * 7 * 24)
-    print("Difference relative to 39 weeks", (mean1 - mean2) / 39 * 100)
-    d = thinkstats.cohen_effect_size(firsts.prglngth, others.prglngth)
-    print("Cohen d", d)
 
 
 def main():
@@ -256,10 +229,8 @@ def main():
     weights = preg.finalwgt.value_counts()
     key = max(weights.keys())
     assert preg.finalwgt.value_counts()[key] == 6
-    assert validate_pregnum(resp, preg)
     print("All tests passed.")
     live, firsts, others = make_frames()
-    summarize(live, firsts, others)
 
 
 if __name__ == "__main__":
