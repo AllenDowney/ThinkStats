@@ -217,7 +217,8 @@ class Density:
         """Initializes the Pdf.
 
         density_func: density function
-        label: string
+        domain: tuple of low, high
+        name: string
         """
         self.name = name
         self.density_func = density_func
@@ -227,7 +228,7 @@ class Density:
         return f"Density({self.density_func.__name__}, {self.domain}, name={self.name})"
 
     def __call__(self, qs):
-        """Evaluates this Pdf at qs.
+        """Evaluates this Density at qs.
 
         qs: float or sequence of floats
         
@@ -236,14 +237,15 @@ class Density:
         return self.density_func(qs)
     
     def plot(self, qs=None, **options):
-        """Plots this Pdf.
+        """Plots this Density.
 
-        qs: NumPy array of quantities where the Pdf should be evaluated
+        qs: NumPy array of quantities where the density_func should be evaluated
         options: passed along to plt.plot
         """
         if qs is None:
             low, high = self.domain
             qs = np.linspace(low, high, 201)
+
         ps = self(qs)
         underride(options, label=self.name)
         plt.plot(qs, ps, **options)
@@ -285,6 +287,7 @@ class ContinuousCdf(Density):
         if qs is None:
             low, high = self.domain
             qs = np.linspace(low, high, 201)
+            
         ps = self(qs)
 
         underride(options, name=self.name)
