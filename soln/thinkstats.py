@@ -15,6 +15,8 @@ from statadict import parse_stata_dict
 
 from empiricaldist import Pmf, Cdf
 
+from scipy.stats import norm
+
 
 # Make the figures smaller to save some screen real estate.
 # The figures generated for the book have DPI 400, so scaling
@@ -46,7 +48,7 @@ def read_stata(dct_file, dat_file, **options):
 
 ## Chapter 2
 
-def two_bar_plots(dist1, dist2, width=0.45, **options):
+def two_bar_plots(dist1, dist2, width=0.45, xlabel="", **options):
     """Makes two back-to-back bar plots.
 
     dist1: Hist or Pmf object
@@ -57,6 +59,7 @@ def two_bar_plots(dist1, dist2, width=0.45, **options):
     underride(options, alpha=0.6)
     dist1.bar(align="edge", width=-width, **options)
     dist2.bar(align="edge", width=width, **options)
+    decorate(xlabel=xlabel)
 
 
 def cohen_effect_size(group1, group2):
@@ -106,12 +109,12 @@ def read_brfss(filename="CDBRFS08.ASC.gz", compression="gzip", nrows=None):
     colspecs = variables[["start", "end"]].values.tolist()
     names = variables["name"].tolist()
 
-    df = pd.read_fwf(filename, 
+    df = pd.read_fwf(filename,
                      colspecs=colspecs,
                      names=names,
                      compression=compression,
                      nrows=nrows)
-    
+
     clean_brfss(df)
     return df
 
@@ -127,77 +130,318 @@ def clean_brfss(df):
     df["wtyrago"] = df.wtyrago.replace([7777, 9999], np.nan)
     df["wtyrago"] = df.wtyrago.apply(lambda x: x / 2.2 if x < 9000 else x - 9000)
 
+from scipy.special import comb
 
-def normal_probability_plot(sample, show_model=True, **options):
-    """Makes a normal probability plot with a fitted line.
 
-    sample: sequence of numbers
-    show_model: whether to plot the model line
-    options: passed along to plt.plot
+def binomial_pmf(k, n, p):
+    """Compute the binomial PMF.
+
+    k (int or array-like): number of successes
+    n (int): number of trials
+    p (float): probability of success on a single trial
+
+    returns: float or ndarray
     """
-    ys = np.sort(sample)
-    xs = np.random.normal(0, 1, len(ys))
-    xs.sort()
+    return comb(n, k) * (p**k) * ((1 - p) ** (n - k))
 
-    if show_model:
-        inter, slope = np.mean(sample), np.std(sample)
-        fit_ys = inter + slope * xs
-        plt.plot(xs, fit_ys, color="gray", label="model")
 
-    plt.plot(xs, ys, **options)
+from scipy.special import factorial
+
+
+def poisson_pmf(k, lam):
+    """Compute the Poisson PMF.
+
+    k (int or array-like): The number of occurrences
+    lam (float): The rate parameter (λ) of the Poisson distribution
+
+    returns: float or ndarray
+    """
+    return (lam**k) * np.exp(-lam) / factorial(k)
+
+
+def exponential_cdf(x, lam):
+    """Compute the exponential CDF.
+
+    x: float or sequence of floats
+    lam: rate parameter
+    
+    returns: float or NumPy array of cumulative probability
+    """
+    return 1 - np.exp(-lam * x)
+
+
+def make_normal_model(data):
+    """Make the Cdf of a normal distribution based on data.
+
+    data: sequence of numbers
+    """
+    m, s = np.mean(data), np.std(data)
+    low, high = np.min(data), np.max(data)
+    qs = np.linspace(low, high, 201)
+    ps = norm.cdf(qs, m, s)
+    return Cdf(ps, qs, name="normal model")
+
+
+def two_cdf_plots(cdf_model, cdf_data, xlabel="", **options):
+    """Plot an empirical CDF and a theoretical model.
+
+    cdf_model: Cdf object
+    cdf_data: Cdf object
+    xlabel: string
+    options: control the way cdf_data is plotted
+    """
+    cdf_model.plot(alpha=0.6, color="gray")
+    cdf_data.plot(alpha=0.6, **options)
+
+    decorate(xlabel=xlabel, ylabel="CDF")
+
+# Chapter 6
+
+def normal_pdf(xs, mu, sigma):
+    """Evaluates the normal probability density function.
+
+    xs: float or sequence of floats
+    mu: mean of the distribution
+    sigma: standard deviation of the distribution
+
+    returns: float or NumPy array of probability density
+    """
+    z = (xs - mu) / sigma
+    return np.exp(-(z**2) / 2) / sigma / np.sqrt(2 * np.pi)
+
+
+class Density:
+    """Represents a continuous PDF or CDF."""
+
+    def __init__(self, density_func, domain, name=""):
+        """Initializes the Pdf.
+
+        density_func: density function
+        domain: tuple of low, high
+        name: string
+        """
+        self.name = name
+        self.density_func = density_func
+        self.domain = domain
+
+    def __repr__(self):
+        return f"Density({self.density_func.__name__}, {self.domain}, name={self.name})"
+
+    def __call__(self, qs):
+        """Evaluates this Density at qs.
+
+        qs: float or sequence of floats
+        
+        returns: float or NumPy array of probability density
+        """
+        return self.density_func(qs)
+    
+    def plot(self, qs=None, **options):
+        """Plots this Density.
+
+        qs: NumPy array of quantities where the density_func should be evaluated
+        options: passed along to plt.plot
+        """
+        if qs is None:
+            low, high = self.domain
+            qs = np.linspace(low, high, 201)
+
+        ps = self(qs)
+        underride(options, label=self.name)
+        plt.plot(qs, ps, **options)
+
+
+class Pdf(Density):
+    """Represents a PDF."""
+
+    def make_pmf(self, qs=None, **options):
+        """Makes a discrete approximation to the Pdf.
+
+        qs: NumPy array of quantities where the Pdf should be evaluated
+        options: passed along to the Pmf constructor
+
+        returns: Pmf
+        """
+        if qs is None:
+            low, high = self.domain
+            qs = np.linspace(low, high, 201)
+        ps = self(qs)
+
+        underride(options, name=self.name)
+        pmf = Pmf(ps, qs, **options)
+        pmf.normalize()
+        return pmf
     
 
-def render_expo_cdf(lam, low, high, n=101):
-    """Generates sequences of xs and ps for an exponential CDF.
+class ContinuousCdf(Density):
+    """Represents a CDF."""
 
-    lam: parameter
-    low: float
-    high: float
-    n: number of points to render
+    def make_cdf(self, qs=None, **options):
+        """Makes a discrete approximation to the CDF.
 
-    returns: numpy arrays (xs, ps)
+        qs: NumPy array of quantities where the CDF should be evaluated
+        options: passed along to the Cdf constructor
+
+        returns: Cdf
+        """
+        if qs is None:
+            low, high = self.domain
+            qs = np.linspace(low, high, 201)
+            
+        ps = self(qs)
+
+        underride(options, name=self.name)
+        cdf = Cdf(ps, qs, **options)
+        return cdf
+    
+
+class NormalPdf(Pdf):
+    """Represents the PDF of a Normal distribution."""
+
+    def __init__(self, mu=0, sigma=1, domain=None, name=""):
+        """Constructs a NormalPdf with given mu and sigma.
+
+        mu: mean
+        sigma: standard deviation
+        name: string
+        """
+        self.mu = mu
+        self.sigma = sigma
+        if domain is None:
+            domain = mu - 4 * sigma, mu + 4 * sigma
+        self.domain = domain
+        self.name = name
+
+    def __repr__(self):
+        """Returns a string representation."""
+        return f"NormalPdf({self.mu}, {self.sigma}, name='{self.name}')"
+
+    def __call__(self, qs):
+        """Evaluates this PDF at qs.
+
+        qs: scalar or sequence of floats
+
+        returns: float or NumPy array of probability density
+        """
+        return normal_pdf(qs, self.mu, self.sigma)
+
+
+class NormalCdf(ContinuousCdf):
+    """Represents the CDF of a Normal distribution."""
+
+    def __init__(self, mu=0, sigma=1, domain=None, name=""):
+        """Constructs a NormalCdf with given mu and sigma.
+
+        mu: mean
+        sigma: standard deviation
+        name: string
+        """
+        self.mu = mu
+        self.sigma = sigma
+        if domain is None:
+            domain = mu - 4 * sigma, mu + 4 * sigma
+        self.domain = domain
+        self.name = name
+
+    def __repr__(self):
+        """Returns a string representation."""
+        return f"NormalCdf({self.mu}, {self.sigma}, name='{self.name}')"
+    
+    def __call__(self, qs):
+        """Evaluates this CDF at qs.
+
+        qs: scalar or sequence of floats
+
+        returns: float or NumPy array of cumulative probability
+        """
+        return norm.cdf(qs, self.mu, self.sigma)
+    
+
+def exponential_pdf(x, lam):
+    """Evaluates the exponential PDF.
+
+    x: float or sequence of floats
+    lam: rate parameter
+
+    returns: float or NumPy array of probability density
     """
-    xs = np.linspace(low, high, n)
-    ps = 1 - np.exp(-lam * xs)
-    return xs, ps
+    return lam * np.exp(-lam * x)
 
-# TODO: Do we ever call render without plotting? If not, let's just plot.
 
-def render_normal_cdf(mu, sigma, low, high, n=101):
-    """Generates sequences of xs and ps for a Normal CDF.
+class ExponentialPdf(Pdf):
+    """Represents the PDF of an exponential distribution."""
 
-    mu: parameter
-    sigma: parameter
-    low: float
-    high: float
-    n: number of points to render
+    def __init__(self, lam=1, domain=None, name=""):
+        """Constructs an ExponentialPdf with given lambda.
 
-    returns: numpy arrays (xs, ps)
+        lam: rate parameter
+        name: string
+        """
+        self.lam = lam
+        if domain is None:
+            domain = 0, 5.0 / lam
+        self.domain = domain
+        self.name = name
+
+    def __repr__(self):
+        """Returns a string representation."""
+        return f"ExponentialPdf({self.lam}, name='{self.name}')"
+    
+    def __call__(self, qs):
+        """Evaluates this PDF at qs.
+
+        qs: scalar or sequence of floats
+
+        returns: float or NumPy array of probability density
+        """
+        return exponential_pdf(qs, self.lam)
+    
+
+class ExponentialCdf(ContinuousCdf):
+    """Represents the CDF of an exponential distribution."""
+
+    def __init__(self, lam=1, domain=None, name=""):
+        """Constructs an ExponentialCdf with given lambda.
+
+        lam: rate parameter
+        name: string
+        """
+        self.lam = lam
+        if domain is None:
+            domain = 0, 5.0 / lam
+        self.domain = domain
+        self.name = name
+
+    def __repr__(self):
+        """Returns a string representation."""
+        return f"ExponentialCdf({self.lam}, name='{self.name}')"
+    
+    def __call__(self, qs):
+        """Evaluates this CDF at qs.
+
+        qs: scalar or sequence of floats
+
+        returns: float or NumPy array of cumulative probability
+        """
+        return exponential_cdf(qs, self.lam)
+
+
+def read_baby_boom(filename="babyboom.dat"):
+    """Reads the babyboom data.
+
+    filename: string
+
+    returns: DataFrame
     """
-    xs = np.linspace(low, high, n)
-    ps = scipy.stats.norm.cdf(xs, mu, sigma)
-    return xs, ps
+    colspecs = [(1, 8), (9, 16), (17, 24), (25, 32)]
+    column_names = ["time", "sex", "weight_g", "minutes"]
+    df = pd.read_fwf(filename, colspecs=colspecs, names=column_names, skiprows=59)
+    return df
 
 
-def render_pareto_cdf(xmin, alpha, low, high, n=50):
-    """Generates sequences of xs and ps for a Pareto CDF.
+## Chapter 7
 
-    xmin: parameter
-    alpha: parameter
-    low: float
-    high: float
-    n: number of points to render
-
-    returns: numpy arrays (xs, ps)
-    """
-    if low < xmin:
-        low = xmin
-    xs = np.linspace(low, high, n)
-    ps = 1 - (xs / xmin) ** -alpha
-    return xs, ps
-
-
-def jitter(seq, std=0.5):
+def jitter(seq, std=1):
     """Jitters the values by adding random Gaussian noise.
 
     seq: sequence of numbers
@@ -209,52 +453,146 @@ def jitter(seq, std=0.5):
     return np.random.normal(0, std, n) + seq
 
 
-def trim(t, p=0.01):
-    """Trims the largest and smallest elements of t.
+def scatter(df, var1, var2, jitter_std=None, **options):
+    """Make a scatter plot and return the coefficient of correlation.
 
-    Args:
-        t: sequence of numbers
-        p: fraction of values to trim off each end
-
-    Returns:
-        sequence of values
+    df: DataFrame
+    var1: string variable name
+    var2: string variable name
+    jitter_std: float standard deviation of noise to add
+    **options: passed along to plt.scatter
     """
-    n = int(p * len(t))
-    t = sorted(t)[n:-n]
-    return t
+    valid = df.dropna(subset=[var1, var2])
+    xs = valid[var1]
+    ys = valid[var2]
+
+    if jitter_std is not None:
+        xs = jitter(xs, jitter_std)
+        ys = jitter(ys, jitter_std)
+
+    underride(options, s=5, alpha=0.2)
+    plt.scatter(xs, ys, **options)
 
 
-def predict(xs, inter, slope):
-    """Predicted values of y for given xs.
+def decile_plot(df, var1, var2, **options):
+    """Make a decile plot.
 
-    xs: sequence of x
-    inter: float intercept
-    slope: float slope
-
-    returns: sequence of y
+    df: DataFrame
+    var1: string variable name
+    var2: string variable name
+    **options: passed along to plt.plot
     """
-    xs = np.asarray(xs)
-    return inter + slope * xs
+    valid = df.dropna(subset=[var1, var2])
+    deciles = pd.qcut(valid[var1], 10, labels=False)
+    df_groupby = valid.groupby(deciles)
+    series_groupby = df_groupby[var2]
+
+    low = series_groupby.quantile(0.1)
+    median = series_groupby.quantile(0.5)
+    high = series_groupby.quantile(0.9)
+
+    xs = df_groupby[var1].median()
+
+    plt.fill_between(xs, low, high, alpha=0.2)
+    underride(options, color="C0", label='median')
+    plt.plot(xs, median, **options)
 
 
-def fit_line(xs, inter, slope):
-    """Fits a line to the given data.
+def corrcoef(df, var1, var2):
+    """Computes the correlation matrix for two variables.
+
+    df: DataFrame
+    var1: string variable name
+    var2: string variable name
+
+    returns: float
+    """
+    valid = df.dropna(subset=[var1, var2])
+    xs = valid[var1]
+    ys = valid[var2]
+    return np.corrcoef(xs, ys)[0, 1]
+
+
+def rankcorr(df, var1, var2):
+    """Computes the Spearman rank correlation for two variables.
+
+    df: DataFrame
+    var1: string variable name
+    var2: string variable name
+
+    returns: float
+    """
+    valid = df.dropna(subset=[var1, var2])
+    xs = valid[var1].rank()
+    ys = valid[var2].rank()
+    return np.corrcoef(xs, ys)[0, 1]
+
+
+def standardize(xs):
+    """Standardizes a sequence of numbers.
+
+    xs: sequence of numbers
+
+    returns: NumPy array
+    """
+    return (xs - np.mean(xs)) / np.std(xs)
+
+
+def make_correlated_scatter(xs, ys, rho, **options):
+    """Makes a scatter plot with given correlation.
     
-    xs: sequence of x
-    inter: float intercept
-    slope: float slope
-    
-    returns: sequence of x, sequence of y
+    xs: sequence of values
+    ys: sequence of values
+    rho: target correlation
     """
-    low, high = np.min(xs), np.max(xs)
-    fit_xs = np.linspace(low, high)
-    fit_ys = predict(fit_xs, inter, slope)
-    return fit_xs, fit_ys
+    ys = rho * xs + np.sqrt(1 - rho**2) * ys
 
-## Chapter 6
+    underride(options, s=5, alpha=0.5)
+    plt.scatter(xs, ys, **options)
+    add_rho(rho)
+    remove_spines()
 
 
-## Chapter 7
+def add_rho(rho):
+    """Adds a label to a figure to indicate the correlation."""
+    ax = plt.gca()
+    plt.text(0.5, 0.05, f"ρ = {rho}",
+        fontsize="large",
+        transform=ax.transAxes,
+        ha="center",
+        va="center",
+    )
+
+
+def make_nonlinear_scatter(xs, ys, kind="quadratic", **options):
+    """Makes a scatter plot with a nonlinear relationship.
+
+    xs: sequence of values
+    ys: sequence of values
+    """
+    if kind == "quadratic":
+        ys = ys + xs**2
+    elif kind == "sinusoid":
+        ys = ys + 10 * np.sin(3 * xs)
+    elif kind == "abs":
+        ys = ys / 4 - np.abs(xs)
+
+    underride(options, s=5, alpha=0.5)
+    plt.scatter(xs, ys, **options)
+    remove_spines()
+    r = np.corrcoef(xs, ys)[0, 1]
+    return r
+
+
+def remove_spines():
+    """Remove the spines from a plot."""
+    ax = plt.gca()
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+
+    for axis in [ax.xaxis, ax.yaxis]:
+        axis.set_ticks([])
+
 
 def cov(xs, ys):
     """Covariance of two variables.
@@ -302,6 +640,38 @@ def percentile_rows(row_seq, percentiles):
 ## Chapter 14
 
 
+
+
+
+
+
+
+def predict(xs, inter, slope):
+    """Predicted values of y for given xs.
+
+    xs: sequence of x
+    inter: float intercept
+    slope: float slope
+
+    returns: sequence of y
+    """
+    xs = np.asarray(xs)
+    return inter + slope * xs
+
+
+def fit_line(xs, inter, slope):
+    """Fits a line to the given data.
+
+    xs: sequence of x
+    inter: float intercept
+    slope: float slope
+
+    returns: sequence of x, sequence of y
+    """
+    low, high = np.min(xs), np.max(xs)
+    fit_xs = np.linspace(low, high)
+    fit_ys = predict(fit_xs, inter, slope)
+    return fit_xs, fit_ys
 
 
 def odds(p):
@@ -356,21 +726,7 @@ def confidence_interval(cdf, percent=90):
     return cdf.inverse([alpha / 2, 1 - alpha / 2])
 
 
-def cohen_effect_size(group1, group2):
-    """Computes Cohen's effect size for two groups.
-    
-    group1: sequence
-    group2: sequence
 
-    returns: float
-    """
-    diff = np.mean(group1) - np.mean(group2)
-    var1 = np.var(group1)
-    var2 = np.var(group2)
-    n1, n2 = len(group1), len(group2)
-    pooled_var = (n1 * var1 + n2 * var2) / (n1 + n2)
-    d = diff / np.sqrt(pooled_var)
-    return d
 
 
 class Interpolator(object):
@@ -418,93 +774,6 @@ def make_uniform_pmf(low, high, n):
     pmf.normalize()
     return pmf
 
-
-class Pdf(object):
-    """Represents a probability density function (PDF)."""
-
-    def make_pmf(self, xs, name=""):
-        """Makes a discrete version of this Pdf.
-
-        xs: equally spaced sequence of quantities
-
-        returns: new Pmf
-        """
-        ds = self.density(xs)
-        pmf = Pmf(ds, xs, name=name)
-        pmf.normalize()
-        return pmf
-
-    def plot(self, xs=None, **options):
-        """Plots this Pdf.
-
-        xs: sequence of quantities where the Pdf should be evaluated
-        options: passed along to plt.plot
-        """
-        options = underride(options, label=self.name)
-        if xs is None:
-            low, high = self.mu - 4 * self.sigma, self.mu + 4 * self.sigma
-            xs = np.linspace(low, high, 101)
-        ds = self.density(xs)
-        plt.plot(xs, ds, **options)
-
-
-class NormalPdf(Pdf):
-    """Represents the PDF of a Normal distribution."""
-
-    def __init__(self, mu=0, sigma=1, name=""):
-        """Constructs a Normal Pdf with given mu and sigma.
-
-        mu: mean
-        sigma: standard deviation
-        label: string
-        """
-        self.mu = mu
-        self.sigma = sigma
-        self.name = name
-
-    def __str__(self):
-        return f"NormalPdf({self.mu}, {self.sigma}, name={self.name})"
-
-    def density(self, xs):
-        """Evaluates this Pdf at xs.
-
-        xs: scalar or sequence of floats
-
-        returns: float or NumPy array of probability density
-        """
-        return scipy.stats.norm.pdf(xs, self.mu, self.sigma)
-
-
-class EstimatedPdf(Pdf):
-    """Represents a PDF estimated by KDE."""
-
-    def __init__(self, sample, name=""):
-        """Estimates the density function based on a sample.
-
-        sample: sequence of data
-        label: string
-        """
-        self.name = name
-        self.kde = scipy.stats.gaussian_kde(sample)
-        self.mu = np.mean(sample)
-        self.sigma = np.std(sample)
-
-    def __str__(self):
-        return f"EstimatedPdf(name={self.name})"
-
-    def density(self, xs):
-        """Evaluates this Pdf at xs.
-
-        returns: float or NumPy array of probability density
-        """
-        return self.kde.evaluate(xs)
-
-    def sample(self, n):
-        """Generates a random sample from the estimated Pdf.
-
-        n: size of sample
-        """
-        return self.kde.resample(n).flatten()
 
 
 def resample(xs, n=None):
@@ -978,25 +1247,6 @@ def chi_squared_cdf(n):
     return Cdf(ps, xs)
 
 
-def read_baby_boom(filename="babyboom.dat"):
-    """Reads the babyboom data.
-
-    filename: string
-
-    returns: DataFrame
-    """
-    var_info = [
-        ("time", 1, 8, int),
-        ("sex", 9, 16, int),
-        ("weight_g", 17, 24, int),
-        ("minutes", 25, 32, int),
-    ]
-    columns = ["name", "start", "end", "type"]
-    variables = pd.DataFrame(var_info, columns=columns)
-    variables.end += 1
-    dct = FixedWidthVariables(variables, index_base=1)
-    df = dct.read_fixed_width(filename, skiprows=59)
-    return df
 
 
 ##  Plotting functions
