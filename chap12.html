@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Time series analysis &#8212; Think Stats, 3rd edition</title>
+    <title>13. Time series analysis &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap12';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Survival analysis" href="chap13.html" />
-    <link rel="prev" title="Regression" href="chap11.html" />
+    <link rel="next" title="14. Survival analysis" href="chap13.html" />
+    <link rel="prev" title="12. Regression" href="chap11.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,21 +175,21 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">Linear least squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Linear least squares</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">Regression</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Time series analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Regression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">14. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">15. Analytic methods</a></li>
 </ul>
 
     </div>
@@ -353,17 +353,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-cleaning">Importing and cleaning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">Plotting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-averages">Moving averages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">Missing values</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-correlation">Serial correlation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation">Autocorrelation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">Prediction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-cleaning">13.1. Importing and cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">13.2. Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">13.3. Linear regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-averages">13.4. Moving averages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">13.5. Missing values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-correlation">13.6. Serial correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation">13.7. Autocorrelation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">13.8. Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">13.9. Further reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">13.10. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.11. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -376,7 +376,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="time-series-analysis">
-<h1>Time series analysis<a class="headerlink" href="#time-series-analysis" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">13. </span>Time series analysis<a class="headerlink" href="#time-series-analysis" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -456,7 +456,7 @@ I find this project appealing because it is an example that uses data to address
 <p>I hope you will find this chapter interesting, but I’ll take this opportunity to reiterate the importance of maintaining a professional attitude to data analysis.
 Whether and which drugs should be illegal are important and difficult public policy questions; our decisions should be informed by accurate data reported honestly.</p>
 <section id="importing-and-cleaning">
-<h2>Importing and cleaning<a class="headerlink" href="#importing-and-cleaning" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.1. </span>Importing and cleaning<a class="headerlink" href="#importing-and-cleaning" title="Link to this heading">#</a></h2>
 <p>The data I downloaded from Mr. Jones’s site is in the repository for this book.
 The following code reads it into a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
 <div class="cell docutils container">
@@ -736,7 +736,7 @@ So <code class="docutils literal notranslate"><span class="pre">GroupByDay</span
 </div>
 </section>
 <section id="plotting">
-<h2>Plotting<a class="headerlink" href="#plotting" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.2. </span>Plotting<a class="headerlink" href="#plotting" title="Link to this heading">#</a></h2>
 <p>The result from <code class="docutils literal notranslate"><span class="pre">GroupByQualityAndDay</span></code> is a map from each quality to a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> of daily prices.
 Here’s the code I use to plot the three time series:</p>
 <div class="cell docutils container">
@@ -786,7 +786,7 @@ The price of low quality might also be increasing, but it is harder to tell, sin
 Keep in mind that quality data is reported by volunteers, so trends over time might reflect changes in how participants apply these labels.</p>
 </section>
 <section id="linear-regression">
-<h2>Linear regression<a class="headerlink" href="#linear-regression" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.3. </span>Linear regression<a class="headerlink" href="#linear-regression" title="Link to this heading">#</a></h2>
 <p>Although there are methods specific to time series analysis, for many problems a simple way to get started is by applying general-purpose tools like linear regression.
 The following function takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> of daily prices and computes a least squares fit, returning the model and results objects from StatsModels:</p>
 <div class="cell docutils container">
@@ -947,7 +947,7 @@ With time series data, this assumption is often false because successive values 
 <p>The next section presents an alternative that is more appropriate for time series data.</p>
 </section>
 <section id="moving-averages">
-<h2>Moving averages<a class="headerlink" href="#moving-averages" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.4. </span>Moving averages<a class="headerlink" href="#moving-averages" title="Link to this heading">#</a></h2>
 <p>Most time series analysis is based on the modeling assumption that the observed series is the sum of three components:</p>
 <ul class="simple">
 <li><p>Trend: A smooth function that captures persistent changes.</p></li>
@@ -1225,7 +1225,7 @@ Second, the Pandas implementation of EWMA handles missing values better.</p>
 The values are noisy at the beginning of the time series, because they are based on fewer data points.</p>
 </section>
 <section id="missing-values">
-<h2>Missing values<a class="headerlink" href="#missing-values" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.5. </span>Missing values<a class="headerlink" href="#missing-values" title="Link to this heading">#</a></h2>
 <p>Now that we have characterized the trend of the time series, the next step is to investigate seasonality, which is periodic behavior.
 Time series data based on human behavior often exhibits daily, weekly, monthly, or yearly cycles.
 In the next section I present methods to test for seasonality, but they don’t work well with missing data, so we have to solve that problem first.</p>
@@ -1422,7 +1422,7 @@ Finally, <code class="docutils literal notranslate"><span class="pre">fillna</sp
 Since the resampled residuals are random, the results are different every time; later we’ll see how to characterize the error created by missing values.</p>
 </section>
 <section id="serial-correlation">
-<h2>Serial correlation<a class="headerlink" href="#serial-correlation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.6. </span>Serial correlation<a class="headerlink" href="#serial-correlation" title="Link to this heading">#</a></h2>
 <p>As prices vary from day to day, you might expect to see patterns.
 If the price is high on Monday, you might expect it to be high for a few more days; and if it’s low, you might expect it to stay low.
 A pattern like this is called <strong>serial correlation</strong>, because each value is correlated with the next one in the series.</p>
@@ -1557,7 +1557,7 @@ medium -0.010294571597965742
 <p>In the next section we’ll test whether these correlations are statistically significant (they are not), but at this point we can tentatively conclude that there are no substantial seasonal patterns in these series, at least not with these lags.</p>
 </section>
 <section id="autocorrelation">
-<h2>Autocorrelation<a class="headerlink" href="#autocorrelation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.7. </span>Autocorrelation<a class="headerlink" href="#autocorrelation" title="Link to this heading">#</a></h2>
 <p>If you think a series might have some serial correlation, but you don’t know which lags to test, you can test them all! The <strong>autocorrelation function</strong> is a function that maps from lag to the serial correlation with the given lag.
 “Autocorrelation” is another name for serial correlation, used more often when the lag is not 1.</p>
 <p>StatsModels provides functions for time series analysis, including <code class="docutils literal notranslate"><span class="pre">acf</span></code>, which computes the autocorrelation function:</p>
@@ -1806,7 +1806,7 @@ To simulate this effect, I select dates that fall on Friday or Saturday and add 
 For low quality they are not, because residuals in this category are large; the effect would have to be bigger to be visible through the noise.</p>
 </section>
 <section id="prediction">
-<h2>Prediction<a class="headerlink" href="#prediction" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.8. </span>Prediction<a class="headerlink" href="#prediction" title="Link to this heading">#</a></h2>
 <p>Time series analysis can be used to investigate, and sometimes explain, the behavior of systems that vary in time.
 It can also make predictions.</p>
 <p>The linear regressions we used in Section <a class="reference internal" href="#timeregress"><span class="xref myst">[timeregress]</span></a>{reference-type=“ref” reference=“timeregress”} can be used for prediction.
@@ -2234,7 +2234,7 @@ But the most recent interval shows signs of decreasing prices, so models based o
 As a result, the widest predictive interval includes the possibility of decreasing prices over the next year.</p>
 </section>
 <section id="further-reading">
-<h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.9. </span>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
 <p>Time series analysis is a big topic; this chapter has only scratched the surface.
 An important tool for working with time series data is autoregression, which I did not cover here, mostly because it turns out not to be useful for the example data I worked with.</p>
 <p>But once you have learned the material in this chapter, you are well prepared to learn about autoregression.
@@ -2242,7 +2242,7 @@ One resource I recommend is Philipp Janert’s book, <em>Data Analysis with Open
 His chapter on time series analysis picks up where this one leaves off.</p>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.10. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>time series</strong>: A dataset where each value is associated with a timestamp, often a series of measurements and the times they were collected.</p></li>
 <li><p><strong>window</strong>: A sequence of consecutive values in a time series, often used to compute a moving average.</p></li>
@@ -2258,7 +2258,7 @@ His chapter on time series analysis picks up where this one leaves off.</p>
 </ul>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.11. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p><strong>Exercise:</strong>   The linear model I used in this chapter has the obvious drawback that it is linear, and there is no reason to expect prices to change linearly over time.
 We can add flexibility to the model by adding a quadratic term, as we did in Section 11.3.</p>
 <p>Use a quadratic model to fit the time series of daily prices, and use the model to generate predictions.
@@ -2801,7 +2801,7 @@ One of the simplest is something like this:</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Regression</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Regression</p>
       </div>
     </a>
     <a class="right-next"
@@ -2809,7 +2809,7 @@ One of the simplest is something like this:</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Survival analysis</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Survival analysis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2829,17 +2829,17 @@ One of the simplest is something like this:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-cleaning">Importing and cleaning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">Plotting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-averages">Moving averages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">Missing values</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-correlation">Serial correlation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation">Autocorrelation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">Prediction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-cleaning">13.1. Importing and cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">13.2. Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">13.3. Linear regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-averages">13.4. Moving averages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">13.5. Missing values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-correlation">13.6. Serial correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation">13.7. Autocorrelation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">13.8. Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">13.9. Further reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">13.10. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.11. Exercises</a></li>
 </ul>
   </nav></div>
 

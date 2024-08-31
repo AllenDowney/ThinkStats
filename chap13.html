@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Survival analysis &#8212; Think Stats, 3rd edition</title>
+    <title>14. Survival analysis &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap13';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Analytic methods" href="chap14.html" />
-    <link rel="prev" title="Time series analysis" href="chap12.html" />
+    <link rel="next" title="15. Analytic methods" href="chap14.html" />
+    <link rel="prev" title="13. Time series analysis" href="chap12.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,21 +175,21 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">Linear least squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Linear least squares</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time series analysis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">13. Time series analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">15. Analytic methods</a></li>
 </ul>
 
     </div>
@@ -353,18 +353,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survival-curves">Survival curves</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-function">Hazard function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-survival-curves">Inferring survival curves</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kaplan-meier-estimation">Kaplan-Meier estimation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-marriage-curve">The marriage curve</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-survival-curve">Estimating the survival curve</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence intervals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cohort-effects">Cohort effects</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extrapolation">Extrapolation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-remaining-lifetime">Expected remaining lifetime</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survival-curves">14.1. Survival curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-function">14.2. Hazard function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-survival-curves">14.3. Inferring survival curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kaplan-meier-estimation">14.4. Kaplan-Meier estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-marriage-curve">14.5. The marriage curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-survival-curve">14.6. Estimating the survival curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">14.7. Confidence intervals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cohort-effects">14.8. Cohort effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extrapolation">14.9. Extrapolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-remaining-lifetime">14.10. Expected remaining lifetime</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">14.11. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">14.12. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -377,7 +377,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="survival-analysis">
-<h1>Survival analysis<a class="headerlink" href="#survival-analysis" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">14. </span>Survival analysis<a class="headerlink" href="#survival-analysis" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -453,7 +453,7 @@ It is often used to study human lifetimes, but it also applies to “survival”
 <p>If someone you know has been diagnosed with a life-threatening disease, you might have seen a “5-year survival rate,” which is the probability of surviving five years after diagnosis.
 That estimate and related statistics are the result of survival analysis.</p>
 <section id="survival-curves">
-<h2>Survival curves<a class="headerlink" href="#survival-curves" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.1. </span>Survival curves<a class="headerlink" href="#survival-curves" title="Link to this heading">#</a></h2>
 <p>The fundamental concept in survival analysis is the <strong>survival curve</strong>, <span class="math notranslate nohighlight">\(S(t)\)</span>, which is a function that maps from a duration, <span class="math notranslate nohighlight">\(t\)</span>, to the probability of surviving longer than <span class="math notranslate nohighlight">\(t\)</span>.
 If you know the distribution of durations, or “lifetimes”, finding the survival curve is easy; it’s just the complement of the CDF:</p>
 <div class="math notranslate nohighlight">
@@ -727,7 +727,7 @@ To represent the survival curve, I define an object that wraps a <code class="do
 And the curve is steepest around 39 weeks, which is the most common pregnancy length.</p>
 </section>
 <section id="hazard-function">
-<h2>Hazard function<a class="headerlink" href="#hazard-function" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.2. </span>Hazard function<a class="headerlink" href="#hazard-function" title="Link to this heading">#</a></h2>
 <p>From the survival curve we can derive the <strong>hazard function</strong>; for pregnancy lengths, the hazard function maps from a time, <span class="math notranslate nohighlight">\(t\)</span>, to the fraction of pregnancies that continue until <span class="math notranslate nohighlight">\(t\)</span> and then end at <span class="math notranslate nohighlight">\(t\)</span>.
 To be more precise:</p>
 <div class="math notranslate nohighlight">
@@ -820,7 +820,7 @@ Other than that the shape of the curve is as expected: it is highest around 39 w
 <p>The hazard function is useful in its own right, but it is also an important tool for estimating survival curves, as we’ll see in the next section.</p>
 </section>
 <section id="inferring-survival-curves">
-<h2>Inferring survival curves<a class="headerlink" href="#inferring-survival-curves" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.3. </span>Inferring survival curves<a class="headerlink" href="#inferring-survival-curves" title="Link to this heading">#</a></h2>
 <p>If someone gives you the CDF of lifetimes, it is easy to compute the survival and hazard functions.
 But in many real-world scenarios, we can’t measure the distribution of lifetimes directly.
 We have to infer it.</p>
@@ -838,7 +838,7 @@ That is a bad idea.
 The result would be doubly misleading: (1) older women would be overrepresented, because they are more likely to be married when interviewed, and (2) married women would be overrepresented! In fact, this analysis would lead to the conclusion that all women get married, which is obviously incorrect.</p>
 </section>
 <section id="kaplan-meier-estimation">
-<h2>Kaplan-Meier estimation<a class="headerlink" href="#kaplan-meier-estimation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.4. </span>Kaplan-Meier estimation<a class="headerlink" href="#kaplan-meier-estimation" title="Link to this heading">#</a></h2>
 <p>In this example it is not only desirable but necessary to include observations of unmarried women, which brings us to one of the central algorithms in survival analysis, <strong>Kaplan-Meier estimation</strong>.</p>
 <p>The general idea is that we can use the data to estimate the hazard function, then convert the hazard function to a survival curve.
 To estimate the hazard function, we consider, for each age, (1) the number of women who got married at that age and (2) the number of women “at risk” of getting married, which includes all women who were not married at an earlier age.</p>
@@ -916,7 +916,7 @@ In this context, “censored” means that the data are unavailable because of t
 <p>Finally, we pass <code class="docutils literal notranslate"><span class="pre">lams</span></code> to the <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> constructor and return the result.</p>
 </section>
 <section id="the-marriage-curve">
-<h2>The marriage curve<a class="headerlink" href="#the-marriage-curve" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.5. </span>The marriage curve<a class="headerlink" href="#the-marriage-curve" title="Link to this heading">#</a></h2>
 <p>To test this function, we have to do some data cleaning and transformation.
 The NSFG variables we need are:</p>
 <ul class="simple">
@@ -1086,7 +1086,7 @@ The survival curve will smooth out this noise.</p>
 </div>
 </section>
 <section id="estimating-the-survival-curve">
-<h2>Estimating the survival curve<a class="headerlink" href="#estimating-the-survival-curve" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.6. </span>Estimating the survival curve<a class="headerlink" href="#estimating-the-survival-curve" title="Link to this heading">#</a></h2>
 <p>Once we have the hazard function, we can estimate the survival curve.
 The chance of surviving past time <code class="docutils literal notranslate"><span class="pre">t</span></code> is the chance of surviving all times up through <code class="docutils literal notranslate"><span class="pre">t</span></code>, which is the cumulative product of the complementary hazard function:</p>
 <div class="math notranslate nohighlight">
@@ -1154,7 +1154,7 @@ In 2006, <em>Newsweek</em> ran an another article admitting that they were wrong
 It should remind you of the ethical obligation to perform statistical analysis with care, interpret the results with appropriate skepticism, and present them to the public accurately and honestly.</p>
 </section>
 <section id="confidence-intervals">
-<h2>Confidence intervals<a class="headerlink" href="#confidence-intervals" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.7. </span>Confidence intervals<a class="headerlink" href="#confidence-intervals" title="Link to this heading">#</a></h2>
 <p>Kaplan-Meier analysis yields a single estimate of the survival curve, but it is also important to quantify the uncertainty of the estimate.
 As usual, there are three possible sources of error: measurement error, sampling error, and modeling error.</p>
 <p>In this example, measurement error is probably small.
@@ -1288,7 +1288,7 @@ It computes <code class="docutils literal notranslate"><span class="pre">ts</spa
 The discrepancy between them indicates that the sampling weights have a substantial effect on the estimate – we will have to keep that in mind.</p>
 </section>
 <section id="cohort-effects">
-<h2>Cohort effects<a class="headerlink" href="#cohort-effects" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.8. </span>Cohort effects<a class="headerlink" href="#cohort-effects" title="Link to this heading">#</a></h2>
 <p>One of the challenges of survival analysis is that different parts of the estimated curve are based on different groups of respondents.
 The part of the curve at time <code class="docutils literal notranslate"><span class="pre">t</span></code> is based on respondents whose age was at least <code class="docutils literal notranslate"><span class="pre">t</span></code> when they were interviewed.
 So the leftmost part of the curve includes data from all respondents, but the rightmost part includes only the oldest respondents.</p>
@@ -1539,7 +1539,7 @@ They are less likely than their predecessors to be married before age 25, but at
 <p>In the meantime we can make some predictions.</p>
 </section>
 <section id="extrapolation">
-<h2>Extrapolation<a class="headerlink" href="#extrapolation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.9. </span>Extrapolation<a class="headerlink" href="#extrapolation" title="Link to this heading">#</a></h2>
 <p>The survival curve for the 70s cohort ends at about age 38; for the 80s cohort it ends at age 28, and for the 90s cohort we hardly have any data at all.</p>
 <p>We can extrapolate these curves by “borrowing” data from the previous cohort.
 <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> provides a method, <code class="docutils literal notranslate"><span class="pre">Extend</span></code>, that copies the tail from another longer <code class="docutils literal notranslate"><span class="pre">Hazard</span></code>:</p>
@@ -1646,7 +1646,7 @@ The first loop computes the <code class="docutils literal notranslate"><span cla
 These results suggest that by age 40, the most recent cohorts will converge with the 60s cohort, with fewer than 20% never married.</p>
 </section>
 <section id="expected-remaining-lifetime">
-<h2>Expected remaining lifetime<a class="headerlink" href="#expected-remaining-lifetime" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.10. </span>Expected remaining lifetime<a class="headerlink" href="#expected-remaining-lifetime" title="Link to this heading">#</a></h2>
 <p>Given a survival curve, we can compute the expected remaining lifetime as a function of current age.
 For example, given the survival curve of pregnancy length, we can compute the expected time until delivery.</p>
 <p>The first step is to extract the PMF of lifetimes.
@@ -1928,7 +1928,7 @@ Newborns and cancer patients are also UBNE; their life expectancy increases the 
 That makes the mean infinity for all ages, but the median is well-defined as long as more than 50% of the remaining lifetimes are finite, which is true until age 30. After that it is hard to define a meaningful expected remaining lifetime.</p>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.11. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>survival analysis</strong>: A set of methods for describing and predicting lifetimes, or more generally time until an event occurs.</p></li>
 <li><p><strong>survival curve</strong>: A function that maps from a time, <span class="math notranslate nohighlight">\(t\)</span>, to the probability of surviving past <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
@@ -1941,7 +1941,7 @@ That makes the mean infinity for all ages, but the median is well-defined as lon
 </ul>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.12. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p><strong>Exercise:</strong>    In NSFG Cycles 6 and 7, the variable <code class="docutils literal notranslate"><span class="pre">cmdivorcx</span></code> contains the date of divorce for the respondent’s first marriage, if applicable, encoded in century-months.</p>
 <p>Compute the duration of marriages that have ended in divorce, and the duration, so far, of marriages that are ongoing.
 Estimate the hazard and survival curve for the duration of marriage.</p>
@@ -2048,7 +2048,7 @@ Estimate the hazard and survival curve for the duration of marriage.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Time series analysis</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Time series analysis</p>
       </div>
     </a>
     <a class="right-next"
@@ -2056,7 +2056,7 @@ Estimate the hazard and survival curve for the duration of marriage.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Analytic methods</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Analytic methods</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2076,18 +2076,18 @@ Estimate the hazard and survival curve for the duration of marriage.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survival-curves">Survival curves</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-function">Hazard function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-survival-curves">Inferring survival curves</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kaplan-meier-estimation">Kaplan-Meier estimation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-marriage-curve">The marriage curve</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-survival-curve">Estimating the survival curve</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence intervals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cohort-effects">Cohort effects</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extrapolation">Extrapolation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-remaining-lifetime">Expected remaining lifetime</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survival-curves">14.1. Survival curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-function">14.2. Hazard function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-survival-curves">14.3. Inferring survival curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kaplan-meier-estimation">14.4. Kaplan-Meier estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-marriage-curve">14.5. The marriage curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-survival-curve">14.6. Estimating the survival curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">14.7. Confidence intervals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cohort-effects">14.8. Cohort effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extrapolation">14.9. Extrapolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-remaining-lifetime">14.10. Expected remaining lifetime</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">14.11. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">14.12. Exercises</a></li>
 </ul>
   </nav></div>
 

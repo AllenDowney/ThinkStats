@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Linear least squares &#8212; Think Stats, 3rd edition</title>
+    <title>10. Linear least squares &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap10';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Regression" href="chap11.html" />
-    <link rel="prev" title="Hypothesis testing" href="chap09.html" />
+    <link rel="next" title="12. Regression" href="chap11.html" />
+    <link rel="prev" title="9. Hypothesis testing" href="chap09.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,21 +175,21 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis testing</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear least squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis testing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Linear least squares</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time series analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">13. Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">14. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">15. Analytic methods</a></li>
 </ul>
 
     </div>
@@ -353,18 +353,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear least squares</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-fit">Least squares fit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals">Residuals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation">Estimation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goodness-of-fit">Goodness of fit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-linear-model">Testing a linear model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-resampling">Weighted resampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">10. Linear least squares</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-fit">10.1. Least squares fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">10.2. Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals">10.3. Residuals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation">10.4. Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goodness-of-fit">10.5. Goodness of fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-linear-model">10.6. Testing a linear model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-resampling">10.7. Weighted resampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">10.8. Glossary</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">11. Exercises</a></li>
 </ul>
 
             </nav>
@@ -378,7 +378,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="linear-least-squares">
-<h1>Linear least squares<a class="headerlink" href="#linear-least-squares" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">10. </span>Linear least squares<a class="headerlink" href="#linear-least-squares" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -450,7 +450,7 @@ document.write(`
             </script></div>
 </div>
 <section id="least-squares-fit">
-<h2>Least squares fit<a class="headerlink" href="#least-squares-fit" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.1. </span>Least squares fit<a class="headerlink" href="#least-squares-fit" title="Link to this heading">#</a></h2>
 <p>Correlation coefficients measure the strength and sign of a relationship, but not the slope.
 There are several ways to estimate the slope; the most common is a <strong>linear least squares fit</strong>.
 A “linear fit” is a line intended to model the relationship between variables.
@@ -478,7 +478,7 @@ In that case you might want to compute some cost function for each residual, and
 However, computing a least squares fit is quick, easy and often good enough.</p>
 </section>
 <section id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.2. </span>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
 <p>TODO: Explain how to compute slope and inter</p>
 <p>The following function takes <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> and returns the intercept and slope of the best fit line.</p>
 <div class="cell docutils container">
@@ -743,7 +743,7 @@ In this case the mean age is about 25 years and the mean baby weight for a 25 ye
 <p>It’s a good idea to look at a figure like this to assess whether the relationship is linear and whether the fitted line seems like a good model of the relationship.</p>
 </section>
 <section id="residuals">
-<h2>Residuals<a class="headerlink" href="#residuals" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.3. </span>Residuals<a class="headerlink" href="#residuals" title="Link to this heading">#</a></h2>
 <p>Another useful test is to plot the residuals.</p>
 <p>TODO: definition</p>
 <p>The following function computes residuals:</p>
@@ -906,7 +906,7 @@ In fact, the lines are close to parallel, so that’s good; but they have some c
 Nevertheless, the linear fit is a simple model that is probably good enough for some purposes.</p>
 </section>
 <section id="estimation">
-<h2>Estimation<a class="headerlink" href="#estimation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.4. </span>Estimation<a class="headerlink" href="#estimation" title="Link to this heading">#</a></h2>
 <p>The parameters <code class="docutils literal notranslate"><span class="pre">slope</span></code> and <code class="docutils literal notranslate"><span class="pre">inter</span></code> are estimates based on a sample; like other estimates, they are vulnerable to sampling bias, measurement error, and sampling error.</p>
 <p>Sampling bias is caused by non-representative sampling, measurement error is caused by errors in collecting and recording data, and sampling error is the result of measuring a sample rather than the entire population.</p>
 <p>To assess sampling error, we ask, “If we run this experiment again, how much variability do we expect in the estimates?” We can answer this question by running simulated experiments and computing sampling distributions of the estimates.</p>
@@ -1198,7 +1198,7 @@ For a 90% confidence interval, it selects the 5th and 95th percentiles.
 <p>The vertical width of the region represents the effect of sampling error – the effect is smaller for values near the mean and larger for the extremes.</p>
 </section>
 <section id="goodness-of-fit">
-<h2>Goodness of fit<a class="headerlink" href="#goodness-of-fit" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.5. </span>Goodness of fit<a class="headerlink" href="#goodness-of-fit" title="Link to this heading">#</a></h2>
 <p>There are several ways to measure the quality of a linear model, or <strong>goodness of fit</strong>.
 One of the simplest is the standard deviation of the residuals.</p>
 <p>If you use a linear model to make predictions, <code class="docutils literal notranslate"><span class="pre">std(res)</span></code> is the root mean squared error (RMSE) of your predictions.
@@ -1391,7 +1391,7 @@ A correlation of 0.72 yields a reduction in RMSE of only 31%.</p>
 <p>If you see a correlation that looks impressive, remember that <span class="math notranslate nohighlight">\(R^2\)</span> is a better indicator of reduction in MSE, and reduction in RMSE is a better indicator of predictive power.</p>
 </section>
 <section id="testing-a-linear-model">
-<h2>Testing a linear model<a class="headerlink" href="#testing-a-linear-model" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.6. </span>Testing a linear model<a class="headerlink" href="#testing-a-linear-model" title="Link to this heading">#</a></h2>
 <p>The effect of mother’s age on birth weight is small, and has little predictive power.
 So is it possible that the apparent relationship is due to chance? There are several ways we might test the results of a linear fit.</p>
 <p>One option is to test whether the apparent reduction in MSE is due to chance.
@@ -1510,7 +1510,7 @@ To generate simulated data, we permute the deviations and add them to the mean.<
 <p>Estimating the p-value by simulating the null hypothesis is strictly correct, but there is a simpler alternative.</p>
 </section>
 <section id="weighted-resampling">
-<h2>Weighted resampling<a class="headerlink" href="#weighted-resampling" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.7. </span>Weighted resampling<a class="headerlink" href="#weighted-resampling" title="Link to this heading">#</a></h2>
 <p>So far we have treated the NSFG data as if it were a representative sample, but as I mentioned in Section <a class="reference internal" href="#nsfg"><span class="xref myst">[nsfg]</span></a>{reference-type=“ref” reference=“nsfg”}, it is not.
 The survey deliberately oversamples several groups in order to improve the chance of getting statistically significant results; that is, in order to improve the power of tests involving these groups.</p>
 <p>This survey design is useful for many purposes, but it means that we cannot use the sample to estimate values for the general population without accounting for the sampling process.</p>
@@ -1630,7 +1630,7 @@ The difference in estimated means, with and without weighting, is about 0.08 pou
 This difference is substantially larger than the standard error of the estimate, 0.014 pounds, which implies that the difference is not due to chance.</p>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.8. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>linear fit</strong>: a line intended to model the relationship between variables.</p></li>
 <li><p><strong>least squares fit</strong>: A model of a dataset that minimizes the sum of squares of the residuals.</p></li>
@@ -1642,7 +1642,7 @@ This difference is substantially larger than the standard error of the estimate,
 </section>
 </section>
 <section id="exercises">
-<h1>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">11. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h1>
 <p><strong>Exercise:</strong> Use <code class="docutils literal notranslate"><span class="pre">resample_rows</span></code> and generate a list of estimates for the mean birth weight.
 Use <code class="docutils literal notranslate"><span class="pre">summarize</span></code> to compute the SE and CI for these estimates.</p>
 <div class="cell docutils container">
@@ -2254,7 +2254,7 @@ Note that the weight column in this dataset is called <code class="docutils lite
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Hypothesis testing</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Hypothesis testing</p>
       </div>
     </a>
     <a class="right-next"
@@ -2262,7 +2262,7 @@ Note that the weight column in this dataset is called <code class="docutils lite
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Regression</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Regression</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2282,18 +2282,18 @@ Note that the weight column in this dataset is called <code class="docutils lite
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear least squares</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-fit">Least squares fit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals">Residuals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation">Estimation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goodness-of-fit">Goodness of fit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-linear-model">Testing a linear model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-resampling">Weighted resampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">10. Linear least squares</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-fit">10.1. Least squares fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">10.2. Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals">10.3. Residuals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation">10.4. Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goodness-of-fit">10.5. Goodness of fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-linear-model">10.6. Testing a linear model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-resampling">10.7. Weighted resampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">10.8. Glossary</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">11. Exercises</a></li>
 </ul>
 
   </nav></div>

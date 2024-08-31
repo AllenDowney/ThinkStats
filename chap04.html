@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Cumulative Distribution Functions &#8212; Think Stats, 3rd edition</title>
+    <title>4. Cumulative Distribution Functions &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap04';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Modeling Distributions" href="chap05.html" />
-    <link rel="prev" title="Probability Mass Functions" href="chap03.html" />
+    <link rel="next" title="5. Modeling Distributions" href="chap05.html" />
+    <link rel="prev" title="3. Probability Mass Functions" href="chap03.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,21 +175,21 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">Linear least squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Linear least squares</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time series analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">13. Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">14. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">15. Analytic methods</a></li>
 </ul>
 
     </div>
@@ -353,18 +353,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentiles-and-percentile-ranks">Percentiles and Percentile Ranks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdfs">CDFs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-cdfs">Comparing CDFs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentile-based-statistics">Percentile-Based Statistics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers">Random Numbers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentiles-and-percentile-ranks">4.1. Percentiles and Percentile Ranks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdfs">4.2. CDFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-cdfs">4.3. Comparing CDFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentile-based-statistics">4.4. Percentile-Based Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers">4.5. Random Numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">4.6. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">4.7. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">4.7.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.7.2. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.7.3. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">4.7.4. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.7.5. Exercise</a></li>
 </ul>
 </li>
 </ul>
@@ -379,7 +379,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="cumulative-distribution-functions">
-<h1>Cumulative Distribution Functions<a class="headerlink" href="#cumulative-distribution-functions" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">4. </span>Cumulative Distribution Functions<a class="headerlink" href="#cumulative-distribution-functions" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -461,7 +461,7 @@ document.write(`
             </script></div>
 </div>
 <section id="percentiles-and-percentile-ranks">
-<h2>Percentiles and Percentile Ranks<a class="headerlink" href="#percentiles-and-percentile-ranks" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.1. </span>Percentiles and Percentile Ranks<a class="headerlink" href="#percentiles-and-percentile-ranks" title="Link to this heading">#</a></h2>
 <p>If you have taken a standardized test, you probably got your results in the form of a raw score and a <strong>percentile rank</strong>.
 In this context, the percentile rank is the percentage of people who got the same score as you or lower.
 So if you are “in the 90th percentile,” you did as well as or better than 90% of the people who took the exam.</p>
@@ -1028,7 +1028,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">query</s
 <p>The goal of these examples is to introduce percentile ranks and percentiles, which are the key to understanding cumulative distribution functions.</p>
 </section>
 <section id="cdfs">
-<h2>CDFs<a class="headerlink" href="#cdfs" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.2. </span>CDFs<a class="headerlink" href="#cdfs" title="Link to this heading">#</a></h2>
 <p>A <strong>cumulative distribution function</strong>, or CDF, is a way to describe the distribution of a set of values.
 Given a value <code class="docutils literal notranslate"><span class="pre">x</span></code>, the CDF computes the fraction of values less than or equal to <code class="docutils literal notranslate"><span class="pre">x</span></code>.
 As an example, we’ll start with a short sequence.</p>
@@ -1456,7 +1456,7 @@ To be consistent with percentile and percentile rank”, it could be called a �
 Most often, it is called a <strong>cumulative probability</strong>.</p>
 </section>
 <section id="comparing-cdfs">
-<h2>Comparing CDFs<a class="headerlink" href="#comparing-cdfs" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.3. </span>Comparing CDFs<a class="headerlink" href="#comparing-cdfs" title="Link to this heading">#</a></h2>
 <p>CDFs are especially useful for comparing distributions.
 As an example, let’s compare the distribution of birth weights for first babies and others.
 We’ll load the NSFG dataset again, and divide it into three <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>: all live births, first babies, and others.</p>
@@ -1694,7 +1694,7 @@ If they are big enough to smooth out noise, they might also smooth out useful in
 We can see that first babies are slightly lighter throughout the distribution, with a larger discrepancy above the midpoint.</p>
 </section>
 <section id="percentile-based-statistics">
-<h2>Percentile-Based Statistics<a class="headerlink" href="#percentile-based-statistics" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.4. </span>Percentile-Based Statistics<a class="headerlink" href="#percentile-based-statistics" title="Link to this heading">#</a></h2>
 <p>In Section xxx we computed the arithmetic mean, which identifies a central point in a distribution, and the standard deviations, which quantifies how spread out the distribution is.
 And in Section xxx we computed Pearson’s skewness, which indicates whether a distribution is skewed left or right.
 One drawback of all of these statistics is that they are sensitive to outliers.
@@ -2410,7 +2410,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
 <p>These examples show that percentile-based statistics are less sensitive to outliers and errors in the data.</p>
 </section>
 <section id="random-numbers">
-<h2>Random Numbers<a class="headerlink" href="#random-numbers" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.5. </span>Random Numbers<a class="headerlink" href="#random-numbers" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Cdf</span></code> objects provide an efficient way to generate random numbers from a distribution.
 First we generate random numbers from a uniform distribution between 0 and 1.
 Then we evaluate the inverse CDF at those points.
@@ -2605,7 +2605,7 @@ And that makes sense, because in any distribution, the proportion with percentil
 </div>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.6. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>percentile rank</strong>: The percentage of quantities in a distribution that are less than or equal to a given quantity.</p></li>
 <li><p><strong>percentile</strong>: The quantity associated with a given percentile rank.</p></li>
@@ -2620,9 +2620,9 @@ And that makes sense, because in any distribution, the proportion with percentil
 </ul>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.7. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="exercise">
-<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.7.1. </span>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <p>How much did you weigh at birth? If you don’t know, call your mother or someone else who knows.
 Using the NSFG data (all live births), compute the distribution of birth weights and use it to find your percentile rank.
 If you were a first baby, find your percentile rank in the distribution for first babies.
@@ -2656,7 +2656,7 @@ If you are in the 90th percentile or higher, call your mother back and apologize
 </div>
 </section>
 <section id="id1">
-<h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.7.2. </span>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>For live births in the NSFG dataset, the column <code class="docutils literal notranslate"><span class="pre">babysex</span></code> indicates whether the baby was male or female.
 We can use <code class="docutils literal notranslate"><span class="pre">query</span></code> to select the rows for male and female babies.</p>
 <div class="cell docutils container">
@@ -2694,7 +2694,7 @@ What are the differences in the shape and location of the distributions?</p>
 <p>If a male baby weighs 8.5 pounds, what is his percentile rank? What is the weight of a female baby with the same percentile rank?</p>
 </section>
 <section id="id2">
-<h3>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.7.3. </span>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>From the NSFG dataset pregnancy data, select the <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> column, divide by 100 to convert to and make a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> to represent the distribution of age at conception for each pregnancy.</p>
 <p>Use the CDF to compute the percentage of ages less than or equal to 20, and the percentage less than or equal to 30.</p>
 <p>Use those results to compute the percentage between 20 and 30.</p>
@@ -2726,7 +2726,7 @@ What are the differences in the shape and location of the distributions?</p>
 </div>
 </section>
 <section id="id3">
-<h3>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.7.4. </span>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>Here are the running speeds of the people who finished the James Joyce Ramble, described in Section xxx.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2756,7 +2756,7 @@ What are the differences in the shape and location of the distributions?</p>
 Does the distribution skew to the left or right?</p>
 </section>
 <section id="id4">
-<h3>Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.7.5. </span>Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>The numbers generated by <code class="docutils literal notranslate"><span class="pre">np.random.random</span></code> are supposed to be uniform between 0 and 1, which means that the CDF of a sample should be a straight line.
 Let’s see if that’s true.</p>
 <p>Here’s a sample of 1000 numbers. Plot the CDF of this sample. Does it look like a straight line?</p>
@@ -2824,7 +2824,7 @@ Let’s see if that’s true.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Probability Mass Functions</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Probability Mass Functions</p>
       </div>
     </a>
     <a class="right-next"
@@ -2832,7 +2832,7 @@ Let’s see if that’s true.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Modeling Distributions</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Modeling Distributions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2852,18 +2852,18 @@ Let’s see if that’s true.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentiles-and-percentile-ranks">Percentiles and Percentile Ranks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdfs">CDFs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-cdfs">Comparing CDFs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentile-based-statistics">Percentile-Based Statistics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers">Random Numbers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentiles-and-percentile-ranks">4.1. Percentiles and Percentile Ranks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdfs">4.2. CDFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-cdfs">4.3. Comparing CDFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentile-based-statistics">4.4. Percentile-Based Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers">4.5. Random Numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">4.6. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">4.7. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">4.7.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.7.2. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.7.3. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">4.7.4. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.7.5. Exercise</a></li>
 </ul>
 </li>
 </ul>

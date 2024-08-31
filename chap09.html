@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Hypothesis testing &#8212; Think Stats, 3rd edition</title>
+    <title>9. Hypothesis testing &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap09';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Linear least squares" href="chap10.html" />
-    <link rel="prev" title="Estimation" href="chap08.html" />
+    <link rel="next" title="10. Linear least squares" href="chap10.html" />
+    <link rel="prev" title="8. Estimation" href="chap08.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,21 +175,21 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hypothesis testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">Linear least squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Hypothesis testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Linear least squares</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time series analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">13. Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">14. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">15. Analytic methods</a></li>
 </ul>
 
     </div>
@@ -353,19 +353,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-hypothesis-testing">Classical hypothesis testing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesistest"><code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-difference-in-means">Testing a difference in means</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-test-statistics">Other Test Statistics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-correlation">Testing a correlation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-proportions">Testing proportions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-tests">Chi-squared tests</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">Errors</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power">Power</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replication">Replication</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-babies-again">First babies again</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-hypothesis-testing">9.1. Classical hypothesis testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesistest">9.2. <code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-difference-in-means">9.3. Testing a difference in means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-test-statistics">9.4. Other Test Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-correlation">9.5. Testing a correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-proportions">9.6. Testing proportions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-tests">9.7. Chi-squared tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">9.8. Errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power">9.9. Power</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replication">9.10. Replication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">9.11. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.12. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-babies-again">9.13. First babies again</a></li>
 </ul>
             </nav>
         </div>
@@ -378,7 +378,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="hypothesis-testing">
-<h1>Hypothesis testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">9. </span>Hypothesis testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -504,7 +504,7 @@ document.write(`
             </script></div>
 </div>
 <section id="classical-hypothesis-testing">
-<h2>Classical hypothesis testing<a class="headerlink" href="#classical-hypothesis-testing" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.1. </span>Classical hypothesis testing<a class="headerlink" href="#classical-hypothesis-testing" title="Link to this heading">#</a></h2>
 <p>Exploring the data from the NSFG, we saw several “apparent effects,” including differences between first babies and others.
 So far we have taken these effects at face value; in this chapter, we put them to the test.</p>
 <p>The fundamental question we want to address is whether the effects we see in a sample are likely to appear in the larger population.
@@ -534,7 +534,7 @@ That’s the p-value.
 If the p-value is low, we conclude that the null hypothesis is unlikely to be true.</p>
 </section>
 <section id="hypothesistest">
-<h2><code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code><a class="headerlink" href="#hypothesistest" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.2. </span><code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code><a class="headerlink" href="#hypothesistest" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code> is a class that represents the structure of a classical hypothesis test.
 Here is the definition:</p>
 <div class="cell docutils container">
@@ -1096,7 +1096,7 @@ P-values between 1% and 10% should be considered borderline.
 So in this example I conclude that the data do not provide strong evidence that the coin is biased or not.</p>
 </section>
 <section id="testing-a-difference-in-means">
-<h2>Testing a difference in means<a class="headerlink" href="#testing-a-difference-in-means" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.3. </span>Testing a difference in means<a class="headerlink" href="#testing-a-difference-in-means" title="Link to this heading">#</a></h2>
 <p>One of the most common effects to test is a difference in mean between two groups.
 In the NSFG data, we saw that the mean pregnancy length for first babies is slightly longer, and the mean birth weight is slightly smaller.
 Now we will see if those effects are statistically significant.</p>
@@ -1443,7 +1443,7 @@ So this effect is not statistically significant.</p>
 So we would report <span class="math notranslate nohighlight">\(p &lt; 0.001\)</span>, and conclude that the difference in birth weight is statistically significant.</p>
 </section>
 <section id="other-test-statistics">
-<h2>Other Test Statistics<a class="headerlink" href="#other-test-statistics" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.4. </span>Other Test Statistics<a class="headerlink" href="#other-test-statistics" title="Link to this heading">#</a></h2>
 <p>We can use the same framework to test for a difference in standard deviation.
 In Section <a class="reference internal" href="#visualization"><span class="xref myst">[visualization]</span></a>{reference-type=“ref” reference=“visualization”}, we saw some evidence that first babies are more likely to be early or late, and less likely to be on time.
 So we might hypothesize that the standard deviation is higher.
@@ -1586,7 +1586,7 @@ Here’s how we can test that:</p>
 The p-value is 0.09, which is not statistically significant.</p>
 </section>
 <section id="testing-a-correlation">
-<h2>Testing a correlation<a class="headerlink" href="#testing-a-correlation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.5. </span>Testing a correlation<a class="headerlink" href="#testing-a-correlation" title="Link to this heading">#</a></h2>
 <p>This framework can also test correlations.
 For example, in the NSFG data set, the correlation between birth weight and mother’s age is about 0.07. It seems like older mothers have heavier babies.
 But could this effect be due to chance?</p>
@@ -1867,7 +1867,7 @@ By shuffling the observed values, we can simulate a world where the distribution
 It only means that it is unlikely to have occurred by chance.</p>
 </section>
 <section id="testing-proportions">
-<h2>Testing proportions<a class="headerlink" href="#testing-proportions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.6. </span>Testing proportions<a class="headerlink" href="#testing-proportions" title="Link to this heading">#</a></h2>
 <p>Suppose you run a casino and you suspect that a customer is using a crooked die; that is, one that has been modified to make one of the faces more likely than the others.
 You apprehend the alleged cheater and confiscate the die, but now you have to prove that it is crooked.
 You roll the die 60 times and get the following results:</p>
@@ -2116,7 +2116,7 @@ In this example, we expect each side to come up 10 times out of 60; the deviatio
 </div>
 </section>
 <section id="chi-squared-tests">
-<h2>Chi-squared tests<a class="headerlink" href="#chi-squared-tests" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.7. </span>Chi-squared tests<a class="headerlink" href="#chi-squared-tests" title="Link to this heading">#</a></h2>
 <p>In the previous section we used total deviation as the test statistic.
 But for testing proportions it is more common to use the chi-squared statistic: $<span class="math notranslate nohighlight">\(\chi^2 = \sum_i \frac{(O_i - E_i)^2}{E_i}\)</span><span class="math notranslate nohighlight">\( Where \)</span>O_i<span class="math notranslate nohighlight">\( are the observed frequencies and \)</span>E_i$ are the expected frequencies.
 Here’s the Python code:</p>
@@ -2189,7 +2189,7 @@ I would not rule out the possibility that the die is crooked, but I would not co
 So the apparent effect is not statistically significant.</p>
 </section>
 <section id="errors">
-<h2>Errors<a class="headerlink" href="#errors" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.8. </span>Errors<a class="headerlink" href="#errors" title="Link to this heading">#</a></h2>
 <p>In classical hypothesis testing, an effect is considered statistically significant if the p-value is below some threshold, commonly 5%. This procedure raises two questions:</p>
 <ul class="simple">
 <li><p>If the effect is actually due to chance, what is the probability that we will wrongly consider it significant? This probability is the <strong>false positive rate</strong>.</p></li>
@@ -2207,7 +2207,7 @@ And how often does a value chosen from <span class="math notranslate nohighlight
 <p>So if you perform one hypothesis test with a 5% threshold, you expect a false positive 1 time in 20.</p>
 </section>
 <section id="power">
-<h2>Power<a class="headerlink" href="#power" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.9. </span>Power<a class="headerlink" href="#power" title="Link to this heading">#</a></h2>
 <p>The false negative rate is harder to compute because it depends on the actual effect size, and normally we don’t know that.
 One option is to compute a rate conditioned on a hypothetical effect size.</p>
 <p>For example, if we assume that the observed difference between groups is accurate, we can use the observed samples as a model of the population and run hypothesis tests with simulated data:</p>
@@ -2314,7 +2314,7 @@ As a rule of thumb, a power of 80% is considered acceptable, so we would say tha
 <p>In general, a negative hypothesis test does not imply that there is no difference between the groups; instead, it suggests that if there is a difference, it is too small to detect with this sample size.</p>
 </section>
 <section id="replication">
-<h2>Replication<a class="headerlink" href="#replication" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.10. </span>Replication<a class="headerlink" href="#replication" title="Link to this heading">#</a></h2>
 <p>The hypothesis testing process I demonstrated in this chapter is not, strictly speaking, good practice.</p>
 <p>First, I performed multiple tests.
 If you run one hypothesis test, the chance of a false positive is about 1 in 20, which might be acceptable.
@@ -2341,7 +2341,7 @@ In the new dataset:</p>
 <p>In summary, all of the effects that were statistically significant in the original dataset were replicated in the new dataset, and the difference in pregnancy length, which was not significant in the original, is bigger in the new dataset and significant.</p>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.11. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>hypothesis testing</strong>: The process of determining whether an apparent effect is statistically significant.</p></li>
 <li><p><strong>test statistic</strong>: A statistic used to quantify an effect size.</p></li>
@@ -2359,7 +2359,7 @@ In the new dataset:</p>
 </ul>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.12. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p><strong>Exercise:</strong> As sample size increases, the power of a hypothesis test increases, which means it is more likely detect an effect if there is one.</p>
 <p>To investigate this behavior, run the tests in this chapter with different subsets of the NSFG data.</p>
 <p>To choose a random subset of the data, you can use the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> method <code class="docutils literal notranslate"><span class="pre">sample</span></code> like this:</p>
@@ -2398,7 +2398,7 @@ There are several ways to implement resampling, but one of the simplest is to dr
 How much does the model affect the results?</p>
 </section>
 <section id="first-babies-again">
-<h2>First babies again<a class="headerlink" href="#first-babies-again" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.13. </span>First babies again<a class="headerlink" href="#first-babies-again" title="Link to this heading">#</a></h2>
 <p>Earlier in this chapter we looked at pregnancy lengths for first babies and others, and concluded that the apparent differences in mean and standard deviation are not statistically significant.
 But in Section <a class="reference internal" href="#visualization"><span class="xref myst">[visualization]</span></a>{reference-type=“ref” reference=“visualization”}, we saw several apparent differences in the distribution of pregnancy length, especially in the range from 35 to 43 weeks.
 To see whether those differences are statistically significant, we can use a test based on a chi-squared statistic.</p>
@@ -2564,7 +2564,7 @@ But after 1000 iterations, the largest test statistic generated under the null h
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Estimation</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Estimation</p>
       </div>
     </a>
     <a class="right-next"
@@ -2572,7 +2572,7 @@ But after 1000 iterations, the largest test statistic generated under the null h
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Linear least squares</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Linear least squares</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2592,19 +2592,19 @@ But after 1000 iterations, the largest test statistic generated under the null h
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-hypothesis-testing">Classical hypothesis testing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesistest"><code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-difference-in-means">Testing a difference in means</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-test-statistics">Other Test Statistics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-correlation">Testing a correlation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-proportions">Testing proportions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-tests">Chi-squared tests</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">Errors</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power">Power</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replication">Replication</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-babies-again">First babies again</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-hypothesis-testing">9.1. Classical hypothesis testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesistest">9.2. <code class="docutils literal notranslate"><span class="pre">HypothesisTest</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-difference-in-means">9.3. Testing a difference in means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-test-statistics">9.4. Other Test Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-correlation">9.5. Testing a correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-proportions">9.6. Testing proportions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-tests">9.7. Chi-squared tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">9.8. Errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power">9.9. Power</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replication">9.10. Replication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">9.11. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.12. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-babies-again">9.13. First babies again</a></li>
 </ul>
   </nav></div>
 

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Estimation &#8212; Think Stats, 3rd edition</title>
+    <title>8. Estimation &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap08';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Hypothesis testing" href="chap09.html" />
-    <link rel="prev" title="Relationships between variables" href="chap07.html" />
+    <link rel="next" title="9. Hypothesis testing" href="chap09.html" />
+    <link rel="prev" title="7. Relationships between variables" href="chap07.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -173,21 +173,21 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">Linear least squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Linear least squares</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time series analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">13. Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">14. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">15. Analytic methods</a></li>
 </ul>
 
     </div>
@@ -351,25 +351,25 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighing-penguins">Weighing Penguins</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness">Robustness</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-variance">Estimating Variance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distributions">Sampling Distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-error">Standard Error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence Intervals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-of-error">Sources of Error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighing-penguins">8.1. Weighing Penguins</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness">8.2. Robustness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-variance">8.3. Estimating Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distributions">8.4. Sampling Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-error">8.5. Standard Error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">8.6. Confidence Intervals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-of-error">8.7. Sources of Error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">8.8. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">8.9. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">8.9.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.9.2. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.10. Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">8.10.1. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.11. Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">8.11.1. Exercise</a></li>
 </ul>
 </li>
 </ul>
@@ -384,7 +384,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="estimation">
-<h1>Estimation<a class="headerlink" href="#estimation" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">8. </span>Estimation<a class="headerlink" href="#estimation" title="Link to this heading">#</a></h1>
 <p>Suppose you live in a town with a population of 10,000 people, and you want to predict who will win an upcoming election for mayor.
 In theory, you could ask everyone in town who they plan to vote for, and if they all answered honestly, you could make a reliable prediction.</p>
 <p>But even in a small town, it is probably not practical to survey the entire population.
@@ -501,7 +501,7 @@ This process – using a sample to make inferences about a population – is cal
 </details>
 </div>
 <section id="weighing-penguins">
-<h2>Weighing Penguins<a class="headerlink" href="#weighing-penguins" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.1. </span>Weighing Penguins<a class="headerlink" href="#weighing-penguins" title="Link to this heading">#</a></h2>
 <p>Suppose you are a researcher in Antarctica, studying local populations of penguins.
 One of your tasks is to monitor the average weight of the penguins as it varies over the course of the year.
 It would be impractical to weigh every penguin in the environment, so your plan is to collect a random sample of 10 penguins each week, weigh them, and use the sample to estimate the mean of the entire population – which is called the <strong>population mean</strong>.</p>
@@ -1004,7 +1004,7 @@ The following function computes MAE for a sequence of estimates.</p>
 So the sample mean is probably the better choice, at least for this example.</p>
 </section>
 <section id="robustness">
-<h2>Robustness<a class="headerlink" href="#robustness" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.2. </span>Robustness<a class="headerlink" href="#robustness" title="Link to this heading">#</a></h2>
 <p>Now let’s consider a different scenario.
 Suppose that 2% of the time, when you try to weigh a penguin, it accidentally presses the units button on the scale and the weight gets recorded in pounds instead of kilograms.
 Assuming that the error goes unnoticed, it introduces an outlier in the sample.</p>
@@ -1189,7 +1189,7 @@ The sample median is less sensitive to outliers than the sample mean, so it is l
 Estimators that deal well with outliers – and similar violations of assumptions – are said to be <strong>robust</strong>.</p>
 </section>
 <section id="estimating-variance">
-<h2>Estimating Variance<a class="headerlink" href="#estimating-variance" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.3. </span>Estimating Variance<a class="headerlink" href="#estimating-variance" title="Link to this heading">#</a></h2>
 <p>As another example, suppose we want to estimate variance in the penguin’s weights.
 In Section XXX, we saw that there are two ways to compute the variance of a sample.
 I promised to explain the difference later – and later is now.</p>
@@ -1400,7 +1400,7 @@ With sample size 100, the difference is only 1%, which is small enough that is p
 </div>
 </section>
 <section id="sampling-distributions">
-<h2>Sampling Distributions<a class="headerlink" href="#sampling-distributions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.4. </span>Sampling Distributions<a class="headerlink" href="#sampling-distributions" title="Link to this heading">#</a></h2>
 <p>The section introduces an important idea in statistical inference, the sampling distribution.
 To demonstrate, we’ll use a sample of penguin weights.
 So let’s start with the data.</p>
@@ -1706,7 +1706,7 @@ It shows how much we expect the sample mean to vary if we collect many samples o
 <p>Informally, we can see that the sample mean could be as low as 3.55, if we collected another sample, or as high as 3.9.</p>
 </section>
 <section id="standard-error">
-<h2>Standard Error<a class="headerlink" href="#standard-error" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.5. </span>Standard Error<a class="headerlink" href="#standard-error" title="Link to this heading">#</a></h2>
 <p>To quantify the width of the sampling distribution, one option is to compute its standard deviation – the result is called the <strong>standard error</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2029,7 +2029,7 @@ If we know the standard deviation and sample size, we can approximate the standa
 <p>These results are close to what we got by resampling.</p>
 </section>
 <section id="confidence-intervals">
-<h2>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.6. </span>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Link to this heading">#</a></h2>
 <p>Another way to summarize the sampling distribution is to compute a <strong>condfidence interval</strong>.
 For example, a 90% confidence interval contains 90% of the values in the sampling distribution, which we can find by computing the 5th and 95th percentiles.
 Here’s the 90% confidence interval for the average weight of chinstrap penguins.</p>
@@ -2099,7 +2099,7 @@ Under reasonable philosophies of probability, a confidence interval means what p
 The sampling distribution does not account for other sources of error, notably sampling bias and measurement error, which are the topics of the next section.</p>
 </section>
 <section id="sources-of-error">
-<h2>Sources of Error<a class="headerlink" href="#sources-of-error" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.7. </span>Sources of Error<a class="headerlink" href="#sources-of-error" title="Link to this heading">#</a></h2>
 <p>Suppose that instead of the average weight of penguins in Antarctica, you want to know the average weight of women in the city where you live.
 You can’t randomly choose a representative sample of women and weigh them.</p>
 <p>A simple alternative would be “telephone sampling” – that is, you could choose random numbers from the phone book, call and ask to speak to an adult woman, and ask how much she weighs.</p>
@@ -2119,7 +2119,7 @@ These inaccuracies are examples of <strong>measurement error</strong>.</p>
 But remember that sampling error is only one source of error, and often it is not the biggest.</p>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.8. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>estimation</strong>: The process of inferring the parameters of a distribution from a sample.</p></li>
 <li><p><strong>estimator</strong>: A statistic used to estimate a parameter.</p></li>
@@ -2136,9 +2136,9 @@ But remember that sampling error is only one source of error, and often it is no
 </ul>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.9. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="exercise">
-<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.9.1. </span>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <p>One of the strengths of resampling methods is that they are easy to extend to other statistics.
 In this chapter, we computed the sample mean of penguin weights and then used resampling to approximate the sampling distribution of the mean.</p>
 <p>As an exercise, compute the sample standard deviation of weights for chinstrap penguins.
@@ -2146,7 +2146,7 @@ Then use <code class="docutils literal notranslate"><span class="pre">resample</
 Use the sampling distribution to compute the standard error of the estimate and a 90% confidence interval.</p>
 </section>
 <section id="id1">
-<h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.9.2. </span>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>The Behavioral Risk Factor Surveillance System (BRFSS) dataset includes self-reported heights and weights for a sample of adults in the United States.
 Use this data to estimate the average height of male adults.
 Use resample to approximate the sampling distribution and compute a 90% confidence interval.</p>
@@ -2244,7 +2244,7 @@ Name: htm3, dtype: float64
 </section>
 </section>
 <section id="id2">
-<h2>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.10. </span>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>In games like soccer and hockey, the time between goals tends to follow an exponential distribution (as we saw in Section xxx).
 Suppose we observe a sample of times between goals.
 If we assume that the sample came from an exponential distribution, how can we estimate the actual mean of the distribution?
@@ -2336,7 +2336,7 @@ Here’s how you can compute the actual median of an exponential distribution wi
 <p>Next, generate many samples with size 10 and check whether the sample mean is an unbiased estimator of the actual mean.</p>
 <p>Finally, check whether the sample median is an unbiased estimator of the actual median.</p>
 <section id="id3">
-<h3>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.10.1. </span>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>In Section xxx we tested a biased estimator of variance and showed that it is, in fact, biased.
 And we showed that the unbiased estimator is unbiased.
 Now let’s try standard deviation.</p>
@@ -2431,7 +2431,7 @@ Check whether either of these is an unbiased estimator of standard deviation.</p
 </section>
 </section>
 <section id="id4">
-<h2>Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.11. </span>Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>The exercise is based on the German tank problem, which a simplified version of an actual analysis performed by the Economic Warfare Division of the American Embassy in London during World War II.</p>
 <p>Suppose you are an Allied spy and your job is to estimate how many tanks the Germans have built.
 As data, you have serial numbers recovered from <code class="docutils literal notranslate"><span class="pre">k</span></code> captured tanks.</p>
@@ -2600,7 +2600,7 @@ As data, you have serial numbers recovered from <code class="docutils literal no
 <p>For more on this problem, see [this Wikipedia page][<a class="reference external" href="https://en.wikipedia.org/wiki/German_tank_problem">https://en.wikipedia.org/wiki/German_tank_problem</a>] and Ruggles and Brodie, “An Empirical Approach to Economic Intelligence in World War II”, Journal of the American Statistical Association, March 1947, available <a class="reference external" href="https://web.archive.org/web/20170123132042/https://www.cia.gov/library/readingroom/docs/CIA-RDP79R01001A001300010013-3.pdf">here</a>.</p>
 <p>For an explanation of how this estimator works, you might like <a class="reference external" href="https://www.youtube.com/watch?v=WLCwMRJBhuI">this video</a>.</p>
 <section id="id5">
-<h3>Exercise<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.11.1. </span>Exercise<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p>In several sports – especially basketball – many players and fans believe in a phenomenon called the “hot hand”, which implies that a player who has hit several consecutive shots is more likely to hit the next, and a player who has missed several times is more likely to miss.</p>
 <p>A famous paper proposed a way to test whether the hot hand is real or a statistical illusion, by looking at sequences of hits and misses from professional basketball games.
 For each player, the authors computed the overall probability of making a shot, and the conditional probability of making a shot after three consecutive hits.
@@ -2744,7 +2744,7 @@ For an overview of the topic and an explanation of the error, <a class="referenc
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Relationships between variables</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Relationships between variables</p>
       </div>
     </a>
     <a class="right-next"
@@ -2752,7 +2752,7 @@ For an overview of the topic and an explanation of the error, <a class="referenc
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Hypothesis testing</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Hypothesis testing</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2772,25 +2772,25 @@ For an overview of the topic and an explanation of the error, <a class="referenc
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighing-penguins">Weighing Penguins</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness">Robustness</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-variance">Estimating Variance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distributions">Sampling Distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-error">Standard Error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence Intervals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-of-error">Sources of Error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighing-penguins">8.1. Weighing Penguins</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness">8.2. Robustness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-variance">8.3. Estimating Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distributions">8.4. Sampling Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-error">8.5. Standard Error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">8.6. Confidence Intervals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-of-error">8.7. Sources of Error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">8.8. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">8.9. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">8.9.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.9.2. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.10. Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">8.10.1. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.11. Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">8.11.1. Exercise</a></li>
 </ul>
 </li>
 </ul>

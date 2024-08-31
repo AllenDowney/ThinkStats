@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Regression &#8212; Think Stats, 3rd edition</title>
+    <title>12. Regression &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap11';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Time series analysis" href="chap12.html" />
-    <link rel="prev" title="Linear least squares" href="chap10.html" />
+    <link rel="next" title="13. Time series analysis" href="chap12.html" />
+    <link rel="prev" title="10. Linear least squares" href="chap10.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,21 +175,21 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">Linear least squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Linear least squares</a></li>
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time series analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic methods</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">13. Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">14. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">15. Analytic methods</a></li>
 </ul>
 
     </div>
@@ -353,17 +353,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">StatsModels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression">Multiple regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-relationships">Nonlinear relationships</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-mining">Data mining</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">Prediction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-parameters">Estimating parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">12.1. StatsModels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression">12.2. Multiple regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-relationships">12.3. Nonlinear relationships</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-mining">12.4. Data mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">12.5. Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">12.6. Logistic regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-parameters">12.7. Estimating parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">12.8. Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">12.9. Accuracy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">12.10. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">12.11. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -376,7 +376,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="regression">
-<h1>Regression<a class="headerlink" href="#regression" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">12. </span>Regression<a class="headerlink" href="#regression" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -464,7 +464,7 @@ This process is called <strong>ordinary least squares</strong>.
 The computation is similar to <code class="docutils literal notranslate"><span class="pre">thinkstats2.LeastSquare</span></code>, but generalized to deal with more than one explanatory variable.
 You can find the details at <a class="reference external" href="https://en.wikipedia.org/wiki/Ordinary_least_squares">https://en.wikipedia.org/wiki/Ordinary_least_squares</a></p>
 <section id="statsmodels">
-<h2>StatsModels<a class="headerlink" href="#statsmodels" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.1. </span>StatsModels<a class="headerlink" href="#statsmodels" title="Link to this heading">#</a></h2>
 <p>In the previous chapter I presented <code class="docutils literal notranslate"><span class="pre">thinkstats2.LeastSquares</span></code>, an implementation of simple linear regression intended to be easy to read.
 For multiple regression we’ll switch to StatsModels, a Python package that provides several forms of regression and other analyses.
 If you are using Anaconda, you already have StatsModels; otherwise you might have to install it.</p>
@@ -763,7 +763,7 @@ Std(res) 1.405
 As we have already seen, knowing the mother’s age provides no substantial improvement to the predictions.</p>
 </section>
 <section id="multiple-regression">
-<h2>Multiple regression<a class="headerlink" href="#multiple-regression" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.2. </span>Multiple regression<a class="headerlink" href="#multiple-regression" title="Link to this heading">#</a></h2>
 <p>We’ve seen that first babies tend to be lighter than others, and this effect is statistically significant.
 But it is a strange result because there is no obvious mechanism that would cause first babies to be lighter.
 So we might wonder whether this relationship is <strong>spurious</strong>.</p>
@@ -1033,7 +1033,7 @@ And the p-value for <code class="docutils literal notranslate"><span class="pre"
 <p><span class="math notranslate nohighlight">\(R^2\)</span> for this model is a little higher, which indicates that the two variables together account for more variation in birth weight than either alone (but not by much).</p>
 </section>
 <section id="nonlinear-relationships">
-<h2>Nonlinear relationships<a class="headerlink" href="#nonlinear-relationships" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.3. </span>Nonlinear relationships<a class="headerlink" href="#nonlinear-relationships" title="Link to this heading">#</a></h2>
 <p>Remembering that the contribution of <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> might be nonlinear, we might consider adding a variable to capture more of this relationship.
 One option is to create a column, <code class="docutils literal notranslate"><span class="pre">agepreg2</span></code>, that contains the squares of the ages:</p>
 <div class="cell docutils container">
@@ -1109,7 +1109,7 @@ When we include mother’s age in the model, the effect of <code class="docutils
 <p>In this example, mother’s age acts as a <strong>control variable</strong>; including <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> in the model “controls for” the difference in age between first-time mothers and others, making it possible to isolate the effect (if any) of <code class="docutils literal notranslate"><span class="pre">isfirst</span></code>.</p>
 </section>
 <section id="data-mining">
-<h2>Data mining<a class="headerlink" href="#data-mining" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.4. </span>Data mining<a class="headerlink" href="#data-mining" title="Link to this heading">#</a></h2>
 <p>So far we have used regression models for explanation; for example, in the previous section we discovered that an apparent difference in birth weight is actually due to a difference in mother’s age.
 But the <span class="math notranslate nohighlight">\(R^2\)</span> values of those models is very low, which means that they have little predictive power.
 In this section we’ll try to do better.</p>
@@ -1361,7 +1361,7 @@ As a result, we might overlook some variables that would be useful if they were 
 But maybe we will find some good candidates.</p>
 </section>
 <section id="prediction">
-<h2>Prediction<a class="headerlink" href="#prediction" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.5. </span>Prediction<a class="headerlink" href="#prediction" title="Link to this heading">#</a></h2>
 <p>The next step is to sort the results and select the variables that yield the highest values of <span class="math notranslate nohighlight">\(R^2\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1593,7 +1593,7 @@ RMSE without using the model is 1.27 lbs; with the model it drops to 1.23. So yo
 Sorry!</p>
 </section>
 <section id="logistic-regression">
-<h2>Logistic regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.6. </span>Logistic regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h2>
 <p>In the previous examples, some of the explanatory variables were numerical and some categorical (including boolean).
 But the dependent variable was always numerical.</p>
 <p>Linear regression can be generalized to handle other kinds of dependent variables.
@@ -1710,7 +1710,7 @@ We can compute the predicted value of <span class="math notranslate nohighlight"
 But how do we estimate the parameters?</p>
 </section>
 <section id="estimating-parameters">
-<h2>Estimating parameters<a class="headerlink" href="#estimating-parameters" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.7. </span>Estimating parameters<a class="headerlink" href="#estimating-parameters" title="Link to this heading">#</a></h2>
 <p>Unlike linear regression, logistic regression does not have a closed form solution, so it is solved by guessing an initial solution and improving it iteratively.</p>
 <p>The usual goal is to find the maximum-likelihood estimate (MLE), which is the set of parameters that maximizes the likelihood of the data.
 For example, suppose we have the following data:</p>
@@ -1903,7 +1903,7 @@ For example, if we think the probability of a boy is 0.8 and the outcome is a bo
 To do that, most statistics packages use an iterative solver like Newton’s method (see <a class="reference external" href="https://en.wikipedia.org/wiki/Logistic_regression#Model_fitting">https://en.wikipedia.org/wiki/Logistic_regression#Model_fitting</a>).</p>
 </section>
 <section id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.8. </span>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
 <p>StatsModels provides an implementation of logistic regression called <code class="docutils literal notranslate"><span class="pre">logit</span></code>, named for the function that converts from probability to log odds.
 To demonstrate its use, I’ll look for variables that affect the sex ratio.</p>
 <p>Again, I load the NSFG data and select pregnancies longer than 30 weeks:</p>
@@ -2099,7 +2099,7 @@ R^2 0.000144
 The pseudo-<span class="math notranslate nohighlight">\(R^2\)</span> value is a little higher, but that could be due to chance.</p>
 </section>
 <section id="accuracy">
-<h2>Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.9. </span>Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h2>
 <p>In the office pool scenario, we are most interested in the accuracy of the model: the number of successful predictions, compared with what we would expect by chance.</p>
 <p>In the NSFG data, there are more boys than girls, so the baseline strategy is to guess “boy” every time.</p>
 <p>The model contains attributes called <code class="docutils literal notranslate"><span class="pre">endog</span></code> and <code class="docutils literal notranslate"><span class="pre">exog</span></code> that contain the <strong>endogenous variable</strong>, another name for the dependent variable, and the <strong>exogenous variables</strong>, another name for the explanatory variables.
@@ -2339,7 +2339,7 @@ Suppose your friend is 35 years old and white, her husband is 39, and they are e
 The result in this case is 0.52, so you should guess “boy.” But if the model improves your chances of winning, the difference is very small.</p>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.10. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>regression</strong>: One of several related processes for estimating parameters that fit a model to data.</p></li>
 <li><p><strong>dependent variables</strong>: The variables in a regression model we would like to predict.
@@ -2362,7 +2362,7 @@ Also known as independent, or exogenous, variables.</p></li>
 </ul>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.11. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p><strong>Exercise:</strong> Suppose one of your co-workers is expecting a baby and you are participating in an office pool to predict the date of birth.
 Assuming that bets are placed during the 30th week of pregnancy, what variables could you use to make the best prediction? You should limit yourself to variables that are known before the birth, and likely to be available to the people in the pool.</p>
 <div class="cell docutils container">
@@ -2484,7 +2484,7 @@ What is the probability that she is married, cohabitating, etc?</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Linear least squares</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Linear least squares</p>
       </div>
     </a>
     <a class="right-next"
@@ -2492,7 +2492,7 @@ What is the probability that she is married, cohabitating, etc?</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Time series analysis</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Time series analysis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2512,17 +2512,17 @@ What is the probability that she is married, cohabitating, etc?</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">StatsModels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression">Multiple regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-relationships">Nonlinear relationships</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-mining">Data mining</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">Prediction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-parameters">Estimating parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">12.1. StatsModels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression">12.2. Multiple regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-relationships">12.3. Nonlinear relationships</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-mining">12.4. Data mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">12.5. Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">12.6. Logistic regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-parameters">12.7. Estimating parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">12.8. Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">12.9. Accuracy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">12.10. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">12.11. Exercises</a></li>
 </ul>
   </nav></div>
 
