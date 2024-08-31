@@ -60,8 +60,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap00';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Exploratory data analysis" href="chap01.html" />
-    <link rel="prev" title="Think Stats, 3rd edition" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +122,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -171,8 +171,8 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Preface</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
@@ -351,6 +351,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-new">What’s New?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-code">Using the code</a></li>
 </ul>
             </nav>
@@ -396,41 +397,51 @@ It uses data from two sources:</p>
 <li><p>The Behavioral Risk Factor Surveillance System (BRFSS), conducted by the National Center for Chronic Disease Prevention and Health Promotion to “track health conditions and risk behaviors in the United States.” (See <a class="reference external" href="http://cdc.gov/BRFSS/">http://cdc.gov/BRFSS/</a>.)</p></li>
 </ul>
 <p>Other examples use data from the IRS, the U.S. Census, and the Boston Marathon.</p>
-<p>This third edition of <em>Think Stats</em> … WHAT’s NEW…</p>
+<p>TODO: Inventory of data sources in the new edition.</p>
+<section id="whats-new">
+<h2>What’s New?<a class="headerlink" href="#whats-new" title="Link to this heading">#</a></h2>
+<p>For this third edition, I started by moving the book into Jupyter notebooks.
+This change has one immediate benefit – you can read the text, run the code, and work on exercises all in one place.
+And the notebooks are designed to work on Google Colab, so you can get started without installing anything.</p>
+<p>The move to notebooks has another benefit – the code is more visible.
+In the first two editions, some of the code was in the book and some was in supporting files.
+In retrospect, it’s clear that splitting the material in this way was not ideal, and it made the code more complicated than it needed to be.
+In the third edition, I was able to simplify the code and make it more readable.</p>
+<p>Since the last edition was published, I’ve developed a library called <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code> that provides objects that represent statistical distributions.
+This library is more mature now, so the updated code makes better use of it.</p>
+<p>The third edition covers the same topics, in almost the same order, but the text is substantially revised.
+Some of the examples are new; others are updated with new data.
+I’ve developed new exercises, revised some of the old ones, and removed a few.
+I think the updated exercises are better connected to the examples, and more interesting.</p>
+<p>Overall, I think these changes make <em>Think Stats</em> a better book.
+I hope you like it!</p>
+</section>
 <section id="using-the-code">
 <h2>Using the code<a class="headerlink" href="#using-the-code" title="Link to this heading">#</a></h2>
-<p>The code and data used in this book are available from <a class="github reference external" href="https://github.com/AllenDowney/ThinkStats">AllenDowney/ThinkStats</a>.
-Git is a version control system that allows you to keep track of the files that make up a project.
+<p>The code and data used in this book are available from <a class="github reference external" href="https://github.com/AllenDowney/ThinkStats">AllenDowney/ThinkStats</a>, which is a Git repository on GitHub.
+Git is a version control system that helps to keep track of the files that make up a project.
 A collection of files under Git’s control is called a <strong>repository</strong>.
 GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.</p>
-<p>All of the code is written to work in both Python 2 and Python 3 with no translation.
-I developed this book using Anaconda from Continuum Analytics, which is a free Python distribution that includes all the packages you’ll need to run the code (and lots more).
-I found Anaconda easy to install.
-By default it does a user-level installation, not system-level, so you don’t need administrative privileges.
-And it supports both Python 2 and Python 3.
-You can download Anaconda from <a class="reference external" href="http://continuum.io/downloads">http://continuum.io/downloads</a>.</p>
-<p>If you don’t want to use Anaconda, you will need the following packages:</p>
-<ul class="simple">
-<li><p>Pandas for representing and analyzing data, <a class="reference external" href="http://Pandas.pydata.org/">http://Pandas.pydata.org/</a>;</p></li>
-<li><p>NumPy for basic numerical computation, <a class="reference external" href="http://www.numpy.org/">http://www.numpy.org/</a>;</p></li>
-<li><p>SciPy for scientific computation including statistics, <a class="reference external" href="http://www.scipy.org/">http://www.scipy.org/</a>;</p></li>
-<li><p>StatsModels for regression and other statistical analysis, <a class="reference external" href="http://statsmodels.sourceforge.net/">http://statsmodels.sourceforge.net/</a>; and</p></li>
-<li><p>Matplotlib for visualization, <a class="reference external" href="http://matplotlib.org/">http://matplotlib.org/</a>.</p></li>
-</ul>
-<p>Although these are commonly used packages, they are not included with all Python installations, and they can be hard to install in some environments.
-If you have trouble installing them, I strongly recommend using Anaconda or one of the other Python distributions that include these packages.
-After you clone the repository or unzip the zip file, you should have a folder called <code class="docutils literal notranslate"><span class="pre">ThinkStats2/code</span></code> with a file called <a class="reference external" href="http://nsfg.py">nsfg.py</a>.
-If you run <a class="reference external" href="http://nsfg.py">nsfg.py</a>, it should read a data file, run some tests, and print a message like, “All tests passed.” If you get import errors, it probably means there are packages you need to install.</p>
-<p>All chapters are available in Jupyter notebooks.
-If you have not used Jupyter notebook before, I suggest you start with the documentation at &lt;<a class="reference external" href="http://ipython.org/ipython-doc/stable">http://ipython.org/ipython-doc/stable</a>
-otebook
-otebook.html&gt;.
-I wrote this book assuming that the reader is familiar with core Python, including object-oriented features, but not Pandas, NumPy, and SciPy.
-If you are already familiar with these modules, you can skip a few sections.
+<p>For each chapter in this book, the repository provides a Jupyter notebook, which is a document that contains the text, code, and the results of running the code.
+You can use these notebooks to run the code and work on the exercises.</p>
+<p>There are two ways you can run the notebooks.
+By far the easier one is to use Colab, which is a service provided by Google where you can run the notebooks in a web browser without installing anything on your computer.
+If you start from the <em>Think Stats</em> home page at <a class="reference external" href="https://allendowney.github.io/ThinkStats/">https://allendowney.github.io/ThinkStats/</a>, you will find links to the notebooks, including one that introduces Colab and Jupyter notebooks.</p>
+<p>TODO: Add the Jupyter intro notebook to the repo.</p>
+<p>If you don’t want to use Colab, you can download the notebooks and run them on your computer, but in that case you will have to install Python, Jupyter, and the libraries the book uses, including NumPy, SciPy, and StatsModels.
+If you have experience installing software, setting up an environment where you can run the notebooks is not difficult.
+But if you don’t have that experience, your first attempt can be challenging, and sometimes frustrating.
+In that case, it can be a barrier to getting the most out of this book.
+If you want to learn about exploratory data analysis in Python, you don’t want to spend your time and cognitive capacity on installing software!</p>
+<p>I strongly recommend that you run at least the first few chapters on Colab.
+Then, if you want to set up your own environment, you can do it without interrupting your progress in the book.
+And one last suggestion: if have any problems installing software, take advantage of tools like ChatGPT – they generally provide good guidance on these topics.</p>
+<p>I wrote this book assuming that the reader is familiar with core Python, including object-oriented features.
+If you are familiar with NumPy and Pandas, that will help, but it’s not necessary – I’ll explain what you need to know.
 I assume that the reader knows basic mathematics, including logarithms, for example, and summations.
-I refer to calculus concepts in a few places, but you don’t have to do any calculus.
-If you have never studied statistics, I think this book is a good place to start.
-And if you have taken a traditional statistics class, I hope this book will help repair the damage.</p>
+You don’t need to know linear algebra or calculus.
+There is one place where I mention derivatives and integrals, but if you are not familiar with those concepts, they are entirely optional.
+Finally, I don’t assume you know anything about statistics.</p>
 </section>
 </section>
 
@@ -464,24 +475,6 @@ And if you have taken a traditional statistics class, I hope this book will help
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="index.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Think Stats, 3rd edition</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="chap01.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Exploratory data analysis</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -498,6 +491,7 @@ And if you have taken a traditional statistics class, I hope this book will help
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-new">What’s New?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-code">Using the code</a></li>
 </ul>
   </nav></div>

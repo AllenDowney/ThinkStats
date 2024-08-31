@@ -171,8 +171,8 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
@@ -388,10 +388,11 @@ document.write(`
 <p>Suppose you live in a town with a population of 10,000 people, and you want to predict who will win an upcoming election for mayor.
 In theory, you could ask everyone in town who they plan to vote for, and if they all answered honestly, you could make a reliable prediction.</p>
 <p>But even in a small town, it is probably not practical to survey the entire population.
-Fortunately, is it not necessary – if you survey a random subset of the people, you can use this sample to infer the voting preferences of the population.
+Fortunately, is it not necessary.
+If you survey a random subset of the people, you can use the sample to infer the voting preferences of the population.
 This process – using a sample to make inferences about a population – is called statistical inference.</p>
 <p>Two steps of statistical inference are estimation, which is the topic of this chapter, and hypothesis testing, which is the topic of the next chapter.</p>
-<div class="cell tag_hide-cell docutils container">
+<div class="cell tag_remove-print tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell content</span>
@@ -433,7 +434,44 @@ This process – using a sample to make inferences about a population – is cal
             </script></div>
 </details>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_remove-print tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">statadict</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>statadict
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_remove-print tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">empiricaldist</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>empiricaldist
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_remove-print tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -460,6 +498,7 @@ This process – using a sample to make inferences about a population – is cal
                 }
             }, 500);
             </script></div>
+</details>
 </div>
 <section id="weighing-penguins">
 <h2>Weighing Penguins<a class="headerlink" href="#weighing-penguins" title="Link to this heading">#</a></h2>
@@ -1487,6 +1526,7 @@ Name: count, dtype: int64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_kde</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot an estimated PDF.&quot;&quot;&quot;</span>
+    
     <span class="n">kde</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.3&quot;</span><span class="p">)</span>
@@ -2557,34 +2597,6 @@ As data, you have serial numbers recovered from <code class="docutils literal no
             </script></div>
 </div>
 <p>Check whether this estimator is biased.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="n">estimate_tanks</span><span class="p">(</span><span class="n">sample_tanks</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
-<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>121.72996700329966
-</pre></div>
-</div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 90;
-                var nbb_unformatted_code = "t = [estimate_tanks(sample_tanks(5)) for i in range(10001)]\nnp.mean(t)";
-                var nbb_formatted_code = "t = [estimate_tanks(sample_tanks(5)) for i in range(10001)]\nnp.mean(t)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
 <p>For more on this problem, see [this Wikipedia page][<a class="reference external" href="https://en.wikipedia.org/wiki/German_tank_problem">https://en.wikipedia.org/wiki/German_tank_problem</a>] and Ruggles and Brodie, “An Empirical Approach to Economic Intelligence in World War II”, Journal of the American Statistical Association, March 1947, available <a class="reference external" href="https://web.archive.org/web/20170123132042/https://www.cia.gov/library/readingroom/docs/CIA-RDP79R01001A001300010013-3.pdf">here</a>.</p>
 <p>For an explanation of how this estimator works, you might like <a class="reference external" href="https://www.youtube.com/watch?v=WLCwMRJBhuI">this video</a>.</p>
 <section id="id5">
@@ -2604,6 +2616,7 @@ We’ll use the following function to generate a sequence of 0s and 1s with prob
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_hits_and_misses</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a sequence of 0s and 1s.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2686,37 +2699,6 @@ Compute the percentage of these shots that are hits.
 Hint: if the sequence does not contain three consecutive hits, the function returns an empty sequence, so your code will have to handle that.</p>
 <p>If you run this simulation many times, what is the average percentage of hits?
 How does this result vary as you increase or decrease the length of the sequence.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># When n is 100, the conditional probability is about 0.46, substantially</span>
-<span class="c1"># lower than 0.5</span>
-
-<span class="c1"># When n is smaller, the conditional probability is even lower.</span>
-
-<span class="c1"># As n increases, it eventually converges to 0.5.</span>
-
-<span class="c1"># So this statistic is consistent, but it is biased.</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 97;
-                var nbb_unformatted_code = "# When n is 100, the conditional probability is about 0.46, substantially\n# lower than 0.5\n\n# When n is smaller, the conditional probability is even lower.\n\n# As n increases, it eventually converges to 0.5.\n\n# So this statistic is consistent, but it is biased.";
-                var nbb_formatted_code = "# When n is 100, the conditional probability is about 0.46, substantially\n# lower than 0.5\n\n# When n is smaller, the conditional probability is even lower.\n\n# As n increases, it eventually converges to 0.5.\n\n# So this statistic is consistent, but it is biased.";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
 <p>The famous paper is Gilovich, T., Vallone, R., &amp; Tversky, A. (1985). The hot hand in basketball: On the misperception of random sequences. <em>Cognitive psychology</em>, 17(3), 295-314.</p>
 <p>The paper showing the statistical error is Miller, J. B., &amp; Sanjurjo, A. (2018). Surprised by the hot hand fallacy? A truth in the law of small numbers. <em>Econometrica</em>, 86(6), 2019-2047.</p>
 <p>The first paper is <a class="reference external" href="https://www.joelvelasco.net/teaching/122/Gilo.Vallone.Tversky.pdf">available here</a>.

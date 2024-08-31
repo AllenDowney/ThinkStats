@@ -173,8 +173,8 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory data analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
@@ -1019,6 +1019,12 @@ It evaluates the normal PDF at equally-spaced quantities between <code class="do
 
 
 <span class="k">def</span> <span class="nf">area_under</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the area under a PDF.</span>
+<span class="sd">    </span>
+<span class="sd">    pdf: Pdf object</span>
+<span class="sd">    low: low end of the interval</span>
+<span class="sd">    high: high end of the interval</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">qs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="mi">501</span><span class="p">)</span>
     <span class="n">ps</span> <span class="o">=</span> <span class="n">pdf</span><span class="p">(</span><span class="n">qs</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">simpson</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">ps</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">qs</span><span class="p">)</span>
