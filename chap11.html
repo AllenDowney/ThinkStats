@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>12. Regression &#8212; Think Stats, 3rd edition</title>
+    <title>12. Multiple Regression &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="13. Time series analysis" href="chap12.html" />
-    <link rel="prev" title="10. Linear least squares" href="chap10.html" />
+    <link rel="prev" title="10. Simple Regression" href="chap10.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -183,13 +183,17 @@
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Linear least squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Simple Regression</a></li>
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Regression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Multiple Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">13. Time series analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap13.html">14. Survival analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap14.html">15. Analytic methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ripoff_etf.html">Rip-off ETF?</a></li>
 </ul>
 
     </div>
@@ -343,7 +347,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Regression</h1>
+    <h1>Multiple Regression</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -354,7 +358,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">12.1. StatsModels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression">12.2. Multiple regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">12.2. Multiple regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-relationships">12.3. Nonlinear relationships</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-mining">12.4. Data mining</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">12.5. Prediction</a></li>
@@ -375,8 +379,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="regression">
-<h1><span class="section-number">12. </span>Regression<a class="headerlink" href="#regression" title="Link to this heading">#</a></h1>
+  <section id="multiple-regression">
+<h1><span class="section-number">12. </span>Multiple Regression<a class="headerlink" href="#multiple-regression" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -762,8 +766,8 @@ Std(res) 1.405
 <code class="docutils literal notranslate"><span class="pre">Std(res)</span></code> is the standard deviation of the residuals, which is the RMSE if your guesses are informed by the mother’s age.
 As we have already seen, knowing the mother’s age provides no substantial improvement to the predictions.</p>
 </section>
-<section id="multiple-regression">
-<h2><span class="section-number">12.2. </span>Multiple regression<a class="headerlink" href="#multiple-regression" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h2><span class="section-number">12.2. </span>Multiple regression<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>We’ve seen that first babies tend to be lighter than others, and this effect is statistically significant.
 But it is a strange result because there is no obvious mechanism that would cause first babies to be lighter.
 So we might wonder whether this relationship is <strong>spurious</strong>.</p>
@@ -2484,7 +2488,7 @@ What is the probability that she is married, cohabitating, etc?</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Linear least squares</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Simple Regression</p>
       </div>
     </a>
     <a class="right-next"
@@ -2513,7 +2517,7 @@ What is the probability that she is married, cohabitating, etc?</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">12.1. StatsModels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression">12.2. Multiple regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">12.2. Multiple regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-relationships">12.3. Nonlinear relationships</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-mining">12.4. Data mining</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">12.5. Prediction</a></li>

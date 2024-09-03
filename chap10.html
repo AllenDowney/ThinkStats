@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>10. Linear least squares &#8212; Think Stats, 3rd edition</title>
+    <title>10. Simple Regression &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap10';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="12. Regression" href="chap11.html" />
-    <link rel="prev" title="9. Hypothesis testing" href="chap09.html" />
+    <link rel="next" title="12. Multiple Regression" href="chap11.html" />
+    <link rel="prev" title="9. Hypothesis Testing" href="chap09.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -183,13 +183,17 @@
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis testing</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Linear least squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Simple Regression</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Multiple Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">13. Time series analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap13.html">14. Survival analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap14.html">15. Analytic methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ripoff_etf.html">Rip-off ETF?</a></li>
 </ul>
 
     </div>
@@ -343,7 +347,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Linear least squares</h1>
+    <h1>Simple Regression</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -353,7 +357,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">10. Linear least squares</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">10. Simple Regression</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-fit">10.1. Least squares fit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">10.2. Implementation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals">10.3. Residuals</a></li>
@@ -377,8 +381,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="linear-least-squares">
-<h1><span class="section-number">10. </span>Linear least squares<a class="headerlink" href="#linear-least-squares" title="Link to this heading">#</a></h1>
+  <section id="simple-regression">
+<h1><span class="section-number">10. </span>Simple Regression<a class="headerlink" href="#simple-regression" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -2254,7 +2258,7 @@ Note that the weight column in this dataset is called <code class="docutils lite
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>Hypothesis testing</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Hypothesis Testing</p>
       </div>
     </a>
     <a class="right-next"
@@ -2262,7 +2266,7 @@ Note that the weight column in this dataset is called <code class="docutils lite
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">12. </span>Regression</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Multiple Regression</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2282,7 +2286,7 @@ Note that the weight column in this dataset is called <code class="docutils lite
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">10. Linear least squares</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">10. Simple Regression</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-fit">10.1. Least squares fit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">10.2. Implementation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals">10.3. Residuals</a></li>
