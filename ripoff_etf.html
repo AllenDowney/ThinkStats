@@ -887,10 +887,10 @@ Here are the results for the DJIA from the beginning of 1980 to the end of 2023.
 </div>
 </div>
 </div>
-<p>A buffered ETF over this period would have grown by a factor of more than 15, with no risk of loss.
+<p>A buffer ETF over this period would have grown by a factor of more than 15 in nominal dollars, with no risk of loss.
 But an index fund would have grown by a factor of almost 50.
 So yeah, the ETF would have been a bad deal.</p>
-<p>However, if we go back to the bad old days, an investor in 1900 would have been substantially better off with a buffered ETF held for 43 years – a factor of 7.2 compared to a factor of 2.8.</p>
+<p>However, if we go back to the bad old days, an investor in 1900 would have been substantially better off with a buffer ETF held for 43 years – a factor of 7.2 compared to a factor of 2.8.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compute_ratios</span><span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">43</span><span class="p">)</span>
@@ -908,17 +908,17 @@ Starting in 1886, we’ll compute price returns for all 30-year intervals, endin
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ratios</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_ratios</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1886</span><span class="p">,</span> <span class="mi">1993</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
-<span class="n">ratios</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ratios</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Start&#39;</span><span class="p">,</span> <span class="s1">&#39;End&#39;</span><span class="p">,</span> <span class="s1">&#39;Index Fund&#39;</span><span class="p">,</span> <span class="s1">&#39;Buffered ETF&#39;</span><span class="p">])</span>
+<span class="n">ratios</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ratios</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Start&#39;</span><span class="p">,</span> <span class="s1">&#39;End&#39;</span><span class="p">,</span> <span class="s1">&#39;Index Fund&#39;</span><span class="p">,</span> <span class="s1">&#39;Buffer ETF&#39;</span><span class="p">])</span>
 <span class="n">ratios</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">ratios</span><span class="p">[</span><span class="s1">&#39;Start&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Here’s what the returns look like for an index fund compared to a buffered ETF.</p>
+<p>Here’s what the returns look like for an index fund compared to a buffer ETF.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ratios</span><span class="p">[</span><span class="s1">&#39;Index Fund&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">ratios</span><span class="p">[</span><span class="s1">&#39;Buffered ETF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">ratios</span><span class="p">[</span><span class="s1">&#39;Buffer ETF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Start year&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;30-year price return&#39;</span><span class="p">)</span>
 </pre></div>
@@ -928,10 +928,10 @@ Starting in 1886, we’ll compute price returns for all 30-year intervals, endin
 <img alt="_images/741fda93786e6caa0e750cb47eac158f8abdae7f2b6d124631e5f51065c450df.png" src="_images/741fda93786e6caa0e750cb47eac158f8abdae7f2b6d124631e5f51065c450df.png" />
 </div>
 </div>
-<p>The buffered ETF performs as advertised, substantially reducing volatility.
+<p>The buffer ETF performs as advertised, substantially reducing volatility.
 But it has only occasionally been a good deal, and not in my lifetime.</p>
 <p>According to ChatGPT, the primary reasons for strong growth in stock prices since the 1960s are “technological advancements, globalization, financial market innovation, and favorable monetary policies”.
-If you think these elements will generally persist over the next 30 years, you might want to avoid buffered ETFs.</p>
+If you think these elements will generally persist over the next 30 years, you might want to avoid buffer ETFs.</p>
 </section>
 </section>
 
