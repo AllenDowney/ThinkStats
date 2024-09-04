@@ -7,9 +7,29 @@ License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 
 import numpy as np
 import pandas as pd
-import thinkstats as ts
 
+from statadict import parse_stata_dict
 
+from thinkstats import underride
+
+def read_stata(dct_file, dat_file, **options):
+    """Read data from a stata file.
+
+    dct_file: string file name
+    dat_file: string file name
+
+    returns: DataFrame
+    """
+    stata_dict = parse_stata_dict(dct_file)
+
+    underride(options, compression="gzip")
+    resp = pd.read_fwf(
+        dat_file,
+        names=stata_dict.names,
+        colspecs=stata_dict.colspecs,
+        **options,
+    )
+    return resp
 
 def read_fem_resp(dct_file="2002FemResp.dct", dat_file="2002FemResp.dat.gz"):
     """Read the 2002 NSFG respondent file.
@@ -19,7 +39,7 @@ def read_fem_resp(dct_file="2002FemResp.dct", dat_file="2002FemResp.dat.gz"):
 
     returns: DataFrame
     """
-    resp =  ts.read_stata(dct_file, dat_file)
+    resp =  read_stata(dct_file, dat_file)
     clean_fem_resp(resp)
     return resp
 
@@ -32,7 +52,7 @@ def read_fem_preg(dct_file="2002FemPreg.dct", dat_file="2002FemPreg.dat.gz"):
 
     returns: DataFrame
     """
-    preg = ts.read_stata(dct_file, dat_file)
+    preg = read_stata(dct_file, dat_file)
     clean_fem_preg(preg)
     return preg
 

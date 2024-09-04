@@ -11,11 +11,12 @@ from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
 import scipy
-from statadict import parse_stata_dict
 
 from empiricaldist import Pmf, Cdf
 
 from scipy.stats import norm
+from scipy.stats import gaussian_kde
+from scipy.integrate import simpson
 
 
 # Make the figures smaller to save some screen real estate.
@@ -27,24 +28,7 @@ plt.rcParams['figure.figsize'] = [6, 3.5]
 
 ## Chapter 1
 
-def read_stata(dct_file, dat_file, **options):
-    """Read NSFG data.
 
-    dct_file: string file name
-    dat_file: string file name
-
-    returns: DataFrame
-    """
-    stata_dict = parse_stata_dict(dct_file)
-
-    underride(options, compression="gzip")
-    resp = pd.read_fwf(
-        dat_file,
-        names=stata_dict.names,
-        colspecs=stata_dict.colspecs,
-        **options,
-    )
-    return resp
 
 ## Chapter 2
 
@@ -271,7 +255,19 @@ class Pdf(Density):
         pmf = Pmf(ps, qs, **options)
         pmf.normalize()
         return pmf
+
+
+def area_under(pdf, low, high):
+    """Find the area under a PDF.
     
+    pdf: Pdf object
+    low: low end of the interval
+    high: high end of the interval
+    """
+    qs = np.linspace(low, high, 501)
+    ps = pdf(qs)
+    return simpson(y=ps, x=qs)
+
 
 class ContinuousCdf(Density):
     """Represents a CDF."""
@@ -287,7 +283,7 @@ class ContinuousCdf(Density):
         if qs is None:
             low, high = self.domain
             qs = np.linspace(low, high, 201)
-            
+
         ps = self(qs)
 
         underride(options, name=self.name)
@@ -452,6 +448,34 @@ def jitter(seq, std=1):
     n = len(seq)
     return np.random.normal(0, std, n) + seq
 
+def standardize(xs):
+    """Standardizes a sequence of numbers.
+
+    xs: sequence of numbers
+
+    returns: NumPy array
+    """
+    return (xs - np.mean(xs)) / np.std(xs)
+
+
+## Chapter 8
+
+def plot_kde(sample, name="", **options):
+    """Plot an estimated PDF."""
+    
+    kde = gaussian_kde(sample)
+    m, s = np.mean(sample), np.std(sample)
+    plt.axvline(m, ls=":", color="0.3")
+
+    domain = m - 4 * s, m + 4 * s
+    pdf = Pdf(kde, domain, name)
+    pdf.plot(**options)
+
+
+## unassigned
+
+
+
 
 def scatter(df, var1, var2, jitter_std=None, **options):
     """Make a scatter plot and return the coefficient of correlation.
@@ -528,14 +552,6 @@ def rankcorr(df, var1, var2):
     return np.corrcoef(xs, ys)[0, 1]
 
 
-def standardize(xs):
-    """Standardizes a sequence of numbers.
-
-    xs: sequence of numbers
-
-    returns: NumPy array
-    """
-    return (xs - np.mean(xs)) / np.std(xs)
 
 
 def make_correlated_scatter(xs, ys, rho, **options):
