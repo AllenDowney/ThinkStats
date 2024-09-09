@@ -27,8 +27,7 @@ plt.rcParams['figure.figsize'] = [6, 3.5]
 
 
 ## Chapter 1
-
-
+        
 
 ## Chapter 2
 
@@ -78,6 +77,8 @@ def read_brfss(filename="CDBRFS08.ASC.gz", compression="gzip", nrows=None):
 
     returns: DataFrame
     """
+    # column names and column specs from 
+    # https://www.cdc.gov/brfss/annual_data/2008/varLayout_table_08.htm
     var_info = [
         ("age", 100, 102, int),
         ("sex", 142, 143, int),
@@ -88,7 +89,6 @@ def read_brfss(filename="CDBRFS08.ASC.gz", compression="gzip", nrows=None):
     ]
     columns = ["name", "start", "end", "type"]
     variables = pd.DataFrame(var_info, columns=columns)
-    # variables["end"] += 1
 
     colspecs = variables[["start", "end"]].values.tolist()
     names = variables["name"].tolist()
@@ -472,6 +472,22 @@ def plot_kde(sample, name="", **options):
     pdf.plot(**options)
 
 
+## Chapter 9
+
+def make_pmf(sample, low, high):
+    """Make a PMF based on KDE.
+    
+    sample: sequence of values
+    low: low end of the range
+    high: high end of the range
+    
+    returns: Pmf
+    """
+    kde = gaussian_kde(sample)
+    qs = np.linspace(low, high, 201)
+    ps = kde(qs)
+    return Pmf(ps, qs)
+
 ## unassigned
 
 
@@ -841,253 +857,6 @@ def resample_rows_weighted(df, column="finalwgt"):
     return df.sample(n, weights=weights, replace=True)
 
 
-class HypothesisTest(object):
-    """Represents a hypothesis test."""
-
-    def __init__(self, data):
-        """Initializes.
-
-        data: data in whatever form is relevant
-        """
-        self.data = data
-        self.make_model()
-        self.actual = self.test_statistic(data)
-        self.test_stats = None
-        self.test_cdf = None
-
-    def p_value(self, iters=1000):
-        """Computes the distribution of the test statistic and p-value.
-
-        iters: number of iterations
-
-        returns: float p-value
-        """
-        self.test_stats = [self.test_statistic(self.run_model()) for _ in range(iters)]
-        self.test_cdf = Cdf.from_seq(self.test_stats)
-        count = sum(1 for x in self.test_stats if x >= self.actual)
-        return count / iters
-
-    def max_test_stat(self):
-        """Returns the largest test statistic seen during simulations."""
-        return max(self.test_stats)
-
-    def plot_cdf(self, label=None):
-        """Draws a Cdf with vertical lines at the observed test stat."""
-
-        def vert_line(x):
-            """Draws a vertical line at x."""
-            plt.plot([x, x], [0, 1], color="0.8")
-
-        vert_line(self.actual)
-        self.test_cdf.plot(label=label)
-
-    def test_statistic(self, data):
-        """Computes the test statistic.
-
-        data: data in whatever form is relevant
-        """
-        raise NotImplementedError()
-
-    def make_model(self):
-        """Build a model of the null"""
-        pass
-
-    def run_model(self):
-        """Run the model of the null
-
-        returns: simulated data
-        """
-        raise NotImplementedError()
-
-
-class CoinTest(HypothesisTest):
-    """Tests the hypothesis that a coin is fair."""
-
-    def test_statistic(self, data):
-        """Computes the test statistic.
-
-        data: data in whatever form is relevant
-        """
-        heads, tails = data
-        test_stat = abs(heads - tails)
-        return test_stat
-
-    def run_model(self):
-        """Run the model of the null
-
-        returns: simulated data
-        """
-        heads, tails = self.data
-        n = heads + tails
-        sample = [random.choice("HT") for _ in range(n)]
-        hist = Hist.from_seq(sample)
-        data = hist["H"], hist["T"]
-        return data
-
-
-class DiffMeansPermute(HypothesisTest):
-    """Tests a difference in means by permutation."""
-
-    def test_statistic(self, data):
-        """Computes the test statistic.
-
-        data: data in whatever form is relevant
-        """
-        group1, group2 = data
-        test_stat = abs(group1.mean() - group2.mean())
-        return test_stat
-
-    def make_model(self):
-        """Build a model of the null"""
-        group1, group2 = self.data
-        self.n, self.m = len(group1), len(group2)
-        self.pool = np.hstack((group1, group2))
-
-    def run_model(self):
-        """Run the model of the null
-
-        returns: simulated data
-        """
-        np.random.shuffle(self.pool)
-        data = self.pool[: self.n], self.pool[self.n :]
-        return data
-
-
-class DiffMeansOneSided(DiffMeansPermute):
-    """Tests a one-sided difference in means by permutation."""
-
-    def test_statistic(self, data):
-        """Computes the test statistic.
-
-        data: data in whatever form is relevant
-        """
-        group1, group2 = data
-        test_stat = group1.mean() - group2.mean()
-        return test_stat
-
-
-class DiffStdPermute(DiffMeansPermute):
-    """Tests a one-sided difference in standard deviation by permutation."""
-
-    def test_statistic(self, data):
-        """Computes the test statistic.
-
-        data: data in whatever form is relevant
-        """
-        group1, group2 = data
-        test_stat = group1.std() - group2.std()
-        return test_stat
-
-
-class CorrelationPermute(HypothesisTest):
-    """Tests correlations by permutation."""
-
-    def test_statistic(self, data):
-        """Computes the test statistic.
-
-        data: tuple of xs and ys
-        """
-        xs, ys = data
-        test_stat = abs(corr(xs, ys))
-        return test_stat
-
-    def run_model(self):
-        """Run the model of the null
-
-        returns: simulated data
-        """
-        xs, ys = self.data
-        xs = np.random.permutation(xs)
-        return xs, ys
-
-
-class DiceTest(HypothesisTest):
-    """Tests whether a six-sided die is fair."""
-
-    def test_statistic(self, data):
-        """Computes the test statistic.
-
-        data: list of frequencies
-        """
-        observed = data
-        n = sum(observed)
-        expected = np.ones(6) * n / 6
-        test_stat = sum(abs(observed - expected))
-        return test_stat
-
-    def run_model(self):
-        """Run the model of the null
-
-        returns: simulated data
-        """
-        n = sum(self.data)
-        values = [1, 2, 3, 4, 5, 6]
-        rolls = np.random.choice(values, n, replace=True)
-        hist = Hist.from_seq(rolls)
-        freqs = hist(values)
-        return freqs
-
-
-class DiceChiTest(DiceTest):
-    """Tests a six-sided die using a chi-squared statistic."""
-
-    def test_statistic(self, data):
-        """Computes the test statistic.
-
-        data: list of frequencies
-        """
-        observed = data
-        n = sum(observed)
-        expected = np.ones(6) * n / 6
-        test_stat = sum((observed - expected) ** 2 / expected)
-        return test_stat
-
-
-class PregLengthTest(HypothesisTest):
-    """Tests difference in pregnancy length using a chi-squared statistic."""
-
-    def test_statistic(self, data):
-        """Computes the test statistic.
-
-        data: pair of lists of pregnancy lengths
-        """
-        firsts, others = data
-        stat = self.chi_squared(firsts) + self.chi_squared(others)
-        return stat
-
-    def chi_squared(self, lengths):
-        """Computes the chi-squared statistic.
-
-        lengths: sequence of lengths
-
-        returns: float
-        """
-        hist = Hist.from_seq(lengths)
-        observed = hist(self.values)
-        expected = self.expected_probs * len(lengths)
-        stat = sum((observed - expected) ** 2 / expected)
-        return stat
-
-    def make_model(self):
-        """Build a model of the null"""
-        firsts, others = self.data
-        self.n = len(firsts)
-        self.pool = np.hstack((firsts, others))
-        pmf = Pmf(self.pool)
-        self.values = range(35, 44)
-        self.expected_probs = np.array(pmf.probs(self.values))
-
-    def run_model(self):
-        """Run the model of the null
-
-        returns: simulated data
-        """
-        np.random.shuffle(self.pool)
-        data = self.pool[: self.n], self.pool[self.n :]
-        return data
-
-
-
 
 
 def summarize_results(results):
@@ -1121,7 +890,7 @@ def print_tabular(rows, header):
     print("\\hline")
 
 
-class Normal(object):
+class Normal():
     """Represents a Normal distribution"""
 
     def __init__(self, mu, sigma2, label=""):
