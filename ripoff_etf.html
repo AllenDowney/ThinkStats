@@ -185,9 +185,9 @@
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Simple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Least Squares</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Multiple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">13. Time series analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap13.html">14. Survival analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap14.html">15. Analytic methods</a></li>
@@ -359,6 +359,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dow-jones">The Dow Jones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-term-returns">Long-Term Returns</a></li>
 </ul>
             </nav>
         </div>
@@ -373,12 +374,12 @@ document.write(`
   <section id="rip-off-etf">
 <h1>Rip-off ETF?<a class="headerlink" href="#rip-off-etf" title="Link to this heading">#</a></h1>
 <p>An article in a recent issue of  <em>The Economist</em> suggests, right in the title, “<a class="reference external" href="https://www.economist.com/finance-and-economics/2024/08/22/investors-should-avoid-a-new-generation-of-rip-off-etfs">Investors should avoid a new generation of rip-off ETFs</a>”.
-An exchange-traded fund (ETF) is an investment fund that holds a collection of assets, and trades on a stock exchange like a single stock. For example, the SPDR S&amp;P 500 ETF Trust (SPY) tracks the S&amp;P 500 index, but unlike traditional index funds, you can buy or sell shares in minutes.</p>
+An ETF is an exchange-traded fund, which holds a collection of assets and trades on an exchange like a single stock. For example, the SPDR S&amp;P 500 ETF Trust (SPY) tracks the S&amp;P 500 index, but unlike traditional index funds, you can buy or sell shares in minutes.</p>
 <p>There’s nothing obviously wrong with that – but as an example of a “rip-off ETF”, the article describes “defined-outcome funds” or buffer ETFs, which “offer investors an enviable-sounding opportunity: hold stocks, with protection against falling prices. All they must do is forgo annual returns above a certain level, often 10% or so.”</p>
-<p>That might sound like a good deal, but the article explains, “Over the long term, they are a terrible deal for investors. Much of the compounding effect of stock ownership comes from rallies.”</p>
+<p>That might sound good, but the article explains, “Over the long term, they are a terrible deal for investors. Much of the compounding effect of stock ownership comes from rallies.”</p>
 <p>To demonstrate, they use the value of the S&amp;P index since 1980: “An investor with returns capped at 10% and protected from losses would have made a real return of 403% over the period, a fraction of the 3,155% return offered by just buying and holding the S&amp;P 500.”</p>
-<p>So that sounds bad, but returns from 1980 to the present have been historically unusual – and as we’ve been warned, past performance is not indicative of future results.
-To get a better sense of whether buffer ETFs are more generally a bad deal, let’s get a bigger picture.</p>
+<p>So that sounds bad, but returns from 1980 to the present have been historically unusual.
+To get a sense of whether buffer ETFs are more generally a bad deal, let’s get a bigger picture.</p>
 <p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkStats/blob/v3/examples/ripoff_etf.ipynb">Click here to run this notebook on Colab</a></p>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
@@ -440,7 +441,7 @@ To get a better sense of whether buffer ETFs are more generally a bad deal, let�
 </div>
 <section id="the-dow-jones">
 <h2>The Dow Jones<a class="headerlink" href="#the-dow-jones" title="Link to this heading">#</a></h2>
-<p>The MeasuringWorth Foundation has compiled the value of the Dow Jones Industrial Average at the end of each day from February 16, 1885 to the present, with adjustments at several points to make the values comparable.
+<p>The <a class="reference external" href="https://www.measuringworth.com/datasets/DJA">MeasuringWorth Foundation</a> has compiled the value of the Dow Jones Industrial Average at the end of each day from February 16, 1885 to the present, with adjustments at several points to make the values comparable.
 The series I collected starts on February 16, 1885 and ends on August 30, 2024.
 The following cells download and read the data.</p>
 <div class="cell tag_hide-cell docutils container">
@@ -715,7 +716,7 @@ The following cells download and read the data.</p>
 </div>
 </div>
 </div>
-<p>Looking at the years with the biggest losses and gains, we can see that most of the extremes were before the 1960s – the exception is the 2008 financial crisis.</p>
+<p>Looking at the years with the biggest losses and gains, we can see that most of the extremes were before the 1960s – with the exception of the 2008 financial crisis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annual</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Return&#39;</span><span class="p">)</span>
@@ -833,6 +834,7 @@ The following cells download and read the data.</p>
 <span class="n">cdf_return</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Annual return (percent)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;ripoff_etf1.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -853,6 +855,9 @@ The following cells download and read the data.</p>
 </div>
 </div>
 </div>
+</section>
+<section id="long-term-returns">
+<h2>Long-Term Returns<a class="headerlink" href="#long-term-returns" title="Link to this heading">#</a></h2>
 <p>We’ll use the following function to compute long-term returns.
 It takes a start date and a duration, and computes two ratios:</p>
 <ul class="simple">
@@ -888,7 +893,7 @@ Here are the results for the DJIA from the beginning of 1980 to the end of 2023.
 </div>
 </div>
 <p>A buffer ETF over this period would have grown by a factor of more than 15 in nominal dollars, with no risk of loss.
-But an index fund would have grown by a factor of almost 50.
+But an index fund would have grown by a factor of almost 45.
 So yeah, the ETF would have been a bad deal.</p>
 <p>However, if we go back to the bad old days, an investor in 1900 would have been substantially better off with a buffer ETF held for 43 years – a factor of 7.2 compared to a factor of 2.8.</p>
 <div class="cell docutils container">
@@ -907,12 +912,85 @@ So yeah, the ETF would have been a bad deal.</p>
 Starting in 1886, we’ll compute price returns for all 30-year intervals, ending with the interval from 1993 to 2023.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ratios</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_ratios</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1886</span><span class="p">,</span> <span class="mi">1993</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duration</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">ratios</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_ratios</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span> <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1886</span><span class="p">,</span> <span class="mi">2024</span><span class="o">-</span><span class="n">duration</span><span class="p">)]</span>
 <span class="n">ratios</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ratios</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Start&#39;</span><span class="p">,</span> <span class="s1">&#39;End&#39;</span><span class="p">,</span> <span class="s1">&#39;Index Fund&#39;</span><span class="p">,</span> <span class="s1">&#39;Buffer ETF&#39;</span><span class="p">])</span>
 <span class="n">ratios</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">ratios</span><span class="p">[</span><span class="s1">&#39;Start&#39;</span><span class="p">]</span>
+<span class="n">ratios</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Index Fund</th>
+      <th>Buffer ETF</th>
+    </tr>
+    <tr>
+      <th>Start</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1989</th>
+      <td>1989</td>
+      <td>2019</td>
+      <td>13.160027</td>
+      <td>6.532125</td>
+    </tr>
+    <tr>
+      <th>1990</th>
+      <td>1990</td>
+      <td>2020</td>
+      <td>11.116693</td>
+      <td>6.368615</td>
+    </tr>
+    <tr>
+      <th>1991</th>
+      <td>1991</td>
+      <td>2021</td>
+      <td>13.797643</td>
+      <td>7.005476</td>
+    </tr>
+    <tr>
+      <th>1992</th>
+      <td>1992</td>
+      <td>2022</td>
+      <td>10.460407</td>
+      <td>6.368615</td>
+    </tr>
+    <tr>
+      <th>1993</th>
+      <td>1993</td>
+      <td>2023</td>
+      <td>11.417232</td>
+      <td>6.724757</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Here’s what the returns look like for an index fund compared to a buffer ETF.</p>
 <div class="cell docutils container">
@@ -921,11 +999,12 @@ Starting in 1886, we’ll compute price returns for all 30-year intervals, endin
 <span class="n">ratios</span><span class="p">[</span><span class="s1">&#39;Buffer ETF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Start year&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;30-year price return&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;ripoff_etf2.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/741fda93786e6caa0e750cb47eac158f8abdae7f2b6d124631e5f51065c450df.png" src="_images/741fda93786e6caa0e750cb47eac158f8abdae7f2b6d124631e5f51065c450df.png" />
+<img alt="_images/27f1abe05ea533153ef7eb0e382406ffaed79eab734272803aaffbf23ed238a8.png" src="_images/27f1abe05ea533153ef7eb0e382406ffaed79eab734272803aaffbf23ed238a8.png" />
 </div>
 </div>
 <p>The buffer ETF performs as advertised, substantially reducing volatility.
@@ -991,6 +1070,7 @@ If you think these elements will generally persist over the next 30 years, you m
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dow-jones">The Dow Jones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-term-returns">Long-Term Returns</a></li>
 </ul>
   </nav></div>
 

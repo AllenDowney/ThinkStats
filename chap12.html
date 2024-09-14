@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="14. Survival analysis" href="chap13.html" />
-    <link rel="prev" title="12. Multiple Regression" href="chap11.html" />
+    <link rel="prev" title="12. Regression" href="chap11.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -188,9 +188,9 @@
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Simple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Least Squares</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Multiple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Regression</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Time series analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap13.html">14. Survival analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap14.html">15. Analytic methods</a></li>
@@ -361,17 +361,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-cleaning">13.1. Importing and cleaning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">13.2. Plotting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">13.3. Linear regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-averages">13.4. Moving averages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">13.5. Missing values</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-correlation">13.6. Serial correlation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation">13.7. Autocorrelation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">13.8. Prediction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">13.9. Further reading</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">13.10. Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.11. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dow-jones">13.1. The Dow Jones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-cleaning">13.2. Importing and cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">13.3. Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">13.4. Linear regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-averages">13.5. Moving averages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">13.6. Missing values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-correlation">13.7. Serial correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation">13.8. Autocorrelation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">13.9. Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">13.10. Further reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">13.11. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.12. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -411,7 +412,7 @@ document.write(`
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 2;
+                var nbb_cell_id = 4;
                 var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
                 var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -440,7 +441,7 @@ document.write(`
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 3;
+                var nbb_cell_id = 5;
                 var nbb_unformatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_formatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -463,8 +464,781 @@ The goal of his project is to investigate the effect of policy decisions, like l
 I find this project appealing because it is an example that uses data to address important political questions, like drug policy.</p>
 <p>I hope you will find this chapter interesting, but I’ll take this opportunity to reiterate the importance of maintaining a professional attitude to data analysis.
 Whether and which drugs should be illegal are important and difficult public policy questions; our decisions should be informed by accurate data reported honestly.</p>
+<section id="the-dow-jones">
+<h2><span class="section-number">13.1. </span>The Dow Jones<a class="headerlink" href="#the-dow-jones" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://www.measuringworth.com/datasets/DJA">MeasuringWorth Foundation</a> has compiled the value of the Dow Jones Industrial Average at the end of each day from February 16, 1885 to the present, with adjustments at several points to make the values comparable.
+The series I collected starts on February 16, 1885 and ends on August 30, 2024.
+The following cells download and read the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># &quot;Citation: Samuel H. Williamson, &#39;Daily Closing Value of the Dow Jones Average, 1885 to Present,&#39;</span>
+<span class="c1"># MeasuringWorth, 2022. &quot;</span>
+
+<span class="c1"># Downloaded from https://www.measuringworth.com/datasets/DJA, September 3, 2024</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "# \"Citation: Samuel H. Williamson, 'Daily Closing Value of the Dow Jones Average, 1885 to Present,'\n# MeasuringWorth, 2022. \"\n\n# Downloaded from https://www.measuringworth.com/datasets/DJA, September 3, 2024";
+                var nbb_formatted_code = "# \"Citation: Samuel H. Williamson, 'Daily Closing Value of the Dow Jones Average, 1885 to Present,'\n# MeasuringWorth, 2022. \"\n\n# Downloaded from https://www.measuringworth.com/datasets/DJA, September 3, 2024";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATA_PATH</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/&quot;</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;DJA.csv&quot;</span>
+<span class="n">download</span><span class="p">(</span><span class="n">DATA_PATH</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "DATA_PATH = \"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\"\nfilename = \"DJA.csv\"\ndownload(DATA_PATH + filename)";
+                var nbb_formatted_code = "DATA_PATH = \"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\"\nfilename = \"DJA.csv\"\ndownload(DATA_PATH + filename)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">djia</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">djia</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DJIA</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1885-02-16</th>
+      <td>30.9226</td>
+    </tr>
+    <tr>
+      <th>1885-02-17</th>
+      <td>31.3365</td>
+    </tr>
+    <tr>
+      <th>1885-02-18</th>
+      <td>31.4744</td>
+    </tr>
+    <tr>
+      <th>1885-02-19</th>
+      <td>31.6765</td>
+    </tr>
+    <tr>
+      <th>1885-02-20</th>
+      <td>31.4252</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "djia = pd.read_csv(filename, skiprows=4, parse_dates=[0], index_col=0)\ndjia.head()";
+                var nbb_formatted_code = "djia = pd.read_csv(filename, skiprows=4, parse_dates=[0], index_col=0)\ndjia.head()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">djia</span><span class="p">[</span><span class="s2">&quot;DJIA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Closing price ($)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7b14d362682ba541198658ca23fe2d9d85d32b221fa4b75fa402e1ac91944752.png" src="_images/7b14d362682ba541198658ca23fe2d9d85d32b221fa4b75fa402e1ac91944752.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "djia['DJIA'].plot()\n\ndecorate(ylabel=\"Closing price ($)\")";
+                var nbb_formatted_code = "djia[\"DJIA\"].plot()\n\ndecorate(ylabel=\"Closing price ($)\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">djia</span><span class="p">[</span><span class="s2">&quot;diff&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">djia</span><span class="p">[</span><span class="s2">&quot;DJIA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="n">djia</span><span class="p">[</span><span class="s2">&quot;diff&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;One-day change ($)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f0cfd9bdc9105e5138a127e53417a611f62f9e0a3245b7a2e332d2dfe704dc37.png" src="_images/f0cfd9bdc9105e5138a127e53417a611f62f9e0a3245b7a2e332d2dfe704dc37.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 18;
+                var nbb_unformatted_code = "djia[\"diff\"] = djia[\"DJIA\"].diff()\ndjia[\"diff\"].plot()\n\ndecorate(ylabel=\"One-day change ($)\")";
+                var nbb_formatted_code = "djia[\"diff\"] = djia[\"DJIA\"].diff()\ndjia[\"diff\"].plot()\n\ndecorate(ylabel=\"One-day change ($)\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">djia</span><span class="p">[</span><span class="s2">&quot;percent_diff&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">djia</span><span class="p">[</span><span class="s2">&quot;diff&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">djia</span><span class="p">[</span><span class="s2">&quot;DJIA&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">djia</span><span class="p">[</span><span class="s2">&quot;percent_diff&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;One-day percent change&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/88fb7742929bdf22f33ca4613b12d3902adf9499b017bbe38d91ae49a648b4b2.png" src="_images/88fb7742929bdf22f33ca4613b12d3902adf9499b017bbe38d91ae49a648b4b2.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 20;
+                var nbb_unformatted_code = "djia[\"percent_diff\"] = djia[\"diff\"] / djia[\"DJIA\"] * 100\ndjia[\"percent_diff\"].plot()\n\ndecorate(ylabel=\"One-day percent change\")";
+                var nbb_formatted_code = "djia[\"percent_diff\"] = djia[\"diff\"] / djia[\"DJIA\"] * 100\ndjia[\"percent_diff\"].plot()\n\ndecorate(ylabel=\"One-day percent change\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
+
+<span class="n">cdf_percent_diff</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">djia</span><span class="p">[</span><span class="s2">&quot;percent_diff&quot;</span><span class="p">])</span>
+<span class="n">cdf_percent_diff</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;percent_diff&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/050000c7f34db920c2f2ed06fe65f8f96a7c55a93240fef868ba3952ec7d63c6.png" src="_images/050000c7f34db920c2f2ed06fe65f8f96a7c55a93240fef868ba3952ec7d63c6.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 24;
+                var nbb_unformatted_code = "from empiricaldist import Cdf\n\ncdf_percent_diff = Cdf.from_seq(djia[\"percent_diff\"])\ncdf_percent_diff.plot()";
+                var nbb_formatted_code = "from empiricaldist import Cdf\n\ncdf_percent_diff = Cdf.from_seq(djia[\"percent_diff\"])\ncdf_percent_diff.plot()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">up_day</span> <span class="o">=</span> <span class="n">djia</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;percent_diff &gt; 0&quot;</span><span class="p">)</span>
+<span class="n">down_day</span> <span class="o">=</span> <span class="n">djia</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;percent_diff &lt; 0&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 25;
+                var nbb_unformatted_code = "up_day = djia.query('percent_diff > 0')\ndown_day = djia.query('percent_diff < 0')";
+                var nbb_formatted_code = "up_day = djia.query(\"percent_diff > 0\")\ndown_day = djia.query(\"percent_diff < 0\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_up</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">up_day</span><span class="p">[</span><span class="s2">&quot;percent_diff&quot;</span><span class="p">])</span>
+<span class="n">cdf_up</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Up days&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cdf_up</span><span class="o">.</span><span class="n">qs</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">cdf_down</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="o">-</span><span class="n">down_day</span><span class="p">[</span><span class="s2">&quot;percent_diff&quot;</span><span class="p">])</span>
+<span class="n">cdf_down</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Down days&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cdf_down</span><span class="o">.</span><span class="n">qs</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;One day percent change&quot;</span><span class="p">,</span> <span class="n">xscale</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b415e3a71b8f01ed96966038688996453443d8c2c0883ead3cd746b5218a3850.png" src="_images/b415e3a71b8f01ed96966038688996453443d8c2c0883ead3cd746b5218a3850.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 38;
+                var nbb_unformatted_code = "cdf_up = Cdf.from_seq(up_day[\"percent_diff\"])\ncdf_up.plot(label=\"Up days\", ls=\"--\")\nplt.plot(cdf_up.qs.max(), 1, \"|\", color=\"C0\", ms=10)\n\ncdf_down = Cdf.from_seq(-down_day[\"percent_diff\"])\ncdf_down.plot(label=\"Down days\")\nplt.plot(cdf_down.qs.max(), 1, \"|\", color=\"C1\", ms=10)\n\ndecorate(xlabel=\"One day percent change\", xscale=\"log\", ylabel=\"CDF\")";
+                var nbb_formatted_code = "cdf_up = Cdf.from_seq(up_day[\"percent_diff\"])\ncdf_up.plot(label=\"Up days\", ls=\"--\")\nplt.plot(cdf_up.qs.max(), 1, \"|\", color=\"C0\", ms=10)\n\ncdf_down = Cdf.from_seq(-down_day[\"percent_diff\"])\ncdf_down.plot(label=\"Down days\")\nplt.plot(cdf_down.qs.max(), 1, \"|\", color=\"C1\", ms=10)\n\ndecorate(xlabel=\"One day percent change\", xscale=\"log\", ylabel=\"CDF\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recent</span> <span class="o">=</span> <span class="n">djia</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;index &gt; &quot;1936-01-01&quot;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 64;
+                var nbb_unformatted_code = "recent = djia.query('index > \"1936-01-01\"')";
+                var nbb_formatted_code = "recent = djia.query('index > \"1936-01-01\"')";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recent</span><span class="p">[</span><span class="s2">&quot;percent_diff&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Date&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/a08d4c3a1dd60f753b8fca5b8a9c9a53525d75091dfa67e4292a06dc24c8b50b.png" src="_images/a08d4c3a1dd60f753b8fca5b8a9c9a53525d75091dfa67e4292a06dc24c8b50b.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 65;
+                var nbb_unformatted_code = "recent[\"percent_diff\"].plot()";
+                var nbb_formatted_code = "recent[\"percent_diff\"].plot()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annual</span> <span class="o">=</span> <span class="n">djia</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">djia</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">2024</span><span class="p">)</span>
+<span class="n">annual</span><span class="p">[</span><span class="s2">&quot;diff&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">annual</span><span class="p">[</span><span class="s2">&quot;DJIA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="n">annual</span><span class="p">[</span><span class="s2">&quot;percent_diff&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">annual</span><span class="p">[</span><span class="s2">&quot;diff&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">annual</span><span class="p">[</span><span class="s2">&quot;DJIA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">annual</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DJIA</th>
+      <th>diff</th>
+      <th>percent_diff</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1885</th>
+      <td>39.4859</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1886</th>
+      <td>41.2391</td>
+      <td>1.7532</td>
+      <td>4.440066</td>
+    </tr>
+    <tr>
+      <th>1887</th>
+      <td>37.7693</td>
+      <td>-3.4698</td>
+      <td>-8.413860</td>
+    </tr>
+    <tr>
+      <th>1888</th>
+      <td>39.5866</td>
+      <td>1.8173</td>
+      <td>4.811580</td>
+    </tr>
+    <tr>
+      <th>1889</th>
+      <td>42.0394</td>
+      <td>2.4528</td>
+      <td>6.196036</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2019</th>
+      <td>28538.4400</td>
+      <td>5210.9800</td>
+      <td>22.338394</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>30606.4800</td>
+      <td>2068.0400</td>
+      <td>7.246507</td>
+    </tr>
+    <tr>
+      <th>2021</th>
+      <td>36338.3000</td>
+      <td>5731.8200</td>
+      <td>18.727472</td>
+    </tr>
+    <tr>
+      <th>2022</th>
+      <td>33147.2500</td>
+      <td>-3191.0500</td>
+      <td>-8.781506</td>
+    </tr>
+    <tr>
+      <th>2023</th>
+      <td>37689.5400</td>
+      <td>4542.2900</td>
+      <td>13.703369</td>
+    </tr>
+  </tbody>
+</table>
+<p>139 rows × 3 columns</p>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 81;
+                var nbb_unformatted_code = "annual = djia.groupby(djia.index.year).last().drop(2024)\nannual[\"diff\"] = annual[\"DJIA\"].diff()\nannual[\"percent_diff\"] = annual[\"diff\"] / annual[\"DJIA\"].shift(1) * 100\nannual";
+                var nbb_formatted_code = "annual = djia.groupby(djia.index.year).last().drop(2024)\nannual[\"diff\"] = annual[\"DJIA\"].diff()\nannual[\"percent_diff\"] = annual[\"diff\"] / annual[\"DJIA\"].shift(1) * 100\nannual";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annual</span><span class="p">[</span><span class="s2">&quot;percent_diff&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Date&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/24dc6978dd181f1236dab1b9f7813fd85c8f47e90f5e93fe2d121f1d91b4cc68.png" src="_images/24dc6978dd181f1236dab1b9f7813fd85c8f47e90f5e93fe2d121f1d91b4cc68.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 82;
+                var nbb_unformatted_code = "annual[\"percent_diff\"].plot()";
+                var nbb_formatted_code = "annual[\"percent_diff\"].plot()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annual</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">annual</span><span class="o">.</span><span class="n">index</span>
+<span class="n">interval</span> <span class="o">=</span> <span class="n">annual</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1972</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 88;
+                var nbb_unformatted_code = "annual[\"year\"] = annual.index\ninterval = annual.loc[1972:]";
+                var nbb_formatted_code = "annual[\"year\"] = annual.index\ninterval = annual.loc[1972:]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;percent_diff ~ year&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">interval</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>      <td>percent_diff</td>   <th>  R-squared:         </th> <td>   0.003</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>  -0.017</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>  0.1330</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Thu, 05 Sep 2024</td> <th>  Prob (F-statistic):</th>  <td> 0.717</td> 
+</tr>
+<tr>
+  <th>Time:</th>                 <td>16:13:23</td>     <th>  Log-Likelihood:    </th> <td> -216.00</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>    52</td>      <th>  AIC:               </th> <td>   436.0</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>    50</td>      <th>  BIC:               </th> <td>   439.9</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>  -97.0885</td> <td>  290.012</td> <td>   -0.335</td> <td> 0.739</td> <td> -679.595</td> <td>  485.418</td>
+</tr>
+<tr>
+  <th>year</th>      <td>    0.0529</td> <td>    0.145</td> <td>    0.365</td> <td> 0.717</td> <td>   -0.239</td> <td>    0.345</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 2.848</td> <th>  Durbin-Watson:     </th> <td>   2.205</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.241</td> <th>  Jarque-Bera (JB):  </th> <td>   2.399</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-0.526</td> <th>  Prob(JB):          </th> <td>   0.301</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.968</td> <th>  Cond. No.          </th> <td>2.66e+05</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 2.66e+05. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 89;
+                var nbb_unformatted_code = "import statsmodels.formula.api as smf\n\nmodel = smf.ols('percent_diff ~ year', data=interval).fit()\n\nmodel.summary()";
+                var nbb_formatted_code = "import statsmodels.formula.api as smf\n\nmodel = smf.ols(\"percent_diff ~ year\", data=interval).fit()\n\nmodel.summary()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.tsa.arima.model</span> <span class="kn">import</span> <span class="n">ARIMA</span>
+
+<span class="c1"># Assuming &#39;annual&#39; dataframe has &#39;percent_diff&#39; column for percentage changes</span>
+<span class="c1"># Step 1: Define the ARIMA model on the percent differences</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">annual</span><span class="p">[</span><span class="s1">&#39;percent_diff&#39;</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Step 2: Fit the model</span>
+<span class="n">model_fit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Step 3: Display the summary</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_fit</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+
+<span class="c1"># Step 4: Forecast future percent differences</span>
+<span class="n">forecast_steps</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Forecast the next 10 periods</span>
+<span class="n">forecast</span> <span class="o">=</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">forecast_steps</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">forecast</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:           percent_diff   No. Observations:                  139
+Model:                 ARIMA(1, 1, 1)   Log Likelihood                -616.672
+Date:                Thu, 05 Sep 2024   AIC                           1239.344
+Time:                        16:15:41   BIC                           1248.125
+Sample:                             0   HQIC                          1242.912
+                                - 139                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ar.L1         -0.0386      0.075     -0.512      0.609      -0.186       0.109
+ma.L1         -0.9996      1.401     -0.714      0.475      -3.745       1.746
+sigma2       409.2568    574.580      0.712      0.476    -716.900    1535.413
+===================================================================================
+Ljung-Box (L1) (Q):                   0.09   Jarque-Bera (JB):                11.29
+Prob(Q):                              0.76   Prob(JB):                         0.00
+Heteroskedasticity (H):               0.32   Skew:                             0.18
+Prob(H) (two-sided):                  0.00   Kurtosis:                         4.35
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+139    6.820663
+140    7.086024
+141    7.075793
+142    7.076188
+143    7.076173
+144    7.076173
+145    7.076173
+146    7.076173
+147    7.076173
+148    7.076173
+Name: predicted_mean, dtype: float64
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/downey/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: An unsupported index was provided and will be ignored when e.g. forecasting.
+  self._init_dates(dates, freq)
+/home/downey/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: An unsupported index was provided and will be ignored when e.g. forecasting.
+  self._init_dates(dates, freq)
+/home/downey/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: An unsupported index was provided and will be ignored when e.g. forecasting.
+  self._init_dates(dates, freq)
+/home/downey/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/statsmodels/tsa/base/tsa_model.py:836: ValueWarning: No supported index is available. Prediction results will be given with an integer index beginning at `start`.
+  return get_prediction_index(
+/home/downey/miniconda3/envs/ThinkStats/lib/python3.10/site-packages/statsmodels/tsa/base/tsa_model.py:836: FutureWarning: No supported index is available. In the next version, calling this method in a model without a supported index will result in an exception.
+  return get_prediction_index(
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 90;
+                var nbb_unformatted_code = "from statsmodels.tsa.arima.model import ARIMA\n\n# Assuming 'annual' dataframe has 'percent_diff' column for percentage changes\n# Step 1: Define the ARIMA model on the percent differences\nmodel = ARIMA(annual['percent_diff'], order=(1, 1, 1))\n\n# Step 2: Fit the model\nmodel_fit = model.fit()\n\n# Step 3: Display the summary\nprint(model_fit.summary())\n\n# Step 4: Forecast future percent differences\nforecast_steps = 10  # Forecast the next 10 periods\nforecast = model_fit.forecast(steps=forecast_steps)\nprint(forecast)";
+                var nbb_formatted_code = "from statsmodels.tsa.arima.model import ARIMA\n\n# Assuming 'annual' dataframe has 'percent_diff' column for percentage changes\n# Step 1: Define the ARIMA model on the percent differences\nmodel = ARIMA(annual[\"percent_diff\"], order=(1, 1, 1))\n\n# Step 2: Fit the model\nmodel_fit = model.fit()\n\n# Step 3: Display the summary\nprint(model_fit.summary())\n\n# Step 4: Forecast future percent differences\nforecast_steps = 10  # Forecast the next 10 periods\nforecast = model_fit.forecast(steps=forecast_steps)\nprint(forecast)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Exercise: Check if volatility has increased by running a regression of absolute value of percent change over time</p>
+<p>Filling missing dates</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fill_series</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">index</span>
+    <span class="n">full_date_range</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">end</span><span class="o">=</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;D&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">series</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">full_date_range</span><span class="p">)</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 22;
+                var nbb_unformatted_code = "def fill_series(series):\n    index = series.index\n    full_date_range = pd.date_range(start=index.min(), end=index.max(), freq=\"D\")\n    return series.reindex(full_date_range).ffill()";
+                var nbb_formatted_code = "def fill_series(series):\n    index = series.index\n    full_date_range = pd.date_range(start=index.min(), end=index.max(), freq=\"D\")\n    return series.reindex(full_date_range).ffill()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fill_series</span><span class="p">(</span><span class="n">djia</span><span class="p">[</span><span class="s2">&quot;DJIA&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-08-19    40896.53
+2024-08-20    40834.97
+2024-08-21    40890.49
+2024-08-22    40712.78
+2024-08-23    41175.08
+2024-08-24    41175.08
+2024-08-25    41175.08
+2024-08-26    41240.52
+2024-08-27    41250.50
+2024-08-28    41091.42
+2024-08-29    41335.05
+2024-08-30    41563.08
+Freq: D, Name: DJIA, dtype: float64
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 24;
+                var nbb_unformatted_code = "fill_series(recent[\"DJIA\"])";
+                var nbb_formatted_code = "fill_series(recent[\"DJIA\"])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+</section>
 <section id="importing-and-cleaning">
-<h2><span class="section-number">13.1. </span>Importing and cleaning<a class="headerlink" href="#importing-and-cleaning" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.2. </span>Importing and cleaning<a class="headerlink" href="#importing-and-cleaning" title="Link to this heading">#</a></h2>
 <p>The data I downloaded from Mr. Jones’s site is in the repository for this book.
 The following code reads it into a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
 <div class="cell docutils container">
@@ -744,7 +1518,7 @@ So <code class="docutils literal notranslate"><span class="pre">GroupByDay</span
 </div>
 </section>
 <section id="plotting">
-<h2><span class="section-number">13.2. </span>Plotting<a class="headerlink" href="#plotting" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.3. </span>Plotting<a class="headerlink" href="#plotting" title="Link to this heading">#</a></h2>
 <p>The result from <code class="docutils literal notranslate"><span class="pre">GroupByQualityAndDay</span></code> is a map from each quality to a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> of daily prices.
 Here’s the code I use to plot the three time series:</p>
 <div class="cell docutils container">
@@ -794,7 +1568,7 @@ The price of low quality might also be increasing, but it is harder to tell, sin
 Keep in mind that quality data is reported by volunteers, so trends over time might reflect changes in how participants apply these labels.</p>
 </section>
 <section id="linear-regression">
-<h2><span class="section-number">13.3. </span>Linear regression<a class="headerlink" href="#linear-regression" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.4. </span>Linear regression<a class="headerlink" href="#linear-regression" title="Link to this heading">#</a></h2>
 <p>Although there are methods specific to time series analysis, for many problems a simple way to get started is by applying general-purpose tools like linear regression.
 The following function takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> of daily prices and computes a least squares fit, returning the model and results objects from StatsModels:</p>
 <div class="cell docutils container">
@@ -955,7 +1729,7 @@ With time series data, this assumption is often false because successive values 
 <p>The next section presents an alternative that is more appropriate for time series data.</p>
 </section>
 <section id="moving-averages">
-<h2><span class="section-number">13.4. </span>Moving averages<a class="headerlink" href="#moving-averages" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.5. </span>Moving averages<a class="headerlink" href="#moving-averages" title="Link to this heading">#</a></h2>
 <p>Most time series analysis is based on the modeling assumption that the observed series is the sum of three components:</p>
 <ul class="simple">
 <li><p>Trend: A smooth function that captures persistent changes.</p></li>
@@ -1233,7 +2007,7 @@ Second, the Pandas implementation of EWMA handles missing values better.</p>
 The values are noisy at the beginning of the time series, because they are based on fewer data points.</p>
 </section>
 <section id="missing-values">
-<h2><span class="section-number">13.5. </span>Missing values<a class="headerlink" href="#missing-values" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.6. </span>Missing values<a class="headerlink" href="#missing-values" title="Link to this heading">#</a></h2>
 <p>Now that we have characterized the trend of the time series, the next step is to investigate seasonality, which is periodic behavior.
 Time series data based on human behavior often exhibits daily, weekly, monthly, or yearly cycles.
 In the next section I present methods to test for seasonality, but they don’t work well with missing data, so we have to solve that problem first.</p>
@@ -1430,7 +2204,7 @@ Finally, <code class="docutils literal notranslate"><span class="pre">fillna</sp
 Since the resampled residuals are random, the results are different every time; later we’ll see how to characterize the error created by missing values.</p>
 </section>
 <section id="serial-correlation">
-<h2><span class="section-number">13.6. </span>Serial correlation<a class="headerlink" href="#serial-correlation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.7. </span>Serial correlation<a class="headerlink" href="#serial-correlation" title="Link to this heading">#</a></h2>
 <p>As prices vary from day to day, you might expect to see patterns.
 If the price is high on Monday, you might expect it to be high for a few more days; and if it’s low, you might expect it to stay low.
 A pattern like this is called <strong>serial correlation</strong>, because each value is correlated with the next one in the series.</p>
@@ -1565,7 +2339,7 @@ medium -0.010294571597965742
 <p>In the next section we’ll test whether these correlations are statistically significant (they are not), but at this point we can tentatively conclude that there are no substantial seasonal patterns in these series, at least not with these lags.</p>
 </section>
 <section id="autocorrelation">
-<h2><span class="section-number">13.7. </span>Autocorrelation<a class="headerlink" href="#autocorrelation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.8. </span>Autocorrelation<a class="headerlink" href="#autocorrelation" title="Link to this heading">#</a></h2>
 <p>If you think a series might have some serial correlation, but you don’t know which lags to test, you can test them all! The <strong>autocorrelation function</strong> is a function that maps from lag to the serial correlation with the given lag.
 “Autocorrelation” is another name for serial correlation, used more often when the lag is not 1.</p>
 <p>StatsModels provides functions for time series analysis, including <code class="docutils literal notranslate"><span class="pre">acf</span></code>, which computes the autocorrelation function:</p>
@@ -1814,7 +2588,7 @@ To simulate this effect, I select dates that fall on Friday or Saturday and add 
 For low quality they are not, because residuals in this category are large; the effect would have to be bigger to be visible through the noise.</p>
 </section>
 <section id="prediction">
-<h2><span class="section-number">13.8. </span>Prediction<a class="headerlink" href="#prediction" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.9. </span>Prediction<a class="headerlink" href="#prediction" title="Link to this heading">#</a></h2>
 <p>Time series analysis can be used to investigate, and sometimes explain, the behavior of systems that vary in time.
 It can also make predictions.</p>
 <p>The linear regressions we used in Section <a class="reference internal" href="#timeregress"><span class="xref myst">[timeregress]</span></a>{reference-type=“ref” reference=“timeregress”} can be used for prediction.
@@ -2242,7 +3016,7 @@ But the most recent interval shows signs of decreasing prices, so models based o
 As a result, the widest predictive interval includes the possibility of decreasing prices over the next year.</p>
 </section>
 <section id="further-reading">
-<h2><span class="section-number">13.9. </span>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.10. </span>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
 <p>Time series analysis is a big topic; this chapter has only scratched the surface.
 An important tool for working with time series data is autoregression, which I did not cover here, mostly because it turns out not to be useful for the example data I worked with.</p>
 <p>But once you have learned the material in this chapter, you are well prepared to learn about autoregression.
@@ -2250,7 +3024,7 @@ One resource I recommend is Philipp Janert’s book, <em>Data Analysis with Open
 His chapter on time series analysis picks up where this one leaves off.</p>
 </section>
 <section id="glossary">
-<h2><span class="section-number">13.10. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.11. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>time series</strong>: A dataset where each value is associated with a timestamp, often a series of measurements and the times they were collected.</p></li>
 <li><p><strong>window</strong>: A sequence of consecutive values in a time series, often used to compute a moving average.</p></li>
@@ -2266,7 +3040,7 @@ His chapter on time series analysis picks up where this one leaves off.</p>
 </ul>
 </section>
 <section id="exercises">
-<h2><span class="section-number">13.11. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.12. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p><strong>Exercise:</strong>   The linear model I used in this chapter has the obvious drawback that it is linear, and there is no reason to expect prices to change linearly over time.
 We can add flexibility to the model by adding a quadratic term, as we did in Section 11.3.</p>
 <p>Use a quadratic model to fit the time series of daily prices, and use the model to generate predictions.
@@ -2809,7 +3583,7 @@ One of the simplest is something like this:</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">12. </span>Multiple Regression</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Regression</p>
       </div>
     </a>
     <a class="right-next"
@@ -2837,17 +3611,18 @@ One of the simplest is something like this:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-cleaning">13.1. Importing and cleaning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">13.2. Plotting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">13.3. Linear regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-averages">13.4. Moving averages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">13.5. Missing values</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-correlation">13.6. Serial correlation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation">13.7. Autocorrelation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">13.8. Prediction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">13.9. Further reading</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">13.10. Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.11. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dow-jones">13.1. The Dow Jones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-cleaning">13.2. Importing and cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">13.3. Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">13.4. Linear regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-averages">13.5. Moving averages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">13.6. Missing values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-correlation">13.7. Serial correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation">13.8. Autocorrelation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">13.9. Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">13.10. Further reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">13.11. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.12. Exercises</a></li>
 </ul>
   </nav></div>
 

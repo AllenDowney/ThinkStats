@@ -188,9 +188,9 @@
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Simple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Least Squares</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Multiple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">13. Time series analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap13.html">14. Survival analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap14.html">15. Analytic methods</a></li>
@@ -1481,10 +1481,20 @@ To be consistent with percentile and percentile rank”, it could be called a �
 Most often, it is called a <strong>cumulative probability</strong>.</p>
 </section>
 <section id="comparing-cdfs">
-<h2><span class="section-number">4.3. </span>Comparing CDFs<a class="headerlink" href="#comparing-cdfs" title="Link to this heading">#</a></h2>
+<span id="section-comparing-cdfs"></span><h2><span class="section-number">4.3. </span>Comparing CDFs<a class="headerlink" href="#comparing-cdfs" title="Link to this heading">#</a></h2>
 <p>CDFs are especially useful for comparing distributions.
 As an example, let’s compare the distribution of birth weights for first babies and others.
 We’ll load the NSFG dataset again, and divide it into three <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>: all live births, first babies, and others.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">statadict</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>statadict
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
@@ -1594,8 +1604,8 @@ We’ll load the NSFG dataset again, and divide it into three <code class="docut
             }, 500);
             </script></div>
 </div>
-<p>As we saw in Section xxx, first babies are a little lighter on average.
-But there are several ways a difference like that could happen – for example, there might be a small number of first babies who are especially light, or a small number of other babies who are especially heavy, but the result of the distribution might look the same.
+<p>It looks like first babies are a little lighter on average.
+But there are several ways a difference like that could happen – for example, there might be a small number of first babies who are especially light, or a small number of other babies who are especially heavy.
 In those cases, the distributions would have different shapes.
 As another possibility, the distributions might have the same shape, but different locations.</p>
 <p>To compare the distributions, we can try plotting the PMFs.</p>
@@ -2191,9 +2201,10 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
             }, 500);
             </script></div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">skew1</span> <span class="o">-</span> <span class="n">skew2</span><span class="p">)</span> <span class="o">/</span> <span class="n">skew2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># how much is skew1 off by?</span>
+<span class="p">(</span><span class="n">skew1</span> <span class="o">-</span> <span class="n">skew2</span><span class="p">)</span> <span class="o">/</span> <span class="n">skew2</span>
 </pre></div>
 </div>
 </div>
@@ -2203,9 +2214,9 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 52;
-                var nbb_unformatted_code = "(skew1 - skew2) / skew2";
-                var nbb_formatted_code = "(skew1 - skew2) / skew2";
+                var nbb_cell_id = 87;
+                var nbb_unformatted_code = "# how much is skew1 off by?\n(skew1 - skew2) / skew2";
+                var nbb_formatted_code = "# how much is skew1 off by?\n(skew1 - skew2) / skew2";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {

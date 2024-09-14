@@ -188,9 +188,9 @@
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Simple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Least Squares</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Multiple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">13. Time series analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap13.html">14. Survival analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap14.html">15. Analytic methods</a></li>
@@ -1473,6 +1473,16 @@ That’s a consequence of the Central Limit Theorem, which we’ll come back to 
 <p>But first let’s see how well the normal distribution fits real data.
 As an example, we’ll look at the distribution of birth weights in the National Survey of Family Growth (NSFG).
 We can use <code class="docutils literal notranslate"><span class="pre">read_fem_preg</span></code> to read the data, then select the <code class="docutils literal notranslate"><span class="pre">totalwgt_lb</span></code> column, which records birth weights in pounds.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">statadict</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>statadict
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
