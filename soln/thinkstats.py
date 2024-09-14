@@ -18,12 +18,26 @@ from scipy.stats import norm
 from scipy.stats import gaussian_kde
 from scipy.integrate import simpson
 
+from IPython.display import display
+from statsmodels.iolib.table import SimpleTable
+
 
 # Make the figures smaller to save some screen real estate.
 # The figures generated for the book have DPI 400, so scaling
 # them by a factor of 4 restores them to the size in the notebooks.
 plt.rcParams['figure.dpi'] = 75
 plt.rcParams['figure.figsize'] = [6, 3.5]
+
+
+def value_counts(series, **options):
+    """Counts the values in a series and returns sorted.
+
+    series: pd.Series
+
+    returns: pd.Series
+    """
+    options = underride(options, dropna=False)
+    return series.value_counts(**options).sort_index()
 
 
 ## Chapter 1
@@ -487,6 +501,28 @@ def make_pmf(sample, low, high):
     qs = np.linspace(low, high, 201)
     ps = kde(qs)
     return Pmf(ps, qs)
+
+## Chapter 10
+
+
+
+def display_summary(result):
+    """Prints summary statistics from a regression model.
+    
+    result: RegressionResults object
+    """
+    params = result.summary().tables[1]
+    display(params)
+
+    if hasattr(result, "rsquared"):
+        row = ["R-squared:", f"{result.rsquared:0.4}"]
+    elif hasattr(result, "prsquared"):
+        row = ["Pseudo R-squared:", f"{result.prsquared:0.4}"]
+    else:
+        return   
+    table = SimpleTable([row])
+    display(table)
+
 
 ## unassigned
 
