@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>15. Analytic methods &#8212; Think Stats, 3rd edition</title>
+    <title>14. Analytic methods &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Rip-off ETF?" href="ripoff_etf.html" />
-    <link rel="prev" title="14. Survival analysis" href="chap13.html" />
+    <link rel="prev" title="13. Survival analysis" href="chap13.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -189,11 +189,10 @@
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Least Squares</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">12. Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">13. Time series analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">14. Survival analysis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. Analytic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">13. Survival analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Analytic methods</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="nav bd-sidenav">
@@ -361,16 +360,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions">15.1. <code class="docutils literal notranslate"><span class="pre">Normal</span></code> distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distributions">15.2. Sampling distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-normal-distributions">15.3. Representing normal distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">15.4. Central limit theorem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-clt">15.5. Testing the CLT</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-clt">15.6. Applying the CLT</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-test">15.7. Correlation test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-test">15.8. Chi-squared test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">15.9. Discussion</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">15.10. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions">14.1. <code class="docutils literal notranslate"><span class="pre">Normal</span></code> distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distributions">14.2. Sampling distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-normal-distributions">14.3. Representing normal distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">14.4. Central limit theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-clt">14.5. Testing the CLT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-clt">14.6. Applying the CLT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-test">14.7. Correlation test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-test">14.8. Chi-squared test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">14.9. Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">14.10. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -383,7 +382,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="analytic-methods">
-<h1><span class="section-number">15. </span>Analytic methods<a class="headerlink" href="#analytic-methods" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">14. </span>Analytic methods<a class="headerlink" href="#analytic-methods" title="Link to this heading">#</a></h1>
 <p>This book has focused on computational methods like simulation and resampling, but some of the problems we solved have analytic solutions that can be much faster.</p>
 <p>I present some of these methods in this chapter, and explain how they work.
 At the end of the chapter, I make suggestions for integrating computational and analytic methods for exploratory data analysis.</p>
@@ -458,7 +457,7 @@ At the end of the chapter, I make suggestions for integrating computational and 
             </script></div>
 </div>
 <section id="normal-distributions">
-<h2><span class="section-number">15.1. </span><code class="docutils literal notranslate"><span class="pre">Normal</span></code> distributions<a class="headerlink" href="#normal-distributions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.1. </span><code class="docutils literal notranslate"><span class="pre">Normal</span></code> distributions<a class="headerlink" href="#normal-distributions" title="Link to this heading">#</a></h2>
 <p>As a motivating example, let’s review the problem from Section <a class="reference internal" href="#gorilla"><span class="xref myst">[gorilla]</span></a>{reference-type=“ref” reference=“gorilla”}:</p>
 <blockquote>
 <div><p>Suppose you are a scientist studying gorillas in a wildlife preserve.
@@ -501,7 +500,7 @@ If <span class="math notranslate nohighlight">\(Z = X + Y\)</span> and</p>
 \[Z \sim `Normal`~(n \mu_X, n \sigma_X^2)  \tag*{(3)}\]</div>
 </section>
 <section id="sampling-distributions">
-<h2><span class="section-number">15.2. </span>Sampling distributions<a class="headerlink" href="#sampling-distributions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.2. </span>Sampling distributions<a class="headerlink" href="#sampling-distributions" title="Link to this heading">#</a></h2>
 <p>Now we have everything we need to compute the sampling distribution of <span class="math notranslate nohighlight">\(\bar{x}\)</span>.
 Remember that we compute <span class="math notranslate nohighlight">\(\bar{x}\)</span> by weighing <span class="math notranslate nohighlight">\(n\)</span> gorillas, adding up the total weight, and dividing by <span class="math notranslate nohighlight">\(n\)</span>.</p>
 <p>Assume that the distribution of gorilla weights, <span class="math notranslate nohighlight">\(X\)</span>, is approximately normal:</p>
@@ -612,7 +611,7 @@ For the 90% confidence interval of <span class="math notranslate nohighlight">\(
 Again, this is consistent with the result we got by simulation.</p>
 </section>
 <section id="representing-normal-distributions">
-<h2><span class="section-number">15.3. </span>Representing normal distributions<a class="headerlink" href="#representing-normal-distributions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.3. </span>Representing normal distributions<a class="headerlink" href="#representing-normal-distributions" title="Link to this heading">#</a></h2>
 <p>To make these calculations easier, I have defined a class called <code class="docutils literal notranslate"><span class="pre">Normal</span></code> that represents a normal distribution and encodes the equations in the previous sections.
 Here’s what it looks like:</p>
 <p>So we can instantiate a <code class="docutils literal notranslate"><span class="pre">Normal</span></code> that represents the distribution of gorilla weights:</p>
@@ -705,7 +704,7 @@ Finally, <code class="docutils literal notranslate"><span class="pre">Normal</sp
 We’ll use the <code class="docutils literal notranslate"><span class="pre">Normal</span></code> class again later, but before we go on, we need one more bit of analysis.</p>
 </section>
 <section id="central-limit-theorem">
-<h2><span class="section-number">15.4. </span>Central limit theorem<a class="headerlink" href="#central-limit-theorem" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.4. </span>Central limit theorem<a class="headerlink" href="#central-limit-theorem" title="Link to this heading">#</a></h2>
 <p>As we saw in the previous sections, if we add values drawn from normal distributions, the distribution of the sum is normal.
 Most other distributions don’t have this property; if we add values drawn from other distributions, the sum does not generally have an analytic distribution.</p>
 <p>But if we add up <code class="docutils literal notranslate"><span class="pre">n</span></code> values from almost any distribution, the distribution of the sum converges to normal as <code class="docutils literal notranslate"><span class="pre">n</span></code> increases.</p>
@@ -727,7 +726,7 @@ Many characteristics of living things are affected by genetic and environmental 
 The characteristics we measure are the sum of a large number of small effects, so their distribution tends to be normal.</p>
 </section>
 <section id="testing-the-clt">
-<h2><span class="section-number">15.5. </span>Testing the CLT<a class="headerlink" href="#testing-the-clt" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.5. </span>Testing the CLT<a class="headerlink" href="#testing-the-clt" title="Link to this heading">#</a></h2>
 <p>To see how the Central Limit Theorem works, and when it doesn’t, let’s try some experiments.
 First, we’ll try an exponential distribution:</p>
 <div class="cell docutils container">
@@ -1174,7 +1173,7 @@ So even though CLT does not strictly apply when the values are correlated, moder
 Now let’s see how we can use it.</p>
 </section>
 <section id="applying-the-clt">
-<h2><span class="section-number">15.6. </span>Applying the CLT<a class="headerlink" href="#applying-the-clt" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.6. </span>Applying the CLT<a class="headerlink" href="#applying-the-clt" title="Link to this heading">#</a></h2>
 <p>To see why the Central Limit Theorem is useful, let’s get back to the example in Section XXX: testing the apparent difference in mean pregnancy length for first babies and others.
 As we’ve seen, the apparent difference is about 0.078 weeks:</p>
 <div class="cell docutils container">
@@ -1421,7 +1420,7 @@ For a two-sided test we would also compute</p>
 The sum of the tails is 0.168, which is consistent with the estimate in Section XXX, which was 0.17.</p>
 </section>
 <section id="correlation-test">
-<h2><span class="section-number">15.7. </span>Correlation test<a class="headerlink" href="#correlation-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.7. </span>Correlation test<a class="headerlink" href="#correlation-test" title="Link to this heading">#</a></h2>
 <p>In Section xxx we used a permutation test for the correlation between birth weight and mother’s age, and found that it is statistically significant, with p-value less than 0.001.</p>
 <p>Now we can do the same thing analytically.
 The method is based on this mathematical result: given two variables that are normally distributed and uncorrelated, if we generate a sample with size <span class="math notranslate nohighlight">\(n\)</span>, compute Pearson’s correlation, <span class="math notranslate nohighlight">\(r\)</span>, and then compute the transformed correlation $<span class="math notranslate nohighlight">\(t = r \sqrt{\frac{n-2}{1-r^2}}\)</span><span class="math notranslate nohighlight">\( the distribution of \)</span>t<span class="math notranslate nohighlight">\( is Student's t-distribution with parameter \)</span>n-2$.
@@ -1625,7 +1624,7 @@ This example demonstrates an advantage of the analytic method: we can compute ve
 But in practice it usually doesn’t matter.</p>
 </section>
 <section id="chi-squared-test">
-<h2><span class="section-number">15.8. </span>Chi-squared test<a class="headerlink" href="#chi-squared-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.8. </span>Chi-squared test<a class="headerlink" href="#chi-squared-test" title="Link to this heading">#</a></h2>
 <p>In Section XXX we used the chi-squared statistic to test whether a die is crooked.
 The chi-squared statistic measures the total normalized deviation from the expected values in a table:</p>
 <div class="math notranslate nohighlight">
@@ -1765,7 +1764,7 @@ They are very similar, especially in the tail, which is the part we usually care
 In this case the correct parameter is <code class="docutils literal notranslate"><span class="pre">n-1</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the size of the table, 6. Choosing this parameter can be tricky; to be honest, I am never confident that I have it right until I generate something like the previous figure to compare the analytic results to the resampling results.</p>
 </section>
 <section id="discussion">
-<h2><span class="section-number">15.9. </span>Discussion<a class="headerlink" href="#discussion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.9. </span>Discussion<a class="headerlink" href="#discussion" title="Link to this heading">#</a></h2>
 <p>This book focuses on computational methods like resampling and permutation.
 These methods have several advantages over analysis:</p>
 <ul class="simple">
@@ -1793,7 +1792,7 @@ Using analytic methods is one of several methods of optimization.</p></li>
 <p>For the vast majority of problems I have worked on, I didn’t have to go past Step 1.</p>
 </section>
 <section id="exercises">
-<h2><span class="section-number">15.10. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.10. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p><strong>Exercise:</strong>    In Section 5.4, we saw that the distribution of adult weights is approximately lognormal.
 One possible explanation is that the weight a person gains each year is proportional to their current weight.
 In that case, adult weight is the product of a large number of multiplicative factors:</p>
@@ -2013,7 +2012,7 @@ stderr 0.425205832509386
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>Survival analysis</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Survival analysis</p>
       </div>
     </a>
     <a class="right-next"
@@ -2041,16 +2040,16 @@ stderr 0.425205832509386
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions">15.1. <code class="docutils literal notranslate"><span class="pre">Normal</span></code> distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distributions">15.2. Sampling distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-normal-distributions">15.3. Representing normal distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">15.4. Central limit theorem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-clt">15.5. Testing the CLT</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-clt">15.6. Applying the CLT</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-test">15.7. Correlation test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-test">15.8. Chi-squared test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">15.9. Discussion</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">15.10. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions">14.1. <code class="docutils literal notranslate"><span class="pre">Normal</span></code> distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distributions">14.2. Sampling distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-normal-distributions">14.3. Representing normal distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">14.4. Central limit theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-clt">14.5. Testing the CLT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-clt">14.6. Applying the CLT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-test">14.7. Correlation test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-test">14.8. Chi-squared test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">14.9. Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">14.10. Exercises</a></li>
 </ul>
   </nav></div>
 
