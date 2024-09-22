@@ -1484,18 +1484,10 @@ Most often, it is called a <strong>cumulative probability</strong>.</p>
 <span id="section-comparing-cdfs"></span><h2><span class="section-number">4.3. </span>Comparing CDFs<a class="headerlink" href="#comparing-cdfs" title="Link to this heading">#</a></h2>
 <p>CDFs are especially useful for comparing distributions.
 As an example, let’s compare the distribution of birth weights for first babies and others.
-We’ll load the NSFG dataset again, and divide it into three <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>: all live births, first babies, and others.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">statadict</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>statadict
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
+We’ll load the NSFG dataset again, and divide it into three <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>: all live births, first babies, and others.
+Instructions for downloading the data are in the notebook for this chapter.</p>
+<p>The following cells download the data files and install <code class="docutils literal notranslate"><span class="pre">statadict</span></code>, which we need to read the data.</p>
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct&quot;</span><span class="p">)</span>
@@ -1521,6 +1513,33 @@ We’ll load the NSFG dataset again, and divide it into three <code class="docut
             }, 500);
             </script></div>
 </div>
+<div class="cell tag_remove-print docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">statadict</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>statadict
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 32;
+                var nbb_unformatted_code = "try:\n    import statadict\nexcept ImportError:\n    !pip install statadict";
+                var nbb_formatted_code = "try:\n    import statadict\nexcept ImportError:\n    !pip install statadict";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">get_nsfg_groups</span>
@@ -1532,7 +1551,7 @@ We’ll load the NSFG dataset again, and divide it into three <code class="docut
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 32;
+                var nbb_cell_id = 33;
                 var nbb_unformatted_code = "from nsfg import get_nsfg_groups\n\nlive, firsts, others = get_nsfg_groups()";
                 var nbb_formatted_code = "from nsfg import get_nsfg_groups\n\nlive, firsts, others = get_nsfg_groups()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1561,7 +1580,7 @@ We’ll load the NSFG dataset again, and divide it into three <code class="docut
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 33;
+                var nbb_cell_id = 34;
                 var nbb_unformatted_code = "first_weights = firsts[\"totalwgt_lb\"].dropna()\nfirst_weights.mean()";
                 var nbb_formatted_code = "first_weights = firsts[\"totalwgt_lb\"].dropna()\nfirst_weights.mean()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1589,7 +1608,7 @@ We’ll load the NSFG dataset again, and divide it into three <code class="docut
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 34;
+                var nbb_cell_id = 35;
                 var nbb_unformatted_code = "other_weights = others[\"totalwgt_lb\"].dropna()\nother_weights.mean()";
                 var nbb_formatted_code = "other_weights = others[\"totalwgt_lb\"].dropna()\nother_weights.mean()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1621,7 +1640,7 @@ As another possibility, the distributions might have the same shape, but differe
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 35;
+                var nbb_cell_id = 36;
                 var nbb_unformatted_code = "from empiricaldist import Pmf\n\nfirst_pmf = Pmf.from_seq(first_weights, name=\"first\")\nother_pmf = Pmf.from_seq(other_weights, name=\"other\")";
                 var nbb_formatted_code = "from empiricaldist import Pmf\n\nfirst_pmf = Pmf.from_seq(first_weights, name=\"first\")\nother_pmf = Pmf.from_seq(other_weights, name=\"other\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1650,7 +1669,7 @@ As another possibility, the distributions might have the same shape, but differe
 <img alt="_images/4201348653dc588345d4ad5bda0bc719704714bff53622e4a200c9b5a901d3c0.png" src="_images/4201348653dc588345d4ad5bda0bc719704714bff53622e4a200c9b5a901d3c0.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 36;
+                var nbb_cell_id = 37;
                 var nbb_unformatted_code = "from thinkstats import two_bar_plots\n\ntwo_bar_plots(first_pmf, other_pmf, width=0.06, alpha=0.5)\ndecorate(xlabel=\"Weight (pounds)\", ylabel=\"PMF\")";
                 var nbb_formatted_code = "from thinkstats import two_bar_plots\n\ntwo_bar_plots(first_pmf, other_pmf, width=0.06, alpha=0.5)\ndecorate(xlabel=\"Weight (pounds)\", ylabel=\"PMF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1682,7 +1701,7 @@ If they are big enough to smooth out noise, they might also smooth out useful in
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 37;
+                var nbb_cell_id = 38;
                 var nbb_unformatted_code = "first_cdf = first_pmf.make_cdf()\nother_cdf = other_pmf.make_cdf()";
                 var nbb_formatted_code = "first_cdf = first_pmf.make_cdf()\nother_cdf = other_pmf.make_cdf()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1710,7 +1729,7 @@ If they are big enough to smooth out noise, they might also smooth out useful in
 <img alt="_images/3632fd9317c2ef4ff9caee61b563eadba244b4c5f579aa9983828c1f230fd071.png" src="_images/3632fd9317c2ef4ff9caee61b563eadba244b4c5f579aa9983828c1f230fd071.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 38;
+                var nbb_cell_id = 39;
                 var nbb_unformatted_code = "first_cdf.plot()\nother_cdf.plot()\ndecorate(xlabel=\"Weight (pounds)\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "first_cdf.plot()\nother_cdf.plot()\ndecorate(xlabel=\"Weight (pounds)\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1738,7 +1757,7 @@ A single extreme value in a dataset can have a large effect on mean, standard de
 <p>To demonstrate, let’s load the NSFG data again without doing any data cleaning.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">read_stata</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">read_stata</span>
 
 <span class="n">dct_file</span> <span class="o">=</span> <span class="s2">&quot;2002FemPreg.dct&quot;</span>
 <span class="n">dat_file</span> <span class="o">=</span> <span class="s2">&quot;2002FemPreg.dat.gz&quot;</span>
@@ -1750,9 +1769,9 @@ A single extreme value in a dataset can have a large effect on mean, standard de
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 39;
-                var nbb_unformatted_code = "from thinkstats import read_stata\n\ndct_file = \"2002FemPreg.dct\"\ndat_file = \"2002FemPreg.dat.gz\"\n\npreg = read_stata(dct_file, dat_file)";
-                var nbb_formatted_code = "from thinkstats import read_stata\n\ndct_file = \"2002FemPreg.dct\"\ndat_file = \"2002FemPreg.dat.gz\"\n\npreg = read_stata(dct_file, dat_file)";
+                var nbb_cell_id = 41;
+                var nbb_unformatted_code = "from nsfg import read_stata\n\ndct_file = \"2002FemPreg.dct\"\ndat_file = \"2002FemPreg.dat.gz\"\n\npreg = read_stata(dct_file, dat_file)";
+                var nbb_formatted_code = "from nsfg import read_stata\n\ndct_file = \"2002FemPreg.dct\"\ndat_file = \"2002FemPreg.dat.gz\"\n\npreg = read_stata(dct_file, dat_file)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1776,7 +1795,7 @@ A single extreme value in a dataset can have a large effect on mean, standard de
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 40;
+                var nbb_cell_id = 42;
                 var nbb_unformatted_code = "birthwgt_lb = preg[\"birthwgt_lb\"]\nbirthwgt_oz = preg[\"birthwgt_oz\"]";
                 var nbb_formatted_code = "birthwgt_lb = preg[\"birthwgt_lb\"]\nbirthwgt_oz = preg[\"birthwgt_oz\"]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1851,7 +1870,7 @@ A single extreme value in a dataset can have a large effect on mean, standard de
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 41;
+                var nbb_cell_id = 43;
                 var nbb_unformatted_code = "from empiricaldist import Hist\n\nHist.from_seq(birthwgt_oz).tail(5)";
                 var nbb_formatted_code = "from empiricaldist import Hist\n\nHist.from_seq(birthwgt_oz).tail(5)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1924,7 +1943,7 @@ A single extreme value in a dataset can have a large effect on mean, standard de
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 42;
+                var nbb_cell_id = 44;
                 var nbb_unformatted_code = "Hist.from_seq(birthwgt_lb).tail(5)";
                 var nbb_formatted_code = "Hist.from_seq(birthwgt_lb).tail(5)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1953,7 +1972,7 @@ In one scenario, we clean these variables by replacing missing and invalid value
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 43;
+                var nbb_cell_id = 45;
                 var nbb_unformatted_code = "birthwgt_lb_clean = birthwgt_lb.replace([51, 97, 98, 99], np.nan)\nbirthwgt_oz_clean = birthwgt_oz.replace([97, 98, 99], np.nan)\n\ntotal_weight_clean = birthwgt_lb_clean + birthwgt_oz_clean / 16";
                 var nbb_formatted_code = "birthwgt_lb_clean = birthwgt_lb.replace([51, 97, 98, 99], np.nan)\nbirthwgt_oz_clean = birthwgt_oz.replace([97, 98, 99], np.nan)\n\ntotal_weight_clean = birthwgt_lb_clean + birthwgt_oz_clean / 16";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1978,7 +1997,7 @@ In one scenario, we clean these variables by replacing missing and invalid value
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 44;
+                var nbb_cell_id = 46;
                 var nbb_unformatted_code = "total_weight_bogus = birthwgt_lb + birthwgt_oz / 16";
                 var nbb_formatted_code = "total_weight_bogus = birthwgt_lb + birthwgt_oz / 16";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2010,7 +2029,7 @@ The bogus dataset contains only 49 bogus values, which is about 0.5% of the data
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 45;
+                var nbb_cell_id = 47;
                 var nbb_unformatted_code = "count1, count2 = total_weight_bogus.count(), total_weight_clean.count()\ndiff = count1 - count2\n\ndiff, diff / count2 * 100";
                 var nbb_formatted_code = "count1, count2 = total_weight_bogus.count(), total_weight_clean.count()\ndiff = count1 - count2\n\ndiff, diff / count2 * 100";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2039,7 +2058,7 @@ The bogus dataset contains only 49 bogus values, which is about 0.5% of the data
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 46;
+                var nbb_cell_id = 48;
                 var nbb_unformatted_code = "mean1, mean2 = total_weight_bogus.mean(), total_weight_clean.mean()\nmean1, mean2";
                 var nbb_formatted_code = "mean1, mean2 = total_weight_bogus.mean(), total_weight_clean.mean()\nmean1, mean2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2068,7 +2087,7 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 47;
+                var nbb_cell_id = 49;
                 var nbb_unformatted_code = "(mean1 - mean2) / mean2 * 100";
                 var nbb_formatted_code = "(mean1 - mean2) / mean2 * 100";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2097,7 +2116,7 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 48;
+                var nbb_cell_id = 50;
                 var nbb_unformatted_code = "std1, std2 = total_weight_bogus.std(), total_weight_clean.std()\nstd1, std2";
                 var nbb_formatted_code = "std1, std2 = total_weight_bogus.std(), total_weight_clean.std()\nstd1, std2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2124,7 +2143,7 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 49;
+                var nbb_cell_id = 51;
                 var nbb_unformatted_code = "(std1 - std2) / std2 * 100";
                 var nbb_formatted_code = "(std1 - std2) / std2 * 100";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2158,7 +2177,7 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 50;
+                var nbb_cell_id = 52;
                 var nbb_unformatted_code = "def skewness(seq):\n    \"\"\"Compute the skewness of a sequence\n\n    seq: sequence of numbers\n\n    returns: float skewness\n    \"\"\"\n    deviations = seq - seq.mean()\n    return np.mean(deviations**3) / seq.std(ddof=0) ** 3";
                 var nbb_formatted_code = "def skewness(seq):\n    \"\"\"Compute the skewness of a sequence\n\n    seq: sequence of numbers\n\n    returns: float skewness\n    \"\"\"\n    deviations = seq - seq.mean()\n    return np.mean(deviations**3) / seq.std(ddof=0) ** 3";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2186,7 +2205,7 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 51;
+                var nbb_cell_id = 53;
                 var nbb_unformatted_code = "skew1, skew2 = skewness(total_weight_bogus), skewness(total_weight_clean)\nskew1, skew2";
                 var nbb_formatted_code = "skew1, skew2 = skewness(total_weight_bogus), skewness(total_weight_clean)\nskew1, skew2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2214,7 +2233,7 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 87;
+                var nbb_cell_id = 54;
                 var nbb_unformatted_code = "# how much is skew1 off by?\n(skew1 - skew2) / skew2";
                 var nbb_formatted_code = "# how much is skew1 off by?\n(skew1 - skew2) / skew2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2251,7 +2270,7 @@ To demonstrate, let’s make a <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 53;
+                var nbb_cell_id = 55;
                 var nbb_unformatted_code = "cdf_total_weight_bogus = Cdf.from_seq(total_weight_bogus)\ncdf_total_weight_clean = Cdf.from_seq(total_weight_clean)";
                 var nbb_formatted_code = "cdf_total_weight_bogus = Cdf.from_seq(total_weight_bogus)\ncdf_total_weight_clean = Cdf.from_seq(total_weight_clean)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2278,7 +2297,7 @@ To demonstrate, let’s make a <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 54;
+                var nbb_cell_id = 56;
                 var nbb_unformatted_code = "def median(cdf):\n    m = cdf.inverse(0.5)\n    return m";
                 var nbb_formatted_code = "def median(cdf):\n    m = cdf.inverse(0.5)\n    return m";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2306,7 +2325,7 @@ To demonstrate, let’s make a <code class="docutils literal notranslate"><span 
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 55;
+                var nbb_cell_id = 57;
                 var nbb_unformatted_code = "median(cdf_total_weight_bogus), median(cdf_total_weight_clean)";
                 var nbb_formatted_code = "median(cdf_total_weight_bogus), median(cdf_total_weight_clean)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2336,7 +2355,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 56;
+                var nbb_cell_id = 58;
                 var nbb_unformatted_code = "def iqr(cdf):\n    low, high = cdf.inverse([0.25, 0.75])\n    return high - low";
                 var nbb_formatted_code = "def iqr(cdf):\n    low, high = cdf.inverse([0.25, 0.75])\n    return high - low";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2364,7 +2383,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 57;
+                var nbb_cell_id = 59;
                 var nbb_unformatted_code = "iqr(cdf_total_weight_bogus), iqr(cdf_total_weight_clean)";
                 var nbb_formatted_code = "iqr(cdf_total_weight_bogus), iqr(cdf_total_weight_clean)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2399,7 +2418,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 58;
+                var nbb_cell_id = 60;
                 var nbb_unformatted_code = "def quartile_skewness(cdf):\n    low, median, high = cdf.inverse([0.25, 0.5, 0.75])\n    midpoint = (high + low) / 2\n    semi_iqr = (high - low) / 2\n    return (midpoint - median) / semi_iqr";
                 var nbb_formatted_code = "def quartile_skewness(cdf):\n    low, median, high = cdf.inverse([0.25, 0.5, 0.75])\n    midpoint = (high + low) / 2\n    semi_iqr = (high - low) / 2\n    return (midpoint - median) / semi_iqr";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2428,7 +2447,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 59;
+                var nbb_cell_id = 61;
                 var nbb_unformatted_code = "qskew1 = quartile_skewness(cdf_total_weight_bogus)\nqskew2 = quartile_skewness(cdf_total_weight_clean)\nqskew1, qskew2";
                 var nbb_formatted_code = "qskew1 = quartile_skewness(cdf_total_weight_bogus)\nqskew2 = quartile_skewness(cdf_total_weight_clean)\nqskew1, qskew2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2462,7 +2481,7 @@ The following function implements this algorithm.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 60;
+                var nbb_cell_id = 62;
                 var nbb_unformatted_code = "def sample_from_cdf(cdf, n):\n    ps = np.random.random(size=n)\n    return cdf.inverse(ps)";
                 var nbb_formatted_code = "def sample_from_cdf(cdf, n):\n    ps = np.random.random(size=n)\n    return cdf.inverse(ps)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2486,7 +2505,7 @@ The following function implements this algorithm.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 61;
+                var nbb_cell_id = 63;
                 var nbb_unformatted_code = "sample = sample_from_cdf(cdf_speeds, 1633)";
                 var nbb_formatted_code = "sample = sample_from_cdf(cdf_speeds, 1633)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2510,7 +2529,7 @@ The following function implements this algorithm.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 62;
+                var nbb_cell_id = 64;
                 var nbb_unformatted_code = "cdf_sample = Cdf.from_seq(sample)";
                 var nbb_formatted_code = "cdf_sample = Cdf.from_seq(sample)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2535,10 +2554,10 @@ The following function implements this algorithm.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d1b549a12d11f4e465b096382834901b980aff6351df7aa9f9d5fb1d46aed5f7.png" src="_images/d1b549a12d11f4e465b096382834901b980aff6351df7aa9f9d5fb1d46aed5f7.png" />
+<img alt="_images/3aced69428481a52bc5d9aa2089cd019e18aff18b41e28d4002eb900cb86b6ce.png" src="_images/3aced69428481a52bc5d9aa2089cd019e18aff18b41e28d4002eb900cb86b6ce.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 63;
+                var nbb_cell_id = 65;
                 var nbb_unformatted_code = "cdf_speeds.plot(label=\"original\")\ncdf_sample.plot(label=\"sample\")\n\ndecorate(xlabel=\"Speed (mph)\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "cdf_speeds.plot(label=\"original\")\ncdf_sample.plot(label=\"sample\")\n\ndecorate(xlabel=\"Speed (mph)\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2567,7 +2586,7 @@ What do you think it will look like?</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 64;
+                var nbb_cell_id = 66;
                 var nbb_unformatted_code = "percentile_ranks = cdf_speeds(sample) * 100";
                 var nbb_formatted_code = "percentile_ranks = cdf_speeds(sample) * 100";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2593,10 +2612,10 @@ What do you think it will look like?</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/82e6bc66c1869a270b613247685bfcff8e85c5822d6ac3c41ce435a769bca2d9.png" src="_images/82e6bc66c1869a270b613247685bfcff8e85c5822d6ac3c41ce435a769bca2d9.png" />
+<img alt="_images/638e8f37f57c8b94e8b2a0af03ce61da74ccfa69711960a5761082407f784fc2.png" src="_images/638e8f37f57c8b94e8b2a0af03ce61da74ccfa69711960a5761082407f784fc2.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 65;
+                var nbb_cell_id = 67;
                 var nbb_unformatted_code = "cdf_percentile_rank = Cdf.from_seq(percentile_ranks)\ncdf_percentile_rank.plot()\n\ndecorate(xlabel=\"Percentile rank\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "cdf_percentile_rank = Cdf.from_seq(percentile_ranks)\ncdf_percentile_rank.plot()\n\ndecorate(xlabel=\"Percentile rank\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2624,7 +2643,7 @@ And that makes sense, because in any distribution, the proportion with percentil
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 66;
+                var nbb_cell_id = 68;
                 var nbb_unformatted_code = "sample = cdf_speeds.sample(1633)";
                 var nbb_formatted_code = "sample = cdf_speeds.sample(1633)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2675,7 +2694,7 @@ If you are in the 90th percentile or higher, call your mother back and apologize
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 67;
+                var nbb_cell_id = 69;
                 var nbb_unformatted_code = "from nsfg import get_nsfg_groups\n\nlive, firsts, others = get_nsfg_groups()";
                 var nbb_formatted_code = "from nsfg import get_nsfg_groups\n\nlive, firsts, others = get_nsfg_groups()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2709,7 +2728,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">query</s
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 71;
+                var nbb_cell_id = 73;
                 var nbb_unformatted_code = "male = live.query(\"babysex == 1\")\nfemale = live.query(\"babysex == 2\")\nlen(male), len(female)";
                 var nbb_formatted_code = "male = live.query(\"babysex == 1\")\nfemale = live.query(\"babysex == 2\")\nlen(male), len(female)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2745,7 +2764,7 @@ What are the differences in the shape and location of the distributions?</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 77;
+                var nbb_cell_id = 79;
                 var nbb_unformatted_code = "from nsfg import read_fem_preg\n\npreg = read_fem_preg()";
                 var nbb_formatted_code = "from nsfg import read_fem_preg\n\npreg = read_fem_preg()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2773,7 +2792,7 @@ What are the differences in the shape and location of the distributions?</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 82;
+                var nbb_cell_id = 84;
                 var nbb_unformatted_code = "speeds = results[\"MPH\"].values";
                 var nbb_formatted_code = "speeds = results[\"MPH\"].values";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2805,7 +2824,7 @@ Let’s see if that’s true.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 85;
+                var nbb_cell_id = 87;
                 var nbb_unformatted_code = "t = np.random.random(1000)";
                 var nbb_formatted_code = "t = np.random.random(1000)";
                 var nbb_cells = Jupyter.notebook.get_cells();

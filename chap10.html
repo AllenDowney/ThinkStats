@@ -442,6 +442,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "try:\n    import empiricaldist\nexcept ImportError:\n    !pip install empiricaldist";
+                var nbb_formatted_code = "try:\n    import empiricaldist\nexcept ImportError:\n    !pip install empiricaldist";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -456,7 +473,7 @@ document.write(`
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 3;
+                var nbb_cell_id = 4;
                 var nbb_unformatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_formatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -493,7 +510,7 @@ The data they collected is freely available – instructions for downloading it 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 83;
+                var nbb_cell_id = 5;
                 var nbb_unformatted_code = "download(\n    \"https://raw.githubusercontent.com/allisonhorst/palmerpenguins/c19a904462482430170bfe2c718775ddb7dbb885/inst/extdata/penguins_raw.csv\"\n)";
                 var nbb_formatted_code = "download(\n    \"https://raw.githubusercontent.com/allisonhorst/palmerpenguins/c19a904462482430170bfe2c718775ddb7dbb885/inst/extdata/penguins_raw.csv\"\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -521,7 +538,7 @@ The data they collected is freely available – instructions for downloading it 
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 5;
+                var nbb_cell_id = 6;
                 var nbb_unformatted_code = "penguins = pd.read_csv(\"penguins_raw.csv\").dropna(subset=[\"Body Mass (g)\"])\npenguins.shape";
                 var nbb_formatted_code = "penguins = pd.read_csv(\"penguins_raw.csv\").dropna(subset=[\"Body Mass (g)\"])\npenguins.shape";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -551,7 +568,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">query</s
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 6;
+                var nbb_cell_id = 7;
                 var nbb_unformatted_code = "adelie = penguins.query('Species.str.startswith(\"Adelie\")')\nlen(adelie)";
                 var nbb_formatted_code = "adelie = penguins.query('Species.str.startswith(\"Adelie\")')\nlen(adelie)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -581,7 +598,7 @@ First we’ll select these columns from the <code class="docutils literal notran
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 7;
+                var nbb_cell_id = 8;
                 var nbb_unformatted_code = "xvar = \"Flipper Length (mm)\"\nyvar = \"Body Mass (g)\"\n\nflipper_length = adelie[xvar]\nbody_mass = adelie[yvar]";
                 var nbb_formatted_code = "xvar = \"Flipper Length (mm)\"\nyvar = \"Body Mass (g)\"\n\nflipper_length = adelie[xvar]\nbody_mass = adelie[yvar]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -608,7 +625,7 @@ First we’ll select these columns from the <code class="docutils literal notran
 <img alt="_images/786517ba2d35124a5823366ab9612bdc792be47587b05582bb784beb6b018717.png" src="_images/786517ba2d35124a5823366ab9612bdc792be47587b05582bb784beb6b018717.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 8;
+                var nbb_cell_id = 9;
                 var nbb_unformatted_code = "plt.scatter(flipper_length, body_mass, marker=\".\", alpha=0.5)\ndecorate(xlabel=xvar, ylabel=yvar)";
                 var nbb_formatted_code = "plt.scatter(flipper_length, body_mass, marker=\".\", alpha=0.5)\ndecorate(xlabel=xvar, ylabel=yvar)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -636,7 +653,7 @@ First we’ll select these columns from the <code class="docutils literal notran
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 9;
+                var nbb_cell_id = 10;
                 var nbb_unformatted_code = "np.corrcoef(flipper_length, body_mass)[0, 1]";
                 var nbb_formatted_code = "np.corrcoef(flipper_length, body_mass)[0, 1]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -673,7 +690,7 @@ Here’s how we use it.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 10;
+                var nbb_cell_id = 11;
                 var nbb_unformatted_code = "from scipy.stats import linregress\n\nresult = linregress(flipper_length, body_mass)\nresult";
                 var nbb_formatted_code = "from scipy.stats import linregress\n\nresult = linregress(flipper_length, body_mass)\nresult";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -706,7 +723,7 @@ It might make more sense if we use the slope and intercept to evaluate the fitte
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 11;
+                var nbb_cell_id = 12;
                 var nbb_unformatted_code = "x = flipper_length.mean()\ny = result.intercept + result.slope * x\nx, y";
                 var nbb_formatted_code = "x = flipper_length.mean()\ny = result.intercept + result.slope * x\nx, y";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -734,7 +751,7 @@ It might make more sense if we use the slope and intercept to evaluate the fitte
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 12;
+                var nbb_cell_id = 13;
                 var nbb_unformatted_code = "def predict(result, xs):\n    ys = result.intercept + result.slope * xs\n    return ys";
                 var nbb_formatted_code = "def predict(result, xs):\n    ys = result.intercept + result.slope * xs\n    return ys";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -761,7 +778,7 @@ It might make more sense if we use the slope and intercept to evaluate the fitte
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 13;
+                var nbb_cell_id = 14;
                 var nbb_unformatted_code = "fit_xs = np.linspace(np.min(flipper_length), np.max(flipper_length))\nfit_ys = predict(result, fit_xs)";
                 var nbb_formatted_code = "fit_xs = np.linspace(np.min(flipper_length), np.max(flipper_length))\nfit_ys = predict(result, fit_xs)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -789,7 +806,7 @@ It might make more sense if we use the slope and intercept to evaluate the fitte
 <img alt="_images/eecafcbf4653be5906fa06ffde40147beb4a83ef3ac918d7d165e2bc1e1429e8.png" src="_images/eecafcbf4653be5906fa06ffde40147beb4a83ef3ac918d7d165e2bc1e1429e8.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 14;
+                var nbb_cell_id = 15;
                 var nbb_unformatted_code = "plt.scatter(flipper_length, body_mass, marker=\".\", alpha=0.5)\nplt.plot(fit_xs, fit_ys, color=\"C1\")\ndecorate(xlabel=xvar, ylabel=yvar)";
                 var nbb_formatted_code = "plt.scatter(flipper_length, body_mass, marker=\".\", alpha=0.5)\nplt.plot(fit_xs, fit_ys, color=\"C1\")\ndecorate(xlabel=xvar, ylabel=yvar)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -819,7 +836,7 @@ The following function computes these errors, which are also called <strong>resi
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 15;
+                var nbb_cell_id = 16;
                 var nbb_unformatted_code = "def compute_residuals(result, xs, ys):\n    fit_ys = predict(result, xs)\n    return ys - fit_ys";
                 var nbb_formatted_code = "def compute_residuals(result, xs, ys):\n    fit_ys = predict(result, xs)\n    return ys - fit_ys";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -844,7 +861,7 @@ The following function computes these errors, which are also called <strong>resi
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 16;
+                var nbb_cell_id = 17;
                 var nbb_unformatted_code = "residuals = compute_residuals(result, flipper_length, body_mass)";
                 var nbb_formatted_code = "residuals = compute_residuals(result, flipper_length, body_mass)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -874,7 +891,7 @@ The following function computes these errors, which are also called <strong>resi
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 17;
+                var nbb_cell_id = 18;
                 var nbb_unformatted_code = "x = flipper_length[0]\ny = predict(result, x)\nx, y";
                 var nbb_formatted_code = "x = flipper_length[0]\ny = predict(result, x)\nx, y";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -902,7 +919,7 @@ The following function computes these errors, which are also called <strong>resi
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 18;
+                var nbb_cell_id = 19;
                 var nbb_unformatted_code = "body_mass[0], residuals[0]";
                 var nbb_formatted_code = "body_mass[0], residuals[0]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -932,7 +949,7 @@ The following function computes these errors, which are also called <strong>resi
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 19;
+                var nbb_cell_id = 20;
                 var nbb_unformatted_code = "mse = np.mean(residuals**2)\nmse";
                 var nbb_formatted_code = "mse = np.mean(residuals**2)\nmse";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -966,7 +983,7 @@ In that case, the prediction errors are the deviations from the mean.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 20;
+                var nbb_cell_id = 21;
                 var nbb_unformatted_code = "deviations = body_mass - np.mean(body_mass)";
                 var nbb_formatted_code = "deviations = body_mass - np.mean(body_mass)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -994,7 +1011,7 @@ In that case, the prediction errors are the deviations from the mean.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 21;
+                var nbb_cell_id = 22;
                 var nbb_unformatted_code = "np.mean(deviations**2)";
                 var nbb_formatted_code = "np.mean(deviations**2)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1022,7 +1039,7 @@ In that case, the prediction errors are the deviations from the mean.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 22;
+                var nbb_cell_id = 23;
                 var nbb_unformatted_code = "np.var(body_mass)";
                 var nbb_formatted_code = "np.var(body_mass)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1050,7 +1067,7 @@ If we compute the ratio of these variances and subtract it from 1, the result in
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 23;
+                var nbb_cell_id = 24;
                 var nbb_unformatted_code = "def coefficient_of_determination(ys, residuals):\n    return 1 - np.var(residuals) / np.var(ys)";
                 var nbb_formatted_code = "def coefficient_of_determination(ys, residuals):\n    return 1 - np.var(residuals) / np.var(ys)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1079,7 +1096,7 @@ If we compute the ratio of these variances and subtract it from 1, the result in
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 24;
+                var nbb_cell_id = 25;
                 var nbb_unformatted_code = "R2 = coefficient_of_determination(body_mass, residuals)\nR2";
                 var nbb_formatted_code = "R2 = coefficient_of_determination(body_mass, residuals)\nR2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1110,7 +1127,7 @@ As you might guess, just based on the notation, <span class="math notranslate no
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 25;
+                var nbb_cell_id = 26;
                 var nbb_unformatted_code = "r = np.sqrt(R2)\nr";
                 var nbb_formatted_code = "r = np.sqrt(R2)\nr";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1139,7 +1156,7 @@ As you might guess, just based on the notation, <span class="math notranslate no
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 26;
+                var nbb_cell_id = 27;
                 var nbb_unformatted_code = "corr = np.corrcoef(flipper_length, body_mass)[0, 1]\ncorr";
                 var nbb_formatted_code = "corr = np.corrcoef(flipper_length, body_mass)[0, 1]\ncorr";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1167,7 +1184,7 @@ As you might guess, just based on the notation, <span class="math notranslate no
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 27;
+                var nbb_cell_id = 28;
                 var nbb_unformatted_code = "result.rvalue";
                 var nbb_formatted_code = "result.rvalue";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1206,12 +1223,12 @@ We won’t prove that, but we can test it by adding small random values to the i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>namespace(intercept=-2534.788485612038, slope=31.51552767819861)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>namespace(intercept=-2536.6741320174224, slope=33.61896590421531)
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 28;
+                var nbb_cell_id = 29;
                 var nbb_unformatted_code = "from types import SimpleNamespace\n\nintercept = result.intercept + np.random.normal(0, 1)\nslope = result.slope + np.random.normal(0, 1)\nfake_result = SimpleNamespace(intercept=intercept, slope=slope)\nfake_result";
                 var nbb_formatted_code = "from types import SimpleNamespace\n\nintercept = result.intercept + np.random.normal(0, 1)\nslope = result.slope + np.random.normal(0, 1)\nfake_result = SimpleNamespace(intercept=intercept, slope=slope)\nfake_result";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1237,7 +1254,7 @@ We won’t prove that, but we can test it by adding small random values to the i
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 29;
+                var nbb_cell_id = 30;
                 var nbb_unformatted_code = "fake_residuals = compute_residuals(fake_result, flipper_length, body_mass)\nfake_mse = np.mean(fake_residuals**2)";
                 var nbb_formatted_code = "fake_residuals = compute_residuals(fake_result, flipper_length, body_mass)\nfake_mse = np.mean(fake_residuals**2)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1260,12 +1277,12 @@ We won’t prove that, but we can test it by adding small random values to the i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(163098.85902884745, 225154.2587637279, True)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(163098.85902884745, 185239.44960298543, True)
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 30;
+                var nbb_cell_id = 31;
                 var nbb_unformatted_code = "mse, fake_mse, fake_mse > mse";
                 var nbb_formatted_code = "mse, fake_mse, fake_mse > mse";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1306,7 +1323,7 @@ The following function shows how.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 31;
+                var nbb_cell_id = 32;
                 var nbb_unformatted_code = "def least_squares(xs, ys):\n    xbar = np.mean(xs)\n    ybar = np.mean(ys)\n\n    xdev = xs - xbar\n    ydev = ys - ybar\n\n    slope = np.sum(xdev * ydev) / np.sum(xdev**2)\n    intercept = ybar - slope * xbar\n\n    return intercept, slope";
                 var nbb_formatted_code = "def least_squares(xs, ys):\n    xbar = np.mean(xs)\n    ybar = np.mean(ys)\n\n    xdev = xs - xbar\n    ydev = ys - ybar\n\n    slope = np.sum(xdev * ydev) / np.sum(xdev**2)\n    intercept = ybar - slope * xbar\n\n    return intercept, slope";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1335,7 +1352,7 @@ The following function shows how.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 32;
+                var nbb_cell_id = 33;
                 var nbb_unformatted_code = "intercept, slope = least_squares(flipper_length, body_mass)\nintercept, slope";
                 var nbb_formatted_code = "intercept, slope = least_squares(flipper_length, body_mass)\nintercept, slope";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1363,7 +1380,7 @@ The following function shows how.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 33;
+                var nbb_cell_id = 34;
                 var nbb_unformatted_code = "np.allclose([intercept, slope], [result.intercept, result.slope])";
                 var nbb_formatted_code = "np.allclose([intercept, slope], [result.intercept, result.slope])";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1399,7 +1416,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 34;
+                var nbb_cell_id = 35;
                 var nbb_unformatted_code = "def resample(df):\n    n = len(df)\n    return df.sample(n, replace=True)";
                 var nbb_formatted_code = "def resample(df):\n    n = len(df)\n    return df.sample(n, replace=True)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1427,7 +1444,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 35;
+                var nbb_cell_id = 36;
                 var nbb_unformatted_code = "def estimate_slope(df):\n    xs, ys = df[\"Flipper Length (mm)\"], df[\"Body Mass (g)\"]\n    result = linregress(xs, ys)\n    return result.slope";
                 var nbb_formatted_code = "def estimate_slope(df):\n    xs, ys = df[\"Flipper Length (mm)\"], df[\"Body Mass (g)\"]\n    result = linregress(xs, ys)\n    return result.slope";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1452,7 +1469,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 36;
+                var nbb_cell_id = 37;
                 var nbb_unformatted_code = "resampled_slopes = [estimate_slope(resample(adelie)) for i in range(1001)]";
                 var nbb_formatted_code = "resampled_slopes = [estimate_slope(resample(adelie)) for i in range(1001)]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1480,10 +1497,10 @@ Here’s what it looks like.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d5d44212ad413b26cb68f94314d2a3a8bca014103e64c9562174e13d6a5b0da3.png" src="_images/d5d44212ad413b26cb68f94314d2a3a8bca014103e64c9562174e13d6a5b0da3.png" />
+<img alt="_images/d514be828cad6172e417e444b853ded3b47e1c890c096b34a2575eea2790ec04.png" src="_images/d514be828cad6172e417e444b853ded3b47e1c890c096b34a2575eea2790ec04.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 37;
+                var nbb_cell_id = 38;
                 var nbb_unformatted_code = "from thinkstats import plot_kde\n\nplot_kde(resampled_slopes)\n\ndecorate(xlabel=\"Slope of the fitted line (g / mm)\", ylabel=\"Density\")";
                 var nbb_formatted_code = "from thinkstats import plot_kde\n\nplot_kde(resampled_slopes)\n\ndecorate(xlabel=\"Slope of the fitted line (g / mm)\", ylabel=\"Density\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1507,12 +1524,12 @@ Here’s what it looks like.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32.83168975115009 [25.8502323  40.87664045]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32.83168975115009 [25.70959875 40.96580407]
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 38;
+                var nbb_cell_id = 39;
                 var nbb_unformatted_code = "ci90 = np.percentile(resampled_slopes, [5, 95])\nprint(result.slope, ci90)";
                 var nbb_formatted_code = "ci90 = np.percentile(resampled_slopes, [5, 95])\nprint(result.slope, ci90)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1536,12 +1553,12 @@ Here’s what it looks like.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.6699434763284025
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.663133263255994
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 39;
+                var nbb_cell_id = 40;
                 var nbb_unformatted_code = "stderr = np.std(resampled_slopes)\nstderr";
                 var nbb_formatted_code = "stderr = np.std(resampled_slopes)\nstderr";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1569,7 +1586,7 @@ Here’s what it looks like.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 40;
+                var nbb_cell_id = 41;
                 var nbb_unformatted_code = "result.stderr";
                 var nbb_formatted_code = "result.stderr";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1598,7 +1615,7 @@ Here’s what it looks like.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 41;
+                var nbb_cell_id = 42;
                 var nbb_unformatted_code = "from scipy.stats import norm\n\nm, s = np.mean(resampled_slopes), np.std(resampled_slopes)\nsampling_dist = norm(m, s)";
                 var nbb_formatted_code = "from scipy.stats import norm\n\nm, s = np.mean(resampled_slopes), np.std(resampled_slopes)\nsampling_dist = norm(m, s)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1622,12 +1639,12 @@ Here’s what it looks like.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.189075860460712e-13
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.564638066114596e-13
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 42;
+                var nbb_cell_id = 43;
                 var nbb_unformatted_code = "p_value = sampling_dist.cdf(0)\np_value";
                 var nbb_formatted_code = "p_value = sampling_dist.cdf(0)\np_value";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1662,7 +1679,7 @@ The following function takes a resampled <code class="docutils literal notransla
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 43;
+                var nbb_cell_id = 44;
                 var nbb_unformatted_code = "def fit_line(df, fit_xs):\n    xs, ys = df[\"Flipper Length (mm)\"], df[\"Body Mass (g)\"]\n    result = linregress(xs, ys)\n    fit_ys = predict(result, fit_xs)\n    return fit_ys";
                 var nbb_formatted_code = "def fit_line(df, fit_xs):\n    xs, ys = df[\"Flipper Length (mm)\"], df[\"Body Mass (g)\"]\n    result = linregress(xs, ys)\n    fit_ys = predict(result, fit_xs)\n    return fit_ys";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1688,7 +1705,7 @@ The following function takes a resampled <code class="docutils literal notransla
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 44;
+                var nbb_cell_id = 45;
                 var nbb_unformatted_code = "xs = adelie[\"Flipper Length (mm)\"]\nfit_xs = np.linspace(np.min(xs), np.max(xs))";
                 var nbb_formatted_code = "xs = adelie[\"Flipper Length (mm)\"]\nfit_xs = np.linspace(np.min(xs), np.max(xs))";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1717,10 +1734,10 @@ The following function takes a resampled <code class="docutils literal notransla
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/489361ec75b47965ce6a1ec6e45263cd6c3008724b673cc3d51bc57bd998d2be.png" src="_images/489361ec75b47965ce6a1ec6e45263cd6c3008724b673cc3d51bc57bd998d2be.png" />
+<img alt="_images/108ffa84f1994e5e7ab8f4c07d3f2e3e39e9f6dd1bd61da5ff0a581d31342fda.png" src="_images/108ffa84f1994e5e7ab8f4c07d3f2e3e39e9f6dd1bd61da5ff0a581d31342fda.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 45;
+                var nbb_cell_id = 46;
                 var nbb_unformatted_code = "plt.scatter(flipper_length, body_mass, marker=\".\", alpha=0.5)\n\nfor i in range(101):\n    fit_ys = fit_line(resample(adelie), fit_xs)\n    plt.plot(fit_xs, fit_ys, color=\"C1\", alpha=0.05)\n\ndecorate(xlabel=xvar, ylabel=yvar)";
                 var nbb_formatted_code = "plt.scatter(flipper_length, body_mass, marker=\".\", alpha=0.5)\n\nfor i in range(101):\n    fit_ys = fit_line(resample(adelie), fit_xs)\n    plt.plot(fit_xs, fit_ys, color=\"C1\", alpha=0.05)\n\ndecorate(xlabel=xvar, ylabel=yvar)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1747,7 +1764,7 @@ We can do that by collecting the fitted lines as a list of arrays.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 46;
+                var nbb_cell_id = 47;
                 var nbb_unformatted_code = "fitted_ys = [fit_line(resample(adelie), fit_xs) for i in range(1001)]";
                 var nbb_formatted_code = "fitted_ys = [fit_line(resample(adelie), fit_xs) for i in range(1001)]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1773,7 +1790,7 @@ We can do that by collecting the fitted lines as a list of arrays.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 47;
+                var nbb_cell_id = 48;
                 var nbb_unformatted_code = "low, median, high = np.percentile(fitted_ys, [5, 50, 95], axis=0)";
                 var nbb_formatted_code = "low, median, high = np.percentile(fitted_ys, [5, 50, 95], axis=0)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1801,10 +1818,10 @@ We can do that by collecting the fitted lines as a list of arrays.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/061b18d979c7e44c4fdca98dcd81f3a354607d0c2190b59572d8a652d54cfefe.png" src="_images/061b18d979c7e44c4fdca98dcd81f3a354607d0c2190b59572d8a652d54cfefe.png" />
+<img alt="_images/ad57b99f269be28a5a310e239fb9c0848f085309689d81902d64ace9a87d6f83.png" src="_images/ad57b99f269be28a5a310e239fb9c0848f085309689d81902d64ace9a87d6f83.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 48;
+                var nbb_cell_id = 49;
                 var nbb_unformatted_code = "plt.scatter(flipper_length, body_mass, marker=\".\", alpha=0.5)\n\nplt.fill_between(fit_xs, low, high, color=\"C1\", lw=0, alpha=0.2)\nplt.plot(fit_xs, median, color=\"C1\")\n\ndecorate(xlabel=xvar, ylabel=yvar)";
                 var nbb_formatted_code = "plt.scatter(flipper_length, body_mass, marker=\".\", alpha=0.5)\n\nplt.fill_between(fit_xs, low, high, color=\"C1\", lw=0, alpha=0.2)\nplt.plot(fit_xs, median, color=\"C1\")\n\ndecorate(xlabel=xvar, ylabel=yvar)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1835,7 +1852,7 @@ To demonstrate, we’ll use heights and weights from the BRFSS, which we saw in 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 49;
+                var nbb_cell_id = 50;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1862,7 +1879,7 @@ To demonstrate, we’ll use heights and weights from the BRFSS, which we saw in 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 50;
+                var nbb_cell_id = 51;
                 var nbb_unformatted_code = "from thinkstats import read_brfss\n\nbrfss = read_brfss()";
                 var nbb_formatted_code = "from thinkstats import read_brfss\n\nbrfss = read_brfss()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1888,7 +1905,7 @@ To demonstrate, we’ll use heights and weights from the BRFSS, which we saw in 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 51;
+                var nbb_cell_id = 52;
                 var nbb_unformatted_code = "valid = brfss.dropna(subset=[\"htm3\", \"wtkg2\"])\nheights, weights = valid[\"htm3\"], valid[\"wtkg2\"]";
                 var nbb_formatted_code = "valid = brfss.dropna(subset=[\"htm3\", \"wtkg2\"])\nheights, weights = valid[\"htm3\"], valid[\"wtkg2\"]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1917,7 +1934,7 @@ To demonstrate, we’ll use heights and weights from the BRFSS, which we saw in 
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 52;
+                var nbb_cell_id = 53;
                 var nbb_unformatted_code = "result_brfss = linregress(heights, weights)\nresult_brfss.intercept, result_brfss.slope";
                 var nbb_formatted_code = "result_brfss = linregress(heights, weights)\nresult_brfss.intercept, result_brfss.slope";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1944,7 +1961,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">predict<
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 53;
+                var nbb_cell_id = 54;
                 var nbb_unformatted_code = "fit_xs = np.linspace(heights.min(), heights.max())\nfit_ys = predict(result_brfss, fit_xs)";
                 var nbb_formatted_code = "fit_xs = np.linspace(heights.min(), heights.max())\nfit_ys = predict(result_brfss, fit_xs)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1972,7 +1989,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">predict<
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 54;
+                var nbb_cell_id = 55;
                 var nbb_unformatted_code = "from thinkstats import jitter\n\njittered_heights = jitter(heights, 2)\njittered_weights = jitter(weights, 1.5)";
                 var nbb_formatted_code = "from thinkstats import jitter\n\njittered_heights = jitter(heights, 2)\njittered_weights = jitter(weights, 1.5)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1999,7 +2016,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">predict<
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 55;
+                var nbb_cell_id = 56;
                 var nbb_unformatted_code = "m, s = heights.mean(), heights.std()\nxlim = m - 4 * s, m + 4 * s\nylim = 0, 200";
                 var nbb_formatted_code = "m, s = heights.mean(), heights.std()\nxlim = m - 4 * s, m + 4 * s\nylim = 0, 200";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2024,10 +2041,10 @@ We can use <code class="docutils literal notranslate"><span class="pre">predict<
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/186e1ecfd3a4c86e9e70f159f1e68482096f73005837b4b7d7ae732d051ebfe4.png" src="_images/186e1ecfd3a4c86e9e70f159f1e68482096f73005837b4b7d7ae732d051ebfe4.png" />
+<img alt="_images/3c160949b6ebc447baaf499cb6ee781e1a5bab1191d75f8221a37824e9548e5d.png" src="_images/3c160949b6ebc447baaf499cb6ee781e1a5bab1191d75f8221a37824e9548e5d.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 56;
+                var nbb_cell_id = 57;
                 var nbb_unformatted_code = "plt.scatter(jittered_heights, jittered_weights, alpha=0.01, s=0.1)\nplt.plot(fit_xs, fit_ys, color=\"C1\")\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\", xlim=xlim, ylim=ylim)";
                 var nbb_formatted_code = "plt.scatter(jittered_heights, jittered_weights, alpha=0.01, s=0.1)\nplt.plot(fit_xs, fit_ys, color=\"C1\")\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\", xlim=xlim, ylim=ylim)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2055,7 +2072,7 @@ As we saw in Section xxx (Chapter 5), adult weights tend to follow a lognormal d
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 57;
+                var nbb_cell_id = 58;
                 var nbb_unformatted_code = "residuals = compute_residuals(result_brfss, heights, weights)";
                 var nbb_formatted_code = "residuals = compute_residuals(result_brfss, heights, weights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2085,7 +2102,7 @@ As we saw in Section xxx (Chapter 5), adult weights tend to follow a lognormal d
 <img alt="_images/d364f574e82bb202b429c9ba22d030afc0b28f7990fefb6a9fc3264bc1b4b969.png" src="_images/d364f574e82bb202b429c9ba22d030afc0b28f7990fefb6a9fc3264bc1b4b969.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 58;
+                var nbb_cell_id = 59;
                 var nbb_unformatted_code = "from thinkstats import make_pmf\n\npmf_kde = make_pmf(residuals, -60, 120)\npmf_kde.plot()\n\ndecorate(xlabel=\"Residual (kg)\", ylabel=\"Density\")";
                 var nbb_formatted_code = "from thinkstats import make_pmf\n\npmf_kde = make_pmf(residuals, -60, 120)\npmf_kde.plot()\n\ndecorate(xlabel=\"Residual (kg)\", ylabel=\"Density\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2118,7 +2135,7 @@ So let’s see what happens if we fit a line to the logarithms of weight as a fu
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 59;
+                var nbb_cell_id = 60;
                 var nbb_unformatted_code = "log_weights = np.log10(weights)\nresult_brfss2 = linregress(heights, log_weights)\nresult_brfss2.intercept, result_brfss2.slope";
                 var nbb_formatted_code = "log_weights = np.log10(weights)\nresult_brfss2 = linregress(heights, log_weights)\nresult_brfss2.intercept, result_brfss2.slope";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2145,7 +2162,7 @@ But we can use <code class="docutils literal notranslate"><span class="pre">pred
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 60;
+                var nbb_cell_id = 61;
                 var nbb_unformatted_code = "fit_xs = np.linspace(heights.min(), heights.max())\nfit_ys = predict(result_brfss2, fit_xs)";
                 var nbb_formatted_code = "fit_xs = np.linspace(heights.min(), heights.max())\nfit_ys = predict(result_brfss2, fit_xs)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2171,10 +2188,10 @@ But we can use <code class="docutils literal notranslate"><span class="pre">pred
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0f67e980f9387b324c8137b61e1801606a6d557c30c030744d01d4e9dccac526.png" src="_images/0f67e980f9387b324c8137b61e1801606a6d557c30c030744d01d4e9dccac526.png" />
+<img alt="_images/94c7305b9e85f65fa635dc64c83d962b77c8c9a521bb04134b40fd97d62c85cb.png" src="_images/94c7305b9e85f65fa635dc64c83d962b77c8c9a521bb04134b40fd97d62c85cb.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 61;
+                var nbb_cell_id = 62;
                 var nbb_unformatted_code = "jittered_log_weights = jitter(log_weights, 1.5)\nplt.scatter(jittered_heights, log_weights, alpha=0.01, s=0.1)\nplt.plot(fit_xs, fit_ys, color=\"C1\")\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (log10 kg)\", xlim=xlim)";
                 var nbb_formatted_code = "jittered_log_weights = jitter(log_weights, 1.5)\nplt.scatter(jittered_heights, log_weights, alpha=0.01, s=0.1)\nplt.plot(fit_xs, fit_ys, color=\"C1\")\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (log10 kg)\", xlim=xlim)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2200,7 +2217,7 @@ And the distribution of the residuals is roughly symmetric.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 62;
+                var nbb_cell_id = 63;
                 var nbb_unformatted_code = "residuals = compute_residuals(result, heights, log_weights)";
                 var nbb_formatted_code = "residuals = compute_residuals(result, heights, log_weights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2228,7 +2245,7 @@ And the distribution of the residuals is roughly symmetric.</p>
 <img alt="_images/5e7797e122c08ea02b0d950e1e211b348f3ab265a770b81f29adcb2aa7aad7f2.png" src="_images/5e7797e122c08ea02b0d950e1e211b348f3ab265a770b81f29adcb2aa7aad7f2.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 63;
+                var nbb_cell_id = 64;
                 var nbb_unformatted_code = "pmf_kde = make_pmf(residuals, -0.6, 0.6)\npmf_kde.plot()\n\ndecorate(xlabel=\"Residual (kg)\", ylabel=\"Density\")";
                 var nbb_formatted_code = "pmf_kde = make_pmf(residuals, -0.6, 0.6)\npmf_kde.plot()\n\ndecorate(xlabel=\"Residual (kg)\", ylabel=\"Density\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2257,7 +2274,7 @@ If we compare the <span class="math notranslate nohighlight">\(r\)</span> values
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 64;
+                var nbb_cell_id = 65;
                 var nbb_unformatted_code = "result_brfss.rvalue, result_brfss2.rvalue";
                 var nbb_formatted_code = "result_brfss.rvalue, result_brfss2.rvalue";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2285,7 +2302,7 @@ If we compare the <span class="math notranslate nohighlight">\(r\)</span> values
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 65;
+                var nbb_cell_id = 66;
                 var nbb_unformatted_code = "result_brfss.rvalue**2, result_brfss2.rvalue**2";
                 var nbb_formatted_code = "result_brfss.rvalue**2, result_brfss2.rvalue**2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2313,10 +2330,10 @@ Here’s what the fitted line looks like after the inverse transformation, along
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4bc88481012f01e296629ce6fbbe1aea0ee031867971925168d077e64b902eec.png" src="_images/4bc88481012f01e296629ce6fbbe1aea0ee031867971925168d077e64b902eec.png" />
+<img alt="_images/c6366db9dd257d030eb1454b37eb3469f138ab55a64a87a47d5c036b7eb52f7f.png" src="_images/c6366db9dd257d030eb1454b37eb3469f138ab55a64a87a47d5c036b7eb52f7f.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 66;
+                var nbb_cell_id = 67;
                 var nbb_unformatted_code = "plt.scatter(jittered_heights, jittered_weights, alpha=0.01, s=0.1)\nplt.plot(fit_xs, 10**fit_ys, color=\"C1\")\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\", xlim=xlim, ylim=ylim)";
                 var nbb_formatted_code = "plt.scatter(jittered_heights, jittered_weights, alpha=0.01, s=0.1)\nplt.plot(fit_xs, 10**fit_ys, color=\"C1\")\ndecorate(xlabel=\"Height (cm)\", ylabel=\"Weight (kg)\", xlim=xlim, ylim=ylim)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2369,7 +2386,7 @@ Which is a better predictor of weight, culmen length or flipper length?</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 67;
+                var nbb_cell_id = 68;
                 var nbb_unformatted_code = "xvar = \"Culmen Length (mm)\"\nyvar = \"Body Mass (g)\"\n\nculmen_length = adelie[xvar]\nbody_mass = adelie[yvar]";
                 var nbb_formatted_code = "xvar = \"Culmen Length (mm)\"\nyvar = \"Body Mass (g)\"\n\nculmen_length = adelie[xvar]\nbody_mass = adelie[yvar]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2411,7 +2428,7 @@ In the BRFSS dataset, we can compute BMI like this, after converting heights fro
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 77;
+                var nbb_cell_id = 78;
                 var nbb_unformatted_code = "heights_m = heights / 100\nbmis = weights / heights_m**2";
                 var nbb_formatted_code = "heights_m = heights / 100\nbmis = weights / heights_m**2";
                 var nbb_cells = Jupyter.notebook.get_cells();

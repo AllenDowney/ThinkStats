@@ -507,17 +507,9 @@ To understand probability density, let’s start by comparing distributions.</p>
 <p>In the previous chapter, when we compared discrete distributions, we used a bar plot to show their probability mass functions (PMFs).
 When we compared continuous distributions, we used a line plot to show their cumulative distribution functions (CDFs).</p>
 <p>For the discrete distributions, we could also have used CDFs.
-For example, here’s the PMF of a Poisson distribution with parameter <code class="docutils literal notranslate"><span class="pre">lam=2.2</span></code>, which is a good model for the distribution of household size in the NSFG.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">statadict</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>statadict
-</pre></div>
-</div>
-</div>
-</div>
+For example, here’s the PMF of a Poisson distribution with parameter <code class="docutils literal notranslate"><span class="pre">lam=2.2</span></code>, which is a good model for the distribution of household size in the NSFG.
+Instructions for downloading the data are in the notebook for this chapter.</p>
+<p>The following cells download the data files and install <code class="docutils literal notranslate"><span class="pre">statadict</span></code>, which we need to read the data.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
@@ -544,6 +536,33 @@ For example, here’s the PMF of a Poisson distribution with parameter <code cla
             }, 500);
             </script></div>
 </div>
+<div class="cell tag_remove-print docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">statadict</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>statadict
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "try:\n    import statadict\nexcept ImportError:\n    !pip install statadict";
+                var nbb_formatted_code = "try:\n    import statadict\nexcept ImportError:\n    !pip install statadict";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">read_fem_resp</span>
@@ -557,7 +576,7 @@ For example, here’s the PMF of a Poisson distribution with parameter <code cla
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 6;
+                var nbb_cell_id = 7;
                 var nbb_unformatted_code = "from nsfg import read_fem_resp\n\nresp = read_fem_resp()\nolder = resp.query(\"age >= 25\")\nnum_family = older[\"numfmhh\"]";
                 var nbb_formatted_code = "from nsfg import read_fem_resp\n\nresp = read_fem_resp()\nolder = resp.query(\"age >= 25\")\nnum_family = older[\"numfmhh\"]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -583,7 +602,7 @@ For example, here’s the PMF of a Poisson distribution with parameter <code cla
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 7;
+                var nbb_cell_id = 8;
                 var nbb_unformatted_code = "from empiricaldist import Pmf\n\npmf_family = Pmf.from_seq(num_family, name=\"data\")";
                 var nbb_formatted_code = "from empiricaldist import Pmf\n\npmf_family = Pmf.from_seq(num_family, name=\"data\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -611,7 +630,7 @@ For example, here’s the PMF of a Poisson distribution with parameter <code cla
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 8;
+                var nbb_cell_id = 9;
                 var nbb_unformatted_code = "from thinkstats import poisson_pmf\n\nlam = 2.2\nks = np.arange(11)\nps = poisson_pmf(ks, lam)";
                 var nbb_formatted_code = "from thinkstats import poisson_pmf\n\nlam = 2.2\nks = np.arange(11)\nps = poisson_pmf(ks, lam)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -635,7 +654,7 @@ For example, here’s the PMF of a Poisson distribution with parameter <code cla
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 9;
+                var nbb_cell_id = 10;
                 var nbb_unformatted_code = "pmf_poisson = Pmf(ps, ks, name=\"Poisson model\")";
                 var nbb_formatted_code = "pmf_poisson = Pmf(ps, ks, name=\"Poisson model\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -663,7 +682,7 @@ For example, here’s the PMF of a Poisson distribution with parameter <code cla
 <img alt="_images/01f8dd62e1081b034a15bdf410a7b8a1766636c9a87c21e31d5194cabb07dc7c.png" src="_images/01f8dd62e1081b034a15bdf410a7b8a1766636c9a87c21e31d5194cabb07dc7c.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 10;
+                var nbb_cell_id = 11;
                 var nbb_unformatted_code = "from thinkstats import two_bar_plots\n\ntwo_bar_plots(pmf_family, pmf_poisson)\ndecorate(xlabel=\"Number of family members\")";
                 var nbb_formatted_code = "from thinkstats import two_bar_plots\n\ntwo_bar_plots(pmf_family, pmf_poisson)\ndecorate(xlabel=\"Number of family members\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -692,7 +711,7 @@ Sometimes we can see the big picture more clearly by comparing CDFs.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 11;
+                var nbb_cell_id = 12;
                 var nbb_unformatted_code = "cdf_family = pmf_family.make_cdf()\ncdf_poisson = pmf_poisson.make_cdf()";
                 var nbb_formatted_code = "cdf_family = pmf_family.make_cdf()\ncdf_poisson = pmf_poisson.make_cdf()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -720,7 +739,7 @@ Sometimes we can see the big picture more clearly by comparing CDFs.</p>
 <img alt="_images/b0fd6c4e887a05ee50a09ba17d6550f6d849ee31d2de5492cd89229aca160fe5.png" src="_images/b0fd6c4e887a05ee50a09ba17d6550f6d849ee31d2de5492cd89229aca160fe5.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 12;
+                var nbb_cell_id = 13;
                 var nbb_unformatted_code = "from thinkstats import two_cdf_plots\n\ntwo_cdf_plots(cdf_poisson, cdf_family)\ndecorate(xlabel=\"Number of family members\")";
                 var nbb_formatted_code = "from thinkstats import two_cdf_plots\n\ntwo_cdf_plots(cdf_poisson, cdf_family)\ndecorate(xlabel=\"Number of family members\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -747,7 +766,7 @@ Sometimes we can see the big picture more clearly by comparing CDFs.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 13;
+                var nbb_cell_id = 14;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -774,7 +793,7 @@ Sometimes we can see the big picture more clearly by comparing CDFs.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 14;
+                var nbb_cell_id = 15;
                 var nbb_unformatted_code = "from nsfg import read_fem_preg\n\npreg = read_fem_preg()\nbirth_weights = preg[\"totalwgt_lb\"].dropna()";
                 var nbb_formatted_code = "from nsfg import read_fem_preg\n\npreg = read_fem_preg()\nbirth_weights = preg[\"totalwgt_lb\"].dropna()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -800,7 +819,7 @@ Sometimes we can see the big picture more clearly by comparing CDFs.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 15;
+                var nbb_cell_id = 16;
                 var nbb_unformatted_code = "from scipy.stats import trimboth\n\ntrimmed = trimboth(birth_weights, 0.01)";
                 var nbb_formatted_code = "from scipy.stats import trimboth\n\ntrimmed = trimboth(birth_weights, 0.01)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -826,7 +845,7 @@ Sometimes we can see the big picture more clearly by comparing CDFs.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 16;
+                var nbb_cell_id = 17;
                 var nbb_unformatted_code = "from thinkstats import make_normal_model\n\ncdf_model = make_normal_model(trimmed)";
                 var nbb_formatted_code = "from thinkstats import make_normal_model\n\ncdf_model = make_normal_model(trimmed)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -854,7 +873,7 @@ Sometimes we can see the big picture more clearly by comparing CDFs.</p>
 <img alt="_images/6c2fc1d648cc49d93887a25edcbe4b9981b614b52f1c54937132cd9ba392b13c.png" src="_images/6c2fc1d648cc49d93887a25edcbe4b9981b614b52f1c54937132cd9ba392b13c.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 17;
+                var nbb_cell_id = 18;
                 var nbb_unformatted_code = "from empiricaldist import Cdf\n\ncdf_birth_weight = Cdf.from_seq(birth_weights, name=\"sample\")\ntwo_cdf_plots(cdf_model, cdf_birth_weight, xlabel=\"Birth weight (pounds)\")";
                 var nbb_formatted_code = "from empiricaldist import Cdf\n\ncdf_birth_weight = Cdf.from_seq(birth_weights, name=\"sample\")\ntwo_cdf_plots(cdf_model, cdf_birth_weight, xlabel=\"Birth weight (pounds)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -892,7 +911,7 @@ Sometimes we can see the big picture more clearly by comparing CDFs.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 18;
+                var nbb_cell_id = 19;
                 var nbb_unformatted_code = "def normal_pdf(xs, mu, sigma):\n    \"\"\"Evaluates the normal probability density function.\n\n    xs: float or sequence of floats\n    mu: mean of the distribution\n    sigma: standard deviation of the distribution\n\n    returns: float or NumPy array of probability density\n    \"\"\"\n    z = (xs - mu) / sigma\n    return np.exp(-(z**2) / 2) / sigma / np.sqrt(2 * np.pi)";
                 var nbb_formatted_code = "def normal_pdf(xs, mu, sigma):\n    \"\"\"Evaluates the normal probability density function.\n\n    xs: float or sequence of floats\n    mu: mean of the distribution\n    sigma: standard deviation of the distribution\n\n    returns: float or NumPy array of probability density\n    \"\"\"\n    z = (xs - mu) / sigma\n    return np.exp(-(z**2) / 2) / sigma / np.sqrt(2 * np.pi)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -925,7 +944,7 @@ We can use it to create a <code class="docutils literal notranslate"><span class
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 19;
+                var nbb_cell_id = 20;
                 var nbb_unformatted_code = "from thinkstats import NormalPdf\n\nm, s = np.mean(trimmed), np.std(trimmed)\npdf_model = NormalPdf(m, s, name=\"normal model\")\npdf_model";
                 var nbb_formatted_code = "from thinkstats import NormalPdf\n\nm, s = np.mean(trimmed), np.std(trimmed)\npdf_model = NormalPdf(m, s, name=\"normal model\")\npdf_model";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -953,7 +972,7 @@ We can use it to create a <code class="docutils literal notranslate"><span class
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 20;
+                var nbb_cell_id = 21;
                 var nbb_unformatted_code = "low = m - 4 * s\nhigh = m + 4 * s\nqs = np.linspace(low, high, 201)\nps = pdf_model(qs)";
                 var nbb_formatted_code = "low = m - 4 * s\nhigh = m + 4 * s\nqs = np.linspace(low, high, 201)\nps = pdf_model(qs)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -980,7 +999,7 @@ We can use it to create a <code class="docutils literal notranslate"><span class
 <img alt="_images/2771a8ea2d474d2cbeec027676f9adec4c2a3889402856146d4e19866d96de49.png" src="_images/2771a8ea2d474d2cbeec027676f9adec4c2a3889402856146d4e19866d96de49.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 21;
+                var nbb_cell_id = 22;
                 var nbb_unformatted_code = "plt.plot(qs, ps, label=\"normal model\")\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"Density\")";
                 var nbb_formatted_code = "plt.plot(qs, ps, label=\"normal model\")\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"Density\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1010,7 +1029,7 @@ If we evaluate the PDF there, the result is a probability density.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 22;
+                var nbb_cell_id = 23;
                 var nbb_unformatted_code = "pdf_model(m)";
                 var nbb_formatted_code = "pdf_model(m)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1052,8 +1071,8 @@ It evaluates the normal PDF at equally-spaced quantities between <code class="do
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 23;
-                var nbb_unformatted_code = "from scipy.integrate import simpson\n\n\ndef area_under(pdf, low, high):\n    \"\"\"Find the area under a PDF.\n    \n    pdf: Pdf object\n    low: low end of the interval\n    high: high end of the interval\n    \"\"\"\n    qs = np.linspace(low, high, 501)\n    ps = pdf(qs)\n    return simpson(y=ps, x=qs)";
+                var nbb_cell_id = 24;
+                var nbb_unformatted_code = "from scipy.integrate import simpson\n\n\ndef area_under(pdf, low, high):\n    \"\"\"Find the area under a PDF.\n\n    pdf: Pdf object\n    low: low end of the interval\n    high: high end of the interval\n    \"\"\"\n    qs = np.linspace(low, high, 501)\n    ps = pdf(qs)\n    return simpson(y=ps, x=qs)";
                 var nbb_formatted_code = "from scipy.integrate import simpson\n\n\ndef area_under(pdf, low, high):\n    \"\"\"Find the area under a PDF.\n\n    pdf: Pdf object\n    low: low end of the interval\n    high: high end of the interval\n    \"\"\"\n    qs = np.linspace(low, high, 501)\n    ps = pdf(qs)\n    return simpson(y=ps, x=qs)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -1080,7 +1099,7 @@ It evaluates the normal PDF at equally-spaced quantities between <code class="do
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 24;
+                var nbb_cell_id = 25;
                 var nbb_unformatted_code = "area_under(pdf_model, 2, 12)";
                 var nbb_formatted_code = "area_under(pdf_model, 2, 12)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1109,7 +1128,7 @@ It evaluates the normal PDF at equally-spaced quantities between <code class="do
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 25;
+                var nbb_cell_id = 26;
                 var nbb_unformatted_code = "area_under(pdf_model, 0, 8.5)";
                 var nbb_formatted_code = "area_under(pdf_model, 0, 8.5)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1140,7 +1159,7 @@ So we could compute the same result using the CDF of the normal distribution.</p
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 26;
+                var nbb_cell_id = 27;
                 var nbb_unformatted_code = "from scipy.stats import norm\n\nnorm.cdf(8.5, m, s)";
                 var nbb_formatted_code = "from scipy.stats import norm\n\nnorm.cdf(8.5, m, s)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1168,7 +1187,7 @@ So we could compute the same result using the CDF of the normal distribution.</p
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 27;
+                var nbb_cell_id = 28;
                 var nbb_unformatted_code = "area_under(pdf_model, 6, 8)";
                 var nbb_formatted_code = "area_under(pdf_model, 6, 8)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1196,7 +1215,7 @@ So we could compute the same result using the CDF of the normal distribution.</p
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 28;
+                var nbb_cell_id = 29;
                 var nbb_unformatted_code = "norm.cdf(8, m, s) - norm.cdf(6, m, s)";
                 var nbb_formatted_code = "norm.cdf(8, m, s) - norm.cdf(6, m, s)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1237,7 +1256,7 @@ We used the following function to compute the exponential CDF.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 29;
+                var nbb_cell_id = 30;
                 var nbb_unformatted_code = "def exponential_cdf(x, lam):\n    \"\"\"Compute the exponential CDF.\n\n    x: float or sequence of floats\n    lam: rate parameter\n\n    returns: float or NumPy array of cumulative probability\n    \"\"\"\n    return 1 - np.exp(-lam * x)";
                 var nbb_formatted_code = "def exponential_cdf(x, lam):\n    \"\"\"Compute the exponential CDF.\n\n    x: float or sequence of floats\n    lam: rate parameter\n\n    returns: float or NumPy array of cumulative probability\n    \"\"\"\n    return 1 - np.exp(-lam * x)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1271,7 +1290,7 @@ We can compute the exponential PDF like this.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 30;
+                var nbb_cell_id = 31;
                 var nbb_unformatted_code = "def exponential_pdf(x, lam):\n    \"\"\"Evaluates the exponential PDF.\n\n    x: float or sequence of floats\n    lam: rate parameter\n\n    returns: float or NumPy array of probability density\n    \"\"\"\n    return lam * np.exp(-lam * x)";
                 var nbb_formatted_code = "def exponential_pdf(x, lam):\n    \"\"\"Evaluates the exponential PDF.\n\n    x: float or sequence of floats\n    lam: rate parameter\n\n    returns: float or NumPy array of probability density\n    \"\"\"\n    return lam * np.exp(-lam * x)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1304,7 +1323,7 @@ We can use one to represent an exponential distribution with rate parameter 6 go
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 31;
+                var nbb_cell_id = 32;
                 var nbb_unformatted_code = "from thinkstats import ExponentialPdf\n\nlam = 6\npdf_expo = ExponentialPdf(lam, name=\"model\")\npdf_expo";
                 var nbb_formatted_code = "from thinkstats import ExponentialPdf\n\nlam = 6\npdf_expo = ExponentialPdf(lam, name=\"model\")\npdf_expo";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1332,7 +1351,7 @@ We can use one to represent an exponential distribution with rate parameter 6 go
 <img alt="_images/c1019bd2307578031c7488df0c47aee05469c42136a15b1598108276da0e42cf.png" src="_images/c1019bd2307578031c7488df0c47aee05469c42136a15b1598108276da0e42cf.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 32;
+                var nbb_cell_id = 33;
                 var nbb_unformatted_code = "qs = np.linspace(0, 1.5, 201)\npdf_expo.plot(qs)\ndecorate(xlabel=\"Time (games)\", ylabel=\"Density\")";
                 var nbb_formatted_code = "qs = np.linspace(0, 1.5, 201)\npdf_expo.plot(qs)\ndecorate(xlabel=\"Time (games)\", ylabel=\"Density\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1362,7 +1381,7 @@ But the area under a density curve is a probability, so it should never be great
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 33;
+                var nbb_cell_id = 34;
                 var nbb_unformatted_code = "area_under(pdf_expo, 0, 1.5)";
                 var nbb_formatted_code = "area_under(pdf_expo, 0, 1.5)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1393,7 +1412,7 @@ Mathematically, it is exactly 1, as we can confirm using the exponential CDF.</p
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 34;
+                var nbb_cell_id = 35;
                 var nbb_unformatted_code = "from thinkstats import exponential_cdf\n\nexponential_cdf(7, lam)";
                 var nbb_formatted_code = "from thinkstats import exponential_cdf\n\nexponential_cdf(7, lam)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1422,7 +1441,7 @@ For example, here is the probability of a goal during the first minute of a 60-m
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 35;
+                var nbb_cell_id = 36;
                 var nbb_unformatted_code = "area_under(pdf_expo, 0, 1 / 60)";
                 var nbb_formatted_code = "area_under(pdf_expo, 0, 1 / 60)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1450,7 +1469,7 @@ For example, here is the probability of a goal during the first minute of a 60-m
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 36;
+                var nbb_cell_id = 37;
                 var nbb_unformatted_code = "exponential_cdf(1 / 60, lam)";
                 var nbb_formatted_code = "exponential_cdf(1 / 60, lam)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1480,7 +1499,7 @@ Here’s a <code class="docutils literal notranslate"><span class="pre">Pmf</spa
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 37;
+                var nbb_cell_id = 38;
                 var nbb_unformatted_code = "pmf_birth_weight = Pmf.from_seq(birth_weights, name=\"data\")";
                 var nbb_formatted_code = "pmf_birth_weight = Pmf.from_seq(birth_weights, name=\"data\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1510,7 +1529,7 @@ Here’s what happens if we plot them on the same axis.</p>
 <img alt="_images/c4dde542eea6a859a814c043c03edba4cf84511ab06d4a12ce9b1f6e6dc61063.png" src="_images/c4dde542eea6a859a814c043c03edba4cf84511ab06d4a12ce9b1f6e6dc61063.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 38;
+                var nbb_cell_id = 39;
                 var nbb_unformatted_code = "pmf_birth_weight.plot()\npdf_model.plot(color=\"gray\")\n\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"PMF? Density?\")";
                 var nbb_formatted_code = "pmf_birth_weight.plot()\npdf_model.plot(color=\"gray\")\n\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"PMF? Density?\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1539,7 +1558,7 @@ A <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 39;
+                var nbb_cell_id = 40;
                 var nbb_unformatted_code = "pmf_model = pdf_model.make_pmf()";
                 var nbb_formatted_code = "pmf_model = pdf_model.make_pmf()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1568,7 +1587,7 @@ A <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>
 <img alt="_images/9ddd9103b985364092f059ef8dfa13d589d6157987c5cad6995a74714d7c4d46.png" src="_images/9ddd9103b985364092f059ef8dfa13d589d6157987c5cad6995a74714d7c4d46.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 40;
+                var nbb_cell_id = 41;
                 var nbb_unformatted_code = "pmf_model.plot(color=\"gray\")\npmf_birth_weight.plot()\n\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"PMF\")";
                 var nbb_formatted_code = "pmf_model.plot(color=\"gray\")\npmf_birth_weight.plot()\n\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"PMF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1597,7 +1616,7 @@ One problem is that the two <code class="docutils literal notranslate"><span cla
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 41;
+                var nbb_cell_id = 42;
                 var nbb_unformatted_code = "len(pmf_model), len(pmf_birth_weight)";
                 var nbb_formatted_code = "len(pmf_model), len(pmf_birth_weight)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1630,7 +1649,7 @@ To show how that works, I’ll start with a small sample of the data.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 42;
+                var nbb_cell_id = 43;
                 var nbb_unformatted_code = "np.random.seed(3)\n\nn = 10\nsample = birth_weights.sample(n)";
                 var nbb_formatted_code = "np.random.seed(3)\n\nn = 10\nsample = birth_weights.sample(n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1661,7 +1680,7 @@ To show how that works, I’ll start with a small sample of the data.</p>
 <img alt="_images/d4da519be64ffcd67f999025412db85097a2d3fafa39805eeb33098a95524193.png" src="_images/d4da519be64ffcd67f999025412db85097a2d3fafa39805eeb33098a95524193.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 43;
+                var nbb_cell_id = 44;
                 var nbb_unformatted_code = "for weight in sample:\n    pmf = Pmf.from_seq([weight]) / n\n    pmf.bar(width=0.08, alpha=0.5)\n\nxlim = [1.5, 12.5]\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"PMF\", xlim=xlim)";
                 var nbb_formatted_code = "for weight in sample:\n    pmf = Pmf.from_seq([weight]) / n\n    pmf.bar(width=0.08, alpha=0.5)\n\nxlim = [1.5, 12.5]\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"PMF\", xlim=xlim)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1695,7 +1714,7 @@ We can represent that possibility by replacing each discrete probability mass wi
 <img alt="_images/bd2daec0182480aac5b135f27d619430160506baef0c579b4ad2356fca08184f.png" src="_images/bd2daec0182480aac5b135f27d619430160506baef0c579b4ad2356fca08184f.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 44;
+                var nbb_cell_id = 45;
                 var nbb_unformatted_code = "qs = np.linspace(2, 12, 201)\n\nfor weight in sample:\n    ps = NormalPdf(weight, 0.75)(qs) / n\n    plt.plot(qs, ps, alpha=0.5)\n\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"PDF\", xlim=xlim)";
                 var nbb_formatted_code = "qs = np.linspace(2, 12, 201)\n\nfor weight in sample:\n    ps = NormalPdf(weight, 0.75)(qs) / n\n    plt.plot(qs, ps, alpha=0.5)\n\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"PDF\", xlim=xlim)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1729,7 +1748,7 @@ We can represent that possibility by replacing each discrete probability mass wi
 <img alt="_images/a2f9cff8fe849b6b617f3e1b1ced495ad53f84e761484501098ec985cfd4a535.png" src="_images/a2f9cff8fe849b6b617f3e1b1ced495ad53f84e761484501098ec985cfd4a535.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 45;
+                var nbb_cell_id = 46;
                 var nbb_unformatted_code = "low_ps = np.zeros_like(qs)\n\nfor weight in sample:\n    ps = NormalPdf(weight, 0.75)(qs) / n\n    high_ps = low_ps + ps\n    plt.fill_between(qs, low_ps, high_ps, alpha=0.5, lw=0)\n    low_ps = high_ps\n\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"PDF\", xlim=xlim)";
                 var nbb_formatted_code = "low_ps = np.zeros_like(qs)\n\nfor weight in sample:\n    ps = NormalPdf(weight, 0.75)(qs) / n\n    high_ps = low_ps + ps\n    plt.fill_between(qs, low_ps, high_ps, alpha=0.5, lw=0)\n    low_ps = high_ps\n\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"PDF\", xlim=xlim)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1761,7 +1780,7 @@ Here’s how we can use it to estimate the distribution of birth weights.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 46;
+                var nbb_cell_id = 47;
                 var nbb_unformatted_code = "from scipy.stats import gaussian_kde\n\nkde = gaussian_kde(birth_weights)";
                 var nbb_formatted_code = "from scipy.stats import gaussian_kde\n\nkde = gaussian_kde(birth_weights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1786,7 +1805,7 @@ Here’s how we can use it to estimate the distribution of birth weights.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 47;
+                var nbb_cell_id = 48;
                 var nbb_unformatted_code = "ps = kde(qs)";
                 var nbb_formatted_code = "ps = kde(qs)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1814,7 +1833,7 @@ Here’s how we can use it to estimate the distribution of birth weights.</p>
 <img alt="_images/e439502495e67aa8555711c4477a4d2040303f8d93148134e876977273e24aa4.png" src="_images/e439502495e67aa8555711c4477a4d2040303f8d93148134e876977273e24aa4.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 48;
+                var nbb_cell_id = 49;
                 var nbb_unformatted_code = "plt.plot(qs, ps)\n\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"Density\")";
                 var nbb_formatted_code = "plt.plot(qs, ps)\n\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"Density\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1843,7 +1862,7 @@ Here’s how we make one.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 49;
+                var nbb_cell_id = 50;
                 var nbb_unformatted_code = "from thinkstats import Pdf\n\ndomain = np.min(birth_weights), np.max(birth_weights)\nkde_birth_weights = Pdf(kde, domain, name=\"data\")";
                 var nbb_formatted_code = "from thinkstats import Pdf\n\ndomain = np.min(birth_weights), np.max(birth_weights)\nkde_birth_weights = Pdf(kde, domain, name=\"data\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1872,7 +1891,7 @@ Here’s how we make one.</p>
 <img alt="_images/ed907e1c413ddc96de21643297f1556345fb5db8e3d1e4306af692ff638ef529.png" src="_images/ed907e1c413ddc96de21643297f1556345fb5db8e3d1e4306af692ff638ef529.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 50;
+                var nbb_cell_id = 51;
                 var nbb_unformatted_code = "kde_birth_weights.plot()\npdf_model.plot(color=\"gray\")\n\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"Density\")";
                 var nbb_formatted_code = "kde_birth_weights.plot()\npdf_model.plot(color=\"gray\")\n\ndecorate(xlabel=\"Birth weight (pounds)\", ylabel=\"Density\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1907,7 +1926,7 @@ For example, if we have a <code class="docutils literal notranslate"><span class
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 51;
+                var nbb_cell_id = 52;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/babyboom.dat\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/babyboom.dat\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1996,7 +2015,7 @@ For example, if we have a <code class="docutils literal notranslate"><span class
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 52;
+                var nbb_cell_id = 53;
                 var nbb_unformatted_code = "from thinkstats import read_baby_boom\n\nboom = read_baby_boom()\nboom.head()";
                 var nbb_formatted_code = "from thinkstats import read_baby_boom\n\nboom = read_baby_boom()\nboom.head()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2022,7 +2041,7 @@ So can use the <code class="docutils literal notranslate"><span class="pre">diff
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 53;
+                var nbb_cell_id = 54;
                 var nbb_unformatted_code = "diffs = boom[\"minutes\"].diff().dropna()";
                 var nbb_formatted_code = "diffs = boom[\"minutes\"].diff().dropna()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2053,7 +2072,7 @@ In reality, that assumption is not precisely true, but the exponential distribut
 <img alt="_images/adf6f9b1013cba6c0970c5827a1cceb1b17a009fc23fb7f5022dc171bcc6cee9.png" src="_images/adf6f9b1013cba6c0970c5827a1cceb1b17a009fc23fb7f5022dc171bcc6cee9.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 54;
+                var nbb_cell_id = 55;
                 var nbb_unformatted_code = "pmf_diffs = Pmf.from_seq(diffs, name=\"data\")\npmf_diffs.bar(width=1)\n\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"PMF\")";
                 var nbb_formatted_code = "pmf_diffs = Pmf.from_seq(diffs, name=\"data\")\npmf_diffs.bar(width=1)\n\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"PMF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2082,7 +2101,7 @@ In reality, that assumption is not precisely true, but the exponential distribut
 <img alt="_images/8657bceb6ebce11db212f09fd7f2e39dc45cb24dff5547947954319326df52bb.png" src="_images/8657bceb6ebce11db212f09fd7f2e39dc45cb24dff5547947954319326df52bb.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 55;
+                var nbb_cell_id = 56;
                 var nbb_unformatted_code = "cdf_diffs = pmf_diffs.make_cdf()\ncdf_diffs.step(color=\"C1\")\n\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "cdf_diffs = pmf_diffs.make_cdf()\ncdf_diffs.step(color=\"C1\")\n\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2108,7 +2127,7 @@ To demonstrate, we’ll use the <code class="docutils literal notranslate"><span
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 56;
+                var nbb_cell_id = 57;
                 var nbb_unformatted_code = "pmf_diffs2 = cdf_diffs.make_pmf()";
                 var nbb_formatted_code = "pmf_diffs2 = cdf_diffs.make_pmf()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2137,7 +2156,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">allclose
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 57;
+                var nbb_cell_id = 58;
                 var nbb_unformatted_code = "np.allclose(pmf_diffs, pmf_diffs2)";
                 var nbb_formatted_code = "np.allclose(pmf_diffs, pmf_diffs2)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2163,7 +2182,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">allclose
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 58;
+                var nbb_cell_id = 59;
                 var nbb_unformatted_code = "kde = gaussian_kde(pmf_diffs.qs, weights=pmf_diffs.ps)";
                 var nbb_formatted_code = "kde = gaussian_kde(pmf_diffs.qs, weights=pmf_diffs.ps)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2192,7 +2211,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">allclose
 <img alt="_images/9953dd90e1fb8c63bbe1d3b5f7d38cf323ab485c36c0b00929b130f0e4f3b880.png" src="_images/9953dd90e1fb8c63bbe1d3b5f7d38cf323ab485c36c0b00929b130f0e4f3b880.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 59;
+                var nbb_cell_id = 60;
                 var nbb_unformatted_code = "domain = np.min(pmf_diffs.qs), np.max(pmf_diffs.qs)\nkde_diffs = Pdf(kde, domain=domain, name=\"estimated density\")\n\nkde_diffs.plot()\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"Density\")";
                 var nbb_formatted_code = "domain = np.min(pmf_diffs.qs), np.max(pmf_diffs.qs)\nkde_diffs = Pdf(kde, domain=domain, name=\"estimated density\")\n\nkde_diffs.plot()\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"Density\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2219,7 +2238,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">allclose
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 60;
+                var nbb_cell_id = 61;
                 var nbb_unformatted_code = "m = diffs.mean()\nlam = 1 / m\npdf_model = ExponentialPdf(lam, name=\"exponential PDF\")";
                 var nbb_formatted_code = "m = diffs.mean()\nlam = 1 / m\npdf_model = ExponentialPdf(lam, name=\"exponential PDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2247,7 +2266,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">allclose
 <img alt="_images/29ead44fb9e7b12a323e2e6482169d179dfb21fc1e4b79bf741adbd32d44d853.png" src="_images/29ead44fb9e7b12a323e2e6482169d179dfb21fc1e4b79bf741adbd32d44d853.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 61;
+                var nbb_cell_id = 62;
                 var nbb_unformatted_code = "pdf_model.plot(color=\"gray\")\nkde_diffs.plot()\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"Density\")";
                 var nbb_formatted_code = "pdf_model.plot(color=\"gray\")\nkde_diffs.plot()\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"Density\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2281,7 +2300,7 @@ But that might be misleading – again, I think comparing CDFs provides the clea
 <img alt="_images/a004a57306625469fd4d16222fc5a4f3ceb6b7056c6402f1a7cb47578dbf9566.png" src="_images/a004a57306625469fd4d16222fc5a4f3ceb6b7056c6402f1a7cb47578dbf9566.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 62;
+                var nbb_cell_id = 63;
                 var nbb_unformatted_code = "from thinkstats import ExponentialCdf\n\ncdf_model = ExponentialCdf(lam, name=\"exponential CDF\")\ncdf_model.plot(color=\"gray\")\ncdf_diffs.step(color=\"C1\")\n\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "from thinkstats import ExponentialCdf\n\ncdf_model = ExponentialCdf(lam, name=\"exponential CDF\")\ncdf_model.plot(color=\"gray\")\ncdf_diffs.step(color=\"C1\")\n\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2312,7 +2331,7 @@ But that might be misleading – again, I think comparing CDFs provides the clea
 <img alt="_images/8976ca235be9c877832e64a5928aaf67c79efea11c2354f8cc2b0538e546eb5a.png" src="_images/8976ca235be9c877832e64a5928aaf67c79efea11c2354f8cc2b0538e546eb5a.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 63;
+                var nbb_cell_id = 64;
                 var nbb_unformatted_code = "qs = np.linspace(0, 175, 31)\npmf_model = pdf_model.make_pmf(qs)\npmf_model.bar(width=2)\n\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"PMF\")";
                 var nbb_formatted_code = "qs = np.linspace(0, 175, 31)\npmf_model = pdf_model.make_pmf(qs)\npmf_model.bar(width=2)\n\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"PMF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2341,7 +2360,7 @@ But that might be misleading – again, I think comparing CDFs provides the clea
 <img alt="_images/ba59d84cc620082e6b950e2617ff401e70d9629e1ac4f8dab55264f62a46a629.png" src="_images/ba59d84cc620082e6b950e2617ff401e70d9629e1ac4f8dab55264f62a46a629.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 64;
+                var nbb_cell_id = 65;
                 var nbb_unformatted_code = "discrete_cdf_model = cdf_model.make_cdf(qs)\ndiscrete_cdf_model.step()\n\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "discrete_cdf_model = cdf_model.make_cdf(qs)\ndiscrete_cdf_model.step()\n\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2369,7 +2388,7 @@ But that might be misleading – again, I think comparing CDFs provides the clea
 <img alt="_images/dbffae86a7b9164cbd653ea44682b4fb268f9b6865076653ba1a48e114d4ebb0.png" src="_images/dbffae86a7b9164cbd653ea44682b4fb268f9b6865076653ba1a48e114d4ebb0.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 65;
+                var nbb_cell_id = 66;
                 var nbb_unformatted_code = "discrete_cdf_model.plot()\n\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "discrete_cdf_model.plot()\n\ndecorate(xlabel=\"Interval (minutes)\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2403,7 +2422,7 @@ But that might be misleading – again, I think comparing CDFs provides the clea
 \[\displaystyle 1 - e^{- x λ}\]</div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 66;
+                var nbb_cell_id = 67;
                 var nbb_unformatted_code = "import sympy as sp\n\nx = sp.Symbol(\"x\", real=True, positive=True)\n\u03bb = sp.Symbol(\"\u03bb\", real=True, positive=True)\n\ncdf = 1 - sp.exp(-\u03bb * x)\ncdf";
                 var nbb_formatted_code = "import sympy as sp\n\nx = sp.Symbol(\"x\", real=True, positive=True)\n\u03bb = sp.Symbol(\"\u03bb\", real=True, positive=True)\n\ncdf = 1 - sp.exp(-\u03bb * x)\ncdf";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2430,7 +2449,7 @@ But that might be misleading – again, I think comparing CDFs provides the clea
 \[\displaystyle λ e^{- x λ}\]</div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 67;
+                var nbb_cell_id = 68;
                 var nbb_unformatted_code = "pdf = sp.diff(cdf, x)\npdf";
                 var nbb_formatted_code = "pdf = sp.diff(cdf, x)\npdf";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2457,7 +2476,7 @@ But that might be misleading – again, I think comparing CDFs provides the clea
 \[\displaystyle - e^{- x λ}\]</div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 68;
+                var nbb_cell_id = 69;
                 var nbb_unformatted_code = "sp.integrate(pdf, x)";
                 var nbb_formatted_code = "sp.integrate(pdf, x)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2506,7 +2525,7 @@ Let’s see what fraction of the male adult population in the United States meet
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 74;
+                var nbb_cell_id = 75;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2534,7 +2553,7 @@ Let’s see what fraction of the male adult population in the United States meet
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 75;
+                var nbb_cell_id = 76;
                 var nbb_unformatted_code = "from thinkstats import read_brfss\n\nbrfss = read_brfss()\nmale = brfss.query(\"sex == 1\")\nheights = male[\"htm3\"].dropna()";
                 var nbb_formatted_code = "from thinkstats import read_brfss\n\nbrfss = read_brfss()\nmale = brfss.query(\"sex == 1\")\nheights = male[\"htm3\"].dropna()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2565,7 +2584,7 @@ Let’s see what fraction of the male adult population in the United States meet
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 76;
+                var nbb_cell_id = 77;
                 var nbb_unformatted_code = "from scipy.stats import trimboth\n\ntrimmed = trimboth(heights, 0.01)\nm, s = np.mean(trimmed), np.std(trimmed)\nm, s";
                 var nbb_formatted_code = "from scipy.stats import trimboth\n\ntrimmed = trimboth(heights, 0.01)\nm, s = np.mean(trimmed), np.std(trimmed)\nm, s";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2592,7 +2611,7 @@ Let’s see what fraction of the male adult population in the United States meet
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 77;
+                var nbb_cell_id = 78;
                 var nbb_unformatted_code = "from thinkstats import NormalCdf\n\ncdf_normal_model = NormalCdf(m, s)";
                 var nbb_formatted_code = "from thinkstats import NormalCdf\n\ncdf_normal_model = NormalCdf(m, s)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2623,7 +2642,7 @@ Let’s see what fraction of the male adult population in the United States meet
 <img alt="_images/4c89a230d5f676ee91b20ef3738e4a64770128ce76a668a5da4c666fd7418949.png" src="_images/4c89a230d5f676ee91b20ef3738e4a64770128ce76a668a5da4c666fd7418949.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 78;
+                var nbb_cell_id = 79;
                 var nbb_unformatted_code = "cdf_height = Cdf.from_seq(heights, name=\"data\")\ncdf_normal_model.plot(color=\"gray\")\ncdf_height.step()\n\nxlim = [140, 210]\ndecorate(xlabel=\"Height (cm)\", ylabel=\"CDF\", xlim=xlim)";
                 var nbb_formatted_code = "cdf_height = Cdf.from_seq(heights, name=\"data\")\ncdf_normal_model.plot(color=\"gray\")\ncdf_height.step()\n\nxlim = [140, 210]\ndecorate(xlabel=\"Height (cm)\", ylabel=\"CDF\", xlim=xlim)";
                 var nbb_cells = Jupyter.notebook.get_cells();
