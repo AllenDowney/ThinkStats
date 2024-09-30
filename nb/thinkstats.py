@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 import scipy
 
-from empiricaldist import Pmf, Cdf
+from empiricaldist import Hist, Pmf, Cdf, Hazard
 
 from scipy.stats import norm
 from scipy.stats import gaussian_kde
@@ -27,6 +27,11 @@ from statsmodels.iolib.table import SimpleTable
 # them by a factor of 4 restores them to the size in the notebooks.
 plt.rcParams['figure.dpi'] = 75
 plt.rcParams['figure.figsize'] = [6, 3.5]
+
+def remove_spines():
+    """Remove the spines of a plot."""
+    for spine in plt.gca().spines.values():
+        spine.set_visible(False)
 
 
 def value_counts(series, **options):
@@ -524,6 +529,31 @@ def display_summary(result):
     display(table)
 
 
+
+## Chapter 13
+
+def estimate_hazard(complete, ongoing):
+    """Estimates the hazard function.
+
+    complete: sequence of complete lifetimes
+    ongoing: sequence of ongoing lifetimes
+
+    returns: Hazard object
+    """
+    hist_complete = Hist.from_seq(complete)
+    hist_ongoing = Hist.from_seq(ongoing)
+
+    surv_complete = hist_complete.make_surv()
+    surv_ongoing = hist_ongoing.make_surv()
+
+    ts = pd.Index.union(hist_complete.index, hist_ongoing.index)
+
+    at_risk = hist_complete(ts) + hist_ongoing(ts) + surv_complete(ts) + surv_ongoing(ts)
+
+    hs = hist_complete(ts) / at_risk
+
+    return Hazard(hs, ts)
+
 ## unassigned
 
 
@@ -891,8 +921,6 @@ def resample_rows_weighted(df, column="finalwgt"):
     n = len(df)
     weights = df[column]
     return df.sample(n, weights=weights, replace=True)
-
-
 
 
 def summarize_results(results):

@@ -31,6 +31,7 @@ def read_stata(dct_file, dat_file, **options):
     )
     return resp
 
+
 def read_fem_resp(dct_file="2002FemResp.dct", dat_file="2002FemResp.dat.gz"):
     """Read the 2002 NSFG respondent file.
 
