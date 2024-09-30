@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>11. Regression &#8212; Think Stats, 3rd edition</title>
+    <title>11. Regression &#8212; Think Stats</title>
   
   
   
@@ -149,7 +149,7 @@
   
   
   
-    <p class="title logo__title">Think Stats, 3rd edition</p>
+    <p class="title logo__title">Think Stats</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -179,7 +179,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
@@ -390,7 +390,40 @@ document.write(`
 <p>In the examples in the previous chapter, there is only one dependent and one explanatory variable, which is called <strong>simple regression</strong>.
 In this chapter, we move on to <strong>multiple regression</strong>, with more than one explanatory variable, but still only one dependent variable.
 If there is more than one dependent variable, that’s multivariate regression, which we won’t cover in this book.</p>
-<div class="cell tag_hide-cell docutils container">
+<p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkStats/blob/v3/nb/chap11.ipynb">Click here to run this notebook on Colab</a>.</p>
+<div class="cell tag_remove-print tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> nb_black
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 1;
+                var nbb_unformatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_formatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</details>
+</div>
+<div class="cell tag_remove-print tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell content</span>
@@ -432,7 +465,12 @@ If there is more than one dependent variable, that’s multivariate regression, 
             </script></div>
 </details>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_remove-print tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">empiricaldist</span>
@@ -458,8 +496,14 @@ If there is more than one dependent variable, that’s multivariate regression, 
                 }
             }, 500);
             </script></div>
+</details>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_remove-print tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -486,6 +530,7 @@ If there is more than one dependent variable, that’s multivariate regression, 
                 }
             }, 500);
             </script></div>
+</details>
 </div>
 <section id="statsmodels">
 <h2><span class="section-number">11.1. </span>StatsModels<a class="headerlink" href="#statsmodels" title="Link to this heading">#</a></h2>
@@ -2643,6 +2688,10 @@ How does the pseudo <span class="math notranslate nohighlight">\(R^2\)</span> va
             }, 500);
             </script></div>
 </div>
+<p><a class="reference external" href="https://allendowney.github.io/ThinkStats/index.html">Think Stats: Exploratory Data Analysis in Python, 3rd Edition</a></p>
+<p>Copyright 2024 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
+<p>Code license: <a class="reference external" href="https://mit-license.org/">MIT License</a></p>
+<p>Text license: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
 </section>
 </section>
 </section>
@@ -2761,6 +2810,20 @@ By Allen B. Downey
   
   <div class="footer-item">
     
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
   </div>
   
 </div>

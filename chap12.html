@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>12. Time series analysis &#8212; Think Stats, 3rd edition</title>
+    <title>12. Time series analysis &#8212; Think Stats</title>
   
   
   
@@ -149,7 +149,7 @@
   
   
   
-    <p class="title logo__title">Think Stats, 3rd edition</p>
+    <p class="title logo__title">Think Stats</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -179,7 +179,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
@@ -396,7 +396,40 @@ But there are additional methods that are particularly useful for this kind of d
 We will develop methods to decompose a time series into a long-term trend and a repeated seasonal component.
 We’ll use linear regression models to fit and forecast trends.
 And we’ll try out a widely-used model for analyzing time series data, with the formal name “autoregressive integrated moving average” and the easier-to-say acronym ARIMA.</p>
-<div class="cell tag_hide-cell docutils container">
+<p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkStats/blob/v3/nb/chap12.ipynb">Click here to run this notebook on Colab</a>.</p>
+<div class="cell tag_remove-print tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> nb_black
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 1;
+                var nbb_unformatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_formatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</details>
+</div>
+<div class="cell tag_remove-print tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell content</span>
@@ -438,7 +471,45 @@ And we’ll try out a widely-used model for analyzing time series data, with the
             </script></div>
 </details>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_remove-print tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">empiricaldist</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>empiricaldist
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "try:\n    import empiricaldist\nexcept ImportError:\n    !pip install empiricaldist";
+                var nbb_formatted_code = "try:\n    import empiricaldist\nexcept ImportError:\n    !pip install empiricaldist";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</details>
+</div>
+<div class="cell tag_remove-print tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -451,7 +522,7 @@ And we’ll try out a widely-used model for analyzing time series data, with the
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 3;
+                var nbb_cell_id = 4;
                 var nbb_unformatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_formatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -465,6 +536,7 @@ And we’ll try out a widely-used model for analyzing time series data, with the
                 }
             }, 500);
             </script></div>
+</details>
 </div>
 <section id="electricity">
 <h2><span class="section-number">12.1. </span>Electricity<a class="headerlink" href="#electricity" title="Link to this heading">#</a></h2>
@@ -480,7 +552,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 4;
+                var nbb_cell_id = 5;
                 var nbb_unformatted_code = "# The following cell downloads the data, which I downloaded September 17, 2024\n# from https://www.eia.gov/electricity/data/browser/";
                 var nbb_formatted_code = "# The following cell downloads the data, which I downloaded September 17, 2024\n# from https://www.eia.gov/electricity/data/browser/";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -505,7 +577,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 5;
+                var nbb_cell_id = 6;
                 var nbb_unformatted_code = "filename = \"Net_generation_for_all_sectors.csv\"\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\" + filename)";
                 var nbb_formatted_code = "filename = \"Net_generation_for_all_sectors.csv\"\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\" + filename)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -537,7 +609,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 6;
+                var nbb_cell_id = 7;
                 var nbb_unformatted_code = "elec = (\n    pd.read_csv(\"Net_generation_for_all_sectors.csv\", skiprows=4)\n    .drop(columns=[\"units\", \"source key\"])\n    .set_index(\"description\")\n    .replace(\"--\", np.nan)\n    .transpose()\n    .astype(float)\n)";
                 var nbb_formatted_code = "elec = (\n    pd.read_csv(\"Net_generation_for_all_sectors.csv\", skiprows=4)\n    .drop(columns=[\"units\", \"source key\"])\n    .set_index(\"description\")\n    .replace(\"--\", np.nan)\n    .transpose()\n    .astype(float)\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -575,7 +647,7 @@ Here are the column labels, showing the different sources of electricity, or “
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 7;
+                var nbb_cell_id = 8;
                 var nbb_unformatted_code = "elec.columns";
                 var nbb_formatted_code = "elec.columns";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -603,7 +675,7 @@ Here are the column labels, showing the different sources of electricity, or “
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 8;
+                var nbb_cell_id = 9;
                 var nbb_unformatted_code = "elec.index[:6]";
                 var nbb_formatted_code = "elec.index[:6]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -619,15 +691,20 @@ Here are the column labels, showing the different sources of electricity, or “
             </script></div>
 </div>
 <p>It will be easier to work with this data if we replace these strings with Pandas <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> objects.
-We can use the <code class="docutils literal notranslate"><span class="pre">date_range</span></code> function to generate a sequence of <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> objects, starting in January 2021 with the frequency code <code class="docutils literal notranslate"><span class="pre">&quot;ME&quot;</span></code>, which stands for “month end”, which means that it fills in the last day of each month.</p>
+We can use the <code class="docutils literal notranslate"><span class="pre">date_range</span></code> function to generate a sequence of <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> objects, starting in January 2021 with the frequency code <code class="docutils literal notranslate"><span class="pre">&quot;M&quot;</span></code>, which stands for “monthly”.</p>
+<p>TODO: Update this when Colab gets to Pandas 2.2.2 … frequency code <code class="docutils literal notranslate"><span class="pre">&quot;ME&quot;</span></code>, which stands for “month end”, which means that it fills in the last day of each month.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elec</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s2">&quot;2001-01&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">elec</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elec</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s2">&quot;2001-01&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">elec</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;M&quot;</span><span class="p">)</span>
 <span class="n">elec</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_851943/673247472.py:1: FutureWarning: &#39;M&#39; is deprecated and will be removed in a future version, please use &#39;ME&#39; instead.
+  elec.index = pd.date_range(start=&quot;2001-01&quot;, periods=len(elec), freq=&quot;M&quot;)
+</pre></div>
+</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2001-01-31&#39;, &#39;2001-02-28&#39;, &#39;2001-03-31&#39;, &#39;2001-04-30&#39;,
                &#39;2001-05-31&#39;, &#39;2001-06-30&#39;],
               dtype=&#39;datetime64[ns]&#39;, freq=&#39;ME&#39;)
@@ -635,9 +712,9 @@ We can use the <code class="docutils literal notranslate"><span class="pre">date
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "elec.index = pd.date_range(start=\"2001-01\", periods=len(elec), freq=\"ME\")\nelec.index[:6]";
-                var nbb_formatted_code = "elec.index = pd.date_range(start=\"2001-01\", periods=len(elec), freq=\"ME\")\nelec.index[:6]";
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "elec.index = pd.date_range(start=\"2001-01\", periods=len(elec), freq=\"M\")\nelec.index[:6]";
+                var nbb_formatted_code = "elec.index = pd.date_range(start=\"2001-01\", periods=len(elec), freq=\"M\")\nelec.index[:6]";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -668,7 +745,7 @@ We can use the <code class="docutils literal notranslate"><span class="pre">date
 <img alt="_images/250021343680b07056dccb7318db712a4bf6cf18fda96ed81c09bce4e19ef916.png" src="_images/250021343680b07056dccb7318db712a4bf6cf18fda96ed81c09bce4e19ef916.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 10;
+                var nbb_cell_id = 11;
                 var nbb_unformatted_code = "nuclear = elec[\"United States : nuclear\"]\nnuclear.plot(label=\"nuclear\")\n\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "nuclear = elec[\"United States : nuclear\"]\nnuclear.plot(label=\"nuclear\")\n\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -696,7 +773,7 @@ For each interval, we compute the mean of the measurements.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 11;
+                var nbb_cell_id = 12;
                 var nbb_unformatted_code = "trend = nuclear.rolling(window=12).mean()";
                 var nbb_formatted_code = "trend = nuclear.rolling(window=12).mean()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -724,7 +801,7 @@ For each interval, we compute the mean of the measurements.</p>
 <img alt="_images/f65c1127364cdc823c93b28d8713a15057e52dd076262faf18ee21d9e5efa60c.png" src="_images/f65c1127364cdc823c93b28d8713a15057e52dd076262faf18ee21d9e5efa60c.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 12;
+                var nbb_cell_id = 13;
                 var nbb_unformatted_code = "nuclear.plot(label=\"nuclear\")\ntrend.plot(label=\"trend\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "nuclear.plot(label=\"nuclear\")\ntrend.plot(label=\"trend\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -755,7 +832,7 @@ Here’s what it looks like.</p>
 <img alt="_images/22cab2abe35100c119e48b57e2f1fe84fad2937d2c97fda212678d3e749a9c25.png" src="_images/22cab2abe35100c119e48b57e2f1fe84fad2937d2c97fda212678d3e749a9c25.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 13;
+                var nbb_cell_id = 14;
                 var nbb_unformatted_code = "detrended = (nuclear - trend).dropna()\ndetrended.plot(label=\"detrended\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "detrended = (nuclear - trend).dropna()\ndetrended.plot(label=\"detrended\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -785,7 +862,7 @@ Here’s what the monthly averages look like.</p>
 <img alt="_images/adeb792531b4bae4bcedb27a3097c3fc578863c5769f8fcd8c4ebcd1e6c4062f.png" src="_images/adeb792531b4bae4bcedb27a3097c3fc578863c5769f8fcd8c4ebcd1e6c4062f.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 14;
+                var nbb_cell_id = 15;
                 var nbb_unformatted_code = "monthly_averages = detrended.groupby(detrended.index.month).mean()\nmonthly_averages.plot(label=\"monthly average\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "monthly_averages = detrended.groupby(detrended.index.month).mean()\nmonthly_averages.plot(label=\"monthly average\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -816,7 +893,7 @@ Here’s what it looks like.</p>
 <img alt="_images/6bf4661513e29f4ba28930abc6b45a04d82b038fa904fa9a7479d7526fc6d759.png" src="_images/6bf4661513e29f4ba28930abc6b45a04d82b038fa904fa9a7479d7526fc6d759.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 15;
+                var nbb_cell_id = 16;
                 var nbb_unformatted_code = "seasonal = monthly_averages[nuclear.index.month]\nseasonal.index = nuclear.index\nseasonal.plot()\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "seasonal = monthly_averages[nuclear.index.month]\nseasonal.index = nuclear.index\nseasonal.plot()\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -842,7 +919,7 @@ Here’s what it looks like.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 16;
+                var nbb_cell_id = 17;
                 var nbb_unformatted_code = "expected = trend + seasonal";
                 var nbb_formatted_code = "expected = trend + seasonal";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -870,7 +947,7 @@ Here’s what it looks like.</p>
 <img alt="_images/b28a819f0f3fba169eace29e095cb661a9a323b4c9d8fb9ca7c9804a7194021b.png" src="_images/b28a819f0f3fba169eace29e095cb661a9a323b4c9d8fb9ca7c9804a7194021b.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 17;
+                var nbb_cell_id = 18;
                 var nbb_unformatted_code = "nuclear.plot(label=\"nuclear\")\nexpected.plot(color=\"0.8\", label=\"expected\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "nuclear.plot(label=\"nuclear\")\nexpected.plot(color=\"0.8\", label=\"expected\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -898,7 +975,7 @@ Here’s what it looks like.</p>
 <img alt="_images/7b0e1d6dd5008602487681b72deacadc987bc7dc733729c5507a4d6ec442e294.png" src="_images/7b0e1d6dd5008602487681b72deacadc987bc7dc733729c5507a4d6ec442e294.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 18;
+                var nbb_cell_id = 19;
                 var nbb_unformatted_code = "resid = nuclear - expected\nresid.plot(label=\"residual\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "resid = nuclear - expected\nresid.plot(label=\"residual\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -930,7 +1007,7 @@ Since the residual is the sum of many unpredictable, and sometimes unknowable, f
 <img alt="_images/1923f3d97fa67bd15187bac8c4d11c6d1c9a49ba6a85a60676def865eac082e6.png" src="_images/1923f3d97fa67bd15187bac8c4d11c6d1c9a49ba6a85a60676def865eac082e6.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 19;
+                var nbb_cell_id = 20;
                 var nbb_unformatted_code = "from thinkstats import plot_kde\n\nplot_kde(resid.dropna())\ndecorate(xlabel=\"Residual (GWh)\")";
                 var nbb_formatted_code = "from thinkstats import plot_kde\n\nplot_kde(resid.dropna())\ndecorate(xlabel=\"Residual (GWh)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -960,7 +1037,7 @@ Since the residual is the sum of many unpredictable, and sometimes unknowable, f
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 20;
+                var nbb_cell_id = 21;
                 var nbb_unformatted_code = "rsquared = 1 - resid.var() / nuclear.var()\nrsquared";
                 var nbb_formatted_code = "rsquared = 1 - resid.var() / nuclear.var()\nrsquared";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -995,7 +1072,7 @@ In this dataset, we assume that the period of the seasonal component is 12 month
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 21;
+                var nbb_cell_id = 22;
                 var nbb_unformatted_code = "from statsmodels.tsa.seasonal import seasonal_decompose\n\ndecomposition = seasonal_decompose(nuclear, model=\"additive\", period=12)";
                 var nbb_formatted_code = "from statsmodels.tsa.seasonal import seasonal_decompose\n\ndecomposition = seasonal_decompose(nuclear, model=\"additive\", period=12)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1040,7 +1117,7 @@ We’ll use the following function to plot them.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 22;
+                var nbb_cell_id = 23;
                 var nbb_unformatted_code = "def plot_decomposition(original, decomposition):\n    plt.figure(figsize=(6, 5))\n\n    plt.subplot(4, 1, 1)\n    plt.plot(original, label=\"Original\", color=\"C0\")\n    plt.ylabel(\"Original\")\n\n    plt.subplot(4, 1, 2)\n    plt.plot(decomposition.trend, label=\"Trend\", color=\"C1\")\n    plt.ylabel(\"Trend\")\n\n    plt.subplot(4, 1, 3)\n    plt.plot(decomposition.seasonal, label=\"Seasonal\", color=\"C2\")\n    plt.ylabel(\"Seasonal\")\n\n    plt.subplot(4, 1, 4)\n    plt.plot(decomposition.resid, label=\"Residual\", color=\"C3\")\n    plt.ylabel(\"Residual\")\n\n    plt.tight_layout()";
                 var nbb_formatted_code = "def plot_decomposition(original, decomposition):\n    plt.figure(figsize=(6, 5))\n\n    plt.subplot(4, 1, 1)\n    plt.plot(original, label=\"Original\", color=\"C0\")\n    plt.ylabel(\"Original\")\n\n    plt.subplot(4, 1, 2)\n    plt.plot(decomposition.trend, label=\"Trend\", color=\"C1\")\n    plt.ylabel(\"Trend\")\n\n    plt.subplot(4, 1, 3)\n    plt.plot(decomposition.seasonal, label=\"Seasonal\", color=\"C2\")\n    plt.ylabel(\"Seasonal\")\n\n    plt.subplot(4, 1, 4)\n    plt.plot(decomposition.resid, label=\"Residual\", color=\"C3\")\n    plt.ylabel(\"Residual\")\n\n    plt.tight_layout()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1065,7 +1142,7 @@ We’ll use the following function to plot them.</p>
 <img alt="_images/bc2ffeb034fbb8ce231f3d97231f9a944f7a5033a41615c17f8d9b5033b5cfce.png" src="_images/bc2ffeb034fbb8ce231f3d97231f9a944f7a5033a41615c17f8d9b5033b5cfce.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 23;
+                var nbb_cell_id = 24;
                 var nbb_unformatted_code = "plot_decomposition(nuclear, decomposition)";
                 var nbb_formatted_code = "plot_decomposition(nuclear, decomposition)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1099,7 +1176,7 @@ To demonstrate, we’ll use the following function to split the time series into
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 24;
+                var nbb_cell_id = 25;
                 var nbb_unformatted_code = "def split_series(series, n=60):\n    training = series.iloc[:-n]\n    test = series.iloc[-n:]\n    return training, test";
                 var nbb_formatted_code = "def split_series(series, n=60):\n    training = series.iloc[:-n]\n    test = series.iloc[-n:]\n    return training, test";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1128,7 +1205,7 @@ To demonstrate, we’ll use the following function to split the time series into
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 25;
+                var nbb_cell_id = 26;
                 var nbb_unformatted_code = "training, test = split_series(nuclear)\ntest.index[0]";
                 var nbb_formatted_code = "training, test = split_series(nuclear)\ntest.index[0]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1155,7 +1232,7 @@ We’ll start with a seasonal decomposition of the training data.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 26;
+                var nbb_cell_id = 27;
                 var nbb_unformatted_code = "decomposition = seasonal_decompose(training, model=\"additive\", period=12)\ntrend = decomposition.trend";
                 var nbb_formatted_code = "decomposition = seasonal_decompose(training, model=\"additive\", period=12)\ntrend = decomposition.trend";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1185,7 +1262,7 @@ The dependent variable, <code class="docutils literal notranslate"><span class="
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 27;
+                var nbb_cell_id = 28;
                 var nbb_unformatted_code = "import statsmodels.formula.api as smf\n\nmonths = np.arange(len(trend))\ndata = pd.DataFrame({\"trend\": trend, \"months\": months}).dropna()\nresults = smf.ols(\"trend ~ months\", data=data).fit()";
                 var nbb_formatted_code = "import statsmodels.formula.api as smf\n\nmonths = np.arange(len(trend))\ndata = pd.DataFrame({\"trend\": trend, \"months\": months}).dropna()\nresults = smf.ols(\"trend ~ months\", data=data).fit()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1226,7 +1303,7 @@ The dependent variable, <code class="docutils literal notranslate"><span class="
 </tr>
 </table></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 28;
+                var nbb_cell_id = 29;
                 var nbb_unformatted_code = "from thinkstats import display_summary\n\ndisplay_summary(results)";
                 var nbb_formatted_code = "from thinkstats import display_summary\n\ndisplay_summary(results)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1256,7 +1333,7 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">pre
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 29;
+                var nbb_cell_id = 30;
                 var nbb_unformatted_code = "months = np.arange(len(training) + len(test))\ndf = pd.DataFrame({\"months\": months})\npred_trend = results.predict(df)\npred_trend.index = nuclear.index";
                 var nbb_formatted_code = "months = np.arange(len(training) + len(test))\ndf = pd.DataFrame({\"months\": months})\npred_trend = results.predict(df)\npred_trend.index = nuclear.index";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1284,7 +1361,7 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">pre
 <img alt="_images/5be8b0d789cb9586e91afbc918fcc6f624f3f382adc3b6a494aed0dc0402b5b8.png" src="_images/5be8b0d789cb9586e91afbc918fcc6f624f3f382adc3b6a494aed0dc0402b5b8.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 30;
+                var nbb_cell_id = 31;
                 var nbb_unformatted_code = "trend.plot(color=\"C1\")\npred_trend.plot(color=\"0.6\", label=\"linear model\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "trend.plot(color=\"C1\")\npred_trend.plot(color=\"0.6\", label=\"linear model\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1311,7 +1388,7 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">pre
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 31;
+                var nbb_cell_id = 32;
                 var nbb_unformatted_code = "seasonal = decomposition.seasonal\nmonthly_averages = seasonal.groupby(seasonal.index.month).mean()";
                 var nbb_formatted_code = "seasonal = decomposition.seasonal\nmonthly_averages = seasonal.groupby(seasonal.index.month).mean()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1337,7 +1414,7 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">pre
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 32;
+                var nbb_cell_id = 33;
                 var nbb_unformatted_code = "pred_seasonal = monthly_averages[pred_trend.index.month]\npred_seasonal.index = pred_trend.index";
                 var nbb_formatted_code = "pred_seasonal = monthly_averages[pred_trend.index.month]\npred_seasonal.index = pred_trend.index";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1362,7 +1439,7 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">pre
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 33;
+                var nbb_cell_id = 34;
                 var nbb_unformatted_code = "pred = pred_trend + pred_seasonal";
                 var nbb_formatted_code = "pred = pred_trend + pred_seasonal";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1390,7 +1467,7 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">pre
 <img alt="_images/0173f2aab1acf5f216a320d8fb13cd40f611271087a5fcf9651ce3090250a773.png" src="_images/0173f2aab1acf5f216a320d8fb13cd40f611271087a5fcf9651ce3090250a773.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 34;
+                var nbb_cell_id = 35;
                 var nbb_unformatted_code = "training.plot(label=\"training\")\npred.plot(color=\"0.8\", label=\"prediction\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "training.plot(label=\"training\")\npred.plot(color=\"0.8\", label=\"prediction\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1421,7 +1498,7 @@ Here is are the predicted and actual values for the five-year interval from July
 <img alt="_images/06fdd4afa980d9147e47045b559f53a12fb68b7f82257f0347401d18a0d8d434.png" src="_images/06fdd4afa980d9147e47045b559f53a12fb68b7f82257f0347401d18a0d8d434.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 35;
+                var nbb_cell_id = 36;
                 var nbb_unformatted_code = "forecast = pred[test.index]\nforecast.plot(ls=\"--\", color=\"0.6\", label=\"predicted\")\ntest.plot(label=\"actual\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "forecast = pred[test.index]\nforecast.plot(ls=\"--\", color=\"0.6\", label=\"predicted\")\ntest.plot(label=\"actual\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1449,7 +1526,7 @@ Here is are the predicted and actual values for the five-year interval from July
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 36;
+                var nbb_cell_id = 37;
                 var nbb_unformatted_code = "def MAPE(predicted, actual):\n    ape = np.abs(predicted - actual) / actual\n    return np.mean(ape) * 100";
                 var nbb_formatted_code = "def MAPE(predicted, actual):\n    ape = np.abs(predicted - actual) / actual\n    return np.mean(ape) * 100";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1477,7 +1554,7 @@ Here is are the predicted and actual values for the five-year interval from July
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 37;
+                var nbb_cell_id = 38;
                 var nbb_unformatted_code = "MAPE(forecast, test)";
                 var nbb_formatted_code = "MAPE(forecast, test)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1510,7 +1587,7 @@ Here is are the predicted and actual values for the five-year interval from July
 <img alt="_images/86539269db9ce2568bf7bb6e80c25d37c5d8ddc93ba8de6352e857d8bb148cec.png" src="_images/86539269db9ce2568bf7bb6e80c25d37c5d8ddc93ba8de6352e857d8bb148cec.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 38;
+                var nbb_cell_id = 39;
                 var nbb_unformatted_code = "solar = elec[\"United States : small-scale solar photovoltaic\"].dropna()\nsolar.plot(label=\"solar\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "solar = elec[\"United States : small-scale solar photovoltaic\"].dropna()\nsolar.plot(label=\"solar\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1538,7 +1615,7 @@ And it’s clear that the magnitude of seasonal variation has increased as well.
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 39;
+                var nbb_cell_id = 40;
                 var nbb_unformatted_code = "training, test = split_series(solar)";
                 var nbb_formatted_code = "training, test = split_series(solar)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1563,7 +1640,7 @@ And it’s clear that the magnitude of seasonal variation has increased as well.
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 40;
+                var nbb_cell_id = 41;
                 var nbb_unformatted_code = "decomposition = seasonal_decompose(training, model=\"multiplicative\", period=12)";
                 var nbb_formatted_code = "decomposition = seasonal_decompose(training, model=\"multiplicative\", period=12)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1589,7 +1666,7 @@ And it’s clear that the magnitude of seasonal variation has increased as well.
 <img alt="_images/eff587bb6527bbf770da7f8e33ab451633af92b85cc8dd6c2c1d44ccaacd37ed.png" src="_images/eff587bb6527bbf770da7f8e33ab451633af92b85cc8dd6c2c1d44ccaacd37ed.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 41;
+                var nbb_cell_id = 42;
                 var nbb_unformatted_code = "plot_decomposition(training, decomposition)";
                 var nbb_formatted_code = "plot_decomposition(training, decomposition)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1618,7 +1695,7 @@ And the residual component is usually less than 5% either way, with the exceptio
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 42;
+                var nbb_cell_id = 43;
                 var nbb_unformatted_code = "trend = decomposition.trend\nseasonal = decomposition.seasonal\nresid = decomposition.resid";
                 var nbb_formatted_code = "trend = decomposition.trend\nseasonal = decomposition.seasonal\nresid = decomposition.resid";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1647,7 +1724,7 @@ And the residual component is usually less than 5% either way, with the exceptio
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 43;
+                var nbb_cell_id = 44;
                 var nbb_unformatted_code = "rsquared = 1 - resid.var() / training.var()\nrsquared";
                 var nbb_formatted_code = "rsquared = 1 - resid.var() / training.var()\nrsquared";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1675,7 +1752,7 @@ And the residual component is usually less than 5% either way, with the exceptio
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 44;
+                var nbb_cell_id = 45;
                 var nbb_unformatted_code = "months = range(len(training))\ndata = pd.DataFrame({\"trend\": trend, \"months\": months}).dropna()\nresults = smf.ols(\"trend ~ months + I(months**2)\", data=data).fit()";
                 var nbb_formatted_code = "months = range(len(training))\ndata = pd.DataFrame({\"trend\": trend, \"months\": months}).dropna()\nresults = smf.ols(\"trend ~ months + I(months**2)\", data=data).fit()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1718,7 +1795,7 @@ Here are the results.</p>
 </tr>
 </table></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 45;
+                var nbb_cell_id = 46;
                 var nbb_unformatted_code = "display_summary(results)";
                 var nbb_formatted_code = "display_summary(results)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1747,7 +1824,7 @@ Here are the results.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 46;
+                var nbb_cell_id = 47;
                 var nbb_unformatted_code = "months = range(len(solar))\ndf = pd.DataFrame({\"months\": months})\npred_trend = results.predict(df)\npred_trend.index = solar.index";
                 var nbb_formatted_code = "months = range(len(solar))\ndf = pd.DataFrame({\"months\": months})\npred_trend = results.predict(df)\npred_trend.index = solar.index";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1775,7 +1852,7 @@ Here are the results.</p>
 <img alt="_images/a5a5c42d8344c1c9773f46a0e41736b2243856990ad79cc4ee351ece33e24300.png" src="_images/a5a5c42d8344c1c9773f46a0e41736b2243856990ad79cc4ee351ece33e24300.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 47;
+                var nbb_cell_id = 48;
                 var nbb_unformatted_code = "pred_trend.plot(color=\"0.8\", label=\"quadratic model\")\ntrend.plot(color=\"C1\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "pred_trend.plot(color=\"0.8\", label=\"quadratic model\")\ntrend.plot(color=\"C1\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1803,7 +1880,7 @@ Now we can use the seasonal component from the decomposition to predict the seas
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 48;
+                var nbb_cell_id = 49;
                 var nbb_unformatted_code = "monthly_averages = seasonal.groupby(seasonal.index.month).mean()\npred_seasonal = monthly_averages[pred_trend.index.month]\npred_seasonal.index = pred_trend.index";
                 var nbb_formatted_code = "monthly_averages = seasonal.groupby(seasonal.index.month).mean()\npred_seasonal = monthly_averages[pred_trend.index.month]\npred_seasonal.index = pred_trend.index";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1828,7 +1905,7 @@ Now we can use the seasonal component from the decomposition to predict the seas
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 49;
+                var nbb_cell_id = 50;
                 var nbb_unformatted_code = "pred = pred_trend * pred_seasonal";
                 var nbb_formatted_code = "pred = pred_trend * pred_seasonal";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1856,7 +1933,7 @@ Now we can use the seasonal component from the decomposition to predict the seas
 <img alt="_images/388e99505acc1f95283d9016e2a7d4839822a519bc821b9b6ec1a56f41aa3cdf.png" src="_images/388e99505acc1f95283d9016e2a7d4839822a519bc821b9b6ec1a56f41aa3cdf.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 50;
+                var nbb_cell_id = 51;
                 var nbb_unformatted_code = "training.plot(label=\"training\")\npred.plot(alpha=0.6, color=\"0.6\", label=\"prediction\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "training.plot(label=\"training\")\npred.plot(alpha=0.6, color=\"0.6\", label=\"prediction\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1887,7 +1964,7 @@ Here are the predictions along with the test data.</p>
 <img alt="_images/662c539d178eeda1c2b6a51234899f683bbe5fe20d981e1897d20811f7d0efd0.png" src="_images/662c539d178eeda1c2b6a51234899f683bbe5fe20d981e1897d20811f7d0efd0.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 51;
+                var nbb_cell_id = 52;
                 var nbb_unformatted_code = "future = pred[test.index]\nfuture.plot(ls=\"--\", color=\"0.6\", label=\"prediction\")\n\ntest.plot(label=\"actual\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "future = pred[test.index]\nfuture.plot(ls=\"--\", color=\"0.6\", label=\"prediction\")\n\ntest.plot(label=\"actual\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1925,7 +2002,7 @@ So if you are asked to make a prediction for next June, a good starting place wo
 <img alt="_images/f7d73b203c70e39e305fb247ee2d022c6790d49d1b31a462830f328136d5e46b.png" src="_images/f7d73b203c70e39e305fb247ee2d022c6790d49d1b31a462830f328136d5e46b.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 52;
+                var nbb_cell_id = 53;
                 var nbb_unformatted_code = "diff = (nuclear - nuclear.shift(12)).dropna()\ndiff.plot(label=\"year over year differences\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "diff = (nuclear - nuclear.shift(12)).dropna()\ndiff.plot(label=\"year over year differences\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1958,7 +2035,7 @@ These columns are named <code class="docutils literal notranslate"><span class="
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 53;
+                var nbb_cell_id = 54;
                 var nbb_unformatted_code = "df_ar = pd.DataFrame({\"diff\": diff})\nfor lag in [1, 2, 3]:\n    df_ar[f\"lag{lag}\"] = diff.shift(lag)\n\ndf_ar = df_ar.dropna()";
                 var nbb_formatted_code = "df_ar = pd.DataFrame({\"diff\": diff})\nfor lag in [1, 2, 3]:\n    df_ar[f\"lag{lag}\"] = diff.shift(lag)\n\ndf_ar = df_ar.dropna()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2023,7 +2100,7 @@ These columns are named <code class="docutils literal notranslate"><span class="
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 54;
+                var nbb_cell_id = 55;
                 var nbb_unformatted_code = "df_ar.corr()[[\"diff\"]]";
                 var nbb_formatted_code = "df_ar.corr()[[\"diff\"]]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2055,7 +2132,7 @@ The following function uses the columns from the <code class="docutils literal n
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 55;
+                var nbb_cell_id = 56;
                 var nbb_unformatted_code = "def make_formula(df):\n    \"\"\"Make a Patsy formula from column names.\"\"\"\n    y = df.columns[0]\n    xs = \" + \".join(df.columns[1:])\n    return f\"{y} ~ {xs}\"";
                 var nbb_formatted_code = "def make_formula(df):\n    \"\"\"Make a Patsy formula from column names.\"\"\"\n    y = df.columns[0]\n    xs = \" + \".join(df.columns[1:])\n    return f\"{y} ~ {xs}\"";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2102,7 +2179,7 @@ The following function uses the columns from the <code class="docutils literal n
 </tr>
 </table></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 56;
+                var nbb_cell_id = 57;
                 var nbb_unformatted_code = "formula = make_formula(df_ar)\nresults_ar = smf.ols(formula=formula, data=df_ar).fit()\ndisplay_summary(results_ar)";
                 var nbb_formatted_code = "formula = make_formula(df_ar)\nresults_ar = smf.ols(formula=formula, data=df_ar).fit()\ndisplay_summary(results_ar)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2132,7 +2209,7 @@ The following function uses the columns from the <code class="docutils literal n
 <img alt="_images/f4c105ff36663ba3e0370ba8135c0b595ed2006e26bbc5195e2cf6f3a1620beb.png" src="_images/f4c105ff36663ba3e0370ba8135c0b595ed2006e26bbc5195e2cf6f3a1620beb.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 57;
+                var nbb_cell_id = 58;
                 var nbb_unformatted_code = "pred_ar = results_ar.predict(df_ar)\ndiff.plot(label=\"differences\")\npred_ar.plot(color=\"0.8\", label=\"predictions\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "pred_ar = results_ar.predict(df_ar)\ndiff.plot(label=\"differences\")\npred_ar.plot(color=\"0.8\", label=\"predictions\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2162,7 +2239,7 @@ The following function uses the columns from the <code class="docutils literal n
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 58;
+                var nbb_cell_id = 59;
                 var nbb_unformatted_code = "resid_ar = (diff - pred_ar).dropna()\nR2 = 1 - resid_ar.var() / diff.var()\nR2";
                 var nbb_formatted_code = "resid_ar = (diff - pred_ar).dropna()\nR2 = 1 - resid_ar.var() / diff.var()\nR2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2204,7 +2281,7 @@ For this example, I’ll use lags of 1 and 6 months.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 59;
+                var nbb_cell_id = 60;
                 var nbb_unformatted_code = "df_ma = pd.DataFrame({\"resid\": resid_ar})\n\nfor lag in [1, 6]:\n    df_ma[f\"lag{lag}\"] = resid_ar.shift(lag)\n\ndf_ma = df_ma.dropna()";
                 var nbb_formatted_code = "df_ma = pd.DataFrame({\"resid\": resid_ar})\n\nfor lag in [1, 6]:\n    df_ma[f\"lag{lag}\"] = resid_ar.shift(lag)\n\ndf_ma = df_ma.dropna()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2251,7 +2328,7 @@ I don’t find that term particularly helpful, but it is conventional.</p>
 </tr>
 </table></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 60;
+                var nbb_cell_id = 61;
                 var nbb_unformatted_code = "formula = make_formula(df_ma)\nresults_ma = smf.ols(formula=formula, data=df_ma).fit()\ndisplay_summary(results_ma)";
                 var nbb_formatted_code = "formula = make_formula(df_ma)\nresults_ma = smf.ols(formula=formula, data=df_ma).fit()\ndisplay_summary(results_ma)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2278,7 +2355,7 @@ But the p-value for the 6-month lag is small, which suggests that it contributes
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 61;
+                var nbb_cell_id = 62;
                 var nbb_unformatted_code = "pred_ma = results_ma.predict(df_ma)";
                 var nbb_formatted_code = "pred_ma = results_ma.predict(df_ma)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2303,7 +2380,7 @@ But the p-value for the 6-month lag is small, which suggests that it contributes
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 62;
+                var nbb_cell_id = 63;
                 var nbb_unformatted_code = "pred_diff = pred_ar + pred_ma";
                 var nbb_formatted_code = "pred_diff = pred_ar + pred_ma";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2333,7 +2410,7 @@ But the p-value for the 6-month lag is small, which suggests that it contributes
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 63;
+                var nbb_cell_id = 64;
                 var nbb_unformatted_code = "resid = (diff - pred_diff).dropna()\nR2 = 1 - resid.var() / diff.var()\nR2";
                 var nbb_formatted_code = "resid = (diff - pred_diff).dropna()\nR2 = 1 - resid.var() / diff.var()\nR2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2362,7 +2439,7 @@ But the p-value for the 6-month lag is small, which suggests that it contributes
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 64;
+                var nbb_cell_id = 65;
                 var nbb_unformatted_code = "pred_diff = pd.Series(pred_diff, index=nuclear.index)";
                 var nbb_formatted_code = "pred_diff = pd.Series(pred_diff, index=nuclear.index)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2387,7 +2464,7 @@ But the p-value for the 6-month lag is small, which suggests that it contributes
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 65;
+                var nbb_cell_id = 66;
                 var nbb_unformatted_code = "n_missing = pred_diff.isna().sum()";
                 var nbb_formatted_code = "n_missing = pred_diff.isna().sum()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2415,7 +2492,7 @@ Each time we shift a series like this, we lose a few values at the beginning of 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 66;
+                var nbb_cell_id = 67;
                 var nbb_unformatted_code = "pred_series = pd.Series(index=nuclear.index, dtype=float)\npred_series.iloc[:n_missing] = nuclear.iloc[:n_missing]";
                 var nbb_formatted_code = "pred_series = pd.Series(index=nuclear.index, dtype=float)\npred_series.iloc[:n_missing] = nuclear.iloc[:n_missing]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2442,7 +2519,7 @@ Each element is the sum of the value from the previous year and the predicted ye
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 67;
+                var nbb_cell_id = 68;
                 var nbb_unformatted_code = "for i in range(n_missing, len(pred_series)):\n    pred_series.iloc[i] = pred_series.iloc[i - 12] + pred_diff.iloc[i]";
                 var nbb_formatted_code = "for i in range(n_missing, len(pred_series)):\n    pred_series.iloc[i] = pred_series.iloc[i - 12] + pred_diff.iloc[i]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2467,7 +2544,7 @@ Each element is the sum of the value from the previous year and the predicted ye
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 68;
+                var nbb_cell_id = 69;
                 var nbb_unformatted_code = "pred_series[:n_missing] = np.nan";
                 var nbb_formatted_code = "pred_series[:n_missing] = np.nan";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2495,7 +2572,7 @@ Each element is the sum of the value from the previous year and the predicted ye
 <img alt="_images/40d4a59a6cdef6eba5d751b4e715a46928cc84d045b3a4f2a5c05e76047729db.png" src="_images/40d4a59a6cdef6eba5d751b4e715a46928cc84d045b3a4f2a5c05e76047729db.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 69;
+                var nbb_cell_id = 70;
                 var nbb_unformatted_code = "nuclear.plot(label=\"actual\")\npred_series.plot(color=\"0.9\", label=\"predicted\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "nuclear.plot(label=\"actual\")\npred_series.plot(color=\"0.9\", label=\"predicted\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2525,7 +2602,7 @@ Each element is the sum of the value from the previous year and the predicted ye
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 70;
+                var nbb_cell_id = 71;
                 var nbb_unformatted_code = "resid = (nuclear - pred_series).dropna()\nR2 = 1 - resid.var() / nuclear.var()\nR2";
                 var nbb_formatted_code = "resid = (nuclear - pred_series).dropna()\nR2 = 1 - resid.var() / nuclear.var()\nR2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2564,7 +2641,7 @@ Here are the values in <code class="docutils literal notranslate"><span class="p
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 71;
+                var nbb_cell_id = 72;
                 var nbb_unformatted_code = "order = ([1, 2, 3], 0, [1, 6])";
                 var nbb_formatted_code = "order = ([1, 2, 3], 0, [1, 6])";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2595,7 +2672,7 @@ Here are the values in <code class="docutils literal notranslate"><span class="p
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 72;
+                var nbb_cell_id = 73;
                 var nbb_unformatted_code = "seasonal_order = (0, 1, 0, 12)";
                 var nbb_formatted_code = "seasonal_order = (0, 1, 0, 12)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2648,7 +2725,7 @@ The second element is 1, which means it computes seasonal differences – and th
 </tr>
 </table></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 73;
+                var nbb_cell_id = 74;
                 var nbb_unformatted_code = "import statsmodels.tsa.api as tsa\n\nmodel = tsa.ARIMA(nuclear, order=(3, 0, [1, 6]), seasonal_order=(0, 1, 0, 12))\nresults_arima = model.fit()\ndisplay_summary(results_arima)";
                 var nbb_formatted_code = "import statsmodels.tsa.api as tsa\n\nmodel = tsa.ARIMA(nuclear, order=(3, 0, [1, 6]), seasonal_order=(0, 1, 0, 12))\nresults_arima = model.fit()\ndisplay_summary(results_arima)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2675,7 +2752,7 @@ For the same reason there were missing values at the beginning of the retrodicti
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 74;
+                var nbb_cell_id = 75;
                 var nbb_unformatted_code = "fittedvalues = results_arima.fittedvalues[n_missing:]";
                 var nbb_formatted_code = "fittedvalues = results_arima.fittedvalues[n_missing:]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2703,7 +2780,7 @@ For the same reason there were missing values at the beginning of the retrodicti
 <img alt="_images/13cfdef6341a03ce98eb5f48d7e8f8ae260734e8a6fa9c09e269f7b3df02b655.png" src="_images/13cfdef6341a03ce98eb5f48d7e8f8ae260734e8a6fa9c09e269f7b3df02b655.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 75;
+                var nbb_cell_id = 76;
                 var nbb_unformatted_code = "nuclear.plot(label=\"actual\")\nfittedvalues.plot(color=\"0.9\", label=\"ARIMA model\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "nuclear.plot(label=\"actual\")\nfittedvalues.plot(color=\"0.9\", label=\"ARIMA model\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2733,7 +2810,7 @@ For the same reason there were missing values at the beginning of the retrodicti
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 76;
+                var nbb_cell_id = 77;
                 var nbb_unformatted_code = "resid = fittedvalues - nuclear\nR2 = 1 - resid.var() / nuclear.var()\nR2";
                 var nbb_formatted_code = "resid = fittedvalues - nuclear\nR2 = 1 - resid.var() / nuclear.var()\nR2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2765,7 +2842,7 @@ To demonstrate, we’ll split the time series into a training and test set, and 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 77;
+                var nbb_cell_id = 78;
                 var nbb_unformatted_code = "training, test = split_series(nuclear)\nmodel = tsa.ARIMA(training, order=(3, 0, [1, 6]), seasonal_order=(0, 1, 0, 12))\nresults_training = model.fit()";
                 var nbb_formatted_code = "training, test = split_series(nuclear)\nmodel = tsa.ARIMA(training, order=(3, 0, [1, 6]), seasonal_order=(0, 1, 0, 12))\nresults_training = model.fit()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2790,7 +2867,7 @@ To demonstrate, we’ll split the time series into a training and test set, and 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 78;
+                var nbb_cell_id = 79;
                 var nbb_unformatted_code = "forecast = results_training.get_forecast(steps=len(test))";
                 var nbb_formatted_code = "forecast = results_training.get_forecast(steps=len(test))";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2817,7 +2894,7 @@ To demonstrate, we’ll split the time series into a training and test set, and 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 79;
+                var nbb_cell_id = 80;
                 var nbb_unformatted_code = "forecast_mean = forecast.predicted_mean\nforecast_ci = forecast.conf_int()\nforecast_ci.columns = [\"lower\", \"upper\"]";
                 var nbb_formatted_code = "forecast_mean = forecast.predicted_mean\nforecast_ci = forecast.conf_int()\nforecast_ci.columns = [\"lower\", \"upper\"]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2853,7 +2930,7 @@ To demonstrate, we’ll split the time series into a training and test set, and 
 <img alt="_images/0b4671efbaa02fbba9dd66e5b25188176b49a95bad38e9a4721e8505421206d6.png" src="_images/0b4671efbaa02fbba9dd66e5b25188176b49a95bad38e9a4721e8505421206d6.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 80;
+                var nbb_cell_id = 81;
                 var nbb_unformatted_code = "plt.fill_between(\n    forecast_ci.index,\n    forecast_ci.lower,\n    forecast_ci.upper,\n    lw=0,\n    color=\"0.6\",\n    alpha=0.2,\n)\nplt.plot(forecast_mean.index, forecast_mean, \"--\", label=\"forecast\", color=\"0.6\")\nplt.plot(test.index, test, label=\"actual\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "plt.fill_between(\n    forecast_ci.index,\n    forecast_ci.lower,\n    forecast_ci.upper,\n    lw=0,\n    color=\"0.6\",\n    alpha=0.2,\n)\nplt.plot(forecast_mean.index, forecast_mean, \"--\", label=\"forecast\", color=\"0.6\")\nplt.plot(test.index, test, label=\"actual\")\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2882,7 +2959,7 @@ Here’s the MAPE of the predictions.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 81;
+                var nbb_cell_id = 82;
                 var nbb_unformatted_code = "MAPE(forecast_mean, test)";
                 var nbb_formatted_code = "MAPE(forecast_mean, test)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2938,7 +3015,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 82;
+                var nbb_cell_id = 83;
                 var nbb_unformatted_code = "# The following cell downloads data prepared by Our World in Data,\n# which I Downloaded September 18, 2024\n# from https://ourworldindata.org/grapher/average-monthly-surface-temperature\n\n# Based on modified data from Copernicus Climate Change Service information (2019)\n# with \"major processing\" by Our World in Data";
                 var nbb_formatted_code = "# The following cell downloads data prepared by Our World in Data,\n# which I Downloaded September 18, 2024\n# from https://ourworldindata.org/grapher/average-monthly-surface-temperature\n\n# Based on modified data from Copernicus Climate Change Service information (2019)\n# with \"major processing\" by Our World in Data";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2963,7 +3040,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 83;
+                var nbb_cell_id = 84;
                 var nbb_unformatted_code = "filename = \"monthly-average-surface-temperatures-by-year.csv\"\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\" + filename)";
                 var nbb_formatted_code = "filename = \"monthly-average-surface-temperatures-by-year.csv\"\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\" + filename)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2988,7 +3065,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 84;
+                var nbb_cell_id = 85;
                 var nbb_unformatted_code = "temp = pd.read_csv(\"monthly-average-surface-temperatures-by-year.csv\")";
                 var nbb_formatted_code = "temp = pd.read_csv(\"monthly-average-surface-temperatures-by-year.csv\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -3177,7 +3254,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>5 rows × 78 columns</p>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 85;
+                var nbb_cell_id = 86;
                 var nbb_unformatted_code = "temp.head()";
                 var nbb_formatted_code = "temp.head()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -3198,16 +3275,20 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp_us</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Code == &#39;USA&#39;&quot;</span><span class="p">)</span>
 <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">2025</span><span class="p">)]</span>
 <span class="n">temp_series</span> <span class="o">=</span> <span class="n">temp_us</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
-<span class="n">temp_series</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s2">&quot;2000-01&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">temp_series</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span>
+<span class="n">temp_series</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s2">&quot;2000-01&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">temp_series</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;M&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_851943/704380127.py:4: FutureWarning: &#39;M&#39; is deprecated and will be removed in a future version, please use &#39;ME&#39; instead.
+  temp_series.index = pd.date_range(start=&quot;2000-01&quot;, periods=len(temp_series), freq=&quot;M&quot;)
+</pre></div>
+</div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 86;
-                var nbb_unformatted_code = "temp_us = temp.query(\"Code == 'USA'\")\ncolumns = [str(year) for year in range(2000, 2025)]\ntemp_series = temp_us.loc[:, columns].transpose().stack()\ntemp_series.index = pd.date_range(start=\"2000-01\", periods=len(temp_series), freq=\"ME\")";
-                var nbb_formatted_code = "temp_us = temp.query(\"Code == 'USA'\")\ncolumns = [str(year) for year in range(2000, 2025)]\ntemp_series = temp_us.loc[:, columns].transpose().stack()\ntemp_series.index = pd.date_range(start=\"2000-01\", periods=len(temp_series), freq=\"ME\")";
+                var nbb_cell_id = 87;
+                var nbb_unformatted_code = "temp_us = temp.query(\"Code == 'USA'\")\ncolumns = [str(year) for year in range(2000, 2025)]\ntemp_series = temp_us.loc[:, columns].transpose().stack()\ntemp_series.index = pd.date_range(start=\"2000-01\", periods=len(temp_series), freq=\"M\")";
+                var nbb_formatted_code = "temp_us = temp.query(\"Code == 'USA'\")\ncolumns = [str(year) for year in range(2000, 2025)]\ntemp_series = temp_us.loc[:, columns].transpose().stack()\ntemp_series.index = pd.date_range(start=\"2000-01\", periods=len(temp_series), freq=\"M\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -3232,7 +3313,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <img alt="_images/928fdbaea989eb0339674589b1980ee6efd86a33fb1ea37e3942d64ae8eca416.png" src="_images/928fdbaea989eb0339674589b1980ee6efd86a33fb1ea37e3942d64ae8eca416.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 87;
+                var nbb_cell_id = 88;
                 var nbb_unformatted_code = "temp_series.plot(label=\"monthly average\")\ndecorate(ylabel=\"Surface temperature (degC)\")";
                 var nbb_formatted_code = "temp_series.plot(label=\"monthly average\")\ndecorate(ylabel=\"Surface temperature (degC)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -3272,7 +3353,7 @@ Here’s what the time series looks like.</p>
 <img alt="_images/95e24f9fb74b55d01762624ced9c3b3c820ed1d9b56871b899fbd78c5daf7435.png" src="_images/95e24f9fb74b55d01762624ced9c3b3c820ed1d9b56871b899fbd78c5daf7435.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 97;
+                var nbb_cell_id = 98;
                 var nbb_unformatted_code = "util_solar = elec[\"United States : all utility-scale solar\"].dropna()\nutil_solar = util_solar[util_solar.index.year >= 2014]\nutil_solar.plot()\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "util_solar = elec[\"United States : all utility-scale solar\"].dropna()\nutil_solar = util_solar[util_solar.index.year >= 2014]\nutil_solar.plot()\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -3308,7 +3389,7 @@ Here’s what the time series looks like from 2001 to 2024.</p>
 <img alt="_images/e685ca8ae92ec5b24c6602c6a23ed5f3838503178d847191b434dee90bbda12e.png" src="_images/e685ca8ae92ec5b24c6602c6a23ed5f3838503178d847191b434dee90bbda12e.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 107;
+                var nbb_cell_id = 108;
                 var nbb_unformatted_code = "hydro = elec[\"United States : conventional hydroelectric\"]\nhydro.plot()\ndecorate(ylabel=\"GWh\")";
                 var nbb_formatted_code = "hydro = elec[\"United States : conventional hydroelectric\"]\nhydro.plot()\ndecorate(ylabel=\"GWh\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -3327,6 +3408,10 @@ Here’s what the time series looks like from 2001 to 2024.</p>
 Experiment with different lags in the autoregression and moving average parts of the model and see if you can find a combination that maximizes the <span class="math notranslate nohighlight">\(R^2\)</span> value of the model.
 Generate a five-year forecast and plot it along with its confidence interval.</p>
 <p>NOTE: Depending on what lags you include in the model, you might find that the first 12 to 24 elements of the fitted values are not reliable. You might want to remove them before plotting or computing <span class="math notranslate nohighlight">\(R^2\)</span>.</p>
+<p><a class="reference external" href="https://allendowney.github.io/ThinkStats/index.html">Think Stats: Exploratory Data Analysis in Python, 3rd Edition</a></p>
+<p>Copyright 2024 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
+<p>Code license: <a class="reference external" href="https://mit-license.org/">MIT License</a></p>
+<p>Text license: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
 </section>
 </section>
 
@@ -3447,6 +3532,20 @@ By Allen B. Downey
   
   <div class="footer-item">
     
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
   </div>
   
 </div>

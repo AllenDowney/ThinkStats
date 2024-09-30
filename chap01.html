@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Exploratory data analysis &#8212; Think Stats, 3rd edition</title>
+    <title>1. Exploratory Data Analysis &#8212; Think Stats</title>
   
   
   
@@ -147,7 +147,7 @@
   
   
   
-    <p class="title logo__title">Think Stats, 3rd edition</p>
+    <p class="title logo__title">Think Stats</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -177,7 +177,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Exploratory data analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Exploratory Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
@@ -348,7 +348,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Exploratory data analysis</h1>
+    <h1>Exploratory Data Analysis</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -366,10 +366,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">1.6. Transformation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics">1.7. Summary Statistics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">1.8. Interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.9. Exercises</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">1.10. Exercise</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.11. Exercise</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.11.1. Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.9. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">1.9.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.9.2. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.9.3. Exercise</a></li>
 </ul>
 </li>
 </ul>
@@ -384,11 +384,44 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="exploratory-data-analysis">
-<h1><span class="section-number">1. </span>Exploratory data analysis<a class="headerlink" href="#exploratory-data-analysis" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">1. </span>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Link to this heading">#</a></h1>
 <p>The thesis of this book is we can use data to answer questions, resolve debates, and make better decions.</p>
 <p>This chapter introduces the steps we’ll use to do that: loading and validating data, exploring, and choosing statistics that measure what your are interested in.
 As an example, it uses data from the National Survey of Family Growth (NSFG) to answer a question I heard when my wife and I were expecting our first child: do first babies tend to arrive late?</p>
-<div class="cell tag_hide-cell docutils container">
+<p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkStats/blob/v3/nb/chap01.ipynb">Click here to run this notebook on Colab</a>.</p>
+<div class="cell tag_remove-print tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> nb_black
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 1;
+                var nbb_unformatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_formatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</details>
+</div>
+<div class="cell tag_remove-print tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell content</span>
@@ -430,7 +463,7 @@ As an example, it uses data from the National Survey of Family Growth (NSFG) to 
             </script></div>
 </details>
 </div>
-<div class="cell tag_hide-cell docutils container">
+<div class="cell tag_hide-cell tag_remove-print docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell content</span>
@@ -463,7 +496,7 @@ As an example, it uses data from the National Survey of Family Growth (NSFG) to 
             </script></div>
 </details>
 </div>
-<div class="cell tag_hide-cell docutils container">
+<div class="cell tag_hide-cell tag_remove-print docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell content</span>
@@ -1732,19 +1765,19 @@ At the same time, we have an obligation to consider the people represented by th
 </section>
 <section id="exercises">
 <h2><span class="section-number">1.9. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
-</section>
 <section id="exercise">
-<h2><span class="section-number">1.10. </span>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">1.9.1. </span>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <p>Select the <code class="docutils literal notranslate"><span class="pre">birthord</span></code> column, print the value counts, and compare to results published in the  codebook.</p>
 <p>The codebook for this dataset is at <a class="reference external" href="https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/NSFG/Cycle6Codebook-Pregnancy.pdf">https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/NSFG/Cycle6Codebook-Pregnancy.pdf</a>.</p>
 </section>
 <section id="id1">
-<h2><span class="section-number">1.11. </span>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">1.9.2. </span>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>Create a new column named <code class="docutils literal notranslate"><span class="pre">totalwgt_kg</span></code> that contains birth weight in kilograms (there are approximately 2.2 pounds per kilogram).
 Remember that when you create a new column, you have to use the bracket operator, not dot notation.
 Compute the mean and standard deviation of the new column.</p>
+</section>
 <section id="id2">
-<h3><span class="section-number">1.11.1. </span>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.9.3. </span>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>What are the pregnancy lengths for the respondent with <code class="docutils literal notranslate"><span class="pre">caseid</span></code> 2298?</p>
 <p>What was the birth weight of the first baby born to the respondent with <code class="docutils literal notranslate"><span class="pre">caseid</span></code> 5013?
 Hint: You can use <code class="docutils literal notranslate"><span class="pre">and</span></code> to check more than one condition in a query.</p>
@@ -1772,6 +1805,10 @@ Hint: You can use <code class="docutils literal notranslate"><span class="pre">a
             }, 500);
             </script></div>
 </div>
+<p><a class="reference external" href="https://allendowney.github.io/ThinkStats/index.html">Think Stats: Exploratory Data Analysis in Python, 3rd Edition</a></p>
+<p>Copyright 2024 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
+<p>Code license: <a class="reference external" href="https://mit-license.org/">MIT License</a></p>
+<p>Text license: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
 </section>
 </section>
 </section>
@@ -1848,10 +1885,10 @@ Hint: You can use <code class="docutils literal notranslate"><span class="pre">a
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">1.6. Transformation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics">1.7. Summary Statistics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">1.8. Interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.9. Exercises</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">1.10. Exercise</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.11. Exercise</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.11.1. Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.9. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">1.9.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.9.2. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.9.3. Exercise</a></li>
 </ul>
 </li>
 </ul>
@@ -1891,6 +1928,20 @@ By Allen B. Downey
   
   <div class="footer-item">
     
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
   </div>
   
 </div>
