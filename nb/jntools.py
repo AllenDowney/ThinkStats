@@ -341,6 +341,12 @@ def add_tags_to_notebook(filename):
     nbf.write(notebook, filename)
 
 def add_tags_to_cell(cell, tags):
+    """Add tags to a cell
+    
+    Args:
+        cell (dict): A Jupyter cell
+        tags (list): A list of tags to add
+    """
     cell_tags = cell['metadata'].get('tags', [])
 
     #if hide is in the list of tags, remove it
