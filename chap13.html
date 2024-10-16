@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap13';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="14. Analytic methods" href="chap14.html" />
+    <link rel="next" title="14. Analytic Methods" href="chap14.html" />
     <link rel="prev" title="12. Time series analysis" href="chap12.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -192,7 +192,7 @@
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Time series analysis</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">14. Analytic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">14. Analytic Methods</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="nav bd-sidenav">
@@ -368,7 +368,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-survival-function">13.6. Estimating the Survival Function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lifelines">13.7. Lifelines</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">13.8. Confidence Intervals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-remaining-lifetime">13.9. Expected remaining lifetime</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-remaining-lifetime">13.9. Expected Remaining Lifetime</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">13.10. Glossary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.11. Exercises</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">13.11.1. Exercise</a></li>
@@ -408,9 +408,15 @@ This chapter introduces the tools and methods used to produce estimates like tha
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The nb_black extension is already loaded. To reload it, use:
+  %reload_ext nb_black
+The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
+</pre></div>
+</div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 1;
+                var nbb_cell_id = 93;
                 var nbb_unformatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
                 var nbb_formatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -452,7 +458,7 @@ This chapter introduces the tools and methods used to produce estimates like tha
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 2;
+                var nbb_cell_id = 94;
                 var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
                 var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -485,7 +491,7 @@ This chapter introduces the tools and methods used to produce estimates like tha
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 3;
+                var nbb_cell_id = 95;
                 var nbb_unformatted_code = "try:\n    import empiricaldist\nexcept ImportError:\n    !pip install empiricaldist";
                 var nbb_formatted_code = "try:\n    import empiricaldist\nexcept ImportError:\n    !pip install empiricaldist";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -519,7 +525,7 @@ This chapter introduces the tools and methods used to produce estimates like tha
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 4;
+                var nbb_cell_id = 96;
                 var nbb_unformatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_formatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -559,7 +565,7 @@ DOI: 10.1007/s11668-007-9074-9</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 5;
+                var nbb_cell_id = 97;
                 var nbb_unformatted_code = "download(\n    \"https://gist.github.com/epogrebnyak/7933e16c0ad215742c4c104be4fbdeb1/raw/c932bc5b6aa6317770c4cbf43eb591511fec08f9/lamps.csv\"\n)";
                 var nbb_formatted_code = "download(\n    \"https://gist.github.com/epogrebnyak/7933e16c0ad215742c4c104be4fbdeb1/raw/c932bc5b6aa6317770c4cbf43eb591511fec08f9/lamps.csv\"\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -647,7 +653,7 @@ DOI: 10.1007/s11668-007-9074-9</p>
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 6;
+                var nbb_cell_id = 98;
                 var nbb_unformatted_code = "df = pd.read_csv(\"lamps.csv\", index_col=0)\ndf.tail()";
                 var nbb_formatted_code = "df = pd.read_csv(\"lamps.csv\", index_col=0)\ndf.tail()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -680,7 +686,7 @@ To represent the distribution of lifespans, we’ll put these values in a <code 
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 7;
+                var nbb_cell_id = 99;
                 var nbb_unformatted_code = "from empiricaldist import Pmf\n\npmf_bulblife = Pmf(df[\"f\"].values, index=df[\"h\"])\npmf_bulblife.normalize()";
                 var nbb_formatted_code = "from empiricaldist import Pmf\n\npmf_bulblife = Pmf(df[\"f\"].values, index=df[\"h\"])\npmf_bulblife.normalize()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -710,7 +716,7 @@ For example, 78% of the bulbs expire at or before 1656 hours.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 8;
+                var nbb_cell_id = 100;
                 var nbb_unformatted_code = "cdf_bulblife = pmf_bulblife.make_cdf()\ncdf_bulblife[1656]";
                 var nbb_formatted_code = "cdf_bulblife = pmf_bulblife.make_cdf()\ncdf_bulblife[1656]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -740,7 +746,7 @@ So we can compute it like this.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 9;
+                var nbb_cell_id = 101;
                 var nbb_unformatted_code = "complementary_cdf = 1 - cdf_bulblife\ncomplementary_cdf[1656]";
                 var nbb_formatted_code = "complementary_cdf = 1 - cdf_bulblife\ncomplementary_cdf[1656]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -770,7 +776,7 @@ So we can compute it like this.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 10;
+                var nbb_cell_id = 102;
                 var nbb_unformatted_code = "surv_bulblife = cdf_bulblife.make_surv()\nsurv_bulblife[1656]";
                 var nbb_formatted_code = "surv_bulblife = cdf_bulblife.make_surv()\nsurv_bulblife[1656]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -799,7 +805,7 @@ So we can compute it like this.</p>
 <img alt="_images/ce2def220f0cdd5b99452be63e950324f4f516a25a357c1948542f61ad1f16f6.png" src="_images/ce2def220f0cdd5b99452be63e950324f4f516a25a357c1948542f61ad1f16f6.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 11;
+                var nbb_cell_id = 103;
                 var nbb_unformatted_code = "cdf_bulblife.plot(ls=\"--\", label=\"CDF\")\nsurv_bulblife.plot(label=\"Survival\")\n\ndecorate(xlabel=\"Light bulb duration (hours)\", ylabel=\"Probability\")";
                 var nbb_formatted_code = "cdf_bulblife.plot(ls=\"--\", label=\"CDF\")\nsurv_bulblife.plot(label=\"Survival\")\n\ndecorate(xlabel=\"Light bulb duration (hours)\", ylabel=\"Probability\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -837,7 +843,7 @@ As an example, 26% of the bulbs were at risk during hour 1656.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 12;
+                var nbb_cell_id = 104;
                 var nbb_unformatted_code = "at_risk = pmf_bulblife + surv_bulblife\nat_risk[1656]";
                 var nbb_formatted_code = "at_risk = pmf_bulblife + surv_bulblife\nat_risk[1656]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -865,7 +871,7 @@ As an example, 26% of the bulbs were at risk during hour 1656.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 13;
+                var nbb_cell_id = 105;
                 var nbb_unformatted_code = "pmf_bulblife[1656]";
                 var nbb_formatted_code = "pmf_bulblife[1656]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -894,7 +900,7 @@ As an example, 26% of the bulbs were at risk during hour 1656.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 14;
+                var nbb_cell_id = 106;
                 var nbb_unformatted_code = "hazard = pmf_bulblife / at_risk\nhazard[1656]";
                 var nbb_formatted_code = "hazard = pmf_bulblife / at_risk\nhazard[1656]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -924,7 +930,7 @@ As an example, 26% of the bulbs were at risk during hour 1656.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 15;
+                var nbb_cell_id = 107;
                 var nbb_unformatted_code = "hazard_bulblife = surv_bulblife.make_hazard()\nhazard_bulblife[1656]";
                 var nbb_formatted_code = "hazard_bulblife = surv_bulblife.make_hazard()\nhazard_bulblife[1656]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -951,7 +957,7 @@ As an example, 26% of the bulbs were at risk during hour 1656.</p>
 <img alt="_images/3dbd3641244c09056ebf25f5476594ceee5e4bbf4db8d78632e4586b9c1ad4f8.png" src="_images/3dbd3641244c09056ebf25f5476594ceee5e4bbf4db8d78632e4586b9c1ad4f8.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 16;
+                var nbb_cell_id = 108;
                 var nbb_unformatted_code = "hazard_bulblife.plot()\ndecorate(xlabel=\"Light bulb duration (hours)\", ylabel=\"Hazard\")";
                 var nbb_formatted_code = "hazard_bulblife.plot()\ndecorate(xlabel=\"Light bulb duration (hours)\", ylabel=\"Hazard\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -981,7 +987,7 @@ A better alternative is to plot the cumulative hazard function, which is the cum
 <img alt="_images/6d8de174631bb840e5953e6eab185fdf8baf16e5246f141ca6a5872d39a6f753.png" src="_images/6d8de174631bb840e5953e6eab185fdf8baf16e5246f141ca6a5872d39a6f753.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 17;
+                var nbb_cell_id = 109;
                 var nbb_unformatted_code = "cumulative_hazard = hazard_bulblife.cumsum()\ncumulative_hazard.plot()\n\ndecorate(xlabel=\"Light bulb duration (hours)\", ylabel=\"Cumulative hazard\")";
                 var nbb_formatted_code = "cumulative_hazard = hazard_bulblife.cumsum()\ncumulative_hazard.plot()\n\ndecorate(xlabel=\"Light bulb duration (hours)\", ylabel=\"Cumulative hazard\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1022,7 +1028,7 @@ Instructions for downloading this excerpt are in the notebook for this chapter.<
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 18;
+                var nbb_cell_id = 110;
                 var nbb_unformatted_code = "filename = \"marriage_nsfg_female.csv.gz\"\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\" + filename)";
                 var nbb_formatted_code = "filename = \"marriage_nsfg_female.csv.gz\"\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\" + filename)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1051,7 +1057,7 @@ Instructions for downloading this excerpt are in the notebook for this chapter.<
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 19;
+                var nbb_cell_id = 111;
                 var nbb_unformatted_code = "resp = pd.read_csv(\"marriage_nsfg_female.csv.gz\")\nresp.shape";
                 var nbb_formatted_code = "resp = pd.read_csv(\"marriage_nsfg_female.csv.gz\")\nresp.shape";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1091,7 +1097,7 @@ We’ll use the following function, which takes a value of <code class="docutils
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 20;
+                var nbb_cell_id = 112;
                 var nbb_unformatted_code = "month0 = pd.to_datetime(\"1899-12-31\")\n\n\ndef decade_of_birth(cmbirth):\n    date = month0 + pd.DateOffset(months=cmbirth)\n    return date.year // 10 * 10";
                 var nbb_formatted_code = "month0 = pd.to_datetime(\"1899-12-31\")\n\n\ndef decade_of_birth(cmbirth):\n    date = month0 + pd.DateOffset(months=cmbirth)\n    return date.year // 10 * 10";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1133,7 +1139,7 @@ Name: count, dtype: int64
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 21;
+                var nbb_cell_id = 113;
                 var nbb_unformatted_code = "from thinkstats import value_counts\n\nresp[\"cohort\"] = resp[\"cmbirth\"].apply(decade_of_birth)\nvalue_counts(resp[\"cohort\"])";
                 var nbb_formatted_code = "from thinkstats import value_counts\n\nresp[\"cohort\"] = resp[\"cmbirth\"].apply(decade_of_birth)\nvalue_counts(resp[\"cohort\"])";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1160,7 +1166,7 @@ Name: count, dtype: int64
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 22;
+                var nbb_cell_id = 114;
                 var nbb_unformatted_code = "resp[\"agemarr\"] = (resp[\"cmmarrhx\"] - resp[\"cmbirth\"]) / 12\nresp[\"age\"] = (resp[\"cmintvw\"] - resp[\"cmbirth\"]) / 12";
                 var nbb_formatted_code = "resp[\"agemarr\"] = (resp[\"cmmarrhx\"] - resp[\"cmbirth\"]) / 12\nresp[\"age\"] = (resp[\"cmintvw\"] - resp[\"cmbirth\"]) / 12";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1200,7 +1206,7 @@ Note: This function is not correct – in later sections we’ll see what the pr
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 23;
+                var nbb_cell_id = 115;
                 var nbb_unformatted_code = "from empiricaldist import Surv\n\n\ndef make_survival_map(resp, cohorts):\n    surv_map = {}\n\n    grouped = resp.groupby(\"cohort\")\n    for cohort in cohorts:\n        group = grouped.get_group(cohort)\n        surv_map[cohort] = Surv.from_seq(group[\"agemarr\"], dropna=False)\n\n    return surv_map";
                 var nbb_formatted_code = "from empiricaldist import Surv\n\n\ndef make_survival_map(resp, cohorts):\n    surv_map = {}\n\n    grouped = resp.groupby(\"cohort\")\n    for cohort in cohorts:\n        group = grouped.get_group(cohort)\n        surv_map[cohort] = Surv.from_seq(group[\"agemarr\"], dropna=False)\n\n    return surv_map";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1226,7 +1232,7 @@ Note: This function is not correct – in later sections we’ll see what the pr
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 24;
+                var nbb_cell_id = 116;
                 var nbb_unformatted_code = "cohorts = [1980, 1960, 1940]\nsurv_map = make_survival_map(resp, cohorts)";
                 var nbb_formatted_code = "cohorts = [1980, 1960, 1940]\nsurv_map = make_survival_map(resp, cohorts)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1255,7 +1261,7 @@ Note: This function is not correct – in later sections we’ll see what the pr
 <img alt="_images/4fbad48b04c4b6e5439e5859adef6c6595fbedda47fd68f9609e170d74f15019.png" src="_images/4fbad48b04c4b6e5439e5859adef6c6595fbedda47fd68f9609e170d74f15019.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 25;
+                var nbb_cell_id = 117;
                 var nbb_unformatted_code = "for cohort, surv in surv_map.items():\n    surv.plot(label=f\"{cohort}s\")\n\ndecorate(xlabel=\"Age\", ylabel=\"Prob never married\", ylim=[-0.05, 1.05])";
                 var nbb_formatted_code = "for cohort, surv in surv_map.items():\n    surv.plot(label=f\"{cohort}s\")\n\ndecorate(xlabel=\"Age\", ylabel=\"Prob never married\", ylim=[-0.05, 1.05])";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1298,7 +1304,7 @@ Here’s the function from Section XXX that does it.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 26;
+                var nbb_cell_id = 118;
                 var nbb_unformatted_code = "def resample_rows_weighted(df, column=\"finalwgt\"):\n    n = len(df)\n    weights = df[column]\n    return df.sample(n, weights=weights, replace=True)";
                 var nbb_formatted_code = "def resample_rows_weighted(df, column=\"finalwgt\"):\n    n = len(df)\n    weights = df[column]\n    return df.sample(n, weights=weights, replace=True)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1327,7 +1333,7 @@ That’s what the following function does.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 27;
+                var nbb_cell_id = 119;
                 var nbb_unformatted_code = "def resample_cycles(resp):\n    grouped = resp.groupby(\"cycle\")\n    samples = [resample_rows_weighted(group) for _, group in grouped]\n    return pd.concat(samples)";
                 var nbb_formatted_code = "def resample_cycles(resp):\n    grouped = resp.groupby(\"cycle\")\n    samples = [resample_rows_weighted(group) for _, group in grouped]\n    return pd.concat(samples)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1352,7 +1358,7 @@ That’s what the following function does.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 28;
+                var nbb_cell_id = 120;
                 var nbb_unformatted_code = "sample = resample_cycles(resp)";
                 var nbb_formatted_code = "sample = resample_cycles(resp)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1384,10 +1390,10 @@ That’s what the following function does.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ec85348cd6df6b7edcfc11f64c062037ee167f92bb1bcca2b50074613c00a8e2.png" src="_images/ec85348cd6df6b7edcfc11f64c062037ee167f92bb1bcca2b50074613c00a8e2.png" />
+<img alt="_images/5e8fbf50a2bb6d3226e212b8d0bb846594474147f3dc1a20ed48aba7115fb08a.png" src="_images/5e8fbf50a2bb6d3226e212b8d0bb846594474147f3dc1a20ed48aba7115fb08a.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 29;
+                var nbb_cell_id = 121;
                 var nbb_unformatted_code = "for label, surv in surv_map.items():\n    surv.plot(ls=\":\", color=\"gray\", alpha=0.8)\n\nsurvs_resampled = make_survival_map(sample, cohorts)\n\nfor label, surv in survs_resampled.items():\n    surv.plot(label=label)\n\ndecorate(xlabel=\"Age\", ylabel=\"Prob never married\", ylim=[-0.05, 1.05])";
                 var nbb_formatted_code = "for label, surv in surv_map.items():\n    surv.plot(ls=\":\", color=\"gray\", alpha=0.8)\n\nsurvs_resampled = make_survival_map(sample, cohorts)\n\nfor label, surv in survs_resampled.items():\n    surv.plot(label=label)\n\ndecorate(xlabel=\"Age\", ylabel=\"Prob never married\", ylim=[-0.05, 1.05])";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1425,7 +1431,7 @@ This process is called <strong>Kaplan-Meier estimation</strong>.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 30;
+                var nbb_cell_id = 122;
                 var nbb_unformatted_code = "resp60 = sample.query(\"cohort == 1960\")";
                 var nbb_formatted_code = "resp60 = sample.query(\"cohort == 1960\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1450,12 +1456,12 @@ There are 10,222 of them, which we’ll call “completed” cases.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10111
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9830
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 31;
+                var nbb_cell_id = 123;
                 var nbb_unformatted_code = "complete = resp60.query(\"evrmarry == 1\")[\"agemarr\"]\ncomplete.count()";
                 var nbb_formatted_code = "complete = resp60.query(\"evrmarry == 1\")[\"agemarr\"]\ncomplete.count()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1480,12 +1486,12 @@ There are 5,501 of them, which we’ll call the “ongoing” cases.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5391
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5352
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 32;
+                var nbb_cell_id = 124;
                 var nbb_unformatted_code = "ongoing = resp60.query(\"evrmarry == 0\")[\"age\"]\nongoing.count()";
                 var nbb_formatted_code = "ongoing = resp60.query(\"evrmarry == 0\")[\"age\"]\nongoing.count()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1514,7 +1520,7 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 33;
+                var nbb_cell_id = 125;
                 var nbb_unformatted_code = "from empiricaldist import Hist\n\nhist_complete = Hist.from_seq(complete)\nhist_ongoing = Hist.from_seq(ongoing)";
                 var nbb_formatted_code = "from empiricaldist import Hist\n\nhist_complete = Hist.from_seq(complete)\nhist_ongoing = Hist.from_seq(ongoing)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1537,12 +1543,12 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 34;
+                var nbb_cell_id = 126;
                 var nbb_unformatted_code = "hist_complete[25]";
                 var nbb_formatted_code = "hist_complete[25]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1570,7 +1576,7 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 35;
+                var nbb_cell_id = 127;
                 var nbb_unformatted_code = "hist_ongoing[25]";
                 var nbb_formatted_code = "hist_ongoing[25]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1596,7 +1602,7 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 36;
+                var nbb_cell_id = 128;
                 var nbb_unformatted_code = "surv_complete = hist_complete.make_surv()\nsurv_ongoing = hist_ongoing.make_surv()";
                 var nbb_formatted_code = "surv_complete = hist_complete.make_surv()\nsurv_ongoing = hist_ongoing.make_surv()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1619,12 +1625,12 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2878
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2829
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 37;
+                var nbb_cell_id = 129;
                 var nbb_unformatted_code = "surv_complete[25]";
                 var nbb_formatted_code = "surv_complete[25]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1647,12 +1653,12 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2161
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2184
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 38;
+                var nbb_cell_id = 130;
                 var nbb_unformatted_code = "surv_ongoing[25]";
                 var nbb_formatted_code = "surv_ongoing[25]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1676,12 +1682,12 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5107
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5091
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 39;
+                var nbb_cell_id = 131;
                 var nbb_unformatted_code = "at_risk = hist_complete[25] + hist_ongoing[25] + surv_complete[25] + surv_ongoing[25]\nat_risk";
                 var nbb_formatted_code = "at_risk = hist_complete[25] + hist_ongoing[25] + surv_complete[25] + surv_ongoing[25]\nat_risk";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1706,12 +1712,12 @@ So we can compute the hazard function at age 25 like this.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.012140199725866458
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.014142604596346494
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 40;
+                var nbb_cell_id = 132;
                 var nbb_unformatted_code = "hazard = hist_complete[25] / at_risk\nhazard";
                 var nbb_formatted_code = "hazard = hist_complete[25] / at_risk\nhazard";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1738,7 +1744,7 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">uni
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 41;
+                var nbb_cell_id = 133;
                 var nbb_unformatted_code = "ts = pd.Index.union(hist_complete.index, hist_ongoing.index)";
                 var nbb_formatted_code = "ts = pd.Index.union(hist_complete.index, hist_ongoing.index)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1763,7 +1769,7 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">uni
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 42;
+                var nbb_cell_id = 134;
                 var nbb_unformatted_code = "at_risk = hist_complete(ts) + hist_ongoing(ts) + surv_complete(ts) + surv_ongoing(ts)";
                 var nbb_formatted_code = "at_risk = hist_complete(ts) + hist_ongoing(ts) + surv_complete(ts) + surv_ongoing(ts)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1791,7 +1797,7 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">uni
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 43;
+                var nbb_cell_id = 135;
                 var nbb_unformatted_code = "from empiricaldist import Hazard\n\nhs = hist_complete(ts) / at_risk\nhazard = Hazard(hs, ts)";
                 var nbb_formatted_code = "from empiricaldist import Hazard\n\nhs = hist_complete(ts) / at_risk\nhazard = Hazard(hs, ts)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1816,10 +1822,10 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">uni
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5efd99e78584812fd5d19b4537eadab4642ee8484d9a6b22946f82c3aa8febcc.png" src="_images/5efd99e78584812fd5d19b4537eadab4642ee8484d9a6b22946f82c3aa8febcc.png" />
+<img alt="_images/ac2e7d7d27b8d811f55f9aa47a4fe29f6df5921de2410db62c72879d92bae2fe.png" src="_images/ac2e7d7d27b8d811f55f9aa47a4fe29f6df5921de2410db62c72879d92bae2fe.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 44;
+                var nbb_cell_id = 136;
                 var nbb_unformatted_code = "hazard.cumsum().plot()\n\ndecorate(xlabel=\"Age\", ylabel=\"Cumulative hazard\")";
                 var nbb_formatted_code = "hazard.cumsum().plot()\n\ndecorate(xlabel=\"Age\", ylabel=\"Cumulative hazard\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1855,7 +1861,7 @@ And the probability of doing that is the product of the complementary hazard fun
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 45;
+                var nbb_cell_id = 137;
                 var nbb_unformatted_code = "ps = (1 - hazard).cumprod()";
                 var nbb_formatted_code = "ps = (1 - hazard).cumprod()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1880,7 +1886,7 @@ And the probability of doing that is the product of the complementary hazard fun
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 46;
+                var nbb_cell_id = 138;
                 var nbb_unformatted_code = "surv = hazard.make_surv()";
                 var nbb_formatted_code = "surv = hazard.make_surv()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1906,10 +1912,10 @@ And the probability of doing that is the product of the complementary hazard fun
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5903afa33e8e79645a533c45db08f7c7e19e95f7ed69b1e99257da9747d386ed.png" src="_images/5903afa33e8e79645a533c45db08f7c7e19e95f7ed69b1e99257da9747d386ed.png" />
+<img alt="_images/08ddef02d5dc6423c9b59327d33c5263dbc2c41782ce50d551a7b4748869cec1.png" src="_images/08ddef02d5dc6423c9b59327d33c5263dbc2c41782ce50d551a7b4748869cec1.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 47;
+                var nbb_cell_id = 139;
                 var nbb_unformatted_code = "survs_resampled[1960].plot(ls=\":\", color=\"gray\", label=\"resampled\")\nsurv.plot(label=\"Kaplan-Meier\")\n\ndecorate(xlabel=\"Age\", ylabel=\"Prob never married\", ylim=[-0.05, 1.05])";
                 var nbb_formatted_code = "survs_resampled[1960].plot(ls=\":\", color=\"gray\", label=\"resampled\")\nsurv.plot(label=\"Kaplan-Meier\")\n\ndecorate(xlabel=\"Age\", ylabel=\"Prob never married\", ylim=[-0.05, 1.05])";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1925,6 +1931,12 @@ And the probability of doing that is the product of the complementary hazard fun
             </script></div>
 </div>
 <p>We can see how important it is to handle censored data correctly.</p>
+<p>A survival function like this was the basis of a famous magazine article in 1986 – <em>Newsweek</em> reported that a 40-year old unmarried woman was “more likely to be killed by a terrorist” than get married.
+That claim was widely reported and became part of popular culture, but it was wrong then (because it was based on faulty analysis) and turned out to be even more wrong (because of cultural changes that were already in progress and continued).
+In 2006, <em>Newsweek</em> ran an another article admitting that they were wrong.</p>
+<p>I encourage you to read more about this article, the statistics it was based on, and the reaction.
+It should remind you of the ethical obligation to perform statistical analysis with care, interpret the results with appropriate skepticism, and present them to the public accurately and honestly.</p>
+<p><a class="reference external" href="https://www.snopes.com/fact-check/marry-go-round/">Snopes has a good article on the topic</a>.</p>
 <p>The following function encapsulates the steps of Kaplan-Meier estimation.
 It takes as arguments sequences of survival times for complete and ongoing cases, and returns a <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> object.</p>
 <div class="cell docutils container">
@@ -1950,7 +1962,7 @@ It takes as arguments sequences of survival times for complete and ongoing cases
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 48;
+                var nbb_cell_id = 140;
                 var nbb_unformatted_code = "def estimate_hazard(complete, ongoing):\n    \"\"\"Kaplan-Meier estimation.\"\"\"\n    hist_complete = Hist.from_seq(complete)\n    hist_ongoing = Hist.from_seq(ongoing)\n\n    surv_complete = hist_complete.make_surv()\n    surv_ongoing = hist_ongoing.make_surv()\n\n    ts = pd.Index.union(hist_complete.index, hist_ongoing.index)\n    at_risk = (\n        hist_complete(ts) + hist_ongoing(ts) + surv_complete(ts) + surv_ongoing(ts)\n    )\n\n    hs = hist_complete(ts) / at_risk\n    return Hazard(hs, ts)";
                 var nbb_formatted_code = "def estimate_hazard(complete, ongoing):\n    \"\"\"Kaplan-Meier estimation.\"\"\"\n    hist_complete = Hist.from_seq(complete)\n    hist_ongoing = Hist.from_seq(ongoing)\n\n    surv_complete = hist_complete.make_surv()\n    surv_ongoing = hist_ongoing.make_surv()\n\n    ts = pd.Index.union(hist_complete.index, hist_ongoing.index)\n    at_risk = (\n        hist_complete(ts) + hist_ongoing(ts) + surv_complete(ts) + surv_ongoing(ts)\n    )\n\n    hs = hist_complete(ts) / at_risk\n    return Hazard(hs, ts)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1981,7 +1993,7 @@ It takes as arguments sequences of survival times for complete and ongoing cases
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 49;
+                var nbb_cell_id = 141;
                 var nbb_unformatted_code = "def estimate_survival(group):\n    \"\"\"Estimate the survival function.\"\"\"\n    complete = group.query(\"evrmarry == 1\")[\"agemarr\"]\n    ongoing = group.query(\"evrmarry == 0\")[\"age\"]\n    hf = estimate_hazard(complete, ongoing)\n    sf = hf.make_surv()\n    return sf";
                 var nbb_formatted_code = "def estimate_survival(group):\n    \"\"\"Estimate the survival function.\"\"\"\n    complete = group.query(\"evrmarry == 1\")[\"agemarr\"]\n    ongoing = group.query(\"evrmarry == 0\")[\"age\"]\n    hf = estimate_hazard(complete, ongoing)\n    sf = hf.make_surv()\n    return sf";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2000,7 +2012,7 @@ It takes as arguments sequences of survival times for complete and ongoing cases
 </section>
 <section id="lifelines">
 <h2><span class="section-number">13.7. </span>Lifelines<a class="headerlink" href="#lifelines" title="Link to this heading">#</a></h2>
-<p>There is a Python package called <code class="docutils literal notranslate"><span class="pre">lifelines</span></code> that includes tools for survival analysis, including functions that compute Kaplan-Meier estimates.</p>
+<p>A Python package called <code class="docutils literal notranslate"><span class="pre">lifelines</span></code> provides tools for survival analysis, including functions that compute Kaplan-Meier estimates.</p>
 <p>The following cell installs <code class="docutils literal notranslate"><span class="pre">lifelines</span></code> if necessary.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
@@ -2014,7 +2026,7 @@ It takes as arguments sequences of survival times for complete and ongoing cases
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 50;
+                var nbb_cell_id = 193;
                 var nbb_unformatted_code = "try:\n    import lifelines\nexcept ImportError:\n    !pip install lifelines";
                 var nbb_formatted_code = "try:\n    import lifelines\nexcept ImportError:\n    !pip install lifelines";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2029,8 +2041,8 @@ It takes as arguments sequences of survival times for complete and ongoing cases
             }, 500);
             </script></div>
 </div>
-<p>We can use it to confirm that the computation in the previous section is correct.
-First we’ll compute the survival curve using <code class="docutils literal notranslate"><span class="pre">estimate_survival</span></code>.</p>
+<p>We can use it to confirm that the result in the previous section is correct.
+First we’ll compute the survival function using <code class="docutils literal notranslate"><span class="pre">estimate_survival</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surv</span> <span class="o">=</span> <span class="n">estimate_survival</span><span class="p">(</span><span class="n">resp60</span><span class="p">)</span>
@@ -2040,7 +2052,7 @@ First we’ll compute the survival curve using <code class="docutils literal not
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 51;
+                var nbb_cell_id = 143;
                 var nbb_unformatted_code = "surv = estimate_survival(resp60)";
                 var nbb_formatted_code = "surv = estimate_survival(resp60)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2056,7 +2068,7 @@ First we’ll compute the survival curve using <code class="docutils literal not
             </script></div>
 </div>
 <p>Next we’ll compute it using <code class="docutils literal notranslate"><span class="pre">lifelines</span></code>.
-We have to do a little work to get the data into the format <code class="docutils literal notranslate"><span class="pre">lifelines</span></code> requires.</p>
+First we’ll get the data into the format <code class="docutils literal notranslate"><span class="pre">lifelines</span></code> requires.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">complete</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
@@ -2068,7 +2080,7 @@ We have to do a little work to get the data into the format <code class="docutil
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 52;
+                var nbb_cell_id = 144;
                 var nbb_unformatted_code = "complete = complete.dropna()\ndurations = np.concatenate([complete, ongoing])\nevent_observed = np.concatenate([np.ones(len(complete)), np.zeros(len(ongoing))])";
                 var nbb_formatted_code = "complete = complete.dropna()\ndurations = np.concatenate([complete, ongoing])\nevent_observed = np.concatenate([np.ones(len(complete)), np.zeros(len(ongoing))])";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2094,12 +2106,12 @@ We have to do a little work to get the data into the format <code class="docutil
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;lifelines.KaplanMeierFitter:&quot;KM_estimate&quot;, fitted with 15502 total observations, 5391 right-censored observations&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;lifelines.KaplanMeierFitter:&quot;KM_estimate&quot;, fitted with 15182 total observations, 5352 right-censored observations&gt;
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 53;
+                var nbb_cell_id = 145;
                 var nbb_unformatted_code = "from lifelines import KaplanMeierFitter\n\nkmf = KaplanMeierFitter()\nkmf.fit(durations=durations, event_observed=event_observed)";
                 var nbb_formatted_code = "from lifelines import KaplanMeierFitter\n\nkmf = KaplanMeierFitter()\nkmf.fit(durations=durations, event_observed=event_observed)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2118,19 +2130,18 @@ We have to do a little work to get the data into the format <code class="docutil
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob never married&quot;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;timeline&#39;&gt;
-</pre></div>
-</div>
-<img alt="_images/00d06ce2d2c99878d5705c433b016f434fd259fbf673ad49fe3d07b47846f2bb.png" src="_images/00d06ce2d2c99878d5705c433b016f434fd259fbf673ad49fe3d07b47846f2bb.png" />
+<img alt="_images/e70ee1552dbfa7e027fac3b82d17e1065b193dc422b4e16bba3f53efe4c09289.png" src="_images/e70ee1552dbfa7e027fac3b82d17e1065b193dc422b4e16bba3f53efe4c09289.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 54;
-                var nbb_unformatted_code = "kmf.plot()";
-                var nbb_formatted_code = "kmf.plot()";
+                var nbb_cell_id = 190;
+                var nbb_unformatted_code = "kmf.plot()\n\ndecorate(xlabel=\"Age\", ylabel=\"Prob never married\", ylim=[-0.05, 1.05])";
+                var nbb_formatted_code = "kmf.plot()\n\ndecorate(xlabel=\"Age\", ylabel=\"Prob never married\", ylim=[-0.05, 1.05])";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2144,7 +2155,7 @@ We have to do a little work to get the data into the format <code class="docutil
             </script></div>
 </div>
 <p>The results from lifelines are slightly different from the results we computed because they start from 0.
-But all of the other values in the results are the same, within floating-point error.</p>
+But all of the other values are the same, within floating-point error.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">kmf</span><span class="o">.</span><span class="n">survival_function_</span><span class="p">[</span><span class="s2">&quot;KM_estimate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -2158,7 +2169,7 @@ But all of the other values in the results are the same, within floating-point e
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 55;
+                var nbb_cell_id = 147;
                 var nbb_unformatted_code = "ps = kmf.survival_function_[\"KM_estimate\"].drop(0)\nnp.allclose(ps, surv)";
                 var nbb_formatted_code = "ps = kmf.survival_function_[\"KM_estimate\"].drop(0)\nnp.allclose(ps, surv)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2173,17 +2184,18 @@ But all of the other values in the results are the same, within floating-point e
             }, 500);
             </script></div>
 </div>
-<p>In the next section, we’ll use weighted resampling to compute confidence intervals.</p>
+<p>In the next section, we’ll use weighted resampling to compute confidence intervals that take stratified sampling into account.</p>
 </section>
 <section id="confidence-intervals">
 <h2><span class="section-number">13.8. </span>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Link to this heading">#</a></h2>
 <p>The Kaplan-Meier estimate we computed is based on a single resampling of the dataset.
 To get an idea of how much variation there is due to random sampling, we’ll run the analysis with several resamplings and plot the results.</p>
-<p>We’ll use the following function, which takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and a list of cohorts, estimates the survival function for each cohort, and returns a dictionary that maps from each integer cohort to a <code class="docutils literal notranslate"><span class="pre">Surv</span></code> object.
-This function is identical to <code class="docutils literal notranslate"><span class="pre">make_survival_map</span></code> in Section xxx, except that it calls <code class="docutils literal notranslate"><span class="pre">estimate_survival</span></code>, which uses Kaplan-Meier estimation, rather than <code class="docutils literal notranslate"><span class="pre">Surv.from_seq</span></code>, which only works if there is no censored data.</p>
+<p>We’ll use the following function, which takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and a list of cohorts, estimates the survival function for each cohort, and returns a dictionary that maps from each integer cohort to a <code class="docutils literal notranslate"><span class="pre">Surv</span></code> object.</p>
+<p>This function is identical to <code class="docutils literal notranslate"><span class="pre">make_survival_map</span></code> in Section xxx, except that it calls <code class="docutils literal notranslate"><span class="pre">estimate_survival</span></code>, which uses Kaplan-Meier estimation, rather than <code class="docutils literal notranslate"><span class="pre">Surv.from_seq</span></code>, which only works if there is no censored data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate_survival_map</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">cohorts</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a dictionary from cohorts to Surv objects.&quot;&quot;&quot;</span>
     <span class="n">surv_map</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="n">grouped</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;cohort&quot;</span><span class="p">)</span>
@@ -2198,7 +2210,7 @@ This function is identical to <code class="docutils literal notranslate"><span c
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 56;
+                var nbb_cell_id = 148;
                 var nbb_unformatted_code = "def estimate_survival_map(resp, cohorts):\n    surv_map = {}\n\n    grouped = resp.groupby(\"cohort\")\n    for cohort in cohorts:\n        group = grouped.get_group(cohort)\n        surv_map[cohort] = estimate_survival(group)\n\n    return surv_map";
                 var nbb_formatted_code = "def estimate_survival_map(resp, cohorts):\n    surv_map = {}\n\n    grouped = resp.groupby(\"cohort\")\n    for cohort in cohorts:\n        group = grouped.get_group(cohort)\n        surv_map[cohort] = estimate_survival(group)\n\n    return surv_map";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2213,7 +2225,7 @@ This function is identical to <code class="docutils literal notranslate"><span c
             }, 500);
             </script></div>
 </div>
-<p>The following loop generates 101 random resamplings of the dataset, weighted to correct for stratified sampling, and makes a list of 101 dictionaries containing the estimated survival curves.</p>
+<p>The following loop generates 101 random resamplings of the dataset and makes a list of 101 dictionaries containing the estimated survival functions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohorts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1940</span><span class="p">,</span> <span class="mi">1950</span><span class="p">,</span> <span class="mi">1960</span><span class="p">,</span> <span class="mi">1970</span><span class="p">,</span> <span class="mi">1980</span><span class="p">,</span> <span class="mi">1990</span><span class="p">]</span>
@@ -2225,7 +2237,7 @@ This function is identical to <code class="docutils literal notranslate"><span c
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 57;
+                var nbb_cell_id = 149;
                 var nbb_unformatted_code = "cohorts = [1940, 1950, 1960, 1970, 1980, 1990]\n\nsurv_maps = [estimate_survival_map(resample_cycles(resp), cohorts) for i in range(101)]";
                 var nbb_formatted_code = "cohorts = [1940, 1950, 1960, 1970, 1980, 1990]\n\nsurv_maps = [estimate_survival_map(resample_cycles(resp), cohorts) for i in range(101)]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2240,11 +2252,12 @@ This function is identical to <code class="docutils literal notranslate"><span c
             }, 500);
             </script></div>
 </div>
-<p>To plot the results, we’ll use the following function, which takes that list of dictionaries, and integer cohort, and a color string.
+<p>To plot the results, we’ll use the following function, which takes that list of dictionaries, an integer cohort, and a color string.
 It loops through the dictionaries, selects the survival function for the given cohort, and plots it with a nearly transparent line – which is one way to visualize the variability between resamplings.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_cohort</span><span class="p">(</span><span class="n">surv_maps</span><span class="p">,</span> <span class="n">cohort</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot results for a single cohort.&quot;&quot;&quot;</span>
     <span class="n">survs</span> <span class="o">=</span> <span class="p">[</span><span class="n">surv_map</span><span class="p">[</span><span class="n">cohort</span><span class="p">]</span> <span class="k">for</span> <span class="n">surv_map</span> <span class="ow">in</span> <span class="n">surv_maps</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">surv</span> <span class="ow">in</span> <span class="n">survs</span><span class="p">:</span>
         <span class="n">surv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
@@ -2257,7 +2270,7 @@ It loops through the dictionaries, selects the survival function for the given c
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 58;
+                var nbb_cell_id = 150;
                 var nbb_unformatted_code = "def plot_cohort(surv_maps, cohort, color):\n    survs = [surv_map[cohort] for surv_map in surv_maps]\n    for surv in survs:\n        surv.plot(color=color, alpha=0.05)\n\n    x, y = surv.index[-1], surv.iloc[-1]\n    plt.text(x + 1, y, f\"{cohort}s\", ha=\"left\", va=\"center\")";
                 var nbb_formatted_code = "def plot_cohort(surv_maps, cohort, color):\n    survs = [surv_map[cohort] for surv_map in surv_maps]\n    for surv in survs:\n        surv.plot(color=color, alpha=0.05)\n\n    x, y = surv.index[-1], surv.iloc[-1]\n    plt.text(x + 1, y, f\"{cohort}s\", ha=\"left\", va=\"center\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2272,29 +2285,25 @@ It loops through the dictionaries, selects the survival function for the given c
             }, 500);
             </script></div>
 </div>
-<p>Here are the results for which cohorts…</p>
+<p>Here are the results for birth cohorts from the 1940s to the 1990s.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">remove_spines</span>
-
-<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cohorts</span><span class="p">))]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cohorts</span><span class="p">))]</span>
 
 <span class="k">for</span> <span class="n">cohort</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cohorts</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
     <span class="n">plot_cohort</span><span class="p">(</span><span class="n">surv_maps</span><span class="p">,</span> <span class="n">cohort</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
 
-<span class="n">remove_spines</span><span class="p">()</span>
-
-<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob never married&quot;</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob never married&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">55</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e0d234689bd6b51edb1fe657bb3f4a0bff74847635a43cff2b54f92fcf48d114.png" src="_images/e0d234689bd6b51edb1fe657bb3f4a0bff74847635a43cff2b54f92fcf48d114.png" />
+<img alt="_images/7702b327ca6469899aae3f91e7dd8d132b04e5e281359b0d47fbd97951690fca.png" src="_images/7702b327ca6469899aae3f91e7dd8d132b04e5e281359b0d47fbd97951690fca.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 59;
-                var nbb_unformatted_code = "from thinkstats import remove_spines\n\ncolors = [f\"C{i}\" for i in range(len(cohorts))]\n\nfor cohort, color in zip(cohorts, colors):\n    plot_cohort(surv_maps, cohort, color)\n\nremove_spines()\n\ndecorate(xlabel=\"Age\", ylabel=\"Prob never married\")";
-                var nbb_formatted_code = "from thinkstats import remove_spines\n\ncolors = [f\"C{i}\" for i in range(len(cohorts))]\n\nfor cohort, color in zip(cohorts, colors):\n    plot_cohort(surv_maps, cohort, color)\n\nremove_spines()\n\ndecorate(xlabel=\"Age\", ylabel=\"Prob never married\")";
+                var nbb_cell_id = 191;
+                var nbb_unformatted_code = "colors = [f\"C{i}\" for i in range(len(cohorts))]\n\nfor cohort, color in zip(cohorts, colors):\n    plot_cohort(surv_maps, cohort, color)\n\ndecorate(xlabel=\"Age\", ylabel=\"Prob never married\", xlim=[8, 55], ylim=[-0.05, 1.05])";
+                var nbb_formatted_code = "colors = [f\"C{i}\" for i in range(len(cohorts))]\n\nfor cohort, color in zip(cohorts, colors):\n    plot_cohort(surv_maps, cohort, color)\n\ndecorate(xlabel=\"Age\", ylabel=\"Prob never married\", xlim=[8, 55], ylim=[-0.05, 1.05])";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2309,33 +2318,17 @@ It loops through the dictionaries, selects the survival function for the given c
 </div>
 <p>Several patterns are visible:</p>
 <ul class="simple">
-<li><p>Women born in the 50s married earliest, with successive cohorts marrying later and later, at least until age 30 or so.</p></li>
-<li><p>Women born in the 60s follow a surprising pattern.
-Prior to age 25, they were marrying at slower rates than their predecessors.
-After age 25, they were marrying faster.
-By age 32 they had overtaken the 50s cohort, and at age 44 they are substantially more likely to have married.</p></li>
+<li><p>Women born in the 1940s married earliest – cohorts born in the 1950s and 1960s married later, but about the same fraction stayed unmarried.</p></li>
+<li><p>Women born in the 1970s married later <em>and</em> stayed unmarried at higher rates than previous cohorts.</p></li>
+<li><p>Cohorts born in 1980s, and 1990s are marrying even later, and are on track to stay unmarried at even higher rates – although these patterns could change in the future.</p></li>
 </ul>
-<p>A surv like this was the basis of a famous magazine article in 1986; <em>Newsweek</em> reported that a 40-year old unmarried woman was “more likely to be killed by a terrorist” than get married.
-These statistics were widely reported and became part of popular culture, but they were wrong then (because they were based on faulty analysis) and turned out to be even more wrong (because of cultural changes that were already in progress and continued).
-In 2006, <em>Newsweek</em> ran an another article admitting that they were wrong.</p>
-<p>I encourage you to read more about this article, the statistics it was based on, and the reaction.
-It should remind you of the ethical obligation to perform statistical analysis with care, interpret the results with appropriate skepticism, and present them to the public accurately and honestly.</p>
-<p>Women born in the 60s turned 25 between 1985 and 1995.
-Remembering that the <em>Newsweek</em> article I mentioned was published in 1986, it is tempting to imagine that the article triggered a marriage boom.
-That explanation would be too pat, but it is possible that the article and the reaction to it were indicative of a mood that affected the behavior of this cohort.</p>
-<ul class="simple">
-<li><p>The pattern of the 70s cohort is similar.
-They are less likely than their predecessors to be married before age 25, but at age 35 they have caught up with both of the previous cohorts.</p></li>
-<li><p>Women born in the 80s are even less likely to marry before age 25. What happens after that is not clear; for more data, we have to wait for the next cycle of the NSFG.</p></li>
-</ul>
-<p>In the meantime we can make some predictions.</p>
+<p>We’ll have to wait for the next data release from the NSFG to learn more.</p>
 </section>
 <section id="expected-remaining-lifetime">
-<h2><span class="section-number">13.9. </span>Expected remaining lifetime<a class="headerlink" href="#expected-remaining-lifetime" title="Link to this heading">#</a></h2>
-<p>Given a survival function, we can compute the expected remaining lifetime as a function of current age.
-For example, given the survival function of pregnancy length, we can compute the expected time until delivery.</p>
-<p>The first step is to extract the PMF of lifetimes.
-<code class="docutils literal notranslate"><span class="pre">SurvivalFunction</span></code> provides a method that does that:</p>
+<h2><span class="section-number">13.9. </span>Expected Remaining Lifetime<a class="headerlink" href="#expected-remaining-lifetime" title="Link to this heading">#</a></h2>
+<p>Given a distribution, we can compute the expected remaining lifetime as a function of elapsed time.
+For example, given the distribution of pregnancy lengths, we can compute the expected time until delivery.
+To demonstrate, we’ll use pregnancy data from the NSFG.</p>
 <p>The following cells download the data files and install <code class="docutils literal notranslate"><span class="pre">statadict</span></code>, which we need to read the data.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
@@ -2348,7 +2341,7 @@ For example, given the survival function of pregnancy length, we can compute the
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 60;
+                var nbb_cell_id = 152;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2375,7 +2368,7 @@ For example, given the survival function of pregnancy length, we can compute the
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 61;
+                var nbb_cell_id = 153;
                 var nbb_unformatted_code = "try:\n    import statadict\nexcept ImportError:\n    !pip install statadict";
                 var nbb_formatted_code = "try:\n    import statadict\nexcept ImportError:\n    !pip install statadict";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2390,6 +2383,7 @@ For example, given the survival function of pregnancy length, we can compute the
             }, 500);
             </script></div>
 </div>
+<p>We can load it like this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">get_nsfg_groups</span>
@@ -2401,7 +2395,7 @@ For example, given the survival function of pregnancy length, we can compute the
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 62;
+                var nbb_cell_id = 154;
                 var nbb_unformatted_code = "from nsfg import get_nsfg_groups\n\nlive, firsts, others = get_nsfg_groups()";
                 var nbb_formatted_code = "from nsfg import get_nsfg_groups\n\nlive, firsts, others = get_nsfg_groups()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2416,6 +2410,7 @@ For example, given the survival function of pregnancy length, we can compute the
             }, 500);
             </script></div>
 </div>
+<p>We’ll start with a single resampling of the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="s2">&quot;finalwgt&quot;</span><span class="p">)</span>
@@ -2425,7 +2420,7 @@ For example, given the survival function of pregnancy length, we can compute the
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 63;
+                var nbb_cell_id = 155;
                 var nbb_unformatted_code = "sample = resample_rows_weighted(live, \"finalwgt\")";
                 var nbb_formatted_code = "sample = resample_rows_weighted(live, \"finalwgt\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2440,6 +2435,7 @@ For example, given the survival function of pregnancy length, we can compute the
             }, 500);
             </script></div>
 </div>
+<p>Here’s the PMF of pregnancy durations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_durations</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;prglngth&quot;</span><span class="p">])</span>
@@ -2449,7 +2445,7 @@ For example, given the survival function of pregnancy length, we can compute the
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 64;
+                var nbb_cell_id = 156;
                 var nbb_unformatted_code = "pmf_durations = Pmf.from_seq(sample[\"prglngth\"])";
                 var nbb_formatted_code = "pmf_durations = Pmf.from_seq(sample[\"prglngth\"])";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2464,6 +2460,9 @@ For example, given the survival function of pregnancy length, we can compute the
             }, 500);
             </script></div>
 </div>
+<p>Now suppose it’s the beginning of the 36th week of pregnancy.
+Remembering that the most common pregnancy length is 39 weeks, we expect the remaining time to be 3-4 weeks.
+To make that estimate more precise, we can identify the values in the distribution that equal or exceed 36 weeks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="mi">36</span>
@@ -2474,7 +2473,7 @@ For example, given the survival function of pregnancy length, we can compute the
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 65;
+                var nbb_cell_id = 157;
                 var nbb_unformatted_code = "t = 36\nis_remaining = pmf_durations.qs >= t";
                 var nbb_formatted_code = "t = 36\nis_remaining = pmf_durations.qs >= t";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2489,17 +2488,28 @@ For example, given the survival function of pregnancy length, we can compute the
             }, 500);
             </script></div>
 </div>
+<p>Next we’ll make a new <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> object that contains only those values, shifted left so the current time is at 0.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">pmf_durations</span><span class="o">.</span><span class="n">ps</span><span class="p">[</span><span class="n">is_remaining</span><span class="p">]</span>
 <span class="n">qs</span> <span class="o">=</span> <span class="n">pmf_durations</span><span class="o">.</span><span class="n">qs</span><span class="p">[</span><span class="n">is_remaining</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span>
+
+<span class="n">pmf_remaining</span> <span class="o">=</span> <span class="n">Pmf</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">qs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because we selected a subset of the values in the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, the probabilities no longer add up to 1, but we can normalize the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> so they do.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_remaining</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 66;
+                var nbb_cell_id = 158;
                 var nbb_unformatted_code = "ps = pmf_durations.ps[is_remaining]\nqs = pmf_durations.qs[is_remaining] - t";
                 var nbb_formatted_code = "ps = pmf_durations.ps[is_remaining]\nqs = pmf_durations.qs[is_remaining] - t";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2514,34 +2524,7 @@ For example, given the survival function of pregnancy length, we can compute the
             }, 500);
             </script></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_remaining</span> <span class="o">=</span> <span class="n">Pmf</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">qs</span><span class="p">)</span>
-<span class="n">pmf_remaining</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9121119370354174
-</pre></div>
-</div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 67;
-                var nbb_unformatted_code = "pmf_remaining = Pmf(ps, qs)\npmf_remaining.normalize()";
-                var nbb_formatted_code = "pmf_remaining = Pmf(ps, qs)\npmf_remaining.normalize()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
+<p>Here’s the result, which shows the distribution of remaining time at the beginning of the 36th week.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_remaining</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Week 36&quot;</span><span class="p">)</span>
@@ -2550,10 +2533,10 @@ For example, given the survival function of pregnancy length, we can compute the
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a64bdcba604c946c42bfbfe55d497ee5a5899c8ac97c94aa60e991694abc634c.png" src="_images/a64bdcba604c946c42bfbfe55d497ee5a5899c8ac97c94aa60e991694abc634c.png" />
+<img alt="_images/435258a0c0053f015fdd8af6880294d483905c54d7e67510926a867461210019.png" src="_images/435258a0c0053f015fdd8af6880294d483905c54d7e67510926a867461210019.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 68;
+                var nbb_cell_id = 160;
                 var nbb_unformatted_code = "pmf_remaining.bar(label=\"Week 36\")\ndecorate(xlabel=\"Remaining duration (weeks)\", ylabel=\"PMF\")";
                 var nbb_formatted_code = "pmf_remaining.bar(label=\"Week 36\")\ndecorate(xlabel=\"Remaining duration (weeks)\", ylabel=\"PMF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2568,6 +2551,7 @@ For example, given the survival function of pregnancy length, we can compute the
             }, 500);
             </script></div>
 </div>
+<p>The mean of this distribution is the expected remaining time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_remaining</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -2575,12 +2559,12 @@ For example, given the survival function of pregnancy length, we can compute the
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.2623441994247373
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.2389929602672716
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 69;
+                var nbb_cell_id = 161;
                 var nbb_unformatted_code = "pmf_remaining.mean()";
                 var nbb_formatted_code = "pmf_remaining.mean()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2595,10 +2579,11 @@ For example, given the survival function of pregnancy length, we can compute the
             }, 500);
             </script></div>
 </div>
+<p>The following function encapsulates these steps and computes the distribution of remaining time for a given <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> at a given time, <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_pmf_remaining</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Distribution of remaining time.&quot;&quot;&quot;</span>
     <span class="n">is_remaining</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">qs</span> <span class="o">&gt;=</span> <span class="n">t</span>
     <span class="n">ps</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">ps</span><span class="p">[</span><span class="n">is_remaining</span><span class="p">]</span>
     <span class="n">qs</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">qs</span><span class="p">[</span><span class="n">is_remaining</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span>
@@ -2611,9 +2596,9 @@ For example, given the survival function of pregnancy length, we can compute the
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 70;
-                var nbb_unformatted_code = "def compute_pmf_remaining(pmf, t):\n    \"\"\"\n    \"\"\"\n    is_remaining = pmf.qs >= t\n    ps = pmf.ps[is_remaining]\n    qs = pmf.qs[is_remaining] - t\n    pmf_remaining = Pmf(ps, qs)\n    pmf_remaining.normalize()\n    return pmf_remaining";
-                var nbb_formatted_code = "def compute_pmf_remaining(pmf, t):\n    \"\"\" \"\"\"\n    is_remaining = pmf.qs >= t\n    ps = pmf.ps[is_remaining]\n    qs = pmf.qs[is_remaining] - t\n    pmf_remaining = Pmf(ps, qs)\n    pmf_remaining.normalize()\n    return pmf_remaining";
+                var nbb_cell_id = 194;
+                var nbb_unformatted_code = "def compute_pmf_remaining(pmf, t):\n    \"\"\"Distribution of remaining time.\"\"\"\n    is_remaining = pmf.qs >= t\n    ps = pmf.ps[is_remaining]\n    qs = pmf.qs[is_remaining] - t\n    pmf_remaining = Pmf(ps, qs)\n    pmf_remaining.normalize()\n    return pmf_remaining";
+                var nbb_formatted_code = "def compute_pmf_remaining(pmf, t):\n    \"\"\"Distribution of remaining time.\"\"\"\n    is_remaining = pmf.qs >= t\n    ps = pmf.ps[is_remaining]\n    qs = pmf.qs[is_remaining] - t\n    pmf_remaining = Pmf(ps, qs)\n    pmf_remaining.normalize()\n    return pmf_remaining";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2626,6 +2611,7 @@ For example, given the survival function of pregnancy length, we can compute the
             }, 500);
             </script></div>
 </div>
+<p>The following function takes a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> of pregnancy lengths and computes the expected remaining time at the beginning of each week from the 36th to the 43rd.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">expected_remaining</span><span class="p">(</span><span class="n">pmf</span><span class="p">):</span>
@@ -2643,7 +2629,7 @@ For example, given the survival function of pregnancy length, we can compute the
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 71;
+                var nbb_cell_id = 163;
                 var nbb_unformatted_code = "def expected_remaining(pmf):\n    index = range(36, 44)\n    expected = pd.Series(index=index)\n\n    for t in index:\n        pmf_remaining = compute_pmf_remaining(pmf, t)\n        expected[t] = pmf_remaining.mean()\n\n    return expected";
                 var nbb_formatted_code = "def expected_remaining(pmf):\n    index = range(36, 44)\n    expected = pd.Series(index=index)\n\n    for t in index:\n        pmf_remaining = compute_pmf_remaining(pmf, t)\n        expected[t] = pmf_remaining.mean()\n\n    return expected";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2658,6 +2644,7 @@ For example, given the survival function of pregnancy length, we can compute the
             }, 500);
             </script></div>
 </div>
+<p>Here are the results for a single resampling of the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expected</span> <span class="o">=</span> <span class="n">expected_remaining</span><span class="p">(</span><span class="n">pmf_durations</span><span class="p">)</span>
@@ -2666,20 +2653,20 @@ For example, given the survival function of pregnancy length, we can compute the
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36    3.262344
-37    2.388225
-38    1.531935
-39    0.659377
-40    0.899135
-41    0.803468
-42    0.651952
-43    0.627119
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36    3.238993
+37    2.364650
+38    1.519878
+39    0.643153
+40    0.920682
+41    0.854811
+42    0.636513
+43    0.619247
 dtype: float64
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 72;
+                var nbb_cell_id = 164;
                 var nbb_unformatted_code = "expected = expected_remaining(pmf_durations)\nexpected";
                 var nbb_formatted_code = "expected = expected_remaining(pmf_durations)\nexpected";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2694,6 +2681,7 @@ dtype: float64
             }, 500);
             </script></div>
 </div>
+<p>To see how much variation there is due to random sampling, we can run this analysis with several resamplings and plot the results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">21</span><span class="p">):</span>
@@ -2709,10 +2697,10 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1dd021671dc270ce355324d2ff17afaa4b781f2c0042e800e164080602e84124.png" src="_images/1dd021671dc270ce355324d2ff17afaa4b781f2c0042e800e164080602e84124.png" />
+<img alt="_images/db4bac32dea9327ccf02ef8bc933ea8583715c4d3b56f0351f7d8cccf6c63995.png" src="_images/db4bac32dea9327ccf02ef8bc933ea8583715c4d3b56f0351f7d8cccf6c63995.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 73;
+                var nbb_cell_id = 195;
                 var nbb_unformatted_code = "for i in range(21):\n    sample = resample_rows_weighted(live, \"finalwgt\")\n    pmf_durations = Pmf.from_seq(sample[\"prglngth\"])\n    expected = expected_remaining(pmf_durations)\n    expected.plot(color=\"C0\", alpha=0.1)\n\ndecorate(\n    xlabel=\"Weeks of pregnancy\", ylabel=\"Expected remaining time (weeks)\", ylim=[0, 3.5]\n)";
                 var nbb_formatted_code = "for i in range(21):\n    sample = resample_rows_weighted(live, \"finalwgt\")\n    pmf_durations = Pmf.from_seq(sample[\"prglngth\"])\n    expected = expected_remaining(pmf_durations)\n    expected.plot(color=\"C0\", alpha=0.1)\n\ndecorate(\n    xlabel=\"Weeks of pregnancy\", ylabel=\"Expected remaining time (weeks)\", ylim=[0, 3.5]\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2727,6 +2715,10 @@ dtype: float64
             }, 500);
             </script></div>
 </div>
+<p>Between weeks 36 and 39, the expected remaining time decreases until, at the beginning of the 39th week, it is about 0.5 weeks.
+But after that, the curve levels off.
+At the beginning of the 40th week, the expected remaining time is still close to 0.5 week, and at the beginning of the 41st, 42nd, and 43rd, it is almost the same.
+For people waiting anxiously for a baby to be born, this behavior seems quite cruel.</p>
 </section>
 <section id="glossary">
 <h2><span class="section-number">13.10. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
@@ -2734,11 +2726,9 @@ dtype: float64
 <li><p><strong>survival analysis</strong>: A set of methods for describing and predicting lifetimes, or more generally time until an event occurs.</p></li>
 <li><p><strong>survival function</strong>: A function that maps from a time, <span class="math notranslate nohighlight">\(t\)</span>, to the probability of surviving past <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p><strong>hazard function</strong>: A function that maps from <span class="math notranslate nohighlight">\(t\)</span> to the fraction of people alive until <span class="math notranslate nohighlight">\(t\)</span> who die at <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><strong>censored data</strong>: Data that is only partially known, often because it depends on future events.</p></li>
 <li><p><strong>Kaplan-Meier estimation</strong>: An algorithm for estimating hazard and survival functions.</p></li>
-<li><p><strong>cohort</strong>: a group of subjects defined by an event, like date of birth, in a particular interval of time.</p></li>
-<li><p><strong>cohort effect</strong>: a difference between cohorts.</p></li>
-<li><p><strong>NBUE</strong>: A property of expected remaining lifetime, “New better than used in expectation.”</p></li>
-<li><p><strong>UBNE</strong>: A property of expected remaining lifetime, “Used better than new in expectation.”</p></li>
+<li><p><strong>cohort</strong>: A group of subjects with something in common – like they decade they were born – who are treated as a group for purposes of analysis.</p></li>
 </ul>
 </section>
 <section id="exercises">
@@ -2747,19 +2737,19 @@ dtype: float64
 <h3><span class="section-number">13.11.1. </span>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <p>We can use the methods in this chapter to estimate hazard and survival functions for the duration of a marriage.
 To keep things simple, we’ll consider only first marriages, and we’ll focus on divorce as the endpoint, rather than separation or death.</p>
-<p>In the NSFG data, the <code class="docutils literal notranslate"><span class="pre">cmdivorcx</span></code> column contains the date of divorce for each respondent’s first marriage, if applicable, encoded in century-months.</p>
-<p>Compute the duration of marriages that have ended in divorce, and the duration, so far, of marriages that are ongoing.</p>
+<p>In the NSFG data, the <code class="docutils literal notranslate"><span class="pre">cmdivorcx</span></code> column contains the date of divorce for each respondent’s first marriage, if applicable, encoded in century-months.
+Compute the duration of marriages that have ended in divorce, and the duration, so far, of marriages that are ongoing.</p>
 <ul class="simple">
-<li><p>For complete cases, you can compute the elapsed time between <code class="docutils literal notranslate"><span class="pre">cmdivorcx</span></code> and <code class="docutils literal notranslate"><span class="pre">cmmarrhx</span></code>. If both values are valid – not <code class="docutils literal notranslate"><span class="pre">NaN</span></code> – that means the respondent’s first marriage ended in divorce.</p></li>
-<li><p>To identify ongoing cases, you should select people who have only married once and who are still married. You can use <code class="docutils literal notranslate"><span class="pre">fmarno</span></code>, which records the number of times each respondent has married, and <code class="docutils literal notranslate"><span class="pre">fmarital</span></code>, which encodes marital status – the value 1 indicates that the respondent is married.</p></li>
+<li><p>For complete cases, compute the elapsed time between <code class="docutils literal notranslate"><span class="pre">cmdivorcx</span></code> and <code class="docutils literal notranslate"><span class="pre">cmmarrhx</span></code>. If both values are valid – not <code class="docutils literal notranslate"><span class="pre">NaN</span></code> – that means the respondent’s first marriage ended in divorce.</p></li>
+<li><p>To identify ongoing cases, select people who have only married once and who are still married. You can use <code class="docutils literal notranslate"><span class="pre">fmarno</span></code>, which records the number of times each respondent has married, and <code class="docutils literal notranslate"><span class="pre">fmarital</span></code>, which encodes their marital status – the value 1 indicates that the respondent is married.</p></li>
 </ul>
 <p>In some cases the values of these variables are only approximate, so you might find a small number of negative differences, but they should not be more than one year.</p>
-<p>Estimate the hazard and survival function for the duration of marriage.
+<p>Estimate the hazard and survival functions for the duration of marriage.
 Plot the cumulative hazard function – when is the danger of divorce highest?
 Plot the survival function – what fraction of marriages end in divorce?</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a single resampling of the data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># I suggest you use a single resampling of the data</span>
 
 <span class="n">sample</span> <span class="o">=</span> <span class="n">resample_cycles</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
 </pre></div>
@@ -2768,9 +2758,9 @@ Plot the survival function – what fraction of marriages end in divorce?</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 74;
-                var nbb_unformatted_code = "# Use a single resampling of the data\n\nsample = resample_cycles(resp)";
-                var nbb_formatted_code = "# Use a single resampling of the data\n\nsample = resample_cycles(resp)";
+                var nbb_cell_id = 196;
+                var nbb_unformatted_code = "# I suggest you use a single resampling of the data\n\nsample = resample_cycles(resp)";
+                var nbb_formatted_code = "# I suggest you use a single resampling of the data\n\nsample = resample_cycles(resp)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2792,7 +2782,7 @@ For ages from 0 to 91 years, they estimated the age-specific mortality rate, whi
 Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>Data source: Beltrán-Sánchez, H., Crimmins, E. M., &amp; Finch, C. E. (2012). Early cohort mortality predicts the rate of aging in the cohort: a historical analysis. <em>Journal of developmental origins of health and disease</em>, 3(5), 380-386.</p>
 <p>The following cell downloads the data.</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
     <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/mortality_rates_beltran2012.csv&quot;</span>
@@ -2803,7 +2793,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 83;
+                var nbb_cell_id = 175;
                 var nbb_unformatted_code = "download(\n    \"https://github.com/AllenDowney/ThinkStats/raw/v3/data/mortality_rates_beltran2012.csv\"\n)";
                 var nbb_formatted_code = "download(\n    \"https://github.com/AllenDowney/ThinkStats/raw/v3/data/mortality_rates_beltran2012.csv\"\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2828,7 +2818,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 84;
+                var nbb_cell_id = 176;
                 var nbb_unformatted_code = "mortality = pd.read_csv(\"mortality_rates_beltran2012.csv\", header=[0, 1]).dropna()";
                 var nbb_formatted_code = "mortality = pd.read_csv(\"mortality_rates_beltran2012.csv\", header=[0, 1]).dropna()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2867,7 +2857,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 85;
+                var nbb_cell_id = 177;
                 var nbb_unformatted_code = "from scipy.interpolate import interp1d\nfrom empiricaldist import Hazard\n\n\ndef make_hazard(ages, rates):\n    \"\"\"Make a Hazard function by interpolating a Series.\n\n    series: Series\n\n    returns: Hazard\n    \"\"\"\n    interp = interp1d(ages, rates, fill_value=\"extrapolate\")\n    xs = np.arange(0, 100)\n    ys = np.exp(interp(xs))\n    return Hazard(ys, xs)";
                 var nbb_formatted_code = "from scipy.interpolate import interp1d\nfrom empiricaldist import Hazard\n\n\ndef make_hazard(ages, rates):\n    \"\"\"Make a Hazard function by interpolating a Series.\n\n    series: Series\n\n    returns: Hazard\n    \"\"\"\n    interp = interp1d(ages, rates, fill_value=\"extrapolate\")\n    xs = np.arange(0, 100)\n    ys = np.exp(interp(xs))\n    return Hazard(ys, xs)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2894,7 +2884,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 86;
+                var nbb_cell_id = 178;
                 var nbb_unformatted_code = "ages = mortality[\"1800\", \"X\"].values\nrates = mortality[\"1800\", \"Y\"].values\nhazard = make_hazard(ages, rates)";
                 var nbb_formatted_code = "ages = mortality[\"1800\", \"X\"].values\nrates = mortality[\"1800\", \"Y\"].values\nhazard = make_hazard(ages, rates)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2922,7 +2912,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <img alt="_images/627e081018b5c19b3f07c3c476361f867c27407d92120a730b0ac509626975a7.png" src="_images/627e081018b5c19b3f07c3c476361f867c27407d92120a730b0ac509626975a7.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 87;
+                var nbb_cell_id = 179;
                 var nbb_unformatted_code = "hazard.plot()\n\ndecorate(xlabel=\"Age (years)\", ylabel=\"Probability\")";
                 var nbb_formatted_code = "hazard.plot()\n\ndecorate(xlabel=\"Age (years)\", ylabel=\"Probability\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2939,13 +2929,13 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 </div>
 <p>Use <code class="docutils literal notranslate"><span class="pre">make_surv</span></code> to make a survival function based on these rates, and <code class="docutils literal notranslate"><span class="pre">make_cdf</span></code> to compute the corresponding CDF.
 Plot the results.</p>
-<p>Then use <code class="docutils literal notranslate"><span class="pre">make_pmf</span></code> to make the <code class="docutils literal notranslate"><span class="pre">PMF</span></code> of the distribution of lifetimes and plot it.
+<p>Then use <code class="docutils literal notranslate"><span class="pre">make_pmf</span></code> to make the PMF of the distribution of lifetimes and plot it.
 Finally, use <code class="docutils literal notranslate"><span class="pre">compute_pmf_remaining</span></code> to compute the average remaining lifetime at each age from 0 to 99.
 Plot the result.</p>
-<p>In the remaining lifetime, you should see a counterintuitive pattern – for the first few years of life, remaining lifetime increases.
+<p>In the remaining lifetime curve, you should see a counterintuitive pattern – for the first few years of life, remaining lifetime increases.
 Because infant mortality was so high in the early 1800s, an older child was expected to live longer than a younger child.
-After about age 5, life expectancy returns to the pattern we expect – younger people are expected to live longer than old people.</p>
-<p>If you are interested in this topic, you might like Chapter 5 of my book, <em>Probably Overthinking It</em>, which is about this and other counterintuitive results from many areas of statistics.</p>
+After about age 5, life expectancy returns to the pattern we expect – young people are expected to live longer than old people.</p>
+<p>If you are interested in this topic, you might like Chapter 5 of my book, <em>Probably Overthinking It</em>, which includes similarly counterintuitive results from many areas of statistics.</p>
 <p>Available from <a class="reference external" href="https://probablyoverthinking.it">https://probablyoverthinking.it</a>.</p>
 <p><a class="reference external" href="https://allendowney.github.io/ThinkStats/index.html">Think Stats: Exploratory Data Analysis in Python, 3rd Edition</a></p>
 <p>Copyright 2024 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
@@ -2999,7 +2989,7 @@ After about age 5, life expectancy returns to the pattern we expect – younger 
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>Analytic methods</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Analytic Methods</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -3027,7 +3017,7 @@ After about age 5, life expectancy returns to the pattern we expect – younger 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-survival-function">13.6. Estimating the Survival Function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lifelines">13.7. Lifelines</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">13.8. Confidence Intervals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-remaining-lifetime">13.9. Expected remaining lifetime</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-remaining-lifetime">13.9. Expected Remaining Lifetime</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">13.10. Glossary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.11. Exercises</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">13.11.1. Exercise</a></li>

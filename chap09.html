@@ -190,7 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Time series analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap13.html">13. Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">14. Analytic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">14. Analytic Methods</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="nav bd-sidenav">
@@ -1536,6 +1536,7 @@ Any of those variations would work just as well.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">permute</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shuffle the x values.&quot;&quot;&quot;</span>
     <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">data</span>
     <span class="n">new_xs</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">new_xs</span><span class="p">)</span>
@@ -1547,8 +1548,8 @@ Any of those variations would work just as well.</p>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 38;
-                var nbb_unformatted_code = "def permute(data):\n    xs, ys = data\n    new_xs = xs.values.copy()\n    np.random.shuffle(new_xs)\n    return new_xs, ys";
-                var nbb_formatted_code = "def permute(data):\n    xs, ys = data\n    new_xs = xs.values.copy()\n    np.random.shuffle(new_xs)\n    return new_xs, ys";
+                var nbb_unformatted_code = "def permute(data):\n    \"\"\"Shuffle the x values.\"\"\"\n    xs, ys = data\n    new_xs = xs.values.copy()\n    np.random.shuffle(new_xs)\n    return new_xs, ys";
+                var nbb_formatted_code = "def permute(data):\n    \"\"\"Shuffle the x values.\"\"\"\n    xs, ys = data\n    new_xs = xs.values.copy()\n    np.random.shuffle(new_xs)\n    return new_xs, ys";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1777,14 +1778,12 @@ Here are the results in a <code class="docutils literal notranslate"><span class
 <p>On average you expect each value to appear 10 times.
 In this dataset, the value 3 appears more often than expected, and the value 4 appears less often.
 But could these differences happen by chance?</p>
-<p>To test this hypothesis, we’ll use the following function to compute the expected frequency for each value, the difference between the expected and observed frequencies, and the total of the absolute differences.</p>
+<p>To test this hypothesis, we’ll start by computing the expected frequency for each outcome.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">total_deviation</span><span class="p">(</span><span class="n">observed</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">observed</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-    <span class="n">outcomes</span> <span class="o">=</span> <span class="n">observed</span><span class="o">.</span><span class="n">qs</span>
-    <span class="n">expected</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">6</span><span class="p">,</span> <span class="n">outcomes</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_rolls</span> <span class="o">=</span> <span class="n">observed</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">outcomes</span> <span class="o">=</span> <span class="n">observed</span><span class="o">.</span><span class="n">qs</span>
+<span class="n">expected</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">num_rolls</span> <span class="o">/</span> <span class="mi">6</span><span class="p">,</span> <span class="n">outcomes</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1792,8 +1791,34 @@ But could these differences happen by chance?</p>
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 44;
-                var nbb_unformatted_code = "def total_deviation(observed):\n    n = observed.sum()\n    outcomes = observed.qs\n    expected = Hist(n / 6, outcomes)\n    return sum(abs(observed - expected))";
-                var nbb_formatted_code = "def total_deviation(observed):\n    n = observed.sum()\n    outcomes = observed.qs\n    expected = Hist(n / 6, outcomes)\n    return sum(abs(observed - expected))";
+                var nbb_unformatted_code = "num_rolls = observed.sum()\noutcomes = observed.qs\nexpected = Hist(num_rolls / 6, outcomes)";
+                var nbb_formatted_code = "num_rolls = observed.sum()\noutcomes = observed.qs\nexpected = Hist(num_rolls / 6, outcomes)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>The following function takes the observed and expected frequencies and computes the sum of the absolute differences.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">total_deviation</span><span class="p">(</span><span class="n">observed</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 45;
+                var nbb_unformatted_code = "def total_deviation(observed):\n    return np.sum(np.abs(observed - expected))";
+                var nbb_formatted_code = "def total_deviation(observed):\n    return np.sum(np.abs(observed - expected))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1820,7 +1845,7 @@ But could these differences happen by chance?</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 45;
+                var nbb_cell_id = 46;
                 var nbb_unformatted_code = "observed_dev = total_deviation(observed)\nobserved_dev";
                 var nbb_formatted_code = "observed_dev = total_deviation(observed)\nobserved_dev";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1839,8 +1864,8 @@ But could these differences happen by chance?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_dice</span><span class="p">(</span><span class="n">observed</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
-    <span class="n">rolls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">observed</span><span class="o">.</span><span class="n">qs</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">num_rolls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
+    <span class="n">rolls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">observed</span><span class="o">.</span><span class="n">qs</span><span class="p">,</span> <span class="n">num_rolls</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">rolls</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">hist</span>
 </pre></div>
@@ -1849,9 +1874,9 @@ But could these differences happen by chance?</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 46;
-                var nbb_unformatted_code = "def simulate_dice(observed):\n    n = np.sum(observed)\n    rolls = np.random.choice(observed.qs, n, replace=True)\n    hist = Hist.from_seq(rolls)\n    return hist";
-                var nbb_formatted_code = "def simulate_dice(observed):\n    n = np.sum(observed)\n    rolls = np.random.choice(observed.qs, n, replace=True)\n    hist = Hist.from_seq(rolls)\n    return hist";
+                var nbb_cell_id = 47;
+                var nbb_unformatted_code = "def simulate_dice(observed):\n    num_rolls = np.sum(observed)\n    rolls = np.random.choice(observed.qs, num_rolls, replace=True)\n    hist = Hist.from_seq(rolls)\n    return hist";
+                var nbb_formatted_code = "def simulate_dice(observed):\n    num_rolls = np.sum(observed)\n    rolls = np.random.choice(observed.qs, num_rolls, replace=True)\n    hist = Hist.from_seq(rolls)\n    return hist";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1874,7 +1899,7 @@ But could these differences happen by chance?</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 47;
+                var nbb_cell_id = 48;
                 var nbb_unformatted_code = "simulated_devs = [total_deviation(simulate_dice(observed)) for i in range(1001)]";
                 var nbb_formatted_code = "simulated_devs = [total_deviation(simulate_dice(observed)) for i in range(1001)]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1904,7 +1929,7 @@ Notice that the total is always even, because every time an outcome appears more
 <img alt="_images/228703779dff13038fd10404783efbba04bf988766c52eb281a97f4f748fbe2f.png" src="_images/228703779dff13038fd10404783efbba04bf988766c52eb281a97f4f748fbe2f.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 48;
+                var nbb_cell_id = 49;
                 var nbb_unformatted_code = "pmf_devs = Pmf.from_seq(simulated_devs)\npmf_devs.bar(alpha=0.5)\n\ndecorate(xlabel=\"Total absolute deviation\", ylabel=\"PMF\")";
                 var nbb_formatted_code = "pmf_devs = Pmf.from_seq(simulated_devs)\npmf_devs.bar(alpha=0.5)\n\ndecorate(xlabel=\"Total absolute deviation\", ylabel=\"PMF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1933,7 +1958,7 @@ And the p-value is about 13%, which means that we can’t be sure the die is cro
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 49;
+                var nbb_cell_id = 50;
                 var nbb_unformatted_code = "compute_p_value(simulated_devs, observed_dev)";
                 var nbb_formatted_code = "compute_p_value(simulated_devs, observed_dev)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1953,20 +1978,17 @@ For a problem like this, it would be more conventional to use the chi-squared st
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">chi_squared_stat</span><span class="p">(</span><span class="n">observed</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">observed</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-    <span class="n">outcomes</span> <span class="o">=</span> <span class="n">observed</span><span class="o">.</span><span class="n">qs</span>
-    <span class="n">expected</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">6</span><span class="p">,</span> <span class="n">outcomes</span><span class="p">)</span>
     <span class="n">diffs</span> <span class="o">=</span> <span class="p">(</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">((</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">expected</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">diffs</span> <span class="o">/</span> <span class="n">expected</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 50;
-                var nbb_unformatted_code = "def chi_squared_stat(observed):\n    n = observed.sum()\n    outcomes = observed.qs\n    expected = Hist(n / 6, outcomes)\n    diffs = (observed - expected) ** 2\n    return sum((observed - expected) ** 2 / expected)";
-                var nbb_formatted_code = "def chi_squared_stat(observed):\n    n = observed.sum()\n    outcomes = observed.qs\n    expected = Hist(n / 6, outcomes)\n    diffs = (observed - expected) ** 2\n    return sum((observed - expected) ** 2 / expected)";
+                var nbb_cell_id = 51;
+                var nbb_unformatted_code = "def chi_squared_stat(observed):\n    diffs = (observed - expected) ** 2\n    return np.sum(diffs / expected)";
+                var nbb_formatted_code = "def chi_squared_stat(observed):\n    diffs = (observed - expected) ** 2\n    return np.sum(diffs / expected)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1994,7 +2016,7 @@ Dividing through by <code class="docutils literal notranslate"><span class="pre"
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 51;
+                var nbb_cell_id = 52;
                 var nbb_unformatted_code = "observed_chi_squared = chi_squared_stat(observed)\nobserved_chi_squared";
                 var nbb_formatted_code = "observed_chi_squared = chi_squared_stat(observed)\nobserved_chi_squared";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2021,7 +2043,7 @@ The following loop generates many simulated datasets and computes the chi-square
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 52;
+                var nbb_cell_id = 53;
                 var nbb_unformatted_code = "simulated_chi_squared = [chi_squared_stat(simulate_dice(observed)) for i in range(1001)]";
                 var nbb_formatted_code = "simulated_chi_squared = [chi_squared_stat(simulate_dice(observed)) for i in range(1001)]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2051,7 +2073,7 @@ The shaded region shows the results that exceed the observed test statistic.</p>
 <img alt="_images/65da8b0d96cbd45b769c5cae3f57a453486a8f135faf3e3898b7ee35f2a06150.png" src="_images/65da8b0d96cbd45b769c5cae3f57a453486a8f135faf3e3898b7ee35f2a06150.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 53;
+                var nbb_cell_id = 54;
                 var nbb_unformatted_code = "pmf = make_pmf(simulated_chi_squared, 0, 20)\npmf.plot()\nfill_tail(pmf, observed_chi_squared, \"right\")\ndecorate(xlabel=\"Chi-Squared Statistic\", ylabel=\"Density\")";
                 var nbb_formatted_code = "pmf = make_pmf(simulated_chi_squared, 0, 20)\npmf.plot()\nfill_tail(pmf, observed_chi_squared, \"right\")\ndecorate(xlabel=\"Chi-Squared Statistic\", ylabel=\"Density\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2079,7 +2101,7 @@ The shaded region shows the results that exceed the observed test statistic.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 54;
+                var nbb_cell_id = 55;
                 var nbb_unformatted_code = "compute_p_value(simulated_chi_squared, observed_chi_squared)";
                 var nbb_formatted_code = "compute_p_value(simulated_chi_squared, observed_chi_squared)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2135,7 +2157,7 @@ Let’s see if that difference between the two groups is likely to reflect a rea
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 55;
+                var nbb_cell_id = 56;
                 var nbb_unformatted_code = "filename = \"Shooting_at_the_2020_Summer_Olympics_Mens_skeet\"\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\" + filename)";
                 var nbb_formatted_code = "filename = \"Shooting_at_the_2020_Summer_Olympics_Mens_skeet\"\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\" + filename)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2615,7 +2637,7 @@ Let’s see if that difference between the two groups is likely to reflect a rea
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 56;
+                var nbb_cell_id = 57;
                 var nbb_unformatted_code = "tables = pd.read_html(filename)\ntable = tables[6]\ntable";
                 var nbb_formatted_code = "tables = pd.read_html(filename)\ntable = tables[6]\ntable";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2641,7 +2663,7 @@ Let’s see if that difference between the two groups is likely to reflect a rea
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 57;
+                var nbb_cell_id = 58;
                 var nbb_unformatted_code = "qualified = table.query(\"Rank <= 6\")\neliminated = table.query(\"Rank > 6\")";
                 var nbb_formatted_code = "qualified = table.query(\"Rank <= 6\")\neliminated = table.query(\"Rank > 6\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2671,7 +2693,7 @@ Let’s see if that difference between the two groups is likely to reflect a rea
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 58;
+                var nbb_cell_id = 59;
                 var nbb_unformatted_code = "columns = [\"1\", \"2\", \"3\", \"4\", \"5\"]\nresults_qualified = qualified[columns].values.flatten()\nnp.mean(results_qualified)";
                 var nbb_formatted_code = "columns = [\"1\", \"2\", \"3\", \"4\", \"5\"]\nresults_qualified = qualified[columns].values.flatten()\nnp.mean(results_qualified)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2699,7 +2721,7 @@ Let’s see if that difference between the two groups is likely to reflect a rea
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 59;
+                var nbb_cell_id = 60;
                 var nbb_unformatted_code = "results_eliminated = eliminated[columns].values.flatten()\nnp.mean(results_eliminated)";
                 var nbb_formatted_code = "results_eliminated = eliminated[columns].values.flatten()\nnp.mean(results_eliminated)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2731,7 +2753,7 @@ Is it plausible that the difference between the groups happened by chance?</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 60;
+                var nbb_cell_id = 61;
                 var nbb_unformatted_code = "data = results_qualified, results_eliminated\nobserved_diff = diff_means(data)\nobserved_diff";
                 var nbb_formatted_code = "data = results_qualified, results_eliminated\nobserved_diff = diff_means(data)\nobserved_diff";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2759,7 +2781,7 @@ Is it plausible that the difference between the groups happened by chance?</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 61;
+                var nbb_cell_id = 62;
                 var nbb_unformatted_code = "pool = np.hstack(data)\nlen(pool)";
                 var nbb_formatted_code = "pool = np.hstack(data)\nlen(pool)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2783,7 +2805,7 @@ Is it plausible that the difference between the groups happened by chance?</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 62;
+                var nbb_cell_id = 63;
                 var nbb_unformatted_code = "simulated_diffs = [diff_means(simulate_groups(data)) for i in range(1001)]";
                 var nbb_formatted_code = "simulated_diffs = [diff_means(simulate_groups(data)) for i in range(1001)]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2811,7 +2833,7 @@ Is it plausible that the difference between the groups happened by chance?</p>
 <img alt="_images/44b8fddb8b5e324d6ab1bf9aa6850899ddac4a8bb299a922c5024580011fe650.png" src="_images/44b8fddb8b5e324d6ab1bf9aa6850899ddac4a8bb299a922c5024580011fe650.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 63;
+                var nbb_cell_id = 64;
                 var nbb_unformatted_code = "pmf = make_pmf(simulated_diffs, 0, 1.25)\npmf.plot()\nplt.axvline(observed_diff, ls=\":\")\ndecorate(xlabel=\"Difference in means\", ylabel=\"Density\")";
                 var nbb_formatted_code = "pmf = make_pmf(simulated_diffs, 0, 1.25)\npmf.plot()\nplt.axvline(observed_diff, ls=\":\")\ndecorate(xlabel=\"Difference in means\", ylabel=\"Density\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2838,7 +2860,7 @@ Is it plausible that the difference between the groups happened by chance?</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 64;
+                var nbb_cell_id = 65;
                 var nbb_unformatted_code = "compute_p_value(simulated_diffs, observed_diff)";
                 var nbb_formatted_code = "compute_p_value(simulated_diffs, observed_diff)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2867,7 +2889,7 @@ Is it plausible that the difference between the groups happened by chance?</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 65;
+                var nbb_cell_id = 66;
                 var nbb_unformatted_code = "results = table[columns].values.flatten()";
                 var nbb_formatted_code = "results = table[columns].values.flatten()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2896,7 +2918,7 @@ Is it plausible that the difference between the groups happened by chance?</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 66;
+                var nbb_cell_id = 67;
                 var nbb_unformatted_code = "n = 25\np = np.mean(results / 25)\np";
                 var nbb_formatted_code = "n = 25\np = np.mean(results / 25)\np";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -3258,7 +3280,7 @@ Is it plausible that the difference between the groups happened by chance?</p>
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 67;
+                var nbb_cell_id = 68;
                 var nbb_unformatted_code = "from scipy.stats import binom\n\nsimulated_data = binom.rvs(n, p, size=table[columns].shape)\nsimulated_results = pd.DataFrame(simulated_data, columns=columns)\nsimulated_results[\"Total\"] = simulated_data.sum(axis=1)\nsimulated_results[\"Rank\"] = simulated_results[\"Total\"].rank(\n    method=\"first\", ascending=False\n)\nsimulated_results";
                 var nbb_formatted_code = "from scipy.stats import binom\n\nsimulated_data = binom.rvs(n, p, size=table[columns].shape)\nsimulated_results = pd.DataFrame(simulated_data, columns=columns)\nsimulated_results[\"Total\"] = simulated_data.sum(axis=1)\nsimulated_results[\"Rank\"] = simulated_results[\"Total\"].rank(\n    method=\"first\", ascending=False\n)\nsimulated_results";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -3283,7 +3305,7 @@ Is it plausible that the difference between the groups happened by chance?</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 68;
+                var nbb_cell_id = 69;
                 var nbb_unformatted_code = "qualified = simulated_results.query(\"Rank <= 6\")\neliminated = simulated_results.query(\"Rank > 6\")";
                 var nbb_formatted_code = "qualified = simulated_results.query(\"Rank <= 6\")\neliminated = simulated_results.query(\"Rank > 6\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -3312,7 +3334,7 @@ Is it plausible that the difference between the groups happened by chance?</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 69;
+                var nbb_cell_id = 70;
                 var nbb_unformatted_code = "results_qualified = qualified[columns].values.flatten()\nresults_eliminated = eliminated[columns].values.flatten()\nnp.mean(results_qualified), np.mean(results_eliminated)";
                 var nbb_formatted_code = "results_qualified = qualified[columns].values.flatten()\nresults_eliminated = eliminated[columns].values.flatten()\nnp.mean(results_qualified), np.mean(results_eliminated)";
                 var nbb_cells = Jupyter.notebook.get_cells();
