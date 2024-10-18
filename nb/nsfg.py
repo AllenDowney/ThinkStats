@@ -187,11 +187,11 @@ def clean_fem_preg(df):
     na_vals = [97, 98, 99]
     df["birthwgt_lb"] = df.birthwgt_lb.replace(na_vals, np.nan)
     df["birthwgt_oz"] = df.birthwgt_oz.replace(na_vals, np.nan)
+    df["totalwgt_lb"] = df.birthwgt_lb + df.birthwgt_oz / 16.0
+
     df["hpagelb"] = df.hpagelb.replace(na_vals, np.nan)
     df["babysex"] = df.babysex.replace([7, 9], np.nan)
     df["nbrnaliv"] = df.nbrnaliv.replace([9], np.nan)
-    df["totalwgt_lb"] = df.birthwgt_lb + df.birthwgt_oz / 16.0
-    df.cmintvw = np.nan
 
 
 from statadict import parse_stata_dict
