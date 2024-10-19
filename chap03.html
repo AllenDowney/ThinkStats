@@ -382,9 +382,9 @@ document.write(`
                   
   <section id="probability-mass-functions">
 <h1><span class="section-number">3. </span>Probability Mass Functions<a class="headerlink" href="#probability-mass-functions" title="Link to this heading">#</a></h1>
-<p>In the previous chapter we represented distributions using a <code class="docutils literal notranslate"><span class="pre">Hist</span></code> object, which contains a set of quantities and their frequencies – that is, the number of times each one appears.
+<p>In the previous chapter we represented distributions using a <code class="docutils literal notranslate"><span class="pre">Hist</span></code> object, which contains a set of quantities and their frequencies – that is, the number of times each quantity appears.
 In this chapter we’ll introduce another way to represent a distribution: a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> object, which contains a set of quantities and their probabilities.</p>
-<p>And we’ll use <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> objects to compute the mean and variance of a distribution, and the skewness, which indicates whether it is skewed to the left or right.
+<p>We’ll use <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> objects to compute the mean and variance of a distribution, and the skewness, which indicates whether it is skewed to the left or right.
 Finally, we will explore how a phenomenon called the “inspection paradox” can cause a sample to give a biased view of a distribution.</p>
 <p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkStats/blob/v3/nb/chap03.ipynb">Click here to run this notebook on Colab</a>.</p>
 <div class="cell tag_remove-print tag_hide-cell docutils container">
@@ -400,6 +400,23 @@ Finally, we will explore how a phenomenon called the “inspection paradox” ca
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 1;
+                var nbb_unformatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_formatted_code = "%load_ext nb_black\n%load_ext autoreload\n%autoreload 2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </details>
 </div>
 <div class="cell tag_remove-print tag_hide-cell docutils container">
@@ -425,6 +442,23 @@ Finally, we will explore how a phenomenon called the “inspection paradox” ca
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 2;
+                var nbb_unformatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
+                var nbb_formatted_code = "from os.path import basename, exists\n\n\ndef download(url):\n    filename = basename(url)\n    if not exists(filename):\n        from urllib.request import urlretrieve\n\n        local, _ = urlretrieve(url, filename)\n        print(\"Downloaded \" + local)\n\n\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </details>
 </div>
 <div class="cell tag_remove-print tag_hide-cell docutils container">
@@ -441,19 +475,31 @@ Finally, we will explore how a phenomenon called the “inspection paradox” ca
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "try:\n    import empiricaldist\nexcept ImportError:\n    !pip install empiricaldist";
+                var nbb_formatted_code = "try:\n    import empiricaldist\nexcept ImportError:\n    !pip install empiricaldist";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </details>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">statadict</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>statadict
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
+<div class="cell tag_remove-print tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -463,6 +509,24 @@ Finally, we will explore how a phenomenon called the “inspection paradox” ca
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 4;
+                var nbb_unformatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
+                var nbb_formatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom thinkstats import decorate";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</details>
 </div>
 <section id="pmfs">
 <h2><span class="section-number">3.1. </span>PMFs<a class="headerlink" href="#pmfs" title="Link to this heading">#</a></h2>
@@ -519,7 +583,22 @@ For example, here’s a <code class="docutils literal notranslate"><span class="
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "from empiricaldist import Hist\n\nhist = Hist.from_seq([1, 2, 2, 3, 5])\nhist";
+                var nbb_formatted_code = "from empiricaldist import Hist\n\nhist = Hist.from_seq([1, 2, 2, 3, 5])\nhist";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The sum of the frequencies is the size of the original sequence.</p>
 <div class="cell docutils container">
@@ -533,7 +612,22 @@ For example, here’s a <code class="docutils literal notranslate"><span class="
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "n = hist.sum()\nn";
+                var nbb_formatted_code = "n = hist.sum()\nn";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>If we divide the frequencies by <code class="docutils literal notranslate"><span class="pre">n</span></code>, they represent proportions, rather than counts.</p>
 <div class="cell docutils container">
@@ -584,7 +678,22 @@ For example, here’s a <code class="docutils literal notranslate"><span class="
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "pmf = hist / n\npmf";
+                var nbb_formatted_code = "pmf = hist / n\npmf";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>This result indicates that 20% of the values in the sequence are 1, 40% are 2, and so on.</p>
 <p>We can also think of these proportions as probabilities in the following sense: if we choose a random value from the original sequence, the probability we choose the value 1 is 0.2, the probability we choose the value 2 is 0.4, and so on.</p>
@@ -599,7 +708,22 @@ For example, here’s a <code class="docutils literal notranslate"><span class="
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "pmf.sum()";
+                var nbb_formatted_code = "pmf.sum()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>A normalized <code class="docutils literal notranslate"><span class="pre">Hist</span></code> object represents a <strong>probability mass function</strong> (PMF), so-called because probabilities associated with discrete quantities are also called “probability masses”.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code> library provides a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> object that represents a probability mass function, so instead of creating a <code class="docutils literal notranslate"><span class="pre">Hist</span></code> object and then normalizing it, we can create a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> object directly.</p>
@@ -653,7 +777,22 @@ For example, here’s a <code class="docutils literal notranslate"><span class="
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "from empiricaldist import Pmf\n\npmf = Pmf.from_seq([1, 2, 2, 3, 5])\npmf";
+                var nbb_formatted_code = "from empiricaldist import Pmf\n\npmf = Pmf.from_seq([1, 2, 2, 3, 5])\npmf";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> is normalized so the total probability is 1.</p>
 <div class="cell docutils container">
@@ -666,7 +805,22 @@ For example, here’s a <code class="docutils literal notranslate"><span class="
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "pmf.sum()";
+                var nbb_formatted_code = "pmf.sum()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> and <code class="docutils literal notranslate"><span class="pre">Hist</span></code> objects are similar in many ways.
 To look up the probability associated with a value, we can use the bracket operator.</p>
@@ -680,7 +834,22 @@ To look up the probability associated with a value, we can use the bracket opera
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "pmf[2]";
+                var nbb_formatted_code = "pmf[2]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Or use parentheses to call the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> like a function.</p>
 <div class="cell docutils container">
@@ -693,7 +862,22 @@ To look up the probability associated with a value, we can use the bracket opera
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 12;
+                var nbb_unformatted_code = "pmf(2)";
+                var nbb_formatted_code = "pmf(2)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>To assign a probability to a quantity, you have to use the bracket operator.</p>
 <div class="cell docutils container">
@@ -707,7 +891,22 @@ To look up the probability associated with a value, we can use the bracket opera
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "pmf[2] = 0.2\npmf(2)";
+                var nbb_formatted_code = "pmf[2] = 0.2\npmf(2)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>You can modify an existing <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> by incrementing the probability associated with a value:</p>
 <div class="cell docutils container">
@@ -721,7 +920,22 @@ To look up the probability associated with a value, we can use the bracket opera
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "pmf[2] += 0.3\npmf[2]";
+                var nbb_formatted_code = "pmf[2] += 0.3\npmf[2]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Or you can multiply a probability by a factor:</p>
 <div class="cell docutils container">
@@ -735,7 +949,22 @@ To look up the probability associated with a value, we can use the bracket opera
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.25
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "pmf[2] *= 0.5\npmf[2]";
+                var nbb_formatted_code = "pmf[2] *= 0.5\npmf[2]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>If you modify a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, the result may not be normalized – that is, the probabilities may no longer add up to 1.</p>
 <div class="cell docutils container">
@@ -748,7 +977,22 @@ To look up the probability associated with a value, we can use the bracket opera
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8500000000000001
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "pmf.sum()";
+                var nbb_formatted_code = "pmf.sum()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">normalize</span></code> method renormalizes the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> by dividing through by the sum – and returning the sum.</p>
 <div class="cell docutils container">
@@ -761,7 +1005,22 @@ To look up the probability associated with a value, we can use the bracket opera
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8500000000000001
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "pmf.normalize()";
+                var nbb_formatted_code = "pmf.normalize()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> objects provide a <code class="docutils literal notranslate"><span class="pre">copy</span></code> method so you can make and modify a copy without affecting the original.</p>
 <div class="cell docutils container">
@@ -811,7 +1070,22 @@ To look up the probability associated with a value, we can use the bracket opera
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 18;
+                var nbb_unformatted_code = "pmf.copy()";
+                var nbb_formatted_code = "pmf.copy()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Like a <code class="docutils literal notranslate"><span class="pre">Hist</span></code> object, a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> object has a <code class="docutils literal notranslate"><span class="pre">qs</span></code> attribute that accesses the quantities and a <code class="docutils literal notranslate"><span class="pre">ps</span></code> attribute that accesses the probabilities.</p>
 <p>It also has a <code class="docutils literal notranslate"><span class="pre">bar</span></code> method that plots the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> as a bar graph and a <code class="docutils literal notranslate"><span class="pre">plot</span></code> method that plots it as a line graph.</p>
@@ -833,7 +1107,22 @@ Here’s a simple example.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.6
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 19;
+                var nbb_unformatted_code = "seq = [1, 2, 2, 3, 5]\n\nmean = np.sum(seq) / len(seq)\nmean";
+                var nbb_formatted_code = "seq = [1, 2, 2, 3, 5]\n\nmean = np.sum(seq) / len(seq)\nmean";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Now suppose we compute the PMF of the values in the sequence.</p>
 <div class="cell docutils container">
@@ -842,6 +1131,23 @@ Here’s a simple example.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 20;
+                var nbb_unformatted_code = "pmf = Pmf.from_seq(seq)";
+                var nbb_formatted_code = "pmf = Pmf.from_seq(seq)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Given the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, we can still compute the mean, but the process is different – we have to multiply the probabilities and quantities and add up the products.</p>
 <div class="cell docutils container">
@@ -855,9 +1161,25 @@ Here’s a simple example.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.6
 </pre></div>
 </div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 21;
+                var nbb_unformatted_code = "mean = np.sum(pmf.ps * pmf.qs)\nmean";
+                var nbb_formatted_code = "mean = np.sum(pmf.ps * pmf.qs)\nmean";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">mean</span></code> method does the same thing.</p>
+<p>Notice that we <em>don’t</em> have to divide by <code class="docutils literal notranslate"><span class="pre">n</span></code>, because we already did that when we normalized the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>.
+<code class="docutils literal notranslate"><span class="pre">Pmf</span></code> objects have a <code class="docutils literal notranslate"><span class="pre">mean</span></code> method that does the same thing.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -868,16 +1190,47 @@ Here’s a simple example.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.6
 </pre></div>
 </div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 22;
+                var nbb_unformatted_code = "pmf.mean()";
+                var nbb_formatted_code = "pmf.mean()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-</div>
-<p>Notice that we <em>don’t</em> have to divide by <code class="docutils literal notranslate"><span class="pre">n</span></code>, because we already did that when we normalized the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>.</p>
-<p>Give a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, we can compute the variance by computing the deviation of each quantity from the mean.</p>
+<p>Given a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, we can compute the variance by computing the deviation of each quantity from the mean.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">deviations</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">qs</span> <span class="o">-</span> <span class="n">mean</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 23;
+                var nbb_unformatted_code = "deviations = pmf.qs - mean";
+                var nbb_formatted_code = "deviations = pmf.qs - mean";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Then we multiply the squared deviations by the probabilities and add up the products.</p>
 <div class="cell docutils container">
@@ -891,7 +1244,22 @@ Here’s a simple example.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.84
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 24;
+                var nbb_unformatted_code = "var = np.sum(pmf.ps * deviations**2)\nvar";
+                var nbb_formatted_code = "var = np.sum(pmf.ps * deviations**2)\nvar";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">var</span></code> method does the same thing.</p>
 <div class="cell docutils container">
@@ -904,7 +1272,22 @@ Here’s a simple example.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.84
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 25;
+                var nbb_unformatted_code = "pmf.var()";
+                var nbb_formatted_code = "pmf.var()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>From the variance, we can compute the standard deviation in the usual way.</p>
 <div class="cell docutils container">
@@ -917,7 +1300,22 @@ Here’s a simple example.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3564659966250536
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 26;
+                var nbb_unformatted_code = "np.sqrt(var)";
+                var nbb_formatted_code = "np.sqrt(var)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Or the <code class="docutils literal notranslate"><span class="pre">std</span></code> method does the same thing.</p>
 <div class="cell docutils container">
@@ -930,7 +1328,22 @@ Here’s a simple example.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3564659966250536
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 27;
+                var nbb_unformatted_code = "pmf.std()";
+                var nbb_formatted_code = "pmf.std()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> also provides a <code class="docutils literal notranslate"><span class="pre">mode</span></code> method that finds the value with the highest probability.</p>
 <div class="cell docutils container">
@@ -943,14 +1356,30 @@ Here’s a simple example.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
 </pre></div>
 </div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 28;
+                var nbb_unformatted_code = "pmf.mode()";
+                var nbb_formatted_code = "pmf.mode()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-</div>
+<p>We’ll see more methods as we go along, but that’s enough to get started.</p>
 </section>
 <section id="the-class-size-paradox">
 <h2><span class="section-number">3.3. </span>The Class Size Paradox<a class="headerlink" href="#the-class-size-paradox" title="Link to this heading">#</a></h2>
 <p>As an example of what we can do with <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> objects, let’s consider a phenomenon I call “the class size paradox.”</p>
 <p>At many American colleges and universities, the student-to-faculty ratio is about 10:1.
-But students are often surprised to discover that their average class size is bigger than 10. There are two reasons for the discrepancy:</p>
+But students are often surprised that many of their classes have more than 10 students, sometimes a lot more. There are two reasons for the discrepancy:</p>
 <ul class="simple">
 <li><p>Students typically take 4 or 5 classes per semester, but professors often teach 1 or 2.</p></li>
 <li><p>The number of students who enjoy a small class is small, but the number of students in a large class is large.</p></li>
@@ -1034,9 +1463,25 @@ Suppose that a college offers 65 classes in a given semester, and we are given t
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 29;
+                var nbb_unformatted_code = "ranges = pd.interval_range(start=5, end=50, freq=5, closed=\"left\")\nranges.name = \"class size\"\n\ndata = pd.DataFrame(index=ranges)\ndata[\"count\"] = [8, 8, 14, 4, 6, 12, 8, 3, 2]\ndata";
+                var nbb_formatted_code = "ranges = pd.interval_range(start=5, end=50, freq=5, closed=\"left\")\nranges.name = \"class size\"\n\ndata = pd.DataFrame(index=ranges)\ndata[\"count\"] = [8, 8, 14, 4, 6, 12, 8, 3, 2]\ndata";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-<p>Since we don’t know the sizes of the classes in each range, let’s assume that all sizes are at the midpoint of the range.</p>
+<p>The Pandas function <code class="docutils literal notranslate"><span class="pre">interval_range</span></code> makes an <code class="docutils literal notranslate"><span class="pre">Index</span></code> where each label represents a range of values.
+Since we don’t know the sizes of the classes in each range, let’s assume that all sizes are at the midpoint of the range.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sizes</span> <span class="o">=</span> <span class="n">ranges</span><span class="o">.</span><span class="n">left</span> <span class="o">+</span> <span class="mi">2</span>
@@ -1048,10 +1493,25 @@ Suppose that a college offers 65 classes in a given semester, and we are given t
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([7, 12, 17, 22, 27, 32, 37, 42, 47], dtype=&#39;int64&#39;)
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 30;
+                var nbb_unformatted_code = "sizes = ranges.left + 2\nsizes";
+                var nbb_formatted_code = "sizes = ranges.left + 2\nsizes";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Now let’s make a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> that represents the distribution of class sizes.
-Because we already know the frequency of each size, we don’t have to use <code class="docutils literal notranslate"><span class="pre">from_seq</span></code>; instead, we can create a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> directly, passing as arguments the counts, sizes, and name.
+Because we know the sizes and their frequencies, we can create a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> directly, passing as arguments the counts, sizes, and a name.
 When we normalize the new <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, the result is the sum of the counts.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1065,20 +1525,50 @@ When we normalize the new <code class="docutils literal notranslate"><span class
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 31;
+                var nbb_unformatted_code = "counts = data[\"count\"]\nactual_pmf = Pmf(counts, sizes, name=\"actual\")\nactual_pmf.normalize()";
+                var nbb_formatted_code = "counts = data[\"count\"]\nactual_pmf = Pmf(counts, sizes, name=\"actual\")\nactual_pmf.normalize()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>If you ask the college for the average class size, they report the mean of this distribution, which is 23.7.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">actual_pmf</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actual_pmf</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean 23.692307692307693
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.692307692307693
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 63;
+                var nbb_unformatted_code = "actual_pmf.mean()";
+                var nbb_formatted_code = "actual_pmf.mean()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>But if you survey a group of students, ask them how many students are in their classes, and compute the mean, the average is bigger.
 Let’s see how much bigger.</p>
@@ -1090,13 +1580,29 @@ So the probability of observing a class is proportional to its size.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bias</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
     <span class="n">qs</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">qs</span>
     <span class="n">ps</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">ps</span> <span class="o">*</span> <span class="n">pmf</span><span class="o">.</span><span class="n">qs</span>
-
     <span class="n">new_pmf</span> <span class="o">=</span> <span class="n">Pmf</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">pmf</span><span class="o">.</span><span class="n">qs</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
     <span class="n">new_pmf</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">new_pmf</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 33;
+                var nbb_unformatted_code = "def bias(pmf, name):\n    qs = pmf.qs\n    ps = pmf.ps * pmf.qs\n\n    new_pmf = Pmf(ps, pmf.qs, name=name)\n    new_pmf.normalize()\n    return new_pmf";
+                var nbb_formatted_code = "def bias(pmf, name):\n    qs = pmf.qs\n    ps = pmf.ps * pmf.qs\n\n    new_pmf = Pmf(ps, pmf.qs, name=name)\n    new_pmf.normalize()\n    return new_pmf";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Now we can compute the biased <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> as observed by students.</p>
 <div class="cell docutils container">
@@ -1105,6 +1611,23 @@ So the probability of observing a class is proportional to its size.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 34;
+                var nbb_unformatted_code = "observed_pmf = bias(actual_pmf, name=\"observed\")";
+                var nbb_formatted_code = "observed_pmf = bias(actual_pmf, name=\"observed\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Here’s what the two distributions look like.</p>
 <div class="cell docutils container">
@@ -1118,10 +1641,25 @@ So the probability of observing a class is proportional to its size.</p>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/998cca01074ed044a827246ffb36afccbebd352a005d07021393dc9888b252c7.png" src="_images/998cca01074ed044a827246ffb36afccbebd352a005d07021393dc9888b252c7.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 35;
+                var nbb_unformatted_code = "from thinkstats import two_bar_plots\n\ntwo_bar_plots(actual_pmf, observed_pmf, width=2)\ndecorate(xlabel=\"Class size\", ylabel=\"PMF\")";
+                var nbb_formatted_code = "from thinkstats import two_bar_plots\n\ntwo_bar_plots(actual_pmf, observed_pmf, width=2)\ndecorate(xlabel=\"Class size\", ylabel=\"PMF\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>In the observed distribution there are fewer small classes and more large ones.
-And the mean is 29.1, almost 25% higher than the actual mean.</p>
+And the biased mean is 29.1, almost 25% higher than the actual mean.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observed_pmf</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -1132,7 +1670,22 @@ And the mean is 29.1, almost 25% higher than the actual mean.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29.123376623376622
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 36;
+                var nbb_unformatted_code = "observed_pmf.mean()";
+                var nbb_formatted_code = "observed_pmf.mean()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>It is also possible to invert this operation.
 Suppose you want to find the distribution of class sizes at a college, but you can’t get reliable data.
@@ -1151,6 +1704,23 @@ Here’s the function that unbiases a <code class="docutils literal notranslate"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 37;
+                var nbb_unformatted_code = "def unbias(pmf, name):\n    qs = pmf.qs\n    ps = pmf.ps / pmf.qs\n\n    new_pmf = Pmf(ps, pmf.qs, name=name)\n    new_pmf.normalize()\n    return new_pmf";
+                var nbb_formatted_code = "def unbias(pmf, name):\n    qs = pmf.qs\n    ps = pmf.ps / pmf.qs\n\n    new_pmf = Pmf(ps, pmf.qs, name=name)\n    new_pmf.normalize()\n    return new_pmf";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>And here’s the result.</p>
 <div class="cell docutils container">
@@ -1164,18 +1734,32 @@ Here’s the function that unbiases a <code class="docutils literal notranslate"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.692307692307693
 </pre></div>
 </div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 38;
+                var nbb_unformatted_code = "debiased_pmf = unbias(observed_pmf, \"debiased\")\ndebiased_pmf.mean()";
+                var nbb_formatted_code = "debiased_pmf = unbias(observed_pmf, \"debiased\")\ndebiased_pmf.mean()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-</div>
-<p>The mean of the debiased <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> is the same as the mean of the actual distribution we started with.
-If you think this example is interesting, you might like Chapter 2 of <em>Probably Overthinking It</em>, which includes this and several other examples of what’s called the “inspection paradox”.</p>
+<p>The mean of the debiased <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> is the same as the mean of the actual distribution we started with.</p>
+<p>If you think this example is interesting, you might like Chapter 2 of <em>Probably Overthinking It</em>, which includes this and several other examples of what’s called the “inspection paradox”.</p>
 </section>
 <section id="nsfg-data">
 <h2><span class="section-number">3.4. </span>NSFG Data<a class="headerlink" href="#nsfg-data" title="Link to this heading">#</a></h2>
 <p>In the previous chapter, we plotting histograms for the distributions of pregnancy lengths for first babies and others.
 But the sizes of the groups are not the same, so we can’t compare the histograms directly.
-Because PMFs are normalized so they add up to 1, we can compare them.</p>
-<p>TODO: Intro NSFG data
-Instructions for downloading the data are in the notebook for this chapter.</p>
+Because PMFs are normalized, we can compare them.
+So let’s load the NSFG data again and make <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> objects to represent distributions of pregnancy lengths.</p>
 <p>The following cells download the data files and install <code class="docutils literal notranslate"><span class="pre">statadict</span></code>, which we need to read the data.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
@@ -1186,6 +1770,23 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 39;
+                var nbb_unformatted_code = "try:\n    import statadict\nexcept ImportError:\n    !pip install statadict";
+                var nbb_formatted_code = "try:\n    import statadict\nexcept ImportError:\n    !pip install statadict";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
@@ -1195,36 +1796,53 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 40;
+                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-<p>Again, we can use <code class="docutils literal notranslate"><span class="pre">read_fem_preg</span></code> to read the pregnancy file and use the <code class="docutils literal notranslate"><span class="pre">query</span></code> method to select live births.</p>
-<p>We can use <code class="docutils literal notranslate"><span class="pre">birthord</span></code> to separate first babies and others into two groups.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">nsfg</span></code> module provides a <code class="docutils literal notranslate"><span class="pre">read_nsfg_groups</span></code> function that reads the data, selects rows that represent live births, and partitions live births into first babies and others.
+It returns three <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> objects.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">read_fem_preg</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">get_nsfg_groups</span>
 
-
-<span class="k">def</span> <span class="nf">get_nsfg_groups</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read the NSFG pregnancy file and split into groups.</span>
-<span class="sd">    </span>
-<span class="sd">    returns: all live births, first babies, other babies</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">preg</span> <span class="o">=</span> <span class="n">read_fem_preg</span><span class="p">()</span>
-    <span class="n">live</span> <span class="o">=</span> <span class="n">preg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;outcome == 1&quot;</span><span class="p">)</span>
-    <span class="n">firsts</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;birthord == 1&quot;</span><span class="p">)</span>
-    <span class="n">others</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;birthord != 1&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span>
+<span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">get_nsfg_groups</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 41;
+                var nbb_unformatted_code = "from nsfg import get_nsfg_groups\n\nlive, firsts, others = get_nsfg_groups()";
+                var nbb_formatted_code = "from nsfg import get_nsfg_groups\n\nlive, firsts, others = get_nsfg_groups()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">get_nsfg_groups</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>And make a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> for the pregnancy lengths in each group.</p>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">firsts</span></code> and <code class="docutils literal notranslate"><span class="pre">others</span></code> to make a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> for the pregnancy lengths in each group.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_pmf</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">firsts</span><span class="p">[</span><span class="s2">&quot;prglngth&quot;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;firsts&quot;</span><span class="p">)</span>
@@ -1232,8 +1850,25 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 42;
+                var nbb_unformatted_code = "first_pmf = Pmf.from_seq(firsts[\"prglngth\"], name=\"firsts\")\nother_pmf = Pmf.from_seq(others[\"prglngth\"], name=\"others\")";
+                var nbb_formatted_code = "first_pmf = Pmf.from_seq(firsts[\"prglngth\"], name=\"firsts\")\nother_pmf = Pmf.from_seq(others[\"prglngth\"], name=\"others\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-<p>Here are the PMFs of pregnancy length for first babies and others, plotted as bar graphs.</p>
+<p>Here are the PMFs for first babies and others, plotted as bar graphs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_bar_plots</span><span class="p">(</span><span class="n">first_pmf</span><span class="p">,</span> <span class="n">other_pmf</span><span class="p">)</span>
@@ -1243,7 +1878,22 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/f89951ee9108b82276d0fd4341fe899227bc628535f0f92e1374684a207ed7c5.png" src="_images/f89951ee9108b82276d0fd4341fe899227bc628535f0f92e1374684a207ed7c5.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 64;
+                var nbb_unformatted_code = "two_bar_plots(first_pmf, other_pmf)\ndecorate(xlabel=\"weeks\", ylabel=\"probability\", xlim=[20, 50])";
+                var nbb_formatted_code = "two_bar_plots(first_pmf, other_pmf)\ndecorate(xlabel=\"weeks\", ylabel=\"probability\", xlim=[20, 50])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>By plotting the PMF instead of the histogram, we can compare the two distributions without being misled by the difference in sample size.
 Based on this figure, first babies seem to be less likely than others to arrive on time (week 39) and more likely to be late (weeks 41 and 42).</p>
@@ -1268,7 +1918,22 @@ So it makes sense to zoom in on that part of the graph, and select data from wee
        0.00135962])
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 44;
+                var nbb_unformatted_code = "weeks = range(35, 46)\nfirst_pmf(weeks)";
+                var nbb_formatted_code = "weeks = range(35, 46)\nfirst_pmf(weeks)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1282,7 +1947,22 @@ So it makes sense to zoom in on that part of the graph, and select data from wee
        0.00084477])
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 45;
+                var nbb_unformatted_code = "other_pmf(weeks)";
+                var nbb_formatted_code = "other_pmf(weeks)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>So we can compute the differences in the probabilities like this.</p>
 <div class="cell docutils container">
@@ -1298,7 +1978,22 @@ So it makes sense to zoom in on that part of the graph, and select data from wee
         0.00051485])
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 46;
+                var nbb_unformatted_code = "diffs = first_pmf(weeks) - other_pmf(weeks)\ndiffs";
+                var nbb_formatted_code = "diffs = first_pmf(weeks) - other_pmf(weeks)\ndiffs";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Here’s what they look like, multiplied by 100 to express the differences in percentage points.</p>
 <div class="cell docutils container">
@@ -1310,7 +2005,22 @@ So it makes sense to zoom in on that part of the graph, and select data from wee
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/e3dacb16510c1b4c7b4b9a402a43ab334fb79d8f07dc8cc553333e856bf9f5b8.png" src="_images/e3dacb16510c1b4c7b4b9a402a43ab334fb79d8f07dc8cc553333e856bf9f5b8.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 47;
+                var nbb_unformatted_code = "plt.bar(weeks, diffs * 100)\ndecorate(xlabel=\"Weeks\", ylabel=\"Difference (percentage points)\")";
+                var nbb_formatted_code = "plt.bar(weeks, diffs * 100)\ndecorate(xlabel=\"Weeks\", ylabel=\"Difference (percentage points)\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>This figure makes the pattern clearer: first babies are less likely to be born in week 39, and somewhat more likely to be born in weeks 41 and 42.</p>
 <p>For now we can’t be sure this effect is real – it might be due to random variation.
@@ -1319,7 +2029,7 @@ We’ll revisit that question in Chapter xxx.</p>
 <section id="glossary">
 <h2><span class="section-number">3.6. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Probability mass function (PMF)</strong>: a representation of a distribution as a function that maps from values to probabilities.</p></li>
+<li><p><strong>probability mass function (PMF)</strong>: a representation of a distribution as a function that maps from values to probabilities.</p></li>
 <li><p><strong>probability</strong>: A frequency expressed as a fraction of the sample size.</p></li>
 <li><p><strong>normalization</strong>: The process of dividing a frequency by a sample size to get a probability.</p></li>
 <li><p><strong>index</strong>: In a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, the index is a special column that contains the row labels.</p></li>
@@ -1327,7 +2037,8 @@ We’ll revisit that question in Chapter xxx.</p>
 </section>
 <section id="exercises">
 <h2><span class="section-number">3.7. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
-<p>For the exercises in this chapter, we’ll use the NSFG respondent file, which contains one row for each respondent.</p>
+<p>For the exercises in this chapter, we’ll use the NSFG respondent file, which contains one row for each respondent.
+Instructions for downloading the data are in the notebook for this chapter.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dct&quot;</span><span class="p">)</span>
@@ -1335,6 +2046,23 @@ We’ll revisit that question in Chapter xxx.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 48;
+                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dat.gz\")";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dat.gz\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The codebook for this dataset is at <a class="reference external" href="https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/NSFG/Cycle6Codebook-Female.pdf">https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/NSFG/Cycle6Codebook-Female.pdf</a>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">nsfg.py</span></code> module provides a function that reads the respondent file and returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
@@ -1351,15 +2079,30 @@ We’ll revisit that question in Chapter xxx.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7643, 3092)
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 49;
+                var nbb_unformatted_code = "from nsfg import read_fem_resp\n\nresp = read_fem_resp()\nresp.shape";
+                var nbb_formatted_code = "from nsfg import read_fem_resp\n\nresp = read_fem_resp()\nresp.shape";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>This <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> contains 7643 rows and 3092 columns.</p>
 <section id="exercise">
 <h3><span class="section-number">3.7.1. </span>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
-<p>Select the column <code class="docutils literal notranslate"><span class="pre">numbabes</span></code>, which records the “number of babies born alive” to the respondent.
+<p>Select the column <code class="docutils literal notranslate"><span class="pre">numbabes</span></code>, which records the “number of babies born alive” to each respondent.
 Make a <code class="docutils literal notranslate"><span class="pre">Hist</span></code> object and display the frequencies of the values in this column.
 Check that they are consistent with the frequencies in the code book.
-Are there any special values that should be replaced with <code class="docutils literal notranslate"><span class="pre">nan</span></code>?</p>
+Are there any special values that should be replaced with <code class="docutils literal notranslate"><span class="pre">NaN</span></code>?</p>
 <p>Then make a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> object and plot it as a bar graph. Is the distribution symmetric, skewed to the left, or skewed to the right?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1370,7 +2113,22 @@ Are there any special values that should be replaced with <code class="docutils 
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/57bf5fafd31f76d9aa002cc79a110478a9c5b48f6a7042862c6bc16365841c7d.png" src="_images/57bf5fafd31f76d9aa002cc79a110478a9c5b48f6a7042862c6bc16365841c7d.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 52;
+                var nbb_unformatted_code = "pmf.bar()\ndecorate(xlabel=\"Number of babies\", ylabel=\"PMF\")";
+                var nbb_formatted_code = "pmf.bar()\ndecorate(xlabel=\"Number of babies\", ylabel=\"PMF\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 </section>
 <section id="id1">
@@ -1384,6 +2142,23 @@ For example, here’s how we compute the skewness of <code class="docutils liter
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 54;
+                var nbb_unformatted_code = "numbabes = resp[\"numbabes\"].replace(97, np.nan)";
+                var nbb_formatted_code = "numbabes = resp[\"numbabes\"].replace(97, np.nan)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1397,7 +2172,22 @@ For example, here’s how we compute the skewness of <code class="docutils liter
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7018914266755958
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 55;
+                var nbb_unformatted_code = "deviations = numbabes - numbabes.mean()\nskewness = np.mean(deviations**3) / numbabes.std(ddof=0) ** 3\nskewness";
+                var nbb_formatted_code = "deviations = numbabes - numbabes.mean()\nskewness = np.mean(deviations**3) / numbabes.std(ddof=0) ** 3\nskewness";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>In general, a positive value indicates that a distribution is skewed to the right, and a negative value indicates that it is skewed to the left.</p>
 <p>If you are given a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, rather than a sequence of values, you can compute skewness like this:</p>

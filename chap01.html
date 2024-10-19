@@ -1097,52 +1097,7 @@ If you take time to validate the data, you can save time later and avoid errors.
 <p>One way to validate data is to compute basic statistics and compare them with published results.
 For example, the NSFG codebook includes tables that summarize each variable.
 Here is the table for <code class="docutils literal notranslate"><span class="pre">outcome</span></code>, which encodes the outcome of each pregnancy.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_table</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">HTML</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 97;
-                var nbb_unformatted_code = "def show_table(d):\n    df = pd.DataFrame(d)\n    return HTML(df.to_html(index=False))";
-                var nbb_formatted_code = "def show_table(d):\n    df = pd.DataFrame(d)\n    return HTML(df.to_html(index=False))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;Value&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;Total&quot;</span><span class="p">],</span>
-    <span class="s2">&quot;Label&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;LIVE BIRTH&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;INDUCED ABORTION&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;STILLBIRTH&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;MISCARRIAGE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ECTOPIC PREGNANCY&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CURRENT PREGNANCY&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;Total&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">9148</span><span class="p">,</span> <span class="mi">1862</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">1921</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">352</span><span class="p">,</span> <span class="mi">13593</span><span class="p">],</span>
-<span class="p">}</span>
-
-<span class="n">show_table</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><table border="1" class="dataframe">
   <thead>
@@ -1244,29 +1199,7 @@ Name: count, dtype: int64
 </div>
 <p>Comparing the results with the published table, we can confirm that the values in <code class="docutils literal notranslate"><span class="pre">outcome</span></code> are correct.
 Similarly, here is the published table for <code class="docutils literal notranslate"><span class="pre">birthwgt_lb</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;Value&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;0-5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span> <span class="s2">&quot;9-95&quot;</span><span class="p">,</span> <span class="s2">&quot;97&quot;</span><span class="p">,</span> <span class="s2">&quot;98&quot;</span><span class="p">,</span> <span class="s2">&quot;99&quot;</span><span class="p">,</span> <span class="s2">&quot;Total&quot;</span><span class="p">],</span>
-    <span class="s2">&quot;Label&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;UNDER 6 POUNDS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;6 POUNDS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;7 POUNDS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;8 POUNDS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;9 POUNDS OR MORE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Not ascertained&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;REFUSED&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;DON&#39;T KNOW&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;Total&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4449</span><span class="p">,</span> <span class="mi">1125</span><span class="p">,</span> <span class="mi">2223</span><span class="p">,</span> <span class="mi">3049</span><span class="p">,</span> <span class="mi">1889</span><span class="p">,</span> <span class="mi">799</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">13593</span><span class="p">],</span>
-<span class="p">}</span>
-
-<span class="n">show_table</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><table border="1" class="dataframe">
   <thead>
