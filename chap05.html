@@ -57,8 +57,6 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap05';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -385,14 +383,18 @@ document.write(`
                   
   <section id="modeling-distributions">
 <h1><span class="section-number">5. </span>Modeling Distributions<a class="headerlink" href="#modeling-distributions" title="Link to this heading">#</a></h1>
-<p>The distributions we have used so far are called empirical distributions because they are based on empirical observations – in other words, data. Many datasets we see in the real world can be closely approximated by a theoretical distribution, which is usually based on a simple mathematical model. This chapter presents some of these theoretical distributions and datasets they can be used to model.</p>
+<p>The distributions we have used so far are called empirical distributions because they are based on empirical observations – in other words, data.
+Many datasets we see in the real world can be closely approximated by a theoretical distribution, which is usually based on a simple mathematical function.
+This chapter presents some of these theoretical distributions and datasets they can be used to model.</p>
 <p>As examples, we’ll see that:</p>
 <ul class="simple">
 <li><p>In a skeet shooting competition, the number of hits and misses is well modeled by a binomial distribution.</p></li>
 <li><p>In games like hockey and soccer (football), the number of goals in a game follows a Poisson distribution, and the time between goals follows an exponential distribution.</p></li>
 <li><p>Birth weights follow a normal distribution, also called a Gaussian, and adult weights follow a lognormal distribution.</p></li>
 </ul>
-<p>If you are not familiar with these distributions – or these sports – I will explain what you need to know. For each example, we’ll start with a simulation based on a simple model, and show that the simulation results follow an theoretical distribution. Then we’ll see how well real data agrees with the model.</p>
+<p>If you are not familiar with these distributions – or these sports – I will explain what you need to know.
+For each example, we’ll start with a simulation based on a simple model, and show that the simulation results follow an theoretical distribution.
+Then we’ll see how well real data agrees with the model.</p>
 <p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkStats/blob/v3/nb/chap05.ipynb">Click here to run this notebook on Colab</a>.</p>
 <div class="cell tag_remove-print tag_hide-cell docutils container">
 <details class="hide above-input">
@@ -540,8 +542,8 @@ document.write(`
 <p>As a first example, we’ll consider the sport of skeet shooting, in which competitors use shotguns to shoot clay disks that are thrown into the air.
 In international competition, including the Olympics, there are five rounds with 25 targets per round, with additional rounds as needed to determine a winner.</p>
 <p>As a model of a skeet-shooting competition, suppose that every participant has the same probability of hitting every target, <code class="docutils literal notranslate"><span class="pre">p</span></code>.
-Of course, this model is a simplification – in reality, it’s likely that some competitors have a higher probability than others, and even for a single competitor, it might vary from one attempt to the next.
-But even if it is not realistic, this model make some surprisingly accurate predictions, as we’ll see.</p>
+Of course, this model is a simplification – in reality, some competitors have a higher probability than others, and even for a single competitor, it might vary from one attempt to the next.
+But even if it is not realistic, this model makes some surprisingly accurate predictions, as we’ll see.</p>
 <p>To simulate the model, I’ll use the following function, which takes the number of targets, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and the probability of hitting each one, <code class="docutils literal notranslate"><span class="pre">p</span></code>, and returns a sequence of 1s and 0s to indicate hits and misses.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -571,6 +573,31 @@ But even if it is not realistic, this model make some surprisingly accurate pred
             </script></div>
 </div>
 <p>Here’s an example that simulates a round of 25 targets where the probability of hitting each one is 90%.</p>
+<div class="cell tag_remove--print docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seed the random number generator so we get the same results every time</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "# Seed the random number generator so we get the same results every time\nnp.random.seed(1)";
+                var nbb_formatted_code = "# Seed the random number generator so we get the same results every time\nnp.random.seed(1)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flip</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
@@ -578,13 +605,13 @@ But even if it is not realistic, this model make some surprisingly accurate pred
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-       1, 0, 1])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+       1, 1, 1])
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 6;
+                var nbb_cell_id = 7;
                 var nbb_unformatted_code = "flip(25, 0.9)";
                 var nbb_formatted_code = "flip(25, 0.9)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -599,7 +626,7 @@ But even if it is not realistic, this model make some surprisingly accurate pred
             }, 500);
             </script></div>
 </div>
-<p>If we generate a sequence of 1000 attempts, and compute the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> of the results, we can confirm that the proportions of 1s and 0s are correct, at least approximately.</p>
+<p>If we generate a longer sequence and compute the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> of the results, we can confirm that the proportions of 1s and 0s are correct, at least approximately.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Pmf</span>
@@ -635,17 +662,17 @@ But even if it is not realistic, this model make some surprisingly accurate pred
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.107</td>
+      <td>0.101</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.893</td>
+      <td>0.899</td>
     </tr>
   </tbody>
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 7;
+                var nbb_cell_id = 8;
                 var nbb_unformatted_code = "from empiricaldist import Pmf\n\nseq = flip(1000, 0.9)\npmf = Pmf.from_seq(seq)\npmf";
                 var nbb_formatted_code = "from empiricaldist import Pmf\n\nseq = flip(1000, 0.9)\npmf = Pmf.from_seq(seq)\npmf";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -672,7 +699,7 @@ But even if it is not realistic, this model make some surprisingly accurate pred
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 8;
+                var nbb_cell_id = 9;
                 var nbb_unformatted_code = "def simulate_round(n, p):\n    seq = flip(n, p)\n    return seq.sum()";
                 var nbb_formatted_code = "def simulate_round(n, p):\n    seq = flip(n, p)\n    return seq.sum()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -700,7 +727,7 @@ We can simulate a competition like that by calling <code class="docutils literal
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 9;
+                var nbb_cell_id = 10;
                 var nbb_unformatted_code = "n = 25\np = 0.9\nresults_sim = [simulate_round(n, p) for i in range(1000)]";
                 var nbb_formatted_code = "n = 25\np = 0.9\nresults_sim = [simulate_round(n, p) for i in range(1000)]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -723,12 +750,12 @@ We can simulate a competition like that by calling <code class="docutils literal
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(22.495, 22.5)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(22.522, 22.5)
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 10;
+                var nbb_cell_id = 11;
                 var nbb_unformatted_code = "np.mean(results_sim), n * p";
                 var nbb_formatted_code = "np.mean(results_sim), n * p";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -756,10 +783,10 @@ We can simulate a competition like that by calling <code class="docutils literal
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3cd26464c61353701ec8f5d3dda8e6317a5e1776f3aaef7a00c7a46e81909cf1.png" src="_images/3cd26464c61353701ec8f5d3dda8e6317a5e1776f3aaef7a00c7a46e81909cf1.png" />
+<img alt="_images/21fafbd7fb6232a52d7f3d2e8ed5f07320bd30050ac9c8051353f94911f3bf5d.png" src="_images/21fafbd7fb6232a52d7f3d2e8ed5f07320bd30050ac9c8051353f94911f3bf5d.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 11;
+                var nbb_cell_id = 12;
                 var nbb_unformatted_code = "from empiricaldist import Pmf\n\npmf_sim = Pmf.from_seq(results_sim, name=\"simulation results\")\n\npmf_sim.bar(alpha=0.6)\ndecorate(xlabel=\"Hits\", ylabel=\"PMF\")";
                 var nbb_formatted_code = "from empiricaldist import Pmf\n\npmf_sim = Pmf.from_seq(results_sim, name=\"simulation results\")\n\npmf_sim.bar(alpha=0.6)\ndecorate(xlabel=\"Hits\", ylabel=\"PMF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -774,8 +801,9 @@ We can simulate a competition like that by calling <code class="docutils literal
             }, 500);
             </script></div>
 </div>
+<p>The peak is near the mean, and the distribution is skewed to the left.</p>
 <p>Instead of running a simulation, we could have predicted this distribution.
-Mathematically, we can show that the distribution of these outcomes follows a binomial distribution, which has a PMF that is easy to compute.</p>
+Mathematically, the distribution of these outcomes follows a binomial distribution, which has a PMF that is easy to compute.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">comb</span>
@@ -797,7 +825,7 @@ Mathematically, we can show that the distribution of these outcomes follows a bi
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 12;
+                var nbb_cell_id = 13;
                 var nbb_unformatted_code = "from scipy.special import comb\n\n\ndef binomial_pmf(k, n, p):\n    \"\"\"Compute the binomial PMF.\n\n    k (int or array-like): number of successes\n    n (int): number of trials\n    p (float): probability of success on a single trial\n\n    returns: float or ndarray\n    \"\"\"\n    return comb(n, k) * (p**k) * ((1 - p) ** (n - k))";
                 var nbb_formatted_code = "from scipy.special import comb\n\n\ndef binomial_pmf(k, n, p):\n    \"\"\"Compute the binomial PMF.\n\n    k (int or array-like): number of successes\n    n (int): number of trials\n    p (float): probability of success on a single trial\n\n    returns: float or ndarray\n    \"\"\"\n    return comb(n, k) * (p**k) * ((1 - p) ** (n - k))";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -825,7 +853,7 @@ If we call this function with a range of <code class="docutils literal notransla
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 13;
+                var nbb_cell_id = 14;
                 var nbb_unformatted_code = "ks = np.arange(16, n + 1)\nps = binomial_pmf(ks, n, p)\npmf_binom = Pmf(ps, ks, name=\"binomial model\")";
                 var nbb_formatted_code = "ks = np.arange(16, n + 1)\nps = binomial_pmf(ks, n, p)\npmf_binom = Pmf(ps, ks, name=\"binomial model\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -851,10 +879,10 @@ If we call this function with a range of <code class="docutils literal notransla
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0b20e3ff76524cda82fa4bf563ea81c88e8630d838b6464ef990627c6e3ea13e.png" src="_images/0b20e3ff76524cda82fa4bf563ea81c88e8630d838b6464ef990627c6e3ea13e.png" />
+<img alt="_images/a61d24b595dcd9242948cf5c5122d4a9217b06b95372fc0ae946bd5ac2e26e30.png" src="_images/a61d24b595dcd9242948cf5c5122d4a9217b06b95372fc0ae946bd5ac2e26e30.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 14;
+                var nbb_cell_id = 15;
                 var nbb_unformatted_code = "from thinkstats import two_bar_plots\n\ntwo_bar_plots(pmf_sim, pmf_binom)\ndecorate(xlabel=\"Hits\", ylabel=\"PMF\")";
                 var nbb_formatted_code = "from thinkstats import two_bar_plots\n\ntwo_bar_plots(pmf_sim, pmf_binom)\ndecorate(xlabel=\"Hits\", ylabel=\"PMF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -872,21 +900,45 @@ If we call this function with a range of <code class="docutils literal notransla
 <p>They are similar, with small differences because of random variation in the simulation results.</p>
 <p>This agreement should not be surprising, because the simulation and the model are based on the same assumptions – particularly the assumption that every attempt has the same probability of success.
 The real test of a model is how it compares to real data.</p>
-<p>From the Wikipedia page for the men’s skeet shooting competition at the 2020 Summer Olympics, we can extract a table that shows the results for the qualification rounds of the competition.</p>
+<p>From the Wikipedia page for the men’s skeet shooting competition at the 2020 Summer Olympics, we can extract a table that shows the results for the qualification rounds.
+Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>Downloaded from <a class="reference external" href="https://en.wikipedia.org/wiki/Shooting_at_the_2020_Summer_Olympics_%E2%80%93_Men's_skeet">https://en.wikipedia.org/wiki/Shooting_at_the_2020_Summer_Olympics_–_Men’s_skeet</a> on July 15, 2024.</p>
-<div class="cell tag_remove-print docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;Shooting_at_the_2020_Summer_Olympics_Mens_skeet&quot;</span>
-<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/&quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 15;
-                var nbb_unformatted_code = "filename = \"Shooting_at_the_2020_Summer_Olympics_Mens_skeet\"\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\" + filename)";
-                var nbb_formatted_code = "filename = \"Shooting_at_the_2020_Summer_Olympics_Mens_skeet\"\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\" + filename)";
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "filename = \"Shooting_at_the_2020_Summer_Olympics_Mens_skeet\"";
+                var nbb_formatted_code = "filename = \"Shooting_at_the_2020_Summer_Olympics_Mens_skeet\"";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell tag_remove-print docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/&quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\" + filename)";
+                var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/\" + filename)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1014,7 +1066,7 @@ The real test of a model is how it compares to real data.</p>
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 16;
+                var nbb_cell_id = 18;
                 var nbb_unformatted_code = "tables = pd.read_html(filename)\ntable = tables[6]\ntable.head()";
                 var nbb_formatted_code = "tables = pd.read_html(filename)\ntable = tables[6]\ntable.head()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1029,8 +1081,8 @@ The real test of a model is how it compares to real data.</p>
             }, 500);
             </script></div>
 </div>
-<p>The table has one row for each competitors, with one column for each of five rounds.
-We’ll select the columns that contain the results and use <code class="docutils literal notranslate"><span class="pre">flatten</span></code> to put them into a single array.</p>
+<p>The table has one row for each competitor, with one column for each of five rounds.
+We’ll select the columns that contain the results and use the NumPy function <code class="docutils literal notranslate"><span class="pre">flatten</span></code> to put them into a single array.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">]</span>
@@ -1041,7 +1093,7 @@ We’ll select the columns that contain the results and use <code class="docutil
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 17;
+                var nbb_cell_id = 19;
                 var nbb_unformatted_code = "columns = [\"1\", \"2\", \"3\", \"4\", \"5\"]\nresults = table[columns].values.flatten()";
                 var nbb_formatted_code = "columns = [\"1\", \"2\", \"3\", \"4\", \"5\"]\nresults = table[columns].values.flatten()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1056,6 +1108,7 @@ We’ll select the columns that contain the results and use <code class="docutil
             }, 500);
             </script></div>
 </div>
+<p>With 30 competitors, we have results from 150 rounds of 25 shots each, with 3750 hits out of a total of 3575 attempts.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_shots</span> <span class="o">=</span> <span class="mi">25</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
@@ -1070,7 +1123,7 @@ We’ll select the columns that contain the results and use <code class="docutil
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 18;
+                var nbb_cell_id = 20;
                 var nbb_unformatted_code = "total_shots = 25 * len(results)\ntotal_hits = results.sum()\nn, total_shots, total_hits";
                 var nbb_formatted_code = "total_shots = 25 * len(results)\ntotal_hits = results.sum()\nn, total_shots, total_hits";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1085,8 +1138,7 @@ We’ll select the columns that contain the results and use <code class="docutil
             }, 500);
             </script></div>
 </div>
-<p>With 30 competitors, we have results from 150 rounds of 25 shots each, with 3750 hits out of a total of 3575 attempts.
-So the overall success rate is 95.3%.</p>
+<p>So the overall success rate is 95.3%.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">total_hits</span> <span class="o">/</span> <span class="n">total_shots</span>
@@ -1100,7 +1152,7 @@ So the overall success rate is 95.3%.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 19;
+                var nbb_cell_id = 21;
                 var nbb_unformatted_code = "p = total_hits / total_shots\np";
                 var nbb_formatted_code = "p = total_hits / total_shots\np";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1115,7 +1167,7 @@ So the overall success rate is 95.3%.</p>
             }, 500);
             </script></div>
 </div>
-<p>Now we can compute a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> that represents the binomial distribution with <code class="docutils literal notranslate"><span class="pre">n=25</span></code> and the value of <code class="docutils literal notranslate"><span class="pre">p</span></code> we just computed.</p>
+<p>Now let’s compute a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> that represents the binomial distribution with <code class="docutils literal notranslate"><span class="pre">n=25</span></code> and the value of <code class="docutils literal notranslate"><span class="pre">p</span></code> we just computed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">binomial_pmf</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
@@ -1126,7 +1178,7 @@ So the overall success rate is 95.3%.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 20;
+                var nbb_cell_id = 22;
                 var nbb_unformatted_code = "ps = binomial_pmf(ks, n, p)\npmf_binom = Pmf(ps, ks, name=\"binomial model\")";
                 var nbb_formatted_code = "ps = binomial_pmf(ks, n, p)\npmf_binom = Pmf(ps, ks, name=\"binomial model\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1155,7 +1207,7 @@ So the overall success rate is 95.3%.</p>
 <img alt="_images/aba17948c4723c23174d3ead3d812fdb2b193224cca6108d1fbf6615ff43be85.png" src="_images/aba17948c4723c23174d3ead3d812fdb2b193224cca6108d1fbf6615ff43be85.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 21;
+                var nbb_cell_id = 23;
                 var nbb_unformatted_code = "pmf_results = Pmf.from_seq(results, name=\"actual results\")\n\ntwo_bar_plots(pmf_results, pmf_binom)\ndecorate(xlabel=\"Hits\", ylabel=\"PMF\")";
                 var nbb_formatted_code = "pmf_results = Pmf.from_seq(results, name=\"actual results\")\n\ntwo_bar_plots(pmf_results, pmf_binom)\ndecorate(xlabel=\"Hits\", ylabel=\"PMF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1170,12 +1222,12 @@ So the overall success rate is 95.3%.</p>
             }, 500);
             </script></div>
 </div>
-<p>The binomial model is a good fit for the distribution of the data.</p>
+<p>The binomial model is a good fit for the distribution of the data – even though it is based on assumption we know are not true in the real world.</p>
 </section>
 <section id="the-poisson-distribution">
 <h2><span class="section-number">5.2. </span>The Poisson Distribution<a class="headerlink" href="#the-poisson-distribution" title="Link to this heading">#</a></h2>
 <p>As another example where the outcomes of sports events follow predictable patterns, let’s look at the number of goals scored in ice hockey games.</p>
-<p>We’ll start by simulating a 60-minute game, which is 3600 seconds, assuming that the teams score a total of 6 goals per game, on average, and that the probability of scoring a goal is the same during any second.</p>
+<p>We’ll start by simulating a 60-minute game, which is 3600 seconds, assuming that the teams score a total of 6 goals per game, on average, and that the probability of scoring a goal, <code class="docutils literal notranslate"><span class="pre">p</span></code>,  is the same during any second.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">3600</span>
@@ -1191,7 +1243,7 @@ So the overall success rate is 95.3%.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 22;
+                var nbb_cell_id = 24;
                 var nbb_unformatted_code = "n = 3600\nm = 6\np = m / 3600\np";
                 var nbb_formatted_code = "n = 3600\nm = 6\np = m / 3600\np";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1217,7 +1269,7 @@ So the overall success rate is 95.3%.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 23;
+                var nbb_cell_id = 25;
                 var nbb_unformatted_code = "def simulate_goals(n, p):\n    return flip(n, p).sum()";
                 var nbb_formatted_code = "def simulate_goals(n, p):\n    return flip(n, p).sum()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1232,23 +1284,23 @@ So the overall success rate is 95.3%.</p>
             }, 500);
             </script></div>
 </div>
-<p>If we simulate 1000 games, we can confirm that the average number of goals per game is close to 6.</p>
+<p>If we simulate many games, we can confirm that the average number of goals per game is close to 6.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">goals</span> <span class="o">=</span> <span class="p">[</span><span class="n">simulate_goals</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">goals</span> <span class="o">=</span> <span class="p">[</span><span class="n">simulate_goals</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
 <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">goals</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.894
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.021978021978022
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 24;
-                var nbb_unformatted_code = "goals = [simulate_goals(n, p) for i in range(1000)]\nnp.mean(goals)";
-                var nbb_formatted_code = "goals = [simulate_goals(n, p) for i in range(1000)]\nnp.mean(goals)";
+                var nbb_cell_id = 26;
+                var nbb_unformatted_code = "goals = [simulate_goals(n, p) for i in range(1001)]\nnp.mean(goals)";
+                var nbb_formatted_code = "goals = [simulate_goals(n, p) for i in range(1001)]\nnp.mean(goals)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1284,7 +1336,7 @@ So the overall success rate is 95.3%.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 25;
+                var nbb_cell_id = 27;
                 var nbb_unformatted_code = "from scipy.special import factorial\n\n\ndef poisson_pmf(k, lam):\n    \"\"\"Compute the Poisson PMF.\n\n    k (int or array-like): The number of occurrences\n    lam (float): The rate parameter (\u03bb) of the Poisson distribution\n\n    returns: float or ndarray\n    \"\"\"\n    return (lam**k) * np.exp(-lam) / factorial(k)";
                 var nbb_formatted_code = "from scipy.special import factorial\n\n\ndef poisson_pmf(k, lam):\n    \"\"\"Compute the Poisson PMF.\n\n    k (int or array-like): The number of occurrences\n    lam (float): The rate parameter (\u03bb) of the Poisson distribution\n\n    returns: float or ndarray\n    \"\"\"\n    return (lam**k) * np.exp(-lam) / factorial(k)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1312,7 +1364,7 @@ So the overall success rate is 95.3%.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 26;
+                var nbb_cell_id = 28;
                 var nbb_unformatted_code = "lam = 6\nks = np.arange(20)\nps = poisson_pmf(ks, lam)\npmf_poisson = Pmf(ps, ks, name=\"Poisson model\")";
                 var nbb_formatted_code = "lam = 6\nks = np.arange(20)\nps = poisson_pmf(ks, lam)\npmf_poisson = Pmf(ps, ks, name=\"Poisson model\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1341,7 +1393,7 @@ So the overall success rate is 95.3%.</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 27;
+                var nbb_cell_id = 29;
                 var nbb_unformatted_code = "pmf_poisson.normalize()\npmf_poisson.mean()";
                 var nbb_formatted_code = "pmf_poisson.normalize()\npmf_poisson.mean()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1367,10 +1419,10 @@ So the overall success rate is 95.3%.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ffad0ef7730a12941679ff143f9e60322ac913925cafd440c83a1d3ad63f6a55.png" src="_images/ffad0ef7730a12941679ff143f9e60322ac913925cafd440c83a1d3ad63f6a55.png" />
+<img alt="_images/b6059b5c7d29afbaf40e40d2639f598e07d2c632e00a607ce5025d04bd2c26e3.png" src="_images/b6059b5c7d29afbaf40e40d2639f598e07d2c632e00a607ce5025d04bd2c26e3.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 28;
+                var nbb_cell_id = 30;
                 var nbb_unformatted_code = "pmf_sim = Pmf.from_seq(goals, name=\"simulation\")\n\ntwo_bar_plots(pmf_sim, pmf_poisson)\ndecorate(xlabel=\"Goals\", ylabel=\"PMF\")";
                 var nbb_formatted_code = "pmf_sim = Pmf.from_seq(goals, name=\"simulation\")\n\ntwo_bar_plots(pmf_sim, pmf_poisson)\ndecorate(xlabel=\"Goals\", ylabel=\"PMF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1390,9 +1442,10 @@ That should not be surprising, because the simulation and the Poisson model are 
 So the real test is to see how well the model fits real data.</p>
 <p>From HockeyReference, I downloaded results of every game of the National Hockey League (NHL) 2023-2024 regular season (not including the playoffs).
 I extracted information about goals scored during 60 minutes of regulation play, not including overtime or tie-breaking shootouts.
-The results are in an HDF file with one key for each game, and a list of times, in seconds since the beginning of the game, when a goal was scored.</p>
+The results are in an HDF file with one key for each game, and a list of times, in seconds since the beginning of the game, when a goal was scored.
+Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>Raw data downloaded from <a class="reference external" href="https://www.hockey-reference.com/leagues/NHL_2024_games.html">https://www.hockey-reference.com/leagues/NHL_2024_games.html</a> on July 16, 2024.</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/nhl_2023_2024.hdf&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1401,7 +1454,7 @@ The results are in an HDF file with one key for each game, and a list of times, 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 29;
+                var nbb_cell_id = 31;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/nhl_2023_2024.hdf\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/nhl_2023_2024.hdf\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1434,7 +1487,7 @@ The results are in an HDF file with one key for each game, and a list of times, 
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 30;
+                var nbb_cell_id = 32;
                 var nbb_unformatted_code = "filename = \"nhl_2023_2024.hdf\"\n\nwith pd.HDFStore(filename, \"r\") as store:\n    keys = store.keys()\n\nlen(keys), keys[0]";
                 var nbb_formatted_code = "filename = \"nhl_2023_2024.hdf\"\n\nwith pd.HDFStore(filename, \"r\") as store:\n    keys = store.keys()\n\nlen(keys), keys[0]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1471,7 +1524,7 @@ dtype: int64
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 31;
+                var nbb_cell_id = 33;
                 var nbb_unformatted_code = "times = pd.read_hdf(filename, key=keys[0])\ntimes";
                 var nbb_formatted_code = "times = pd.read_hdf(filename, key=keys[0])\ntimes";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1499,7 +1552,7 @@ dtype: int64
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 32;
+                var nbb_cell_id = 34;
                 var nbb_unformatted_code = "3600 - times[5]";
                 var nbb_formatted_code = "3600 - times[5]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1514,7 +1567,7 @@ dtype: int64
             }, 500);
             </script></div>
 </div>
-<p>The following loop reads the results for all games, counts the number of goals, and stores the result in a list.</p>
+<p>The following loop reads the results for all games, counts the number of goals in each one, and stores the results in a list.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">goals</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1529,7 +1582,7 @@ dtype: int64
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 33;
+                var nbb_cell_id = 35;
                 var nbb_unformatted_code = "goals = []\n\nfor key in keys:\n    times = pd.read_hdf(filename, key=key)\n    n = len(times)\n    goals.append(n)";
                 var nbb_formatted_code = "goals = []\n\nfor key in keys:\n    times = pd.read_hdf(filename, key=key)\n    n = len(times)\n    goals.append(n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1558,7 +1611,7 @@ dtype: int64
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 34;
+                var nbb_cell_id = 36;
                 var nbb_unformatted_code = "lam = np.mean(goals)\nlam";
                 var nbb_formatted_code = "lam = np.mean(goals)\nlam";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1584,7 +1637,7 @@ dtype: int64
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 35;
+                var nbb_cell_id = 37;
                 var nbb_unformatted_code = "ps = poisson_pmf(ks, lam)\npmf_poisson = Pmf(ps, ks, name=\"Poisson model\")";
                 var nbb_formatted_code = "ps = poisson_pmf(ks, lam)\npmf_poisson = Pmf(ps, ks, name=\"Poisson model\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1613,7 +1666,7 @@ dtype: int64
 <img alt="_images/f9c72ff2fd66b3a4374e42fc69f70cf837ebf6839ae5bbf3b267ee787968888d.png" src="_images/f9c72ff2fd66b3a4374e42fc69f70cf837ebf6839ae5bbf3b267ee787968888d.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 36;
+                var nbb_cell_id = 38;
                 var nbb_unformatted_code = "pmf_goals = Pmf.from_seq(goals, name=\"home goals\")\n\ntwo_bar_plots(pmf_goals, pmf_poisson)\ndecorate(xlabel=\"Goals\", ylabel=\"PMF\")";
                 var nbb_formatted_code = "pmf_goals = Pmf.from_seq(goals, name=\"home goals\")\n\ntwo_bar_plots(pmf_goals, pmf_poisson)\ndecorate(xlabel=\"Goals\", ylabel=\"PMF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1633,7 +1686,7 @@ dtype: int64
 <section id="the-exponential-distribution">
 <h2><span class="section-number">5.3. </span>The Exponential Distribution<a class="headerlink" href="#the-exponential-distribution" title="Link to this heading">#</a></h2>
 <p>In the previous section, we simulated a simple model of a hockey game where a goal has the same probability of being scored during any second of the game.
-Under the same model, it turns out, the times until the first goal follow an <strong>exponential distribution</strong>.</p>
+Under the same model, it turns out, the time until the first goal follows an <strong>exponential distribution</strong>.</p>
 <p>To demonstrate, let’s assume again that the teams score a total of 6 goals, on average, and compute the probability of a goal during each second.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1650,7 +1703,7 @@ Under the same model, it turns out, the times until the first goal follow an <st
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 37;
+                var nbb_cell_id = 39;
                 var nbb_unformatted_code = "n = 3600\nm = 6\np = m / 3600\np";
                 var nbb_formatted_code = "n = 3600\nm = 6\np = m / 3600\np";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1676,7 +1729,7 @@ Under the same model, it turns out, the times until the first goal follow an <st
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 38;
+                var nbb_cell_id = 40;
                 var nbb_unformatted_code = "def simulate_first_goal(n, p):\n    return flip(n, p).argmax()";
                 var nbb_formatted_code = "def simulate_first_goal(n, p):\n    return flip(n, p).argmax()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1694,24 +1747,19 @@ Under the same model, it turns out, the times until the first goal follow an <st
 <p>This works because the result from <code class="docutils literal notranslate"><span class="pre">flip</span></code> is a sequence of 1s and 0s, so the maximum is almost always 1.
 If there is at least one goal in the sequence, <code class="docutils literal notranslate"><span class="pre">argmax</span></code> returns the index of the first.
 If there are no goals, it returns 0, but that happens seldom enough that we’ll ignore it.</p>
-<p>We’ll use <code class="docutils literal notranslate"><span class="pre">simulate_first_goal</span></code> to simulate 1000 games and make a list of the times until the first goal.</p>
-<div class="cell docutils container">
+<p>We’ll use <code class="docutils literal notranslate"><span class="pre">simulate_first_goal</span></code> to simulate 1001 games and make a list of the times until the first goal.</p>
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_goal_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">simulate_first_goal</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
-<span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">first_goal_times</span><span class="p">)</span>
-<span class="n">mean</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>593.395
-</pre></div>
-</div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 39;
-                var nbb_unformatted_code = "first_goal_times = [simulate_first_goal(n, p) for i in range(1000)]\nmean = np.mean(first_goal_times)\nmean";
-                var nbb_formatted_code = "first_goal_times = [simulate_first_goal(n, p) for i in range(1000)]\nmean = np.mean(first_goal_times)\nmean";
+                var nbb_cell_id = 41;
+                var nbb_unformatted_code = "np.random.seed(3)";
+                var nbb_formatted_code = "np.random.seed(3)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1724,8 +1772,37 @@ If there are no goals, it returns 0, but that happens seldom enough that we’ll
             }, 500);
             </script></div>
 </div>
-<p>The average time until the first goal is about 600 seconds, or 10 minutes.
-And that makes sense – if we expect 6 goals per game, we expect one goal every 10 minutes, on average.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_goal_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">simulate_first_goal</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">first_goal_times</span><span class="p">)</span>
+<span class="n">mean</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>597.7902097902098
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 42;
+                var nbb_unformatted_code = "first_goal_times = [simulate_first_goal(n, p) for i in range(1001)]\nmean = np.mean(first_goal_times)\nmean";
+                var nbb_formatted_code = "first_goal_times = [simulate_first_goal(n, p) for i in range(1001)]\nmean = np.mean(first_goal_times)\nmean";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>The average time until the first goal is close to 600 seconds, or 10 minutes.
+And that makes sense – if we expect 6 goals per sixty-minute game, we expect one goal every 10 minutes, on average.</p>
 <p>When <code class="docutils literal notranslate"><span class="pre">n</span></code> is large and <code class="docutils literal notranslate"><span class="pre">p</span></code> is small, we can show mathematically that the expected time until the first goal follows an exponential distribution.</p>
 <p>Because the simulation generates many unique time values, we’ll use CDFs to compare distributions, rather than PMFs.
 And the CDF of the exponential distribution is easy to compute.</p>
@@ -1746,7 +1823,7 @@ And the CDF of the exponential distribution is easy to compute.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 40;
+                var nbb_cell_id = 43;
                 var nbb_unformatted_code = "def exponential_cdf(x, lam):\n    \"\"\"Compute the exponential CDF.\n\n    x: float or sequence of floats\n    lam: rate parameter\n\n    returns: float or NumPy array of cumulative probability\n    \"\"\"\n    return 1 - np.exp(-lam * x)";
                 var nbb_formatted_code = "def exponential_cdf(x, lam):\n    \"\"\"Compute the exponential CDF.\n\n    x: float or sequence of floats\n    lam: rate parameter\n\n    returns: float or NumPy array of cumulative probability\n    \"\"\"\n    return 1 - np.exp(-lam * x)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1771,12 +1848,12 @@ We can use the mean of the simulated results to compute lam.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0016852181093538032
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0016728276636563566
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 41;
+                var nbb_cell_id = 44;
                 var nbb_unformatted_code = "lam = 1 / mean\nlam";
                 var nbb_formatted_code = "lam = 1 / mean\nlam";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1805,7 +1882,7 @@ We can use the mean of the simulated results to compute lam.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 42;
+                var nbb_cell_id = 45;
                 var nbb_unformatted_code = "from empiricaldist import Cdf\n\nts = np.linspace(0, 3600, 201)\nps = exponential_cdf(ts, lam)\ncdf_expo = Cdf(ps, ts, name=\"exponential model\")";
                 var nbb_formatted_code = "from empiricaldist import Cdf\n\nts = np.linspace(0, 3600, 201)\nps = exponential_cdf(ts, lam)\ncdf_expo = Cdf(ps, ts, name=\"exponential model\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1833,10 +1910,10 @@ We can use the mean of the simulated results to compute lam.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cd05855e005e6ac168e24496c08420e17062fd59d12de92203c53ac4602399ba.png" src="_images/cd05855e005e6ac168e24496c08420e17062fd59d12de92203c53ac4602399ba.png" />
+<img alt="_images/21fc3d99a72e1916876cc2d27c16be2229965bdfe048354e4d1eee4ba3609da7.png" src="_images/21fc3d99a72e1916876cc2d27c16be2229965bdfe048354e4d1eee4ba3609da7.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 43;
+                var nbb_cell_id = 46;
                 var nbb_unformatted_code = "cdf_sim = Cdf.from_seq(first_goal_times, name=\"simulation\")\n\ncdf_expo.plot(alpha=0.6, color=\"gray\")\ncdf_sim.plot(alpha=0.6)\n\ndecorate(xlabel=\"Time of first goal (seconds)\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "cdf_sim = Cdf.from_seq(first_goal_times, name=\"simulation\")\n\ncdf_expo.plot(alpha=0.6, color=\"gray\")\ncdf_sim.plot(alpha=0.6)\n\ndecorate(xlabel=\"Time of first goal (seconds)\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1866,7 +1943,7 @@ If no goals were scored, it adds <code class="docutils literal notranslate"><spa
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 44;
+                var nbb_cell_id = 47;
                 var nbb_unformatted_code = "filename = \"nhl_2023_2024.hdf\"\n\nwith pd.HDFStore(filename, \"r\") as store:\n    keys = store.keys()";
                 var nbb_formatted_code = "filename = \"nhl_2023_2024.hdf\"\n\nwith pd.HDFStore(filename, \"r\") as store:\n    keys = store.keys()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1897,7 +1974,7 @@ If no goals were scored, it adds <code class="docutils literal notranslate"><spa
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 45;
+                var nbb_cell_id = 48;
                 var nbb_unformatted_code = "firsts = []\n\nfor key in keys:\n    times = pd.read_hdf(filename, key=key)\n    if len(times) > 0:\n        firsts.append(times[0])\n    else:\n        firsts.append(np.nan)";
                 var nbb_formatted_code = "firsts = []\n\nfor key in keys:\n    times = pd.read_hdf(filename, key=key)\n    if len(times) > 0:\n        firsts.append(times[0])\n    else:\n        firsts.append(np.nan)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1926,7 +2003,7 @@ If no goals were scored, it adds <code class="docutils literal notranslate"><spa
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 46;
+                var nbb_cell_id = 49;
                 var nbb_unformatted_code = "lam = 1 / np.nanmean(firsts)\nlam";
                 var nbb_formatted_code = "lam = 1 / np.nanmean(firsts)\nlam";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1952,7 +2029,7 @@ If no goals were scored, it adds <code class="docutils literal notranslate"><spa
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 47;
+                var nbb_cell_id = 50;
                 var nbb_unformatted_code = "ps = exponential_cdf(ts, lam)\ncdf_expo = Cdf(ps, ts, name=\"exponential model\")";
                 var nbb_formatted_code = "ps = exponential_cdf(ts, lam)\ncdf_expo = Cdf(ps, ts, name=\"exponential model\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2014,7 +2091,7 @@ If no goals were scored, it adds <code class="docutils literal notranslate"><spa
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 48;
+                var nbb_cell_id = 51;
                 var nbb_unformatted_code = "cdf_firsts = Cdf.from_seq(firsts, name=\"data\", dropna=False)\ncdf_firsts.tail()";
                 var nbb_formatted_code = "cdf_firsts = Cdf.from_seq(firsts, name=\"data\", dropna=False)\ncdf_firsts.tail()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2043,7 +2120,7 @@ If no goals were scored, it adds <code class="docutils literal notranslate"><spa
 <img alt="_images/2d58c14ea427a13aa4862f9623600c11fd66840bb9766ca4254485caf22bf655.png" src="_images/2d58c14ea427a13aa4862f9623600c11fd66840bb9766ca4254485caf22bf655.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 49;
+                var nbb_cell_id = 52;
                 var nbb_unformatted_code = "cdf_expo.plot(alpha=0.6, color=\"gray\")\ncdf_firsts.plot(alpha=0.6)\n\ndecorate(xlabel=\"Time of first goal (seconds)\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "cdf_expo.plot(alpha=0.6, color=\"gray\")\ncdf_firsts.plot(alpha=0.6)\n\ndecorate(xlabel=\"Time of first goal (seconds)\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2062,7 +2139,7 @@ If no goals were scored, it adds <code class="docutils literal notranslate"><spa
 But still, the model fits the data well.</p>
 <p>The underlying assumption of these models – the Poisson model of goals and the exponential model of times – is that a goal is equally likely during any second of a game.
 If you ask a hockey fan whether that’s true, they would say no, and they would be right – the real world violates assumptions like these in many ways.
-But despite these violations, theoretical distributions often fit real data remarkably well.</p>
+Nevertheless, theoretical distributions often fit real data remarkably well.</p>
 </section>
 <section id="the-normal-distribution">
 <h2><span class="section-number">5.4. </span>The Normal Distribution<a class="headerlink" href="#the-normal-distribution" title="Link to this heading">#</a></h2>
@@ -2083,7 +2160,7 @@ And suppose the weather each day is bad, fair, or good with the same probability
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 50;
+                var nbb_cell_id = 53;
                 var nbb_unformatted_code = "def simulate_growth(n):\n    choices = [1, 2, 3]\n    gains = np.random.choice(choices, n)\n    return gains.sum()";
                 var nbb_formatted_code = "def simulate_growth(n):\n    choices = [1, 2, 3]\n    gains = np.random.choice(choices, n)\n    return gains.sum()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2109,12 +2186,12 @@ If we simulate the growth process for 100 days, we get a list of 1001 weights.</
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200.006993006993, 8.317077447738441)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(199.37062937062936, 8.388630840376777)
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 51;
+                var nbb_cell_id = 54;
                 var nbb_unformatted_code = "sim_weights = [simulate_growth(100) for i in range(1001)]\nm, s = np.mean(sim_weights), np.std(sim_weights)\nm, s";
                 var nbb_formatted_code = "sim_weights = [simulate_growth(100) for i in range(1001)]\nm, s = np.mean(sim_weights), np.std(sim_weights)\nm, s";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2129,8 +2206,8 @@ If we simulate the growth process for 100 days, we get a list of 1001 weights.</
             }, 500);
             </script></div>
 </div>
-<p>The mean is close to 200 and the standard deviation is about 8.
-To see whether the weights follow a normal distribution, we’ll use the following function, which takes a sample and makes a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> that represents a normal distribution with the same mean and standard deviation of the sample, evaluated over the range of the sample.</p>
+<p>The mean is close to 200 pounds and the standard deviation is about 8 pounds.
+To see whether the weights follow a normal distribution, we’ll use the following function, which takes a sample and makes a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> that represents a normal distribution with the same mean and standard deviation as the sample, evaluated over the range from 4 standard deviations below the mean to 4 standard deviations above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
@@ -2152,7 +2229,7 @@ To see whether the weights follow a normal distribution, we’ll use the followi
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 52;
+                var nbb_cell_id = 55;
                 var nbb_unformatted_code = "from scipy.stats import norm\n\n\ndef make_normal_model(data):\n    \"\"\"Make the Cdf of a normal distribution based on data.\n\n    data: sequence of numbers\n    \"\"\"\n    m, s = np.mean(data), np.std(data)\n    low, high = m - 4 * s, m + 4 * s\n    qs = np.linspace(low, high, 201)\n    ps = norm.cdf(qs, m, s)\n    return Cdf(ps, qs, name=\"normal model\")";
                 var nbb_formatted_code = "from scipy.stats import norm\n\n\ndef make_normal_model(data):\n    \"\"\"Make the Cdf of a normal distribution based on data.\n\n    data: sequence of numbers\n    \"\"\"\n    m, s = np.mean(data), np.std(data)\n    low, high = m - 4 * s, m + 4 * s\n    qs = np.linspace(low, high, 201)\n    ps = norm.cdf(qs, m, s)\n    return Cdf(ps, qs, name=\"normal model\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2177,7 +2254,7 @@ To see whether the weights follow a normal distribution, we’ll use the followi
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 53;
+                var nbb_cell_id = 56;
                 var nbb_unformatted_code = "cdf_model = make_normal_model(sim_weights)";
                 var nbb_formatted_code = "cdf_model = make_normal_model(sim_weights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2202,7 +2279,7 @@ To see whether the weights follow a normal distribution, we’ll use the followi
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 54;
+                var nbb_cell_id = 57;
                 var nbb_unformatted_code = "cdf_sim_weights = Cdf.from_seq(sim_weights, name=\"simulation\")";
                 var nbb_formatted_code = "cdf_sim_weights = Cdf.from_seq(sim_weights, name=\"simulation\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2238,7 +2315,7 @@ To see whether the weights follow a normal distribution, we’ll use the followi
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 55;
+                var nbb_cell_id = 58;
                 var nbb_unformatted_code = "def two_cdf_plots(cdf_model, cdf_data, xlabel=\"\", **options):\n    \"\"\"Plot an empirical CDF and a theoretical model.\n\n    cdf_model: Cdf object\n    cdf_data: Cdf object\n    xlabel: string\n    options: control the way cdf_data is plotted\n    \"\"\"\n    cdf_model.plot(alpha=0.6, color=\"gray\")\n    cdf_data.plot(alpha=0.6, **options)\n\n    decorate(xlabel=xlabel, ylabel=\"CDF\")";
                 var nbb_formatted_code = "def two_cdf_plots(cdf_model, cdf_data, xlabel=\"\", **options):\n    \"\"\"Plot an empirical CDF and a theoretical model.\n\n    cdf_model: Cdf object\n    cdf_data: Cdf object\n    xlabel: string\n    options: control the way cdf_data is plotted\n    \"\"\"\n    cdf_model.plot(alpha=0.6, color=\"gray\")\n    cdf_data.plot(alpha=0.6, **options)\n\n    decorate(xlabel=xlabel, ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2253,6 +2330,7 @@ To see whether the weights follow a normal distribution, we’ll use the followi
             }, 500);
             </script></div>
 </div>
+<p>And here are the results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_cdf_plots</span><span class="p">(</span><span class="n">cdf_model</span><span class="p">,</span> <span class="n">cdf_sim_weights</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Weight (pounds)&quot;</span><span class="p">)</span>
@@ -2260,10 +2338,10 @@ To see whether the weights follow a normal distribution, we’ll use the followi
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/08f6367d6fbd7dec280c5041f46553058c6ebd5367cf77fef0305e3cdd9148c5.png" src="_images/08f6367d6fbd7dec280c5041f46553058c6ebd5367cf77fef0305e3cdd9148c5.png" />
+<img alt="_images/701b3ac56f96352719665d6189adf650c15ef70d4804334c6c2de18a68efd3a1.png" src="_images/701b3ac56f96352719665d6189adf650c15ef70d4804334c6c2de18a68efd3a1.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 56;
+                var nbb_cell_id = 59;
                 var nbb_unformatted_code = "two_cdf_plots(cdf_model, cdf_sim_weights, color=\"C1\", xlabel=\"Weight (pounds)\")";
                 var nbb_formatted_code = "two_cdf_plots(cdf_model, cdf_sim_weights, color=\"C1\", xlabel=\"Weight (pounds)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2278,13 +2356,12 @@ To see whether the weights follow a normal distribution, we’ll use the followi
             }, 500);
             </script></div>
 </div>
-<p>The normal model fits the distribution of the weights pretty well.
+<p>The normal model fits the distribution of the weights very well.
 In general, when we add up random factors, the sum tends to follow a normal distribution.
 That’s a consequence of the Central Limit Theorem, which we’ll come back to in Chapter xxx.</p>
 <p>But first let’s see how well the normal distribution fits real data.
 As an example, we’ll look at the distribution of birth weights in the National Survey of Family Growth (NSFG).
 We can use <code class="docutils literal notranslate"><span class="pre">read_fem_preg</span></code> to read the data, then select the <code class="docutils literal notranslate"><span class="pre">totalwgt_lb</span></code> column, which records birth weights in pounds.</p>
-<p>Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>The following cells download the data files and install <code class="docutils literal notranslate"><span class="pre">statadict</span></code>, which we need to read the data.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
@@ -2297,7 +2374,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">read_fem
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 57;
+                var nbb_cell_id = 60;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2324,7 +2401,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">read_fem
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 58;
+                var nbb_cell_id = 61;
                 var nbb_unformatted_code = "try:\n    import statadict\nexcept ImportError:\n    !pip install statadict";
                 var nbb_formatted_code = "try:\n    import statadict\nexcept ImportError:\n    !pip install statadict";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2351,7 +2428,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">read_fem
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 59;
+                var nbb_cell_id = 62;
                 var nbb_unformatted_code = "import nsfg\n\npreg = nsfg.read_fem_preg()\nbirth_weights = preg[\"totalwgt_lb\"].dropna()";
                 var nbb_formatted_code = "import nsfg\n\npreg = nsfg.read_fem_preg()\nbirth_weights = preg[\"totalwgt_lb\"].dropna()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2380,7 +2457,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">read_fem
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 60;
+                var nbb_cell_id = 63;
                 var nbb_unformatted_code = "m, s = np.mean(birth_weights), np.std(birth_weights)\nm, s";
                 var nbb_formatted_code = "m, s = np.mean(birth_weights), np.std(birth_weights)\nm, s";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2412,7 +2489,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">read_fem
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 61;
+                var nbb_cell_id = 64;
                 var nbb_unformatted_code = "from scipy.stats import trimboth\n\ntrimmed = trimboth(birth_weights, 0.01)\nm, s = np.mean(trimmed), np.std(trimmed)\nm, s";
                 var nbb_formatted_code = "from scipy.stats import trimboth\n\ntrimmed = trimboth(birth_weights, 0.01)\nm, s = np.mean(trimmed), np.std(trimmed)\nm, s";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2438,7 +2515,7 @@ We’ll use the trimmed data to make a normal model.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 62;
+                var nbb_cell_id = 65;
                 var nbb_unformatted_code = "cdf_model = make_normal_model(trimmed)";
                 var nbb_formatted_code = "cdf_model = make_normal_model(trimmed)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2466,7 +2543,7 @@ We’ll use the trimmed data to make a normal model.</p>
 <img alt="_images/89229f56ff5e38c1471b6631116835462312716317c885e4cbe56d692b8df947.png" src="_images/89229f56ff5e38c1471b6631116835462312716317c885e4cbe56d692b8df947.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 63;
+                var nbb_cell_id = 66;
                 var nbb_unformatted_code = "cdf_birth_weight = Cdf.from_seq(birth_weights)\n\ntwo_cdf_plots(cdf_model, cdf_birth_weight, xlabel=\"Birth weight (pounds)\")";
                 var nbb_formatted_code = "cdf_birth_weight = Cdf.from_seq(birth_weights)\n\ntwo_cdf_plots(cdf_model, cdf_birth_weight, xlabel=\"Birth weight (pounds)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2501,7 +2578,7 @@ Again, we’ll assume that the weather is bad, fair, or good on any given day wi
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 64;
+                var nbb_cell_id = 67;
                 var nbb_unformatted_code = "def simulate_proportionate_growth(n):\n    choices = [1.03, 1.05, 1.07]\n    gains = np.random.choice(choices, n)\n    return gains.prod()";
                 var nbb_formatted_code = "def simulate_proportionate_growth(n):\n    choices = [1.03, 1.05, 1.07]\n    gains = np.random.choice(choices, n)\n    return gains.prod()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2518,23 +2595,23 @@ Again, we’ll assume that the weather is bad, fair, or good on any given day wi
 </div>
 <p>If a pumpkin gains 3% of its weight, the final weight is the product of the initial weight and the factor 1.03.
 So we can compute the weight after 100 days by choosing random factors and multiplying them together.</p>
-<p>We can call this function 1000 times to simulate 1000 pumpkins and save their weights.</p>
+<p>Let’s call this function 1001 times to simulate 1001 pumpkins and save their weights.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">simulate_proportionate_growth</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">simulate_proportionate_growth</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
 <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sim_weights</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sim_weights</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(130.7046480522094, 20.48374035949967)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(130.80183363824722, 20.956047434921466)
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 65;
-                var nbb_unformatted_code = "sim_weights = [simulate_proportionate_growth(100) for i in range(1000)]\nnp.mean(sim_weights), np.std(sim_weights)";
-                var nbb_formatted_code = "sim_weights = [simulate_proportionate_growth(100) for i in range(1000)]\nnp.mean(sim_weights), np.std(sim_weights)";
+                var nbb_cell_id = 68;
+                var nbb_unformatted_code = "sim_weights = [simulate_proportionate_growth(100) for i in range(1001)]\nnp.mean(sim_weights), np.std(sim_weights)";
+                var nbb_formatted_code = "sim_weights = [simulate_proportionate_growth(100) for i in range(1001)]\nnp.mean(sim_weights), np.std(sim_weights)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2547,19 +2624,10 @@ So we can compute the weight after 100 days by choosing random factors and multi
             }, 500);
             </script></div>
 </div>
-<p>The average weight is about 132 pounds; the standard deviation is about 20 pounds.
+<p>The average weight is about 131 pounds; the standard deviation is about 21 pounds.
 So the pumpkins in this model are smaller but more variable than in the previous model.</p>
-<p>And we can show mathematically that they follow a lognormal distribution.
-In the proportionate growth model, the final weight is the product of an initial weight and 100 random factors, which we can write like this:</p>
-<div class="math notranslate nohighlight">
-\[ w_n = w_0 \cdot f_1 \cdot f_2 \cdot \dots \cdot f_n \]</div>
-<p>where <span class="math notranslate nohighlight">\(w_0\)</span> is the initial weight, <span class="math notranslate nohighlight">\(w_n\)</span> is the final weight after <span class="math notranslate nohighlight">\(n\)</span> steps, and <span class="math notranslate nohighlight">\(f_i\)</span> is a random multiplicative factor at step <span class="math notranslate nohighlight">\(i\)</span>.
-If we take the log of both sides of this equation, the log of the product is the sum of the logs:</p>
-<div class="math notranslate nohighlight">
-\[ \log w_n = \log w_0 + \log f_1 + \log f_2 + \dots + \log f_n \]</div>
-<p>So the logarithm of each weight is the sum of a sequence of random terms, which we expect to follow a normal distribution, according to the Central Limit Theorem.
-And if the logarithms of the weights follow a normal distribution, we’d say that the weights themselves follow a <strong>lognormal distribution</strong>.</p>
-<p>To check, we’ll compute the logs of the weights.
+<p>And we can show mathematically that they follow a <strong>lognormal distribution</strong>, which means that the logarithms of the weights follow a normal distribution.
+To check, we’ll compute the logs of the weights and their mean and standard deviation.
 We could use logarithms with any base, but I’ll use base 10 because it makes the results easier to interpret.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2570,12 +2638,12 @@ We could use logarithms with any base, but I’ll use base 10 because it makes t
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.1109497385491993, 0.06833192903894639)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.1111299372609933, 0.06898607064749827)
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 66;
+                var nbb_cell_id = 69;
                 var nbb_unformatted_code = "log_sim_weights = np.log10(sim_weights)\nm, s = np.mean(log_sim_weights), np.std(log_sim_weights)\nm, s";
                 var nbb_formatted_code = "log_sim_weights = np.log10(sim_weights)\nm, s = np.mean(log_sim_weights), np.std(log_sim_weights)\nm, s";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2594,66 +2662,21 @@ We could use logarithms with any base, but I’ll use base 10 because it makes t
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_model</span> <span class="o">=</span> <span class="n">make_normal_model</span><span class="p">(</span><span class="n">log_sim_weights</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 67;
-                var nbb_unformatted_code = "cdf_model = make_normal_model(log_sim_weights)";
-                var nbb_formatted_code = "cdf_model = make_normal_model(log_sim_weights)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_log_sim_weights</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">log_sim_weights</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;simulation&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 68;
-                var nbb_unformatted_code = "cdf_log_sim_weights = Cdf.from_seq(log_sim_weights, name=\"simulation\")";
-                var nbb_formatted_code = "cdf_log_sim_weights = Cdf.from_seq(log_sim_weights, name=\"simulation\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_cdf_plots</span><span class="p">(</span>
+<span class="n">cdf_log_sim_weights</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">log_sim_weights</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;simulation&quot;</span><span class="p">)</span>
+
+<span class="n">two_cdf_plots</span><span class="p">(</span>
     <span class="n">cdf_model</span><span class="p">,</span> <span class="n">cdf_log_sim_weights</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Pumpkin weight (pounds)&quot;</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/24054fa40f87eae8a9dc6aad5d402ae102edf64ed873a44ed4a82de2af1fc91d.png" src="_images/24054fa40f87eae8a9dc6aad5d402ae102edf64ed873a44ed4a82de2af1fc91d.png" />
+<img alt="_images/564a0dd400549ca690be94e6e4364accee883163e333ea4cb1a14d5e69d7ac7c.png" src="_images/564a0dd400549ca690be94e6e4364accee883163e333ea4cb1a14d5e69d7ac7c.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 69;
-                var nbb_unformatted_code = "two_cdf_plots(\n    cdf_model, cdf_log_sim_weights, color=\"C1\", xlabel=\"Pumpkin weight (pounds)\"\n)";
-                var nbb_formatted_code = "two_cdf_plots(\n    cdf_model, cdf_log_sim_weights, color=\"C1\", xlabel=\"Pumpkin weight (pounds)\"\n)";
+                var nbb_cell_id = 70;
+                var nbb_unformatted_code = "cdf_model = make_normal_model(log_sim_weights)\ncdf_log_sim_weights = Cdf.from_seq(log_sim_weights, name=\"simulation\")\n\ntwo_cdf_plots(\n    cdf_model, cdf_log_sim_weights, color=\"C1\", xlabel=\"Pumpkin weight (pounds)\"\n)";
+                var nbb_formatted_code = "cdf_model = make_normal_model(log_sim_weights)\ncdf_log_sim_weights = Cdf.from_seq(log_sim_weights, name=\"simulation\")\n\ntwo_cdf_plots(\n    cdf_model, cdf_log_sim_weights, color=\"C1\", xlabel=\"Pumpkin weight (pounds)\"\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2666,11 +2689,13 @@ We could use logarithms with any base, but I’ll use base 10 because it makes t
             }, 500);
             </script></div>
 </div>
-<p>If people are like pumpkins, where the change in weight from year to year is proportionate to current weight, we might expect the distribution of adult weights to follow a lognormal distribution.
+<p>The model fits the simulation result very well.</p>
+<p>If people are like pumpkins, where the change in weight from year to year is proportionate to their current weight, we might expect the distribution of adult weights to follow a lognormal distribution.
 Let’s find out.</p>
-<p>The National Center for Chronic Disease Prevention and Health Promotion conducts an annual survey as part of the Behavioral Risk Factor Surveillance System (BRFSS).[^3] In 2008, they interviewed 414,509 respondents and asked about their demographics, health, and health risks.
-Among the data they collected are the weights in kilograms of 398,484 respondents.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">thinkstats</span></code> module provides a function that reads data from the BRFSS and returns a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
+<p>The National Center for Chronic Disease Prevention and Health Promotion conducts an annual survey as part of the Behavioral Risk Factor Surveillance System (BRFSS).
+In 2008, they interviewed 414,509 respondents and asked about their demographics, health, and health risks.
+Among the data they collected are the weights in kilograms of 398,484 respondents.
+Instructions for downloading the data are in the notebook for this chapter.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz&quot;</span><span class="p">)</span>
@@ -2680,7 +2705,7 @@ Among the data they collected are the weights in kilograms of 398,484 respondent
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 70;
+                var nbb_cell_id = 71;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2695,6 +2720,7 @@ Among the data they collected are the weights in kilograms of 398,484 respondent
             }, 500);
             </script></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">thinkstats</span></code> module provides a function that reads BRFSS data and returns a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thinkstats</span> <span class="kn">import</span> <span class="n">read_brfss</span>
@@ -2706,7 +2732,7 @@ Among the data they collected are the weights in kilograms of 398,484 respondent
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 71;
+                var nbb_cell_id = 72;
                 var nbb_unformatted_code = "from thinkstats import read_brfss\n\nbrfss = read_brfss()";
                 var nbb_formatted_code = "from thinkstats import read_brfss\n\nbrfss = read_brfss()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2736,7 +2762,7 @@ Among the data they collected are the weights in kilograms of 398,484 respondent
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 72;
+                var nbb_cell_id = 73;
                 var nbb_unformatted_code = "adult_weights = brfss[\"wtkg2\"].dropna()\nm, s = np.mean(adult_weights), np.std(adult_weights)\nm, s";
                 var nbb_formatted_code = "adult_weights = brfss[\"wtkg2\"].dropna()\nm, s = np.mean(adult_weights), np.std(adult_weights)\nm, s";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2756,54 +2782,9 @@ Before we compute logarithms, let’s see if the weights follow a normal distrib
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_model</span> <span class="o">=</span> <span class="n">make_normal_model</span><span class="p">(</span><span class="n">adult_weights</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 73;
-                var nbb_unformatted_code = "cdf_model = make_normal_model(adult_weights)";
-                var nbb_formatted_code = "cdf_model = make_normal_model(adult_weights)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_adult_weights</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">adult_weights</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;adult weight&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 74;
-                var nbb_unformatted_code = "cdf_adult_weights = Cdf.from_seq(adult_weights, name=\"adult weight\")";
-                var nbb_formatted_code = "cdf_adult_weights = Cdf.from_seq(adult_weights, name=\"adult weight\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_cdf_plots</span><span class="p">(</span><span class="n">cdf_model</span><span class="p">,</span> <span class="n">cdf_adult_weights</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Adult weight (kilograms)&quot;</span><span class="p">)</span>
+<span class="n">cdf_adult_weights</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">adult_weights</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;adult weight&quot;</span><span class="p">)</span>
+
+<span class="n">two_cdf_plots</span><span class="p">(</span><span class="n">cdf_model</span><span class="p">,</span> <span class="n">cdf_adult_weights</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Adult weight (kilograms)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2811,9 +2792,9 @@ Before we compute logarithms, let’s see if the weights follow a normal distrib
 <img alt="_images/9e5e1e7bc1babd08a5e5a4ead985782088209a609272afd5430c9f2715e1cddb.png" src="_images/9e5e1e7bc1babd08a5e5a4ead985782088209a609272afd5430c9f2715e1cddb.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 75;
-                var nbb_unformatted_code = "two_cdf_plots(cdf_model, cdf_adult_weights, xlabel=\"Adult weight (kilograms)\")";
-                var nbb_formatted_code = "two_cdf_plots(cdf_model, cdf_adult_weights, xlabel=\"Adult weight (kilograms)\")";
+                var nbb_cell_id = 74;
+                var nbb_unformatted_code = "cdf_model = make_normal_model(adult_weights)\ncdf_adult_weights = Cdf.from_seq(adult_weights, name=\"adult weight\")\n\ntwo_cdf_plots(cdf_model, cdf_adult_weights, xlabel=\"Adult weight (kilograms)\")";
+                var nbb_formatted_code = "cdf_model = make_normal_model(adult_weights)\ncdf_adult_weights = Cdf.from_seq(adult_weights, name=\"adult weight\")\n\ntwo_cdf_plots(cdf_model, cdf_adult_weights, xlabel=\"Adult weight (kilograms)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2826,68 +2807,23 @@ Before we compute logarithms, let’s see if the weights follow a normal distrib
             }, 500);
             </script></div>
 </div>
-<p>The normal distribution is not a terrible model for the data, and might be good enough for some purposes – but let’s see if we can do better.</p>
+<p>The normal distribution might be good enough model for this data, for some purposes – but let’s see if we can do better.</p>
 <p>Here’s the distribution of the log-transformed weights and a normal model with the same mean and standard deviation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_adult_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">adult_weights</span><span class="p">)</span>
+<span class="n">cdf_model</span> <span class="o">=</span> <span class="n">make_normal_model</span><span class="p">(</span><span class="n">log_adult_weights</span><span class="p">)</span>
+
+<span class="n">cdf_log_adult_weights</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">log_adult_weights</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;log adult weight&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 76;
-                var nbb_unformatted_code = "log_adult_weights = np.log10(adult_weights)";
-                var nbb_formatted_code = "log_adult_weights = np.log10(adult_weights)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_model</span> <span class="o">=</span> <span class="n">make_normal_model</span><span class="p">(</span><span class="n">log_adult_weights</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 77;
-                var nbb_unformatted_code = "cdf_model = make_normal_model(log_adult_weights)";
-                var nbb_formatted_code = "cdf_model = make_normal_model(log_adult_weights)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_log_adult_weights</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">log_adult_weights</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;log adult weight&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 78;
-                var nbb_unformatted_code = "cdf_log_adult_weights = Cdf.from_seq(log_adult_weights, name=\"log adult weight\")";
-                var nbb_formatted_code = "cdf_log_adult_weights = Cdf.from_seq(log_adult_weights, name=\"log adult weight\")";
+                var nbb_cell_id = 75;
+                var nbb_unformatted_code = "log_adult_weights = np.log10(adult_weights)\ncdf_model = make_normal_model(log_adult_weights)\n\ncdf_log_adult_weights = Cdf.from_seq(log_adult_weights, name=\"log adult weight\")";
+                var nbb_formatted_code = "log_adult_weights = np.log10(adult_weights)\ncdf_model = make_normal_model(log_adult_weights)\n\ncdf_log_adult_weights = Cdf.from_seq(log_adult_weights, name=\"log adult weight\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2910,7 +2846,7 @@ Before we compute logarithms, let’s see if the weights follow a normal distrib
 <img alt="_images/502edb1aa086742ea9f85469a9a18ad6960c4247f513ca77dc51bdd15fa17dac.png" src="_images/502edb1aa086742ea9f85469a9a18ad6960c4247f513ca77dc51bdd15fa17dac.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 79;
+                var nbb_cell_id = 76;
                 var nbb_unformatted_code = "two_cdf_plots(cdf_model, cdf_log_adult_weights, xlabel=\"Adult weight (log10 kg)\")";
                 var nbb_formatted_code = "two_cdf_plots(cdf_model, cdf_log_adult_weights, xlabel=\"Adult weight (log10 kg)\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2932,15 +2868,15 @@ Before we compute logarithms, let’s see if the weights follow a normal distrib
 <p>At the beginning of this chapter, I said that many real world phenomena can be modeled with theoretical distributions.
 But it might not have been clear why we should care.</p>
 <p>Like all models, theoretical distributions are abstractions, which means they leave out details that are considered irrelevant.
-For example, an observed distribution might have measurement errors or quirks that are specific to the sample; theoretical models smooth out these idiosyncrasies.</p>
+For example, an observed distribution might have measurement errors or quirks that are specific to the sample; theoretical models ignore these idiosyncrasies.</p>
 <p>Theoretical models are also a form of data compression.
 When a model fits a dataset well, a small set of parameters can summarize a large amount of data.</p>
-<p>It is sometimes surprising when data from a natural phenomenon fit an theoretical distribution, but these observations can provide insight into physical systems.
-Sometimes we can explain why an observed distribution has a particular form.</p>
-<p>For example,</p>
-<p>Also, theoretical distributions lend themselves to mathematical analysis, as we will see in Chapter <a class="reference internal" href="#analysis"><span class="xref myst">[analysis]</span></a>{reference-type=“ref” reference=“analysis”}.</p>
+<p>It is sometimes surprising when data from a natural phenomenon fit a theoretical distribution, but these observations can provide insight into physical systems.
+Sometimes we can explain why an observed distribution has a particular form.
+For example, in the previous section we found that adult weight are well-modeled by a lognormal distribution, which suggests that changes in weight from year to year might be proportional to current weight.</p>
+<p>Also, theoretical distributions lend themselves to mathematical analysis, as we will see in Chapter xxx.</p>
 <p>But it is important to remember that all models are imperfect.
-Data from the real world never fit an theoretical distribution perfectly.
+Data from the real world never fit a theoretical distribution perfectly.
 People sometimes talk as if data are generated by models; for example, they might say that the distribution of human heights is normal, or the distribution of income is lognormal.
 Taken literally, these claims cannot be true – there are always differences between the real world and mathematical models.</p>
 <p>Models are useful if they capture the relevant aspects of the real world and leave out unneeded details.
@@ -2962,7 +2898,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">read_fem
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 80;
+                var nbb_cell_id = 77;
                 var nbb_unformatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dat.gz\")";
                 var nbb_formatted_code = "download(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dct\")\ndownload(\"https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemResp.dat.gz\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2988,7 +2924,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">read_fem
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 81;
+                var nbb_cell_id = 78;
                 var nbb_unformatted_code = "from nsfg import read_fem_resp\n\nresp = read_fem_resp()";
                 var nbb_formatted_code = "from nsfg import read_fem_resp\n\nresp = read_fem_resp()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -3013,7 +2949,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">read_fem
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 82;
+                var nbb_cell_id = 79;
                 var nbb_unformatted_code = "older = resp.query(\"age >= 25\")\nnum_family = older[\"numfmhh\"]";
                 var nbb_formatted_code = "older = resp.query(\"age >= 25\")\nnum_family = older[\"numfmhh\"]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -3036,7 +2972,7 @@ How well does the Poisson model fit the data?</p>
 <p>In Section xxx, we saw that the time until the first goal in a hockey game follows an exponential distribution.
 If our model of goal-scoring is correct, a goal is equally likely at any time, regardless of how long it has been since the previous goal.
 And if that’s true, we expect the time between goals to follow an exponential distribution.</p>
-<p>The following loop reads the hockey data, computes the time between successive goals, if there is more than one in a game, and collects the inter-goal times in a list.</p>
+<p>The following loop reads the hockey data again, computes the time between successive goals, if there is more than one in a game, and collects the inter-goal times in a list.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;nhl_2023_2024.hdf&quot;</span>
@@ -3049,76 +2985,9 @@ And if that’s true, we expect the time between goals to follow an exponential 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 89;
+                var nbb_cell_id = 86;
                 var nbb_unformatted_code = "filename = \"nhl_2023_2024.hdf\"\n\nwith pd.HDFStore(filename, \"r\") as store:\n    keys = store.keys()";
                 var nbb_formatted_code = "filename = \"nhl_2023_2024.hdf\"\n\nwith pd.HDFStore(filename, \"r\") as store:\n    keys = store.keys()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">times</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">times</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     424
-1    1916
-2    2137
-3    3005
-4    3329
-5    3513
-dtype: int64
-</pre></div>
-</div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 90;
-                var nbb_unformatted_code = "times = pd.read_hdf(filename, key=keys[0])\ntimes";
-                var nbb_formatted_code = "times = pd.read_hdf(filename, key=keys[0])\ntimes";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">times</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0       NaN
-1    1492.0
-2     221.0
-3     868.0
-4     324.0
-5     184.0
-dtype: float64
-</pre></div>
-</div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 91;
-                var nbb_unformatted_code = "times.diff()";
-                var nbb_formatted_code = "times.diff()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -3145,7 +3014,7 @@ dtype: float64
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 92;
+                var nbb_cell_id = 87;
                 var nbb_unformatted_code = "intervals = []\n\nfor key in keys:\n    times = pd.read_hdf(filename, key=key)\n    if len(times) > 1:\n        intervals.extend(times.diff().dropna())";
                 var nbb_formatted_code = "intervals = []\n\nfor key in keys:\n    times = pd.read_hdf(filename, key=key)\n    if len(times) > 1:\n        intervals.extend(times.diff().dropna())";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -3180,7 +3049,7 @@ To find out, we can select height data from the BRFSS like this:</p>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 97;
+                var nbb_cell_id = 93;
                 var nbb_unformatted_code = "adult_heights = brfss[\"htm3\"].dropna()\nm, s = np.mean(adult_heights), np.std(adult_heights)\nm, s";
                 var nbb_formatted_code = "adult_heights = brfss[\"htm3\"].dropna()\nm, s = np.mean(adult_heights), np.std(adult_heights)\nm, s";
                 var nbb_cells = Jupyter.notebook.get_cells();
