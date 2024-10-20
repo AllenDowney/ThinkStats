@@ -387,6 +387,9 @@ document.write(`
                   
   <section id="cumulative-distribution-functions">
 <h1><span class="section-number">4. </span>Cumulative Distribution Functions<a class="headerlink" href="#cumulative-distribution-functions" title="Link to this heading">#</a></h1>
+<p>Histograms and PMFs are the most familiar ways to represent distributions, but as we’ll see in this chapter, they have limitations.
+An alternative is the cumulative distribution function (CDF), which is useful for computing percentiles, and especially useful for comparing distributions.</p>
+<p>Also in this chapter, we’ll compute percentile-based statistics to quantify the location, spread, and skewness of a distribution.</p>
 <p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkStats/blob/v3/nb/chap04.ipynb">Click here to run this notebook on Colab</a>.</p>
 <div class="cell tag_remove-print tag_hide-cell docutils container">
 <details class="hide above-input">
@@ -536,9 +539,9 @@ In this context, the percentile rank is the percentage of people who got the sam
 So if you are “in the 90th percentile,” you did as well as or better than 90% of the people who took the exam.</p>
 <p>To understand percentiles and percentile ranks, let’s consider an example based on running speeds.
 Some years ago I ran the James Joyce Ramble, which is a 10 kilometer road race in Massachusetts.
-After the race, I downloaded the results so to see how my time compared to other runners.
-The <code class="docutils literal notranslate"><span class="pre">relay.py</span></code> module provides a function that reads the results and returns a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
-<div class="cell docutils container">
+After the race, I downloaded the results to see how my time compared to other runners.</p>
+<p>Instructions for downloading the data are in the notebook for this chapter.</p>
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/relay.py&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span>
@@ -565,6 +568,7 @@ The <code class="docutils literal notranslate"><span class="pre">relay.py</span>
             }, 500);
             </script></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">relay.py</span></code> module provides a function that reads the results and returns a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">relay</span> <span class="kn">import</span> <span class="n">read_results</span>
@@ -880,7 +884,7 @@ We’ll select this column and use <code class="docutils literal notranslate"><s
             }, 500);
             </script></div>
 </div>
-<p>In <code class="docutils literal notranslate"><span class="pre">results</span></code>, the <code class="docutils literal notranslate"><span class="pre">Division</span></code> column indicates the division each runner was in, identified by gender and age range – for example, I was in the M4040 division, which includes male runners aged 40 to 49.
+<p>In <code class="docutils literal notranslate"><span class="pre">results</span></code>, the <code class="docutils literal notranslate"><span class="pre">Division</span></code> column indicates the division each runner was in, identified by gender and age range – for example, I was in the M4049 division, which includes male runners aged 40 to 49.
 We can use the <code class="docutils literal notranslate"><span class="pre">query</span></code> method to select the rows for people in my division and extract their speeds.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -963,8 +967,8 @@ We can use the <code class="docutils literal notranslate"><span class="pre">quer
             }, 500);
             </script></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of elements in the sequence; <code class="docutils literal notranslate"><span class="pre">i</span></code> is the index of the element with the given percentile rank.</p>
-<p>When we look up a percentile rank, the corresponding value is called a <strong>percentile</strong>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of elements in the sequence; <code class="docutils literal notranslate"><span class="pre">i</span></code> is the index of the element with the given percentile rank.
+When we look up a percentile rank, the corresponding value is called a <strong>percentile</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">percentile</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="n">my_division_speeds</span><span class="p">)</span>
@@ -992,10 +996,9 @@ We can use the <code class="docutils literal notranslate"><span class="pre">quer
             }, 500);
             </script></div>
 </div>
-<p>In my division, the 90th percentile was about 8.5 mph.</p>
-<p>If I am still running in 10 years (and I hope I am), I will be in the <code class="docutils literal notranslate"><span class="pre">M5059</span></code> division.
-[NOTE FOR THE THIRD EDITION: I am.]
-Assuming that my percentile rank in my division is the same, how much slower should I expect to be?
+<p>In my division, the 90th percentile was about 8.6 mph.</p>
+<p>Now, some years after I ran that race, I am in the <code class="docutils literal notranslate"><span class="pre">M5059</span></code> division.
+So let’s see how fast I would have to run to have the same percentile rank in my new division.
 We can answer that question by converting my percentile rank in the <code class="docutils literal notranslate"><span class="pre">M4049</span></code> division, which is about 90.2%, to a speed in the <code class="docutils literal notranslate"><span class="pre">M5059</span></code> division.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1094,7 +1097,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">query</s
             </script></div>
 </div>
 <p>He finished in 46:25 and came in 18th out of 171 people in his division.</p>
-<p>The goal of these examples is to introduce percentile ranks and percentiles, which are the key to understanding cumulative distribution functions.</p>
+<p>With this introduction to percentile ranks and percentiles, we are ready for cumulative distribution functions.</p>
 </section>
 <section id="cdfs">
 <h2><span class="section-number">4.2. </span>CDFs<a class="headerlink" href="#cdfs" title="Link to this heading">#</a></h2>
@@ -1223,7 +1226,7 @@ Here is a <code class="docutils literal notranslate"><span class="pre">Pmf</span
             </script></div>
 </div>
 <p>The result is the proportion of values in the sequence equal to the given value.
-In this example, two out of five values are equal to <code class="docutils literal notranslate"><span class="pre">2</span></code>, so the result is 0.4, which is two fifths.
+In this example, two out of five values are equal to <code class="docutils literal notranslate"><span class="pre">2</span></code>, so the result is 0.4.
 We can also think of this proportion as the probability that a randomly chosen value from the sequence equals <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Pmf</span></code> has a <code class="docutils literal notranslate"><span class="pre">make_cdf</span></code> method that computes the cumulative sum of the probabilities in the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>.</p>
 <div class="cell docutils container">
@@ -1320,7 +1323,7 @@ We can use the bracket operator to look up a value.</p>
             }, 500);
             </script></div>
 </div>
-<p>The result is the proportion of values in the sequence less than or equal to the given value. In this example, three out of five of the values in the sequence are less than or equal to <code class="docutils literal notranslate"><span class="pre">2</span></code>, so the result is 0.6, which is three fifths.
+<p>The result is the proportion of values in the sequence less than or equal to the given value. In this example, three out of five values in the sequence are less than or equal to <code class="docutils literal notranslate"><span class="pre">2</span></code>, so the result is 0.6.
 We can also think of this proportion as the probability that a randomly chosen value from the sequence is less than or equal to <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
 <p>We can also use parentheses to call the <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> object like a function.</p>
 <div class="cell docutils container">
@@ -1406,7 +1409,7 @@ We can also think of this proportion as the probability that a randomly chosen v
             </script></div>
 </div>
 <p>As a second example, let’s make a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> that represents the distribution of running speeds from the previous section.
-The <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> class that provides a <code class="docutils literal notranslate"><span class="pre">from_seq</span></code> function we can use to create a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> object from a sequence, without making a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> first.</p>
+The <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> class provides a <code class="docutils literal notranslate"><span class="pre">from_seq</span></code> function we can use to create a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> object from a sequence.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
@@ -1433,21 +1436,22 @@ The <code class="docutils literal notranslate"><span class="pre">Cdf</span></cod
             }, 500);
             </script></div>
 </div>
-<p>And here’s what it looks like.</p>
+<p>And here’s what it looks like – the vertical line is at my speed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_speeds</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">my_speed</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Speed (mph)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f86a759f053dc4366f295ee665e4461f8a6d982c6d4d6f3ac0a93f2bf258bc7e.png" src="_images/f86a759f053dc4366f295ee665e4461f8a6d982c6d4d6f3ac0a93f2bf258bc7e.png" />
+<img alt="_images/a972c1fbe616acd9bce02be75386432f489ed65362098f6b79ca65334b289144.png" src="_images/a972c1fbe616acd9bce02be75386432f489ed65362098f6b79ca65334b289144.png" />
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 28;
-                var nbb_unformatted_code = "cdf_speeds.step()\ndecorate(xlabel=\"Speed (mph)\", ylabel=\"CDF\")";
-                var nbb_formatted_code = "cdf_speeds.step()\ndecorate(xlabel=\"Speed (mph)\", ylabel=\"CDF\")";
+                var nbb_unformatted_code = "cdf_speeds.step()\nplt.axvline(my_speed, ls=\":\", color=\"gray\", alpha=0.8)\ndecorate(xlabel=\"Speed (mph)\", ylabel=\"CDF\")";
+                var nbb_formatted_code = "cdf_speeds.step()\nplt.axvline(my_speed, ls=\":\", color=\"gray\", alpha=0.8)\ndecorate(xlabel=\"Speed (mph)\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1522,14 +1526,13 @@ If we multiply by 100, we get my percentile rank.</p>
 <p>If you have a proportion and you use the inverse CDF to find the corresponding value, the result is called a <strong>quantile</strong> – so the inverse CDF is sometimes called the quantile function.</p>
 <p>If have have a quantile and you use the CDF to find the corresponding proportion, the result doesn’t really have a name, strangely.
 To be consistent with percentile and percentile rank”, it could be called a “quantile rank”, but as far as I can tell, no one calls it that.
-Most often, it is called a <strong>cumulative probability</strong>.</p>
+Most often, it is just called a <strong>cumulative probability</strong>.</p>
 </section>
 <section id="comparing-cdfs">
 <span id="section-comparing-cdfs"></span><h2><span class="section-number">4.3. </span>Comparing CDFs<a class="headerlink" href="#comparing-cdfs" title="Link to this heading">#</a></h2>
 <p>CDFs are especially useful for comparing distributions.
 As an example, let’s compare the distribution of birth weights for first babies and others.
-We’ll load the NSFG dataset again, and divide it into three <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>: all live births, first babies, and others.
-Instructions for downloading the data are in the notebook for this chapter.</p>
+We’ll load the NSFG dataset again, and divide it into three <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>: all live births, first babies, and others.</p>
 <p>The following cells download the data files and install <code class="docutils literal notranslate"><span class="pre">statadict</span></code>, which we need to read the data.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
@@ -1730,7 +1733,7 @@ As another possibility, the distributions might have the same shape, but differe
 </div>
 <p>I adjusted the width and transparency of the bars to show the distributions as clearly as possible, but it is hard to compare them.
 There are many peaks and valleys, and some apparent differences, but it is hard to tell which of these features are meaningful.
-Also, it is hard to see overall patterns – for example, it is not visually apparent which distribution has the higher mean.</p>
+Also, it is hard to see overall patterns; for example, it is not visually apparent which distribution has the higher mean.</p>
 <p>These problems can be mitigated by binning the data – that is, dividing the range of quantities into non-overlapping intervals and counting the number of quantities in each bin.
 Binning can be useful, but it is tricky to get the size of the bins right.
 If they are big enough to smooth out noise, they might also smooth out useful information.</p>
@@ -1763,19 +1766,19 @@ If they are big enough to smooth out noise, they might also smooth out useful in
 <p>Here’s what they look like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
 <span class="n">other_cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Weight (pounds)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3632fd9317c2ef4ff9caee61b563eadba244b4c5f579aa9983828c1f230fd071.png" src="_images/3632fd9317c2ef4ff9caee61b563eadba244b4c5f579aa9983828c1f230fd071.png" />
+<img alt="_images/e14d51857eadcf81d646ef727f083a8c792df8adb97951317dc9837b801f654d.png" src="_images/e14d51857eadcf81d646ef727f083a8c792df8adb97951317dc9837b801f654d.png" />
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 39;
-                var nbb_unformatted_code = "first_cdf.plot()\nother_cdf.plot()\ndecorate(xlabel=\"Weight (pounds)\", ylabel=\"CDF\")";
-                var nbb_formatted_code = "first_cdf.plot()\nother_cdf.plot()\ndecorate(xlabel=\"Weight (pounds)\", ylabel=\"CDF\")";
+                var nbb_unformatted_code = "first_cdf.plot(ls=\"--\")\nother_cdf.plot()\ndecorate(xlabel=\"Weight (pounds)\", ylabel=\"CDF\")";
+                var nbb_formatted_code = "first_cdf.plot(ls=\"--\")\nother_cdf.plot()\ndecorate(xlabel=\"Weight (pounds)\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -1793,12 +1796,12 @@ We can see that first babies are slightly lighter throughout the distribution, w
 </section>
 <section id="percentile-based-statistics">
 <h2><span class="section-number">4.4. </span>Percentile-Based Statistics<a class="headerlink" href="#percentile-based-statistics" title="Link to this heading">#</a></h2>
-<p>In Section xxx we computed the arithmetic mean, which identifies a central point in a distribution, and the standard deviations, which quantifies how spread out the distribution is.
+<p>In Section xxx we computed the arithmetic mean, which identifies a central point in a distribution, and the standard deviation, which quantifies how spread out the distribution is.
 And in Section xxx we computed Pearson’s skewness, which indicates whether a distribution is skewed left or right.
 One drawback of all of these statistics is that they are sensitive to outliers.
 A single extreme value in a dataset can have a large effect on mean, standard deviation, and skewness.</p>
-<p>An alternative is to use statistics that are based on percentiles of the distribution, which tend to be more <strong>robust</strong>, which means that they are less sensitive to outliers.</p>
-<p>To demonstrate, let’s load the NSFG data again without doing any data cleaning.</p>
+<p>An alternative is to use statistics that are based on percentiles of the distribution, which tend to be more <strong>robust</strong>, which means that they are less sensitive to outliers.
+To demonstrate, let’s load the NSFG data again without doing any data cleaning.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">read_stata</span>
@@ -1813,7 +1816,7 @@ A single extreme value in a dataset can have a large effect on mean, standard de
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 41;
+                var nbb_cell_id = 40;
                 var nbb_unformatted_code = "from nsfg import read_stata\n\ndct_file = \"2002FemPreg.dct\"\ndat_file = \"2002FemPreg.dat.gz\"\n\npreg = read_stata(dct_file, dat_file)";
                 var nbb_formatted_code = "from nsfg import read_stata\n\ndct_file = \"2002FemPreg.dct\"\ndat_file = \"2002FemPreg.dat.gz\"\n\npreg = read_stata(dct_file, dat_file)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1839,7 +1842,7 @@ A single extreme value in a dataset can have a large effect on mean, standard de
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 42;
+                var nbb_cell_id = 41;
                 var nbb_unformatted_code = "birthwgt_lb = preg[\"birthwgt_lb\"]\nbirthwgt_oz = preg[\"birthwgt_oz\"]";
                 var nbb_formatted_code = "birthwgt_lb = preg[\"birthwgt_lb\"]\nbirthwgt_oz = preg[\"birthwgt_oz\"]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1914,7 +1917,7 @@ A single extreme value in a dataset can have a large effect on mean, standard de
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 43;
+                var nbb_cell_id = 42;
                 var nbb_unformatted_code = "from empiricaldist import Hist\n\nHist.from_seq(birthwgt_oz).tail(5)";
                 var nbb_formatted_code = "from empiricaldist import Hist\n\nHist.from_seq(birthwgt_oz).tail(5)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1987,7 +1990,7 @@ A single extreme value in a dataset can have a large effect on mean, standard de
 </table>
 </div></div><script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 44;
+                var nbb_cell_id = 43;
                 var nbb_unformatted_code = "Hist.from_seq(birthwgt_lb).tail(5)";
                 var nbb_formatted_code = "Hist.from_seq(birthwgt_lb).tail(5)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2016,7 +2019,7 @@ In one scenario, we clean these variables by replacing missing and invalid value
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 45;
+                var nbb_cell_id = 44;
                 var nbb_unformatted_code = "birthwgt_lb_clean = birthwgt_lb.replace([51, 97, 98, 99], np.nan)\nbirthwgt_oz_clean = birthwgt_oz.replace([97, 98, 99], np.nan)\n\ntotal_weight_clean = birthwgt_lb_clean + birthwgt_oz_clean / 16";
                 var nbb_formatted_code = "birthwgt_lb_clean = birthwgt_lb.replace([51, 97, 98, 99], np.nan)\nbirthwgt_oz_clean = birthwgt_oz.replace([97, 98, 99], np.nan)\n\ntotal_weight_clean = birthwgt_lb_clean + birthwgt_oz_clean / 16";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2041,7 +2044,7 @@ In one scenario, we clean these variables by replacing missing and invalid value
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 46;
+                var nbb_cell_id = 45;
                 var nbb_unformatted_code = "total_weight_bogus = birthwgt_lb + birthwgt_oz / 16";
                 var nbb_formatted_code = "total_weight_bogus = birthwgt_lb + birthwgt_oz / 16";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2056,8 +2059,7 @@ In one scenario, we clean these variables by replacing missing and invalid value
             }, 500);
             </script></div>
 </div>
-<p>I’ll call the first result <code class="docutils literal notranslate"><span class="pre">total_weight_clean</span></code> and the second <code class="docutils literal notranslate"><span class="pre">total_weight_bogus</span></code>, so we remember which is which.
-The bogus dataset contains only 49 bogus values, which is about 0.5% of the data.</p>
+<p>The bogus dataset contains only 49 bogus values, which is about 0.5% of the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count1</span><span class="p">,</span> <span class="n">count2</span> <span class="o">=</span> <span class="n">total_weight_bogus</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="n">total_weight_clean</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -2073,7 +2075,7 @@ The bogus dataset contains only 49 bogus values, which is about 0.5% of the data
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 47;
+                var nbb_cell_id = 46;
                 var nbb_unformatted_code = "count1, count2 = total_weight_bogus.count(), total_weight_clean.count()\ndiff = count1 - count2\n\ndiff, diff / count2 * 100";
                 var nbb_formatted_code = "count1, count2 = total_weight_bogus.count(), total_weight_clean.count()\ndiff = count1 - count2\n\ndiff, diff / count2 * 100";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2102,7 +2104,7 @@ The bogus dataset contains only 49 bogus values, which is about 0.5% of the data
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 48;
+                var nbb_cell_id = 47;
                 var nbb_unformatted_code = "mean1, mean2 = total_weight_bogus.mean(), total_weight_clean.mean()\nmean1, mean2";
                 var nbb_formatted_code = "mean1, mean2 = total_weight_bogus.mean(), total_weight_clean.mean()\nmean1, mean2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2118,7 +2120,7 @@ The bogus dataset contains only 49 bogus values, which is about 0.5% of the data
             </script></div>
 </div>
 <p>The bogus values have a moderate effect on the mean.
-If we take the mean of the cleaned data to be correct, the mean of the bogus data is off by less than 1%, so an error like that might go undetected.</p>
+If we take the mean of the cleaned data to be correct, the mean of the bogus data is off by less than 1%.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">mean1</span> <span class="o">-</span> <span class="n">mean2</span><span class="p">)</span> <span class="o">/</span> <span class="n">mean2</span> <span class="o">*</span> <span class="mi">100</span>
@@ -2131,7 +2133,7 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 49;
+                var nbb_cell_id = 48;
                 var nbb_unformatted_code = "(mean1 - mean2) / mean2 * 100";
                 var nbb_formatted_code = "(mean1 - mean2) / mean2 * 100";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2146,7 +2148,7 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
             }, 500);
             </script></div>
 </div>
-<p>Now let’s see what happens to the standard deviations.</p>
+<p>An error like that might go undetected – but now let’s see what happens to the standard deviations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">std1</span><span class="p">,</span> <span class="n">std2</span> <span class="o">=</span> <span class="n">total_weight_bogus</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">total_weight_clean</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
@@ -2160,7 +2162,7 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 50;
+                var nbb_cell_id = 49;
                 var nbb_unformatted_code = "std1, std2 = total_weight_bogus.std(), total_weight_clean.std()\nstd1, std2";
                 var nbb_formatted_code = "std1, std2 = total_weight_bogus.std(), total_weight_clean.std()\nstd1, std2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2187,7 +2189,7 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 51;
+                var nbb_cell_id = 50;
                 var nbb_unformatted_code = "(std1 - std2) / std2 * 100";
                 var nbb_formatted_code = "(std1 - std2) / std2 * 100";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2202,8 +2204,8 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
             }, 500);
             </script></div>
 </div>
-<p>The standard deviation of the bogus data is off by almost 50%, so that’s pretty bad.</p>
-<p>Finally, here’s the skewness of the two datasets.</p>
+<p>The standard deviation of the bogus data is off by almost 50%, so that’s more noticeable.
+Finally, here’s the skewness of the two datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">skewness</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
@@ -2221,7 +2223,7 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 52;
+                var nbb_cell_id = 51;
                 var nbb_unformatted_code = "def skewness(seq):\n    \"\"\"Compute the skewness of a sequence\n\n    seq: sequence of numbers\n\n    returns: float skewness\n    \"\"\"\n    deviations = seq - seq.mean()\n    return np.mean(deviations**3) / seq.std(ddof=0) ** 3";
                 var nbb_formatted_code = "def skewness(seq):\n    \"\"\"Compute the skewness of a sequence\n\n    seq: sequence of numbers\n\n    returns: float skewness\n    \"\"\"\n    deviations = seq - seq.mean()\n    return np.mean(deviations**3) / seq.std(ddof=0) ** 3";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2249,7 +2251,7 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 53;
+                var nbb_cell_id = 52;
                 var nbb_unformatted_code = "skew1, skew2 = skewness(total_weight_bogus), skewness(total_weight_clean)\nskew1, skew2";
                 var nbb_formatted_code = "skew1, skew2 = skewness(total_weight_bogus), skewness(total_weight_clean)\nskew1, skew2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2277,7 +2279,7 @@ If we take the mean of the cleaned data to be correct, the mean of the bogus dat
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 54;
+                var nbb_cell_id = 53;
                 var nbb_unformatted_code = "# how much is skew1 off by?\n(skew1 - skew2) / skew2";
                 var nbb_formatted_code = "# how much is skew1 off by?\n(skew1 - skew2) / skew2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2314,7 +2316,7 @@ To demonstrate, let’s make a <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 55;
+                var nbb_cell_id = 54;
                 var nbb_unformatted_code = "cdf_total_weight_bogus = Cdf.from_seq(total_weight_bogus)\ncdf_total_weight_clean = Cdf.from_seq(total_weight_clean)";
                 var nbb_formatted_code = "cdf_total_weight_bogus = Cdf.from_seq(total_weight_bogus)\ncdf_total_weight_clean = Cdf.from_seq(total_weight_clean)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2329,7 +2331,7 @@ To demonstrate, let’s make a <code class="docutils literal notranslate"><span 
             }, 500);
             </script></div>
 </div>
-<p>The following function takes a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> and uses its <code class="docutils literal notranslate"><span class="pre">inverse</span></code> method to compute the 50th percentile, which is the median.</p>
+<p>The following function takes a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> and uses its <code class="docutils literal notranslate"><span class="pre">inverse</span></code> method to compute the 50th percentile, which is the median (at least, it is one way to define the median of a dataset).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">median</span><span class="p">(</span><span class="n">cdf</span><span class="p">):</span>
@@ -2341,7 +2343,7 @@ To demonstrate, let’s make a <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 56;
+                var nbb_cell_id = 55;
                 var nbb_unformatted_code = "def median(cdf):\n    m = cdf.inverse(0.5)\n    return m";
                 var nbb_formatted_code = "def median(cdf):\n    m = cdf.inverse(0.5)\n    return m";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2369,7 +2371,7 @@ To demonstrate, let’s make a <code class="docutils literal notranslate"><span 
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 57;
+                var nbb_cell_id = 56;
                 var nbb_unformatted_code = "median(cdf_total_weight_bogus), median(cdf_total_weight_clean)";
                 var nbb_formatted_code = "median(cdf_total_weight_bogus), median(cdf_total_weight_clean)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2399,7 +2401,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 58;
+                var nbb_cell_id = 57;
                 var nbb_unformatted_code = "def iqr(cdf):\n    low, high = cdf.inverse([0.25, 0.75])\n    return high - low";
                 var nbb_formatted_code = "def iqr(cdf):\n    low, high = cdf.inverse([0.25, 0.75])\n    return high - low";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2427,7 +2429,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 59;
+                var nbb_cell_id = 58;
                 var nbb_unformatted_code = "iqr(cdf_total_weight_bogus), iqr(cdf_total_weight_clean)";
                 var nbb_formatted_code = "iqr(cdf_total_weight_bogus), iqr(cdf_total_weight_clean)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2462,7 +2464,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 60;
+                var nbb_cell_id = 59;
                 var nbb_unformatted_code = "def quartile_skewness(cdf):\n    low, median, high = cdf.inverse([0.25, 0.5, 0.75])\n    midpoint = (high + low) / 2\n    semi_iqr = (high - low) / 2\n    return (midpoint - median) / semi_iqr";
                 var nbb_formatted_code = "def quartile_skewness(cdf):\n    low, median, high = cdf.inverse([0.25, 0.5, 0.75])\n    midpoint = (high + low) / 2\n    semi_iqr = (high - low) / 2\n    return (midpoint - median) / semi_iqr";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2477,6 +2479,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
             }, 500);
             </script></div>
 </div>
+<p>And here’s the quartile skewness for the two datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qskew1</span> <span class="o">=</span> <span class="n">quartile_skewness</span><span class="p">(</span><span class="n">cdf_total_weight_bogus</span><span class="p">)</span>
@@ -2491,7 +2494,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 61;
+                var nbb_cell_id = 60;
                 var nbb_unformatted_code = "qskew1 = quartile_skewness(cdf_total_weight_bogus)\nqskew2 = quartile_skewness(cdf_total_weight_clean)\nqskew1, qskew2";
                 var nbb_formatted_code = "qskew1 = quartile_skewness(cdf_total_weight_bogus)\nqskew2 = quartile_skewness(cdf_total_weight_clean)\nqskew1, qskew2";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2506,7 +2509,8 @@ The following function takes a <code class="docutils literal notranslate"><span 
             }, 500);
             </script></div>
 </div>
-<p>These examples show that percentile-based statistics are less sensitive to outliers and errors in the data.</p>
+<p>The small number of outliers in these examples has no effect on the quartile skewness.
+These examples show that percentile-based statistics are less sensitive to outliers and errors in the data.</p>
 </section>
 <section id="random-numbers">
 <h2><span class="section-number">4.5. </span>Random Numbers<a class="headerlink" href="#random-numbers" title="Link to this heading">#</a></h2>
@@ -2525,7 +2529,7 @@ The following function implements this algorithm.</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 62;
+                var nbb_cell_id = 61;
                 var nbb_unformatted_code = "def sample_from_cdf(cdf, n):\n    ps = np.random.random(size=n)\n    return cdf.inverse(ps)";
                 var nbb_formatted_code = "def sample_from_cdf(cdf, n):\n    ps = np.random.random(size=n)\n    return cdf.inverse(ps)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2540,18 +2544,19 @@ The following function implements this algorithm.</p>
             }, 500);
             </script></div>
 </div>
+<p>To demonstrate, let’s generate a random sample of running speeds.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">sample_from_cdf</span><span class="p">(</span><span class="n">cdf_speeds</span><span class="p">,</span> <span class="mi">1633</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">sample_from_cdf</span><span class="p">(</span><span class="n">cdf_speeds</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 63;
-                var nbb_unformatted_code = "sample = sample_from_cdf(cdf_speeds, 1633)";
-                var nbb_formatted_code = "sample = sample_from_cdf(cdf_speeds, 1633)";
+                var nbb_cell_id = 62;
+                var nbb_unformatted_code = "sample = sample_from_cdf(cdf_speeds, 1001)";
+                var nbb_formatted_code = "sample = sample_from_cdf(cdf_speeds, 1001)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2564,33 +2569,12 @@ The following function implements this algorithm.</p>
             }, 500);
             </script></div>
 </div>
+<p>To confirm that it worked, we can compare the CDFs of the sample and the original dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_sample</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 64;
-                var nbb_unformatted_code = "cdf_sample = Cdf.from_seq(sample)";
-                var nbb_formatted_code = "cdf_sample = Cdf.from_seq(sample)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_speeds</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;original&quot;</span><span class="p">)</span>
+
+<span class="n">cdf_speeds</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;original&quot;</span><span class="p">)</span>
 <span class="n">cdf_sample</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;sample&quot;</span><span class="p">)</span>
 
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Speed (mph)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
@@ -2598,12 +2582,12 @@ The following function implements this algorithm.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3aced69428481a52bc5d9aa2089cd019e18aff18b41e28d4002eb900cb86b6ce.png" src="_images/3aced69428481a52bc5d9aa2089cd019e18aff18b41e28d4002eb900cb86b6ce.png" />
+<img alt="_images/af974e417e9203825c74430f935c3e384873b0185a3b9f4f8e66f86a4b37b8c8.png" src="_images/af974e417e9203825c74430f935c3e384873b0185a3b9f4f8e66f86a4b37b8c8.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 65;
-                var nbb_unformatted_code = "cdf_speeds.plot(label=\"original\")\ncdf_sample.plot(label=\"sample\")\n\ndecorate(xlabel=\"Speed (mph)\", ylabel=\"CDF\")";
-                var nbb_formatted_code = "cdf_speeds.plot(label=\"original\")\ncdf_sample.plot(label=\"sample\")\n\ndecorate(xlabel=\"Speed (mph)\", ylabel=\"CDF\")";
+                var nbb_cell_id = 63;
+                var nbb_unformatted_code = "cdf_sample = Cdf.from_seq(sample)\n\ncdf_speeds.plot(ls=\"--\", label=\"original\")\ncdf_sample.plot(label=\"sample\")\n\ndecorate(xlabel=\"Speed (mph)\", ylabel=\"CDF\")";
+                var nbb_formatted_code = "cdf_sample = Cdf.from_seq(sample)\n\ncdf_speeds.plot(ls=\"--\", label=\"original\")\ncdf_sample.plot(label=\"sample\")\n\ndecorate(xlabel=\"Speed (mph)\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2616,8 +2600,9 @@ The following function implements this algorithm.</p>
             }, 500);
             </script></div>
 </div>
-<p>To understand how this algorithm works, consider this question:</p>
-<p>Suppose we choose a random sample from the population of running speed and look up the percentile ranks of the speeds in the sample.
+<p>The sample follows the distribution of the original data.
+To understand how this algorithm works, consider this question:
+Suppose we choose a random sample from the population of running speeds and look up the percentile ranks of the speeds in the sample.
 Now suppose we compute the CDF of the percentile ranks.
 What do you think it will look like?</p>
 <p>Let’s find out. Here are the percentile ranks for the sample we generated.</p>
@@ -2630,7 +2615,7 @@ What do you think it will look like?</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 66;
+                var nbb_cell_id = 64;
                 var nbb_unformatted_code = "percentile_ranks = cdf_speeds(sample) * 100";
                 var nbb_formatted_code = "percentile_ranks = cdf_speeds(sample) * 100";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2656,10 +2641,10 @@ What do you think it will look like?</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/638e8f37f57c8b94e8b2a0af03ce61da74ccfa69711960a5761082407f784fc2.png" src="_images/638e8f37f57c8b94e8b2a0af03ce61da74ccfa69711960a5761082407f784fc2.png" />
+<img alt="_images/23e7e4b8e48842124b73d665ebbda5c52126ec35147774281e74be957d7ab694.png" src="_images/23e7e4b8e48842124b73d665ebbda5c52126ec35147774281e74be957d7ab694.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 67;
+                var nbb_cell_id = 65;
                 var nbb_unformatted_code = "cdf_percentile_rank = Cdf.from_seq(percentile_ranks)\ncdf_percentile_rank.plot()\n\ndecorate(xlabel=\"Percentile rank\", ylabel=\"CDF\")";
                 var nbb_formatted_code = "cdf_percentile_rank = Cdf.from_seq(percentile_ranks)\ncdf_percentile_rank.plot()\n\ndecorate(xlabel=\"Percentile rank\", ylabel=\"CDF\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2674,22 +2659,21 @@ What do you think it will look like?</p>
             }, 500);
             </script></div>
 </div>
-<p>The CDF of the percentile ranks is close to a straight line, which suggests that it is a uniform distribution between 0 and 1.
+<p>The CDF of the percentile ranks is close to a straight line between 0 and 1.
 And that makes sense, because in any distribution, the proportion with percentile rank less than 50% is 0.5; the proportion with percentile rank less than 90% is 0.9, and so on.</p>
-<p>So, if we have a random sample from a distribution and we compute their percentile ranks, we get a uniform distribution.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Cdf</span></code> provides a <code class="docutils literal notranslate"><span class="pre">sample</span></code> method that uses this algorithm, so we could also generate a sample like this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">cdf_speeds</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1633</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">cdf_speeds</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1001</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 68;
-                var nbb_unformatted_code = "sample = cdf_speeds.sample(1633)";
-                var nbb_formatted_code = "sample = cdf_speeds.sample(1633)";
+                var nbb_cell_id = 66;
+                var nbb_unformatted_code = "sample = cdf_speeds.sample(1001)";
+                var nbb_formatted_code = "sample = cdf_speeds.sample(1001)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -2738,7 +2722,7 @@ If you are in the 90th percentile or higher, call your mother back and apologize
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 69;
+                var nbb_cell_id = 67;
                 var nbb_unformatted_code = "from nsfg import get_nsfg_groups\n\nlive, firsts, others = get_nsfg_groups()";
                 var nbb_formatted_code = "from nsfg import get_nsfg_groups\n\nlive, firsts, others = get_nsfg_groups()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2772,7 +2756,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">query</s
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 73;
+                var nbb_cell_id = 71;
                 var nbb_unformatted_code = "male = live.query(\"babysex == 1\")\nfemale = live.query(\"babysex == 2\")\nlen(male), len(female)";
                 var nbb_formatted_code = "male = live.query(\"babysex == 1\")\nfemale = live.query(\"babysex == 2\")\nlen(male), len(female)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2794,9 +2778,9 @@ What are the differences in the shape and location of the distributions?</p>
 </section>
 <section id="id2">
 <h3><span class="section-number">4.7.3. </span>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<p>From the NSFG dataset pregnancy data, select the <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> column, divide by 100 to convert to and make a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> to represent the distribution of age at conception for each pregnancy.</p>
-<p>Use the CDF to compute the percentage of ages less than or equal to 20, and the percentage less than or equal to 30.</p>
-<p>Use those results to compute the percentage between 20 and 30.</p>
+<p>From the NSFG dataset pregnancy data, select the <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> column and make a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> to represent the distribution of age at conception for each pregnancy.
+Use the CDF to compute the percentage of ages less than or equal to 20, and the percentage less than or equal to 30.
+Use those results to compute the percentage between 20 and 30.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nsfg</span> <span class="kn">import</span> <span class="n">read_fem_preg</span>
@@ -2808,7 +2792,7 @@ What are the differences in the shape and location of the distributions?</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 79;
+                var nbb_cell_id = 77;
                 var nbb_unformatted_code = "from nsfg import read_fem_preg\n\npreg = read_fem_preg()";
                 var nbb_formatted_code = "from nsfg import read_fem_preg\n\npreg = read_fem_preg()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2836,7 +2820,7 @@ What are the differences in the shape and location of the distributions?</p>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 84;
+                var nbb_cell_id = 82;
                 var nbb_unformatted_code = "speeds = results[\"MPH\"].values";
                 var nbb_formatted_code = "speeds = results[\"MPH\"].values";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2857,20 +2841,20 @@ Does the distribution skew to the left or right?</p>
 <section id="id4">
 <h3><span class="section-number">4.7.5. </span>Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>The numbers generated by <code class="docutils literal notranslate"><span class="pre">np.random.random</span></code> are supposed to be uniform between 0 and 1, which means that the CDF of a sample should be a straight line.
-Let’s see if that’s true.</p>
-<p>Here’s a sample of 1000 numbers. Plot the CDF of this sample. Does it look like a straight line?</p>
+Let’s see if that’s true.
+Here’s a sample of 1001 numbers. Plot the CDF of this sample. Does it look like a straight line?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">1001</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 87;
-                var nbb_unformatted_code = "t = np.random.random(1000)";
-                var nbb_formatted_code = "t = np.random.random(1000)";
+                var nbb_cell_id = 85;
+                var nbb_unformatted_code = "t = np.random.random(1001)";
+                var nbb_formatted_code = "t = np.random.random(1001)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
