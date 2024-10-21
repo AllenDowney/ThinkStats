@@ -12,10 +12,10 @@ for filename in sorted(filenames):
     print('Removing solutions from', filename)
     ntbk = nbf.read(filename, nbf.NO_CONVERT)
 
-    # if the second element of ntbk.cells loads nb_black, remove it
-    second = ntbk.cells[1]
-    if second.source.startswith(r'%load_ext nb_black'):
-        ntbk.cells.pop(1)
+    # if the third element of ntbk.cells loads nb_black, remove it
+    cell = ntbk.cells[2]
+    if cell.source.startswith(r'%load_ext nb_black'):
+        ntbk.cells.pop(2)
 
     for cell in ntbk.cells:
         # remove tags
