@@ -63,6 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'variability';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Downloading Our World in Data" href="temperature.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -114,8 +115,6 @@
       
       
       
-        
-      
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
@@ -162,22 +161,30 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">Least Squares</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">Multiple Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time Series Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic Methods</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Least Squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Multiple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">13. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">14. Analytic Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="binom_skeet.html">How Binomial is Skeet Shooting?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ripoff_etf.html">Rip-off ETF?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier.html">Fourier Components Don’t Phase Me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="temperature.html">Downloading Our World in Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">The Variability Hypothesis</a></li>
 </ul>
 
     </div>
@@ -358,12 +365,10 @@
                   
   <section id="the-variability-hypothesis">
 <h1>The Variability Hypothesis<a class="headerlink" href="#the-variability-hypothesis" title="Link to this heading">#</a></h1>
-<p>This notebook demonstrates the use of resampling for hypothesis testing. I used it as part of a keynote at posit::conf 2024.</p>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Variability_hypothesis">variability hypothesis</a> is the theory that males are generally more variable than females in both physical and psychological traits.
 It is a controversial claim, to put it mildly.</p>
 <p>As a quick exploration of the topic – and a demonstration of bootstrap resampling – let’s see whether men are more variable than women in height.
 We’ll use the 2022 dataset from the Behavioral Risk Factor Surveillance System (BRFSS), which  includes self-reported heights and weights for more than 400,000 respondents.</p>
-<p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkStats/blob/v3/examples/variability.ipynb">Click here to run this notebook on Colab</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
@@ -810,61 +815,7 @@ The result is a sample from the sampling distribution of differences in means.</
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">gaussian_kde</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pmf</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">simple_plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">format_str</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the sampling distribution, mean and CI</span>
-
-<span class="sd">    data: sample from the sampling distribution</span>
-<span class="sd">    format_str: used to format the values</span>
-<span class="sd">    options: passed to plt.plot</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># compute the mean and CI</span>
-    <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">qs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span> <span class="mi">501</span><span class="p">)</span>
-    <span class="n">ps</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">data</span><span class="p">)(</span><span class="n">qs</span><span class="p">)</span>
-    <span class="n">pmf</span> <span class="o">=</span> <span class="n">Pmf</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">qs</span><span class="p">)</span>
-    <span class="n">pmf</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
-    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">make_cdf</span><span class="p">()</span><span class="o">.</span><span class="n">inverse</span><span class="p">([</span><span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">])</span>
-
-    <span class="c1"># plot the density</span>
-    <span class="n">pmf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">**</span><span class="n">options</span><span class="p">)</span>
-
-    <span class="n">y</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-
-    <span class="c1"># adjust xticks</span>
-    <span class="n">ticks</span> <span class="o">=</span> <span class="p">[</span><span class="n">low</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">high</span><span class="p">]</span>
-    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="nb">format</span><span class="p">(</span><span class="n">tick</span><span class="p">,</span> <span class="n">format_str</span><span class="p">)</span> <span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">ticks</span><span class="p">]</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-    <span class="c1"># plt.xticks(ticks, labels)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
-
-    <span class="c1"># remove spines</span>
-    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">spine</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>Here are the results for the sampling distribution of the difference in means.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple_plot</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Difference in means (cm)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;variability0.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/3d827e510d571605a348cfef2dc276fcf9d5f7883cc815104a03e6e8e309f2d1.png" src="_images/3d827e510d571605a348cfef2dc276fcf9d5f7883cc815104a03e6e8e309f2d1.png" />
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_sampling_distribution</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
@@ -954,11 +905,6 @@ To see if it is, all we have to do is provide a function that takes a sample and
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8125943377103155
-</pre></div>
-</div>
-</div>
 </div>
 <p>Here’s the sampling distribution with its mean and 95% CI.</p>
 <div class="cell docutils container">
@@ -970,20 +916,12 @@ To see if it is, all we have to do is provide a function that takes a sample and
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/c6d67ff72280049c18e2379231fae4358f9f9bd81aea99eb5d1592f1e33c84cb.png" src="_images/c6d67ff72280049c18e2379231fae4358f9f9bd81aea99eb5d1592f1e33c84cb.png" />
-</div>
 </div>
 <p>The 95% CI does not contain zero, which indicates that the difference is significant at the 5% level.
 Assuming that the tails of the distribution drop off like the tails of a normal distribution, we can estimate the p-value like this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_value</span><span class="p">(</span><span class="n">t2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.314884452466515e-169
 </pre></div>
 </div>
 </div>
@@ -1022,11 +960,6 @@ Here’s a function that takes a sample and computes the difference in coefficie
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0006739584748971127
-</pre></div>
-</div>
-</div>
 </div>
 <p>Here’s the sampling distribution and a 95% CI.</p>
 <div class="cell docutils container">
@@ -1038,20 +971,12 @@ Here’s a function that takes a sample and computes the difference in coefficie
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/f55b1f10a049165bdd98518d196853cfc1ceb83c1b0788ee175d2674dbfccf9f.png" src="_images/f55b1f10a049165bdd98518d196853cfc1ceb83c1b0788ee175d2674dbfccf9f.png" />
-</div>
 </div>
 <p>The CI does not contain zero, so the difference is statistically significant.
 And the p-value is small.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_value</span><span class="p">(</span><span class="n">t3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.9123330373066635e-05
 </pre></div>
 </div>
 </div>
@@ -1068,27 +993,11 @@ The coefficients of variations are about 0.048.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_SEX
-1.0    0.048558
-2.0    0.048107
-Name: HTM4, dtype: float64
-</pre></div>
-</div>
-</div>
 </div>
 <p>If we express the difference in CVs and a percentage of the CVs, it is only about 1.4%.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">t3</span><span class="p">)</span> <span class="o">/</span> <span class="n">CVs</span> <span class="o">*</span> <span class="mi">100</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_SEX
-1.0    1.387945
-2.0    1.400971
-Name: HTM4, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -1145,22 +1054,12 @@ The first line jitters the data – otherwise we would get the same results from
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.0025971928221166715
-</pre></div>
-</div>
-</div>
 </div>
 <p>Here’s the sampling distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t4</span> <span class="o">=</span> <span class="n">sampling_dist</span><span class="p">(</span><span class="n">brfss</span><span class="p">,</span> <span class="n">diff_robust_cv</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">t4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.002502441445045549
 </pre></div>
 </div>
 </div>
@@ -1174,19 +1073,11 @@ The first line jitters the data – otherwise we would get the same results from
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/9e7b3b48c8c358ec83d3f786eb90f6b15455634e1481e9d932c47d59b1567426.png" src="_images/9e7b3b48c8c358ec83d3f786eb90f6b15455634e1481e9d932c47d59b1567426.png" />
-</div>
 </div>
 <p>And the p-value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_value</span><span class="p">(</span><span class="n">t4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.93074075784399e-122
 </pre></div>
 </div>
 </div>
@@ -1234,21 +1125,11 @@ The first line jitters the data – otherwise we would get the same results from
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.0031180661772347157
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t5</span> <span class="o">=</span> <span class="n">sampling_dist</span><span class="p">(</span><span class="n">brfss</span><span class="p">,</span> <span class="n">diff_relative_iqr</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">t5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.004621824998497872
 </pre></div>
 </div>
 </div>
@@ -1262,18 +1143,10 @@ The first line jitters the data – otherwise we would get the same results from
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/c5295c1cc75e2b41d08d444b5dffcb1f4dfffd0a290951f7265a150f4cfcae9d.png" src="_images/c5295c1cc75e2b41d08d444b5dffcb1f4dfffd0a290951f7265a150f4cfcae9d.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_value</span><span class="p">(</span><span class="n">t5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.773833573553618e-98
 </pre></div>
 </div>
 </div>
@@ -1311,6 +1184,15 @@ The first line jitters the data – otherwise we would get the same results from
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="temperature.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Downloading Our World in Data</p>
+      </div>
+    </a>
 </div>
                 </footer>
               

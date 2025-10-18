@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Least Squares &#8212; Think Stats, 3rd edition</title>
+    <title>10. Least Squares &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -65,8 +65,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap10';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Multiple Regression" href="chap11.html" />
-    <link rel="prev" title="Hypothesis Testing" href="chap09.html" />
+    <link rel="next" title="11. Multiple Regression" href="chap11.html" />
+    <link rel="prev" title="9. Hypothesis Testing" href="chap09.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -164,22 +164,30 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis Testing</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Least Squares</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">Multiple Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time Series Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic Methods</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Least Squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Multiple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">13. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">14. Analytic Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="binom_skeet.html">How Binomial is Skeet Shooting?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ripoff_etf.html">Rip-off ETF?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier.html">Fourier Components Don’t Phase Me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="temperature.html">Downloading Our World in Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variability.html">The Variability Hypothesis</a></li>
 </ul>
 
     </div>
@@ -340,17 +348,17 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-fit">Least Squares Fit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-of-determination">Coefficient of Determination</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-mse">Minimizing MSE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation">Estimation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-uncertainty">Visualizing Uncertainty</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">Transformation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-1">Exercise 10.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-2">Exercise 10.2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-3">Exercise 10.3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-fit">10.1. Least Squares Fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-of-determination">10.2. Coefficient of Determination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-mse">10.3. Minimizing MSE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation">10.4. Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-uncertainty">10.5. Visualizing Uncertainty</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">10.6. Transformation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">10.7. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.8. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-1">10.8.1. Exercise 10.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-2">10.8.2. Exercise 10.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-3">10.8.3. Exercise 10.3</a></li>
 </ul>
 </li>
 </ul>
@@ -366,7 +374,7 @@
                   
   <p>The third edition of <em>Think Stats</em> is available now from <a class="reference external" href="https://bookshop.org/a/98697/9781098190255">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/42lmxwu">Amazon</a> (those are affiliate links). If you are enjoying the free, online version, consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
 <section id="least-squares">
-<h1>Least Squares<a class="headerlink" href="#least-squares" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">10. </span>Least Squares<a class="headerlink" href="#least-squares" title="Link to this heading">#</a></h1>
 <p>This chapter and the next introduce the idea of fitting a model to data.
 In this context, a <strong>model</strong> consists of a mathematical description of the relationship between variables – like a straight line – and a description of random variation – like a normal distribution.</p>
 <p>When we say that a model fits data, we usually mean that it minimizes errors, which are the distances between the model and the data.
@@ -433,7 +441,7 @@ The next chapter introduces models that can handle more than two variables.</p>
 </details>
 </div>
 <section id="least-squares-fit">
-<h2>Least Squares Fit<a class="headerlink" href="#least-squares-fit" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.1. </span>Least Squares Fit<a class="headerlink" href="#least-squares-fit" title="Link to this heading">#</a></h2>
 <p>As a first example, let’s return to the scenario from <a class="reference internal" href="chap08.html#section-weighing-penguins"><span class="std std-ref">Chapter 8</span></a>.
 Suppose you are a researcher in Antarctica, studying local populations of penguins.
 As part of your data collection, you capture a sample of penguins, measure and weigh them – and then release them unharmed.</p>
@@ -664,7 +672,7 @@ Now let’s see what the actual mass is.</p>
 We can make more sense of it by computing the coefficient of determination.</p>
 </section>
 <section id="coefficient-of-determination">
-<h2>Coefficient of Determination<a class="headerlink" href="#coefficient-of-determination" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.2. </span>Coefficient of Determination<a class="headerlink" href="#coefficient-of-determination" title="Link to this heading">#</a></h2>
 <p>Suppose you want to guess the weight of a penguin.
 If you know its flipper length, you can use the least squares fit to inform your guess, and the MSE quantifies the accuracy of your guesses, on average.</p>
 <p>But what if you don’t know the flipper length – what would you guess?
@@ -780,7 +788,7 @@ As you might guess based on the notation, <span class="math notranslate nohighli
 <p>Also, <span class="math notranslate nohighlight">\(R^2\)</span> is always positive, so it doesn’t indicate whether the correlation is positive or negative.</p>
 </section>
 <section id="minimizing-mse">
-<h2>Minimizing MSE<a class="headerlink" href="#minimizing-mse" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.3. </span>Minimizing MSE<a class="headerlink" href="#minimizing-mse" title="Link to this heading">#</a></h2>
 <p>Earlier I said that the least squares fit is the straight line that minimizes the mean squared error (MSE).
 We won’t prove that, but we can test it by adding small random values to the intercept and slope, and checking whether the MSE gets worse.</p>
 <div class="cell docutils container">
@@ -885,7 +893,7 @@ The following function shows how.</p>
 But that’s no longer the case, so it is worth considering whether squared residuals are the right thing to minimize.</p>
 </section>
 <section id="estimation">
-<h2>Estimation<a class="headerlink" href="#estimation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.4. </span>Estimation<a class="headerlink" href="#estimation" title="Link to this heading">#</a></h2>
 <p>The parameters <code class="docutils literal notranslate"><span class="pre">slope</span></code> and <code class="docutils literal notranslate"><span class="pre">intercept</span></code> are estimates based on a sample.
 Like other estimates, they are vulnerable to non-representative sampling, measurement error, and variability due to random sampling.
 As usual, it’s hard to quantify the effect of non-representative sampling and measurement error.
@@ -989,7 +997,7 @@ Here’s what it looks like.</p>
 <p>The standard error we computed by resampling is a little smaller, but the difference probably doesn’t matter in practice.</p>
 </section>
 <section id="visualizing-uncertainty">
-<h2>Visualizing Uncertainty<a class="headerlink" href="#visualizing-uncertainty" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.5. </span>Visualizing Uncertainty<a class="headerlink" href="#visualizing-uncertainty" title="Link to this heading">#</a></h2>
 <p>Each time we resample the dataset, we get a different fitted line.
 To see how much variation there is in the lines, one option is to loop through them and plot them all.
 The following function takes a resampled <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, computes a least squares fit, and generates predicted values for a sequence of <code class="docutils literal notranslate"><span class="pre">xs</span></code>.</p>
@@ -1068,7 +1076,7 @@ We can do that by collecting the fitted lines as a list of arrays.</p>
 <p>This is my favorite way to represent the variability of a fitted line due to random sampling.</p>
 </section>
 <section id="transformation">
-<h2>Transformation<a class="headerlink" href="#transformation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.6. </span>Transformation<a class="headerlink" href="#transformation" title="Link to this heading">#</a></h2>
 <p>Before fitting a line to data, it is sometimes useful to transform one or both variables, for example by computing the squares of the values, their square roots, or their logarithms.
 To demonstrate, we’ll use heights and weights from the Behavioral Risk Factor Surveillance System (BRFSS), described in <a class="reference internal" href="chap05.html#section-lognormal-distribution"><span class="std std-ref">Chapter 5</span></a>.</p>
 <p>The following cell downloads the BRFSS data.</p>
@@ -1291,7 +1299,7 @@ Here’s what the fitted line looks like after the inverse transformation, along
 <p>A fitted line that’s straight with respect to the transformed data is curved with respect to the original data.</p>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.7. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>model</strong>: In the context of regression, a model is a mathematical description of the relationship between variables – such as a straight line – along with a description of random variation – such as a normal distribution.</p></li>
 <li><p><strong>imputation:</strong> A process for estimating and filling in missing values in a dataset.</p></li>
@@ -1305,9 +1313,9 @@ Here’s what the fitted line looks like after the inverse transformation, along
 </ul>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.8. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="exercise-10-1">
-<h3>Exercise 10.1<a class="headerlink" href="#exercise-10-1" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.8.1. </span>Exercise 10.1<a class="headerlink" href="#exercise-10-1" title="Link to this heading">#</a></h3>
 <p>In this chapter we computed a least squares fit for penguin weights as a function of flipper length.
 There are two other measurements in the dataset we can also consider: culmen length and culmen depth (the culmen is the top ridge of the bill).</p>
 <p>Compute the least squares fit for weight as a function of culmen length.
@@ -1328,7 +1336,7 @@ Which is a better predictor of weight, culmen length or flipper length?</p>
 </div>
 </section>
 <section id="exercise-10-2">
-<h3>Exercise 10.2<a class="headerlink" href="#exercise-10-2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.8.2. </span>Exercise 10.2<a class="headerlink" href="#exercise-10-2" title="Link to this heading">#</a></h3>
 <p>In this chapter we used resampling to approximate the sampling distribution for the slope of a fitted line.
 We can approximate the sampling distribution of the intercept the same way:</p>
 <ol class="arabic simple">
@@ -1340,7 +1348,7 @@ We can approximate the sampling distribution of the intercept the same way:</p>
 </ol>
 </section>
 <section id="exercise-10-3">
-<h3>Exercise 10.3<a class="headerlink" href="#exercise-10-3" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.8.3. </span>Exercise 10.3<a class="headerlink" href="#exercise-10-3" title="Link to this heading">#</a></h3>
 <p>A person’s Body Mass Index (BMI) is their weight in kilograms divided by their height in meters raised to the second power.
 In the BRFSS dataset, we can compute BMI like this, after converting heights from centimeters to meters.</p>
 <div class="cell docutils container">
@@ -1410,7 +1418,7 @@ Is the slope close to 2?</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Hypothesis Testing</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Hypothesis Testing</p>
       </div>
     </a>
     <a class="right-next"
@@ -1418,7 +1426,7 @@ Is the slope close to 2?</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Multiple Regression</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Multiple Regression</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1439,17 +1447,17 @@ Is the slope close to 2?</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-fit">Least Squares Fit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-of-determination">Coefficient of Determination</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-mse">Minimizing MSE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation">Estimation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-uncertainty">Visualizing Uncertainty</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">Transformation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-1">Exercise 10.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-2">Exercise 10.2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-3">Exercise 10.3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-fit">10.1. Least Squares Fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-of-determination">10.2. Coefficient of Determination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-mse">10.3. Minimizing MSE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation">10.4. Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-uncertainty">10.5. Visualizing Uncertainty</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">10.6. Transformation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">10.7. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.8. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-1">10.8.1. Exercise 10.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-2">10.8.2. Exercise 10.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-3">10.8.3. Exercise 10.3</a></li>
 </ul>
 </li>
 </ul>

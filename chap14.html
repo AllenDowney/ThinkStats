@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Analytic Methods &#8212; Think Stats, 3rd edition</title>
+    <title>14. Analytic Methods &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -65,7 +65,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap14';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Survival analysis" href="chap13.html" />
+    <link rel="next" title="How Binomial is Skeet Shooting?" href="binom_skeet.html" />
+    <link rel="prev" title="13. Survival analysis" href="chap13.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -163,22 +164,30 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">Least Squares</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">Multiple Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time Series Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analytic Methods</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Least Squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Multiple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">13. Survival analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Analytic Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="binom_skeet.html">How Binomial is Skeet Shooting?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ripoff_etf.html">Rip-off ETF?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier.html">Fourier Components Don’t Phase Me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="temperature.html">Downloading Our World in Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variability.html">The Variability Hypothesis</a></li>
 </ul>
 
     </div>
@@ -339,22 +348,22 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-probability-plots">Normal Probability Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions">Normal Distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-sample-means">Distribution of Sample Means</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-differences">Distribution of Differences</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">Central Limit Theorem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-limits-of-the-central-limit-theorem">The Limits of the Central Limit Theorem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-clt">Applying the CLT</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-test">Correlation Test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-test">Chi-squared Test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-and-analysis">Computation and Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-1">Exercise 14.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-2">Exercise 14.2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-3">Exercise 14.3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-4">Exercise 14.4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-probability-plots">14.1. Normal Probability Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions">14.2. Normal Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-sample-means">14.3. Distribution of Sample Means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-differences">14.4. Distribution of Differences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">14.5. Central Limit Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-limits-of-the-central-limit-theorem">14.6. The Limits of the Central Limit Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-clt">14.7. Applying the CLT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-test">14.8. Correlation Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-test">14.9. Chi-squared Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-and-analysis">14.10. Computation and Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">14.11. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">14.12. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-1">14.12.1. Exercise 14.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-2">14.12.2. Exercise 14.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-3">14.12.3. Exercise 14.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-4">14.12.4. Exercise 14.4</a></li>
 </ul>
 </li>
 </ul>
@@ -370,7 +379,7 @@
                   
   <p>The third edition of <em>Think Stats</em> is available now from <a class="reference external" href="https://bookshop.org/a/98697/9781098190255">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/42lmxwu">Amazon</a> (those are affiliate links). If you are enjoying the free, online version, consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
 <section id="analytic-methods">
-<span id="chapter-analytic-methods"></span><h1>Analytic Methods<a class="headerlink" href="#analytic-methods" title="Link to this heading">#</a></h1>
+<span id="chapter-analytic-methods"></span><h1><span class="section-number">14. </span>Analytic Methods<a class="headerlink" href="#analytic-methods" title="Link to this heading">#</a></h1>
 <p>This book has focused on computational methods like simulation and resampling, but some of the problems we solved have analytic solutions that can be much faster to compute.</p>
 <p>This chapter presents some of these methods and explains how they work.
 At the end of the chapter, I make suggestions for integrating computational and analytic methods for data analysis.</p>
@@ -434,7 +443,7 @@ At the end of the chapter, I make suggestions for integrating computational and 
 </details>
 </div>
 <section id="normal-probability-plots">
-<h2>Normal Probability Plots<a class="headerlink" href="#normal-probability-plots" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.1. </span>Normal Probability Plots<a class="headerlink" href="#normal-probability-plots" title="Link to this heading">#</a></h2>
 <p>Many analytic methods are based on the properties of the normal distribution, for two reasons: distributions of many measurements in the real world are well-approximated by normal distributions, and normal distributions have mathematical properties that make them useful for analysis.</p>
 <p>To demonstrate the first point, we’ll look at some of the measurements in the penguin dataset.
 Then we’ll explore the mathematical properties of the normal distribution.
@@ -631,7 +640,7 @@ When we put the groups together, the distribution of their weights is a mixture 
 <p>Now let’s consider some of the mathematical properties of normal distributions that make them so useful for analysis.</p>
 </section>
 <section id="normal-distributions">
-<h2>Normal Distributions<a class="headerlink" href="#normal-distributions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.2. </span>Normal Distributions<a class="headerlink" href="#normal-distributions" title="Link to this heading">#</a></h2>
 <p>The following class defines an object that represents a normal distribution.
 It contains as attributes the parameters <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma2</span></code>, which represent the mean and variance of the distribution.
 The name <code class="docutils literal notranslate"><span class="pre">sigma2</span></code> is a reminder that variance is the square of the standard deviation, which is usually denoted <code class="docutils literal notranslate"><span class="pre">sigma</span></code>.</p>
@@ -838,7 +847,7 @@ def sum(self, n):
 So if we collect a sample of <code class="docutils literal notranslate"><span class="pre">n</span></code> measurements, we can compute the distribution of their sum.</p>
 </section>
 <section id="distribution-of-sample-means">
-<h2>Distribution of Sample Means<a class="headerlink" href="#distribution-of-sample-means" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.3. </span>Distribution of Sample Means<a class="headerlink" href="#distribution-of-sample-means" title="Link to this heading">#</a></h2>
 <p>If we can compute the distribution of a sample sum, we can also compute the distribution of a sample mean.
 To do that, we’ll use a third property of a normal distribution: if we multiply or divide by a constant, the result is a normal distribution.
 The following methods show how we compute the parameters of the distribution of a product or quotient.</p>
@@ -931,7 +940,7 @@ In the sequence of steps we followed, we multiplied the variance by <code class=
 <p>Now let’s consider one more result we can compute with normal distributions, the distribution of differences.</p>
 </section>
 <section id="distribution-of-differences">
-<h2>Distribution of Differences<a class="headerlink" href="#distribution-of-differences" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.4. </span>Distribution of Differences<a class="headerlink" href="#distribution-of-differences" title="Link to this heading">#</a></h2>
 <p>Putting together the steps from the previous section, here’s how we can compute the distribution of sample means for the weights of the female penguins.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1056,7 +1065,7 @@ But even if the distribution of the measurements isn’t normal, if we add up ma
 That is the power of the Central Limit Theorem.</p>
 </section>
 <section id="central-limit-theorem">
-<span id="section-central-limit-theorem"></span><h2>Central Limit Theorem<a class="headerlink" href="#central-limit-theorem" title="Link to this heading">#</a></h2>
+<span id="section-central-limit-theorem"></span><h2><span class="section-number">14.5. </span>Central Limit Theorem<a class="headerlink" href="#central-limit-theorem" title="Link to this heading">#</a></h2>
 <p>As we saw in the previous sections, if we add values drawn from normal distributions, the distribution of the sum is normal.
 Most other distributions don’t have this property – for example, if we add values drawn from an exponential distribution, the distribution of the sum is not exponential.</p>
 <p>But for many distributions, if we generate <code class="docutils literal notranslate"><span class="pre">n</span></code> values and add them up, the distribution of the sum converges to normal as <code class="docutils literal notranslate"><span class="pre">n</span></code> increases.
@@ -1167,7 +1176,7 @@ But for some highly skewed distributions, it might not converge at any practical
 And in some cases, it doesn’t happen at all.</p>
 </section>
 <section id="the-limits-of-the-central-limit-theorem">
-<h2>The Limits of the Central Limit Theorem<a class="headerlink" href="#the-limits-of-the-central-limit-theorem" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.6. </span>The Limits of the Central Limit Theorem<a class="headerlink" href="#the-limits-of-the-central-limit-theorem" title="Link to this heading">#</a></h2>
 <p>Pareto distributions are even more skewed than lognormal.
 Depending on the parameters, some Pareto distributions do not have finite mean and variance – in those cases, the Central Limit Theorem does not apply.</p>
 <p>To demonstrate, we’ll generate values from a Pareto distribution with parameter <code class="docutils literal notranslate"><span class="pre">alpha=1</span></code>, which has infinite mean and variance.</p>
@@ -1258,7 +1267,7 @@ If there is also a strong correlation between distant elements of the sequence, 
 Now let’s see how we can use it.</p>
 </section>
 <section id="applying-the-clt">
-<h2>Applying the CLT<a class="headerlink" href="#applying-the-clt" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.7. </span>Applying the CLT<a class="headerlink" href="#applying-the-clt" title="Link to this heading">#</a></h2>
 <p>To see why the Central Limit Theorem is useful, let’s get back to the example in <a class="reference internal" href="chap09.html#section-diff-means"><span class="std std-ref">Chapter 9</span></a>: testing the apparent difference in mean pregnancy length for first babies and others.
 We’ll use the NSFG data again – instructions for downloading it are in the notebook for this chapter.</p>
 <p>The following cell downloads the data.</p>
@@ -1469,7 +1478,7 @@ The <span class="math notranslate nohighlight">\(t\)</span> test is so called be
 The <span class="math notranslate nohighlight">\(t\)</span> distribution is also useful for testing whether a correlation is statistically significant, as we’ll see in the next section.</p>
 </section>
 <section id="correlation-test">
-<h2>Correlation Test<a class="headerlink" href="#correlation-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.8. </span>Correlation Test<a class="headerlink" href="#correlation-test" title="Link to this heading">#</a></h2>
 <p>In <a class="reference internal" href="chap09.html#section-test-correlation"><span class="std std-ref">Chapter 9</span></a> we used a permutation test for the correlation between birth weight and mother’s age, and found that it is statistically significant, with p-value less than 0.001.</p>
 <p>Now we can do the same thing analytically.
 The method is based on this mathematical result: If we generate two samples with size <code class="docutils literal notranslate"><span class="pre">n</span></code> from normal distributions, compute Pearson’s correlation, <code class="docutils literal notranslate"><span class="pre">r</span></code>, and then transform the correlation with this function:</p>
@@ -1703,7 +1712,7 @@ Generally, if a p-value is smaller than 0.001, we can conclude that the observed
 It is not usually important to know precisely how unlikely.</p>
 </section>
 <section id="chi-squared-test">
-<h2>Chi-squared Test<a class="headerlink" href="#chi-squared-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.9. </span>Chi-squared Test<a class="headerlink" href="#chi-squared-test" title="Link to this heading">#</a></h2>
 <p>In <a class="reference internal" href="chap09.html#section-testing-proportions"><span class="std std-ref">Chapter 9</span></a> we tested whether a die is crooked, based on this set of observed outcomes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1903,7 +1912,7 @@ To see what it looks like, we’ll use the following function, which simulates r
 But in context, it might not be the statistic that best quantifies the difference between the observed and expected outcomes.</p>
 </section>
 <section id="computation-and-analysis">
-<h2>Computation and Analysis<a class="headerlink" href="#computation-and-analysis" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.10. </span>Computation and Analysis<a class="headerlink" href="#computation-and-analysis" title="Link to this heading">#</a></h2>
 <p>This book focuses on computational methods like resampling and permutation.
 These methods have several advantages over analysis:</p>
 <ul class="simple">
@@ -1925,7 +1934,7 @@ These methods have several advantages over analysis:</p>
 <p>For many practical problems, the run time of computational methods is not a problem, and we don’t have to go past the first step.</p>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.11. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>normal probability plot:</strong> A plot that compares observed values with the quantiles of a normal distribution to see how closely the data follow a normal distribution.</p></li>
 <li><p><strong>independent sample <span class="math notranslate nohighlight">\(t\)</span> test:</strong> A method for computing the p-value of an observed difference between the means of two independent groups.</p></li>
@@ -1935,9 +1944,9 @@ These methods have several advantages over analysis:</p>
 </ul>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.12. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="exercise-14-1">
-<h3>Exercise 14.1<a class="headerlink" href="#exercise-14-1" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.12.1. </span>Exercise 14.1<a class="headerlink" href="#exercise-14-1" title="Link to this heading">#</a></h3>
 <p>In this chapter we compared the weights of male and female penguins and computed a confidence interval for the difference.
 Now let’s do the same for flipper length.
 The observed difference is about 4.6 mm.</p>
@@ -1962,7 +1971,7 @@ The observed difference is about 4.6 mm.</p>
 Then compute the sampling distribution of the difference and a 90% confidence interval.</p>
 </section>
 <section id="exercise-14-2">
-<h3>Exercise 14.2<a class="headerlink" href="#exercise-14-2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.12.2. </span>Exercise 14.2<a class="headerlink" href="#exercise-14-2" title="Link to this heading">#</a></h3>
 <p>Using the NSFG data, we computed the correlation between a baby’s birth weight and the mother’s age, and we used a <span class="math notranslate nohighlight">\(t\)</span> distribution to compute a p-value.
 Now let’s do the same with birth weight and father’s age, which is recorded in the <code class="docutils literal notranslate"><span class="pre">hpagelb</span></code> column.</p>
 <div class="cell docutils container">
@@ -1999,7 +2008,7 @@ Use the CDF of the <span class="math notranslate nohighlight">\(t\)</span> distr
 Use the SciPy function <code class="docutils literal notranslate"><span class="pre">pearsonr</span></code> to check your results.</p>
 </section>
 <section id="exercise-14-3">
-<h3>Exercise 14.3<a class="headerlink" href="#exercise-14-3" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.12.3. </span>Exercise 14.3<a class="headerlink" href="#exercise-14-3" title="Link to this heading">#</a></h3>
 <p>In one of the exercises in <a class="reference internal" href="chap09.html#chapter-hypothesis-testing"><span class="std std-ref">Chapter 9</span></a> we considered the Trivers-Willard hypothesis, which suggests that for many mammals the sex ratio depends on “maternal condition” – that is, factors like the mother’s age, size, health, and social status.
 Some studies have shown this effect among humans, but results are mixed.</p>
 <p>As an example, and a chance to practice a chi-squared test, let’s see if there’s a relationship between the sex of a baby and the mother’s marital status.
@@ -2225,7 +2234,7 @@ Hint: use the argument <code class="docutils literal notranslate"><span class="p
 <p>Does this test provide support for the Trivers-Willard hypothesis?</p>
 </section>
 <section id="exercise-14-4">
-<h3>Exercise 14.4<a class="headerlink" href="#exercise-14-4" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.12.4. </span>Exercise 14.4<a class="headerlink" href="#exercise-14-4" title="Link to this heading">#</a></h3>
 <p>The method we used in this chapter to analyze differences between groups can be extended to analyze “differences in differences”, which is a common experimental design.
 As an example, we’ll use data from a 2014 paper that investigates the effects of an intervention intended to mitigate gender-stereotypical task allocation within student engineering teams.</p>
 <p>Stein, L. A., Aragon, D., Moreno, D., &amp; Goodman, J. (2014, October). Evidence for the persistent effects of an intervention to mitigate gender-stereotypical task allocation within student engineering teams. In <em>2014 IEEE Frontiers in Education Conference (FIE) Proceedings</em> (pp. 1-9). IEEE.</p>
@@ -2283,8 +2292,17 @@ As an example, we’ll use data from a 2014 paper that investigates the effects 
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Survival analysis</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Survival analysis</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="binom_skeet.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">How Binomial is Skeet Shooting?</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -2303,22 +2321,22 @@ As an example, we’ll use data from a 2014 paper that investigates the effects 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-probability-plots">Normal Probability Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions">Normal Distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-sample-means">Distribution of Sample Means</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-differences">Distribution of Differences</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">Central Limit Theorem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-limits-of-the-central-limit-theorem">The Limits of the Central Limit Theorem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-clt">Applying the CLT</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-test">Correlation Test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-test">Chi-squared Test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-and-analysis">Computation and Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-1">Exercise 14.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-2">Exercise 14.2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-3">Exercise 14.3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-4">Exercise 14.4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-probability-plots">14.1. Normal Probability Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distributions">14.2. Normal Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-sample-means">14.3. Distribution of Sample Means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-differences">14.4. Distribution of Differences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">14.5. Central Limit Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-limits-of-the-central-limit-theorem">14.6. The Limits of the Central Limit Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-clt">14.7. Applying the CLT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-test">14.8. Correlation Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-squared-test">14.9. Chi-squared Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-and-analysis">14.10. Computation and Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">14.11. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">14.12. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-1">14.12.1. Exercise 14.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-2">14.12.2. Exercise 14.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-3">14.12.3. Exercise 14.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-4">14.12.4. Exercise 14.4</a></li>
 </ul>
 </li>
 </ul>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Survival analysis &#8212; Think Stats, 3rd edition</title>
+    <title>13. Survival analysis &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -65,8 +65,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap13';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Analytic Methods" href="chap14.html" />
-    <link rel="prev" title="Time Series Analysis" href="chap12.html" />
+    <link rel="next" title="14. Analytic Methods" href="chap14.html" />
+    <link rel="prev" title="12. Time Series Analysis" href="chap12.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -164,22 +164,30 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">Least Squares</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">Multiple Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time Series Analysis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic Methods</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Least Squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Multiple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Time Series Analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">14. Analytic Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="binom_skeet.html">How Binomial is Skeet Shooting?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ripoff_etf.html">Rip-off ETF?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier.html">Fourier Components Don’t Phase Me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="temperature.html">Downloading Our World in Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variability.html">The Variability Hypothesis</a></li>
 </ul>
 
     </div>
@@ -340,19 +348,19 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survival-functions">Survival Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-function">Hazard Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marriage-data">Marriage Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-bootstrap">Weighted Bootstrap</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-hazard-functions">Estimating Hazard Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-survival-functions">Estimating Survival Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lifelines">Lifelines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence Intervals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-remaining-lifetime">Expected Remaining Lifetime</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-13-1">Exercise 13.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-13-2">Exercise 13.2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survival-functions">13.1. Survival Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-function">13.2. Hazard Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marriage-data">13.3. Marriage Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-bootstrap">13.4. Weighted Bootstrap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-hazard-functions">13.5. Estimating Hazard Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-survival-functions">13.6. Estimating Survival Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lifelines">13.7. Lifelines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">13.8. Confidence Intervals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-remaining-lifetime">13.9. Expected Remaining Lifetime</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">13.10. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.11. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-13-1">13.11.1. Exercise 13.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-13-2">13.11.2. Exercise 13.2</a></li>
 </ul>
 </li>
 </ul>
@@ -368,7 +376,7 @@
                   
   <p>The third edition of <em>Think Stats</em> is available now from <a class="reference external" href="https://bookshop.org/a/98697/9781098190255">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/42lmxwu">Amazon</a> (those are affiliate links). If you are enjoying the free, online version, consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
 <section id="survival-analysis">
-<h1>Survival analysis<a class="headerlink" href="#survival-analysis" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">13. </span>Survival analysis<a class="headerlink" href="#survival-analysis" title="Link to this heading">#</a></h1>
 <p>Survival analysis is a way to describe how long things last.
 It is often used to study human lifetimes, but it also applies to “survival” of mechanical and electronic components, or more generally to an interval in time before any kind of event – or even an interval in space.</p>
 <p>We’ll start with a simple example, the lifespans of light bulbs, and then consider a more substantial example, age at first marriage and how it has changed in the United States over the last 50 years.</p>
@@ -432,7 +440,7 @@ It is often used to study human lifetimes, but it also applies to “survival”
 </details>
 </div>
 <section id="survival-functions">
-<h2>Survival Functions<a class="headerlink" href="#survival-functions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.1. </span>Survival Functions<a class="headerlink" href="#survival-functions" title="Link to this heading">#</a></h2>
 <p>A fundamental concept in survival analysis is the <strong>survival function</strong>, which is the fraction of a population that survives longer than a given duration.
 As a first example, we’ll compute a survival function for the lifespans of light bulbs.</p>
 <p>We’ll use data from an experiment conducted in 2007.
@@ -606,7 +614,7 @@ So we can compute it like this.</p>
 And computing a survival curve is a step toward the next important concept, the hazard function.</p>
 </section>
 <section id="hazard-function">
-<h2>Hazard Function<a class="headerlink" href="#hazard-function" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.2. </span>Hazard Function<a class="headerlink" href="#hazard-function" title="Link to this heading">#</a></h2>
 <p>In the light bulb dataset, each value of <code class="docutils literal notranslate"><span class="pre">h</span></code> represents a 12-hour interval ending at hour <code class="docutils literal notranslate"><span class="pre">h</span></code> – which I will call “interval <code class="docutils literal notranslate"><span class="pre">h</span></code>”.
 Suppose we know that a light bulb has survived up to interval <code class="docutils literal notranslate"><span class="pre">h</span></code>, and we would like to know the probability that it expires during interval <code class="docutils literal notranslate"><span class="pre">h</span></code>.
 To answer this question, we can use the survival function, which indicates the fraction of bulbs that survive past interval <code class="docutils literal notranslate"><span class="pre">h</span></code>, and the PMF, which indicates the fraction that expire during interval <code class="docutils literal notranslate"><span class="pre">h</span></code>.
@@ -701,7 +709,7 @@ After that, the hazard decreases – although this outcome is based on just one 
 <p>Now that we have the general idea of survival and hazard functions, let’s apply them to a more substantial dataset.</p>
 </section>
 <section id="marriage-data">
-<h2>Marriage Data<a class="headerlink" href="#marriage-data" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.3. </span>Marriage Data<a class="headerlink" href="#marriage-data" title="Link to this heading">#</a></h2>
 <p>In many countries, people are getting married later than they used to, and more people stay unmarried.
 To explore these trends in the United States, we’ll use the tools of survival analysis and data from the National Survey of Family Growth (NSFG).</p>
 <p>The NSFG dataset we used in previous chapters is the pregnancy file, which contains one row for each pregnancy reported by the survey respondents.
@@ -872,7 +880,7 @@ For the second problem, we’ll use a method called Kaplan-Meier estimation.
 We’ll start with resampling.</p>
 </section>
 <section id="weighted-bootstrap">
-<h2>Weighted Bootstrap<a class="headerlink" href="#weighted-bootstrap" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.4. </span>Weighted Bootstrap<a class="headerlink" href="#weighted-bootstrap" title="Link to this heading">#</a></h2>
 <p>The NSFG dataset includes a column called <code class="docutils literal notranslate"><span class="pre">finalwgt</span></code> that contains each respondent’s sampling weight, which is the number of people in the population they represent.
 We can use these weights during the resampling process to correct for stratified sampling.
 The following function takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and the name of the column that contains the sampling weights.
@@ -946,7 +954,7 @@ That’s what the following function does.</p>
 <p>Now let’s get to the second problem, dealing with incomplete data.</p>
 </section>
 <section id="estimating-hazard-functions">
-<h2>Estimating Hazard Functions<a class="headerlink" href="#estimating-hazard-functions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.5. </span>Estimating Hazard Functions<a class="headerlink" href="#estimating-hazard-functions" title="Link to this heading">#</a></h2>
 <p>In the light bulb example, we know the life spans for all 50 bulbs, so we can compute the survival function directly – and we can use the survival function to compute the hazard function.</p>
 <p>In the marriage example, we know the age at first marriage for some respondents, the ones who had been married before they were interviewed.
 But for respondents who had never married, we don’t know at what age they would marry in the future – or if they will.</p>
@@ -1144,7 +1152,7 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">uni
 After that, the cumulative hazard levels off, which means that the hazard gradually decreases.</p>
 </section>
 <section id="estimating-survival-functions">
-<h2>Estimating Survival Functions<a class="headerlink" href="#estimating-survival-functions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.6. </span>Estimating Survival Functions<a class="headerlink" href="#estimating-survival-functions" title="Link to this heading">#</a></h2>
 <p>If we are given a survival function, we know how to compute the hazard function.
 Now let’s go in the other direction.</p>
 <p>Here’s one way to think of it.
@@ -1227,7 +1235,7 @@ It takes as arguments sequences of survival times for complete and ongoing cases
 But first let’s see another way to compute Kaplan-Meier estimates.</p>
 </section>
 <section id="lifelines">
-<h2>Lifelines<a class="headerlink" href="#lifelines" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.7. </span>Lifelines<a class="headerlink" href="#lifelines" title="Link to this heading">#</a></h2>
 <p>A Python package called <code class="docutils literal notranslate"><span class="pre">lifelines</span></code> provides tools for survival analysis, including functions that compute Kaplan-Meier estimates.</p>
 <p>The following cell installs <code class="docutils literal notranslate"><span class="pre">lifelines</span></code> if necessary.</p>
 <div class="cell tag_remove-print docutils container">
@@ -1307,7 +1315,7 @@ But the rest of the function is the same, within floating-point error.</p>
 <p>In the next section, we’ll use weighted resampling to compute confidence intervals that take stratified sampling into account.</p>
 </section>
 <section id="confidence-intervals">
-<h2>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.8. </span>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Link to this heading">#</a></h2>
 <p>The Kaplan-Meier estimate we computed is based on a single resampling of the dataset.
 To get an idea of how much variation there is due to random sampling, we’ll run the analysis with several resamplings and plot the results.</p>
 <p>We’ll use the following function, which takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and a list of cohorts, estimates the survival function for each cohort, and returns a dictionary that maps from each integer cohort to a <code class="docutils literal notranslate"><span class="pre">Surv</span></code> object.</p>
@@ -1382,7 +1390,7 @@ More work might be needed to make a publication-ready figure, but we’ll keep i
 <p>We’ll have to wait for the next data release from the NSFG to learn more.</p>
 </section>
 <section id="expected-remaining-lifetime">
-<h2>Expected Remaining Lifetime<a class="headerlink" href="#expected-remaining-lifetime" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.9. </span>Expected Remaining Lifetime<a class="headerlink" href="#expected-remaining-lifetime" title="Link to this heading">#</a></h2>
 <p>Given a distribution, we can compute the expected remaining lifetime as a function of elapsed time.
 For example, given the distribution of pregnancy lengths, we can compute the expected time until delivery.
 To demonstrate, we’ll use pregnancy data from the NSFG.</p>
@@ -1570,7 +1578,7 @@ At the beginning of the 40th week, the expected remaining time is still close to
 For people waiting anxiously for a baby to be born, this behavior seems quite cruel.</p>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.10. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>survival analysis</strong>: A set of methods for describing and predicting the time until an event of interest, often focused on lifetimes or durations.</p></li>
 <li><p><strong>survival function</strong>: A function that maps from a time, <span class="math notranslate nohighlight">\(t\)</span>, to the probability of surviving beyond <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
@@ -1583,9 +1591,9 @@ For people waiting anxiously for a baby to be born, this behavior seems quite cr
 </ul>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.11. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="exercise-13-1">
-<h3>Exercise 13.1<a class="headerlink" href="#exercise-13-1" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.11.1. </span>Exercise 13.1<a class="headerlink" href="#exercise-13-1" title="Link to this heading">#</a></h3>
 <p>We can use the methods in this chapter to estimate hazard and survival functions for the duration of a marriage.
 To keep things simple, we’ll consider only first marriages, and we’ll focus on divorce as the endpoint, rather than separation or death.</p>
 <p>In the NSFG data, the <code class="docutils literal notranslate"><span class="pre">cmdivorcx</span></code> column contains the date of divorce for each respondent’s first marriage, if applicable, encoded in century-months.
@@ -1609,7 +1617,7 @@ Plot the survival function – what fraction of marriages end in divorce?</p>
 </div>
 </section>
 <section id="exercise-13-2">
-<h3>Exercise 13.2<a class="headerlink" href="#exercise-13-2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.11.2. </span>Exercise 13.2<a class="headerlink" href="#exercise-13-2" title="Link to this heading">#</a></h3>
 <p>In 2012, a team of demographers at the University of Southern California estimated life expectancy for people born in Sweden in the early 1800s and 1900s.
 For ages from 0 to 91 years, they estimated the age-specific mortality rate, which is the fraction of people who die at a given age, out of all who survive until that age – which you might recognize as the hazard function.</p>
 <p>I used an online graph digitizer to get the data from the figure in their paper and store it in a CSV file.
@@ -1732,7 +1740,7 @@ After about age 5, life expectancy returns to the pattern we expect – young pe
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Time Series Analysis</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Time Series Analysis</p>
       </div>
     </a>
     <a class="right-next"
@@ -1740,7 +1748,7 @@ After about age 5, life expectancy returns to the pattern we expect – young pe
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Analytic Methods</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Analytic Methods</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1761,19 +1769,19 @@ After about age 5, life expectancy returns to the pattern we expect – young pe
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survival-functions">Survival Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-function">Hazard Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marriage-data">Marriage Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-bootstrap">Weighted Bootstrap</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-hazard-functions">Estimating Hazard Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-survival-functions">Estimating Survival Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lifelines">Lifelines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence Intervals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-remaining-lifetime">Expected Remaining Lifetime</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-13-1">Exercise 13.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-13-2">Exercise 13.2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survival-functions">13.1. Survival Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-function">13.2. Hazard Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marriage-data">13.3. Marriage Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-bootstrap">13.4. Weighted Bootstrap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-hazard-functions">13.5. Estimating Hazard Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-survival-functions">13.6. Estimating Survival Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lifelines">13.7. Lifelines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">13.8. Confidence Intervals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-remaining-lifetime">13.9. Expected Remaining Lifetime</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">13.10. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.11. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-13-1">13.11.1. Exercise 13.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-13-2">13.11.2. Exercise 13.2</a></li>
 </ul>
 </li>
 </ul>

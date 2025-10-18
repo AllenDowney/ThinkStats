@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Distributions &#8212; Think Stats, 3rd edition</title>
+    <title>2. Distributions &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap02';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Probability Mass Functions" href="chap03.html" />
-    <link rel="prev" title="Exploratory Data Analysis" href="chap01.html" />
+    <link rel="next" title="3. Probability Mass Functions" href="chap03.html" />
+    <link rel="prev" title="1. Exploratory Data Analysis" href="chap01.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -162,22 +162,30 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory Data Analysis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">Least Squares</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">Multiple Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time Series Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic Methods</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory Data Analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Least Squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Multiple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">13. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">14. Analytic Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="binom_skeet.html">How Binomial is Skeet Shooting?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ripoff_etf.html">Rip-off ETF?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier.html">Fourier Components Don’t Phase Me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="temperature.html">Downloading Our World in Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variability.html">The Variability Hypothesis</a></li>
 </ul>
 
     </div>
@@ -338,17 +346,17 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-tables">Frequency Tables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nsfg-distributions">NSFG Distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outliers">Outliers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-babies">First Babies</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-size">Effect Size</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-results">Reporting results</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-1">Exercise 2.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-2">Exercise 2.2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-3">Exercise 2.3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-tables">2.1. Frequency Tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nsfg-distributions">2.2. NSFG Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outliers">2.3. Outliers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-babies">2.4. First Babies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-size">2.5. Effect Size</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-results">2.6. Reporting results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">2.7. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">2.8. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-1">2.8.1. Exercise 2.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-2">2.8.2. Exercise 2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-3">2.8.3. Exercise 2.3</a></li>
 </ul>
 </li>
 </ul>
@@ -364,7 +372,7 @@
                   
   <p>The third edition of <em>Think Stats</em> is available now from <a class="reference external" href="https://bookshop.org/a/98697/9781098190255">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/42lmxwu">Amazon</a> (those are affiliate links). If you are enjoying the free, online version, consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
 <section id="distributions">
-<h1>Distributions<a class="headerlink" href="#distributions" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">2. </span>Distributions<a class="headerlink" href="#distributions" title="Link to this heading">#</a></h1>
 <p>This chapter introduces one of the most fundamental ideas in statistics, the distribution.
 We’ll start with frequency tables – which represent the values in a dataset and the number of times each of them appears – and use them to explore data from the National Survey of Family Growth (NSFG).
 We’ll also look for extreme or erroneous values, called outliers, and consider ways to handle them.</p>
@@ -426,7 +434,7 @@ We’ll also look for extreme or erroneous values, called outliers, and consider
 </details>
 </div>
 <section id="frequency-tables">
-<h2>Frequency Tables<a class="headerlink" href="#frequency-tables" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.1. </span>Frequency Tables<a class="headerlink" href="#frequency-tables" title="Link to this heading">#</a></h2>
 <p>One way to describe a variable is a <strong>frequency table</strong>, which contains the values of the variable and their <strong>frequencies</strong> – that is, the number of times each value appears.
 This description is called the <strong>distribution</strong> of the variable.</p>
 <p>To represent distributions, we’ll use a library called <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code>.
@@ -598,7 +606,7 @@ In this example, the value <code class="docutils literal notranslate"><span clas
 <p>We’ll see more <code class="docutils literal notranslate"><span class="pre">FreqTab</span></code> methods as we go along.</p>
 </section>
 <section id="nsfg-distributions">
-<h2>NSFG Distributions<a class="headerlink" href="#nsfg-distributions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.2. </span>NSFG Distributions<a class="headerlink" href="#nsfg-distributions" title="Link to this heading">#</a></h2>
 <p>When you start working with a new dataset, I suggest you explore the variables you are planning to use one at a time, and a good way to start is by looking at frequency tables.</p>
 <p>As an example, let’s look at data from the National Survey of Family Growth (NSFG).
 In the previous chapter, we downloaded this dataset, read it into a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, and cleaned a few of the variables.
@@ -749,7 +757,7 @@ The <code class="docutils literal notranslate"><span class="pre">xlim</span></co
 The left tail is longer than the right – early babies are common, but pregnancies seldom go past 43 weeks, and doctors often intervene if they do.</p>
 </section>
 <section id="outliers">
-<h2>Outliers<a class="headerlink" href="#outliers" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.3. </span>Outliers<a class="headerlink" href="#outliers" title="Link to this heading">#</a></h2>
 <p>Looking at frequency tables, it is easy to identify the shape of the distribution and the most common quantities, but rare quantities are not always visible.
 Before going on, it is a good idea to check for <strong>outliers</strong>, which are extreme values that might be measurement or recording errors, or might be accurate reports of rare events.</p>
 <p>To identify outliers, the following function takes a <code class="docutils literal notranslate"><span class="pre">FreqTab</span></code> object and an integer <code class="docutils literal notranslate"><span class="pre">n</span></code>, and uses a slice index to select the <code class="docutils literal notranslate"><span class="pre">n</span></code> smallest quantities and their frequencies.</p>
@@ -831,7 +839,7 @@ And it depends on what analysis you are planning to perform.</p>
 So we’ll use statistics that are not thrown off too much by a small number of incorrect values.</p>
 </section>
 <section id="first-babies">
-<h2>First Babies<a class="headerlink" href="#first-babies" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.4. </span>First Babies<a class="headerlink" href="#first-babies" title="Link to this heading">#</a></h2>
 <p>Now let’s compare the distribution of pregnancy lengths for first babies and others.
 We can use the <code class="docutils literal notranslate"><span class="pre">query</span></code> method to select rows that represent first babies and others.</p>
 <div class="cell docutils container">
@@ -926,7 +934,7 @@ It looks like more of the non-first babies are born during week 39, but there ar
 <p>In later chapters, we will consider these possible explanations more carefully, but for now we will take this result at face value: in this dataset, there is a small difference in pregnancy length between these groups.</p>
 </section>
 <section id="effect-size">
-<h2>Effect Size<a class="headerlink" href="#effect-size" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.5. </span>Effect Size<a class="headerlink" href="#effect-size" title="Link to this heading">#</a></h2>
 <p>A difference like this is sometimes called an “effect”.
 There are several ways to quantify the magnitude of an effect.
 The simplest is to report the difference in absolute terms – in this example, the difference is 0.078 weeks.</p>
@@ -1045,7 +1053,7 @@ To compute it, we’ll start with the variances.</p>
 To put that in perspective, the difference in height between men and women is about 1.7 standard deviations.</p>
 </section>
 <section id="reporting-results">
-<h2>Reporting results<a class="headerlink" href="#reporting-results" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.6. </span>Reporting results<a class="headerlink" href="#reporting-results" title="Link to this heading">#</a></h2>
 <p>We have seen several ways to describe the difference in pregnancy length (if there is one) between first babies and others.
 How should we report these results?</p>
 <p>The answer depends on who is asking the question.
@@ -1060,7 +1068,7 @@ It’s OK to be persuasive – you <em>should</em> design statistical reports an
 But you should also do your best to make your reports honest, and to acknowledge uncertainty and limitations.</p>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.7. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>distribution</strong>: The set of values and how frequently each value appears in a dataset.</p></li>
 <li><p><strong>frequency table</strong>: A mapping from values to frequencies.</p></li>
@@ -1076,7 +1084,7 @@ But you should also do your best to make your reports honest, and to acknowledge
 </ul>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.8. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p>For the exercises in this chapter, we’ll load the NSFG female respondent file, which contains one row for each female respondent.
 Instructions for downloading the data and the codebook are in the notebook for this chapter.</p>
 <div class="cell tag_remove-print docutils container">
@@ -1106,20 +1114,20 @@ Instructions for downloading the data and the codebook are in the notebook for t
 </div>
 <p>This <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> contains 3092 columns, but we’ll use just a few of them.</p>
 <section id="exercise-2-1">
-<h3>Exercise 2.1<a class="headerlink" href="#exercise-2-1" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.8.1. </span>Exercise 2.1<a class="headerlink" href="#exercise-2-1" title="Link to this heading">#</a></h3>
 <p>We’ll start with <code class="docutils literal notranslate"><span class="pre">totincr</span></code>, which records the total income for the respondent’s family, encoded with a value from 1 to 14.
 You can read the codebook for the respondent file to see what income level each value represents.</p>
 <p>Make a <code class="docutils literal notranslate"><span class="pre">FreqTab</span></code> object to represent the distribution of this variable and plot it as a bar chart.</p>
 </section>
 <section id="exercise-2-2">
-<h3>Exercise 2.2<a class="headerlink" href="#exercise-2-2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.8.2. </span>Exercise 2.2<a class="headerlink" href="#exercise-2-2" title="Link to this heading">#</a></h3>
 <p>Make a frequency table of the <code class="docutils literal notranslate"><span class="pre">parity</span></code> column, which records the number of children each respondent has borne.
 How would you describe the shape of this distribution?</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">largest</span></code> function to find the largest values of <code class="docutils literal notranslate"><span class="pre">parity</span></code>.
 Are there any values you think are errors?</p>
 </section>
 <section id="exercise-2-3">
-<h3>Exercise 2.3<a class="headerlink" href="#exercise-2-3" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.8.3. </span>Exercise 2.3<a class="headerlink" href="#exercise-2-3" title="Link to this heading">#</a></h3>
 <p>Let’s investigate whether women with higher or lower income bear more children.
 Use the query method to select the respondents with the highest income (level 14).
 Plot the frequency table of <code class="docutils literal notranslate"><span class="pre">parity</span></code> for just the high income respondents.</p>
@@ -1171,7 +1179,7 @@ How does it compare with the difference in pregnancy length for first babies and
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Exploratory Data Analysis</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Exploratory Data Analysis</p>
       </div>
     </a>
     <a class="right-next"
@@ -1179,7 +1187,7 @@ How does it compare with the difference in pregnancy length for first babies and
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Probability Mass Functions</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Probability Mass Functions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1200,17 +1208,17 @@ How does it compare with the difference in pregnancy length for first babies and
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-tables">Frequency Tables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nsfg-distributions">NSFG Distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outliers">Outliers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-babies">First Babies</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-size">Effect Size</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-results">Reporting results</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-1">Exercise 2.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-2">Exercise 2.2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-3">Exercise 2.3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-tables">2.1. Frequency Tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nsfg-distributions">2.2. NSFG Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outliers">2.3. Outliers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-babies">2.4. First Babies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-size">2.5. Effect Size</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-results">2.6. Reporting results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">2.7. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">2.8. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-1">2.8.1. Exercise 2.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-2">2.8.2. Exercise 2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-3">2.8.3. Exercise 2.3</a></li>
 </ul>
 </li>
 </ul>

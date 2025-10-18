@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Probability Density Functions &#8212; Think Stats, 3rd edition</title>
+    <title>6. Probability Density Functions &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -65,8 +65,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap06';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Relationships between variables" href="chap07.html" />
-    <link rel="prev" title="Modeling Distributions" href="chap05.html" />
+    <link rel="next" title="7. Relationships between variables" href="chap07.html" />
+    <link rel="prev" title="5. Modeling Distributions" href="chap05.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -164,22 +164,30 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">Least Squares</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">Multiple Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time Series Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic Methods</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Least Squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Multiple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">13. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">14. Analytic Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="binom_skeet.html">How Binomial is Skeet Shooting?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ripoff_etf.html">Rip-off ETF?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier.html">Fourier Components Don’t Phase Me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="temperature.html">Downloading Our World in Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variability.html">The Variability Hypothesis</a></li>
 </ul>
 
     </div>
@@ -340,16 +348,16 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-distributions">Comparing Distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density">Probability Density</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-pdf">The Exponential PDF</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-pmfs-and-pdfs">Comparing PMFs and PDFs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation">Kernel Density Estimation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-distribution-framework">The Distribution Framework</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6-1">Exercise 6.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6-2">Exercise 6.2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-distributions">6.1. Comparing Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density">6.2. Probability Density</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-pdf">6.3. The Exponential PDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-pmfs-and-pdfs">6.4. Comparing PMFs and PDFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation">6.5. Kernel Density Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-distribution-framework">6.6. The Distribution Framework</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">6.7. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">6.8. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6-1">6.8.1. Exercise 6.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6-2">6.8.2. Exercise 6.2</a></li>
 </ul>
 </li>
 </ul>
@@ -365,7 +373,7 @@
                   
   <p>The third edition of <em>Think Stats</em> is available now from <a class="reference external" href="https://bookshop.org/a/98697/9781098190255">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/42lmxwu">Amazon</a> (those are affiliate links). If you are enjoying the free, online version, consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
 <section id="probability-density-functions">
-<h1>Probability Density Functions<a class="headerlink" href="#probability-density-functions" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">6. </span>Probability Density Functions<a class="headerlink" href="#probability-density-functions" title="Link to this heading">#</a></h1>
 <p>In the previous chapter, we modeled data with theoretical distributions including the binomial, Poisson, exponential, and normal distributions.</p>
 <p>The binomial and Poisson distributions are <strong>discrete</strong>, which means that the outcomes have to be distinct or separate elements, like an integer number of hits and misses, or goals scored.
 In a discrete distribution, each outcome is associated with a probability mass.</p>
@@ -433,7 +441,7 @@ As a first step, let’s think again about comparing distributions.</p>
 </details>
 </div>
 <section id="comparing-distributions">
-<h2>Comparing Distributions<a class="headerlink" href="#comparing-distributions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.1. </span>Comparing Distributions<a class="headerlink" href="#comparing-distributions" title="Link to this heading">#</a></h2>
 <p>In the previous chapter, when we compared discrete distributions, we used a bar plot to show their probability mass functions (PMFs).
 When we compared continuous distributions, we used a line plot to show their cumulative distribution functions (CDFs).</p>
 <p>For the discrete distributions, we could also have used CDFs.
@@ -592,7 +600,7 @@ PMFs tend to emphasize small differences – sometimes CDFs provide a better sen
 But for audiences that are not familiar with CDFs, there is one more option: probability density functions.</p>
 </section>
 <section id="probability-density">
-<h2>Probability Density<a class="headerlink" href="#probability-density" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.2. </span>Probability Density<a class="headerlink" href="#probability-density" title="Link to this heading">#</a></h2>
 <p>We’ll start with the <strong>probability density function (PDF)</strong> of the normal distribution, which computes the density for the quantities, <code class="docutils literal notranslate"><span class="pre">xs</span></code>, given <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -773,7 +781,7 @@ If you know calculus, another way to say the same thing is that the CDF is the i
 And conversely, the PDF is the derivative of the CDF.</p>
 </section>
 <section id="the-exponential-pdf">
-<span id="section-exponential-pdf"></span><h2>The Exponential PDF<a class="headerlink" href="#the-exponential-pdf" title="Link to this heading">#</a></h2>
+<span id="section-exponential-pdf"></span><h2><span class="section-number">6.3. </span>The Exponential PDF<a class="headerlink" href="#the-exponential-pdf" title="Link to this heading">#</a></h2>
 <p>To get your head around probability density, it might help to see another example.
 In the previous chapter, we used an exponential distribution to model the time until the first goal in a hockey game.
 We used the following function to compute the exponential CDF, where <code class="docutils literal notranslate"><span class="pre">lam</span></code> is the rate in goals per unit of time.</p>
@@ -902,7 +910,7 @@ However, if we compute the area under the PDF, the result is the probability tha
 Or we can find the same probability by evaluating the CDF at the beginning and end of the interval and computing the difference.</p>
 </section>
 <section id="comparing-pmfs-and-pdfs">
-<h2>Comparing PMFs and PDFs<a class="headerlink" href="#comparing-pmfs-and-pdfs" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.4. </span>Comparing PMFs and PDFs<a class="headerlink" href="#comparing-pmfs-and-pdfs" title="Link to this heading">#</a></h2>
 <p>It is a common error to compare the PMF of a sample with the PDF of a theoretical model.
 For example, suppose we want to compare the distribution of birth weights to a normal model.
 Here’s a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> that represents the distribution of the data.</p>
@@ -972,7 +980,7 @@ One problem is that the two <code class="docutils literal notranslate"><span cla
 So let’s try something else.</p>
 </section>
 <section id="kernel-density-estimation">
-<span id="section-kernel-density-estimation"></span><h2>Kernel Density Estimation<a class="headerlink" href="#kernel-density-estimation" title="Link to this heading">#</a></h2>
+<span id="section-kernel-density-estimation"></span><h2><span class="section-number">6.5. </span>Kernel Density Estimation<a class="headerlink" href="#kernel-density-estimation" title="Link to this heading">#</a></h2>
 <p>Instead of using the model to make a PMF, we can use the data to make a PDF.
 To show how that works, I’ll start with a small sample of the data.</p>
 <div class="cell tag_remove-print docutils container">
@@ -1111,7 +1119,7 @@ Here’s how we make one.</p>
 But for audiences that are familiar with CDFs, comparing CDFs is often better.</p>
 </section>
 <section id="the-distribution-framework">
-<h2>The Distribution Framework<a class="headerlink" href="#the-distribution-framework" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.6. </span>The Distribution Framework<a class="headerlink" href="#the-distribution-framework" title="Link to this heading">#</a></h2>
 <p>At this point we have a complete set of ways to represent distributions: PMFs, CDFs, and PDFs
 The following figure shows these representations and the transitions from one to another.
 For example, if we have a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, we can use the <code class="docutils literal notranslate"><span class="pre">cumsum</span></code> function to compute the cumulative sum of the probabilities and get a <code class="docutils literal notranslate"><span class="pre">Cdf</span></code> that represents the same distribution.</p>
@@ -1402,7 +1410,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">allclose
 <p>This example shows how we use <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, <code class="docutils literal notranslate"><span class="pre">Cdf</span></code>, and <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> objects to represent PMFs, CDFs, and PDFs, and demonstrates the process for converting from each to the others.</p>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.7. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>continuous:</strong> A quantity is continuous if it can have any value in a range on the number line. Most things we measure in the world – like weight, distance, and time – are continuous.</p></li>
 <li><p><strong>discrete:</strong> A quantity is discrete if it can have a limited set of values, like integers or categories. Exact counts are discrete, as well as categorical variables.</p></li>
@@ -1413,9 +1421,9 @@ We can use <code class="docutils literal notranslate"><span class="pre">allclose
 </ul>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.8. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="exercise-6-1">
-<h3>Exercise 6.1<a class="headerlink" href="#exercise-6-1" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.8.1. </span>Exercise 6.1<a class="headerlink" href="#exercise-6-1" title="Link to this heading">#</a></h3>
 <p>In World Cup soccer (football), suppose the time until the first goal is well modeled by an exponential distribution with rate <code class="docutils literal notranslate"><span class="pre">lam=2.5</span></code> goals per game.
 Make an <code class="docutils literal notranslate"><span class="pre">ExponentialPdf</span></code> to represent this distribution and use <code class="docutils literal notranslate"><span class="pre">area_under</span></code> to compute the probability that the time until the first goal is less than half of a game.
 Then use an <code class="docutils literal notranslate"><span class="pre">ExponentialCdf</span></code> to compute the same probability and check that the results are consistent.</p>
@@ -1423,7 +1431,7 @@ Then use an <code class="docutils literal notranslate"><span class="pre">Exponen
 Then use an <code class="docutils literal notranslate"><span class="pre">ExponentialCdf</span></code> to compute the same probability and check that the results are consistent.</p>
 </section>
 <section id="exercise-6-2">
-<h3>Exercise 6.2<a class="headerlink" href="#exercise-6-2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.8.2. </span>Exercise 6.2<a class="headerlink" href="#exercise-6-2" title="Link to this heading">#</a></h3>
 <p>In order to join Blue Man Group, you have to be male between 5’10” and 6’1”, which is roughly 178 to 185 centimeters.
 Let’s see what fraction of the male adult population in the United States meets this requirement.</p>
 <p>The heights of male participants in the BRFSS are well modeled by a normal distribution with mean 178 cm and standard deviation 7 cm.</p>
@@ -1537,7 +1545,7 @@ Finally, use the empirical <code class="docutils literal notranslate"><span clas
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Modeling Distributions</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Modeling Distributions</p>
       </div>
     </a>
     <a class="right-next"
@@ -1545,7 +1553,7 @@ Finally, use the empirical <code class="docutils literal notranslate"><span clas
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Relationships between variables</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Relationships between variables</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1566,16 +1574,16 @@ Finally, use the empirical <code class="docutils literal notranslate"><span clas
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-distributions">Comparing Distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density">Probability Density</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-pdf">The Exponential PDF</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-pmfs-and-pdfs">Comparing PMFs and PDFs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation">Kernel Density Estimation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-distribution-framework">The Distribution Framework</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6-1">Exercise 6.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6-2">Exercise 6.2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-distributions">6.1. Comparing Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density">6.2. Probability Density</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-pdf">6.3. The Exponential PDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-pmfs-and-pdfs">6.4. Comparing PMFs and PDFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation">6.5. Kernel Density Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-distribution-framework">6.6. The Distribution Framework</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">6.7. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">6.8. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6-1">6.8.1. Exercise 6.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6-2">6.8.2. Exercise 6.2</a></li>
 </ul>
 </li>
 </ul>

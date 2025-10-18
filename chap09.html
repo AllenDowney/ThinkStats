@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Hypothesis Testing &#8212; Think Stats, 3rd edition</title>
+    <title>9. Hypothesis Testing &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap09';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Least Squares" href="chap10.html" />
-    <link rel="prev" title="Estimation" href="chap08.html" />
+    <link rel="next" title="10. Least Squares" href="chap10.html" />
+    <link rel="prev" title="8. Estimation" href="chap08.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -162,22 +162,30 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hypothesis Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">Least Squares</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">Multiple Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time Series Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic Methods</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Least Squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Multiple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">13. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">14. Analytic Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="binom_skeet.html">How Binomial is Skeet Shooting?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ripoff_etf.html">Rip-off ETF?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier.html">Fourier Components Don’t Phase Me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="temperature.html">Downloading Our World in Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variability.html">The Variability Hypothesis</a></li>
 </ul>
 
     </div>
@@ -338,15 +346,15 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flipping-coins">Flipping Coins</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-difference-in-means">Testing a Difference in Means</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-test-statistics">Other Test Statistics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-correlation">Testing a Correlation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-proportions">Testing Proportions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-1">Exercise 9.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-2">Exercise 9.2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flipping-coins">9.1. Flipping Coins</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-difference-in-means">9.2. Testing a Difference in Means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-test-statistics">9.3. Other Test Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-correlation">9.4. Testing a Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-proportions">9.5. Testing Proportions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">9.6. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.7. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-1">9.7.1. Exercise 9.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-2">9.7.2. Exercise 9.2</a></li>
 </ul>
 </li>
 </ul>
@@ -362,7 +370,7 @@
                   
   <p>The third edition of <em>Think Stats</em> is available now from <a class="reference external" href="https://bookshop.org/a/98697/9781098190255">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/42lmxwu">Amazon</a> (those are affiliate links). If you are enjoying the free, online version, consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
 <section id="hypothesis-testing">
-<span id="chapter-hypothesis-testing"></span><h1>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">#</a></h1>
+<span id="chapter-hypothesis-testing"></span><h1><span class="section-number">9. </span>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">#</a></h1>
 <p>In the datasets we have explored in this book, we’ve seen differences between groups of people – and penguins – correlations between variables, and slopes of regression lines.
 Results like these are called <strong>observed effects</strong> because they appear in a sample, as contrasted with actual effects in the population, which we usually can’t observe directly.
 When we see an apparent effect, we should consider whether it is likely to be present in the larger population or whether it might appear in the sample by chance.</p>
@@ -428,7 +436,7 @@ What I present here is a mixture of these approaches that is often used in pract
 </details>
 </div>
 <section id="flipping-coins">
-<h2>Flipping Coins<a class="headerlink" href="#flipping-coins" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.1. </span>Flipping Coins<a class="headerlink" href="#flipping-coins" title="Link to this heading">#</a></h2>
 <p>We’ll start with a simple example, based on an example in David MacKay’s book, <em>Information Theory, Inference, and Learning Algorithms</em>.</p>
 <p>When Euro coins were introduced in 2002, a curious coin enthusiast spun a Belgian one-Euro coin on edge 250 times and noted that it landed with the heads side up 140 times and tails side up 110 times.
 If the coin is perfectly balanced, we expect only 125 heads, so this data suggests the coin is biased.
@@ -553,7 +561,7 @@ And if it falls somewhere in the middle, as in this example, we can say that the
 <p>All hypothesis tests are based on these elements – a test statistic, a null hypothesis, and a p-value.</p>
 </section>
 <section id="testing-a-difference-in-means">
-<span id="section-diff-means"></span><h2>Testing a Difference in Means<a class="headerlink" href="#testing-a-difference-in-means" title="Link to this heading">#</a></h2>
+<span id="section-diff-means"></span><h2><span class="section-number">9.2. </span>Testing a Difference in Means<a class="headerlink" href="#testing-a-difference-in-means" title="Link to this heading">#</a></h2>
 <p>In the NSFG data, we saw that the average pregnancy length for first babies is slightly longer than for other babies.
 Now let’s see if that difference could be due to chance.</p>
 <p>The following cells download the data and install <code class="docutils literal notranslate"><span class="pre">statadict</span></code>, which we need to read the data.</p>
@@ -742,7 +750,7 @@ This process is called <strong>permutation</strong>, which is another word for s
 <p>This computational approach to hypothesis testing makes it easy to combine these elements to test different statistics.</p>
 </section>
 <section id="other-test-statistics">
-<h2>Other Test Statistics<a class="headerlink" href="#other-test-statistics" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.3. </span>Other Test Statistics<a class="headerlink" href="#other-test-statistics" title="Link to this heading">#</a></h2>
 <p>We might wonder whether pregnancy lengths for first babies are not just longer, but maybe more variable.
 To test that hypothesis, we can use as a test statistic the absolute difference between the standard deviations of the two groups.
 The following function computes this test statistic.</p>
@@ -811,7 +819,7 @@ Again, the shaded region shows where the test statistic under the null hypothesi
 In conclusion, we can’t be sure that pregnancy lengths are generally more variable for first babies – the difference we see in this dataset could be due to chance.</p>
 </section>
 <section id="testing-a-correlation">
-<span id="section-test-correlation"></span><h2>Testing a Correlation<a class="headerlink" href="#testing-a-correlation" title="Link to this heading">#</a></h2>
+<span id="section-test-correlation"></span><h2><span class="section-number">9.4. </span>Testing a Correlation<a class="headerlink" href="#testing-a-correlation" title="Link to this heading">#</a></h2>
 <p>We can use the same framework to test correlations.
 For example, in the NSFG data set, there is a correlation between birth weight and mother’s age – older mothers have heavier babies, on average.
 But could this effect be due to chance?</p>
@@ -944,7 +952,7 @@ The correlation between mother’s age and birth weight is a good example – it
 </ul>
 </section>
 <section id="testing-proportions">
-<span id="section-testing-proportions"></span><h2>Testing Proportions<a class="headerlink" href="#testing-proportions" title="Link to this heading">#</a></h2>
+<span id="section-testing-proportions"></span><h2><span class="section-number">9.5. </span>Testing Proportions<a class="headerlink" href="#testing-proportions" title="Link to this heading">#</a></h2>
 <p>As a final example, let’s consider a case where the choice of the test statistic takes some thought.
 Suppose you run a casino and you suspect that a customer is using a crooked die – that is, one that has been modified to make one of the faces more likely than the others.
 You apprehend the alleged cheater and confiscate the die, but now you have to prove that it is crooked.
@@ -1172,7 +1180,7 @@ I would not rule out the possibility that the die is crooked, but I would not co
 <p>This example demonstrates an important point: the p-value depends on the choice of test statistic and the model of the null hypothesis, and sometimes these choices determine whether an effect is statistically significant or not.</p>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.6. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>hypothesis testing</strong>: A set of methods for checking whether an observed effect could plausibly be due to random sampling.</p></li>
 <li><p><strong>test statistic</strong>: A statistic used in a hypothesis test to quantify the size of an observed effect.</p></li>
@@ -1183,9 +1191,9 @@ I would not rule out the possibility that the die is crooked, but I would not co
 </ul>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.7. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="exercise-9-1">
-<h3>Exercise 9.1<a class="headerlink" href="#exercise-9-1" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">9.7.1. </span>Exercise 9.1<a class="headerlink" href="#exercise-9-1" title="Link to this heading">#</a></h3>
 <p>Let’s try hypothesis testing with the penguin data from <a class="reference internal" href="chap08.html#section-sampling-distributions"><span class="std std-ref">Chapter 8</span></a>.
 Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>The following cell downloads the data from a repository created by Allison Horst.</p>
@@ -1249,7 +1257,7 @@ Compare the simulation results to the observed difference and compute a p-value.
 Is it plausible that the apparent difference between the groups is due to chance?</p>
 </section>
 <section id="exercise-9-2">
-<h3>Exercise 9.2<a class="headerlink" href="#exercise-9-2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">9.7.2. </span>Exercise 9.2<a class="headerlink" href="#exercise-9-2" title="Link to this heading">#</a></h3>
 <p>Using the penguin data from the previous exercise, we can extract the culmen depths and lengths for the female penguins (the culmen is the top ridge of the bill).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1320,7 +1328,7 @@ How do you interpret the result?</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Estimation</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Estimation</p>
       </div>
     </a>
     <a class="right-next"
@@ -1328,7 +1336,7 @@ How do you interpret the result?</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Least Squares</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Least Squares</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1349,15 +1357,15 @@ How do you interpret the result?</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flipping-coins">Flipping Coins</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-difference-in-means">Testing a Difference in Means</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-test-statistics">Other Test Statistics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-correlation">Testing a Correlation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-proportions">Testing Proportions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-1">Exercise 9.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-2">Exercise 9.2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flipping-coins">9.1. Flipping Coins</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-difference-in-means">9.2. Testing a Difference in Means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-test-statistics">9.3. Other Test Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-correlation">9.4. Testing a Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-proportions">9.5. Testing Proportions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">9.6. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.7. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-1">9.7.1. Exercise 9.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-2">9.7.2. Exercise 9.2</a></li>
 </ul>
 </li>
 </ul>

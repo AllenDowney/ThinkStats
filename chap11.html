@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Multiple Regression &#8212; Think Stats, 3rd edition</title>
+    <title>11. Multiple Regression &#8212; Think Stats, 3rd edition</title>
   
   
   
@@ -65,8 +65,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap11';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Time Series Analysis" href="chap12.html" />
-    <link rel="prev" title="Least Squares" href="chap10.html" />
+    <link rel="next" title="12. Time Series Analysis" href="chap12.html" />
+    <link rel="prev" title="10. Least Squares" href="chap10.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -164,22 +164,30 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">Exploratory Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Probability Mass Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">Cumulative Distribution Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Modeling Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Relationships between variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">Hypothesis Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">Least Squares</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Multiple Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">Time Series Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Survival analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap14.html">Analytic Methods</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Least Squares</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Multiple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">13. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">14. Analytic Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="binom_skeet.html">How Binomial is Skeet Shooting?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ripoff_etf.html">Rip-off ETF?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier.html">Fourier Components Don’t Phase Me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="temperature.html">Downloading Our World in Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variability.html">The Variability Hypothesis</a></li>
 </ul>
 
     </div>
@@ -340,17 +348,17 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">StatsModels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#on-to-multiple-regression">On To Multiple Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-variables">Control Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-relationships">Nonlinear Relationships</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-1">Exercise 11.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-2">Exercise 11.2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-3">Exercise 11.3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-4">Exercise 11.4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">11.1. StatsModels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#on-to-multiple-regression">11.2. On To Multiple Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-variables">11.3. Control Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-relationships">11.4. Nonlinear Relationships</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">11.5. Logistic Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">11.6. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">11.7. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-1">11.7.1. Exercise 11.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-2">11.7.2. Exercise 11.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-3">11.7.3. Exercise 11.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-4">11.7.4. Exercise 11.4</a></li>
 </ul>
 </li>
 </ul>
@@ -366,7 +374,7 @@
                   
   <p>The third edition of <em>Think Stats</em> is available now from <a class="reference external" href="https://bookshop.org/a/98697/9781098190255">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/42lmxwu">Amazon</a> (those are affiliate links). If you are enjoying the free, online version, consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
 <section id="multiple-regression">
-<h1>Multiple Regression<a class="headerlink" href="#multiple-regression" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">11. </span>Multiple Regression<a class="headerlink" href="#multiple-regression" title="Link to this heading">#</a></h1>
 <p>The linear least squares fit in the previous chapter is an example of <strong>regression</strong>, which is the more general problem of modeling the relationship between one set of variables, called <strong>response variables</strong> or dependent variables, and another set of variables, called <strong>explanatory variables</strong> or independent variables.</p>
 <p>In the examples in the previous chapter, there is only one response variable and one explanatory variable, which is called <strong>simple regression</strong>.
 In this chapter, we move on to <strong>multiple regression</strong>, with more than one explanatory variable, but still only one response variable.
@@ -431,7 +439,7 @@ If there is more than one response variable, that’s multivariate regression, w
 </details>
 </div>
 <section id="statsmodels">
-<h2>StatsModels<a class="headerlink" href="#statsmodels" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.1. </span>StatsModels<a class="headerlink" href="#statsmodels" title="Link to this heading">#</a></h2>
 <p>In the previous chapter we used the SciPy function <code class="docutils literal notranslate"><span class="pre">linregress</span></code> to compute least squares fits.
 This function performs simple regression, but not multiple regression.
 For that, we’ll use <code class="docutils literal notranslate"><span class="pre">StatsModels</span></code>, a package that provides several forms of regression and other analyses.</p>
@@ -702,7 +710,7 @@ In this model, the intercept is close to zero, but that’s just a coincidence �
 Now, let’s see what happens if we combine them.</p>
 </section>
 <section id="on-to-multiple-regression">
-<h2>On To Multiple Regression<a class="headerlink" href="#on-to-multiple-regression" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.2. </span>On To Multiple Regression<a class="headerlink" href="#on-to-multiple-regression" title="Link to this heading">#</a></h2>
 <p>Here’s the Patsy formula for a multiple regression model where mass is a linear function of both flipper length and culmen length.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -820,7 +828,7 @@ And the <span class="math notranslate nohighlight">\(R^2\)</span> value is about
 Another common use is to quantify the contribution of one set of variables while controlling for the contribution of another set.</p>
 </section>
 <section id="control-variables">
-<h2>Control Variables<a class="headerlink" href="#control-variables" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.3. </span>Control Variables<a class="headerlink" href="#control-variables" title="Link to this heading">#</a></h2>
 <p>In Section <a class="reference internal" href="chap04.html#section-comparing-cdfs"><span class="std std-ref">Chapter 4</span></a> we saw that first babies are lighter than other babies, on average.
 And in <a class="reference internal" href="chap09.html#section-test-correlation"><span class="std std-ref">Chapter 9</span></a> we saw that birth weight is correlated with the mother’s age – older mothers have heavier babies on average.</p>
 <p>These results might be related.
@@ -1129,7 +1137,7 @@ But it assumes that the relationship between weight and maternal age is linear.
 So let’s see if that’s true.</p>
 </section>
 <section id="nonlinear-relationships">
-<h2>Nonlinear Relationships<a class="headerlink" href="#nonlinear-relationships" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.4. </span>Nonlinear Relationships<a class="headerlink" href="#nonlinear-relationships" title="Link to this heading">#</a></h2>
 <p>To check whether the contribution of <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> might be nonlinear, we can add a new column to the dataset, which contains the values of <code class="docutils literal notranslate"><span class="pre">agepreg</span></code> squared.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1248,7 +1256,7 @@ And the p-value associated with <code class="docutils literal notranslate"><span
 <p>We can conclude that the difference in birth weight is explained – at least in part and possibly in full – by the difference in mother’s age.</p>
 </section>
 <section id="logistic-regression">
-<h2>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.5. </span>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h2>
 <p>Linear regression is based on a model where the expected value of the response variable is the weighted sum of the explanatory variables and an intercept.
 This model is appropriate when the response variable is a continuous quantity like birth weight or penguin mass, but not when the response variable is a discrete quantity like a count or a category.</p>
 <p>For these kinds of response variables, we can use <strong>generalized linear models</strong> or GLMs.
@@ -1501,7 +1509,7 @@ We’ll use the following function to select them.</p>
 That means Gentoo penguins can be classified more accurately using physical measurements, compared to Adélie penguins, which suggests that Gentoo penguins are more dimorphic.</p>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.6. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>regression</strong>: A method for estimating coefficients that fit a model to data.</p></li>
 <li><p><strong>response variables</strong>: The variables a regression model tries to predict, also known as dependent variables.</p></li>
@@ -1516,9 +1524,9 @@ That means Gentoo penguins can be classified more accurately using physical meas
 </ul>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.7. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="exercise-11-1">
-<h3>Exercise 11.1<a class="headerlink" href="#exercise-11-1" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">11.7.1. </span>Exercise 11.1<a class="headerlink" href="#exercise-11-1" title="Link to this heading">#</a></h3>
 <p>Are baby boys heavier than baby girls? To answer this question, we’ll use the NSFG data again.</p>
 <p>Fit a linear regression model with <code class="docutils literal notranslate"><span class="pre">totalwgt_lb</span></code> as the response variable and <code class="docutils literal notranslate"><span class="pre">babysex</span></code> as a categorical explanatory variable – the value of this variable is <code class="docutils literal notranslate"><span class="pre">1</span></code> for boys and <code class="docutils literal notranslate"><span class="pre">2</span></code> for girls.
 What is the estimated difference in weight?
@@ -1526,7 +1534,7 @@ Is it statistically significant?
 What if you control for the mother’s age – does maternal age account for some or all of the apparent difference?</p>
 </section>
 <section id="exercise-11-2">
-<h3>Exercise 11.2<a class="headerlink" href="#exercise-11-2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">11.7.2. </span>Exercise 11.2<a class="headerlink" href="#exercise-11-2" title="Link to this heading">#</a></h3>
 <p>The Trivers-Willard hypothesis suggests that for many mammals the sex ratio depends on “maternal condition” – that is, factors like the mother’s age, size, health, and social status.
 Some studies have shown this effect among humans, but results are mixed.</p>
 <p>See <a class="reference external" href="https://en.wikipedia.org/wiki/Trivers-Willard_hypothesis">https://en.wikipedia.org/wiki/Trivers-Willard_hypothesis</a>.</p>
@@ -1544,13 +1552,13 @@ What if you use a quadratic model of maternal age?</p>
 </div>
 </section>
 <section id="exercise-11-3">
-<h3>Exercise 11.3<a class="headerlink" href="#exercise-11-3" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">11.7.3. </span>Exercise 11.3<a class="headerlink" href="#exercise-11-3" title="Link to this heading">#</a></h3>
 <p>For the Adelie penguins, fit a linear regression model that predicts penguin weights as a function of <code class="docutils literal notranslate"><span class="pre">flipper_length</span></code>, <code class="docutils literal notranslate"><span class="pre">culmen_depth</span></code>,  and <code class="docutils literal notranslate"><span class="pre">Sex</span></code> as a categorical variable.
 If we control for flipper length and culmen depth, how much heavier are male penguins?
 Generate and plot predictions for a range of flipper lengths, for male and female penguins, with <code class="docutils literal notranslate"><span class="pre">culmen_depth</span></code> set to its average value.</p>
 </section>
 <section id="exercise-11-4">
-<h3>Exercise 11.4<a class="headerlink" href="#exercise-11-4" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">11.7.4. </span>Exercise 11.4<a class="headerlink" href="#exercise-11-4" title="Link to this heading">#</a></h3>
 <p>Let’s see if Chinstrap penguins are more or less dimorphic than the other penguin species in the dataset, as quantified by the pseudo <span class="math notranslate nohighlight">\(R^2\)</span> value of the model.
 Use <code class="docutils literal notranslate"><span class="pre">get_species</span></code> to select the Chinstrap penguins, then use logistic regression to fit a logistic regression model with sex as the response variable and all four measurements as explanatory variables.
 How does the pseudo <span class="math notranslate nohighlight">\(R^2\)</span> value compare to the other models?</p>
@@ -1611,7 +1619,7 @@ How does the pseudo <span class="math notranslate nohighlight">\(R^2\)</span> va
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Least Squares</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Least Squares</p>
       </div>
     </a>
     <a class="right-next"
@@ -1619,7 +1627,7 @@ How does the pseudo <span class="math notranslate nohighlight">\(R^2\)</span> va
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Time Series Analysis</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Time Series Analysis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1640,17 +1648,17 @@ How does the pseudo <span class="math notranslate nohighlight">\(R^2\)</span> va
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">StatsModels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#on-to-multiple-regression">On To Multiple Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-variables">Control Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-relationships">Nonlinear Relationships</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">Glossary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-1">Exercise 11.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-2">Exercise 11.2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-3">Exercise 11.3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-4">Exercise 11.4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">11.1. StatsModels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#on-to-multiple-regression">11.2. On To Multiple Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-variables">11.3. Control Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-relationships">11.4. Nonlinear Relationships</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">11.5. Logistic Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">11.6. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">11.7. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-1">11.7.1. Exercise 11.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-2">11.7.2. Exercise 11.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-3">11.7.3. Exercise 11.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-4">11.7.4. Exercise 11.4</a></li>
 </ul>
 </li>
 </ul>
