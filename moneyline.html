@@ -1,0 +1,783 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Don’t Bet on the Super Bowl &#8212; Think Stats, 3rd edition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'moneyline';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="The Variability Hypothesis" href="variability.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Stats, 3rd edition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Think Stats, 3rd edition
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Probability Mass Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Cumulative Distribution Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Modeling Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Relationships between variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Least Squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Multiple Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">13. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">14. Analytic Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="binom_skeet.html">How Binomial is Skeet Shooting?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ripoff_etf.html">Rip-off ETF?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier.html">Fourier Components Don’t Phase Me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="temperature.html">Downloading Our World in Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variability.html">The Variability Hypothesis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Don’t Bet on the Super Bowl</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkStats/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/moneyline.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Don’t Bet on the Super Bowl</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implied-probability">Implied Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-take">The Take</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dont-bet">Don’t Bet</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="dont-bet-on-the-super-bowl">
+<h1>Don’t Bet on the Super Bowl<a class="headerlink" href="#dont-bet-on-the-super-bowl" title="Link to this heading">#</a></h1>
+<p>This notebook contains a supporting example for <a class="reference external" href="https://allendowney.github.io/ThinkStats/">Think Stats 3e</a>.</p>
+<p><em>Think Stats</em> is available now from <a class="reference external" href="https://bookshop.org/a/98697/9781098190255">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/42lmxwu">Amazon</a> (affiliate links). If you are enjoying the free, online version, please consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkStats/blob/v3/examples/%5Bnotebook_name%5D.ipynb">Click here to run this notebook on Colab</a></p>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.parse</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+
+
+<span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">empiricaldist</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>empiricaldist
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">thinkstats</span><span class="w"> </span><span class="kn">import</span> <span class="n">decorate</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>If you have studied probability, you might be familiar with fractional odds, which represent the ratio of the probability something happens to the probability it doesn’t.
+For example, if the Seahawks have a 75% chance of winning the Super Bowl, they have a 25% chance of losing, so the ratio is 75 to 25, sometimes written 3:1 and pronounced “three to one”.</p>
+<p>But if you search for “the odds that the Seahawks win”, you will probably get <strong>moneyline odds</strong>, also known as American odds.
+Right now, the moneyline odds are -240 for the Seahawks and +195 for the Patriots.
+If you are not familiar with this format, that means:</p>
+<ul class="simple">
+<li><p>If you bet <code class="docutils literal notranslate"><span class="pre">$100</span></code> on the Patriots and they win, you gain <code class="docutils literal notranslate"><span class="pre">$195</span></code> – otherwise you lose <code class="docutils literal notranslate"><span class="pre">$100</span></code>.</p></li>
+<li><p>If you bet <code class="docutils literal notranslate"><span class="pre">$240</span></code> on the Seahawks and they win, you gain <code class="docutils literal notranslate"><span class="pre">$100</span></code> – otherwise you lose <code class="docutils literal notranslate"><span class="pre">$240</span></code>.</p></li>
+</ul>
+<p>If you are used to fractional odds, this format might make your head hurt.
+So let’s unpack it.</p>
+<p>Suppose you think the Patriots have a 25% chance of winning.
+Under that assumption, we can compute the expected value of the first wager like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">expected_value</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">wager</span><span class="p">,</span> <span class="n">payout</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">p</span> <span class="o">*</span> <span class="n">payout</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">wager</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expected_value</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">wager</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">payout</span><span class="o">=</span><span class="mi">195</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-26.25
+</pre></div>
+</div>
+</div>
+</div>
+<p>If the Patriots actually have a 25% chance of winning, the first wager has negative expected value – so you probably don’t want to make it.</p>
+<p>Now let’s compute the expected value of the second wager – assuming the Seahawks have a 75% chance of winning:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expected_value</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">wager</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span> <span class="n">payout</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>The expected value of this wager is positive, so you might want to make it – but only if you have good reason to think the Seahawks have a 75% chance of winning.</p>
+<section id="implied-probability">
+<h2>Implied Probability<a class="headerlink" href="#implied-probability" title="Link to this heading">#</a></h2>
+<p>More generally, we can compute the expected value of each wager for a range of probabilities from 0 to 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ev_patriots</span> <span class="o">=</span> <span class="n">expected_value</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">195</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ev_seahawks</span> <span class="o">=</span> <span class="n">expected_value</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ps</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s what they look like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">ev_patriots</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bet on Patriots&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">ev_seahawks</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bet on Seahawks&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Actual probability Patriots win&#39;</span><span class="p">,</span>
+        <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Expected value of wager&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/48c1402d18913b4e4a43f62a11e1f6206cac36ff426a02adefd811caa7714e50.png" src="_images/48c1402d18913b4e4a43f62a11e1f6206cac36ff426a02adefd811caa7714e50.png" />
+</div>
+</div>
+<p>To find the crossover point, we can set the expected value to <code class="docutils literal notranslate"><span class="pre">0</span></code> and solve for <code class="docutils literal notranslate"><span class="pre">p</span></code>.
+This function computes the result:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">crossover</span><span class="p">(</span><span class="n">wager</span><span class="p">,</span> <span class="n">payout</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">wager</span> <span class="o">/</span> <span class="p">(</span><span class="n">wager</span> <span class="o">+</span> <span class="n">payout</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s crossover for a bet on the Patriots at the offered odds.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span> <span class="o">=</span> <span class="n">crossover</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">195</span><span class="p">)</span>
+<span class="n">p1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3389830508474576
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you think the Patriots have a probability higher than the crossover, the first bet has positive expected value.</p>
+<p>And here’s the crossover for a bet on the Seahawks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p2</span> <span class="o">=</span> <span class="n">crossover</span><span class="p">(</span><span class="mi">240</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">p2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7058823529411765
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you think the Seahawks have a probability higher than this crossover, the second bet has positive expected value.</p>
+<p>So the offered odds imply that the consensus view of the betting market is that the Patriots have a 33.9% chance of winning and the Seahawks have a 70.6% chance.
+But you might notice that the sum of those probabilities exceeds 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0448654037886342
+</pre></div>
+</div>
+</div>
+</div>
+<p>What does that mean?</p>
+</section>
+<section id="the-take">
+<h2>The Take<a class="headerlink" href="#the-take" title="Link to this heading">#</a></h2>
+<p>The sum of the crossover probabilities determines “the take”, which is the share of the betting pool taken by “the house” – that is, the entity that takes the bets.</p>
+<p>For example, suppose 1000 people take the first wager and bet <code class="docutils literal notranslate"><span class="pre">$100</span></code> each on the Patriots.
+And 1000 people take the second wager and bet <code class="docutils literal notranslate"><span class="pre">$240</span></code> on the Seahawks.</p>
+<p>Here’s the total expected value of all of those wagers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="n">expected_value</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">,</span> <span class="mi">195_000</span><span class="p">)</span> <span class="o">+</span> <span class="n">expected_value</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ps</span><span class="p">,</span> <span class="mi">240_000</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Total&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Actual probability Patriots win&#39;</span><span class="p">,</span>
+        <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Total expected value of all wagers&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4cbfc771ae7a96120417d15491ffc998549738a707551c824a63cfbaa12536b4.png" src="_images/4cbfc771ae7a96120417d15491ffc998549738a707551c824a63cfbaa12536b4.png" />
+</div>
+</div>
+<p>The total expected value is negative for all probabilities (or zero if the Patriots have no chance at all) – which means the house wins.</p>
+<p>How much the house wins depends on the actual probability.
+As an example, suppose the actual probability is the midpoint of the probabilities implied by the odds:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">p1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p2</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.31655034895314055
+</pre></div>
+</div>
+</div>
+</div>
+<p>In that case, here’s the expected take, assuming that the implied probability is correct.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">take</span> <span class="o">=</span> <span class="o">-</span><span class="n">expected_value</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">,</span> <span class="mi">195_000</span><span class="p">)</span> <span class="o">-</span> <span class="n">expected_value</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="mi">240_000</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">)</span> 
+<span class="n">take</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14244.765702891316
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a percentage of the total betting pool, it’s a little more than 4%.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">take</span> <span class="o">/</span> <span class="p">(</span><span class="mi">100_000</span> <span class="o">+</span> <span class="mi">240_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.04189636971438623
+</pre></div>
+</div>
+</div>
+</div>
+<p>Which we could have approximated by computing the “overround”, which is the amount that the sum of the implied probabilities exceeds 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.04486540378863424
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dont-bet">
+<h2>Don’t Bet<a class="headerlink" href="#dont-bet" title="Link to this heading">#</a></h2>
+<p>In summary, here are the reasons you should not bet on the Super Bowl:</p>
+<ul class="simple">
+<li><p>If the implied probabilities are right (within a few percent) all wagers have negative expected value.</p></li>
+<li><p>If you think the implied probabilities are wrong, you might be able to make a good bet – but only if you are right. The odds represent the aggregated knowledge of everyone who places a bet, which probably includes a lot of people who know more than you.</p></li>
+<li><p>If you spend a lot of time and effort, you might find instances where the implied probabilities are wrong, and you might even make money in the long run. But there are better things you could do with your time.</p></li>
+</ul>
+<p>Betting is a zero-sum game if you include the house and a negative-sum game for people who bet.
+If you make money, someone else loses – there is no net creation of economic value.</p>
+<p>So, if you have the skills to beat the odds, find something more productive to do.</p>
+<p><a class="reference external" href="https://allendowney.github.io/ThinkStats/index.html">Think Stats: Exploratory Data Analysis in Python, 3rd Edition</a></p>
+<p>Copyright 2024 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
+<p>Code license: <a class="reference external" href="https://mit-license.org/">MIT License</a></p>
+<p>Text license: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="variability.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">The Variability Hypothesis</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implied-probability">Implied Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-take">The Take</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dont-bet">Don’t Bet</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
