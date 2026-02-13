@@ -393,7 +393,7 @@ It is often used to study human lifetimes, but it also applies to “survival”
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
@@ -418,10 +418,10 @@ It is often used to study human lifetimes, but it also applies to “survival”
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">empiricaldist</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="o">%</span><span class="k">pip</span> install empiricaldist
+    <span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">empiricaldist</span>
 </pre></div>
 </div>
 </div>
@@ -434,7 +434,7 @@ It is often used to study human lifetimes, but it also applies to “survival”
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
@@ -458,7 +458,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 DOI: 10.1007/s11668-007-9074-9</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
     <span class="s2">&quot;https://gist.github.com/epogrebnyak/7933e16c0ad215742c4c104be4fbdeb1/raw/c932bc5b6aa6317770c4cbf43eb591511fec08f9/lamps.csv&quot;</span>
 <span class="p">)</span>
 </pre></div>
@@ -468,90 +468,21 @@ DOI: 10.1007/s11668-007-9074-9</p>
 <p>We can read the data like this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;lamps.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;lamps.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>h</th>
-      <th>f</th>
-      <th>K</th>
-    </tr>
-    <tr>
-      <th>i</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>28</th>
-      <td>1812</td>
-      <td>1</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>1836</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>1860</td>
-      <td>1</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>1980</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>2568</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">h</span></code> column contains lifespans in hours.
 The <code class="docutils literal notranslate"><span class="pre">f</span></code> column records the number of bulbs that expired at each value of <code class="docutils literal notranslate"><span class="pre">h</span></code>.
 To represent the distribution of lifespans, we’ll put these values in a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> object and normalize it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pmf</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pmf</span>
 
 <span class="n">pmf_bulblife</span> <span class="o">=</span> <span class="n">Pmf</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;h&quot;</span><span class="p">])</span>
 <span class="n">pmf_bulblife</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(50)
 </pre></div>
 </div>
 </div>
@@ -560,13 +491,8 @@ To represent the distribution of lifespans, we’ll put these values in a <code 
 For example, 78% of the bulbs expire at or before 1656 hours.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_bulblife</span> <span class="o">=</span> <span class="n">pmf_bulblife</span><span class="o">.</span><span class="n">make_cdf</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_bulblife</span> <span class="o">=</span> <span class="n">pmf_bulblife</span><span class="o">.</span><span class="n">make_cdf</span><span class="p">()</span>
 <span class="n">cdf_bulblife</span><span class="p">[</span><span class="mi">1656</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.7800000000000002)
 </pre></div>
 </div>
 </div>
@@ -575,13 +501,8 @@ For example, 78% of the bulbs expire at or before 1656 hours.</p>
 So we can compute it like this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">complementary_cdf</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">cdf_bulblife</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">complementary_cdf</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">cdf_bulblife</span>
 <span class="n">complementary_cdf</span><span class="p">[</span><span class="mi">1656</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.21999999999999975)
 </pre></div>
 </div>
 </div>
@@ -590,13 +511,8 @@ So we can compute it like this.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code> library provides a <code class="docutils literal notranslate"><span class="pre">Surv</span></code> object that represents a survival function, and a method called <code class="docutils literal notranslate"><span class="pre">make_surv</span></code> that makes one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surv_bulblife</span> <span class="o">=</span> <span class="n">cdf_bulblife</span><span class="o">.</span><span class="n">make_surv</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">surv_bulblife</span> <span class="o">=</span> <span class="n">cdf_bulblife</span><span class="o">.</span><span class="n">make_surv</span><span class="p">()</span>
 <span class="n">surv_bulblife</span><span class="p">[</span><span class="mi">1656</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.21999999999999997)
 </pre></div>
 </div>
 </div>
@@ -604,15 +520,12 @@ So we can compute it like this.</p>
 <p>If we plot the CDF and the survival function, we can see that they are complementary – that is, their sum is 1 at all values of <code class="docutils literal notranslate"><span class="pre">h</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_bulblife</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_bulblife</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
 <span class="n">surv_bulblife</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Survival&quot;</span><span class="p">)</span>
 
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Light bulb duration (hours)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/4b327fefc98d9cd63de1eb35106ee680bae03079a5a5c38df5bc0616dea4139b.png" src="_images/4b327fefc98d9cd63de1eb35106ee680bae03079a5a5c38df5bc0616dea4139b.png" />
 </div>
 </div>
 <p>In that sense, the CDF and survival function are equivalent – if we are given either one, we can compute the other – but in the context of survival analysis it is more common to work with survival curves.
@@ -627,13 +540,8 @@ The sum of these is the fraction of bulbs that <em>could</em> expire during inte
 As an example, 26% of the bulbs were at risk during interval 1656.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">at_risk</span> <span class="o">=</span> <span class="n">pmf_bulblife</span> <span class="o">+</span> <span class="n">surv_bulblife</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">at_risk</span> <span class="o">=</span> <span class="n">pmf_bulblife</span> <span class="o">+</span> <span class="n">surv_bulblife</span>
 <span class="n">at_risk</span><span class="p">[</span><span class="mi">1656</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.25999999999999995)
 </pre></div>
 </div>
 </div>
@@ -641,12 +549,7 @@ As an example, 26% of the bulbs were at risk during interval 1656.</p>
 <p>And 4% of all bulbs expired during interval 1656.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_bulblife</span><span class="p">[</span><span class="mi">1656</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.04)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_bulblife</span><span class="p">[</span><span class="mi">1656</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -654,13 +557,8 @@ As an example, 26% of the bulbs were at risk during interval 1656.</p>
 <p>The <strong>hazard</strong> is the ratio of <code class="docutils literal notranslate"><span class="pre">pmf_bulblife</span></code> and <code class="docutils literal notranslate"><span class="pre">at_risk</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="n">pmf_bulblife</span> <span class="o">/</span> <span class="n">at_risk</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="n">pmf_bulblife</span> <span class="o">/</span> <span class="n">at_risk</span>
 <span class="n">hazard</span><span class="p">[</span><span class="mi">1656</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.15384615384615388)
 </pre></div>
 </div>
 </div>
@@ -669,13 +567,8 @@ As an example, 26% of the bulbs were at risk during interval 1656.</p>
 <p>Instead of computing the hazard function ourselves, we can use <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code>, which provides a <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> object that represents a hazard function, and a <code class="docutils literal notranslate"><span class="pre">make_hazard</span></code> method that computes it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_bulblife</span> <span class="o">=</span> <span class="n">surv_bulblife</span><span class="o">.</span><span class="n">make_hazard</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_bulblife</span> <span class="o">=</span> <span class="n">surv_bulblife</span><span class="o">.</span><span class="n">make_hazard</span><span class="p">()</span>
 <span class="n">hazard_bulblife</span><span class="p">[</span><span class="mi">1656</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.15384615384615397)
 </pre></div>
 </div>
 </div>
@@ -683,28 +576,22 @@ As an example, 26% of the bulbs were at risk during interval 1656.</p>
 <p>Here’s what the hazard function looks like for the light bulbs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_bulblife</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_bulblife</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Light bulb duration (hours)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Hazard&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/f61318bbaf785683905ace59395cda61ef85e9d87979b031ccfd7ca23441d28e.png" src="_images/f61318bbaf785683905ace59395cda61ef85e9d87979b031ccfd7ca23441d28e.png" />
 </div>
 </div>
 <p>We can see that the hazard is higher in some places than others, but this way of visualizing the hazard function can be misleading, especially in parts of the range where we don’t have much data.
 A better alternative is to plot the <strong>cumulative hazard function</strong>, which is the cumulative sum of the hazards.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cumulative_hazard</span> <span class="o">=</span> <span class="n">hazard_bulblife</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cumulative_hazard</span> <span class="o">=</span> <span class="n">hazard_bulblife</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
 <span class="n">cumulative_hazard</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Light bulb duration (hours)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Cumulative hazard&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/ec4d8ae4729ac6c5907db03385cc674ce8a63af523f6aafa9596f1c03d74ca02.png" src="_images/ec4d8ae4729ac6c5907db03385cc674ce8a63af523f6aafa9596f1c03d74ca02.png" />
 </div>
 </div>
 <p>Where the probability of expiring is high, the cumulative hazard function is steep.
@@ -725,7 +612,7 @@ Instructions for downloading this excerpt are in the notebook for this chapter.<
 <p>Details of the data preparation are in <a class="reference external" href="https://github.com/AllenDowney/MarriageNSFG/blob/master/clean_nsfg.ipynb">this notebook</a>.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;marriage_nsfg_female.csv.gz&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;marriage_nsfg_female.csv.gz&quot;</span>
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/&quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -734,13 +621,8 @@ Instructions for downloading this excerpt are in the notebook for this chapter.<
 <p>We can read the data like this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;marriage_nsfg_female.csv.gz&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;marriage_nsfg_female.csv.gz&quot;</span><span class="p">)</span>
 <span class="n">resp</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(70183, 34)
 </pre></div>
 </div>
 </div>
@@ -759,7 +641,7 @@ We’ll use the following function, which takes a value of <code class="docutils
 It uses the integer division operator <code class="docutils literal notranslate"><span class="pre">//</span></code> to divide by 10 and round down.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">month0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;1899-12-31&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">month0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;1899-12-31&quot;</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">decade_of_birth</span><span class="p">(</span><span class="n">cmbirth</span><span class="p">):</span>
@@ -774,24 +656,10 @@ In this context, a <strong>cohort</strong> is a group of people with something i
 <p>The result from <code class="docutils literal notranslate"><span class="pre">value_counts</span></code> shows the number of people in each cohort.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">thinkstats</span><span class="w"> </span><span class="kn">import</span> <span class="n">value_counts</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">thinkstats</span><span class="w"> </span><span class="kn">import</span> <span class="n">value_counts</span>
 
 <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cohort&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cmbirth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">decade_of_birth</span><span class="p">)</span>
 <span class="n">value_counts</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cohort&quot;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cohort
-1930      325
-1940     3608
-1950    10631
-1960    14953
-1970    16438
-1980    14271
-1990     8552
-2000     1405
-Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -800,7 +668,7 @@ Name: count, dtype: int64
 <p>Next we’ll compute each respondent’s age when married (if applicable) and their age when interviewed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;agemarr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cmmarrhx&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cmbirth&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">12</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;agemarr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cmmarrhx&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cmbirth&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">12</span>
 <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cmintvw&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cmbirth&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">12</span>
 </pre></div>
 </div>
@@ -811,7 +679,7 @@ For each cohort, it selects their ages at first marriage and uses <code class="d
 The <code class="docutils literal notranslate"><span class="pre">dropna=False</span></code> argument includes <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values in the survival function, so the result includes people who have not married.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Surv</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Surv</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">make_survival_map</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">cohorts</span><span class="p">):</span>
@@ -830,7 +698,7 @@ The <code class="docutils literal notranslate"><span class="pre">dropna=False</s
 <p>Here’s how we use this function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohorts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1980</span><span class="p">,</span> <span class="mi">1960</span><span class="p">,</span> <span class="mi">1940</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cohorts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1980</span><span class="p">,</span> <span class="mi">1960</span><span class="p">,</span> <span class="mi">1940</span><span class="p">]</span>
 <span class="n">surv_map</span> <span class="o">=</span> <span class="n">make_survival_map</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">cohorts</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -839,7 +707,7 @@ The <code class="docutils literal notranslate"><span class="pre">dropna=False</s
 <p>And here are the results for people born in the 1940s, 1960s, and 1980s.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">cycler</span>
 
 <span class="c1"># Extract the default color cycle</span>
@@ -861,16 +729,13 @@ The <code class="docutils literal notranslate"><span class="pre">dropna=False</s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">cohort</span><span class="p">,</span> <span class="n">surv</span> <span class="ow">in</span> <span class="n">surv_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">cohort</span><span class="p">,</span> <span class="n">surv</span> <span class="ow">in</span> <span class="n">surv_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">surv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cohort</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
 
 <span class="n">ylim</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">]</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob never married&quot;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/b721d866d71b0d0109fa767b1f35391485fc49d71d5a69b50a6874f9455433a9.png" src="_images/b721d866d71b0d0109fa767b1f35391485fc49d71d5a69b50a6874f9455433a9.png" />
 </div>
 </div>
 <p>If we take these results at face value, they show that people in earlier generations got married younger, and more of them got married eventually.
@@ -892,7 +757,7 @@ The following function takes a <code class="docutils literal notranslate"><span 
 It resamples the rows of the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, taking the sampling weights into account, and returns a new <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">resample_rows_weighted</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s2">&quot;finalwgt&quot;</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">resample_rows_weighted</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s2">&quot;finalwgt&quot;</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
     <span class="n">weights</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -904,7 +769,7 @@ It resamples the rows of the <code class="docutils literal notranslate"><span cl
 That’s what the following function does.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">resample_cycles</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">resample_cycles</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
     <span class="n">grouped</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;cycle&quot;</span><span class="p">)</span>
     <span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
@@ -915,7 +780,7 @@ That’s what the following function does.</p>
 <p>To get started, we’ll resample the data once.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seed the random number generator so we get the same results every time</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seed the random number generator so we get the same results every time</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -923,7 +788,7 @@ That’s what the following function does.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">resample_cycles</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">resample_cycles</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -932,7 +797,7 @@ That’s what the following function does.</p>
 <p>The following figure shows the results with resampling, compared to the results from the previous section without resampling, shown as dotted lines.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">surv</span> <span class="ow">in</span> <span class="n">surv_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">surv</span> <span class="ow">in</span> <span class="n">surv_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">surv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
 
 <span class="n">survs_resampled</span> <span class="o">=</span> <span class="n">make_survival_map</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">cohorts</span><span class="p">)</span>
@@ -944,13 +809,10 @@ That’s what the following function does.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/f27b6bcf8a08c708a272e059ca8a18f8e3ee91f79a43b783f5c545d56a64f9b9.png" src="_images/f27b6bcf8a08c708a272e059ca8a18f8e3ee91f79a43b783f5c545d56a64f9b9.png" />
-</div>
 </div>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;axes&quot;</span><span class="p">,</span> <span class="n">prop_cycle</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">rcParamsDefault</span><span class="p">[</span><span class="s2">&quot;axes.prop_cycle&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;axes&quot;</span><span class="p">,</span> <span class="n">prop_cycle</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">rcParamsDefault</span><span class="p">[</span><span class="s2">&quot;axes.prop_cycle&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -971,7 +833,7 @@ This process is called <strong>Kaplan-Meier estimation</strong>.</p>
 <p>To demonstrate, I’ll select just one cohort from the resampled data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp60</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;cohort == 1960&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">resp60</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;cohort == 1960&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -980,13 +842,8 @@ This process is called <strong>Kaplan-Meier estimation</strong>.</p>
 There are 9921 of them, which we’ll call “complete” cases.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">resp60</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;evrmarry == 1&quot;</span><span class="p">)[</span><span class="s2">&quot;agemarr&quot;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">resp60</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;evrmarry == 1&quot;</span><span class="p">)[</span><span class="s2">&quot;agemarr&quot;</span><span class="p">]</span>
 <span class="n">complete</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(9921)
 </pre></div>
 </div>
 </div>
@@ -995,13 +852,8 @@ There are 9921 of them, which we’ll call “complete” cases.</p>
 There are 5468 of them, which we’ll call the “ongoing” cases.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ongoing</span> <span class="o">=</span> <span class="n">resp60</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;evrmarry == 0&quot;</span><span class="p">)[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ongoing</span> <span class="o">=</span> <span class="n">resp60</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;evrmarry == 0&quot;</span><span class="p">)[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span>
 <span class="n">ongoing</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(5468)
 </pre></div>
 </div>
 </div>
@@ -1010,7 +862,7 @@ There are 5468 of them, which we’ll call the “ongoing” cases.</p>
 It will be convenient to make a <code class="docutils literal notranslate"><span class="pre">FreqTab</span></code> object that counts the number of complete and ongoing cases at each age.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">FreqTab</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">FreqTab</span>
 
 <span class="n">ft_complete</span> <span class="o">=</span> <span class="n">FreqTab</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">complete</span><span class="p">)</span>
 <span class="n">ft_ongoing</span> <span class="o">=</span> <span class="n">FreqTab</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">ongoing</span><span class="p">)</span>
@@ -1021,12 +873,7 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 <p>As an example, there are 58 respondents who reported that they were married for the first time at age 25.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ft_complete</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(58)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ft_complete</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1034,12 +881,7 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 <p>And another 5 respondents who were surveyed at age 25 and reported that they had never married.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ft_ongoing</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(5)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ft_ongoing</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1047,7 +889,7 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 <p>From these <code class="docutils literal notranslate"><span class="pre">FreqTab</span></code> objects, we can compute unnormalized <code class="docutils literal notranslate"><span class="pre">Surv</span></code> objects that contain the number of complete and ongoing cases that exceed each age.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surv_complete</span> <span class="o">=</span> <span class="n">ft_complete</span><span class="o">.</span><span class="n">make_surv</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">surv_complete</span> <span class="o">=</span> <span class="n">ft_complete</span><span class="o">.</span><span class="n">make_surv</span><span class="p">()</span>
 <span class="n">surv_ongoing</span> <span class="o">=</span> <span class="n">ft_ongoing</span><span class="o">.</span><span class="n">make_surv</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1056,12 +898,7 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 <p>For example, there are 2848 people who reported getting married after age 25.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surv_complete</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(2848)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">surv_complete</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1069,12 +906,7 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 <p>And 2273 people surveyed after age 25 who had never married.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surv_ongoing</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(2273)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">surv_ongoing</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1085,13 +917,8 @@ It might seem incongruent in the context of marriage, which is generally conside
 That said, here’s how we compute it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">at_risk</span> <span class="o">=</span> <span class="n">ft_complete</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span> <span class="o">+</span> <span class="n">ft_ongoing</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span> <span class="o">+</span> <span class="n">surv_complete</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span> <span class="o">+</span> <span class="n">surv_ongoing</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">at_risk</span> <span class="o">=</span> <span class="n">ft_complete</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span> <span class="o">+</span> <span class="n">ft_ongoing</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span> <span class="o">+</span> <span class="n">surv_complete</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span> <span class="o">+</span> <span class="n">surv_ongoing</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
 <span class="n">at_risk</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(5184)
 </pre></div>
 </div>
 </div>
@@ -1100,13 +927,8 @@ That said, here’s how we compute it.</p>
 So we can compute the hazard function at age 25 like this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="n">ft_complete</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span> <span class="o">/</span> <span class="n">at_risk</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="n">ft_complete</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span> <span class="o">/</span> <span class="n">at_risk</span>
 <span class="n">hazard</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.011188271604938271)
 </pre></div>
 </div>
 </div>
@@ -1116,7 +938,7 @@ Now let’s compute the whole function, for all ages.
 We’ll use the <code class="docutils literal notranslate"><span class="pre">union</span></code> method of the <code class="docutils literal notranslate"><span class="pre">Index</span></code> class to compute a Pandas <code class="docutils literal notranslate"><span class="pre">Index</span></code> that contains all of the ages from <code class="docutils literal notranslate"><span class="pre">ft_complete</span></code> and <code class="docutils literal notranslate"><span class="pre">ft_ongoing</span></code>, in order.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">ft_complete</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">ft_ongoing</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">ft_complete</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">ft_ongoing</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1124,7 +946,7 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">uni
 <p>Now we can compute the number of people at risk at every age, by looking up the ages in <code class="docutils literal notranslate"><span class="pre">ts</span></code> in each of the  <code class="docutils literal notranslate"><span class="pre">FreqTab</span></code> and <code class="docutils literal notranslate"><span class="pre">Surv</span></code> objects.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">at_risk</span> <span class="o">=</span> <span class="n">ft_complete</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">+</span> <span class="n">ft_ongoing</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">+</span> <span class="n">surv_complete</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">+</span> <span class="n">surv_ongoing</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">at_risk</span> <span class="o">=</span> <span class="n">ft_complete</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">+</span> <span class="n">ft_ongoing</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">+</span> <span class="n">surv_complete</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">+</span> <span class="n">surv_ongoing</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1132,7 +954,7 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">uni
 <p>Finally, we can compute the hazard function at each age, and put the results into a <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Hazard</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Hazard</span>
 
 <span class="n">hs</span> <span class="o">=</span> <span class="n">ft_complete</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">/</span> <span class="n">at_risk</span>
 <span class="n">hazard</span> <span class="o">=</span> <span class="n">Hazard</span><span class="p">(</span><span class="n">hs</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
@@ -1143,14 +965,11 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">uni
 <p>Here’s what the cumulative hazard function looks like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Cumulative hazard&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/f3552c1e500d46d488fbb5f01af5b46e9f301f33836909ddca98e1fc5578ef07.png" src="_images/f3552c1e500d46d488fbb5f01af5b46e9f301f33836909ddca98e1fc5578ef07.png" />
 </div>
 </div>
 <p>It is steepest between ages 20 and 30, which means that an unmarried person is at the greatest “risk” of getting married at these ages.
@@ -1167,7 +986,7 @@ So the complement of the hazard function is the probability of staying unmarried
 And the probability of doing that is the product of the complementary hazard function, which we can compute like this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">hazard</span><span class="p">)</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">hazard</span><span class="p">)</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1175,7 +994,7 @@ And the probability of doing that is the product of the complementary hazard fun
 <p>The <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> object has a <code class="docutils literal notranslate"><span class="pre">make_surv</span></code> method that does this computation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surv</span> <span class="o">=</span> <span class="n">hazard</span><span class="o">.</span><span class="n">make_surv</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">surv</span> <span class="o">=</span> <span class="n">hazard</span><span class="o">.</span><span class="n">make_surv</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1183,15 +1002,12 @@ And the probability of doing that is the product of the complementary hazard fun
 <p>Here’s what the result looks like, compared to the previous result (dotted line), which corrected for stratified resampling, but did not handle censored data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survs_resampled</span><span class="p">[</span><span class="mi">1960</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;resampled&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">survs_resampled</span><span class="p">[</span><span class="mi">1960</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;resampled&quot;</span><span class="p">)</span>
 <span class="n">surv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Kaplan-Meier&quot;</span><span class="p">)</span>
 
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob never married&quot;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/2f32d31a1f4cedf5d0604cc266c6e2361faf81386eeac8bc51203c3229c7cffa.png" src="_images/2f32d31a1f4cedf5d0604cc266c6e2361faf81386eeac8bc51203c3229c7cffa.png" />
 </div>
 </div>
 <p>We can see how important it is to handle censored data correctly.</p>
@@ -1205,7 +1021,7 @@ It should remind you of the ethical obligation to perform statistical analysis w
 It takes as arguments sequences of survival times for complete and ongoing cases, and returns a <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">estimate_hazard</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">estimate_hazard</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Kaplan-Meier estimation.&quot;&quot;&quot;</span>
     <span class="n">ft_complete</span> <span class="o">=</span> <span class="n">FreqTab</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">complete</span><span class="p">)</span>
     <span class="n">ft_ongoing</span> <span class="o">=</span> <span class="n">FreqTab</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">ongoing</span><span class="p">)</span>
@@ -1225,7 +1041,7 @@ It takes as arguments sequences of survival times for complete and ongoing cases
 <p>And here’s a function that takes a group of respondents, extracts survival times, calls <code class="docutils literal notranslate"><span class="pre">estimate_hazard</span></code> to get the hazard function, and then computes the corresponding survival function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">estimate_survival</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">estimate_survival</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimate the survival function.&quot;&quot;&quot;</span>
     <span class="n">complete</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;evrmarry == 1&quot;</span><span class="p">)[</span><span class="s2">&quot;agemarr&quot;</span><span class="p">]</span>
     <span class="n">ongoing</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;evrmarry == 0&quot;</span><span class="p">)[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span>
@@ -1245,10 +1061,10 @@ But first let’s see another way to compute Kaplan-Meier estimates.</p>
 <p>The following cell installs <code class="docutils literal notranslate"><span class="pre">lifelines</span></code> if necessary.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">lifelines</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="o">%</span><span class="k">pip</span> install lifelines
+    <span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">lifelines</span>
 </pre></div>
 </div>
 </div>
@@ -1257,7 +1073,7 @@ But first let’s see another way to compute Kaplan-Meier estimates.</p>
 First we’ll compute the survival function using <code class="docutils literal notranslate"><span class="pre">estimate_survival</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surv</span> <span class="o">=</span> <span class="n">estimate_survival</span><span class="p">(</span><span class="n">resp60</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">surv</span> <span class="o">=</span> <span class="n">estimate_survival</span><span class="p">(</span><span class="n">resp60</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1266,7 +1082,7 @@ First we’ll compute the survival function using <code class="docutils literal 
 First we’ll get the data into the format <code class="docutils literal notranslate"><span class="pre">lifelines</span></code> requires.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">complete</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">complete</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 <span class="n">durations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">complete</span><span class="p">,</span> <span class="n">ongoing</span><span class="p">])</span>
 <span class="n">event_observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">complete</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ongoing</span><span class="p">))])</span>
 </pre></div>
@@ -1276,15 +1092,10 @@ First we’ll get the data into the format <code class="docutils literal notrans
 <p>Now we can make a <code class="docutils literal notranslate"><span class="pre">KaplanMeierFitter</span></code> object and fit the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lifelines</span><span class="w"> </span><span class="kn">import</span> <span class="n">KaplanMeierFitter</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lifelines</span><span class="w"> </span><span class="kn">import</span> <span class="n">KaplanMeierFitter</span>
 
 <span class="n">kmf</span> <span class="o">=</span> <span class="n">KaplanMeierFitter</span><span class="p">()</span>
 <span class="n">kmf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">durations</span><span class="o">=</span><span class="n">durations</span><span class="p">,</span> <span class="n">event_observed</span><span class="o">=</span><span class="n">event_observed</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;lifelines.KaplanMeierFitter:&quot;KM_estimate&quot;, fitted with 15389 total observations, 5468 right-censored observations&gt;
 </pre></div>
 </div>
 </div>
@@ -1292,27 +1103,19 @@ First we’ll get the data into the format <code class="docutils literal notrans
 <p>After fitting the data, we can call the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function to display the results, which include the estimated survival function and a confidence interval – although the confidence interval is not correct in this case because it doesn’t correct for stratified sampling.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">kmf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob never married&quot;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/8607ce98344389d6b166680905db153438d143f4355f7ac898e0a9889e32a49e.png" src="_images/8607ce98344389d6b166680905db153438d143f4355f7ac898e0a9889e32a49e.png" />
 </div>
 </div>
 <p>Unlike the survival function we computed, the one from <code class="docutils literal notranslate"><span class="pre">lifelines</span></code> starts from 0.
 But the rest of the function is the same, within floating-point error.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">kmf</span><span class="o">.</span><span class="n">survival_function_</span><span class="p">[</span><span class="s2">&quot;KM_estimate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">kmf</span><span class="o">.</span><span class="n">survival_function_</span><span class="p">[</span><span class="s2">&quot;KM_estimate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">surv</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
 </pre></div>
 </div>
 </div>
@@ -1327,7 +1130,7 @@ To get an idea of how much variation there is due to random sampling, we’ll ru
 <p>This function is identical to <code class="docutils literal notranslate"><span class="pre">make_survival_map</span></code>, except that it calls <code class="docutils literal notranslate"><span class="pre">estimate_survival</span></code>, which uses Kaplan-Meier estimation, rather than <code class="docutils literal notranslate"><span class="pre">Surv.from_seq</span></code>, which only works if there is no censored data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">estimate_survival_map</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">cohorts</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">estimate_survival_map</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">cohorts</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a dictionary from cohorts to Surv objects.&quot;&quot;&quot;</span>
     <span class="n">surv_map</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -1344,7 +1147,7 @@ To get an idea of how much variation there is due to random sampling, we’ll ru
 <p>The following loop generates 101 random resamplings of the dataset and makes a list of 101 dictionaries containing the estimated survival functions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohorts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1940</span><span class="p">,</span> <span class="mi">1950</span><span class="p">,</span> <span class="mi">1960</span><span class="p">,</span> <span class="mi">1970</span><span class="p">,</span> <span class="mi">1980</span><span class="p">,</span> <span class="mi">1990</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cohorts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1940</span><span class="p">,</span> <span class="mi">1950</span><span class="p">,</span> <span class="mi">1960</span><span class="p">,</span> <span class="mi">1970</span><span class="p">,</span> <span class="mi">1980</span><span class="p">,</span> <span class="mi">1990</span><span class="p">]</span>
 
 <span class="n">surv_maps</span> <span class="o">=</span> <span class="p">[</span><span class="n">estimate_survival_map</span><span class="p">(</span><span class="n">resample_cycles</span><span class="p">(</span><span class="n">resp</span><span class="p">),</span> <span class="n">cohorts</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">101</span><span class="p">)]</span>
 </pre></div>
@@ -1355,7 +1158,7 @@ To get an idea of how much variation there is due to random sampling, we’ll ru
 It loops through the dictionaries, selects the survival function for the given cohort, and plots it with a nearly transparent line – which is one way to visualize the variability between resamplings.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_cohort</span><span class="p">(</span><span class="n">surv_maps</span><span class="p">,</span> <span class="n">cohort</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_cohort</span><span class="p">(</span><span class="n">surv_maps</span><span class="p">,</span> <span class="n">cohort</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot results for a single cohort.&quot;&quot;&quot;</span>
     <span class="n">survs</span> <span class="o">=</span> <span class="p">[</span><span class="n">surv_map</span><span class="p">[</span><span class="n">cohort</span><span class="p">]</span> <span class="k">for</span> <span class="n">surv_map</span> <span class="ow">in</span> <span class="n">surv_maps</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">surv</span> <span class="ow">in</span> <span class="n">survs</span><span class="p">:</span>
@@ -1370,7 +1173,7 @@ It loops through the dictionaries, selects the survival function for the given c
 <p>Here are the results for birth cohorts from the 1940s to the 1990s.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cohorts</span><span class="p">))]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cohorts</span><span class="p">))]</span>
 
 <span class="k">for</span> <span class="n">cohort</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cohorts</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
     <span class="n">plot_cohort</span><span class="p">(</span><span class="n">surv_maps</span><span class="p">,</span> <span class="n">cohort</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
@@ -1379,9 +1182,6 @@ It loops through the dictionaries, selects the survival function for the given c
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob never married&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/857e37c477c353c4342f6ed14a5a01fa4e82dbbdfb36b1a60c4da15dadfbb095.png" src="_images/857e37c477c353c4342f6ed14a5a01fa4e82dbbdfb36b1a60c4da15dadfbb095.png" />
 </div>
 </div>
 <p>This visualization is good enough for exploration, but the lines look blurry and some of the labels overlap.
@@ -1402,7 +1202,7 @@ To demonstrate, we’ll use pregnancy data from the NSFG.</p>
 <p>The following cells download the data files and install <code class="docutils literal notranslate"><span class="pre">statadict</span></code>, which we need to read the data.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1411,10 +1211,10 @@ To demonstrate, we’ll use pregnancy data from the NSFG.</p>
 </div>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">statadict</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="o">%</span><span class="k">pip</span> install statadict
+    <span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">statadict</span>
 </pre></div>
 </div>
 </div>
@@ -1422,7 +1222,7 @@ To demonstrate, we’ll use pregnancy data from the NSFG.</p>
 <p>We’ll use <code class="docutils literal notranslate"><span class="pre">get_nsfg_groups</span></code> to read the data and divide it into first babies and others.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nsfg</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_nsfg_groups</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nsfg</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_nsfg_groups</span>
 
 <span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">get_nsfg_groups</span><span class="p">()</span>
 </pre></div>
@@ -1432,7 +1232,7 @@ To demonstrate, we’ll use pregnancy data from the NSFG.</p>
 <p>We’ll start with a single resampling of the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="s2">&quot;finalwgt&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="s2">&quot;finalwgt&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1440,7 +1240,7 @@ To demonstrate, we’ll use pregnancy data from the NSFG.</p>
 <p>Here’s the PMF of pregnancy durations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_durations</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;prglngth&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_durations</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;prglngth&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1450,7 +1250,7 @@ Remembering that the most common pregnancy length is 39 weeks, we expect the rem
 To make that estimate more precise, we can identify the values in the distribution that equal or exceed 36 weeks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="mi">36</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="mi">36</span>
 <span class="n">is_remaining</span> <span class="o">=</span> <span class="n">pmf_durations</span><span class="o">.</span><span class="n">qs</span> <span class="o">&gt;=</span> <span class="n">t</span>
 </pre></div>
 </div>
@@ -1459,7 +1259,7 @@ To make that estimate more precise, we can identify the values in the distributi
 <p>Next we’ll make a new <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> object that contains only those values, shifted left so the current time is at 0.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">pmf_durations</span><span class="o">.</span><span class="n">ps</span><span class="p">[</span><span class="n">is_remaining</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">pmf_durations</span><span class="o">.</span><span class="n">ps</span><span class="p">[</span><span class="n">is_remaining</span><span class="p">]</span>
 <span class="n">qs</span> <span class="o">=</span> <span class="n">pmf_durations</span><span class="o">.</span><span class="n">qs</span><span class="p">[</span><span class="n">is_remaining</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span>
 
 <span class="n">pmf_remaining</span> <span class="o">=</span> <span class="n">Pmf</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">qs</span><span class="p">)</span>
@@ -1470,12 +1270,7 @@ To make that estimate more precise, we can identify the values in the distributi
 <p>Because we selected a subset of the values in the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code>, the probabilities no longer add up to 1, but we can normalize the <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> so they do.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_remaining</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9155006558810669)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_remaining</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1483,24 +1278,16 @@ To make that estimate more precise, we can identify the values in the distributi
 <p>Here’s the result, which shows the distribution of remaining time at the beginning of the 36th week.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_remaining</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Week 36&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_remaining</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Week 36&quot;</span><span class="p">)</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Remaining duration (weeks)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/40fb6b96fad202426770af9618cbf06f7e5c8c7b2625c5425e543bd2985b1737.png" src="_images/40fb6b96fad202426770af9618cbf06f7e5c8c7b2625c5425e543bd2985b1737.png" />
 </div>
 </div>
 <p>The mean of this distribution is the expected remaining time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_remaining</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(3.2145671641791043)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_remaining</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1508,7 +1295,7 @@ To make that estimate more precise, we can identify the values in the distributi
 <p>The following function encapsulates these steps and computes the distribution of remaining time for a given <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> at a given time, <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_pmf_remaining</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_pmf_remaining</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Distribution of remaining time.&quot;&quot;&quot;</span>
     <span class="n">is_remaining</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">qs</span> <span class="o">&gt;=</span> <span class="n">t</span>
     <span class="n">ps</span> <span class="o">=</span> <span class="n">pmf</span><span class="o">.</span><span class="n">ps</span><span class="p">[</span><span class="n">is_remaining</span><span class="p">]</span>
@@ -1523,7 +1310,7 @@ To make that estimate more precise, we can identify the values in the distributi
 <p>The following function takes a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> of pregnancy lengths and computes the expected remaining time at the beginning of each week from the 36th to the 43rd.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">expected_remaining</span><span class="p">(</span><span class="n">pmf</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">expected_remaining</span><span class="p">(</span><span class="n">pmf</span><span class="p">):</span>
     <span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">44</span><span class="p">)</span>
     <span class="n">expected</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
 
@@ -1539,21 +1326,8 @@ To make that estimate more precise, we can identify the values in the distributi
 <p>Here are the results for a single resampling of the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expected</span> <span class="o">=</span> <span class="n">expected_remaining</span><span class="p">(</span><span class="n">pmf_durations</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">expected</span> <span class="o">=</span> <span class="n">expected_remaining</span><span class="p">(</span><span class="n">pmf_durations</span><span class="p">)</span>
 <span class="n">expected</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36    3.214567
-37    2.337714
-38    1.479095
-39    0.610133
-40    0.912517
-41    0.784211
-42    0.582301
-43    0.589372
-dtype: float64
 </pre></div>
 </div>
 </div>
@@ -1561,7 +1335,7 @@ dtype: float64
 <p>To see how much variation there is due to random sampling, we can run this analysis with several resamplings and plot the results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">21</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">21</span><span class="p">):</span>
     <span class="n">sample</span> <span class="o">=</span> <span class="n">resample_rows_weighted</span><span class="p">(</span><span class="n">live</span><span class="p">,</span> <span class="s2">&quot;finalwgt&quot;</span><span class="p">)</span>
     <span class="n">pmf_durations</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;prglngth&quot;</span><span class="p">])</span>
     <span class="n">expected</span> <span class="o">=</span> <span class="n">expected_remaining</span><span class="p">(</span><span class="n">pmf_durations</span><span class="p">)</span>
@@ -1572,9 +1346,6 @@ dtype: float64
 <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/203affde7f36d1b69038756a0f4b3fa8945234c040f14534ffcfb3b91fc93f2c.png" src="_images/203affde7f36d1b69038756a0f4b3fa8945234c040f14534ffcfb3b91fc93f2c.png" />
 </div>
 </div>
 <p>Between weeks 36 and 39, the expected remaining time decreases until, at the beginning of the 39th week, it is about 0.6 weeks.
@@ -1605,7 +1376,7 @@ To keep things simple, we’ll consider only first marriages, and we’ll focus 
 Compute the duration of marriages that have ended in divorce, and the duration, so far, of marriages that are ongoing.</p>
 <ul class="simple">
 <li><p>For complete cases, compute the elapsed time between <code class="docutils literal notranslate"><span class="pre">cmdivorcx</span></code> and <code class="docutils literal notranslate"><span class="pre">cmmarrhx</span></code>. If both values are valid – not <code class="docutils literal notranslate"><span class="pre">NaN</span></code> – that means the respondent’s first marriage ended in divorce.</p></li>
-<li><p>To identify ongoing cases, select people who have only married once and who are still married. You can use <code class="docutils literal notranslate"><span class="pre">fmarno</span></code>, which records the number of times each respondent has married, and <code class="docutils literal notranslate"><span class="pre">fmarital</span></code>, which encodes their marital status – the value 1 indicates that the respondent is married.</p></li>
+<li><p>To identify ongoing cases, select people who have only married once and who are still married. You can use <code class="docutils literal notranslate"><span class="pre">fmarno</span></code>, which records the number of times each respondent has married, and <code class="docutils literal notranslate"><span class="pre">rmarital</span></code>, which encodes their informal marital status – the value 1 indicates that the respondent is married.</p></li>
 </ul>
 <p>In some cases the values of these variables are only approximate, so you might find a small number of negative differences, but they should not be more than one year.</p>
 <p>Estimate the hazard and survival functions for the duration of marriage.
@@ -1613,7 +1384,7 @@ Plot the cumulative hazard function – when is the danger of divorce highest?
 Plot the survival function – what fraction of marriages end in divorce?</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># I suggest you use a single resampling of the data</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># I suggest you use a single resampling of the data</span>
 
 <span class="n">sample</span> <span class="o">=</span> <span class="n">resample_cycles</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
 </pre></div>
@@ -1631,7 +1402,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>The following cell downloads the data.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
     <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/mortality_rates_beltran2012.csv&quot;</span>
 <span class="p">)</span>
 </pre></div>
@@ -1641,7 +1412,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>We can load the data like this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mortality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;mortality_rates_beltran2012.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mortality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;mortality_rates_beltran2012.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1649,7 +1420,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>The following function interpolates the data to make a hazard function with approximate mortality rates for each age from 0 to 99.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">interp1d</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">interp1d</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Hazard</span>
 
 
@@ -1671,7 +1442,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>Now we can make a <code class="docutils literal notranslate"><span class="pre">Hazard</span></code> object like this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span> <span class="o">=</span> <span class="n">mortality</span><span class="p">[</span><span class="s2">&quot;1800&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span> <span class="o">=</span> <span class="n">mortality</span><span class="p">[</span><span class="s2">&quot;1800&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="n">rates</span> <span class="o">=</span> <span class="n">mortality</span><span class="p">[</span><span class="s2">&quot;1800&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="n">hazard</span> <span class="o">=</span> <span class="n">make_hazard</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">rates</span><span class="p">)</span>
 </pre></div>
@@ -1681,14 +1452,11 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>Here’s what the mortality rates look like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Hazard&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/75e69939ebfeef40ace8cf9d70fb79a6e072afb77b87796a903e22639241ef19.png" src="_images/75e69939ebfeef40ace8cf9d70fb79a6e072afb77b87796a903e22639241ef19.png" />
 </div>
 </div>
 <p>Use <code class="docutils literal notranslate"><span class="pre">make_surv</span></code> to make a survival function based on these rates, and <code class="docutils literal notranslate"><span class="pre">make_cdf</span></code> to compute the corresponding CDF.

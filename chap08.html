@@ -397,7 +397,7 @@ This process – using a sample to make inferences about a population – is cal
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
@@ -422,10 +422,10 @@ This process – using a sample to make inferences about a population – is cal
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">empiricaldist</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="o">%</span><span class="k">pip</span> install empiricaldist
+    <span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">empiricaldist</span>
 </pre></div>
 </div>
 </div>
@@ -438,7 +438,7 @@ This process – using a sample to make inferences about a population – is cal
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
@@ -458,7 +458,7 @@ They are both reasonable choices, but let’s see which is better – and think 
 <p>For purposes of demonstration, we’ll assume that penguin weights are drawn from a normal distribution with known mean and standard deviation, which I’ll denote <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code> and assign values in kilograms.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mf">3.7</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mf">3.7</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.46</span>
 </pre></div>
 </div>
@@ -469,7 +469,7 @@ Given these parameters, we can use NumPy to simulate the sampling process and ge
 For example, here’s a hypothetical sample of 10 weights.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seed the random number generator so we get the same results every time</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seed the random number generator so we get the same results every time</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -477,14 +477,8 @@ For example, here’s a hypothetical sample of 10 weights.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">sample</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([4.44719887, 3.41859205, 3.45704099, 3.20643443, 4.09808751,
-       2.6412922 , 4.50261341, 3.34984483, 3.84675798, 3.58528963])
 </pre></div>
 </div>
 </div>
@@ -492,12 +486,7 @@ For example, here’s a hypothetical sample of 10 weights.</p>
 <p>And here are the mean and median of the sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(3.6553151902291945), np.float64(3.521165310619601))
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -506,7 +495,7 @@ For example, here’s a hypothetical sample of 10 weights.</p>
 To find out, we’ll use the following function to generate hypothetical samples with the given size, <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_sample</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_sample</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -516,7 +505,7 @@ To find out, we’ll use the following function to generate hypothetical samples
 We’ll use the NumPy function <code class="docutils literal notranslate"><span class="pre">logspace</span></code> to make a range of <code class="docutils literal notranslate"><span class="pre">ns</span></code> from 10 to 100,000, equally spaced on a logarithmic scale.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -524,7 +513,7 @@ We’ll use the NumPy function <code class="docutils literal notranslate"><span 
 <p>We can use a list comprehension to generate a hypothetical sample for each value of <code class="docutils literal notranslate"><span class="pre">n</span></code>, compute the mean, and collect the results:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">means</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">make_sample</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">means</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">make_sample</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -532,7 +521,7 @@ We’ll use the NumPy function <code class="docutils literal notranslate"><span 
 <p>And we’ll do the same for the median.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">medians</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">make_sample</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">medians</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">make_sample</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -542,16 +531,13 @@ We’ll use the NumPy function <code class="docutils literal notranslate"><span 
 The horizontal line shows the actual mean in the population.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">means</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">medians</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)</span>
 
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Sample size&quot;</span><span class="p">,</span> <span class="n">xscale</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Estimate&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/8a89df65f38fa8c3eaa4ec9bf174f6ee3ac0648298efe16ea79baa534de24d46.png" src="_images/8a89df65f38fa8c3eaa4ec9bf174f6ee3ac0648298efe16ea79baa534de24d46.png" />
 </div>
 </div>
 <p>For both estimators, the estimates converge to the actual value as the sample size increases.
@@ -562,13 +548,8 @@ That suggests another experiment: if we collect many samples with the same size 
 <p>The following loop simulates this scenario by generating 10,001 samples of 10 penguins and computing the mean of each sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">means</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">make_sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">means</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">make_sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
 <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">means</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(3.70034508492869)
 </pre></div>
 </div>
 </div>
@@ -577,13 +558,8 @@ That suggests another experiment: if we collect many samples with the same size 
 <p>The following loop simulates the same scenario, but this time it computes the median of each sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">medians</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">make_sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">medians</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">make_sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
 <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">medians</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(3.701214089907223)
 </pre></div>
 </div>
 </div>
@@ -598,7 +574,7 @@ The word “accurate” also means different things in different contexts – as
 The following function computes the differences between the estimates and the actual value, and returns the mean of the squares of these errors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mse</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mse</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Mean squared error of a sequence of estimates.&quot;&quot;&quot;</span>
     <span class="n">errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span> <span class="o">-</span> <span class="n">actual</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">errors</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -611,12 +587,7 @@ In practice, we usually don’t – after all, if we knew the actual value, we w
 But in our experiment, we know that the actual population mean is 3.7 kg, so we can use it to compute the MSE of the sample means.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mse</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.020871984891289382)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mse</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -625,12 +596,7 @@ But in our experiment, we know that the actual population mean is 3.7 kg, so we 
 Now here’s the MSE of the sample medians.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mse</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.029022273128644173)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mse</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -645,7 +611,7 @@ Another option is to use the average of the absolute values of the errors, calle
 The following function computes MAE for a sequence of estimates.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mae</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mae</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Mean absolute error of a sequence of estimates.&quot;&quot;&quot;</span>
     <span class="n">errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span> <span class="o">-</span> <span class="n">actual</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
@@ -656,12 +622,7 @@ The following function computes MAE for a sequence of estimates.</p>
 <p>Here’s the MAE of the sample means.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mae</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.11540433749505272)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mae</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -669,12 +630,7 @@ The following function computes MAE for a sequence of estimates.</p>
 <p>And the sample medians.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mae</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.13654429774596036)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mae</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -691,7 +647,7 @@ Assuming that the error goes unnoticed, it introduces an outlier in the sample.<
 conversion factor 2.2 pounds per kilogram.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_sample_with_errors</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_sample_with_errors</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
     <span class="n">factor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">],</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">sample</span> <span class="o">*</span> <span class="n">factor</span>
@@ -702,7 +658,7 @@ conversion factor 2.2 pounds per kilogram.</p>
 <p>To see what effect this has on the distribution, we’ll generate a large sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">make_sample_with_errors</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">make_sample_with_errors</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -710,7 +666,7 @@ conversion factor 2.2 pounds per kilogram.</p>
 <p>To plot the distribution of the sample, we’ll use KDE and the <code class="docutils literal notranslate"><span class="pre">Pdf</span></code> object from <a class="reference internal" href="chap06.html#section-kernel-density-estimation"><span class="std std-ref">Chapter 6</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">gaussian_kde</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">gaussian_kde</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">thinkstats</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pdf</span>
 
 <span class="n">kde</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
@@ -721,21 +677,13 @@ conversion factor 2.2 pounds per kilogram.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/eec8f313b7382e51850036931f3410bbc3b63968fefbb269026643e735035396.png" src="_images/eec8f313b7382e51850036931f3410bbc3b63968fefbb269026643e735035396.png" />
-</div>
 </div>
 <p>In addition to the mode near 3.7 kg, the measurement errors introduce a second mode near 8 kilograms.</p>
 <p>Now let’s repeat the previous experiment, simulating many samples with size 10, computing the mean of each sample, and then computing the average of the sample means.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">means</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">make_sample_with_errors</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">means</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">make_sample_with_errors</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
 <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">means</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(3.786352945690677)
 </pre></div>
 </div>
 </div>
@@ -744,13 +692,8 @@ conversion factor 2.2 pounds per kilogram.</p>
 <p>Now here’s the same experiment using sample medians.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">medians</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">make_sample_with_errors</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">medians</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">make_sample_with_errors</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
 <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">medians</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(3.7121869836715353)
 </pre></div>
 </div>
 </div>
@@ -759,12 +702,7 @@ conversion factor 2.2 pounds per kilogram.</p>
 If we compare the MSE of the estimates, we see that the sample medians are substantially more accurate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mse</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">mu</span><span class="p">),</span> <span class="n">mse</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.06853430354724438), np.float64(0.031164467796883758))
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mse</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">mu</span><span class="p">),</span> <span class="n">mse</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -782,7 +720,7 @@ I promised to explain the difference later – and later is now.</p>
 The following function computes the biased estimator, which is the sum of the squared deviations divided by <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">biased_var</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">biased_var</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
     <span class="c1"># Compute variance with n in the denominator</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
     <span class="n">deviations</span> <span class="o">=</span> <span class="n">xs</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
@@ -794,13 +732,8 @@ The following function computes the biased estimator, which is the sum of the sq
 <p>To test it, we’ll simulate many samples with size 10, compute the biased variance of each sample, and then compute the average of the variances.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biased_vars</span> <span class="o">=</span> <span class="p">[</span><span class="n">biased_var</span><span class="p">(</span><span class="n">make_sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">biased_vars</span> <span class="o">=</span> <span class="p">[</span><span class="n">biased_var</span><span class="p">(</span><span class="n">make_sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
 <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">biased_vars</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.19049277659404473)
 </pre></div>
 </div>
 </div>
@@ -808,13 +741,8 @@ The following function computes the biased estimator, which is the sum of the sq
 <p>The result is about 0.19, but in this case, we know that the actual population variance is about 0.21, so this version of the sample variance is too low on average – which confirms that it is biased.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actual_var</span> <span class="o">=</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">actual_var</span> <span class="o">=</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span>
 <span class="n">actual_var</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2116
 </pre></div>
 </div>
 </div>
@@ -822,7 +750,7 @@ The following function computes the biased estimator, which is the sum of the sq
 <p>The following function computes the unbiased estimator, which is the sum of the squared deviations divided by <code class="docutils literal notranslate"><span class="pre">n-1</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unbiased_var</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unbiased_var</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
     <span class="c1"># Compute variance with n-1 in the denominator</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
     <span class="n">deviations</span> <span class="o">=</span> <span class="n">xs</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
@@ -834,13 +762,8 @@ The following function computes the biased estimator, which is the sum of the sq
 <p>We can test it by generating many samples and computing the unbiased variance for each one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unbiased_vars</span> <span class="o">=</span> <span class="p">[</span><span class="n">unbiased_var</span><span class="p">(</span><span class="n">make_sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">unbiased_vars</span> <span class="o">=</span> <span class="p">[</span><span class="n">unbiased_var</span><span class="p">(</span><span class="n">make_sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
 <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">unbiased_vars</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.21159109492300626)
 </pre></div>
 </div>
 </div>
@@ -850,26 +773,16 @@ The following function computes the biased estimator, which is the sum of the sq
 With sample size 100, the difference is only 1%, which is small enough that it probably doesn’t matter in practice.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.09999999999999998
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.010000000000000009
 </pre></div>
 </div>
 </div>
@@ -886,7 +799,7 @@ The data they collected is freely available – instructions for downloading it 
 <p>The data was collected as part of the research that led to this paper: Gorman KB, Williams TD, Fraser WR (2014). Ecological sexual dimorphism and environmental variability within a community of Antarctic penguins (genus Pygoscelis). PLoS ONE 9(3):e90081. <a class="reference external" href="https://doi.org/10.1371/journal.pone.0090081">https://doi.org/10.1371/journal.pone.0090081</a></p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
     <span class="s2">&quot;https://raw.githubusercontent.com/allisonhorst/palmerpenguins/c19a904462482430170bfe2c718775ddb7dbb885/inst/extdata/penguins_raw.csv&quot;</span>
 <span class="p">)</span>
 </pre></div>
@@ -896,13 +809,8 @@ The data they collected is freely available – instructions for downloading it 
 <p>We can use Pandas to read the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;penguins_raw.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Body Mass (g)&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;penguins_raw.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Body Mass (g)&quot;</span><span class="p">])</span>
 <span class="n">penguins</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(342, 17)
 </pre></div>
 </div>
 </div>
@@ -910,16 +818,7 @@ The data they collected is freely available – instructions for downloading it 
 <p>The dataset includes three penguin species.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;Species&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Species
-Adelie Penguin (Pygoscelis adeliae)          151
-Gentoo penguin (Pygoscelis papua)            123
-Chinstrap penguin (Pygoscelis antarctica)     68
-Name: count, dtype: int64
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;Species&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -927,7 +826,7 @@ Name: count, dtype: int64
 <p>For the first example we’ll select just the Chinstrap penguins.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chinstrap</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;Species.str.startswith(&quot;Chinstrap&quot;)&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chinstrap</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;Species.str.startswith(&quot;Chinstrap&quot;)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -935,7 +834,7 @@ Name: count, dtype: int64
 <p>We’ll use this function to plot estimated PDFs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_kde</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;estimated density&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_kde</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;estimated density&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
     <span class="n">kde</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
@@ -951,26 +850,18 @@ Name: count, dtype: int64
 The vertical dotted line shows the sample mean.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">chinstrap</span><span class="p">[</span><span class="s2">&quot;Body Mass (g)&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">chinstrap</span><span class="p">[</span><span class="s2">&quot;Body Mass (g)&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>
 <span class="n">plot_kde</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="s2">&quot;weights&quot;</span><span class="p">)</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Penguin weight (kg)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/4f97248ce47bd7b1f2bc9a596ca2c4c1cefd8edf9178f40cf803d042f0447c00.png" src="_images/4f97248ce47bd7b1f2bc9a596ca2c4c1cefd8edf9178f40cf803d042f0447c00.png" />
-</div>
 </div>
 <p>The sample mean is about 3.7 kg.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sample_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 <span class="n">sample_mean</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(3.733088235294118)
 </pre></div>
 </div>
 </div>
@@ -986,7 +877,7 @@ The core idea is to use the sample to make a model of the population, then use t
 Notice that the new samples are the same size as the original.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">resample</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">resample</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
     <span class="c1"># Generate a sample from a normal distribution</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
@@ -997,7 +888,7 @@ Notice that the new samples are the same size as the original.</p>
 <p>This loop uses <code class="docutils literal notranslate"><span class="pre">resample</span></code> to generate many samples and compute the mean of each one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_means</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">resample</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sample_means</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">resample</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -1005,13 +896,10 @@ Notice that the new samples are the same size as the original.</p>
 <p>The following figure shows the distribution of these sample means.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_kde</span><span class="p">(</span><span class="n">sample_means</span><span class="p">,</span> <span class="s2">&quot;sample means&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_kde</span><span class="p">(</span><span class="n">sample_means</span><span class="p">,</span> <span class="s2">&quot;sample means&quot;</span><span class="p">)</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Sample mean of weight (kg)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/8cb77fc51b75dd8db21d7b9ba3a14b0a6f0eff669632062dd368c72a249f3a6c.png" src="_images/8cb77fc51b75dd8db21d7b9ba3a14b0a6f0eff669632062dd368c72a249f3a6c.png" />
 </div>
 </div>
 <p>This result approximates the sampling distribution of the sample mean.
@@ -1023,13 +911,8 @@ It shows how much we expect the sample mean to vary if we collect many samples o
 <p>To quantify the width of the sampling distribution, one option is to compute its standard deviation – the result is called the <strong>standard error</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">standard_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample_means</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">standard_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample_means</span><span class="p">)</span>
 <span class="n">standard_error</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.04626531069684985)
 </pre></div>
 </div>
 </div>
@@ -1043,12 +926,7 @@ It shows how much we expect the sample mean to vary if we collect many samples o
 <p>In this dataset, the standard deviation of penguin weights is about 0.38 kg for chinstrap penguins.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.3814986213564681)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1056,12 +934,7 @@ It shows how much we expect the sample mean to vary if we collect many samples o
 <p>The standard error of the average weight is about 0.046 kg.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample_means</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.04626531069684985)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample_means</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1073,7 +946,7 @@ They are answers to different questions.</p>
 If we know the standard deviation and sample size, we can approximate the standard error of the means like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">approximate_standard_error</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">approximate_standard_error</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </pre></div>
@@ -1082,12 +955,7 @@ If we know the standard deviation and sample size, we can approximate the standa
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_standard_error</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.046263503290595163)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_standard_error</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1101,13 +969,8 @@ For example, a 90% confidence interval contains 90% of the values in the samplin
 Here’s the 90% confidence interval for the average weight of chinstrap penguins.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ci90</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">sample_means</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">95</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ci90</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">sample_means</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">95</span><span class="p">])</span>
 <span class="n">ci90</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([3.6576334 , 3.80737506])
 </pre></div>
 </div>
 </div>
@@ -1180,14 +1043,14 @@ But other sources of error might be bigger – what other sources of error do yo
 <p>The following cells download the data, read it into a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, and select the heights of male respondents.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/CDBRFS08.ASC.gz&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">thinkstats</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_brfss</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">thinkstats</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_brfss</span>
 
 <span class="n">brfss</span> <span class="o">=</span> <span class="n">read_brfss</span><span class="p">()</span>
 </pre></div>
@@ -1196,22 +1059,9 @@ But other sources of error might be bigger – what other sources of error do yo
 </div>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">male</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;sex == 1&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">male</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;sex == 1&quot;</span><span class="p">)</span>
 <span class="n">heights</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="s2">&quot;htm3&quot;</span><span class="p">]</span>
 <span class="n">heights</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    154407.000000
-mean        178.066221
-std           7.723563
-min          61.000000
-25%         173.000000
-50%         178.000000
-75%         183.000000
-max         236.000000
-Name: htm3, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -1227,7 +1077,7 @@ Let’s see if either of them is a consistent, unbiased estimator.
 For the experiments, we’ll assume that the actual mean time between goals is 10 minutes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actual_mean</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">actual_mean</span> <span class="o">=</span> <span class="mi">10</span>
 </pre></div>
 </div>
 </div>
@@ -1235,7 +1085,7 @@ For the experiments, we’ll assume that the actual mean time between goals is 1
 <p>The following function generates a sample from an exponential distribution with this mean and the given sample size.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_exponential</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_exponential</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">actual_mean</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1247,13 +1097,8 @@ Do the sample medians converge to the actual median?</p>
 <p>Here’s the actual median of an exponential distribution with the given mean.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actual_median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">actual_mean</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">actual_median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">actual_mean</span>
 <span class="n">actual_median</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(6.931471805599453)
 </pre></div>
 </div>
 </div>
@@ -1269,7 +1114,7 @@ Now let’s try standard deviation.</p>
 <p>To estimate the standard deviation of a population, we can compute the square root of the biased or unbiased estimator of variance, like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">biased_std</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">biased_std</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
     <span class="c1"># Square root of the biased estimator of variance</span>
     <span class="n">var</span> <span class="o">=</span> <span class="n">biased_var</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
@@ -1279,7 +1124,7 @@ Now let’s try standard deviation.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unbiased_std</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unbiased_std</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
     <span class="c1"># Square root of the unbiased estimator of variance</span>
     <span class="n">var</span> <span class="o">=</span> <span class="n">unbiased_var</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
@@ -1291,16 +1136,10 @@ Now let’s try standard deviation.</p>
 Check whether either of these is an unbiased estimator of standard deviation.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here&#39;s an example using `make_sample`</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here&#39;s an example using `make_sample`</span>
 
 <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">3.7</span><span class="p">,</span> <span class="mf">0.46</span>
 <span class="n">make_sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([4.5279695 , 3.75698359, 4.09347143, 3.56308034, 3.17123233,
-       4.40734952, 3.70858308, 4.15706704, 4.06716703, 3.7203591 ])
 </pre></div>
 </div>
 </div>
@@ -1314,7 +1153,7 @@ As data, you have serial numbers recovered from <code class="docutils literal no
 <p>If we assume that the Germans have <code class="docutils literal notranslate"><span class="pre">N</span></code> tanks numbered from 1 to <code class="docutils literal notranslate"><span class="pre">N</span></code>, and that all tanks in this range were equally likely to be captured, we can estimate <code class="docutils literal notranslate"><span class="pre">N</span></code> like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">estimate_tanks</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">estimate_tanks</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
     <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">m</span> <span class="o">+</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span> <span class="o">/</span> <span class="n">k</span>
@@ -1325,7 +1164,7 @@ As data, you have serial numbers recovered from <code class="docutils literal no
 <p>As an example, suppose <code class="docutils literal notranslate"><span class="pre">N</span></code> is 122.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">122</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">122</span>
 <span class="n">tanks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1334,7 +1173,7 @@ As data, you have serial numbers recovered from <code class="docutils literal no
 <p>We can use the following function to generate a random sample of <code class="docutils literal notranslate"><span class="pre">k</span></code> tanks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sample_tanks</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sample_tanks</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">tanks</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1343,20 +1182,15 @@ As data, you have serial numbers recovered from <code class="docutils literal no
 <p>Here’s an example.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">sample_tanks</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">sample_tanks</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">sample</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([74, 71, 95, 10, 17])
 </pre></div>
 </div>
 </div>
@@ -1364,18 +1198,13 @@ As data, you have serial numbers recovered from <code class="docutils literal no
 <p>And here is the estimate based on this sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_tanks</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(113.0)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_tanks</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>Check whether this estimator is biased.</p>
-<p>For more on this problem, see [this Wikipedia page][<a class="reference external" href="https://en.wikipedia.org/wiki/German_tank_problem">https://en.wikipedia.org/wiki/German_tank_problem</a>] and Ruggles and Brodie, “An Empirical Approach to Economic Intelligence in World War II”, Journal of the American Statistical Association, March 1947, available <a class="reference external" href="https://web.archive.org/web/20170123132042/https://www.cia.gov/library/readingroom/docs/CIA-RDP79R01001A001300010013-3.pdf">here</a>.</p>
+<p>For more on this problem, see <a class="reference external" href="https://en.wikipedia.org/wiki/German_tank_problem">this Wikipedia page</a> and Ruggles and Brodie, “An Empirical Approach to Economic Intelligence in World War II”, Journal of the American Statistical Association, March 1947, available <a class="reference external" href="https://web.archive.org/web/20170123132042/https://www.cia.gov/library/readingroom/docs/CIA-RDP79R01001A001300010013-3.pdf">here</a>.</p>
 <p>For an explanation of how this estimator works, you might like <a class="reference external" href="https://www.youtube.com/watch?v=WLCwMRJBhuI">this video</a>.</p>
 </section>
 <section id="exercise-8-6">
@@ -1394,7 +1223,7 @@ But we can use the methods from this chapter to check it.
 We’ll use the following function to generate a sequence of 0s and 1s with probability 0.5 and no correlation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_hits_and_misses</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_hits_and_misses</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="c1"># Generate a random sequence of 0s and 1s</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
 </pre></div>
@@ -1404,7 +1233,7 @@ We’ll use the following function to generate a sequence of 0s and 1s with prob
 <p>In the notebook for this chapter, I provide a function that finds all subsequences of three hits (1s) and returns the element of the sequence that follows.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_successors</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">target_sum</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>

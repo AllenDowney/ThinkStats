@@ -389,7 +389,7 @@ What I present here is a mixture of these approaches that is often used in pract
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
@@ -414,10 +414,10 @@ What I present here is a mixture of these approaches that is often used in pract
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">empiricaldist</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="o">%</span><span class="k">pip</span> install empiricaldist
+    <span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">empiricaldist</span>
 </pre></div>
 </div>
 </div>
@@ -430,7 +430,7 @@ What I present here is a mixture of these approaches that is often used in pract
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
@@ -450,7 +450,7 @@ To see whether that’s plausible, we can perform a hypothesis test.</p>
 <p>We’ll use the following function to compute the absolute difference between the observed number and the expected number if the coin is fair.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">250</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">250</span>
 <span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>
 
 
@@ -464,7 +464,7 @@ To see whether that’s plausible, we can perform a hypothesis test.</p>
 <p>In the observed data, this deviation is 15.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">heads</span> <span class="o">=</span> <span class="mi">140</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">heads</span> <span class="o">=</span> <span class="mi">140</span>
 <span class="n">tails</span> <span class="o">=</span> <span class="mi">110</span>
 
 <span class="n">observed_stat</span> <span class="o">=</span> <span class="n">abs_deviation</span><span class="p">(</span><span class="n">heads</span><span class="p">)</span>
@@ -472,16 +472,11 @@ To see whether that’s plausible, we can perform a hypothesis test.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(15.0)
-</pre></div>
-</div>
-</div>
 </div>
 <p>If the coin is actually fair, we can simulate the coin-spinning experiment by generating a sequence of random strings – either <code class="docutils literal notranslate"><span class="pre">'H'</span></code> or <code class="docutils literal notranslate"><span class="pre">'T'</span></code> with equal probability – and counting the number of times <code class="docutils literal notranslate"><span class="pre">'H'</span></code> appears.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_flips</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_flips</span><span class="p">():</span>
     <span class="n">flips</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
     <span class="n">heads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">flips</span> <span class="o">==</span> <span class="s2">&quot;H&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">heads</span>
@@ -492,19 +487,14 @@ To see whether that’s plausible, we can perform a hypothesis test.</p>
 <p>Each time we call this function, we get the outcome of a simulated experiment.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulate_flips</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(119)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simulate_flips</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -512,7 +502,7 @@ To see whether that’s plausible, we can perform a hypothesis test.</p>
 <p>The following loop simulates the experiment many times, computes the deviation for each one, and uses a list comprehension to collect the results in a list.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulated_stats</span> <span class="o">=</span> <span class="p">[</span><span class="n">abs_deviation</span><span class="p">(</span><span class="n">simulate_flips</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simulated_stats</span> <span class="o">=</span> <span class="p">[</span><span class="n">abs_deviation</span><span class="p">(</span><span class="n">simulate_flips</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10001</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -521,7 +511,7 @@ To see whether that’s plausible, we can perform a hypothesis test.</p>
 Here’s what the distribution of these values looks like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pmf</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pmf</span>
 
 <span class="n">pmf_effects</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">simulated_stats</span><span class="p">)</span>
 <span class="n">pmf_effects</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
@@ -530,21 +520,13 @@ Here’s what the distribution of these values looks like.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/3f731f1367cbe5b239cdb8e7b4f3b4024828e9c8d5c6fca6476b5a0b160761ba.png" src="_images/3f731f1367cbe5b239cdb8e7b4f3b4024828e9c8d5c6fca6476b5a0b160761ba.png" />
-</div>
 </div>
 <p>Values near 0 are the most common; values greater than 10 are less common.
 Remembering that the deviation in the observed data is 15, we see that deviations of that magnitude are rare, but not impossible.
 In this example, the simulated results equal or exceed 15 about 7.1% of the time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">simulated_stats</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(7.079292070792921)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">simulated_stats</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
 </pre></div>
 </div>
 </div>
@@ -572,7 +554,7 @@ Now let’s see if that difference could be due to chance.</p>
 <p>The following cells download the data and install <code class="docutils literal notranslate"><span class="pre">statadict</span></code>, which we need to read the data.</p>
 <div class="cell tag_remove-print tag_hide docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/nsfg.py&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dct&quot;</span><span class="p">)</span>
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/2002FemPreg.dat.gz&quot;</span><span class="p">)</span>
 </pre></div>
@@ -581,10 +563,10 @@ Now let’s see if that difference could be due to chance.</p>
 </div>
 <div class="cell tag_remove-print tag_hide docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">statadict</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="o">%</span><span class="k">pip</span> install statadict
+    <span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">statadict</span>
 </pre></div>
 </div>
 </div>
@@ -592,7 +574,7 @@ Now let’s see if that difference could be due to chance.</p>
 <p>The function <code class="docutils literal notranslate"><span class="pre">get_nsfg_groups</span></code> reads the data, selects live births, and groups live births into first babies and others.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nsfg</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_nsfg_groups</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nsfg</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_nsfg_groups</span>
 
 <span class="n">live</span><span class="p">,</span> <span class="n">firsts</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="n">get_nsfg_groups</span><span class="p">()</span>
 </pre></div>
@@ -602,7 +584,7 @@ Now let’s see if that difference could be due to chance.</p>
 <p>Now we can select pregnancy lengths, in weeks, for both groups.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">firsts</span><span class="p">[</span><span class="s2">&quot;prglngth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">others</span><span class="p">[</span><span class="s2">&quot;prglngth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">firsts</span><span class="p">[</span><span class="s2">&quot;prglngth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">others</span><span class="p">[</span><span class="s2">&quot;prglngth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 </pre></div>
 </div>
 </div>
@@ -610,7 +592,7 @@ Now let’s see if that difference could be due to chance.</p>
 <p>The following function takes the data as a tuple of two sequences, and computes the absolute difference in means.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">abs_diff_means</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">abs_diff_means</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="n">data</span>
     <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">group1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">group2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
@@ -621,24 +603,19 @@ Now let’s see if that difference could be due to chance.</p>
 <p>Between first babies and others, the observed difference in pregnancy length is 0.078 weeks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observed_diff</span> <span class="o">=</span> <span class="n">abs_diff_means</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observed_diff</span> <span class="o">=</span> <span class="n">abs_diff_means</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="n">observed_diff</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.07803726677754952)
-</pre></div>
 </div>
-</div>
-</div>
-<p>So the hypothesis we’ll test is whether pregnancy length is generally longer for first babies.
+<p>So the hypothesis we’ll test is whether there is a difference in pregnancy length between first babies and others.
 The null hypothesis is that pregnancy lengths are actually the same for both groups, and the apparent difference is due to chance.
 If pregnancy lengths are the same for both groups, we can combine the two groups into a single pool.
 To simulate the experiment, we can use the NumPy function <code class="docutils literal notranslate"><span class="pre">shuffle</span></code> to put the pooled values in random order, and then use slice indexes to select two groups with the same sizes as the original.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_groups</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_groups</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="n">data</span>
     <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">group1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">group2</span><span class="p">)</span>
 
@@ -652,12 +629,7 @@ To simulate the experiment, we can use the NumPy function <code class="docutils 
 <p>Each time we call this function, it returns a tuple of sequences, which we can pass to <code class="docutils literal notranslate"><span class="pre">abs_diff_means</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">abs_diff_means</span><span class="p">(</span><span class="n">simulate_groups</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.031193045602279312)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">abs_diff_means</span><span class="p">(</span><span class="n">simulate_groups</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -665,7 +637,7 @@ To simulate the experiment, we can use the NumPy function <code class="docutils 
 <p>The following loop simulates the experiment many times and computes the difference in means for each simulated dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulated_diffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">abs_diff_means</span><span class="p">(</span><span class="n">simulate_groups</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simulated_diffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">abs_diff_means</span><span class="p">(</span><span class="n">simulate_groups</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -673,7 +645,7 @@ To simulate the experiment, we can use the NumPy function <code class="docutils 
 <p>To visualize the results, we’ll use the following function, which takes a sample of simulated results and makes a <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> object that approximates its distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">gaussian_kde</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">gaussian_kde</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pmf</span>
 
 
@@ -689,7 +661,7 @@ To simulate the experiment, we can use the NumPy function <code class="docutils 
 <p>We’ll also use this function, which fills in the tail of the distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">thinkstats</span><span class="w"> </span><span class="kn">import</span> <span class="n">underride</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">thinkstats</span><span class="w"> </span><span class="kn">import</span> <span class="n">underride</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">fill_tail</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">observed</span><span class="p">,</span> <span class="n">side</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
@@ -712,21 +684,18 @@ The shaded region shows the cases where the difference in means under the null h
 The area of this region is the p-value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">make_pmf</span><span class="p">(</span><span class="n">simulated_diffs</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">make_pmf</span><span class="p">(</span><span class="n">simulated_diffs</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
 <span class="n">pmf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">fill_tail</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">observed_diff</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">)</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Absolute difference in means (weeks)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/81d6c7139c0577b81d5868d0444eefc2cb3b4af8c6682b69f0e12ee8b12762f4.png" src="_images/81d6c7139c0577b81d5868d0444eefc2cb3b4af8c6682b69f0e12ee8b12762f4.png" />
-</div>
 </div>
 <p>The following function computes the p-value, which is the fraction of simulated values that are as big or bigger than the observed value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_p_value</span><span class="p">(</span><span class="n">simulated</span><span class="p">,</span> <span class="n">observed</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_p_value</span><span class="p">(</span><span class="n">simulated</span><span class="p">,</span> <span class="n">observed</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fraction of simulated values as big or bigger than the observed value.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">simulated</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">observed</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
@@ -736,12 +705,7 @@ The area of this region is the p-value.</p>
 <p>In this example, the p-value is about 18%, which means it is plausible that a difference as big as 0.078 weeks could happen by chance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compute_p_value</span><span class="p">(</span><span class="n">simulated_diffs</span><span class="p">,</span> <span class="n">observed_diff</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.1838161838161838)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compute_p_value</span><span class="p">(</span><span class="n">simulated_diffs</span><span class="p">,</span> <span class="n">observed_diff</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -756,12 +720,12 @@ This process is called <strong>permutation</strong>, which is another word for s
 </section>
 <section id="other-test-statistics">
 <h2><span class="section-number">9.3. </span>Other Test Statistics<a class="headerlink" href="#other-test-statistics" title="Link to this heading">#</a></h2>
-<p>We might wonder whether pregnancy lengths for first babies are not just longer, but maybe more variable.
+<p>We might wonder whether there is a difference in variability of pregnancy lengths between first babies and others.
 To test that hypothesis, we can use as a test statistic the absolute difference between the standard deviations of the two groups.
 The following function computes this test statistic.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">abs_diff_stds</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">abs_diff_stds</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="n">group1</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="n">data</span>
     <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">group1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">group2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
@@ -772,13 +736,8 @@ The following function computes this test statistic.</p>
 <p>In the NSFG dataset, the difference in standard deviations is about 0.18.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observed_diff</span> <span class="o">=</span> <span class="n">abs_diff_stds</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observed_diff</span> <span class="o">=</span> <span class="n">abs_diff_stds</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="n">observed_diff</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.17600895913991677)
 </pre></div>
 </div>
 </div>
@@ -787,7 +746,7 @@ The following function computes this test statistic.</p>
 The following loop simulates the null hypothesis many times and computes the difference in standard deviation for each simulated dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulated_diffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">abs_diff_stds</span><span class="p">(</span><span class="n">simulate_groups</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simulated_diffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">abs_diff_stds</span><span class="p">(</span><span class="n">simulate_groups</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -796,26 +755,18 @@ The following loop simulates the null hypothesis many times and computes the dif
 Again, the shaded region shows where the test statistic under the null hypothesis exceeds the observed difference.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">make_pmf</span><span class="p">(</span><span class="n">simulated_diffs</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">make_pmf</span><span class="p">(</span><span class="n">simulated_diffs</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="n">pmf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">fill_tail</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">observed_diff</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">)</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Absolute difference in std (weeks)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/b8c12d0e47568c186f13da71da99b26caeb16994a333ef5b4b40a75664b5f418.png" src="_images/b8c12d0e47568c186f13da71da99b26caeb16994a333ef5b4b40a75664b5f418.png" />
-</div>
 </div>
 <p>We can estimate the area of this region by computing the fraction of results that are as big or bigger than the observed difference.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compute_p_value</span><span class="p">(</span><span class="n">simulated_diffs</span><span class="p">,</span> <span class="n">observed_diff</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.17082917082917082)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compute_p_value</span><span class="p">(</span><span class="n">simulated_diffs</span><span class="p">,</span> <span class="n">observed_diff</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -832,13 +783,8 @@ But could this effect be due to chance?</p>
 From live births, we’ll select cases where the age of the mother and birth weight are known.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">valid</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;agepreg&quot;</span><span class="p">,</span> <span class="s2">&quot;totalwgt_lb&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">valid</span> <span class="o">=</span> <span class="n">live</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;agepreg&quot;</span><span class="p">,</span> <span class="s2">&quot;totalwgt_lb&quot;</span><span class="p">])</span>
 <span class="n">valid</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9038, 244)
 </pre></div>
 </div>
 </div>
@@ -846,7 +792,7 @@ From live births, we’ll select cases where the age of the mother and birth wei
 <p>Then we’ll select the relevant columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span> <span class="o">=</span> <span class="n">valid</span><span class="p">[</span><span class="s2">&quot;agepreg&quot;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span> <span class="o">=</span> <span class="n">valid</span><span class="p">[</span><span class="s2">&quot;agepreg&quot;</span><span class="p">]</span>
 <span class="n">birthweights</span> <span class="o">=</span> <span class="n">valid</span><span class="p">[</span><span class="s2">&quot;totalwgt_lb&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -855,7 +801,7 @@ From live births, we’ll select cases where the age of the mother and birth wei
 <p>The following function takes a tuple of <code class="docutils literal notranslate"><span class="pre">xs</span></code> and <code class="docutils literal notranslate"><span class="pre">ys</span></code> and computes the magnitude of the correlation, positive or negative.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">abs_correlation</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">abs_correlation</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">data</span>
     <span class="n">corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
@@ -866,14 +812,9 @@ From live births, we’ll select cases where the age of the mother and birth wei
 <p>In the NSFG dataset, the correlation is about 0.07.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">ages</span><span class="p">,</span> <span class="n">birthweights</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">ages</span><span class="p">,</span> <span class="n">birthweights</span>
 <span class="n">observed_corr</span> <span class="o">=</span> <span class="n">abs_correlation</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="n">observed_corr</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.0688339703541091)
 </pre></div>
 </div>
 </div>
@@ -884,7 +825,7 @@ By shuffling the observed values, we can simulate a world where the distribution
 It would also work if we shuffled the <code class="docutils literal notranslate"><span class="pre">ys</span></code> instead, or shuffled both.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">permute</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">permute</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">data</span>
     <span class="n">new_xs</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">new_xs</span><span class="p">)</span>
@@ -896,12 +837,7 @@ It would also work if we shuffled the <code class="docutils literal notranslate"
 <p>The correlation of the shuffled values is usually close to 0.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">abs_correlation</span><span class="p">(</span><span class="n">permute</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.0019269515502894237)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">abs_correlation</span><span class="p">(</span><span class="n">permute</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -909,7 +845,7 @@ It would also work if we shuffled the <code class="docutils literal notranslate"
 <p>The following loop generates many shuffled datasets and computes the correlation of each one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulated_corrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">abs_correlation</span><span class="p">(</span><span class="n">permute</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simulated_corrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">abs_correlation</span><span class="p">(</span><span class="n">permute</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -918,27 +854,19 @@ It would also work if we shuffled the <code class="docutils literal notranslate"
 The vertical dotted line shows the observed correlation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">make_pmf</span><span class="p">(</span><span class="n">simulated_corrs</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">make_pmf</span><span class="p">(</span><span class="n">simulated_corrs</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">)</span>
 <span class="n">pmf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">observed_corr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Absolute value of correlation&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/13f0b2847c5affed82786df164109c3381eaca6f5bb8a72c941468da3a31b613.png" src="_images/13f0b2847c5affed82786df164109c3381eaca6f5bb8a72c941468da3a31b613.png" />
-</div>
 </div>
 <p>We can see that the observed correlation is in the tail of the distribution, with no visible area under the curve.
 If we try to compute a p-value, the result is 0, indicating that the correlation in the shuffled data did not exceed the observed value in any of the simulations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compute_p_value</span><span class="p">(</span><span class="n">simulated_corrs</span><span class="p">,</span> <span class="n">observed_corr</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.0)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compute_p_value</span><span class="p">(</span><span class="n">simulated_corrs</span><span class="p">,</span> <span class="n">observed_corr</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -965,7 +893,7 @@ You roll the die 60 times and record the frequency of each outcome from 1 to 6.
 Here are the results in a <code class="docutils literal notranslate"><span class="pre">Hist</span></code> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Hist</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">empiricaldist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Hist</span>
 
 <span class="n">qs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
 <span class="n">freqs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
@@ -975,60 +903,6 @@ Here are the results in a <code class="docutils literal notranslate"><span class
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>freqs</th>
-    </tr>
-    <tr>
-      <th>outcome</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>11</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>On average you expect each value to appear 10 times.
 In this dataset, the value 3 appears more often than expected, and the value 4 appears less often.
@@ -1036,7 +910,7 @@ But could these differences happen by chance?</p>
 <p>To test this hypothesis, we’ll start by computing the expected frequency for each outcome.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_rolls</span> <span class="o">=</span> <span class="n">observed</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_rolls</span> <span class="o">=</span> <span class="n">observed</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">outcomes</span> <span class="o">=</span> <span class="n">observed</span><span class="o">.</span><span class="n">qs</span>
 <span class="n">expected</span> <span class="o">=</span> <span class="n">Hist</span><span class="p">(</span><span class="n">num_rolls</span> <span class="o">/</span> <span class="mi">6</span><span class="p">,</span> <span class="n">outcomes</span><span class="p">)</span>
 </pre></div>
@@ -1046,7 +920,7 @@ But could these differences happen by chance?</p>
 <p>The following function takes the observed and expected frequencies and computes the sum of the absolute differences.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">total_abs_deviation</span><span class="p">(</span><span class="n">observed</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">total_abs_deviation</span><span class="p">(</span><span class="n">observed</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -1055,13 +929,8 @@ But could these differences happen by chance?</p>
 <p>In the observed dataset, this test statistic is 20.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observed_dev</span> <span class="o">=</span> <span class="n">total_abs_deviation</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observed_dev</span> <span class="o">=</span> <span class="n">total_abs_deviation</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
 <span class="n">observed_dev</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(20.0)
 </pre></div>
 </div>
 </div>
@@ -1069,7 +938,7 @@ But could these differences happen by chance?</p>
 <p>The following function takes the observed data, simulates rolling a fair die the same number of times, and returns a <code class="docutils literal notranslate"><span class="pre">Hist</span></code> object that contains the simulated frequencies.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_dice</span><span class="p">(</span><span class="n">observed</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_dice</span><span class="p">(</span><span class="n">observed</span><span class="p">):</span>
     <span class="n">num_rolls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
     <span class="n">rolls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">observed</span><span class="o">.</span><span class="n">qs</span><span class="p">,</span> <span class="n">num_rolls</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">hist</span> <span class="o">=</span> <span class="n">Hist</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">rolls</span><span class="p">)</span>
@@ -1081,7 +950,7 @@ But could these differences happen by chance?</p>
 <p>The following loop simulates the experiment many times and computes the total absolute deviation for each one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulated_devs</span> <span class="o">=</span> <span class="p">[</span><span class="n">total_abs_deviation</span><span class="p">(</span><span class="n">simulate_dice</span><span class="p">(</span><span class="n">observed</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simulated_devs</span> <span class="o">=</span> <span class="p">[</span><span class="n">total_abs_deviation</span><span class="p">(</span><span class="n">simulate_dice</span><span class="p">(</span><span class="n">observed</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -1090,26 +959,18 @@ But could these differences happen by chance?</p>
 Notice that the total is always even, because every time an outcome appears more often than expected, another outcome has to appear less often.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_devs</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">simulated_devs</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_devs</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">simulated_devs</span><span class="p">)</span>
 <span class="n">pmf_devs</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
 
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Total absolute deviation&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/5d7743f38a1eac8ca1cf10492e5cf1c48871dc6438957ffc7779e99c151dc2a7.png" src="_images/5d7743f38a1eac8ca1cf10492e5cf1c48871dc6438957ffc7779e99c151dc2a7.png" />
-</div>
 </div>
 <p>We can see that a total deviation of 20 is not unusual – the p-value is about 13%, which means that we can’t be sure the die is crooked.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compute_p_value</span><span class="p">(</span><span class="n">simulated_devs</span><span class="p">,</span> <span class="n">observed_dev</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.13086913086913088)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compute_p_value</span><span class="p">(</span><span class="n">simulated_devs</span><span class="p">,</span> <span class="n">observed_dev</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1118,7 +979,7 @@ Notice that the total is always even, because every time an outcome appears more
 For a problem like this, it would be more conventional to use the chi-squared statistic, which we can compute like this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">chi_squared_stat</span><span class="p">(</span><span class="n">observed</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">chi_squared_stat</span><span class="p">(</span><span class="n">observed</span><span class="p">):</span>
     <span class="n">diffs</span> <span class="o">=</span> <span class="p">(</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">diffs</span> <span class="o">/</span> <span class="n">expected</span><span class="p">)</span>
 </pre></div>
@@ -1129,13 +990,8 @@ For a problem like this, it would be more conventional to use the chi-squared st
 Dividing through by <code class="docutils literal notranslate"><span class="pre">expected</span></code> standardizes the deviations – although in this case it has no effect on the results because the expected frequencies are all equal.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observed_chi2</span> <span class="o">=</span> <span class="n">chi_squared_stat</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observed_chi2</span> <span class="o">=</span> <span class="n">chi_squared_stat</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
 <span class="n">observed_chi2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(11.6)
 </pre></div>
 </div>
 </div>
@@ -1145,7 +1001,7 @@ By itself, this number doesn’t mean very much, but we can compare it to the re
 The following loop generates many simulated datasets and computes the chi-squared statistic for each one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulated_chi2</span> <span class="o">=</span> <span class="p">[</span><span class="n">chi_squared_stat</span><span class="p">(</span><span class="n">simulate_dice</span><span class="p">(</span><span class="n">observed</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simulated_chi2</span> <span class="o">=</span> <span class="p">[</span><span class="n">chi_squared_stat</span><span class="p">(</span><span class="n">simulate_dice</span><span class="p">(</span><span class="n">observed</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -1154,26 +1010,18 @@ The following loop generates many simulated datasets and computes the chi-square
 The shaded region shows the results that exceed the observed value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">make_pmf</span><span class="p">(</span><span class="n">simulated_chi2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">make_pmf</span><span class="p">(</span><span class="n">simulated_chi2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="n">pmf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">fill_tail</span><span class="p">(</span><span class="n">pmf</span><span class="p">,</span> <span class="n">observed_chi2</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">)</span>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Chi-Squared statistic&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/0926b356306842c735f4b20897a267d1115265c91109c553776b3382d5b099c6.png" src="_images/0926b356306842c735f4b20897a267d1115265c91109c553776b3382d5b099c6.png" />
-</div>
 </div>
 <p>Again, the area of the shaded region is the p-value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compute_p_value</span><span class="p">(</span><span class="n">simulated_chi2</span><span class="p">,</span> <span class="n">observed_chi2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.04495504495504495)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compute_p_value</span><span class="p">(</span><span class="n">simulated_chi2</span><span class="p">,</span> <span class="n">observed_chi2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1206,7 +1054,7 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>The data was collected as part of the research that led to this paper: Gorman KB, Williams TD, Fraser WR (2014). Ecological sexual dimorphism and environmental variability within a community of Antarctic penguins (genus Pygoscelis). PLoS ONE 9(3):e90081. <a class="reference external" href="https://doi.org/10.1371/journal.pone.0090081">https://doi.org/10.1371/journal.pone.0090081</a></p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
     <span class="s2">&quot;https://raw.githubusercontent.com/allisonhorst/palmerpenguins/c19a904462482430170bfe2c718775ddb7dbb885/inst/extdata/penguins_raw.csv&quot;</span>
 <span class="p">)</span>
 </pre></div>
@@ -1216,14 +1064,9 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>Here’s how we read the data and select the Chinstrap penguins.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;penguins_raw.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Body Mass (g)&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;penguins_raw.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Body Mass (g)&quot;</span><span class="p">])</span>
 <span class="n">chinstrap</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;Species.str.startswith(&quot;Chinstrap&quot;)&#39;</span><span class="p">)</span>
 <span class="n">chinstrap</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(68, 17)
 </pre></div>
 </div>
 </div>
@@ -1231,28 +1074,18 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <p>And here’s how we can extract the weights for male and female penguins in kilograms.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">male</span> <span class="o">=</span> <span class="n">chinstrap</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Sex == &#39;MALE&#39;&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">male</span> <span class="o">=</span> <span class="n">chinstrap</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Sex == &#39;MALE&#39;&quot;</span><span class="p">)</span>
 <span class="n">weights_male</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="s2">&quot;Body Mass (g)&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>
 <span class="n">weights_male</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(3.9389705882352937)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">female</span> <span class="o">=</span> <span class="n">chinstrap</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Sex == &#39;FEMALE&#39;&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">female</span> <span class="o">=</span> <span class="n">chinstrap</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Sex == &#39;FEMALE&#39;&quot;</span><span class="p">)</span>
 <span class="n">weights_female</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="s2">&quot;Body Mass (g)&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>
 <span class="n">weights_female</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(3.5272058823529413)
 </pre></div>
 </div>
 </div>
@@ -1266,7 +1099,7 @@ Is it plausible that the apparent difference between the groups is due to chance
 <p>Using the penguin data from the previous exercise, we can extract the culmen depths and lengths for the female penguins (the culmen is the top ridge of the bill).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="s2">&quot;Culmen Depth (mm)&quot;</span><span class="p">],</span> <span class="n">female</span><span class="p">[</span><span class="s2">&quot;Culmen Length (mm)&quot;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="s2">&quot;Culmen Depth (mm)&quot;</span><span class="p">],</span> <span class="n">female</span><span class="p">[</span><span class="s2">&quot;Culmen Length (mm)&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1274,13 +1107,8 @@ Is it plausible that the apparent difference between the groups is due to chance
 <p>The correlation between these variables is about 0.26.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observed_corr</span> <span class="o">=</span> <span class="n">abs_correlation</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observed_corr</span> <span class="o">=</span> <span class="n">abs_correlation</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="n">observed_corr</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.2563170802728449)
 </pre></div>
 </div>
 </div>
