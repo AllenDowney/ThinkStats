@@ -34,9 +34,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -524,6 +524,70 @@ DOI: 10.1007/s11668-007-9074-9</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>h</th>
+      <th>f</th>
+      <th>K</th>
+    </tr>
+    <tr>
+      <th>i</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>28</th>
+      <td>1812</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>1836</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>1860</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>1980</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>2568</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">h</span></code> column contains lifespans in hours.
 The <code class="docutils literal notranslate"><span class="pre">f</span></code> column records the number of bulbs that expired at each value of <code class="docutils literal notranslate"><span class="pre">h</span></code>.
@@ -537,6 +601,11 @@ To represent the distribution of lifespans, we’ll put these values in a <code 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(50)
+</pre></div>
+</div>
+</div>
 </div>
 <p>We can use <code class="docutils literal notranslate"><span class="pre">make_cdf</span></code> to compute the CDF, which indicates the fraction of bulbs that expire at or before each value of <code class="docutils literal notranslate"><span class="pre">h</span></code>.
 For example, 78% of the bulbs expire at or before 1656 hours.</p>
@@ -544,6 +613,11 @@ For example, 78% of the bulbs expire at or before 1656 hours.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_bulblife</span> <span class="o">=</span> <span class="n">pmf_bulblife</span><span class="o">.</span><span class="n">make_cdf</span><span class="p">()</span>
 <span class="n">cdf_bulblife</span><span class="p">[</span><span class="mi">1656</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.7800000000000002)
 </pre></div>
 </div>
 </div>
@@ -557,6 +631,11 @@ So we can compute it like this.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.21999999999999975)
+</pre></div>
+</div>
+</div>
 </div>
 <p>22% of the bulbs expired after 1656 hours.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code> library provides a <code class="docutils literal notranslate"><span class="pre">Surv</span></code> object that represents a survival function, and a method called <code class="docutils literal notranslate"><span class="pre">make_surv</span></code> that makes one.</p>
@@ -564,6 +643,11 @@ So we can compute it like this.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surv_bulblife</span> <span class="o">=</span> <span class="n">cdf_bulblife</span><span class="o">.</span><span class="n">make_surv</span><span class="p">()</span>
 <span class="n">surv_bulblife</span><span class="p">[</span><span class="mi">1656</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.21999999999999997)
 </pre></div>
 </div>
 </div>
@@ -577,6 +661,9 @@ So we can compute it like this.</p>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Light bulb duration (hours)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9f6f64e9761be97c2536ea5f4f494705c5f7ed5338475173ec9488fdb18b791c.png" src="_images/9f6f64e9761be97c2536ea5f4f494705c5f7ed5338475173ec9488fdb18b791c.png" />
 </div>
 </div>
 <p>In that sense, the CDF and survival function are equivalent – if we are given either one, we can compute the other – but in the context of survival analysis it is more common to work with survival curves.
@@ -596,11 +683,21 @@ As an example, 26% of the bulbs were at risk during interval 1656.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.25999999999999995)
+</pre></div>
+</div>
+</div>
 </div>
 <p>And 4% of all bulbs expired during interval 1656.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_bulblife</span><span class="p">[</span><span class="mi">1656</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.04)
 </pre></div>
 </div>
 </div>
@@ -610,6 +707,11 @@ As an example, 26% of the bulbs were at risk during interval 1656.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="n">pmf_bulblife</span> <span class="o">/</span> <span class="n">at_risk</span>
 <span class="n">hazard</span><span class="p">[</span><span class="mi">1656</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.15384615384615388)
 </pre></div>
 </div>
 </div>
@@ -623,6 +725,11 @@ As an example, 26% of the bulbs were at risk during interval 1656.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.15384615384615397)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Here’s what the hazard function looks like for the light bulbs.</p>
 <div class="cell docutils container">
@@ -631,6 +738,9 @@ As an example, 26% of the bulbs were at risk during interval 1656.</p>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Light bulb duration (hours)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Hazard&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7cafa6053d8bcbb14e7d99a41a8ceb5777548c8ed58d9d78bccb68e31912b91d.png" src="_images/7cafa6053d8bcbb14e7d99a41a8ceb5777548c8ed58d9d78bccb68e31912b91d.png" />
 </div>
 </div>
 <p>We can see that the hazard is higher in some places than others, but this way of visualizing the hazard function can be misleading, especially in parts of the range where we don’t have much data.
@@ -643,6 +753,9 @@ A better alternative is to plot the <strong>cumulative hazard function</strong>,
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Light bulb duration (hours)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Cumulative hazard&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0ffd6df858f2d5bc50f93d9749cdc3254d579ab4ff83163708684033a7986a86.png" src="_images/0ffd6df858f2d5bc50f93d9749cdc3254d579ab4ff83163708684033a7986a86.png" />
 </div>
 </div>
 <p>Where the probability of expiring is high, the cumulative hazard function is steep.
@@ -674,6 +787,11 @@ Instructions for downloading this excerpt are in the notebook for this chapter.<
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;marriage_nsfg_female.csv.gz&quot;</span><span class="p">)</span>
 <span class="n">resp</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(70183, 34)
 </pre></div>
 </div>
 </div>
@@ -711,6 +829,20 @@ In this context, a <strong>cohort</strong> is a group of people with something i
 
 <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cohort&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cmbirth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">decade_of_birth</span><span class="p">)</span>
 <span class="n">value_counts</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;cohort&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cohort
+1930      325
+1940     3608
+1950    10631
+1960    14953
+1970    16438
+1980    14271
+1990     8552
+2000     1405
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -788,6 +920,9 @@ The <code class="docutils literal notranslate"><span class="pre">dropna=False</s
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/9e54b664947c6a62b1989f2f44eda843f2db7506d22d9af8ea5fcda2be145ecb.png" src="_images/9e54b664947c6a62b1989f2f44eda843f2db7506d22d9af8ea5fcda2be145ecb.png" />
+</div>
 </div>
 <p>If we take these results at face value, they show that people in earlier generations got married younger, and more of them got married eventually.
 However, we should not interpret these results yet, because they are not correct.
@@ -860,6 +995,9 @@ That’s what the following function does.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/d0151716ebc830b0ba0b2fd7fee7be65a0b819bece4c18efedcf313b47906f8c.png" src="_images/d0151716ebc830b0ba0b2fd7fee7be65a0b819bece4c18efedcf313b47906f8c.png" />
+</div>
 </div>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
@@ -898,6 +1036,11 @@ There are 9921 of them, which we’ll call “complete” cases.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(9921)
+</pre></div>
+</div>
+</div>
 </div>
 <p>For respondents who had not married, we’ll select their age when they were surveyed.
 There are 5468 of them, which we’ll call the “ongoing” cases.</p>
@@ -905,6 +1048,11 @@ There are 5468 of them, which we’ll call the “ongoing” cases.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ongoing</span> <span class="o">=</span> <span class="n">resp60</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;evrmarry == 0&quot;</span><span class="p">)[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span>
 <span class="n">ongoing</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(5468)
 </pre></div>
 </div>
 </div>
@@ -928,11 +1076,21 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(58)
+</pre></div>
+</div>
+</div>
 </div>
 <p>And another 5 respondents who were surveyed at age 25 and reported that they had never married.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ft_ongoing</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(5)
 </pre></div>
 </div>
 </div>
@@ -953,11 +1111,21 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(2848)
+</pre></div>
+</div>
+</div>
 </div>
 <p>And 2273 people surveyed after age 25 who had never married.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surv_ongoing</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(2273)
 </pre></div>
 </div>
 </div>
@@ -973,6 +1141,11 @@ That said, here’s how we compute it.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(5184)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Of those, the number who actually married at age 25 is <code class="docutils literal notranslate"><span class="pre">ft_complete[25]</span></code>.
 So we can compute the hazard function at age 25 like this.</p>
@@ -980,6 +1153,11 @@ So we can compute the hazard function at age 25 like this.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="n">ft_complete</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span> <span class="o">/</span> <span class="n">at_risk</span>
 <span class="n">hazard</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.011188271604938271)
 </pre></div>
 </div>
 </div>
@@ -1022,6 +1200,9 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">uni
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/7438aa27c8fae6dfb32802922ad235a8a20433a1bf2243f3f3d146c545fe3856.png" src="_images/7438aa27c8fae6dfb32802922ad235a8a20433a1bf2243f3f3d146c545fe3856.png" />
+</div>
 </div>
 <p>It is steepest between ages 20 and 30, which means that an unmarried person is at the greatest “risk” of getting married at these ages.
 After that, the cumulative hazard levels off, which means that the hazard gradually decreases.</p>
@@ -1059,6 +1240,9 @@ And the probability of doing that is the product of the complementary hazard fun
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob never married&quot;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/57b6d2d483e5afeb6ac1b8c67aa293677130f08945b3ab877f7b6daa901f83ea.png" src="_images/57b6d2d483e5afeb6ac1b8c67aa293677130f08945b3ab877f7b6daa901f83ea.png" />
 </div>
 </div>
 <p>We can see how important it is to handle censored data correctly.</p>
@@ -1150,6 +1334,11 @@ First we’ll get the data into the format <code class="docutils literal notrans
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;lifelines.KaplanMeierFitter:&quot;KM_estimate&quot;, fitted with 15389 total observations, 5468 right-censored observations&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <p>After fitting the data, we can call the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function to display the results, which include the estimated survival function and a confidence interval – although the confidence interval is not correct in this case because it doesn’t correct for stratified sampling.</p>
 <div class="cell docutils container">
@@ -1160,6 +1349,9 @@ First we’ll get the data into the format <code class="docutils literal notrans
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/fd85f6885ce545eeac1251f980ee44045ad7eae1a4524b54cdfa5f8474077f10.png" src="_images/fd85f6885ce545eeac1251f980ee44045ad7eae1a4524b54cdfa5f8474077f10.png" />
+</div>
 </div>
 <p>Unlike the survival function we computed, the one from <code class="docutils literal notranslate"><span class="pre">lifelines</span></code> starts from 0.
 But the rest of the function is the same, within floating-point error.</p>
@@ -1167,6 +1359,11 @@ But the rest of the function is the same, within floating-point error.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">kmf</span><span class="o">.</span><span class="n">survival_function_</span><span class="p">[</span><span class="s2">&quot;KM_estimate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">surv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
 </pre></div>
 </div>
 </div>
@@ -1233,6 +1430,9 @@ It loops through the dictionaries, selects the survival function for the given c
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Prob never married&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/439b22bc2c213e309cd1b83ae53175f80b9deb63986fc9b8b832e704bfa175da.png" src="_images/439b22bc2c213e309cd1b83ae53175f80b9deb63986fc9b8b832e704bfa175da.png" />
 </div>
 </div>
 <p>This visualization is good enough for exploration, but the lines look blurry and some of the labels overlap.
@@ -1325,6 +1525,11 @@ To make that estimate more precise, we can identify the values in the distributi
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9155006558810669)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Here’s the result, which shows the distribution of remaining time at the beginning of the 36th week.</p>
 <div class="cell docutils container">
@@ -1334,11 +1539,19 @@ To make that estimate more precise, we can identify the values in the distributi
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/d1188ed3c916b7fc298a46d2ded7683b32c2f2c85fdac4084fa273b77dd0595c.png" src="_images/d1188ed3c916b7fc298a46d2ded7683b32c2f2c85fdac4084fa273b77dd0595c.png" />
+</div>
 </div>
 <p>The mean of this distribution is the expected remaining time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_remaining</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(3.2145671641791043)
 </pre></div>
 </div>
 </div>
@@ -1382,6 +1595,19 @@ To make that estimate more precise, we can identify the values in the distributi
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36    3.214567
+37    2.337714
+38    1.479095
+39    0.610133
+40    0.912517
+41    0.784211
+42    0.582301
+43    0.589372
+dtype: float64
+</pre></div>
+</div>
+</div>
 </div>
 <p>To see how much variation there is due to random sampling, we can run this analysis with several resamplings and plot the results.</p>
 <div class="cell docutils container">
@@ -1397,6 +1623,9 @@ To make that estimate more precise, we can identify the values in the distributi
 <span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6ca4dfa063bffcf2418fb6ca856b10bc22676aafe2fe8bb6f088ce3feaf6e606.png" src="_images/6ca4dfa063bffcf2418fb6ca856b10bc22676aafe2fe8bb6f088ce3feaf6e606.png" />
 </div>
 </div>
 <p>Between weeks 36 and 39, the expected remaining time decreases until, at the beginning of the 39th week, it is about 0.6 weeks.
@@ -1508,6 +1737,9 @@ Instructions for downloading the data are in the notebook for this chapter.</p>
 <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Hazard&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e11505c6da55bc2b47effc7a86cfddbe93904738fa723e8da24c5c7c14ff7387.png" src="_images/e11505c6da55bc2b47effc7a86cfddbe93904738fa723e8da24c5c7c14ff7387.png" />
 </div>
 </div>
 <p>Use <code class="docutils literal notranslate"><span class="pre">make_surv</span></code> to make a survival function based on these rates, and <code class="docutils literal notranslate"><span class="pre">make_cdf</span></code> to compute the corresponding CDF.

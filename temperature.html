@@ -34,9 +34,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -416,12 +416,16 @@
                   
   <section id="downloading-our-world-in-data">
 <h1>Downloading Our World in Data<a class="headerlink" href="#downloading-our-world-in-data" title="Link to this heading">#</a></h1>
-<p>Our World in Data <a class="reference external" href="https://ourworldindata.org/easier-to-reuse-our-data">recently announced</a> that they are providing APIs to access their data.
-Coincidentally, I am using one of their datasets in my <a class="reference external" href="https://global2024.pydata.org/cfp/talk/KLXYKX/">workshop on time series analysis at PyData Global 2024</a>.
-So I took this opportunity to update my example using the new API – this notebook shows what I learned.</p>
+<p>This notebook contains a supporting example for <a class="reference external" href="https://allendowney.github.io/ThinkStats/">Thinks Stats 3e</a>.</p>
+<p>The third edition is available now from <a class="reference external" href="https://bookshop.org/a/98697/9781098190255">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/42lmxwu">Amazon</a> (those are affiliate links). If you are enjoying the free, online version, consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
 <p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkStats/blob/v3/examples/temperature.ipynb">Click here to run this notebook on Colab</a>.
 It is based on Chapter 12 of <a class="reference external" href="https://allendowney.github.io/ThinkStats/"><em>Think Stats</em>, third edition</a>.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -429,24 +433,11 @@ It is based on Chapter 12 of <a class="reference external" href="https://allendo
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 2;
-                var nbb_unformatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt";
-                var nbb_formatted_code = "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</details>
 </div>
+<p>Our World in Data <a class="reference external" href="https://ourworldindata.org/easier-to-reuse-our-data">recently announced</a> that they are providing APIs to access their data.
+Coincidentally, I am using one of their datasets in my <a class="reference external" href="https://global2024.pydata.org/cfp/talk/KLXYKX/">workshop on time series analysis at PyData Global 2024</a>.
+So I took this opportunity to update my example using the new API – this notebook shows what I learned.</p>
 <section id="air-temperature">
 <h2>Air Temperature<a class="headerlink" href="#air-temperature" title="Link to this heading">#</a></h2>
 <p>In the chapter on time series analysis, in an exercise on seasonal decomposition, I use monthly average surface temperatures in the United States, from a <a class="reference external" href="https://ourworldindata.org/grapher/average-monthly-surface-temperature">dataset from Our World in Data</a> that includes “temperature [in Celsius] of the air measured 2 meters above the ground, encompassing land, sea, and in-land water surfaces,” for most countries in the world from 1941 to 2024.</p>
@@ -467,23 +458,6 @@ It is based on Chapter 12 of <a class="reference external" href="https://allendo
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 4;
-                var nbb_unformatted_code = "import requests\n\nurl = (\n    \"https://ourworldindata.org/grapher/\"\n    \"average-monthly-surface-temperature.metadata.json\"\n)\nquery_params = {\"v\": \"1\", \"csvType\": \"full\", \"useColumnShortNames\": \"true\"}\nheaders = {\"User-Agent\": \"Our World In Data data fetch/1.0\"}\n\nresponse = requests.get(url, params=query_params, headers=headers)\nmetadata = response.json()";
-                var nbb_formatted_code = "import requests\n\nurl = (\n    \"https://ourworldindata.org/grapher/\"\n    \"average-monthly-surface-temperature.metadata.json\"\n)\nquery_params = {\"v\": \"1\", \"csvType\": \"full\", \"useColumnShortNames\": \"true\"}\nheaders = {\"User-Agent\": \"Our World In Data data fetch/1.0\"}\n\nresponse = requests.get(url, params=query_params, headers=headers)\nmetadata = response.json()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>The result is a nested dictionary. Here are the top-level keys.</p>
 <div class="cell docutils container">
@@ -493,25 +467,10 @@ It is based on Chapter 12 of <a class="reference external" href="https://allendo
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;chart&#39;, &#39;columns&#39;, &#39;dateDownloaded&#39;])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;chart&#39;, &#39;columns&#39;, &#39;dateDownloaded&#39;, &#39;activeFilters&#39;])
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "metadata.keys()";
-                var nbb_formatted_code = "metadata.keys()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Here’s the chart-level documentation.</p>
 <div class="cell docutils container">
@@ -524,7 +483,7 @@ It is based on Chapter 12 of <a class="reference external" href="https://allendo
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;citation&#39;: &#39;Contains modified Copernicus Climate Change Service information &#39;
-             &#39;(2019)&#39;,
+             &#39;(2026)&#39;,
  &#39;originalChartUrl&#39;: &#39;https://ourworldindata.org/grapher/average-monthly-surface-temperature?v=1&amp;csvType=full&amp;useColumnShortNames=true&#39;,
  &#39;selection&#39;: [&#39;World&#39;],
  &#39;subtitle&#39;: &#39;The temperature of the air measured 2 meters above the ground, &#39;
@@ -532,22 +491,7 @@ It is based on Chapter 12 of <a class="reference external" href="https://allendo
  &#39;title&#39;: &#39;Average monthly surface temperature&#39;}
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 6;
-                var nbb_unformatted_code = "from pprint import pprint\n\npprint(metadata['chart'])";
-                var nbb_formatted_code = "from pprint import pprint\n\npprint(metadata[\"chart\"])";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>And here’s the documentation of the column we’ll use.</p>
 <div class="cell docutils container">
@@ -558,15 +502,14 @@ It is based on Chapter 12 of <a class="reference external" href="https://allendo
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;citationLong&#39;: &#39;Contains modified Copernicus Climate Change Service &#39;
-                 &#39;information (2019) – with major processing by Our World in &#39;
-                 &#39;Data. “Annual average” [dataset]. Contains modified &#39;
+                 &#39;information (2026) – with major processing by Our World in &#39;
+                 &#39;Data. “Monthly average” [dataset]. Contains modified &#39;
                  &#39;Copernicus Climate Change Service information, “ERA5 monthly &#39;
                  &#39;averaged data on single levels from 1940 to present 2” &#39;
                  &#39;[original data].&#39;,
  &#39;citationShort&#39;: &#39;Contains modified Copernicus Climate Change Service &#39;
-                  &#39;information (2019) – with major processing by Our World in &#39;
+                  &#39;information (2026) – with major processing by Our World in &#39;
                   &#39;Data&#39;,
- &#39;descriptionKey&#39;: [],
  &#39;descriptionProcessing&#39;: &#39;- Temperature measured in kelvin was converted to &#39;
                           &#39;degrees Celsius (°C) by subtracting 273.15.\n&#39;
                           &#39;\n&#39;
@@ -601,38 +544,22 @@ It is based on Chapter 12 of <a class="reference external" href="https://allendo
                           &#39;\n&#39;
                           &#39;- Global temperature averages and anomalies are &#39;
                           &#39;calculated over all land and ocean surfaces.&#39;,
- &#39;descriptionShort&#39;: &#39;The temperature of the air measured 2 meters above the &#39;
+ &#39;descriptionShort&#39;: &#39;Temperature of the air measured 2 meters above the &#39;
                      &#39;ground, encompassing land, sea, and in-land water &#39;
-                     &#39;surfaces. The 2024 data is incomplete and was last &#39;
-                     &#39;updated 13 October 2024.&#39;,
- &#39;fullMetadata&#39;: &#39;https://api.ourworldindata.org/v1/indicators/819532.metadata.json&#39;,
- &#39;lastUpdated&#39;: &#39;2023-12-20&#39;,
- &#39;owidVariableId&#39;: 819532,
+                     &#39;surfaces.&#39;,
+ &#39;fullMetadata&#39;: &#39;https://api.ourworldindata.org/v1/indicators/1306409.metadata.json&#39;,
+ &#39;lastUpdated&#39;: &#39;2026-09-11&#39;,
+ &#39;owidVariableId&#39;: 1306409,
  &#39;shortName&#39;: &#39;temperature_2m&#39;,
  &#39;shortUnit&#39;: &#39;°C&#39;,
- &#39;timespan&#39;: &#39;1940-2024&#39;,
- &#39;titleLong&#39;: &#39;Annual average&#39;,
- &#39;titleShort&#39;: &#39;Annual average&#39;,
+ &#39;timespan&#39;: &#39;&#39;,
+ &#39;titleLong&#39;: &#39;Monthly average&#39;,
+ &#39;titleShort&#39;: &#39;Monthly average&#39;,
  &#39;type&#39;: &#39;Numeric&#39;,
  &#39;unit&#39;: &#39;°C&#39;}
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "pprint(metadata[\"columns\"][\"temperature_2m\"])";
-                var nbb_formatted_code = "pprint(metadata[\"columns\"][\"temperature_2m\"])";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>The following cells download the data for the United States – to see data from another country, change <code class="docutils literal notranslate"><span class="pre">country_code</span></code> to almost any <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes#Current_ISO_3166_country_code">three-letter ISO 3166 country codes</a>.</p>
 <div class="cell docutils container">
@@ -653,23 +580,6 @@ It is based on Chapter 12 of <a class="reference external" href="https://allendo
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "country_code = 'USA'    # replace this with other three-letter country codes\nbase_url = \"https://ourworldindata.org/grapher/\"\"average-monthly-surface-temperature.csv\"\n\nquery_params = {\n    \"v\": \"1\",\n    \"csvType\": \"filtered\",\n    \"useColumnShortNames\": \"true\",\n    \"tab\": \"chart\",\n    \"country\": country_code  \n}";
-                var nbb_formatted_code = "country_code = \"USA\"  # replace this with other three-letter country codes\nbase_url = (\n    \"https://ourworldindata.org/grapher/\" \"average-monthly-surface-temperature.csv\"\n)\n\nquery_params = {\n    \"v\": \"1\",\n    \"csvType\": \"filtered\",\n    \"useColumnShortNames\": \"true\",\n    \"tab\": \"chart\",\n    \"country\": country_code,\n}";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -707,12 +617,10 @@ It is based on Chapter 12 of <a class="reference external" href="https://allendo
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Entity</th>
-      <th>Code</th>
-      <th>year</th>
-      <th>Day</th>
+      <th>entity</th>
+      <th>code</th>
+      <th>month</th>
       <th>temperature_2m</th>
-      <th>temperature_2m.1</th>
     </tr>
   </thead>
   <tbody>
@@ -720,57 +628,47 @@ It is based on Chapter 12 of <a class="reference external" href="https://allendo
       <th>0</th>
       <td>United States</td>
       <td>USA</td>
-      <td>1941</td>
-      <td>1941-12-15</td>
+      <td>1941-12</td>
       <td>-1.878019</td>
-      <td>8.016244</td>
     </tr>
     <tr>
       <th>1</th>
       <td>United States</td>
       <td>USA</td>
-      <td>1942</td>
-      <td>1942-01-15</td>
+      <td>1942-01</td>
       <td>-4.776551</td>
-      <td>7.848984</td>
     </tr>
     <tr>
       <th>2</th>
       <td>United States</td>
       <td>USA</td>
-      <td>1942</td>
-      <td>1942-02-15</td>
+      <td>1942-02</td>
       <td>-3.870868</td>
-      <td>7.848984</td>
     </tr>
     <tr>
       <th>3</th>
       <td>United States</td>
       <td>USA</td>
-      <td>1942</td>
-      <td>1942-03-15</td>
+      <td>1942-03</td>
       <td>0.097811</td>
-      <td>7.848984</td>
     </tr>
     <tr>
       <th>4</th>
       <td>United States</td>
       <td>USA</td>
-      <td>1942</td>
-      <td>1942-04-15</td>
+      <td>1942-04</td>
       <td>7.537291</td>
-      <td>7.848984</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>The resulting <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> includes the column that’s documented in the metadata, <code class="docutils literal notranslate"><span class="pre">temperature_2m</span></code>, and an additional undocumented column, which might be an annual average.</p>
+<p>The resulting <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> includes the column that’s documented in the metadata, <code class="docutils literal notranslate"><span class="pre">temperature_2m</span></code>, along with the name and code of the country and a <code class="docutils literal notranslate"><span class="pre">month</span></code> column that identifies the time period of each observation.</p>
 <p>For this example, we’ll use the monthly data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp_series</span> <span class="o">=</span> <span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;temperature_2m&#39;</span><span class="p">]</span>
-<span class="n">temp_series</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;Day&#39;</span><span class="p">])</span>
+<span class="n">temp_series</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -784,7 +682,7 @@ It is based on Chapter 12 of <a class="reference external" href="https://allendo
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ae897b58e9b8541f265025d79764a87d73740b1fad45b044244e957e896889fe.png" src="_images/ae897b58e9b8541f265025d79764a87d73740b1fad45b044244e957e896889fe.png" />
+<img alt="_images/d29c75d36506cb9565910d0c8fa21a8ff5620ce3eb280dd9a0b35e6ad1de4e3f.png" src="_images/d29c75d36506cb9565910d0c8fa21a8ff5620ce3eb280dd9a0b35e6ad1de4e3f.png" />
 </div>
 </div>
 <p>Not surprisingly, there is a strong seasonal pattern.
@@ -832,7 +730,7 @@ We can use <code class="docutils literal notranslate"><span class="pre">seasonal
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c5738f871cf8982612f4921ae8479cf1c5ad9d583b5f0cebabb401af92abce1f.png" src="_images/c5738f871cf8982612f4921ae8479cf1c5ad9d583b5f0cebabb401af92abce1f.png" />
+<img alt="_images/11d107f4f6cc5c58c3dcb68e9bb6dd1e620bc601c38d3ee735d100a56135f837.png" src="_images/11d107f4f6cc5c58c3dcb68e9bb6dd1e620bc601c38d3ee735d100a56135f837.png" />
 </div>
 </div>
 <p>As always, I’m grateful to Our World in Data for making datasets like this available, and now easier to use programmatically.</p>
