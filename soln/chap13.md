@@ -333,7 +333,7 @@ If we take these results at face value, they show that people in earlier generat
 However, we should not interpret these results yet, because they are not correct.
 There are two problems we have to address:
 
-* As discussed in [Chapter 1](section_nsfg), the NSFG uses stratified sampling, which means that it deliberately oversamples some groups.
+* As discussed in [Chapter 1](section_nsfg), the NSFG deliberately oversamples some groups.
 
 * Also, this way of computing the survival function does not properly take into account people who are not married yet.
 
@@ -345,7 +345,7 @@ We'll start with resampling.
 ## Weighted Bootstrap
 
 The NSFG dataset includes a column called `finalwgt` that contains each respondent's sampling weight, which is the number of people in the population they represent.
-We can use these weights during the resampling process to correct for stratified sampling.
+We can use these weights during the resampling process to correct for oversampling.
 The following function takes a `DataFrame` and the name of the column that contains the sampling weights.
 It resamples the rows of the `DataFrame`, taking the sampling weights into account, and returns a new `DataFrame`.
 
@@ -397,7 +397,7 @@ decorate(xlabel="Age", ylabel="Prob never married", ylim=ylim)
 plt.rc("axes", prop_cycle=plt.rcParamsDefault["axes.prop_cycle"])
 ```
 
-The difference, with and without resampling, is substantial, which shows that we need to correct for stratified sampling to get accurate results.
+The difference, with and without resampling, is substantial, which shows that we need to correct for oversampling to get accurate results.
 
 Now let's get to the second problem, dealing with incomplete data.
 
@@ -555,7 +555,7 @@ The `Hazard` object has a `make_surv` method that does this computation.
 surv = hazard.make_surv()
 ```
 
-Here's what the result looks like, compared to the previous result (dotted line), which corrected for stratified resampling, but did not handle censored data.
+Here's what the result looks like, compared to the previous result (dotted line), which corrected for oversampling, but did not handle censored data.
 
 ```python
 survs_resampled[1960].plot(ls=":", color="gray", label="resampled")
@@ -652,7 +652,7 @@ kmf = KaplanMeierFitter()
 kmf.fit(durations=durations, event_observed=event_observed)
 ```
 
-After fitting the data, we can call the `plot` function to display the results, which include the estimated survival function and a confidence interval -- although the confidence interval is not correct in this case because it doesn't correct for stratified sampling.
+After fitting the data, we can call the `plot` function to display the results, which include the estimated survival function and a confidence interval -- although the confidence interval is not correct in this case because it doesn't correct for oversampling.
 
 ```python
 kmf.plot()
@@ -668,7 +668,7 @@ ps = kmf.survival_function_["KM_estimate"].drop(0)
 np.allclose(ps, surv)
 ```
 
-In the next section, we'll use weighted resampling to compute confidence intervals that take stratified sampling into account.
+In the next section, we'll use weighted resampling to compute confidence intervals that take oversampling into account.
 
 
 ## Confidence Intervals
@@ -885,7 +885,7 @@ For people waiting anxiously for a baby to be born, this behavior seems quite cr
 
 -   **cumulative hazard function**: The cumulative sum of the hazard function, often useful for visualization.
 
--   **weighted bootstrap:** A form of resampling that uses sampling weights to correct for stratified sampling by simulating a representative sample.
+-   **weighted bootstrap:** A form of resampling that uses sampling weights to correct for oversampling by simulating a representative sample.
 
 -   **censored data**: Data that is only partially known because the event of interest has not yet occurred or was unobserved.
 

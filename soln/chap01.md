@@ -131,7 +131,7 @@ We will use data from Cycle 6, which was conducted from January 2002 to March 20
 In general, cross-sectional studies are meant to be **representative**, which means that the sample is similar to the target population in all ways that are important for the purposes of the study.
 That ideal is hard to achieve in practice, but people who conduct surveys come as close as they can.
 
-The NSFG is not representative; instead it is **stratified**, which means that it deliberately **oversamples** some groups.
+The NSFG deliberately **oversamples** some groups, which means that members of those groups have a higher chance of being selected.
 The designers of the study recruited three groups -- Hispanics, African-Americans and teenagers -- at rates higher than their representation in the U.S. population, in order to make sure that the number of respondents in each group is large enough to draw valid conclusions.
 The drawback of oversampling is that it is not as easy to draw conclusions about the population based on statistics from the sample.
 We will come back to this point later.
@@ -273,7 +273,7 @@ Here are some of the ones we'll use for the explorations in this book.
 
 -   `agepreg` is the mother's age at the end of the pregnancy.
 
--   `finalwgt` is the statistical weight associated with the respondent. It is a floating-point value that indicates the number of people in the U.S. population this respondent represents.
+-   `finalwgt` is the sampling weight associated with the respondent. It is a floating-point value that indicates the number of people in the U.S. population this respondent represents.
 
 
 If you read the codebook carefully, you will see that many of the variables are **recodes**, which means that they are not part of the **raw data** collected by the survey -- they are calculated using the raw data.
@@ -555,7 +555,7 @@ The end of each chapter provides a glossary of words that are defined in the cha
 
 - **anecdotal evidence:** Data collected informally from a small number of individual cases, often without systematic sampling.
 
-- **cross-sectional study:** A study that collects data from a representative sample of a population at a single point or interval in time.
+- **cross-sectional study:** A study that collects data from a sample of a population at a single point or interval in time.
 
 - **cycle:** One data-collection interval in a study that collects data at multiple intervals in time.
 
@@ -567,9 +567,7 @@ The end of each chapter provides a glossary of words that are defined in the cha
 
 - **representative:** A sample is representative if it is similar to the population in ways that are important for the purposes of the study.
 
-- **stratified:** A sample is stratified if it deliberately oversamples some groups, usually to make sure that enough members are included to support valid conclusions. 
-
-- **oversampled:** A group is oversampled if its members have a higher chance of appearing in a sample.
+- **oversampled:** A group is oversampled if its members have a higher probability of being selected than members of other groups, usually to make sure that enough members are included to support valid conclusions.
 
 - **variable:** In survey data, a variable is a collection of responses to questions or values computed from responses.
 
