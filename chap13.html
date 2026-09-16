@@ -928,7 +928,7 @@ The <code class="docutils literal notranslate"><span class="pre">dropna=False</s
 However, we should not interpret these results yet, because they are not correct.
 There are two problems we have to address:</p>
 <ul class="simple">
-<li><p>As discussed in <a class="reference internal" href="chap01.html#section-nsfg"><span class="std std-ref">Chapter 1</span></a>, the NSFG uses stratified sampling, which means that it deliberately oversamples some groups.</p></li>
+<li><p>As discussed in <a class="reference internal" href="chap01.html#section-nsfg"><span class="std std-ref">Chapter 1</span></a>, the NSFG deliberately oversamples some groups.</p></li>
 <li><p>Also, this way of computing the survival function does not properly take into account people who are not married yet.</p></li>
 </ul>
 <p>For the first problem, we’ll use a kind of resampling called a <strong>weighted bootstrap</strong>.
@@ -938,7 +938,7 @@ We’ll start with resampling.</p>
 <section id="weighted-bootstrap">
 <h2><span class="section-number">13.4. </span>Weighted Bootstrap<a class="headerlink" href="#weighted-bootstrap" title="Link to this heading">#</a></h2>
 <p>The NSFG dataset includes a column called <code class="docutils literal notranslate"><span class="pre">finalwgt</span></code> that contains each respondent’s sampling weight, which is the number of people in the population they represent.
-We can use these weights during the resampling process to correct for stratified sampling.
+We can use these weights during the resampling process to correct for oversampling.
 The following function takes a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and the name of the column that contains the sampling weights.
 It resamples the rows of the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, taking the sampling weights into account, and returns a new <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
 <div class="cell docutils container">
@@ -1006,7 +1006,7 @@ That’s what the following function does.</p>
 </div>
 </div>
 </div>
-<p>The difference, with and without resampling, is substantial, which shows that we need to correct for stratified sampling to get accurate results.</p>
+<p>The difference, with and without resampling, is substantial, which shows that we need to correct for oversampling to get accurate results.</p>
 <p>Now let’s get to the second problem, dealing with incomplete data.</p>
 </section>
 <section id="estimating-hazard-functions">
@@ -1231,7 +1231,7 @@ And the probability of doing that is the product of the complementary hazard fun
 </div>
 </div>
 </div>
-<p>Here’s what the result looks like, compared to the previous result (dotted line), which corrected for stratified resampling, but did not handle censored data.</p>
+<p>Here’s what the result looks like, compared to the previous result (dotted line), which corrected for oversampling, but did not handle censored data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survs_resampled</span><span class="p">[</span><span class="mi">1960</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;resampled&quot;</span><span class="p">)</span>
@@ -1340,7 +1340,7 @@ First we’ll get the data into the format <code class="docutils literal notrans
 </div>
 </div>
 </div>
-<p>After fitting the data, we can call the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function to display the results, which include the estimated survival function and a confidence interval – although the confidence interval is not correct in this case because it doesn’t correct for stratified sampling.</p>
+<p>After fitting the data, we can call the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function to display the results, which include the estimated survival function and a confidence interval – although the confidence interval is not correct in this case because it doesn’t correct for oversampling.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -1368,7 +1368,7 @@ But the rest of the function is the same, within floating-point error.</p>
 </div>
 </div>
 </div>
-<p>In the next section, we’ll use weighted resampling to compute confidence intervals that take stratified sampling into account.</p>
+<p>In the next section, we’ll use weighted resampling to compute confidence intervals that take oversampling into account.</p>
 </section>
 <section id="confidence-intervals">
 <h2><span class="section-number">13.8. </span>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Link to this heading">#</a></h2>
@@ -1640,7 +1640,7 @@ For people waiting anxiously for a baby to be born, this behavior seems quite cr
 <li><p><strong>survival function</strong>: A function that maps from a time, <span class="math notranslate nohighlight">\(t\)</span>, to the probability of surviving beyond <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p><strong>hazard function</strong>: A function that maps from <span class="math notranslate nohighlight">\(t\)</span> to the fraction of cases that experience the event at <span class="math notranslate nohighlight">\(t\)</span>, out of all cases that survive until <span class="math notranslate nohighlight">\(t\)</span> .</p></li>
 <li><p><strong>cumulative hazard function</strong>: The cumulative sum of the hazard function, often useful for visualization.</p></li>
-<li><p><strong>weighted bootstrap:</strong> A form of resampling that uses sampling weights to correct for stratified sampling by simulating a representative sample.</p></li>
+<li><p><strong>weighted bootstrap:</strong> A form of resampling that uses sampling weights to correct for oversampling by simulating a representative sample.</p></li>
 <li><p><strong>censored data</strong>: Data that is only partially known because the event of interest has not yet occurred or was unobserved.</p></li>
 <li><p><strong>Kaplan-Meier estimation</strong>: A method for estimating survival and hazard functions in datasets with censored observations.</p></li>
 <li><p><strong>cohort</strong>: A set of subjects with shared characteristics – like decade of birth – analyzed as a group.</p></li>

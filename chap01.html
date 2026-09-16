@@ -545,7 +545,7 @@ The NSFG has been conducted several times now; each deployment is called a <stro
 We will use data from Cycle 6, which was conducted from January 2002 to March 2003.</p>
 <p>In general, cross-sectional studies are meant to be <strong>representative</strong>, which means that the sample is similar to the target population in all ways that are important for the purposes of the study.
 That ideal is hard to achieve in practice, but people who conduct surveys come as close as they can.</p>
-<p>The NSFG is not representative; instead it is <strong>stratified</strong>, which means that it deliberately <strong>oversamples</strong> some groups.
+<p>The NSFG deliberately <strong>oversamples</strong> some groups, which means that members of those groups have a higher chance of being selected.
 The designers of the study recruited three groups – Hispanics, African-Americans and teenagers – at rates higher than their representation in the U.S. population, in order to make sure that the number of respondents in each group is large enough to draw valid conclusions.
 The drawback of oversampling is that it is not as easy to draw conclusions about the population based on statistics from the sample.
 We will come back to this point later.</p>
@@ -882,7 +882,7 @@ Here are some of the ones we’ll use for the explorations in this book.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">birthord</span></code> is a serial number for live births: the code for a respondent’s first child is 1, and so on. For outcomes other than live birth, this field is blank.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">birthwgt_lb</span></code> and <code class="docutils literal notranslate"><span class="pre">birthwgt_oz</span></code> contain the pounds and ounces parts of the birth weight of the baby.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">agepreg</span></code> is the mother’s age at the end of the pregnancy.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">finalwgt</span></code> is the statistical weight associated with the respondent. It is a floating-point value that indicates the number of people in the U.S. population this respondent represents.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finalwgt</span></code> is the sampling weight associated with the respondent. It is a floating-point value that indicates the number of people in the U.S. population this respondent represents.</p></li>
 </ul>
 <p>If you read the codebook carefully, you will see that many of the variables are <strong>recodes</strong>, which means that they are not part of the <strong>raw data</strong> collected by the survey – they are calculated using the raw data.</p>
 <p>For example, <code class="docutils literal notranslate"><span class="pre">prglngth</span></code> for live births is equal to the raw variable <code class="docutils literal notranslate"><span class="pre">wksgest</span></code> (weeks of gestation) if it is available; otherwise it is estimated using <code class="docutils literal notranslate"><span class="pre">mosgest</span> <span class="pre">*</span> <span class="pre">4.33</span></code> (months of gestation times the average number of weeks in a month).</p>
@@ -1397,14 +1397,13 @@ At the same time, we have an obligation to consider the people represented by th
 <p>The end of each chapter provides a glossary of words that are defined in the chapter.</p>
 <ul class="simple">
 <li><p><strong>anecdotal evidence:</strong> Data collected informally from a small number of individual cases, often without systematic sampling.</p></li>
-<li><p><strong>cross-sectional study:</strong> A study that collects data from a representative sample of a population at a single point or interval in time.</p></li>
+<li><p><strong>cross-sectional study:</strong> A study that collects data from a sample of a population at a single point or interval in time.</p></li>
 <li><p><strong>cycle:</strong> One data-collection interval in a study that collects data at multiple intervals in time.</p></li>
 <li><p><strong>population:</strong> The entire group of individuals or items that is the subject of a study.</p></li>
 <li><p><strong>sample:</strong> A subset of a population, often chosen at random.</p></li>
 <li><p><strong>respondents:</strong> People who participate in a survey and respond to questions.</p></li>
 <li><p><strong>representative:</strong> A sample is representative if it is similar to the population in ways that are important for the purposes of the study.</p></li>
-<li><p><strong>stratified:</strong> A sample is stratified if it deliberately oversamples some groups, usually to make sure that enough members are included to support valid conclusions.</p></li>
-<li><p><strong>oversampled:</strong> A group is oversampled if its members have a higher chance of appearing in a sample.</p></li>
+<li><p><strong>oversampled:</strong> A group is oversampled if its members have a higher probability of being selected than members of other groups, usually to make sure that enough members are included to support valid conclusions.</p></li>
 <li><p><strong>variable:</strong> In survey data, a variable is a collection of responses to questions or values computed from responses.</p></li>
 <li><p><strong>codebook:</strong> A document that describes the variables in a dataset, and provides other information about the data.</p></li>
 <li><p><strong>recode:</strong> A variable that is computed based on other variables in a dataset.</p></li>
