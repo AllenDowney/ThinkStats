@@ -103,13 +103,13 @@ In general, you can find out which query parameters are supported by exploring t
 temp_df.head()
 ```
 
-The resulting `DataFrame` includes the column that's documented in the metadata, `temperature_2m`, and an additional undocumented column, which might be an annual average.
+The resulting `DataFrame` includes the column that's documented in the metadata, `temperature_2m`, along with the name and code of the country and a `month` column that identifies the time period of each observation.
 
 For this example, we'll use the monthly data.
 
 ```python
 temp_series = temp_df['temperature_2m']
-temp_series.index = pd.to_datetime(temp_df['Day'])
+temp_series.index = pd.to_datetime(temp_df['month'])
 ```
 
 Here's what it looks like.
