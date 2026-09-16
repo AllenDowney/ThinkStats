@@ -3,7 +3,7 @@ PYTHON_VERSION = 3.12
 
 .PHONY: help create_environment create_environment_dev delete_environment \
 	update_environment update_environment_dev clean lint format tests \
-	update-chapter md-from-ipynb
+	update-chapter md-from-ipynb publish-html
 
 CHAPTER ?= chap07
 
@@ -20,6 +20,7 @@ help:
 	@echo "  tests                 - Run tests with pytest"
 	@echo "  update-chapter        - Rebuild one chapter from markdown (CHAPTER=chap07)"
 	@echo "  md-from-ipynb         - Export missing soln/*.md from existing notebooks"
+	@echo "  publish-html          - Build Jupyter Book and push to gh-pages"
 
 create_environment:
 	mamba env create -f environment.yml
@@ -88,3 +89,8 @@ md-from-ipynb:
 		fi; \
 	done
 	@echo ">>> md-from-ipynb complete"
+
+publish-html:
+	@echo "Building Jupyter Book and pushing to gh-pages..."
+	cd jb && bash build.sh
+	@echo ">>> HTML published (see origin/gh-pages)"

@@ -1,6 +1,5 @@
-# pip install jupyter-book ghp-import
-
-# Build the Jupyter book version
+# Requires dev environment: make create_environment_dev
+# (jupyter-book<2 and ghp-import — jb/_config.yml and _toc.yml target JB 1.x)
 
 # copy the notebooks
 cp ../soln/chap[01][0-9]*.ipynb .
