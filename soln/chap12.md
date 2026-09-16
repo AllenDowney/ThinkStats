@@ -934,7 +934,7 @@ The following cell selects data for the United States from 2001 to the end of th
 ```python
 temp_us = temp.query("Code == 'USA'")
 columns = [str(year) for year in range(2000, 2025)]
-temp_series = temp_us.loc[:, columns].transpose().stack()
+temp_series = temp_us.loc[:, columns].transpose().stack().dropna()
 temp_series.index = pd.date_range(start="2000-01", periods=len(temp_series), freq="ME")
 ```
 
