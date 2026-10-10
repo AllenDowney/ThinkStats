@@ -215,3 +215,13 @@ This repository serves `marriage_nsfg_female.csv.gz` publicly from GitHub. That 
 - [ ] Decide whether to extend the chapter to the 2022–2023 cycle or hold at 2017–2019
 - [ ] Decide whether interval censoring belongs in the chapter, an exercise, or nowhere
 - [ ] Settle whether this repository should be serving NSFG microdata at all
+
+---
+
+## Task 6: Page-view counter on the HTML book
+
+**Status:** Live (2026-10-10)
+
+- `jb/_config.yml` → `html: extra_footer` loads `https://greenteapress.com/gh.gif?u=PAGE&r=REFERRER` on every page (`5bea17f`; gh-pages `fc5e344`). No cookies, no third party; counted from the greenteapress.com access logs by `~/GreenTeaPress/scripts/log_report.py` ("GitHub Pages" section of the weekly report). Details and rollout to other books: GreenTeaPress `PROJECT_BOARD.md`, Task 15.
+- Keep the `extra_footer` block when editing `_config.yml`; if the build moves to Jupyter Book 2 / MyST, put the same snippet in the new template.
+- Publishing note: the site was rebuilt from a clean clone (`jb/build.sh` minus `ghp-import`), diffed against the live gh-pages, then pushed with `ghp-import -n -p -f BUILD/html`; only the footer changed.
