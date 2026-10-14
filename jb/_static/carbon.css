@@ -1,0 +1,30 @@
+/* Carbon ad in the right sidebar (_templates/carbon.html). */
+
+/* The theme lays out sidebar items in a row; stack the ad above "Contents". */
+.bd-sidebar-secondary .sidebar-secondary-items { flex-direction: column; }
+.sidebar-secondary-item:has(> .carbon-slot:empty) { display: none; }
+
+/* The theme collapses this sidebar to one line while margin content is on
+   screen; keep that line for "Contents" rather than a slice of the ad. */
+.bd-sidebar-secondary.hide:not(:hover) .sidebar-secondary-item:has(> .carbon-slot) { display: none; }
+
+/* Carbon ships no styles; this lays out its standard markup
+   (#carbonads > span > .carbon-wrap > .carbon-img + .carbon-text, then .carbon-poweredby). */
+.carbon-slot { padding-top: 1rem; }
+#carbonads {
+  max-width: 200px;
+  padding: 0.5rem;
+  border: 1px solid var(--pst-color-border);
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+#carbonads a { color: var(--pst-color-text-base); text-decoration: none; }
+#carbonads .carbon-wrap { display: flex; flex-direction: column; gap: 0.4rem; }
+#carbonads .carbon-img img { display: block; max-width: 100%; height: auto; }
+#carbonads .carbon-poweredby {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.65rem;
+  color: var(--pst-color-text-muted);
+}

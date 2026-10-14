@@ -1,0 +1,20 @@
+{#- Carbon ad above "Contents" in the right sidebar (GreenTeaPress plans/revenue.md, Task 17).
+    Off until CARBON_SERVE is set. Desktop only: below 1200px the theme folds this
+    sidebar into a menu, so the script isn't loaded there and no hidden ad is served.
+    Only on pages that have a table of contents, as page-toc.html does, so pages
+    without one (search, genindex) don't get a sidebar holding just the ad. -#}
+{%- if generate_toc_html() | length >= 1 %}
+<div id="carbon-slot" class="carbon-slot"></div>
+<script>
+(function () {
+  var CARBON_SERVE = "";  // serve code from the Carbon account, e.g. "CXXXXXXX"
+  var CARBON_PLACEMENT = "allendowneygithubio";
+  if (!CARBON_SERVE || !window.matchMedia("(min-width: 1200px)").matches) return;
+  var s = document.createElement("script");
+  s.async = true;
+  s.id = "_carbonads_js";
+  s.src = "https://cdn.carbonads.com/carbon.js?serve=" + CARBON_SERVE + "&placement=" + CARBON_PLACEMENT;
+  document.getElementById("carbon-slot").appendChild(s);
+})();
+</script>
+{%- endif %}
