@@ -1,0 +1,19 @@
+/* Carbon ad in the right sidebar (_templates/carbon.html). */
+
+/* The theme lays out sidebar items in a row; stack the ad above "Contents". */
+.bd-sidebar-secondary .sidebar-secondary-items { flex-direction: column; }
+.sidebar-secondary-item:has(> .carbon-slot:empty) { display: none; }
+
+/* The theme collapses this sidebar to one line while margin content is on
+   screen; keep that line for "Contents" rather than a slice of the ad. */
+.bd-sidebar-secondary.hide:not(:hover) .sidebar-secondary-item:has(> .carbon-slot) { display: none; }
+
+/* Carbon's cover format styles itself. Reserve its height while it loads so the
+   table of contents doesn't jump, and match its fallback (responsive) unit to the theme. */
+.carbon-slot { padding-top: 1rem; }
+.carbon-slot--loading { min-height: 280px; }
+.carbon-slot #carbon-responsive {
+  --carbon-bg-primary: var(--pst-color-surface);
+  --carbon-bg-secondary: var(--pst-color-border);
+  --carbon-text-color: var(--pst-color-text-base);
+}
