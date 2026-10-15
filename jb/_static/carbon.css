@@ -8,23 +8,12 @@
    screen; keep that line for "Contents" rather than a slice of the ad. */
 .bd-sidebar-secondary.hide:not(:hover) .sidebar-secondary-item:has(> .carbon-slot) { display: none; }
 
-/* Carbon ships no styles; this lays out its standard markup
-   (#carbonads > span > .carbon-wrap > .carbon-img + .carbon-text, then .carbon-poweredby). */
+/* Carbon's cover format styles itself. Reserve its height while it loads so the
+   table of contents doesn't jump, and match its fallback (responsive) unit to the theme. */
 .carbon-slot { padding-top: 1rem; }
-#carbonads {
-  max-width: 200px;
-  padding: 0.5rem;
-  border: 1px solid var(--pst-color-border);
-  border-radius: 0.25rem;
-  font-size: 0.75rem;
-  line-height: 1.4;
-}
-#carbonads a { color: var(--pst-color-text-base); text-decoration: none; }
-#carbonads .carbon-wrap { display: flex; flex-direction: column; gap: 0.4rem; }
-#carbonads .carbon-img img { display: block; max-width: 100%; height: auto; }
-#carbonads .carbon-poweredby {
-  display: block;
-  margin-top: 0.4rem;
-  font-size: 0.65rem;
-  color: var(--pst-color-text-muted);
+.carbon-slot--loading { min-height: 280px; }
+.carbon-slot #carbon-responsive {
+  --carbon-bg-primary: var(--pst-color-surface);
+  --carbon-bg-secondary: var(--pst-color-border);
+  --carbon-text-color: var(--pst-color-text-base);
 }
