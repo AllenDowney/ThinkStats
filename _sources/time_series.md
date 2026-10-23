@@ -1,3 +1,10 @@
+---
+myst:
+  html_meta:
+    description: "Time series analysis with StatsModels: a tutorial on seasonal decomposition and ARIMA in Python, with notebooks to run on Colab (PyData Global 2024)."
+og:description: "Time series analysis with StatsModels: a tutorial on seasonal decomposition and ARIMA in Python, with notebooks to run on Colab (PyData Global 2024)."
+---
+
 # Time Series Analysis with StatsModels
 
 This is the landing page for a tutorial on time series analysis, based on [Chapter 12 of *Think Stats*](https://allendowney.github.io/ThinkStats/chap12.html), third edition.

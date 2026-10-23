@@ -1,4 +1,11 @@
-# Think Stats, 3rd edition
+---
+myst:
+  html_meta:
+    description: "Think Stats, 3rd edition, free online: exploratory data analysis and statistics in Python with pandas, as Jupyter notebooks you can run on Colab."
+og:description: "Think Stats, 3rd edition, free online: exploratory data analysis and statistics in Python with pandas, as Jupyter notebooks you can run on Colab."
+---
+
+# Think Stats: Exploratory Data Analysis in Python
 
 <div style="float: right; margin: 0 0 1em 1em;">
   <a href="https://bookshop.org/a/98697/9781098190255">
