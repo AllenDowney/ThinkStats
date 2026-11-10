@@ -72,11 +72,6 @@ The `examples/` notebooks are checked for outputs but **not executed** by the
 tests. `examples/temperature` calls the Our World in Data API at run time and
 breaks when OWID changes its schema.
 
-`make lint` and `make format` pass `--config pyproject.toml`. Before PR #23
-there was no `pyproject.toml`, so they never actually worked; now `make format`
-**will reformat every `.py` file** in the repo with black's defaults. Run it
-only on purpose.
-
 ## Scripts that commit, push or publish
 
 - `build.sh` (top level) commits and pushes `soln/`, then runs both scripts below.

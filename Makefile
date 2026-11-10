@@ -2,7 +2,7 @@ PROJECT_NAME = ThinkStats
 PYTHON_VERSION = 3.12
 
 .PHONY: help create_environment create_environment_dev delete_environment \
-	update_environment update_environment_dev clean lint format tests \
+	update_environment update_environment_dev clean tests \
 	update-chapter md-from-ipynb publish-html
 
 CHAPTER ?= chap07
@@ -15,8 +15,6 @@ help:
 	@echo "  update_environment    - Update environment from environment.yml (with --prune)"
 	@echo "  update_environment_dev - Update dev environment"
 	@echo "  clean                 - Remove temporary files and caches"
-	@echo "  lint                  - Run linters (flake8, black --check)"
-	@echo "  format                - Format code with black"
 	@echo "  tests                 - Check notebooks have outputs, then run them with pytest"
 	@echo "  update-chapter        - Rebuild one chapter from markdown (CHAPTER=chap07)"
 	@echo "  md-from-ipynb         - Export missing soln/*.md from existing notebooks"
@@ -58,17 +56,6 @@ clean:
 	-rm -rf dist/
 	-rm -rf *.egg-info
 	@echo ">>> Cleanup complete!"
-
-lint:
-	@echo "Running linters..."
-	flake8 . --config pyproject.toml || true
-	black --check --config pyproject.toml . || true
-	@echo ">>> Linting complete!"
-
-format:
-	@echo "Formatting code..."
-	black --config pyproject.toml .
-	@echo ">>> Formatting complete!"
 
 tests:
 	@echo "Running tests..."
