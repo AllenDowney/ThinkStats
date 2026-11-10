@@ -414,11 +414,15 @@
                   
   <section id="fourier-components-dont-phase-me">
 <h1>Fourier Components Don’t Phase Me<a class="headerlink" href="#fourier-components-dont-phase-me" title="Link to this heading">#</a></h1>
-<p>Coincidentally, the use of Fourier components in regression models has come up twice this week, on two separate projects.
-This notebook presents a small example to show how they work.</p>
-<p>Note: The title of this article is a play on the <a class="reference external" href="https://www.merriam-webster.com/grammar/phase-vs-faze">homophones “phase” and “faze”</a>.</p>
+<p>This notebook contains a supporting example for <a class="reference external" href="https://allendowney.github.io/ThinkStats/">Think Stats 3e</a>.</p>
+<p>The third edition is available now from <a class="reference external" href="https://bookshop.org/a/98697/9781098190255">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/42lmxwu">Amazon</a> (those are affiliate links). If you find this book useful, please consider <a class="reference external" href="https://greenteapress.com/support/?book=ts3">supporting free, open educational materials</a> from Green Tea Press.</p>
 <p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkStats/blob/v3/examples/fourier.ipynb">Click here to run this notebook on Colab</a></p>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -430,7 +434,11 @@ This notebook presents a small example to show how they work.</p>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
+<p>Coincidentally, the use of Fourier components in regression models has come up twice this week, on two separate projects.
+This notebook presents a small example to show how they work.</p>
+<p>Note: The title of this article is a play on the <a class="reference external" href="https://www.merriam-webster.com/grammar/phase-vs-faze">homophones “phase” and “faze”</a>.</p>
 <p>Suppose we have a signal that contains a periodic component parameterized by frequency <code class="docutils literal notranslate"><span class="pre">f</span></code>, amplitude <code class="docutils literal notranslate"><span class="pre">A</span></code>, and phase shift <code class="docutils literal notranslate"><span class="pre">phi</span></code>.
 I’ll give these parameters arbitrary values and we’ll see if we can recover them.</p>
 <div class="cell docutils container">
@@ -477,7 +485,7 @@ I’ll give these parameters arbitrary values and we’ll see if we can recover 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4b74803ca9cc70b3edccc2d86f4dcfe2eb717a625b9322a3f34c308d75e053d9.png" src="_images/4b74803ca9cc70b3edccc2d86f4dcfe2eb717a625b9322a3f34c308d75e053d9.png" />
+<img alt="_images/fde398f09a1c0fc26ec7222a7a5b1598248658b31dc9392889f41f9705319f1e.png" src="_images/fde398f09a1c0fc26ec7222a7a5b1598248658b31dc9392889f41f9705319f1e.png" />
 </div>
 </div>
 <p>Now let’s see if we can use the signal to estimate the parameters.
@@ -519,10 +527,10 @@ So you can estimate the amplitude and phase of a periodic signal by running a re
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   106.0</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sat, 18 Oct 2025</td> <th>  Prob (F-statistic):</th>          <td>2.46e-18</td>
+  <th>Date:</th>             <td>Tue, 10 Nov 2026</td> <th>  Prob (F-statistic):</th>          <td>2.46e-18</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>11:46:12</td>     <th>  Log-Likelihood:    </th>          <td> -34.513</td>
+  <th>Time:</th>                 <td>11:06:12</td>     <th>  Log-Likelihood:    </th>          <td> -34.513</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>    50</td>      <th>  AIC:               </th>          <td>   73.03</td>
@@ -577,7 +585,7 @@ So you can estimate the amplitude and phase of a periodic signal by running a re
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/192fd9245ead6a9a134b6efa07e61efcef8360172ce880e79f082e6898f0ac29.png" src="_images/192fd9245ead6a9a134b6efa07e61efcef8360172ce880e79f082e6898f0ac29.png" />
+<img alt="_images/d2a6abc4ebd3f46222cee9d90f64aacc8938a6ab57fddc79d1a2686685d8e567.png" src="_images/d2a6abc4ebd3f46222cee9d90f64aacc8938a6ab57fddc79d1a2686685d8e567.png" />
 </div>
 </div>
 <p>It looks like the fitted curve has recovered the phase of the periodic component.
@@ -642,6 +650,10 @@ Instead of using sine and cosine, it uses a complex exponential.</p>
 </div>
 <p>And the estimated values are the same as what we got from linear regression.</p>
 <p>This works because <span class="math notranslate nohighlight">\( e^{i\theta} = \cos\theta + i\sin\theta \)</span>, so when we project the signal on a complex exponential basis, we’re effectively computing the sine and cosine components in a compact form.</p>
+<p><a class="reference external" href="https://allendowney.github.io/ThinkStats/index.html">Think Stats: Exploratory Data Analysis in Python, 3rd Edition</a></p>
+<p>Copyright 2024 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
+<p>Code license: <a class="reference external" href="https://mit-license.org/">MIT License</a></p>
+<p>Text license: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
 </section>
 
     <script type="text/x-thebe-config">

@@ -427,13 +427,8 @@
                   
   <section id="rip-off-etf">
 <h1>Rip-off ETF?<a class="headerlink" href="#rip-off-etf" title="Link to this heading">#</a></h1>
-<p>An article in a recent issue of  <em>The Economist</em> suggests, right in the title, “<a class="reference external" href="https://www.economist.com/finance-and-economics/2024/08/22/investors-should-avoid-a-new-generation-of-rip-off-etfs">Investors should avoid a new generation of rip-off ETFs</a>”.
-An ETF is an exchange-traded fund, which holds a collection of assets and trades on an exchange like a single stock. For example, the SPDR S&amp;P 500 ETF Trust (SPY) tracks the S&amp;P 500 index, but unlike traditional index funds, you can buy or sell shares in minutes.</p>
-<p>There’s nothing obviously wrong with that – but as an example of a “rip-off ETF”, the article describes “defined-outcome funds” or buffer ETFs, which “offer investors an enviable-sounding opportunity: hold stocks, with protection against falling prices. All they must do is forgo annual returns above a certain level, often 10% or so.”</p>
-<p>That might sound good, but the article explains, “Over the long term, they are a terrible deal for investors. Much of the compounding effect of stock ownership comes from rallies.”</p>
-<p>To demonstrate, they use the value of the S&amp;P index since 1980: “An investor with returns capped at 10% and protected from losses would have made a real return of 403% over the period, a fraction of the 3,155% return offered by just buying and holding the S&amp;P 500.”</p>
-<p>So that sounds bad, but returns from 1980 to the present have been historically unusual.
-To get a sense of whether buffer ETFs are more generally a bad deal, let’s get a bigger picture.</p>
+<p>This notebook contains a supporting example for <a class="reference external" href="https://allendowney.github.io/ThinkStats/">Think Stats 3e</a>.</p>
+<p>The third edition is available now from <a class="reference external" href="https://bookshop.org/a/98697/9781098190255">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/42lmxwu">Amazon</a> (those are affiliate links). If you find this book useful, please consider <a class="reference external" href="https://greenteapress.com/support/?book=ts3">supporting free, open educational materials</a> from Green Tea Press.</p>
 <p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkStats/blob/v3/examples/ripoff_etf.ipynb">Click here to run this notebook on Colab</a></p>
 <div class="cell tag_hide-cell docutils container">
 <details class="admonition hide above-input">
@@ -442,16 +437,15 @@ To get a sense of whether buffer ETFs are more generally a bad deal, let’s get
 <p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.parse</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
-
-        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
 
 
 <span class="n">download</span><span class="p">(</span><span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/nb/thinkstats.py&quot;</span><span class="p">)</span>
@@ -493,6 +487,13 @@ To get a sense of whether buffer ETFs are more generally a bad deal, let’s get
 </div>
 </details>
 </div>
+<p>An article in a recent issue of  <em>The Economist</em> suggests, right in the title, “<a class="reference external" href="https://www.economist.com/finance-and-economics/2024/08/22/investors-should-avoid-a-new-generation-of-rip-off-etfs">Investors should avoid a new generation of rip-off ETFs</a>”.
+An ETF is an exchange-traded fund, which holds a collection of assets and trades on an exchange like a single stock. For example, the SPDR S&amp;P 500 ETF Trust (SPY) tracks the S&amp;P 500 index, but unlike traditional index funds, you can buy or sell shares in minutes.</p>
+<p>There’s nothing obviously wrong with that – but as an example of a “rip-off ETF”, the article describes “defined-outcome funds” or buffer ETFs, which “offer investors an enviable-sounding opportunity: hold stocks, with protection against falling prices. All they must do is forgo annual returns above a certain level, often 10% or so.”</p>
+<p>That might sound good, but the article explains, “Over the long term, they are a terrible deal for investors. Much of the compounding effect of stock ownership comes from rallies.”</p>
+<p>To demonstrate, they use the value of the S&amp;P index since 1980: “An investor with returns capped at 10% and protected from losses would have made a real return of 403% over the period, a fraction of the 3,155% return offered by just buying and holding the S&amp;P 500.”</p>
+<p>So that sounds bad, but returns from 1980 to the present have been historically unusual.
+To get a sense of whether buffer ETFs are more generally a bad deal, let’s get a bigger picture.</p>
 <section id="the-dow-jones">
 <h2>The Dow Jones<a class="headerlink" href="#the-dow-jones" title="Link to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://www.measuringworth.com/datasets/DJA">MeasuringWorth Foundation</a> has compiled the value of the Dow Jones Industrial Average at the end of each day from February 16, 1885 to the present, with adjustments at several points to make the values comparable.
@@ -893,7 +894,7 @@ The following cells download and read the data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b63d5190b50b47c4c0542324ed213037bb9e0030dfc6f754c11a4dee9a5e7ca7.png" src="_images/b63d5190b50b47c4c0542324ed213037bb9e0030dfc6f754c11a4dee9a5e7ca7.png" />
+<img alt="_images/1c06bc195e1312ed6d62122b96fd25df5cfb93042317c7fcda98530a415ebfad.png" src="_images/1c06bc195e1312ed6d62122b96fd25df5cfb93042317c7fcda98530a415ebfad.png" />
 </div>
 </div>
 <p>Immediately we see why capping returns at 10% might be a bad idea – this cap is exceeded almost 45% of the time, and sometimes by a lot!</p>
@@ -904,7 +905,7 @@ The following cells download and read the data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4492753623188406
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.4492753623188406)
 </pre></div>
 </div>
 </div>
@@ -941,7 +942,7 @@ Here are the results for the DJIA from the beginning of 1980 to the end of 2023.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1980, 2023, 44.93751117788029, 15.356490985533199)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1980, 2023, np.float64(44.93751117788029), np.float64(15.356490985533199))
 </pre></div>
 </div>
 </div>
@@ -957,7 +958,7 @@ So yeah, the ETF would have been a bad deal.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1900, 1943, 2.8071864303140583, 7.225624631784611)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1900, 1943, np.float64(2.8071864303140583), np.float64(7.225624631784611))
 </pre></div>
 </div>
 </div>
@@ -1058,13 +1059,17 @@ Starting in 1886, we’ll compute price returns for all 30-year intervals, endin
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/27f1abe05ea533153ef7eb0e382406ffaed79eab734272803aaffbf23ed238a8.png" src="_images/27f1abe05ea533153ef7eb0e382406ffaed79eab734272803aaffbf23ed238a8.png" />
+<img alt="_images/943dc5a7d5db2524fa9d1463254219ba3a84e195a1b6c73f2420c905e65bea2b.png" src="_images/943dc5a7d5db2524fa9d1463254219ba3a84e195a1b6c73f2420c905e65bea2b.png" />
 </div>
 </div>
 <p>The buffer ETF performs as advertised, substantially reducing volatility.
 But it has only occasionally been a good deal, and not in my lifetime.</p>
 <p>According to ChatGPT, the primary reasons for strong growth in stock prices since the 1960s are “technological advancements, globalization, financial market innovation, and favorable monetary policies”.
 If you think these elements will generally persist over the next 30 years, you might want to avoid buffer ETFs.</p>
+<p><a class="reference external" href="https://allendowney.github.io/ThinkStats/index.html">Think Stats: Exploratory Data Analysis in Python, 3rd Edition</a></p>
+<p>Copyright 2024 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
+<p>Code license: <a class="reference external" href="https://mit-license.org/">MIT License</a></p>
+<p>Text license: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
 </section>
 </section>
 

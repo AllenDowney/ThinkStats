@@ -426,8 +426,15 @@
                   
   <section id="how-binomial-is-skeet-shooting">
 <h1>How Binomial is Skeet Shooting?<a class="headerlink" href="#how-binomial-is-skeet-shooting" title="Link to this heading">#</a></h1>
-<p>Based on Chapter 5 of Think Stats</p>
-<div class="cell docutils container">
+<p>This notebook contains an example based on Chapter 5 of <a class="reference external" href="https://allendowney.github.io/ThinkStats/">Think Stats 3e</a>.</p>
+<p>The third edition is available now from <a class="reference external" href="https://bookshop.org/a/98697/9781098190255">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/42lmxwu">Amazon</a> (those are affiliate links). If you find this book useful, please consider <a class="reference external" href="https://greenteapress.com/support/?book=ts3">supporting free, open educational materials</a> from Green Tea Press.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkStats/blob/v3/examples/binom_skeet.ipynb">Click here to run this notebook on Colab</a></p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
@@ -444,8 +451,14 @@
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">empiricaldist</span>
@@ -454,8 +467,14 @@
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -465,6 +484,7 @@
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <section id="the-binomial-distribution">
 <h2>The Binomial Distribution<a class="headerlink" href="#the-binomial-distribution" title="Link to this heading">#</a></h2>
@@ -492,8 +512,8 @@ But even if it is not realistic, this model make some surprisingly accurate pred
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1,
-       1, 1, 1])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,
+       1, 0, 1])
 </pre></div>
 </div>
 </div>
@@ -534,11 +554,11 @@ But even if it is not realistic, this model make some surprisingly accurate pred
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.116</td>
+      <td>0.119</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.884</td>
+      <td>0.881</td>
     </tr>
   </tbody>
 </table>
@@ -573,7 +593,7 @@ We can simulate a competition like that by calling <code class="docutils literal
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(22.537, 22.5)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(22.414), 22.5)
 </pre></div>
 </div>
 </div>
@@ -591,7 +611,7 @@ We can simulate a competition like that by calling <code class="docutils literal
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/47d8ce66397ff03809c3ac9277081fa35a2b43356980d8fda9e3bddae329be90.png" src="_images/47d8ce66397ff03809c3ac9277081fa35a2b43356980d8fda9e3bddae329be90.png" />
+<img alt="_images/9ca2badd99199ba7a9867c0bcad0af8b063ba3280d4b7b16f4d56c98922f2d9d.png" src="_images/9ca2badd99199ba7a9867c0bcad0af8b063ba3280d4b7b16f4d56c98922f2d9d.png" />
 </div>
 </div>
 <p>Instead of running a simulation, we could have predicted this distribution.
@@ -637,7 +657,7 @@ If we call this function with a range of <code class="docutils literal notransla
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ea35be730cb8c75652b0ef236be2740983a520d10df4221c9ef29a4578f7b6ed.png" src="_images/ea35be730cb8c75652b0ef236be2740983a520d10df4221c9ef29a4578f7b6ed.png" />
+<img alt="_images/1d6e855c9215b93d41eef4a42cd26ac62b4e616fbef756a8a759f6929e915927.png" src="_images/1d6e855c9215b93d41eef4a42cd26ac62b4e616fbef756a8a759f6929e915927.png" />
 </div>
 </div>
 <p>They are similar, with small differences because of random variation in the simulation results.</p>
@@ -649,11 +669,6 @@ The real test of a model is how it compares to real data.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/AllenDowney/ThinkStats/raw/v3/data/Shooting_at_the_2020_Summer_Olympics_</span><span class="si">%E</span><span class="s2">2</span><span class="si">%80%</span><span class="s2">93_Men&#39;s_skeet&quot;</span>
 <span class="n">download</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded Shooting_at_the_2020_Summer_Olympics_–_Men&#39;s_skeet
 </pre></div>
 </div>
 </div>
@@ -915,7 +930,7 @@ We’ll select the columns that contain the results and use <code class="docutil
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(25, 3750, 3545)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(25, 3750, np.int64(3545))
 </pre></div>
 </div>
 </div>
@@ -930,7 +945,7 @@ So the overall success rate is 95.3%.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9453333333333334
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9453333333333334)
 </pre></div>
 </div>
 </div>
@@ -955,7 +970,7 @@ So the overall success rate is 95.3%.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c35d19d5f7ce2c881a5db5a015bd26585327b6f6858519e9a8b52476419e362c.png" src="_images/c35d19d5f7ce2c881a5db5a015bd26585327b6f6858519e9a8b52476419e362c.png" />
+<img alt="_images/22ecefe3716e93c420d86b6497aab7ac004f8a0761ef1caa707a95237ddd5e5d.png" src="_images/22ecefe3716e93c420d86b6497aab7ac004f8a0761ef1caa707a95237ddd5e5d.png" />
 </div>
 </div>
 <p>The binomial model is a good fit for the distribution of the data.</p>
@@ -969,9 +984,13 @@ So the overall success rate is 95.3%.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9c62a48f447a298945dfc4447348efe9f784370da56c0d0c7c63a11bf4bc8e0d.png" src="_images/9c62a48f447a298945dfc4447348efe9f784370da56c0d0c7c63a11bf4bc8e0d.png" />
+<img alt="_images/a282018089e0cb4901849764bd1cba2836c1e5addd9df14465ff64e20137c9e6.png" src="_images/a282018089e0cb4901849764bd1cba2836c1e5addd9df14465ff64e20137c9e6.png" />
 </div>
 </div>
+<p><a class="reference external" href="https://allendowney.github.io/ThinkStats/index.html">Think Stats: Exploratory Data Analysis in Python, 3rd Edition</a></p>
+<p>Copyright 2024 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
+<p>Code license: <a class="reference external" href="https://mit-license.org/">MIT License</a></p>
+<p>Text license: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
 </section>
 </section>
 
