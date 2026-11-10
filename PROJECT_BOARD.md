@@ -159,11 +159,11 @@ Also in this pass:
 
 ### Follow-ups (open)
 
-- [ ] **Add an outputs check to `make tests`.** A notebook committed with `execution_count: null` in every cell should fail the build. This is the single check that would have caught the original bug the same day.
+- [x] **Add an outputs check to `make tests`.** Done 2026-11-10: `scripts/check_outputs.py` runs first in `make tests` (so in CI too) and fails on any non-comment code cell with `execution_count: null` in `soln/chap*.ipynb` or `examples/*.ipynb`. A notebook committed with `execution_count: null` in every cell should fail the build. This is the single check that would have caught the original bug the same day.
 - [ ] **Test `examples/` too.** `make tests` only runs `soln/chap*.ipynb`, which is why the OWID break went unnoticed. `temperature` needs network access, so it may need its own marker.
-- [ ] **Write a repo `CLAUDE.md`.** ThinkStats has none; [ThinkBayes2's](https://github.com/AllenDowney/ThinkBayes2/blob/master/CLAUDE.md) covers three hazards that bit us here: `jupytext --to ipynb` destroys outputs before `nbconvert` can fail (use `--update` for notebooks that cannot be re-executed), `jb/build.sh` ends in `ghp-import -p` and publishes without confirmation, and adding a chapter means touching `_toc.yml`, the `cp` list in `build.sh`, and the Colab links together.
+- [x] **Write a repo `CLAUDE.md`.** Done 2026-11-10. ThinkStats has none; [ThinkBayes2's](https://github.com/AllenDowney/ThinkBayes2/blob/master/CLAUDE.md) covers three hazards that bit us here: `jupytext --to ipynb` destroys outputs before `nbconvert` can fail (use `--update` for notebooks that cannot be re-executed), `jb/build.sh` ends in `ghp-import -p` and publishes without confirmation, and adding a chapter means touching `_toc.yml`, the `cp` list in `build.sh`, and the Colab links together.
 - [ ] **Decide on `examples/temperature`'s live API dependency.** It will break again on the next OWID schema change. Chapter 12 avoids this by reading a committed CSV snapshot, but the example is explicitly *about* calling the API.
-- [ ] **Three cosmetic `execution_count: null` cells remain** in `soln/chap03`, `soln/chap12`, and `examples/marathon_splits` — all assignment- or comment-only, no outputs affected.
+- [x] **Three cosmetic `execution_count: null` cells remain** — as of 2026-11-10 chap12 is clean, chap03's (an assignment-only solution cell between counts 57 and 59) was set to 58, and marathon_splits' is comment-only, which the check ignores. Original note: in `soln/chap03`, `soln/chap12`, and `examples/marathon_splits` — all assignment- or comment-only, no outputs affected.
 
 
 ---

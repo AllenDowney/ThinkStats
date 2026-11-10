@@ -17,7 +17,7 @@ help:
 	@echo "  clean                 - Remove temporary files and caches"
 	@echo "  lint                  - Run linters (flake8, black --check)"
 	@echo "  format                - Format code with black"
-	@echo "  tests                 - Run tests with pytest"
+	@echo "  tests                 - Check notebooks have outputs, then run them with pytest"
 	@echo "  update-chapter        - Rebuild one chapter from markdown (CHAPTER=chap07)"
 	@echo "  md-from-ipynb         - Export missing soln/*.md from existing notebooks"
 	@echo "  publish-html          - Build Jupyter Book and push to gh-pages"
@@ -72,6 +72,7 @@ format:
 
 tests:
 	@echo "Running tests..."
+	python scripts/check_outputs.py
 	cd soln; pytest --nbmake chap*.ipynb
 	@echo ">>> Tests complete!"
 
