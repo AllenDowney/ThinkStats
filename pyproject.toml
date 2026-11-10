@@ -1,0 +1,42 @@
+[project]
+name = "thinkstats"
+version = "0.1.0"
+description = "Environment for running the Think Stats 3e notebooks and build tools"
+# Matches environment.yml (python=3.12)
+requires-python = ">=3.12,<3.13"
+# From requirements.txt: everything the chapter notebooks import
+dependencies = [
+    "empiricaldist",
+    "html5lib",
+    "lxml",
+    "jupyter",
+    "numpy",
+    "matplotlib",
+    "seaborn",
+    "scipy",
+    "statadict",
+    "statsmodels",
+    "sympy",
+    "tables",
+    # Chapter 13 needs it; its %pip install fallback fails in a uv environment, which has no pip
+    "lifelines>=0.30.3",
+]
+
+[dependency-groups]
+# From requirements-dev.txt: formatting, notebook tests and the Jupyter Book build
+dev = [
+    "black",
+    "nb_black==1.0.5",
+    "flake8",
+    "nbformat",
+    "nbmake",
+    "pytest",
+    "jupytext",
+    "jupyter-book<2",
+    "ghp-import",
+    "sphinx-sitemap",
+    "sphinxext-opengraph",
+]
+
+[tool.uv]
+package = false
