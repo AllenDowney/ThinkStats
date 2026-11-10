@@ -62,6 +62,7 @@ make publish-html
 
 This runs `jb/build.sh`, which:
 
+1. Deletes `jb/_build`, so pages that left the table of contents are not republished
 1. Copies executed notebooks from `soln/` and `examples/` into `jb/`
 2. Strips solution cells (`jb/prep_notebooks.py`)
 3. Builds HTML with Jupyter Book (`jb build`)
@@ -96,7 +97,7 @@ Future work ([Task 2](../PROJECT_BOARD.md)): wire `build.sh` to the markdown-fir
 |--------|---------------------------|----------------------|
 | **HTML** | Yes | [allendowney.github.io/ThinkStats](https://allendowney.github.io/ThinkStats/) (`gh-pages`, built from `jb/`) |
 | **Notebook zips** | Yes | `ThinkStats.zip`, `ThinkStatsSolutions.zip` on the `v3` branch ([README](../README.md)) |
-| **PDF** | **No** | Print/ebook via [O'Reilly / retailers](https://greenteapress.com/wp/think-stats-3e/); not built or hosted from this repo |
+| **PDF** | **No** | Print and ebook from [Bookshop.org](https://bookshop.org/a/98697/9781098190255) and [Amazon](https://amzn.to/42lmxwu) (affiliate links); not built or hosted from this repo |
 
 There is no `make pdf` or committed `.pdf` in ThinkStats v3. The `think-stats-3e/` tree (gitignored here) is a separate production project for the print layout. [Task 2](../PROJECT_BOARD.md) may add GitHub/GTP PDF mirroring later, following the ThinkJava2/ThinkDSP pattern.
 
@@ -136,4 +137,4 @@ After that, treat the `.md` file as canonical.
 | `make update-chapter CHAPTER=chap07` | Rebuild one chapter from markdown |
 | `make publish-html` | Build Jupyter Book and push to `gh-pages` |
 | `make md-from-ipynb` | One-time jupytext export for chapters missing `.md` |
-| `make tests` | Run nbmake on all solution notebooks |
+| `make tests` | Check that notebooks are executed and match their `.md`, then run nbmake on all solution notebooks |

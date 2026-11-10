@@ -1,6 +1,10 @@
 # Requires dev environment: make create_environment_dev
 # (jupyter-book<2 and ghp-import — jb/_config.yml and _toc.yml target JB 1.x)
 
+# start clean: jupyter-book never deletes pages that left the TOC,
+# and ghp-import -f below would publish them
+rm -rf _build
+
 # copy the notebooks
 cp ../soln/chap[01][0-9]*.ipynb .
 cp ../examples/binom_skeet.ipynb .

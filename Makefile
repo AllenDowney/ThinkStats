@@ -15,7 +15,7 @@ help:
 	@echo "  update_environment    - Update environment from environment.yml (with --prune)"
 	@echo "  update_environment_dev - Update dev environment"
 	@echo "  clean                 - Remove temporary files and caches"
-	@echo "  tests                 - Check notebooks have outputs, then run them with pytest"
+	@echo "  tests                 - Check notebooks are executed and match their .md, then run them"
 	@echo "  update-chapter        - Rebuild one chapter from markdown (CHAPTER=chap07)"
 	@echo "  md-from-ipynb         - Export missing soln/*.md from existing notebooks"
 	@echo "  publish-html          - Build Jupyter Book and push to gh-pages"
@@ -60,6 +60,7 @@ clean:
 tests:
 	@echo "Running tests..."
 	python scripts/check_outputs.py
+	python scripts/check_sync.py
 	cd soln; pytest --nbmake chap*.ipynb
 	@echo ">>> Tests complete!"
 

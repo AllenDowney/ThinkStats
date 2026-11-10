@@ -6,7 +6,7 @@ Numbered tasks for tracking work. Each task has a permanent number; add new task
 
 - **Task 1:** Chapter 12 intermittent missing values in Exercise 12.1 — **resolved** (pandas 3 `stack()`).
 - **Task 2:** Redesign release tooling (GitHub canonical + SSH rsync to GTP) — not started.
-- **Task 3:** Markdown-first authoring workflow (jupytext + documented build) — largely done; needs a status review.
+- **Task 3:** Markdown-first authoring workflow — **done** (reviewed 2026-11-10).
 - **Task 4:** Missing figures in published HTML — **resolved**; follow-ups open.
 - **Task 5:** Chapter 13 NSFG extract — **done** 2026-11-10 (cycles to 2022–2023, error fixed, published).
 
@@ -84,7 +84,19 @@ Fixed by adding the `.dropna()` proposed under "Next steps" below. Both pandas v
 
 ## Task 3: Markdown-first authoring workflow
 
-**Status:** Not started
+**Status:** Done (reviewed and closed 2026-11-10)
+
+**Review, 2026-11-10.** Most of this was built on 2026-08-27 (`263ccea`, `a7170cb`, `9fe9e15`) and the board was never updated: every chapter and example has a canonical `.md`, `scripts/book_pipeline.py` and `make update-chapter` implement the pipeline, and `docs/book-update-workflow.md` is the workflow file. All 15 chapters were in sync with their `.md`.
+
+**What the review found.** Three *published* examples (`binom_skeet`, `fourier`, `ripoff_etf`) had drifted: their `.md` got the book banner, Colab link, `hide-cell` tags, license footer and (ripoff_etf) new download code in August–October, but the `.ipynb` was never rebuilt, and the site is built from the `.ipynb`. Regenerated, executed, republished. `resampling_animation` (not in the book) had drifted only in markdown cells and tags; synced with `jupytext --update`, keeping its outputs (it needs `nb_black`, `imageio` and ImageMagick to re-execute).
+
+**Fixes:**
+- `scripts/check_sync.py` in `make tests`: fails when a tracked `.ipynb` differs from its `.md`
+- `jb/build.sh` deletes `_build` itself
+- `build.sh` (gitignored, local only) now commits `soln/chap*.md` with the notebooks
+- Workflow doc: Bookshop/Amazon affiliate links instead of O'Reilly; `make tests` description
+
+The original plan follows.
 
 **Context:** Today the canonical source for book content is the `.ipynb` files in `soln/` (and, for supplementary material, `.ipynb` in `examples/`). Edits happen in notebooks; `nb/build.sh` copies from `soln/` and strips solutions into `nb/`; `jb/build.sh` copies from `soln/` (and `examples/`) for the Jupyter Book HTML build. Some `.md` files already exist (partial jupytext exports in `soln/` and `examples/`), and `jupytext` is in `environment-dev.yml`, but there is no single documented pipeline and markdown is not yet authoritative.
 
