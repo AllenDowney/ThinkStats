@@ -32,3 +32,4 @@ As of June 2025, all data files are included directly in Git to simplify access.
 - **Makefile**: Instructions for creating a Conda environment for the book  
 - **requirements.txt**: Required packages to run the notebooks  
 - **requirements-dev.txt**: Additional packages used for developing the notebooks
+- **pyproject.toml**: The same packages for [uv](https://docs.astral.sh/uv/): run `uv sync`, then `uv run jupyter lab` (`uv sync --no-dev` skips the development tools)
