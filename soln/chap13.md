@@ -206,11 +206,11 @@ To explore these trends in the United States, we'll use the tools of survival an
 The NSFG dataset we used in previous chapters is the pregnancy file, which contains one row for each pregnancy reported by the survey respondents.
 In this chapter, we'll work with the respondent file, which contains information about the respondents themselves.
 
-I have compiled responses from nine iterations of the survey, conducted between 1982 and 2019, and selected data related to marriage.
+I have compiled responses from ten iterations of the survey, conducted between 1982 and 2023, and selected data related to marriage.
 Instructions for downloading this excerpt are in the notebook for this chapter.
 
 <!-- #region tags=["remove-print"] -->
-The following cell downloads the data, which is a CSV file I created that combines data from several iterations of the NSFG survey, from 1982 to 2019.
+The following cell downloads the data, which is a CSV file I created that combines data from several iterations of the NSFG survey, from 1982 to 2023.
 
 Details of the data preparation are in [this notebook](https://github.com/AllenDowney/MarriageNSFG/blob/master/clean_nsfg.ipynb).
 <!-- #endregion -->
@@ -227,7 +227,7 @@ resp = pd.read_csv("marriage_nsfg_female.csv.gz")
 resp.shape
 ```
 
-The excerpt includes one row for each of more than 70,000 respondents, and has the following variables related to age and marriage.
+The excerpt includes one row for each of more than 75,000 respondents, and has the following variables related to age and marriage.
 
 -   `cmbirth`: The respondent's date of birth, known for all respondents.
 
@@ -239,6 +239,7 @@ The excerpt includes one row for each of more than 70,000 respondents, and has t
 
 The first three variables are encoded in "century-months" -- that is, the integer number of months since December 1899.
 So century-month 1 is January 1900.
+Starting with the 2015-2017 survey, the NSFG reports some of these dates only to the nearest year, so for respondents in the three most recent cycles, the values are approximate.
 
 To explore generational changes, we'll group respondents by their decade of birth.
 We'll use the following function, which takes a value of `cmbirth` and computes the corresponding decade of birth.
@@ -424,7 +425,7 @@ resp60 = sample.query("cohort == 1960")
 ```
 
 For respondents who were married when they were surveyed, we'll select their age at first marriage.
-There are 9921 of them, which we'll call "complete" cases.
+There are 10225 of them, which we'll call "complete" cases.
 
 ```python
 complete = resp60.query("evrmarry == 1")["agemarr"]
@@ -432,7 +433,7 @@ complete.count()
 ```
 
 For respondents who had not married, we'll select their age when they were surveyed.
-There are 5468 of them, which we'll call the "ongoing" cases.
+There are 5495 of them, which we'll call the "ongoing" cases.
 
 ```python
 ongoing = resp60.query("evrmarry == 0")["age"]
@@ -449,7 +450,7 @@ ft_complete = FreqTab.from_seq(complete)
 ft_ongoing = FreqTab.from_seq(ongoing)
 ```
 
-As an example, there are 58 respondents who reported that they were married for the first time at age 25.
+As an example, there are 51 respondents who reported that they were married for the first time at age 25.
 
 ```python
 ft_complete[25]
@@ -468,13 +469,13 @@ surv_complete = ft_complete.make_surv()
 surv_ongoing = ft_ongoing.make_surv()
 ```
 
-For example, there are 2848 people who reported getting married after age 25.
+For example, there are 2983 people who reported getting married after age 25.
 
 ```python
 surv_complete[25]
 ```
 
-And 2273 people surveyed after age 25 who had never married.
+And 2300 people surveyed after age 25 who had never married.
 
 ```python
 surv_ongoing[25]

@@ -8,7 +8,7 @@ Numbered tasks for tracking work. Each task has a permanent number; add new task
 - **Task 2:** Redesign release tooling (GitHub canonical + SSH rsync to GTP) — not started.
 - **Task 3:** Markdown-first authoring workflow (jupytext + documented build) — largely done; needs a status review.
 - **Task 4:** Missing figures in published HTML — **resolved**; follow-ups open.
-- **Task 5:** Chapter 13 uses a stale NSFG extract that carries a known error — not started.
+- **Task 5:** Chapter 13 NSFG extract — **data replaced** 2026-11-10 (cycles to 2022–2023, error fixed); interval-censoring question open.
 
 ---
 
@@ -170,7 +170,11 @@ Also in this pass:
 
 ## Task 5: Chapter 13 uses a stale NSFG extract that carries a known error
 
-**Status:** Not started, 2026-09-20. The data fix is straightforward; the analysis question is not.
+**Status:** Data replaced 2026-11-10; the interval-censoring question is still open.
+
+**Done 2026-11-10.** `data/marriage_nsfg_female.csv.gz` is now MarriageNSFG's 2026-09-20 extract (`data/interim/marriage_nsfg_female.csv.gz`), cut to the 9 columns Chapter 13 uses (`cycle`, `finalwgt`, `cmbirth`, `cmintvw`, `cmmarrhx`, `evrmarry`, `cmdivorcx`, `fmarno`, `rmarital`): 75,769 rows, cycles 3–12, 952 KB instead of 1.85 MB. Mean age at first marriage by cycle matches the corrected row of the table below exactly. Chapter 13 re-executed; prose numbers updated (ten cycles to 2023, more than 75,000 respondents, the 1960s-cohort counts in the Kaplan-Meier walkthrough), plus one sentence that dates in the three most recent cycles are approximate. In the cohort figure the 1990s curve now reaches age 33 (was 28) and the 1980s age 44; the chapter's three bullet conclusions still hold. The pregnancy-length outputs later in the chapter also shift slightly, because the seed is set once and the marriage resampling consumes a different number of random draws; the prose there still holds. `nb/chap13.ipynb` regenerated. The site is not republished yet.
+
+`marriage_nsfg_male.csv.gz` is not used by the book and was left as is.
 
 **Context:** [MarriageNSFG](https://github.com/AllenDowney/MarriageNSFG) — the repository that harmonizes NSFG across survey cycles — was reorganized and re-estimated this week. Chapter 13 reads its output:
 
@@ -210,9 +214,9 @@ An earlier version of this task said NSFG's data user agreement does not permit 
 
 ### Scope
 
-- [ ] Regenerate the extract from MarriageNSFG and replace `data/marriage_nsfg_*.csv.gz`
-- [ ] Re-run Chapter 13 and see which figures move
-- [ ] Decide whether to extend the chapter to the 2022–2023 cycle or hold at 2017–2019
+- [x] Regenerate the extract from MarriageNSFG and replace `data/marriage_nsfg_female.csv.gz` (2026-11-10)
+- [x] Re-run Chapter 13 and see which figures move (2026-11-10)
+- [x] Decide whether to extend the chapter to the 2022–2023 cycle or hold at 2017–2019: extended (2026-11-10)
 - [ ] Decide whether interval censoring belongs in the chapter, an exercise, or nowhere
 - [x] Settle whether this repository should be serving NSFG microdata at all: yes (see above)
 

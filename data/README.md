@@ -9,8 +9,8 @@ the National Center for Health Statistics (NCHS):
 |---|---|---|
 | `2002FemPreg.dct`, `2002FemPreg.dat.gz` | Cycle 6 (2002) pregnancy file | Chapters 1–6, 9, 11, 13, 14 |
 | `2002FemResp.dct`, `2002FemResp.dat.gz` | Cycle 6 (2002) female respondent file | Chapters 2, 3, 5, 6 |
-| `marriage_nsfg_female.csv.gz` | Marriage variables from female respondent files, cycles 1982–2019, made with [MarriageNSFG](https://github.com/AllenDowney/MarriageNSFG) | Chapter 13 |
-| `marriage_nsfg_male.csv.gz` | The same for male respondents | not used in the book |
+| `marriage_nsfg_female.csv.gz` | Marriage variables from female respondent files, ten cycles from 1982 to 2022–2023, made with [MarriageNSFG](https://github.com/AllenDowney/MarriageNSFG); only the 9 columns Chapter 13 uses | Chapter 13 |
+| `marriage_nsfg_male.csv.gz` | Male respondents, cycles 2002–2019 (older version, not updated) | not used in the book |
 | `1995FemRespData.dat.gz`, `2006_2010_FemResp*` | Respondent files from other cycles, read by functions in `nsfg.py` | not used in the book |
 
 The `.dat.gz` files are gzipped copies of the files NCHS distributes; the
