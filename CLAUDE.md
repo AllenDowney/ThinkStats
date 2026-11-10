@@ -93,10 +93,15 @@ contents, and `ghp-import -f` would publish the stale ones (Task 4).
 
 ## Data
 
-`data/marriage_nsfg_*.csv.gz` is respondent-level NSFG data, which the NSFG
-data use agreement may not allow us to redistribute, and it has a known
-age-at-marriage error in cycles 10–12. See PROJECT_BOARD Task 5 before
-touching chapter 13's data.
+NSFG files in `data/` are NCHS public-use data. The NCHS data user agreement
+limits use to statistical analysis and forbids re-identification and linking;
+it says nothing against redistribution, so hosting them here is fine (checked
+2026-11-10; see `data/README.md`, which lists the terms and NCHS's citation
+request). Chapter 1 quotes the terms before the first download. IPUMS data is
+different: its terms do forbid redistribution, so never commit IPUMS extracts.
+
+`data/marriage_nsfg_female.csv.gz` comes from MarriageNSFG; see PROJECT_BOARD
+Task 5 before touching chapter 13's data.
 
 ## Task tracking
 

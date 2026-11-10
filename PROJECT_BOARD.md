@@ -204,9 +204,9 @@ MarriageNSFG now treats age at first marriage as *interval-censored* for cycles 
 
 Whether a textbook chapter should carry that is a judgment call. The plain Kaplan-Meier is the better teaching tool; the interval-censored version is the better estimate. It may be an exercise rather than a section.
 
-### Also worth checking
+### Redistribution: settled 2026-11-10, hosting is fine
 
-This repository serves `marriage_nsfg_female.csv.gz` publicly from GitHub. That file is respondent-level NSFG data. MarriageNSFG stopped distributing exactly this file for that reason, and purged it from its history, on the grounds that NSFG's data user agreement does not permit redistribution. The same reasoning presumably applies here.
+An earlier version of this task said NSFG's data user agreement does not permit redistribution, following MarriageNSFG's reasoning. That turned out to be unsupported. The [NCHS Data User Agreement](https://www.cdc.gov/nchs/policy/data-user-agreement.html), repeated verbatim in the [2022–2023 NSFG User's Guide](https://cdc.gov/nchs/data/nsfg/guidefaqs/NSFG-2022-2023-UsersGuide-revJuly2025.pdf) (pp. 4–5), has four terms: statistical use only, no re-identification, no linking to identifiable data, no research on disclosure methods. None concerns sharing the files. The agreements that do bar copying (2013–2015 REGION, 2002 ACASI) cover restricted files released under special agreements, not the public-use files. Chapter 1 already quotes the four terms before the first download, and `data/README.md` now lists them with NCHS's citation request.
 
 ### Scope
 
@@ -214,7 +214,7 @@ This repository serves `marriage_nsfg_female.csv.gz` publicly from GitHub. That 
 - [ ] Re-run Chapter 13 and see which figures move
 - [ ] Decide whether to extend the chapter to the 2022–2023 cycle or hold at 2017–2019
 - [ ] Decide whether interval censoring belongs in the chapter, an exercise, or nowhere
-- [ ] Settle whether this repository should be serving NSFG microdata at all
+- [x] Settle whether this repository should be serving NSFG microdata at all: yes (see above)
 
 ---
 
