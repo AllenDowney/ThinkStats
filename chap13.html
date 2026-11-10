@@ -780,9 +780,9 @@ After that, the hazard decreases – although this outcome is based on just one 
 To explore these trends in the United States, we’ll use the tools of survival analysis and data from the National Survey of Family Growth (NSFG).</p>
 <p>The NSFG dataset we used in previous chapters is the pregnancy file, which contains one row for each pregnancy reported by the survey respondents.
 In this chapter, we’ll work with the respondent file, which contains information about the respondents themselves.</p>
-<p>I have compiled responses from nine iterations of the survey, conducted between 1982 and 2019, and selected data related to marriage.
+<p>I have compiled responses from ten iterations of the survey, conducted between 1982 and 2023, and selected data related to marriage.
 Instructions for downloading this excerpt are in the notebook for this chapter.</p>
-<p>The following cell downloads the data, which is a CSV file I created that combines data from several iterations of the NSFG survey, from 1982 to 2019.</p>
+<p>The following cell downloads the data, which is a CSV file I created that combines data from several iterations of the NSFG survey, from 1982 to 2023.</p>
 <p>Details of the data preparation are in <a class="reference external" href="https://github.com/AllenDowney/MarriageNSFG/blob/master/clean_nsfg.ipynb">this notebook</a>.</p>
 <div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
@@ -801,12 +801,12 @@ Instructions for downloading this excerpt are in the notebook for this chapter.<
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(70183, 34)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(75769, 9)
 </pre></div>
 </div>
 </div>
 </div>
-<p>The excerpt includes one row for each of more than 70,000 respondents, and has the following variables related to age and marriage.</p>
+<p>The excerpt includes one row for each of more than 75,000 respondents, and has the following variables related to age and marriage.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">cmbirth</span></code>: The respondent’s date of birth, known for all respondents.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cmintvw</span></code>: The date the respondent was interviewed, known for all respondents.</p></li>
@@ -814,7 +814,8 @@ Instructions for downloading this excerpt are in the notebook for this chapter.<
 <li><p><code class="docutils literal notranslate"><span class="pre">evrmarry</span></code>: 1 if the respondent had been married prior to the date of interview, 0 otherwise.</p></li>
 </ul>
 <p>The first three variables are encoded in “century-months” – that is, the integer number of months since December 1899.
-So century-month 1 is January 1900.</p>
+So century-month 1 is January 1900.
+Starting with the 2015-2017 survey, the NSFG reports some of these dates only to the nearest year, so for respondents in the three most recent cycles, the values are approximate.</p>
 <p>To explore generational changes, we’ll group respondents by their decade of birth.
 We’ll use the following function, which takes a value of <code class="docutils literal notranslate"><span class="pre">cmbirth</span></code> and computes the corresponding decade of birth.
 It uses the integer division operator <code class="docutils literal notranslate"><span class="pre">//</span></code> to divide by 10 and round down.</p>
@@ -847,11 +848,11 @@ In this context, a <strong>cohort</strong> is a group of people with something i
 1930      325
 1940     3608
 1950    10631
-1960    14953
-1970    16438
-1980    14271
-1990     8552
-2000     1405
+1960    15197
+1970    17444
+1980    16189
+1990    10234
+2000     2141
 Name: count, dtype: int64
 </pre></div>
 </div>
@@ -931,7 +932,7 @@ The <code class="docutils literal notranslate"><span class="pre">dropna=False</s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9e54b664947c6a62b1989f2f44eda843f2db7506d22d9af8ea5fcda2be145ecb.png" src="_images/9e54b664947c6a62b1989f2f44eda843f2db7506d22d9af8ea5fcda2be145ecb.png" />
+<img alt="_images/2feeed38f792b38bedfdf1ad1d93d4862440ea1996404b7d05d25b5d0e9de9ce.png" src="_images/2feeed38f792b38bedfdf1ad1d93d4862440ea1996404b7d05d25b5d0e9de9ce.png" />
 </div>
 </div>
 <p>If we take these results at face value, they show that people in earlier generations got married younger, and more of them got married eventually.
@@ -1006,7 +1007,7 @@ That’s what the following function does.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d0151716ebc830b0ba0b2fd7fee7be65a0b819bece4c18efedcf313b47906f8c.png" src="_images/d0151716ebc830b0ba0b2fd7fee7be65a0b819bece4c18efedcf313b47906f8c.png" />
+<img alt="_images/12206137426549ceb563f8a46d0268c3c0a065dd7446028f044053bfdaaee461.png" src="_images/12206137426549ceb563f8a46d0268c3c0a065dd7446028f044053bfdaaee461.png" />
 </div>
 </div>
 <div class="cell tag_remove-print docutils container">
@@ -1038,7 +1039,7 @@ This process is called <strong>Kaplan-Meier estimation</strong>.</p>
 </div>
 </div>
 <p>For respondents who were married when they were surveyed, we’ll select their age at first marriage.
-There are 9921 of them, which we’ll call “complete” cases.</p>
+There are 10225 of them, which we’ll call “complete” cases.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">resp60</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;evrmarry == 1&quot;</span><span class="p">)[</span><span class="s2">&quot;agemarr&quot;</span><span class="p">]</span>
@@ -1047,13 +1048,13 @@ There are 9921 of them, which we’ll call “complete” cases.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(9921)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(10225)
 </pre></div>
 </div>
 </div>
 </div>
 <p>For respondents who had not married, we’ll select their age when they were surveyed.
-There are 5468 of them, which we’ll call the “ongoing” cases.</p>
+There are 5495 of them, which we’ll call the “ongoing” cases.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ongoing</span> <span class="o">=</span> <span class="n">resp60</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;evrmarry == 0&quot;</span><span class="p">)[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span>
@@ -1062,7 +1063,7 @@ There are 5468 of them, which we’ll call the “ongoing” cases.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(5468)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(5495)
 </pre></div>
 </div>
 </div>
@@ -1079,7 +1080,7 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 </div>
 </div>
 </div>
-<p>As an example, there are 58 respondents who reported that they were married for the first time at age 25.</p>
+<p>As an example, there are 51 respondents who reported that they were married for the first time at age 25.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ft_complete</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
@@ -1087,7 +1088,7 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(58)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(51)
 </pre></div>
 </div>
 </div>
@@ -1114,7 +1115,7 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 </div>
 </div>
 </div>
-<p>For example, there are 2848 people who reported getting married after age 25.</p>
+<p>For example, there are 2983 people who reported getting married after age 25.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surv_complete</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
@@ -1122,12 +1123,12 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(2848)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(2983)
 </pre></div>
 </div>
 </div>
 </div>
-<p>And 2273 people surveyed after age 25 who had never married.</p>
+<p>And 2300 people surveyed after age 25 who had never married.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surv_ongoing</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
@@ -1135,7 +1136,7 @@ It will be convenient to make a <code class="docutils literal notranslate"><span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(2273)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(2300)
 </pre></div>
 </div>
 </div>
@@ -1152,7 +1153,7 @@ That said, here’s how we compute it.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(5184)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(5339)
 </pre></div>
 </div>
 </div>
@@ -1167,7 +1168,7 @@ So we can compute the hazard function at age 25 like this.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.011188271604938271)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.009552350627458326)
 </pre></div>
 </div>
 </div>
@@ -1211,7 +1212,7 @@ We’ll use the <code class="docutils literal notranslate"><span class="pre">uni
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7438aa27c8fae6dfb32802922ad235a8a20433a1bf2243f3f3d146c545fe3856.png" src="_images/7438aa27c8fae6dfb32802922ad235a8a20433a1bf2243f3f3d146c545fe3856.png" />
+<img alt="_images/a1b5437b5688409b8744c9f2ca1aa1ea2596b981ecac963ee57316347f118396.png" src="_images/a1b5437b5688409b8744c9f2ca1aa1ea2596b981ecac963ee57316347f118396.png" />
 </div>
 </div>
 <p>It is steepest between ages 20 and 30, which means that an unmarried person is at the greatest “risk” of getting married at these ages.
@@ -1252,7 +1253,7 @@ And the probability of doing that is the product of the complementary hazard fun
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/57b6d2d483e5afeb6ac1b8c67aa293677130f08945b3ab877f7b6daa901f83ea.png" src="_images/57b6d2d483e5afeb6ac1b8c67aa293677130f08945b3ab877f7b6daa901f83ea.png" />
+<img alt="_images/c28cc28376ee5b90b8dae890fba9304b532097a464d89404daa5e295b2cd3822.png" src="_images/c28cc28376ee5b90b8dae890fba9304b532097a464d89404daa5e295b2cd3822.png" />
 </div>
 </div>
 <p>We can see how important it is to handle censored data correctly.</p>
@@ -1345,7 +1346,7 @@ First we’ll get the data into the format <code class="docutils literal notrans
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;lifelines.KaplanMeierFitter:&quot;KM_estimate&quot;, fitted with 15389 total observations, 5468 right-censored observations&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;lifelines.KaplanMeierFitter:&quot;KM_estimate&quot;, fitted with 15720 total observations, 5495 right-censored observations&gt;
 </pre></div>
 </div>
 </div>
@@ -1360,7 +1361,7 @@ First we’ll get the data into the format <code class="docutils literal notrans
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fd85f6885ce545eeac1251f980ee44045ad7eae1a4524b54cdfa5f8474077f10.png" src="_images/fd85f6885ce545eeac1251f980ee44045ad7eae1a4524b54cdfa5f8474077f10.png" />
+<img alt="_images/3145fe0a21bc159df88d1e88b5d0610003c181e9a864828b05ddb777cfa37843.png" src="_images/3145fe0a21bc159df88d1e88b5d0610003c181e9a864828b05ddb777cfa37843.png" />
 </div>
 </div>
 <p>Unlike the survival function we computed, the one from <code class="docutils literal notranslate"><span class="pre">lifelines</span></code> starts from 0.
@@ -1442,7 +1443,7 @@ It loops through the dictionaries, selects the survival function for the given c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/439b22bc2c213e309cd1b83ae53175f80b9deb63986fc9b8b832e704bfa175da.png" src="_images/439b22bc2c213e309cd1b83ae53175f80b9deb63986fc9b8b832e704bfa175da.png" />
+<img alt="_images/a495d4c39ec981b3835117ba9ed1d4a4c64d9cb67fc3ed21f512ec0dbdbbdd8d.png" src="_images/a495d4c39ec981b3835117ba9ed1d4a4c64d9cb67fc3ed21f512ec0dbdbbdd8d.png" />
 </div>
 </div>
 <p>This visualization is good enough for exploration, but the lines look blurry and some of the labels overlap.
@@ -1536,7 +1537,7 @@ To make that estimate more precise, we can identify the values in the distributi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9155006558810669)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9134236991692173)
 </pre></div>
 </div>
 </div>
@@ -1550,7 +1551,7 @@ To make that estimate more precise, we can identify the values in the distributi
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d1188ed3c916b7fc298a46d2ded7683b32c2f2c85fdac4084fa273b77dd0595c.png" src="_images/d1188ed3c916b7fc298a46d2ded7683b32c2f2c85fdac4084fa273b77dd0595c.png" />
+<img alt="_images/947990d36bd08e668d083b5b19495b44dead6c5c5fa525be93f057c7ccaa071e.png" src="_images/947990d36bd08e668d083b5b19495b44dead6c5c5fa525be93f057c7ccaa071e.png" />
 </div>
 </div>
 <p>The mean of this distribution is the expected remaining time.</p>
@@ -1561,7 +1562,7 @@ To make that estimate more precise, we can identify the values in the distributi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(3.2145671641791043)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(3.247726184777406)
 </pre></div>
 </div>
 </div>
@@ -1606,14 +1607,14 @@ To make that estimate more precise, we can identify the values in the distributi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36    3.214567
-37    2.337714
-38    1.479095
-39    0.610133
-40    0.912517
-41    0.784211
-42    0.582301
-43    0.589372
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36    3.247726
+37    2.367415
+38    1.506767
+39    0.637584
+40    0.886354
+41    0.760067
+42    0.556701
+43    0.565217
 dtype: float64
 </pre></div>
 </div>
@@ -1635,7 +1636,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6ca4dfa063bffcf2418fb6ca856b10bc22676aafe2fe8bb6f088ce3feaf6e606.png" src="_images/6ca4dfa063bffcf2418fb6ca856b10bc22676aafe2fe8bb6f088ce3feaf6e606.png" />
+<img alt="_images/5e5750646576784c0f5080040163ae16ee3502876281d96439b5645586824916.png" src="_images/5e5750646576784c0f5080040163ae16ee3502876281d96439b5645586824916.png" />
 </div>
 </div>
 <p>Between weeks 36 and 39, the expected remaining time decreases until, at the beginning of the 39th week, it is about 0.6 weeks.
