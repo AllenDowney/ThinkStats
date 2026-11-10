@@ -64,13 +64,17 @@ make tests
 ```
 
 This runs `scripts/check_outputs.py` (fails if any committed notebook in
-`soln/` or `examples/` has a code cell that was never executed), then
-`pytest --nbmake` on `soln/chap*.ipynb`. nbmake re-executes the notebooks, so
-on its own it cannot see missing outputs. That is why the outputs check exists.
+`soln/` or `examples/` has a code cell that was never executed),
+`scripts/check_sync.py` (fails if a tracked `.ipynb` differs from its `.md`),
+then `pytest --nbmake` on `soln/chap*.ipynb` and the published examples.
+nbmake re-executes the notebooks, so on its own it cannot see missing outputs
+or a stale notebook; that is why the two checks exist.
 
-The `examples/` notebooks are checked for outputs but **not executed** by the
-tests. `examples/temperature` calls the Our World in Data API at run time and
-breaks when OWID changes its schema.
+`examples/temperature` calls the Our World in Data API at run time and breaks
+when OWID changes its schema, so it runs separately in `make tests-network`,
+which CI runs without failing the build. Notebooks download their data from
+the `v3` branch on GitHub, so a new data file must be pushed before a clean
+checkout (or Colab) can run the notebook that uses it.
 
 ## Scripts that commit, push or publish
 

@@ -40,3 +40,10 @@ jobs:
       - name: Run tests
         run: |
           make tests
+
+      # temperature reads the Our World in Data API, which changes its schema
+      # without notice. Report a failure without failing the build.
+      - name: Run examples that call external APIs
+        continue-on-error: true
+        run: |
+          make tests-network

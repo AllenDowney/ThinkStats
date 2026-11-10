@@ -166,23 +166,23 @@ From the Wikipedia page for the men's skeet shooting competition at the 2020 Sum
 Downloaded from <https://en.wikipedia.org/wiki/Shooting_at_the_2020_Summer_Olympics_–_Men's_skeet> on July 15, 2024.
 
 ```python
-filename = "https://github.com/AllenDowney/ThinkStats/raw/v3/data/Shooting_at_the_2020_Summer_Olympics_%E2%80%93_Men's_skeet"
+filename = "https://github.com/AllenDowney/ThinkStats/raw/v3/data/Shooting_at_the_2020_Summer_Olympics_Mens_skeet"
 download(filename)
 ```
 
 ```python
-tables = pd.read_html("Shooting_at_the_2020_Summer_Olympics_–_Men's_skeet")
+tables = pd.read_html("Shooting_at_the_2020_Summer_Olympics_Mens_skeet")
 table = tables[6]
 table.head()
 ```
 
 ```python
-filename = "https://github.com/AllenDowney/ThinkStats/raw/v3/data/Shooting_at_the_2024_Summer_Olympics_%E2%80%93_Men's_skeet"
+filename = "https://github.com/AllenDowney/ThinkStats/raw/v3/data/Shooting_at_the_2024_Summer_Olympics_Mens_skeet"
 download(filename)
 ```
 
 ```python
-tables = pd.read_html("Shooting_at_the_2024_Summer_Olympics_–_Men's_skeet")
+tables = pd.read_html("Shooting_at_the_2024_Summer_Olympics_Mens_skeet")
 table = tables[5]
 table.head()
 ```

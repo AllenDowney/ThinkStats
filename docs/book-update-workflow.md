@@ -137,4 +137,5 @@ After that, treat the `.md` file as canonical.
 | `make update-chapter CHAPTER=chap07` | Rebuild one chapter from markdown |
 | `make publish-html` | Build Jupyter Book and push to `gh-pages` |
 | `make md-from-ipynb` | One-time jupytext export for chapters missing `.md` |
-| `make tests` | Check that notebooks are executed and match their `.md`, then run nbmake on all solution notebooks |
+| `make tests` | Check that notebooks are executed and match their `.md`, then run nbmake on the chapters and published examples |
+| `make tests-network` | Run `examples/temperature`, which calls the Our World in Data API |

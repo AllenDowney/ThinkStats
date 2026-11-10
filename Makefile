@@ -2,7 +2,7 @@ PROJECT_NAME = ThinkStats
 PYTHON_VERSION = 3.12
 
 .PHONY: help create_environment create_environment_dev delete_environment \
-	update_environment update_environment_dev clean tests \
+	update_environment update_environment_dev clean tests tests-network \
 	update-chapter md-from-ipynb publish-html
 
 CHAPTER ?= chap07
@@ -15,7 +15,8 @@ help:
 	@echo "  update_environment    - Update environment from environment.yml (with --prune)"
 	@echo "  update_environment_dev - Update dev environment"
 	@echo "  clean                 - Remove temporary files and caches"
-	@echo "  tests                 - Check notebooks are executed and match their .md, then run them"
+	@echo "  tests                 - Check notebooks are executed and match their .md, then run chapters and examples"
+	@echo "  tests-network         - Run examples that call external APIs (temperature)"
 	@echo "  update-chapter        - Rebuild one chapter from markdown (CHAPTER=chap07)"
 	@echo "  md-from-ipynb         - Export missing soln/*.md from existing notebooks"
 	@echo "  publish-html          - Build Jupyter Book and push to gh-pages"
@@ -57,12 +58,21 @@ clean:
 	-rm -rf *.egg-info
 	@echo ">>> Cleanup complete!"
 
+# Published examples that read only data from this repo. temperature calls the
+# Our World in Data API at run time, so it is in tests-network instead.
+EXAMPLES = binom_skeet.ipynb ripoff_etf.ipynb fourier.ipynb variability.ipynb moneyline.ipynb
+
 tests:
 	@echo "Running tests..."
 	python scripts/check_outputs.py
 	python scripts/check_sync.py
 	cd soln; pytest --nbmake chap*.ipynb
+	cd examples; pytest --nbmake $(EXAMPLES)
 	@echo ">>> Tests complete!"
+
+tests-network:
+	@echo "Running examples that call external APIs..."
+	cd examples; pytest --nbmake temperature.ipynb
 
 update-chapter:
 	@echo "Updating $(CHAPTER) from markdown..."
